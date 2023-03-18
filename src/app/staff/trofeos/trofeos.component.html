@@ -1,0 +1,286 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border border-info border-3">
+                <div class="bg-info p-4">
+                    <h4 class="card-title text-white">Lista de Trofeos</h4>
+                </div>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Global Search" />
+                <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
+                    [value]="customer" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+                    [loading]="loading" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                    [globalFilterFields]="['name','country.name','representative.name','status']">
+
+                    <ng-template pTemplate="header">
+                        <tr>
+
+                            <th pSortableColumn="name" class="camp">
+                                <div class="flex justify-content-between align-items-center" style="min-width: 80px;">
+                                    Foto
+                                </div>
+                            </th>
+                            <th pSortableColumn="name" class="camp">
+                                <div class="flex justify-content-between align-items-center" style="min-width: 200px;">
+                                    Nombre
+                                    <p-sortIcon field="name"></p-sortIcon>
+
+                                </div>
+                            </th>
+                            <th pSortableColumn="name" class="camp">
+                                <div class="flex justify-content-between align-items-center" style="min-width: 340px;">
+                                    Descripcion
+                                    <p-sortIcon field="name"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="record.n" class="record">
+                                <div class="flex justify-content-between align-items-center" style="min-width: 100px;">
+                                    Tipo
+                                    <p-sortIcon field="record.n"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="precio">
+                                <div class="flex justify-content-between align-items-center" style="min-width: 60px;">
+                                    Activo
+
+
+                                </div>
+                            </th>
+                            <th pSortableColumn="status" style="min-width: 100px">
+                                <div class="flex justify-content-between align-items-center">
+
+                                </div>
+                            </th>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-customer>
+                        <tr class="p-selectable-row">
+
+                            <td>
+                                <p-avatar image="../../../assets/images/users/avatar-2.jpg" shape="circle"
+                                    size="large"></p-avatar>
+                            </td>
+                            <td>
+                                {{customer.name}}
+                            </td>
+                            <td>
+                                actividades de integración, uno a uno y detonadores de conversación
+                            </td>
+                            <td>
+                                Reconocimiento
+                            </td>
+                            <td>
+                                <i class="fas fa-check"></i>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" class="btn btn-primary" style="width: 100px;"
+                                    (click)="extraLarge(exlargeModal)">Lista</button>
+                                <br>
+                                <button class="btn btn-primary" class="btn btn-primary mt-2"
+                                    style="width: 100px;">Asignar</button>
+                                <br>
+                                <button class="btn btn-primary" class="btn btn-primary mt-2"
+                                    style="width: 100px;" (click)="extraLarge(modalEditar)">Editor</button>
+
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #exlargeModal let-modal>
+    <div class="modal-header">
+        <div class="row">
+        </div>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Close click')">
+        </button>
+    </div>
+
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="p-2 bg-primary">
+                <h1 class="text-light">Detalles</h1>
+            </div>
+            <div class="border border-primary container">
+                
+                <div class="row p-2">
+                    <div class="col-4">
+                        <p-avatar image="" shape="circle" size="xlarge"></p-avatar>
+                        <img src="../../../assets/images/users/avatar-2.jpg" alt="" width="100px"
+                            class="rounded-circle">
+                    </div>
+                    <div class="col-8 mt-2">
+                        <div class="row">
+                            <div class="col">
+                                <h2>Trofeo:</h2>
+                                <p>Capacitación Primeros Auxilios </p>
+                            </div>
+                            <div class="col">
+                                <h2>Descripción:</h2>
+                                <p>Tomó curso de primeros auxilios y está certificado por MediGroup</p>
+                            </div>
+                            <div class="col">
+                                <h2>Temporada:</h2>
+                                <p>Tomó curso de primeros auxilios y está certificado por MediGroup</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-12 mt-5">
+            <div class="p-2 bg-primary">
+                <h1 class="text-light">Lista de Trofeos</h1>
+            </div>
+            <div class="col-lg-10 col-md-8 col-sm-8  mt-2 mb-2 body-table-search">
+                <select name="" id="" class="form-select" aria-label="Default select example">
+                    <option value="1">Invierno 2021</option>
+                    <option value="2">Invierno 2018</option>
+                    <option value="4">Invierno 2020</option>
+                </select>
+                <button class="btn btn-primary" class="btn btn-primary" style="width: 100px;">Buscar</button>
+            </div>
+           
+            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
+                    [value]="customer" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+                    [loading]="loading" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                    [globalFilterFields]="['name','country.name','representative.name','status']">
+
+                    <ng-template pTemplate="header">
+                        <tr>
+
+                            
+                            <th pSortableColumn="name" class="camp">
+                                <div class="flex justify-content-between align-items-center" style="min-width: 400px;">
+                                    Nombre
+                                    <p-sortIcon field="name"></p-sortIcon>
+
+                                </div>
+                            </th>
+                            <th pSortableColumn="name" class="camp">
+                                <div class="flex justify-content-between align-items-center" style="min-width: 200px;">
+                                    Fecha de nacimiento	
+                                </div>
+                            </th>
+                            <th pSortableColumn="record.n" class="record">
+                                <div class="flex justify-content-between align-items-center" style="min-width: 200px;">
+                                    Contacto
+                                </div>
+                            </th>
+                          
+                            <th pSortableColumn="status" style="min-width: 100px">
+                                <div class="flex justify-content-between align-items-center">
+
+                                </div>
+                            </th>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-customer>
+                        <tr class="p-selectable-row">
+
+                            
+                            <td>
+                                {{customer.name}}
+                            </td>
+                            <td>
+                                {{customer.fecha}}
+                            </td>
+                            <td>
+                                <div class="col">
+                                   <div class="col-12">
+                                    <i class="fa fa-envelope margin-r-5"></i> {{customer.record.correo}}
+                                   </div> 
+                                   <div class="col-12">
+                                    <i class="bx bx-tab"></i> {{customer.record.tel}}
+                                   </div>
+                                   <div class="col-12">
+                                    <i class="bx bx-phone-call"></i> {{customer.record.cel}}
+                                   </div>
+                                                                   
+                                </div>
+                              
+                            </td>
+                            
+                            <td>
+                                <button class="btn btn-primary" class="btn btn-primary" style="width: 100px;">ver staff</button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+
+                    </ng-template>
+                </p-table>
+        </div>
+
+    </div>
+</ng-template>
+<ng-template  #modalEditar let-modal>
+    <div class="modal-header">
+        <h1>Datos del trofeo </h1>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Close click')">
+            
+
+        </button>
+      
+    </div>
+    <div class="container">
+        <div class="center-form">
+            <form action="" class="col-10">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Titulo</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Descripción</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                  <label for="">Tipo de trofeo</label>
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected>Tipo de trofeo</option>
+                    <option value="1">Reconocimiento</option>
+                    <option value="2">Certificación</option>
+                  </select>
+                  <br>
+                  <br>
+                  <div class="mb-3">
+                    <div class="file-select" id="src-file1" >
+                        <input type="file" name="src-file1" aria-label="Archivo">
+                      </div>
+                  </div>
+                 
+                 
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Activo
+                    </label>
+                  </div>
+                  
+                  <br>
+                 
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+
+        </div>
+       
+
+    </div>
+
+</ng-template>

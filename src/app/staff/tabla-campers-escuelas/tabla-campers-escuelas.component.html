@@ -1,0 +1,82 @@
+<div class="container-fluid ">
+    <div class="card ">
+        <h2 class="p-4 text-alin-center">Acampadores</h2>
+        <br>
+        <div class="col-11">
+        <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="cars" 
+            [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+            [globalFilterFields]="['name','precio','grado','inicio']">
+            <ng-template pTemplate="caption">
+                <div class="table-header flex">
+                    <span class="p-input-icon-left">
+                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                            placeholder="Global Search" />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+
+                
+                    <th pSortableColumn="precio">
+                        <div class="flex justify-content-between align-items-center" style="min-width: 170px;">
+                            Nombre
+                            <p-sortIcon field="precio"></p-sortIcon>
+
+
+                        </div>
+                    </th>
+                    <th pSortableColumn="grado" style="min-width: 12rem">
+                        <div class="flex justify-content-between align-items-center">
+                            Grado
+                            <p-sortIcon field="grado"></p-sortIcon>
+                        </div>
+                    </th>
+                    <th pSortableColumn="inicio" style="min-width: 12rem" style="min-width: 170px;">
+                        <div class="flex justify-content-between align-items-center">
+                            Fecha de nacimiento	
+                            <p-sortIcon field="inicio"></p-sortIcon>
+                        </div>
+                    </th>
+                   
+                    <th pSortableColumn="status" style="min-width: 1rem">
+                        <div class="flex justify-content-between align-items-center">
+
+                        </div>
+                    </th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-cars>
+                <tr class="p-selectable-row">
+
+                    <td>
+                        {{cars.Nombre}}
+                    </td>
+
+                    <td>
+                        {{cars.grado}}
+                    </td>
+                    <td>
+                        {{cars.inicio}}
+                    </td>
+                    
+                    <td>
+                        <button class="btn btn-primary" class="btn btn-primary">ver acamapador</button>
+                    </td>
+
+                    <td style="text-align: center">
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="8">No customers found.</td>
+                </tr>
+            </ng-template>
+        </p-table>   
+    </div>
+
+    </div>
+</div>

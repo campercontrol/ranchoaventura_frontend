@@ -1,0 +1,51 @@
+.display-flex{
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex{
+    display: flex;
+    justify-content: right;
+    
+}
+
+
+
+.btn-grup{
+    display: flex;
+    justify-content:space-around ;
+}
+
+.btn-altura{
+    max-height: 40px;
+}
+
+.container-btn{
+    display: flex;
+    justify-content: right;
+}
+td , th{
+    font-size: 13px;
+}
+td{
+    text-align: center;
+}
+.scroll-y{
+    overflow-x: scroll;
+}
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.left{
+    display: flex;
+    justify-content: right;
+}
+
+@media (max-width: 600px) {
+    .container-btn{
+        display: flex;
+      flex-direction: column;
+    }
+  }

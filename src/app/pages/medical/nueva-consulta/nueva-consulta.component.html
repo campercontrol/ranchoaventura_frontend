@@ -1,0 +1,179 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card  border-top border-danger">
+                <div class="card-body">
+
+                    <div class="container-footer-parents">
+                        <div class="row justify-content-lg-center justify-content-sm-center">
+                            <div class="col-lg-2 col-sm-2">
+                                <img src="assets/images/camp/datos-medico.png" class="avatar-lg" 
+                            alt="madre y padres">
+                            </div>
+                            <div class="col-lg-5  col-sm-3">
+                                <h2 class=" mt-3">Datos de la consulta medica</h2> 
+                            </div> 
+                        </div>
+                    </div>
+                    <hr>
+                    <form>
+                        <div class="row mb-3">
+                          <label for="inputEmail3" class="col-sm-2 col-form-label">Nombre del doctor*</label>
+                          <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail3">
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label for="inputPassword3" class="col-sm-2 col-form-label">Fecha de atención*</label>
+                          <div class="col-sm-10">
+                            <input type="date" class="form-control" id="inputPassword3">
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Hora de atención*</label>
+                            <div class="col-sm-10">
+                              <input type="time" class="form-control" id="inputPassword3">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Diagnostico*</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="inputPassword3">
+                            </div>
+                        </div>
+                        <fieldset class="row mb-3">
+                            <legend class="col-form-label col-sm-2 pt-0">Tipo de consulta</legend>
+                            <div class="col-sm-10">
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                <label class="form-check-label" for="gridRadios1">
+                                    No urgencia
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                <label class="form-check-label" for="gridRadios2">
+                                    Urgencia menor
+                                </label>
+                              </div>
+                              <div class="form-check disabled">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
+                                <label class="form-check-label" for="gridRadios3">
+                                    Urgencia
+                                </label>
+                              </div>
+                              <div class="form-check disabled">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+                                <label class="form-check-label" for="gridRadios3">
+                                    Emergencia
+                                </label>
+                              </div>
+                              <div class="form-check disabled">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
+                                <label class="form-check-label" for="gridRadios3">
+                                    Reanimacion
+                                </label>
+                              </div>
+                            </div>
+                          </fieldset>
+
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Descripción basica para personal no medico*</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Descripción del evento en palabras del camper*</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            </div>
+                        </div>
+                        <fieldset class="row mb-3">
+                            <legend class="col-form-label col-sm-2 pt-0">¿Quien autorizó el medicamento?*</legend>
+                            <div class="col-sm-10">
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                <label class="form-check-label" for="gridRadios1">
+                                    Preautorización en sistema de registro
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                <label class="form-check-label" for="gridRadios2">
+                                    Se contacta a tutores
+                                </label>
+                              </div>
+                              <div class="form-check disabled">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
+                                <label class="form-check-label" for="gridRadios3">
+                                    Por parte de la Escuela / Maestras
+                                </label>
+                              </div>
+                              <div class="form-check disabled">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
+                                <label class="form-check-label" for="gridRadios3">
+                                    Por parte de [[empresa]] (In Loco Parentis)
+                                </label>
+                              </div>
+                              <div class="form-check disabled">
+                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
+                                <label class="form-check-label" for="gridRadios3">
+                                    No se administraron medicamentos
+                                </label>
+                              </div>
+                            </div>
+                          </fieldset>
+                          <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Tratamiento*</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            </div>
+                          </div>
+                          <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Restricciones o medidas dentro del campamento*</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            </div>
+                          </div>
+                          <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Recomendaciones para seguimiento posterior al campamento*</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            </div>
+                          </div>
+                          <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Comentario de la consulta</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            </div>
+                          </div>
+                          <br>
+                          <div class="row mb-3">
+                            <div class="col-sm-10 offset-sm-2">
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                <label class="form-check-label" for="gridCheck1">
+                                    Enviar consulta a padres
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Comentario solo para medicos y staff</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            </div>
+                          </div>
+
+                        
+                        
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                      </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

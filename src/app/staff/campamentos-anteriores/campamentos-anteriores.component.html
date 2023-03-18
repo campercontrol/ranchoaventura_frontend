@@ -1,0 +1,103 @@
+
+
+<div class="container">
+    <div class="card col-12">     
+        <h2 class="p-4 text-alin-center"> Camps Anteriores</h2>
+        <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="customer"
+        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+        [globalFilterFields]="['name','country.name','representative.name','status']">
+        <ng-template pTemplate="caption">
+            <div class="table-header flex">
+                <span class="p-input-icon-left">
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        placeholder="Global Search" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+
+                <th pSortableColumn="name" class="camp">
+                    <div class="flex justify-content-between align-items-center" style="min-width: 180px;">
+                        Camp
+                        <p-sortIcon field="name"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="record.n" class="record">
+                    <div class="flex justify-content-between align-items-center" style="min-width: 100px;">
+                        Record
+                        <p-sortIcon field="record.n"></p-sortIcon>
+                    </div>
+                </th>
+               
+                <th pSortableColumn="sede" style="min-width: 10rem">
+                    <div class="flex justify-content-between align-items-center">
+                        Sede
+                        <p-sortIcon field="sede"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="inicio" style="min-width: 10rem" style="min-width: 170px;">
+                    <div class="flex justify-content-between align-items-center">
+                        Inicia
+                        <p-sortIcon field="inicio"></p-sortIcon>
+                    </div>
+                </th>
+                <th pSortableColumn="termina">
+                    <div class="flex justify-content-between align-items-center" style="min-width: 170px;">
+                        Termina
+                        <p-sortIcon field="termina"></p-sortIcon>
+
+
+                    </div>
+                </th>
+                <th pSortableColumn="status" style="min-width: 10rem">
+                    <div class="flex justify-content-between align-items-center">
+
+                    </div>
+                </th>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-customer>
+            <tr class="p-selectable-row">
+
+                <td>
+                    {{customer.name}}
+                </td>
+                <td>
+
+                    <p-badge [value]="customer.record.n" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
+                   
+                    <p-badge [value]="customer.record.d" pTooltip="Staff confirmado" tooltipPosition="top"
+                        severity="danger" severity="danger"></p-badge>
+
+
+                </td>
+                <td>
+                    {{customer.sede}}
+                </td>
+                <td>
+                    {{customer.inicio}}
+                </td>
+                <td>
+                    {{customer.termina}}
+                </td>
+                <td>
+                    <button class="btn btn-primary" class="btn btn-primary">ver campamento</button>
+                </td>
+
+                <td style="text-align: center">
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="8">No customers found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+   
+    </div>
+</div>

@@ -1,0 +1,113 @@
+import { Component, NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { CampamentoComponent } from '../component/campamento/campamento.component';
+import { CamperNuevoComponent } from '../component/nuevo-camper/camper-nuevo/camper-nuevo.component';
+import { PerfilCamperComponent } from '../component/perfil-camper/perfil-camper.component';
+import { PerfilComponent } from '../component/perfil/perfil.component';
+import { RegisteredChildrenComponent } from '../component/registered-children/registered-children.component';
+import { CampamentosStaffComponent } from '../staff/campamentos-staff/campamentos-staff.component';
+import { CampamentosComponent } from '../staff/campamentos/campamentos.component';
+import { NuevoCampamentoComponent } from '../staff/nuevo-campamento/nuevo-campamento.component';
+import { GroupingComponent } from '../staff/grouping/grouping.component';
+import { MedicoComponent } from '../staff/medico/medico.component';
+
+import { CalendarComponent } from './calendar/calendar.component';
+import { ChatComponent } from './chat/chat.component';
+import { DefaultComponent } from './dashboards/default/default.component';
+import { FilemanagerComponent } from './filemanager/filemanager.component';
+import { NuevaConsultaComponent } from './medical/nueva-consulta/nueva-consulta.component';
+import { GmailingComponent } from './gmailing/gmailing.component';
+import { AgregarAgrupacionComponent } from '../staff/agregar-agrupacion/agregar-agrupacion.component';
+import { PerfilEscuelaComponent } from '../escuela/perfil-escuela/perfil-escuela.component';
+import { CampamentosNuevosComponent } from '../staff/campamentos-nuevos/campamentos-nuevos.component';
+import { CampamentosAnterioresComponent } from '../staff/campamentos-anteriores/campamentos-anteriores.component';
+import { TablaCampersEscuelasComponent } from '../staff/tabla-campers-escuelas/tabla-campers-escuelas.component';
+import { ParentsInscripcionCampComponent } from '../staff/parents-inscripcion-camp/parents-inscripcion-camp.component';
+import { TrofeosComponent } from '../staff/trofeos/trofeos.component';
+import { TablaMedicalComponent } from '../staff/tabla-medical/tabla-medical.component';
+import { TienditaComponent } from '../staff/tiendita/tiendita.component';
+import { PagosComponent } from '../staff/pagos/pagos.component';
+import { CapacitacionesComponent } from '../staff/capacitaciones/capacitaciones.component';
+import { CapacitacionesEventoComponent } from '../staff/capacitaciones-evento/capacitaciones-evento.component';
+import { ListaCapacitacionesComponent } from '../staff/lista-capacitaciones/lista-capacitaciones.component';
+import { PuntoControlComponent } from '../staff/punto-control/punto-control.component';
+import { MisCampamentosComponent } from '../staff/mis-campamentos/mis-campamentos.component';
+import { ListaStaffComponent } from '../staff/lista-staff/lista-staff.component';
+
+const routes: Routes = [
+  { path: '', redirectTo: 'dashboard' },
+  { path: 'dashboard', component: DefaultComponent },
+  { path: 'parents/miPerfil', component: PerfilComponent },
+  { path: 'parents/registered-children', component: RegisteredChildrenComponent },
+  { path: 'parents/nuevo-camper', component: CamperNuevoComponent },
+  { path: 'parents/campamento', component: CampamentoComponent },
+  { path: 'parents/camper', component: PerfilCamperComponent },
+  { path: 'parents/camper/Inscripcion', component: ParentsInscripcionCampComponent },
+  { path: 'staff/camps', component: CampamentosComponent },
+  { path: 'camps/camp_add', component: NuevoCampamentoComponent },
+  { path: 'camps/camp', component: CampamentosStaffComponent },
+  { path: 'staff/grouping', component: GroupingComponent},
+  {path: 'consulta/camp',component:NuevaConsultaComponent},
+
+  {path: 'staff/trofeos',component:TrofeosComponent},
+
+  {path: 'grouping/camp', component: AgregarAgrupacionComponent},
+  {path: 'medical/care', component: MedicoComponent},
+  {path: 'medical/camp-medical', component: TablaMedicalComponent},
+
+  {path: 'mailing', component: GmailingComponent},
+  {path: 'school/profile', component: PerfilEscuelaComponent },
+  {path: 'mailing', component: GmailingComponent},
+  {path: 'tiendita', component: TienditaComponent},
+  {path: 'pagos', component: PagosComponent},
+
+  {path: 'staff/capacitaciones',component:CapacitacionesComponent},
+  {path: 'staff/capacitaciones_eventos',component:CapacitacionesEventoComponent},
+  {path: 'staff/capacitaciones_dashboard',component:ListaCapacitacionesComponent},
+
+  {path: 'staff/checkpoint',component:PuntoControlComponent},
+  {path: 'staff/campamentos',component: MisCampamentosComponent},
+  {path: 'staff/staff',component: ListaStaffComponent},
+
+
+
+
+
+  {path: 'school/new', component: CampamentosNuevosComponent},
+  {path: 'school/laste', component: CampamentosAnterioresComponent},
+  {path: 'school/camp', component: TablaCampersEscuelasComponent},
+  {path: 'school/perfil', component: PerfilEscuelaComponent},
+
+  
+
+
+
+
+
+
+  { path: 'calendar', component: CalendarComponent },
+  { path: 'chat', component: ChatComponent },
+  { path: 'filemanager', component: FilemanagerComponent },
+  { path: 'dashboards', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule) },
+  { path: 'ecommerce', loadChildren: () => import('./ecommerce/ecommerce.module').then(m => m.EcommerceModule) },
+  { path: 'crypto', loadChildren: () => import('./crypto/crypto.module').then(m => m.CryptoModule) },
+  { path: 'email', loadChildren: () => import('./email/email.module').then(m => m.EmailModule) },
+  { path: 'invoices', loadChildren: () => import('./invoices/invoices.module').then(m => m.InvoicesModule) },
+  { path: 'projects', loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule) },
+  { path: 'tasks', loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksModule) },
+  { path: 'contacts', loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule) },
+  { path: 'blog', loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule) },
+  { path: 'pages', loadChildren: () => import('./utility/utility.module').then(m => m.UtilityModule) },
+  { path: 'ui', loadChildren: () => import('./ui/ui.module').then(m => m.UiModule) },
+  { path: 'form', loadChildren: () => import('./form/form.module').then(m => m.FormModule) },
+  { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
+  { path: 'icons', loadChildren: () => import('./icons/icons.module').then(m => m.IconsModule) },
+  { path: 'charts', loadChildren: () => import('./chart/chart.module').then(m => m.ChartModule) },
+  { path: 'maps', loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule) }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
+  })
+  export class PagesRoutingModule { }

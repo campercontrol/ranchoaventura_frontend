@@ -1,0 +1,111 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+
+
+            <div class="card border border-success border-3">
+                <div class="bg-success p-2">
+                    <h1 class="card-title text-white">Agregar un punto de control</h1>
+                </div>
+                <hr>
+                <div class="container-fluid col-10 mt-4 mb-2">
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-5 d-flex justify-content-end col-form-label"> Nombre
+                            del punto de control:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control d-flex justify-content-start" id="inputPassword">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-5 d-flex justify-content-end col-form-label"> Fecha de
+                            aplicacion: </label>
+                        <div class="col-sm-4">
+                            <input type="date" class="form-control d-flex justify-content-start">
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+                <div class="display-flex p-2">
+                    <button class="btn btn-secondary" type="submit">ver camp</button>
+                    <button class="btn btn-primary" type="submit">Agregar punto de Control</button>
+                </div>
+
+            </div>
+
+
+            <div class="card border border-success border-3">
+                <div class="bg-success p-2">
+                    <h1 class="card-title text-white">Acampadores</h1>
+                </div>
+                <hr>
+                <div class=" scroll-y">
+                  
+                    <div class="card-body">
+                        <div>
+                            <div class="col text-end">
+
+                            </div>
+                        </div>
+                        <div class="container-btn">
+
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Global Search" />
+                        </div>
+
+                        <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
+                            [value]="customer" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+                            [loading]="loading" [paginator]="true"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [filterDelay]="0"
+                            [globalFilterFields]="['name','country.name','representative.name','status']">
+
+                            <ng-template pTemplate="header">
+                                <tr >
+
+
+                                    <th pSortableColumn=item.name class="camp" *ngFor="let item of puntosControl">
+                                        <div class="flex justify-content-between align-items-center"
+                                            style=" width: auto;">
+                                            {{item.name}}
+                                            <br>
+                                            {{item.fecha}}
+                                            <br>
+                                            {{item.inscritos}} de {{item.cupos}}<p-sortIcon
+                                                field=item.name></p-sortIcon>
+                                        </div>
+                                    </th>
+
+
+
+
+
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-customer>
+                                <tr class="p-selectable-row">
+                                    <td>
+                                        {{customer.id}}
+                                    </td>
+
+                                    <td>
+                                        {{customer.name}}
+                                    </td>
+                                    <td style="background-color: rgb(223, 112, 112);">
+
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+
+                            </ng-template>
+                        </p-table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

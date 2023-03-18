@@ -1,0 +1,394 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="mb-4 col-12 d-flex justify-content-center justify-content-lg-end align-items-lg-center">
+            <div class="d-flex flex-column d-sm-block med-button-container">
+                <button class="ms-3 my-2 my-lg-0 btn btn-primary">Regresar al módulo Médico</button>
+                <button class="ms-3 my-2 my-lg-0 btn btn-secondary">Ver en el admin</button>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row border-bottom pb-3">
+                <div class="col-12 d-flex justify-content-between">
+                    <h2>Información Médica</h2>
+                    <div class="dropdown-icon-container">
+                        <i class="bx bx-chevron-down"(click)="toggleMenu()"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="row box-camp-info">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="info-container p-3 mb-5">
+                            <h4>Datos Generales</h4>
+                            <hr>
+                            <dl>
+                                <div class="my-2">
+                                    <dt>Nombre: </dt>
+                                    <dd>Alberto</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Peso: </dt>
+                                    <dd>122 kg</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Altura: </dt>
+                                    <dd>173cm</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Enfermedades: </dt>
+                                    <dd>Ninguna</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Tipo de sangre: </dt>
+                                    <dd>B+</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Problemas cardiácos: </dt>
+                                    <dd>No</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Tratamientos psicológicos: </dt>
+                                    <dd>No</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Vacunas: </dt>
+                                    <dd>No</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Lesiones anteriores: </dt>
+                                    <dd>No</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="info-container p-3 mb-5">
+                            <h4>Alergias</h4>
+                            <hr>
+                            <dl>
+                                <div class="my-2">
+                                    <dt>Alergias: </dt>
+                                    <dd>No</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Medicamentos: </dt>
+                                    <dd>Ninguna</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Otras: </dt>
+                                    <dd>No</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="info-container p-3 mb-5">
+                            <h4>Alimentación</h4>
+                            <hr>
+                            <dl>
+                                <div class="my-2">
+                                    <dt>Alimentación: </dt>
+                                    <dd>...</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Alimentación especial: </dt>
+                                    <dd>Ninguna dieta especial</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Alimentación prohibida: </dt>
+                                    <dd>Ninguno</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="info-container p-3 mb-5">
+                            <h4>Medicación</h4>
+                            <hr>
+                            <dl>
+                                <div class="my-2">
+                                    <dt>Medicamentos: </dt>
+                                    <dd>No</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Medicamentos que toma: </dt>
+                                    <dd>Ninguno</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Medicamentos autorizados: </dt>
+                                    <dd>Ningún medicamento autorizado</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Antecedentes camper: </dt>
+                                    <dd>Ningún antecedente médico</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Antecedentes familiares: </dt>
+                                    <dd>Ningún antecedente medico familiar</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="info-container p-3 mb-5">
+                            <h4>Titular del camper</h4>
+                            <hr>
+                            <dl>
+                                <div class="my-2">
+                                    <dt>Nombre completo: </dt>
+                                    <dd>Renata camper control</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Teléfono celular: </dt>
+                                    <dd>55123456</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Teléfono de casa: </dt>
+                                    <dd>55123456</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Teléfono de trabajo: </dt>
+                                    <dd>55123456</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="info-container p-3 mb-5">
+                            <h4>Segundo titular del camper</h4>
+                            <hr>
+                            <dl>
+                                <div class="my-2">
+                                    <dt>Nombre completo: </dt>
+                                    <dd>Renata camper control</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Teléfono celular: </dt>
+                                    <dd>55123456</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Teléfono de casa: </dt>
+                                    <dd>55123456</dd>
+                                </div>
+                                <div class="my-2">
+                                    <dt>Teléfono de trabajo: </dt>
+                                    <dd>55123456</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="info-container p-3 mb-5">
+                                <h4>Contacto de emergencia</h4>
+                                <hr>
+                                <dl>
+                                    <div class="my-2">
+                                        <dt>Nombre completo: </dt>
+                                        <dd>Alberto</dd>
+                                    </div>
+                                    <div class="my-2">
+                                        <dt>Parentesco: </dt>
+                                        <dd>Lider</dd>
+                                    </div>
+                                    <div class="my-2">
+                                        <dt>Télefono celular: </dt>
+                                        <dd>55123456</dd>
+                                    </div>
+                                    <div class="my-2">
+                                        <dt>Télefono de casa: </dt>
+                                        <dd>55123456</dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row border-bottom pb-3">
+                <div class="col-12 d-flex justify-content-between">
+                    <h2>Consultas</h2>
+                    <div class="dropdown-icon-container">
+                        <i class="bx bx-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 d-flex flex-column flex-sm-row justify-content-sm-between">
+                    <div class="reports-button-container">
+                        <div class="btn-group me-1 mt-2" ngbDropdown>
+                            <button type="button" class="btn btn-primary dropdown-toggle" ngbDropdownToggle>Reportes <i
+                                class="mdi mdi-chevron-down"></i></button>
+                            <div class="dropdown-menu" ngbDropdownMenu>
+                              <a class="dropdown-item" href="javascript: void(0);">Excel</a>
+                              <a class="dropdown-item" href="javascript: void(0);">PDF</a>
+                              <!-- <div class="dropdown-divider"></div> -->
+                            </div>
+                          </div><!-- /btn-group -->
+                    </div>
+                    <div class="doctors-visit-button-container">
+                        <button class="btn btn-primary me-1 mt-2">Agregar consulta</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5 container-consulta">
+        <div class="container-consultas p-2 rounded mb-2 bg-primary ">
+            <div>
+                <h5 class="text-white">
+                    Consulta y el pro que fue -- fecha y hora de
+                </h5>
+            </div>
+            <div>
+                <button class="btn btn btn-warning">
+                    Agregar consulta de seguimiento
+                </button>
+                <button class="btn btn-light ms-2" 		(click)="collapse.toggle()"
+                [attr.aria-expanded]="!isCollapsed"
+                aria-controls="collapseExample">
+                    +
+                </button>
+            </div>
+
+        </div>
+        <div class="collapse" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+
+            <div class="col-12 " style="margin-top: 30px;">
+                <p class="text-center fs-4 fw-bolder">Diagnóstico : Pequeña contusion en la parte del cranio por
+                    caida
+                    de niños corriendo</p>
+
+                <p class="text-center fs-4 fw-bold mt-4">Medico Responsable : Juan</p>
+
+            </div>
+            <div>
+                <div class="row mt-5">
+                    <div class="col-6 fs-4">
+                        <p> Fecha y hora de atencion</p>
+
+                    </div>
+                    <div class="col-6 fs-4 ">
+                        <p>26 de octubre de 2022 22:15 </p>
+                    </div>
+
+                    <hr>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-6 fs-4">
+                        <p> TRIAJE</p>
+
+                    </div>
+                    <div class="col-6 fs-4 ">
+                        <p> Urgencia menor</p>
+                    </div>
+
+                    <hr>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-6 fs-6">
+                        <p> Descripcion basica para personal no medico</p>
+
+                    </div>
+                    <div class="col-6 fs-6">
+                        <p>se callo desde los juegos </p>
+                    </div>
+
+                    <hr>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-6 fs-6">
+                        <p> Descripción del evento en palabras del camper </p>
+
+                    </div>
+                    <div class="col-6 fs-6 ">
+                        <p>Descpues de la caida le salio sangre</p>
+                    </div>
+
+                    <hr>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-6 fs-6">
+                        <p> ¿Quién autorizó el medicamento?</p>
+
+                    </div>
+                    <div class="col-6 fs-6">
+                        <p>No se administraron medicamentos</p>
+                    </div>
+
+                    <hr>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-6 fs-6">
+                        <p>tratamientos </p>
+
+                    </div>
+                    <div class="col-6 fs-6">
+                        <p>Reposo</p>
+                    </div>
+
+                    <hr>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-6 fs-6">
+                        <p>Restricciones o medidas dentro del campamento</p>
+
+                    </div>
+                    <div class="col-6 fs-6">
+                        <p>no correr o hacer actividades de mucha demanda fisica</p>
+                    </div>
+
+                    <hr>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-6 fs-6">
+                        <p>Recomendaciones para seguimiento posterior al campamento</p>
+
+                    </div>
+                    <div class="col-6 fs-6">
+                        <p>Prueba</p>
+                    </div>
+
+                    <hr>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-6 fs-6">
+                        <p>Comentario de la consulta </p>
+
+                    </div>
+                    <div class="col-6 fs-6">
+                        <p>Ninguno</p>
+                    </div>
+
+                    <hr>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-6 fs-6">
+                        <p>CComentario solo para medicos y staff
+                        </p>
+
+                    </div>
+                    <div class="col-6 fs-6">
+                        <p>Ninguno</p>
+                    </div>
+
+                    <hr>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+    
+
+</div>

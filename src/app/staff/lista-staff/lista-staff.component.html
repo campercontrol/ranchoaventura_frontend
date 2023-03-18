@@ -1,0 +1,142 @@
+<div class="container-fluid">
+
+    <div class="card border border-info border-3">
+        <div class="bg-info p-2">
+            <h1 class="card-title text-white">Camps a los que me he apuntado</h1>
+    
+        </div>
+        <div class="card-body">
+            <div>
+                <div class="col text-end">
+    
+                </div>
+            </div>
+            <div class="container-btn">
+                <div>
+                    <button class="btn btn-success ">Registro Incompleto</button>
+                    <button class="btn btn-success ms-2">Acampadores sin inscripciones</button>
+    
+                </div>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Global Search" />
+            </div>
+    
+            <div class="scroll-y">
+                <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
+                    [value]="customer" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+                    [loading]="loading" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                    [globalFilterFields]="['name','country.name','representative.name','status']">
+    
+                    <ng-template pTemplate="header">
+                        <tr>
+    
+    
+    
+                            <th pSortableColumn="name" class="camp">
+                                <div class="flex justify-content-between align-items-center"
+                                    style="max-width: 180px; width: 180px;">
+                                    Nombre
+                                    <p-sortIcon field="name"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="precio">
+                                <div class="flex justify-content-between align-items-center" style="width: 120px;">
+                                    Fecha de nacimiento <p-sortIcon field="precio"></p-sortIcon>
+                                </div>
+                            </th>
+    
+                            <th pSortableColumn="precio">
+                                <div class="flex justify-content-between align-items-center" style="width: 210px;">
+                                    contacto
+                                    <p-sortIcon field="precio"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="record.n" class="record">
+                                <div class="flex justify-content-between align-items-center"
+                                    style=" width: 130px;">
+                                    Temporada
+                                    <p-sortIcon field="record.n"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="sede" style="width: 8rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    Record
+                                    <p-sortIcon field="sede"></p-sortIcon>
+                                </div>
+                            </th>
+    
+    
+    
+                            <th pSortableColumn="precio">
+                                <div class="flex justify-content-between align-items-center" style="width: 80px;">
+                                </div>
+                            </th>
+    
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-customer>
+                        <tr class="p-selectable-row">
+    
+                            <td>
+                                {{customer.name}}
+                            </td>
+    
+    
+                            <td>
+                                2019-02-05
+                                <br>
+                              4 años
+                            </td>
+    
+                            
+    
+                            <td>
+                                <i class="bx bxs-user-circle"> </i>  staff4@campercontrol.com
+                                <br>
+                                <i class="bx bxs-phone"></i> 786264949879
+                                <br>
+                                <i class="bx bxl-whatsapp"></i> 89876487638
+                            </td>
+    
+                            <td>
+                                Otoño
+                            </td>
+                            <td>
+
+                                <p-badge [value]="customer.record.n" pTooltip="Acampadores"
+                                    tooltipPosition="top"></p-badge>
+                                <p-badge [value]="customer.record.b" pTooltip="Staff apuntados" tooltipPosition="top"
+                                    severity="info" severity="warning"></p-badge>
+                                <p-badge [value]="customer.record.d" pTooltip="Staff confirmado" tooltipPosition="top"
+                                    severity="danger" severity="danger"></p-badge>
+
+
+                            </td>
+                          
+    
+    
+                            <td>
+                                <button class="btn btn-primary" class="btn btn-primary">Ver Staff</button>
+                                
+    
+                            </td>
+    
+    
+    
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+    
+                    </ng-template>
+                </p-table>
+    
+            </div>
+    
+    
+        </div>
+    </div>
+    
+</div>
+
+

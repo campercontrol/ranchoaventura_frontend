@@ -1,0 +1,118 @@
+.camps{
+    width: 90%;
+    overflow: scroll;  
+    padding: 3px;  
+}
+
+.camps::-webkit-scrollbar{
+    display: none;
+}
+
+.bodyCamper{
+    background-color: #34c38f;
+    width: 100%;
+    color: white;
+    border-radius: 5px;
+    height: auto;
+    align-items: center;
+    padding: 20px 20px;
+}
+
+.container-pagos{
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right:3px ;
+}
+
+.bodyCamper1{
+    background-color: #f1b44c;
+    width: 100%;
+    color: white;
+    border-radius: 5px;
+    height: auto;
+    align-items: center;
+    padding: 20px 20px;
+}
+
+.conatiner-info-camp{
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 30px;
+
+}
+i{
+    margin-right:10px ;
+}
+
+.conatiner-info-camp p{
+    font-size: 20px;
+    margin: 10px;
+    
+}
+.container-modal-camp{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content:space-evenly;
+}
+.container-btn{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+.title-btn{
+    padding: 6px 10px;
+    border-radius: 70px 70px 0px 0px / 70px 70px 25px 25px;
+    background-color:#f1b44c;
+    color: white;
+}
+.title-btn-p{
+    padding: 6px 10px;
+    border-radius: 70px 70px 0px 0px / 70px 70px 25px 25px;
+    background-color:#34c38f;
+    color: white;
+}
+.title-btn-d{
+    padding: 6px 10px;
+    border-radius: 70px 70px 0px 0px / 70px 70px 25px 25px;
+    background-color:white;
+    color: black;
+}
+
+
+@media (max-width: 700px) {
+    .conatiner-info-camp{
+     display: flex;
+     flex-direction: column;   
+    }
+    .container-btn button{
+        margin-top: 10px;
+
+    }
+    
+
+}
+@media (max-width: 750px) {
+    .container-modal-camp{
+     display: flex;
+     flex-direction: column-reverse;   
+    }
+    .container-btn button{
+        margin-top: 10px;
+
+    }
+
+}
+@media (max-width: 980px) {
+    .container-modal-camp{
+     display: flex;
+     flex-direction: column-reverse;   
+    }
+    .container-btn button{
+        margin-top: 10px;
+
+    }
+
+}

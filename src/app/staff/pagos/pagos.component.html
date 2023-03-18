@@ -1,0 +1,161 @@
+<div class="card">
+    <div class="p-2">
+        <div>
+
+            <div class="card border border-warning border-3">
+                <div class="bg-warning p-2">
+                    <h1 class="card-title text-white">Agregar Pagos
+                    </h1>
+                </div>
+                <form class="col-12 p-5">
+                    <div class="row mb-3">
+                        <label for="inputEmail3" class="col-sm-3 col-form-label">Método de pago*</label>
+                        <div class="col-sm-8">
+                            <ng-select [(ngModel)]="metodoPago"
+                            [items]="tiposPago"
+                            bindLabel="desc" 
+                             bindValue="id">
+
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputPassword3" class="col-sm-3 col-form-label">Monto*</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="inputPassword3" [(ngModel)]="monto">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputEmail3" class="col-sm-3 col-form-label">Tipo de Movimiento*</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="inputEmail3" [(ngModel)]="tipMovimiento">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputPassword3" class="col-sm-3 col-form-label">Número de transacción*</label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="inputPassword3" [(ngModel)]="numeroTrans">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="inputPassword3" class="col-sm-3 col-form-label">Fecha*</label>
+                        <div class="col-sm-8">
+                            <p-calendar [(ngModel)]="fecha" [showIcon]="true" inputId="icon"></p-calendar>
+                        </div>
+                    </div>
+
+                   
+                    <hr>
+
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button class="btn btn-secondary" type="button">Regresar</button>
+                        <button class="btn btn-primary" type="button">Agregar Pago</button>
+                      </div>
+
+
+                      
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="card">
+    <div class="p-2">
+        <div class="card border border-success border-3">
+            <div class="bg-success p-2">
+                <h1 class="card-title text-white">Detalles de Pagos
+                </h1>
+            </div>
+            <div class="mt-3 ms-4">
+                <h2>
+                    Tu saldo actual es de:</h2>
+
+            </div>
+            <div class="p-2">
+                <div class="container-btn">
+                    <div class="center-search">
+                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                            placeholder="Global Search" class="mb-2" />
+                    </div>
+
+                </div>
+                <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
+                    [value]="tabla" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
+                    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [filterDelay]="0" [globalFilterFields]="['fecha','descripcion','entrada','sale','saldo',]">
+
+                    <ng-template pTemplate="header">
+                        <tr>
+
+                            <th pSortableColumn="fecha" class="camp">
+                                <div class="flex justify-content-between align-items-center" style="width: 120px;">
+                                    fecha
+                                    <p-sortIcon field="fecha"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="descripcion">
+                                <div class="flex justify-content-between align-items-center" style="width: 230px;">
+                                    Descripción
+                                    <p-sortIcon field="descripcion"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="entrada">
+                                <div class="flex justify-content-between align-items-center" style="width: 90px;">
+                                    Entrada
+                                    <p-sortIcon field="entrada"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="sale">
+                                <div class="flex justify-content-between align-items-center" style="width: 90px;">
+                                    Sale
+                                    <p-sortIcon field="sale"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="saldo">
+                                <div class="flex justify-content-between align-items-center" style="width: 90px;">
+                                    Saldo
+                                    <p-sortIcon field="saldo"></p-sortIcon>
+                                </div>
+                            </th>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-tabla>
+                        <tr class="p-selectable-row">
+
+                            <td>
+                                {{tabla.fecha}}
+                            </td>
+                            <td>
+                                {{tabla.descripcion}}
+                            </td>
+                            <td>
+                                {{tabla.entrada}}
+                            </td>
+                            <td>
+                                {{tabla.sale}}
+                            </td>
+                            <td>
+                                {{tabla.saldo}}
+                            </td>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" class="mt-2">
+
+                    </ng-template>
+                </p-table>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

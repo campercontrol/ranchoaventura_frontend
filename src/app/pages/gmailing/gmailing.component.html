@@ -1,0 +1,232 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="d-grid gap-2 col-12 mx-auto">
+                <button class="btn btn-primary" (click)="Titulo='Enviar Correo'">Enviar Correo</button>
+                <button class="btn btn-primary" (click)="Titulo='Nuevo Templates'">Crear Templates</button>
+
+                <ul class="list-group  mt-3">
+                    <li class="list-group-item list-group-item-action" (click)="Titulo='Enviados'"><i
+                            class="fas fa-ad fas fa-envelope-open-text"></i> Enviados</li>
+                    <li class="list-group-item list-group-item-action" (click)="Titulo='Templates'"> <i
+                            class="fas fa-ad fas fa-envelope-open-text"></i> Templates</li>
+                    <li class="list-group-item list-group-item-action" (click)="Titulo='Templates del sistemas'"> <i
+                            class="fas fa-ad fas fa-envelope-open-text"></i> Templates sistemas</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-9">
+
+
+
+            <div class="card border-top border-primary" >
+                <h1 class="mt-4 container-fluid">{{Titulo}}</h1>
+                <div  *ngIf="Titulo === 'Templates del sistemas' ||  Titulo === 'Templates' || Titulo === 'Enviados' ">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-4">
+                                            <div class="search-box me-2 mb-2 d-inline-block">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control" placeholder="Search..."
+                                                        [(ngModel)]="term">
+                                                    <i class="bx bx-search-alt search-icon"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <table class="table table-centered table-nowrap">
+                                        <thead class="table-light">
+
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let data of transactions">
+                                                <td>
+                                                    <div class="form-check font-size-16">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="transactionCheck{{data.index}}">
+                                                        <label class="form-check-label"
+                                                            for="transactionCheck{{data.index}}"></label>
+                                                    </div>
+                                                </td>
+
+                                                <td class="list-group-item-action">{{data.name}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                    <ul class="pagination pagination-rounded justify-content-end mb-2">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                                <i class="mdi mdi-chevron-left"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item active">
+                                            <a class="page-link" href="javascript: void(0);">1</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript: void(0);">2</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript: void(0);">3</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript: void(0);">4</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript: void(0);">5</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                                <i class="mdi mdi-chevron-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col container-fluid " *ngIf="Titulo ==='Nuevo Templates'">
+                    <hr>
+                    <div class="mx-auto">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <p>Tipo de Plantilla</p>
+
+                                <select name="" id="" [(ngModel)]="tipoTemplate" style="width: 100%;"
+                                    class="form-select mt-2">
+                                    <option value="1">Templates</option>
+                                    <option value="2">Templates del Sistemas</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-5">
+                                <p>Tipo de Template</p>
+
+                                <select name="" id="" [(ngModel)]="tipoTemplate" style="width: 100%;"
+                                    class="form-select mt-2">
+                                    ¿ <option value="1">Templates</option>
+                                    <option value="2">Templates del Sistemas</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-10 mt-4">
+                                <input type="text" placeholder="Asunto" class="form-control">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <ckeditor [editor]="Editor" [(ngModel)]="template" data="<p>Content of the editor.</p>">
+                        </ckeditor>
+
+                    </div>
+
+
+                    <div class="btn-container">
+                        <button class="btn btn-primary" (click)="prueba()">Descartar</button>
+                        <button class="btn btn-primary">Guardar</button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col container-fluid " *ngIf="Titulo ==='Enviar Correo'">
+                    <hr>
+                    <div class="mx-auto">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p>Dirigido a </p>
+
+                                <select name="" id="" [(ngModel)]="tipoTemplate" style="width: 100%;"
+                                    class="form-select mt-2">
+                                    <option value="1">Participante de un solo campamente </option>
+                                    <option value="2">Participante de una capacitacion</option>
+                                    <option value="3">Participante de Varios Campamentos</option>
+                                    <option value="4">Gente que haya tenido actividad ultimamente </option>
+                                </select>
+                            </div>
+                            <div *ngIf="tipoTemplate == 1" class="col-lg-12 mt-2">
+                                <p>Seleciona el Campamento</p>
+                                <select name="" id="" [(ngModel)]="campamento" style="width: 100%;"
+                                    class="form-select mt-2">
+                                    <option value="1">camp 1</option>
+                                    <option value="2">camp 2</option>
+                                </select>
+                            </div>
+                            <div *ngIf="tipoTemplate == 1" class="col-lg-12 mt-2">
+                                <p>Publico Objetivo</p>
+                                <ng-select name="" id="" [(ngModel)]="publicoSelecionado" style="width: 100%;"
+                                    class="mt-2" [multiple]="true">
+                                    <ng-option *ngFor="let obj of publico" [value]="obj.value">{{obj.publico}}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+
+
+                            <div *ngIf="tipoTemplate == 2" class="col-lg-12 mt-2">
+                                <p>Seleciona el Capacitacion</p>
+                                <select name="" id="" [(ngModel)]="capacitacion" style="width: 100%;"
+                                    class="form-select mt-2">
+                                    <option value="1">Capacitacion 1</option>
+                                    <option value="2">Capacitacion 2</option>
+                                </select>
+                            </div>
+                            <div *ngIf="tipoTemplate == 3" class="col-lg-12 mt-3">
+                                <p>Seleciona el Campamento</p>
+                                <ng-select name="" id="" [(ngModel)]="campamento" style="width: 100%;"
+                                    [multiple]="true">
+                                    <ng-option value="1">camp 1</ng-option>
+                                    <ng-option value="2">camp 2</ng-option>
+                                </ng-select>
+
+                            </div>
+                            <div *ngIf="tipoTemplate == 4" class="col-lg-12 mt-3 form-grup">
+                                <label for="">Template almacenado :</label>
+                                <ng-select name="" id="" [(ngModel)]="campamento" style="width: 100%;"
+                                    [multiple]="true">
+                                    <ng-option value="1">Template 1</ng-option>
+                                    <ng-option value="2">Template 2</ng-option>
+                                </ng-select>
+                            </div>
+                            <div  class="col-lg-12 mt-3 form-grup">
+                                <input type="text" name="" class="form-control" id="" placeholder="Asunto">
+
+                            </div>
+                           
+
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <ckeditor [editor]="Editor" [(ngModel)]="template" data="<p>Content of the editor.</p>">
+                        </ckeditor>
+
+                    </div>
+
+
+                    <div class="btn-container">
+                        <button class="btn btn-primary" (click)="prueba()">Descartar</button>
+                        <button class="btn btn-primary">Enviar</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,411 @@
+<div class="container-fluid">
+    <div class="card border border-info border-3">
+        <div class="bg-info p-2">
+            <h1 class="card-title text-white">Camps a los que me he apuntado</h1>
+
+        </div>
+        <div class="card-body">
+            <div>
+                <div class="col text-end">
+
+                </div>
+            </div>
+            <div class="container-btn">
+                <div>
+
+                </div>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Global Search" />
+            </div>
+
+            <div class="scroll-y">
+                <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
+                    [value]="customer" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+                    [loading]="loading" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                    [globalFilterFields]="['name','country.name','representative.name','status']">
+
+                    <ng-template pTemplate="header">
+                        <tr>
+
+
+
+                            <th pSortableColumn="name" class="camp">
+                                <div class="flex justify-content-between align-items-center"
+                                    style="max-width: 200px; width: 200px;">
+                                    Camp
+                                    <p-sortIcon field="name"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="precio">
+                                <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                                    Precio publico <p-sortIcon field="precio"></p-sortIcon>
+                                </div>
+                            </th>
+
+                            <th pSortableColumn="precio">
+                                <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                                    sede
+                                    <p-sortIcon field="precio"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="record.n" class="record">
+                                <div class="flex justify-content-between align-items-center"
+                                    style="min-width: 70px; width: 90px;">
+                                    Inicia
+                                    <p-sortIcon field="record.n"></p-sortIcon>
+                                </div>
+                            </th>
+
+
+                            <th pSortableColumn="sede" style="width: 8rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    Termina
+                                    <p-sortIcon field="sede"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="sede" style="width: 8rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    Record
+                                    <p-sortIcon field="sede"></p-sortIcon>
+                                </div>
+                            </th>
+
+                            <th pSortableColumn="precio">
+                                <div class="flex justify-content-between align-items-center" style="width: 130px;">
+                                </div>
+                            </th>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-customer>
+                        <tr class="p-selectable-row">
+
+                            <td>
+                                {{customer.name}}
+                            </td>
+
+
+                            <td>
+                                {{21212|currency}}
+                            </td>
+
+                            <td>
+                                Los Potros
+                            </td>
+
+                            <td>
+                                2023-07-13 (1 mes, 1 semana)
+                            </td>
+
+                            <td>
+                                2023-08-24
+                            </td>
+                            <td>
+
+                                <p-badge [value]="customer.record.n" pTooltip="Acampadores"
+                                    tooltipPosition="top"></p-badge>
+                                <p-badge [value]="customer.record.b" pTooltip="Staff apuntados" tooltipPosition="top"
+                                    severity="info" severity="warning"></p-badge>
+                                <p-badge [value]="customer.record.d" pTooltip="Staff confirmado" tooltipPosition="top"
+                                    severity="danger" severity="danger"></p-badge>
+
+
+                            </td>
+
+
+                            <td>
+                                <button class="btn btn-primary" class="btn btn-primary">Yo me apunto</button>
+                                
+
+                            </td>
+
+
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+
+                    </ng-template>
+                </p-table>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="card border border-warning border-3">
+        <div class="bg-warning p-2">
+            <h1 class="card-title text-white">Camps a los que me he apuntado</h1>
+
+        </div>
+        <div class="card-body">
+            <div>
+                <div class="col text-end">
+
+                </div>
+            </div>
+            <div class="container-btn">
+                <div>
+
+                </div>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Global Search" />
+            </div>
+
+            <div class="scroll-y">
+                <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
+                    [value]="customer" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+                    [loading]="loading" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                    [globalFilterFields]="['name','country.name','representative.name','status']">
+
+                    <ng-template pTemplate="header">
+                        <tr>
+
+
+
+                            <th pSortableColumn="name" class="camp">
+                                <div class="flex justify-content-between align-items-center"
+                                    style="max-width: 200px; width: 200px;">
+                                    Camp
+                                    <p-sortIcon field="name"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="precio">
+                                <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                                    Precio publico <p-sortIcon field="precio"></p-sortIcon>
+                                </div>
+                            </th>
+
+                            <th pSortableColumn="precio">
+                                <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                                    sede
+                                    <p-sortIcon field="precio"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="record.n" class="record">
+                                <div class="flex justify-content-between align-items-center"
+                                    style="min-width: 70px; width: 90px;">
+                                    Inicia
+                                    <p-sortIcon field="record.n"></p-sortIcon>
+                                </div>
+                            </th>
+
+
+                            <th pSortableColumn="sede" style="width: 8rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    Termina
+                                    <p-sortIcon field="sede"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="sede" style="width: 8rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    Record
+                                    <p-sortIcon field="sede"></p-sortIcon>
+                                </div>
+                            </th>
+
+                            <th pSortableColumn="precio">
+                                <div class="flex justify-content-between align-items-center" style="width: 130px;">
+                                </div>
+                            </th>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-customer>
+                        <tr class="p-selectable-row">
+
+                            <td>
+                                {{customer.name}}
+                            </td>
+
+
+                            <td>
+                                {{21212|currency}}
+                            </td>
+
+                            <td>
+                                Los Potros
+                            </td>
+
+                            <td>
+                                2023-07-13 (1 mes, 1 semana)
+                            </td>
+
+                            <td>
+                                2023-08-24
+                            </td>
+                            <td>
+
+                                <p-badge [value]="customer.record.n" pTooltip="Acampadores"
+                                    tooltipPosition="top"></p-badge>
+                                <p-badge [value]="customer.record.b" pTooltip="Staff apuntados" tooltipPosition="top"
+                                    severity="info" severity="warning"></p-badge>
+                                <p-badge [value]="customer.record.d" pTooltip="Staff confirmado" tooltipPosition="top"
+                                    severity="danger" severity="danger"></p-badge>
+
+
+                            </td>
+
+
+                            <td>
+                                <button class="btn btn-primary" class="btn btn-primary">ver campamento</button>
+                                <br>
+                                <br>
+                                <button class="btn btn-primary" class="btn btn-danger">Cancelar mi paricipacion</button>
+
+                            </td>
+
+
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+
+                    </ng-template>
+                </p-table>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="card border border-success border-3">
+        <div class="bg-success p-2">
+            <h1 class="card-title text-white">Camps a los que me he apuntado </h1>
+
+        </div>
+        <div class="card-body">
+            <div>
+                <div class="col text-end">
+
+                </div>
+            </div>
+            <div class="container-btn">
+                <div>
+
+                </div>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                    placeholder="Global Search" />
+            </div>
+
+            <div class="scroll-y">
+                <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
+                    [value]="customer" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+                    [loading]="loading" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                    [globalFilterFields]="['name','country.name','representative.name','status']">
+
+                    <ng-template pTemplate="header">
+                        <tr>
+
+
+
+                            <th pSortableColumn="name" class="camp">
+                                <div class="flex justify-content-between align-items-center"
+                                    style="max-width: 200px; width: 200px;">
+                                    Camp
+                                    <p-sortIcon field="name"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="precio">
+                                <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                                    Precio publico <p-sortIcon field="precio"></p-sortIcon>
+                                </div>
+                            </th>
+
+                            <th pSortableColumn="precio">
+                                <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                                    sede
+                                    <p-sortIcon field="precio"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="record.n" class="record">
+                                <div class="flex justify-content-between align-items-center"
+                                    style="min-width: 70px; width: 90px;">
+                                    Inicia
+                                    <p-sortIcon field="record.n"></p-sortIcon>
+                                </div>
+                            </th>
+
+
+                            <th pSortableColumn="sede" style="width: 8rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    Termina
+                                    <p-sortIcon field="sede"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="sede" style="width: 8rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    Record
+                                    <p-sortIcon field="sede"></p-sortIcon>
+                                </div>
+                            </th>
+
+                            <th pSortableColumn="precio">
+                                <div class="flex justify-content-between align-items-center" style="width: 130px;">
+                                </div>
+                            </th>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-customer>
+                        <tr class="p-selectable-row">
+
+                            <td>
+                                {{customer.name}}
+                            </td>
+
+
+                            <td>
+                                {{21212|currency}}
+                            </td>
+
+                            <td>
+                                Los Potros
+                            </td>
+
+                            <td>
+                                2023-07-13 (1 mes, 1 semana)
+                            </td>
+
+                            <td>
+                                2023-08-24
+                            </td>
+                            <td>
+
+                                <p-badge [value]="customer.record.n" pTooltip="Acampadores"
+                                    tooltipPosition="top"></p-badge>
+                                <p-badge [value]="customer.record.b" pTooltip="Staff apuntados" tooltipPosition="top"
+                                    severity="info" severity="warning"></p-badge>
+                                <p-badge [value]="customer.record.d" pTooltip="Staff confirmado" tooltipPosition="top"
+                                    severity="danger" severity="danger"></p-badge>
+
+
+                            </td>
+
+
+                            <td>
+                                <button class="btn btn-primary" class="btn btn-primary">ver campamento</button>
+                                <br>
+                                <br>
+                                <button class="btn btn-primary" class="btn btn-danger">No podre asistir</button>
+
+                            </td>
+
+
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+
+                    </ng-template>
+                </p-table>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

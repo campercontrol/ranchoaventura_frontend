@@ -1,0 +1,329 @@
+<div class="card border border-success border-3">
+    <div class="bg-success p-2">
+        <h1 class="card-title text-white">Acampadores</h1>
+
+    </div>
+    <div class="card-body">
+        <div>
+            <div class="col text-end">
+
+            </div>
+        </div>
+        <div class="container-btn">
+
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                placeholder="Global Search" />
+        </div>
+
+        <div class="scroll-y">
+            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="customer"
+                [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                [globalFilterFields]="['name','country.name','representative.name','status']">
+
+                <ng-template pTemplate="header">
+                    <tr>
+
+
+                        <th pSortableColumn="name" class="camp">
+                            <div class="flex justify-content-between align-items-center" style="width: 50px;">
+                                Foto
+                            </div>
+                        </th>
+                        <th pSortableColumn="name" class="camp">
+                            <div class="flex justify-content-between align-items-center" style="width: 90px;">
+                                Nombre
+                                <p-sortIcon field="name"></p-sortIcon>
+                            </div>
+                        </th>
+                        <th pSortableColumn="precio">
+                            <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                                Tutor 1
+                                <p-sortIcon field="precio"></p-sortIcon>
+                            </div>
+                        </th>
+                        <th pSortableColumn="precio">
+                            <div class="flex justify-content-between align-items-center" style="width: 220px;">
+                                Record de consultas
+                                <p-sortIcon field="precio"></p-sortIcon>
+                            </div>
+                        </th>
+
+
+
+
+
+
+                        <th pSortableColumn="precio">
+                            <div class="flex justify-content-between align-items-center" style="width: 80px;">
+                            </div>
+                        </th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-customer>
+                    <tr class="p-selectable-row">
+
+                        <td>
+                            <p-avatar image="../../../assets/images/users/avatar-2.jpg" shape="circle"
+                                size="large"></p-avatar>
+                        </td>
+                        <td>
+                            {{customer.name}}
+                        </td>
+
+
+                        <td>
+                            Renata Camper Control <br>
+                            renata@campercontrol.com <br>
+                            55123456 </td>
+                        <td>
+                            <p-avatar image="../../../assets/images/medical/No urgencia.png" pBadge value="2"
+                                [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px'}"
+                                (click)="valores(customer)" (click)="op.toggle($event)"></p-avatar>
+                            <p-avatar image="../../../assets/images/medical/Emergencia.png" pBadge value="1"
+                                [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px'}"
+                                (click)="op.toggle($event)"></p-avatar>
+                            <p-avatar image="../../../assets/images/medical/Reanimacion.png" pBadge value="3"
+                                [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px'}"
+                                (click)="op.toggle($event)"></p-avatar>
+                            <p-avatar image="../../../assets/images/medical/Urgencia menor.png"
+                                [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 5px'}"
+                                (click)="op.toggle($event)"></p-avatar>
+                            <p-avatar image="../../../assets/images/medical/Urgencia.png" pBadge value="0"
+                                [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px'}"
+                               (click)="valores(customer)" (click)="op.toggle($event) "></p-avatar>
+                            <p-avatar image="../../../assets/images/medical/Reanimacion.png" pBadge value="3"
+                                [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px'}"
+                                (click)="op.toggle($event)"></p-avatar>
+                            <p-avatar image="../../../assets/images/medical/Urgencia menor.png"
+                                [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 5px'}"
+                                (click)="op.toggle($event)"></p-avatar>
+                            <p-avatar image="../../../assets/images/medical/Urgencia.png" pBadge value="0"
+                                [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px'}"
+                                (click)="op.toggle($event)"></p-avatar>
+
+                        </td>
+
+
+
+                        <td>
+                            <button class="btn btn-primary" class="btn btn-primary">ver perfil</button>
+                        </td>
+
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+
+                </ng-template>
+            </p-table>
+
+        </div>
+
+
+    </div>
+</div>
+<div class="card border border-danger border-3">
+    <div class="bg-danger p-2">
+        <h1 class="card-title text-white">Staff</h1>
+
+    </div>
+    <div class="card-body">
+        <div>
+            <div class="col text-end">
+
+            </div>
+        </div>
+
+
+        <div >
+            <div class="scroll-y">
+                <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
+                    [value]="customer" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+                    [loading]="loading" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                    [globalFilterFields]="['name','country.name','representative.name','status']">
+
+                    <ng-template pTemplate="header">
+                        <tr>
+
+
+                            <th pSortableColumn="name" class="camp">
+                                <div class="flex justify-content-between align-items-center" style="width: 50px;">
+                                    Foto
+                                </div>
+                            </th>
+                            <th pSortableColumn="name" class="camp">
+                                <div class="flex justify-content-between align-items-center"
+                                    style="max-width: 200px; width: 200px;">
+                                    Nombre
+                                    <p-sortIcon field="name"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="precio">
+                                <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                                    Tutor 1
+                                    <p-sortIcon field="precio"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="precio">
+                                <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                                    Record de consultas
+                                    <p-sortIcon field="precio"></p-sortIcon>
+                                </div>
+                            </th>
+
+
+
+
+
+
+                            <th pSortableColumn="precio">
+                                <div class="flex justify-content-between align-items-center" style="width: 80px;">
+                                </div>
+                            </th>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-customer>
+                        <tr class="p-selectable-row">
+
+                            <td>
+                                <p-avatar image="../../../assets/images/users/avatar-2.jpg" shape="circle"
+                                    size="large"></p-avatar>
+                            </td>
+                            <td>
+                                {{customer.name}}
+                            </td>
+
+
+                            <td>
+                                Renata Camper Control <br>
+                                renata@campercontrol.com <br>
+                                55123456 </td>
+                            <td>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" class="btn btn-primary">ver perfil</button>
+                            </td>
+
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+
+                    </ng-template>
+                </p-table>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<p-overlayPanel #op [showCloseIcon]="true" [style]="{ width: '200px' }">
+    <ng-template pTemplate>
+        <p>Fecha de atención: </p>
+        <p class="fw-bold">02 de Enero de 2023 </p>
+        <p>Hora de atención: </p>
+        <p class="fw-bold">10:00 p.m. </p>
+        <p>Diagnostico: </p>
+        <p class="fw-bold">{{diagnostio}} </p>
+        <button class="btn btn-primary" (click)="showMaximizableDialog()">Ver Mas</button>
+    </ng-template>
+</p-overlayPanel>
+
+
+
+<p-dialog  [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '60vw'}" [maximizable]="true" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <div class="container-fluid col-11">
+        <div class="row">
+            <div class="col-6 text-end fs-2">
+                Diagnostico :
+            </div>
+            <div class="col-6 text-start fs-2">
+                Prueba de diagnostio
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-6 text-start fs-4">
+                Médico Responsable  :
+            </div>
+            <div class="col-6 text-end fs-4">
+                Medico Prueba
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-6 text-start fs-4">
+                Dia y fecha de atención :
+            </div>
+            <div class="col-6 text-end fs-4">
+                09:30 p.m. - 30 de Septiembre de 2022
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-6 text-start fs-4">
+                TRIAGE :
+            </div>
+            <div class="col-6 text-end fs-4">
+                No urgency
+            </div>
+        </div>
+        <hr>
+        <div class="col">
+            <div class="text-start fs-4">
+                Descripción basica para personal no medico :
+            </div>
+            <div class=" text-start  fs-4 mt-2">
+               .............................
+            </div>
+        </div>
+        <hr>
+        <div class="col">
+            <div class="text-start fs-4">
+                Tratamiento :
+            </div>
+            <div class=" text-start fs-4 mt-2">
+               .............................
+            </div>
+        </div>
+        <hr>
+        <div class="col">
+            <div class="text-start fs-4">
+                Restricciones o medidas dentro del campamento :
+            </div>
+            <div class="text-start fs-4 mt-2">
+               .............................
+            </div>
+        </div>
+        <hr>
+        <div class="col">
+            <div class="text-start fs-4">
+                Recomendaciones para seguimiento posterior al campamento :
+            </div>
+            <div class="col-6 text-start fs-4 mt-2">
+               .............................
+            </div>
+        </div>
+        <hr>
+        <div class="col">
+            <div class="text-start fs-4">
+                Comentario de la consulta :
+            </div>
+            <div class="text-start fs-4 mt-2">
+               .............................
+            </div>
+        </div>
+        <hr>
+
+    </div>
+</p-dialog>

@@ -1,0 +1,43 @@
+.bodyCamper{
+    background-color: #34c38f;
+    width: 100%;
+    color: white;
+    border-radius: 5px;
+    height: 80px;
+    align-items: center;
+    padding: 20px 20px;
+}
+
+.container-pagos{
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right:3px ;
+}
+
+.bodyCamper1{
+    background-color: #f1b44c;
+    width: 100%;
+    color: white;
+    border-radius: 5px;
+    height: 80px;
+    align-items: center;
+    padding: 20px 20px;
+}
+
+.conatiner-info-camp{
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 30px;
+
+}
+i{
+    margin-right:10px ;
+}
+
+.conatiner-info-camp p{
+    font-size: 20px;
+    margin: 10px;
+    
+}

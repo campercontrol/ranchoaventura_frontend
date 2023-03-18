@@ -1,0 +1,529 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card border border-info border-3">
+        <div class=" scroll-y">
+          <div class="bg-info p-2">
+            <h1 class="card-title text-white">Acampadores</h1>
+  
+          </div>
+          <div class="card-body">
+            <div>
+              <div class="col text-end">
+  
+              </div>
+            </div>
+            <div class="container-btn">
+              <div>
+                <div ngbDropdown placement="top-end" class="d-inline-block">
+                  <button type="button" class="btn btn-outline-primary" id="dropdownBasic2"
+                    ngbDropdownToggle>Reportes</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                    <button ngbDropdownItem>Acampadores</button>
+                    <button ngbDropdownItem>Detalles de pagos</button>
+                    <button ngbDropdownItem>Info de campers</button>
+                  </div>
+                </div>
+                <div ngbDropdown placement="top-end" class="d-inline-block">
+                  <button type="button" class="btn btn-outline-primary" id="dropdownBasic2"
+                    ngbDropdownToggle>Reportes</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                    <button ngbDropdownItem>Exel</button>
+                    <button ngbDropdownItem>Fotos</button>
+                  </div>
+                </div>
+                <div ngbDropdown placement="top-end" class="d-inline-block">
+                  <button type="button" class="btn btn-outline-primary" id="dropdownBasic2"
+                    ngbDropdownToggle>Reportes</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                    <button ngbDropdownItem>1" x 11" (ZT-230)</button>
+                    <button ngbDropdownItem>8 x hoja</button>
+                  </div>
+                </div>
+              </div>
+              <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                placeholder="Global Search" />
+            </div>
+  
+            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="customer" 
+              [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+              [globalFilterFields]="['name','country.name','representative.name','status']">
+  
+              <ng-template pTemplate="header">
+                <tr>
+  
+                  <th pSortableColumn="name" class="camp">
+                    <div class="flex justify-content-between align-items-center" style="width: 50px;">
+                      Foto
+                    </div>
+                  </th>
+                  <th pSortableColumn="name" class="camp">
+                    <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
+                      Nombre
+                      <p-sortIcon field="name"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th pSortableColumn="record.n" class="record">
+                    <div class="flex justify-content-between align-items-center" style="min-width: 70px; width: 90px;">
+                      Record
+                      <p-sortIcon field="record.n"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th pSortableColumn="precio">
+                    <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                      Fecha de nacimiento
+                      <p-sortIcon field="precio"></p-sortIcon>
+                    </div>
+                  </th>
+               
+                  <th pSortableColumn="sede" style="width: 130px; min-width: 120px;">
+                    <div class="flex justify-content-between align-items-center">
+                      Saldo
+                      <p-sortIcon field="sede"></p-sortIcon>
+                    </div>
+                  </th>
+  
+                  <th pSortableColumn="status" style="min-width: 2rem">
+                    <div class="flex justify-content-between align-items-center">
+                      Tutor 1
+                      <p-sortIcon field="sede"></p-sortIcon>
+   
+                    </div>
+                  </th>
+                  <th pSortableColumn="precio">
+                    <div class="flex justify-content-between align-items-center" style="width: 140px;">
+                    </div>
+                  </th>
+  
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-customer>
+                <tr class="p-selectable-row">
+  
+                  <td>
+                    <p-avatar image="../../../assets/images/users/avatar-2.jpg" shape="circle" size="large"></p-avatar>
+                  </td>
+                  <td>
+                    {{customer.name}}
+                  </td>
+                  <td>
+  
+                    <p-badge [value]="customer.record.n" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
+                    <p-badge [value]="customer.record.b" pTooltip="Staff apuntados" tooltipPosition="top" severity="info"
+                      severity="warning"></p-badge>
+                    <p-badge [value]="customer.record.d" pTooltip="Staff confirmado" tooltipPosition="top"
+                      severity="danger" severity="danger"></p-badge>
+  
+  
+                  </td>
+                  <td>
+                    <img src="../../../assets/images/camp/pastel-cumpleaños.png" alt="" *ngIf="customer.cumple">
+  
+                    {{customer.inicio}}
+                    <br>
+                    18 años
+  
+                  </td>
+                  <td>
+                    $MXM
+                    <br>
+                    <p-badge [value]="customer.estado"></p-badge>
+  
+                  </td>
+                  <td>
+                    Juan Sánchez Sánchez <br>
+                    papa@campercontrol.com
+                  </td>
+  
+                  <td>
+                    <button class="btn btn-primary" class="btn btn-primary">ver campamento</button>
+                  </td>
+  
+  
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+  
+              </ng-template>
+            </p-table>
+
+        </div>
+        </div>
+      </div>
+
+      <div class="card border border-success border-3">
+        <div class="bg-success p-2">
+          <h1 class="card-title text-white">Staff confirmado</h1>
+
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="col text-end">
+
+            </div>
+          </div>
+          <div class="container-btn">
+            <div>
+              <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
+                <button type="button" class="btn btn-primary" id="dropdownBasic2"
+                  ngbDropdownToggle>Reportes</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                  <button ngbDropdownItem>staff</button>
+                
+                </div>
+              </div>
+              <div ngbDropdown placement="top-end" class="d-inline-block"  style="margin-right: 10px;">
+                <button type="button" class="btn btn-success" id="dropdownBasic2"
+                  ngbDropdownToggle>Credenciales de staff</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                  <button ngbDropdownItem>Exel</button>
+                  <button ngbDropdownItem>Fotos</button>
+                </div>
+              </div>
+              <div ngbDropdown placement="top-end" class="d-inline-block"  style="margin-right: 10px;">
+                <button type="button" class="btn btn-primary">Selecciona rol</button>
+                
+              </div>
+            </div>
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Global Search" />
+          </div>
+
+          <div class="scroll-y">
+            <p-table #dt [(selection)]="selectedCustomers" dataKey="id"  [rowHover]="true" [rows]="10" [value]="customer"
+            [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+            [globalFilterFields]="['name','country.name','representative.name','status']">
+
+            <ng-template pTemplate="header">
+              <tr>
+                <th>
+                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+
+                <th pSortableColumn="name" class="camp">
+                  <div class="flex justify-content-between align-items-center" style="width: 50px;">
+                    Foto
+                  </div>
+                </th>
+                <th pSortableColumn="name" class="camp">
+                  <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
+                    Nombre
+                    <p-sortIcon field="name"></p-sortIcon>
+                  </div>
+                </th>
+                <th pSortableColumn="precio">
+                  <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                    Fecha de nacimiento
+                    <p-sortIcon field="precio"></p-sortIcon>
+                  </div>
+                </th>
+                <th pSortableColumn="precio">
+                  <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                    Telefono celulares
+                    <p-sortIcon field="precio"></p-sortIcon>
+                  </div>
+                </th>
+                <th pSortableColumn="precio">
+                  <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                    Correos
+                    <p-sortIcon field="precio"></p-sortIcon>
+                  </div>
+                </th>
+                <th pSortableColumn="record.n" class="record">
+                  <div class="flex justify-content-between align-items-center" style="min-width: 70px; width: 90px;">
+                    Record
+                    <p-sortIcon field="record.n"></p-sortIcon>
+                  </div>
+                </th>
+              
+             
+                <th pSortableColumn="sede" style="width: 8rem">
+                  <div class="flex justify-content-between align-items-center">
+                    Roles
+                    <p-sortIcon field="sede"></p-sortIcon>
+                  </div>
+                </th>
+
+                <th pSortableColumn="precio">
+                  <div class="flex justify-content-between align-items-center" style="width: 80px;">
+                  </div>
+                </th>
+
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-customer>
+              <tr class="p-selectable-row">
+                <td>
+                  <p-tableCheckbox [value]="customer"></p-tableCheckbox>
+                </td>
+                <td>
+                  <p-avatar image="../../../assets/images/users/avatar-2.jpg" shape="circle" size="large"></p-avatar>
+                </td>
+                <td>
+                  {{customer.name}}
+                </td>
+               
+                <td>
+                  <img src="../../../assets/images/camp/pastel-cumpleaños.png" alt="" *ngIf="customer.cumple">
+
+                  {{customer.inicio}}
+                  <br>
+
+                </td>
+                <td>
+                  5512391274
+                </td>
+                
+                <td>
+                  papa@campercontrol.com
+                </td>
+                <td>
+
+                  <p-badge [value]="customer.record.n" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
+                  <p-badge [value]="customer.record.b" pTooltip="Staff apuntados" tooltipPosition="top" severity="info"
+                    severity="warning"></p-badge>
+                  <p-badge [value]="customer.record.d" pTooltip="Staff confirmado" tooltipPosition="top"
+                    severity="danger" severity="danger"></p-badge>
+
+
+                </td>
+                <td>
+                  Director
+                </td>
+
+                <td>
+                  <button class="btn btn-primary" class="btn btn-primary">ver campamento</button>
+                </td>
+
+
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+
+            </ng-template>
+          </p-table>
+
+          </div>
+          
+
+        </div>
+      </div>
+      <div class="card border border-danger border-3">
+        <div class="bg-danger p-2">
+          <h1 class="card-title text-white">Staff apuntado</h1>
+
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="col text-end">
+
+            </div>
+          </div>
+          <div class="container-btn">
+            <div>
+              <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
+                <button type="button" class="btn btn-primary" id="dropdownBasic2"
+                  ngbDropdownToggle>Reportes</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                  <button ngbDropdownItem>staff</button>
+                
+                </div>
+              </div>
+              <div ngbDropdown placement="top-end" class="d-inline-block"  style="margin-right: 10px;">
+                <button type="button" class="btn btn-success" (click)="showMaximizableDialog()">no apuntado</button>
+              
+              </div>
+              <div ngbDropdown placement="top-end" class="d-inline-block"  style="margin-right: 10px;">
+                <button type="button" class="btn btn-danger">seleciona staff</button>
+                
+              </div>
+            </div>
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Global Search" />
+          </div>
+
+          <div class="scroll-y">
+            <p-table #dt [(selection)]="selectedCustomers" dataKey="id"  [rowHover]="true" [rows]="10" [value]="customer"
+            [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+            [globalFilterFields]="['name','country.name','representative.name','status']">
+
+            <ng-template pTemplate="header">
+              <tr>
+                <th>
+                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+
+                <th pSortableColumn="name" class="camp">
+                  <div class="flex justify-content-between align-items-center" style="width: 50px;">
+                    Foto
+                  </div>
+                </th>
+                <th pSortableColumn="name" class="camp">
+                  <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
+                    Nombre
+                    <p-sortIcon field="name"></p-sortIcon>
+                  </div>
+                </th>
+                <th pSortableColumn="precio">
+                  <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                    Fecha de nacimiento
+                    <p-sortIcon field="precio"></p-sortIcon>
+                  </div>
+                </th>
+                <th pSortableColumn="precio">
+                  <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                    Telefono celulares
+                    <p-sortIcon field="precio"></p-sortIcon>
+                  </div>
+                </th>
+                <th pSortableColumn="precio">
+                  <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                    Correos
+                    <p-sortIcon field="precio"></p-sortIcon>
+                  </div>
+                </th>
+                <th pSortableColumn="sede" style="width: 120px">
+                  <div class="flex justify-content-between align-items-center">
+                    Fecha apuntada
+                    <p-sortIcon field="sede"></p-sortIcon>
+                  </div>
+                </th>
+                <th pSortableColumn="record.n" class="record">
+                  <div class="flex justify-content-between align-items-center" style="min-width: 70px; width: 90px;">
+                    Record
+                    <p-sortIcon field="record.n"></p-sortIcon>
+                  </div>
+                </th>
+              
+                <th pSortableColumn="precio">
+                  <div class="flex justify-content-between align-items-center" style="width: 80px;">
+                  </div>
+                </th>
+
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-customer>
+              <tr class="p-selectable-row">
+                <td>
+                  <p-tableCheckbox [value]="customer"></p-tableCheckbox>
+                </td>
+                <td>
+                  <p-avatar image="../../../assets/images/users/avatar-2.jpg" shape="circle" size="large"></p-avatar>
+                </td>
+                <td>
+                  {{customer.name}}
+                </td>
+               
+                <td>
+                  <img src="../../../assets/images/camp/pastel-cumpleaños.png" alt="" *ngIf="customer.cumple">
+
+                  {{customer.inicio}}
+                  <br>
+
+                </td>
+                <td>
+                 5512391274
+                </td>
+                
+                <td>
+                  papa@campercontrol.com
+                </td>
+                <td>
+                  18 de Octubre de 2017	
+                </td>
+                <td>
+
+                  <p-badge [value]="customer.record.n" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
+                  <p-badge [value]="customer.record.b" pTooltip="Staff apuntados" tooltipPosition="top" severity="info"
+                    severity="warning"></p-badge>
+                  <p-badge [value]="customer.record.d" pTooltip="Staff confirmado" tooltipPosition="top"
+                    severity="danger" severity="danger"></p-badge>
+
+
+                </td>
+                
+
+                <td>
+                  <button class="btn btn-primary" class="btn btn-primary">ver campamento</button>
+                </td>
+
+
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+
+            </ng-template>
+          </p-table>
+
+          </div>
+          
+
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+<p-dialog header="staff  no apuntado" [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <div class="center">
+      <div class="col-10">
+        <div class="left mb-2">
+          <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Global Search" />
+        </div>
+        <p-table #dt [(selection)]="selectedCustomers" dataKey="id"  [rowHover]="true" [rows]="10" [value]="customer"
+        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+        [globalFilterFields]="['name','country.name','representative.name','status']">
+    
+        <ng-template pTemplate="header">
+          <tr>
+            <th>
+              <div style=" width: 30%;">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </div>
+            </th>
+    
+           
+            <th pSortableColumn="name" class="camp">
+              <div class="flex justify-content-between align-items-center" style=" width: 60%;">
+                Nombre
+                <p-sortIcon field="name"></p-sortIcon>
+              </div>
+            </th>
+            
+    
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-customer>
+          <tr class="p-selectable-row">
+            <td>
+              <p-tableCheckbox [value]="customer"></p-tableCheckbox>
+            </td>
+            <td>
+              {{customer.name}}
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+    
+        </ng-template>
+      </p-table>
+      </div>
+    </div>
+  
+    
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="displayMaximizable=false" label="Cancelar" class="p-button-text"></p-button>
+            <p-button icon="pi pi-times" (click)="displayMaximizable=false" label="Aceptar staff"></p-button>
+        </ng-template>
+</p-dialog>

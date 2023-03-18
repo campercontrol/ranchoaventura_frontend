@@ -1,0 +1,216 @@
+<div class="container-fluid my-4">
+  <div class="row bg-warning py-1">
+    <div class="col-12 d-flex justify-content-between align-items-center text-white py-2">
+      <h2 class="text-white mb-0">Campamento 1</h2>
+      <div class="dropdown-icon-container">
+          <button class="button-reset" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="bx bx-chevron-down text-white"></i></button>
+      </div>
+    </div>    
+  
+  </div>
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+              <p>28/Nov/2023 - 30/Nov/2023 (3 días)</p>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <dl>
+              <div class="my-3">  
+                <dt>Sede  <i class="fas fa-flag"></i>: </dt>
+                <dd>Los potros</dd>
+              </div>
+              <div class="my-3">
+                <dt>Salida <i class="fa dripicons-alarm" ></i>: </dt>
+                <dd>Martes, 28 Noviembre 2023 - 9:38 p.m.</dd>
+              </div>
+              <div class="my-3">
+                <dt>Regreso <i class="dripicons-alarm "></i>: </dt>
+                <dd>Jueves, 30 Noviembre 2023 - 9:38 p.m.</dd>
+              </div>
+              <div class="my-3">
+                <dt>Punto de reunión <i class="fa fa-map-marker "></i>: </dt>
+                <dd>Escuela</dd>
+              </div>
+              <div class="my-3">  
+                <dt>Página del camp  <i class="fa fa-globe"></i> : </dt>
+                <dd>...</dd>
+              </div>
+              <div class="my-3">
+                <dt>Mensaje especial  <i class="bx bx-comment-dots"></i> : </dt>
+                <dd>Ninguno</dd>
+              </div>
+              <div class="my-3">
+                <dt>Precio público <i class="fas fa-donate"></i>: </dt>
+                <dd>$5,500.0MXN</dd>
+              </div>
+              <div class="my-3">
+                <dt>Mensaje para el administrador <i class="fas fa-comments"></i>: </dt>
+                <dd>Ninguno</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="container-fluid my-4">
+    <div class="row bg-info py-1">
+        <div class="col-12 d-flex justify-content-between align-items-center text-white py-2">
+            <h2 class="text-white mb-0">Acampadores</h2>
+            <div class="dropdown-icon-container">
+                <button class="button-reset" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="bx bx-chevron-down text-white"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="collapseExample">
+        <div class="card">
+            <div class="card-body">
+              <div class="row mb-4">
+                <div class="d-flex justify-content-end">
+                  <div class="dropdown" ngbDropdown>
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    ngbDropdownToggle>
+                    Añadir agrupación <i class="mdi mdi-chevron-down"></i>
+                  </button>
+                  <div class="dropdown-menu" ngbDropdownMenu>
+                    <a class="dropdown-item" href="javascript: void(0);">Autobus</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="javascript: void(0);">Cabaña</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="javascript: void(0);">Equipo</a>
+                    <div class="dropdown-divider"></div>
+                  </div>
+                </div>
+              </div>
+                
+              </div>
+              <div class="row">
+                <div class="mb-3 col-md-6 col-xl-4 col-xxl-2">
+                  <div id="tickets-table_filter" class="dataTables_filter d-flex align-items-center">
+                    <label for="searchTerm" class="mb-0 me-2">Buscar: </label>
+                      <input type="text" name="searchTerm" class="form-control form-control-sm"
+                        aria-controls="tickets-table" id="searchTerm">
+                  </div>
+                </div>
+                <div class="mb-3 col-md-6 col-xl-8 col-xxl-10 d-flex flex-column align-items-center flex-sm-row justify-content-sm-end ">
+                  <button class="btn btn-secondary mb-2 btn-seleccionar me-sm-2">Seleccionar todos</button>
+                  <button class="btn btn-secondary mb-2 btn-borrar"> Borrar selección</button>
+                </div>
+              </div>
+              <div class="row">
+                <ngx-datatable
+                #myTable
+                class="material expandable"
+                [columnMode]="ColumnMode.force"
+                [headerHeight]="50"
+                [footerHeight]="50"
+                [rowHeight]="50"
+                [scrollbarV]="true"
+                [rows]="rows"
+                (page)="onPage($event)"
+              >
+                <ngx-datatable-column
+                  [width]="50"
+                  [resizeable]="false"
+                  [sortable]="false"
+                  [draggable]="false"
+                  [canAutoResize]="false"
+                >
+                  <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                    <a
+                      href="#"
+                      [class.datatable-icon-right]="!expanded"
+                      [class.datatable-icon-down]="expanded"
+                      title="Expand/Collapse Row"
+                      (click)="toggleExpandRow(row)"
+                      class="desktop-hidden"
+                    >
+                    </a>
+                  </ng-template>
+                </ngx-datatable-column>
+                <!-- <ngx-datatable-column name="ID" [flexGrow]="3" [minWidth]="200">
+                  <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{ value }}
+                  </ng-template>
+                </ngx-datatable-column> -->
+                <ngx-datatable-column name="ID" [flexGrow]="1">
+                  <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                    <span class="mobile-hidden">ID</span>
+                  </ng-template>
+                  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    <span class="mobile-hidden">{{ value }}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Nombre" [flexGrow]="1">
+                  <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                    <span class="mobile-hidden">Nombre</span>
+                  </ng-template>
+                  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    <span class="mobile-hidden">{{ value }}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Fecha" [flexGrow]="1">
+                  <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                    <span class="mobile-hidden">Fecha de nacimiento</span>
+                  </ng-template>
+                  <ng-template let-value="value" ngx-datatable-cell-template>
+                    <span class="mobile-hidden">{{ value }}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Sexo" [flexGrow]="1">
+                  <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                    <span class="mobile-hidden">Sexo</span>
+                  </ng-template>
+                  <ng-template let-value="value" ngx-datatable-cell-template>
+                    <span class="mobile-hidden">{{ value }}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Grado" [flexGrow]="1">
+                  <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                    <span class="mobile-hidden">Grado escolar</span>
+                  </ng-template>
+                  <ng-template let-value="value" ngx-datatable-cell-template>
+                    <span class="mobile-hidden">{{ value }}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Autobus" [flexGrow]="1">
+                  <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                    <span class="mobile-hidden">Autobús</span>
+                  </ng-template>
+                  <ng-template let-value="value" ngx-datatable-cell-template>
+                    <span class="mobile-hidden">{{ value }}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Cabana" [flexGrow]="1">
+                  <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                    <span class="mobile-hidden">Cabaña</span>
+                  </ng-template>
+                  <ng-template let-value="value" ngx-datatable-cell-template>
+                    <span class="mobile-hidden">{{ value }}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Equipo" [flexGrow]="1">
+                  <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                    <span class="mobile-hidden">Equipo</span>
+                  </ng-template>
+                  <ng-template let-value="value" ngx-datatable-cell-template>
+                    <span class="mobile-hidden">{{ value }}</span>
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
+              </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
