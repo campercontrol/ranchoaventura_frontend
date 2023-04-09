@@ -44,6 +44,7 @@ import {PanelModule} from 'primeng/panel';
 import {AvatarModule} from 'primeng/avatar';
 import {AvatarGroupModule} from 'primeng/avatargroup';
 import {DialogModule} from 'primeng/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -82,6 +83,7 @@ export function createTranslateLoader(http: HttpClient): any {
     TimelineModule, 
     ButtonModule,
     CardModule, 
+    ReactiveFormsModule,
     BadgeModule,
     PanelModule,
     TranslateModule.forRoot({
