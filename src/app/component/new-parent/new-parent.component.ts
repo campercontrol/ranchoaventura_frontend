@@ -1,20 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { ParentService } from '../../../services/parent.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ParentService } from 'src/services/parent.service';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.scss']
+  selector: 'app-new-parent',
+  templateUrl: './new-parent.component.html',
+  styleUrls: ['./new-parent.component.scss']
 })
-export class PerfilComponent implements OnInit {
-
+export class NewParentComponent implements OnInit {
   public formParent : FormGroup;
+  estadoContrasena : boolean = false;
+  estadoEmail : boolean = false;
 
-  constructor(private parent : ParentService, private formBuild:FormBuilder) { }
+
+
+  constructor(private formBuild:FormBuilder,private parent: ParentService) { }
 
   ngOnInit(): void {
-
     this.formParent = this.formBuild.group({
       tutor_lastname_father:["",[Validators.required]],
       tutor_cellphone:      ["",[Validators.required,
@@ -31,6 +33,7 @@ export class PerfilComponent implements OnInit {
                             Validators.minLength(8), Validators.maxLength(10)]], 
     contact_email:          ["",[Validators.required,
                                    Validators.email]],
+    contact_email2:          ["",[Validators.email]],
     tutor_name :            ["",[Validators.required]],
     tutor_lastname_mother:  ["",[Validators.required]], 
     tutor_work_phone:       ["",[Validators.required,
@@ -43,46 +46,31 @@ export class PerfilComponent implements OnInit {
     contact_work_phone:     ["",[Validators.required,
                             Validators.pattern("^[0-9]*$"),
                             Validators.minLength(10), Validators.maxLength(10)]],
-    terms:                   ['',[Validators.required,Validators.requiredTrue]]
+    terms:                   ['',[Validators.required,Validators.requiredTrue]],
 
-   
+    pasword:  ["",[Validators.required,Validators.minLength(6)]],
+    pasword2:  ["",[Validators.required,Validators.minLength(6)]],
+ 
+  },{
+    
   })
-
-      this.getParent();
   }
 
-  getParent(){
-    this.parent.getParet(1).subscribe(
-      (res:any)=>{
-        console.log('respuestas',res);
-        
-          this.formParent.patchValue({
-            tutor_lastname_father: res['data'].tutor_lastname_father,
-            tutor_cellphone: res['data'].tutor_cellphone,
-            tutor_home_phone:res['data'].tutor_home_phone,
-            contact_name: res['data'].contact_name,
-            contact_lastname_mother: res['data'].contact_lastname_mother,
-            contact_home_phone: res['data'].contact_home_phone,
-            contact_email: res['data'].contact_email,
-            tutor_name: res['data'].tutor_name,
-            tutor_lastname_mother: res['data'].tutor_lastname_mother,
-            tutor_work_phone: res['data'].tutor_work_phone,
-            contact_lastname_father: res['data'].contact_lastname_father,
-            contact_cellphone: res['data'].contact_cellphone,
-            contact_work_phone: res['data'].contact_work_phone,
-            terms: true
-
-          })
-      }
-    )
+   pass(){
+    if(this.formParent.get('pasword') === this.formParent.get('pasword2')){
+        this.estadoContrasena = true;
+    }else{
+      this.estadoContrasena = true;
+    }
   }
 
-  send(){
-    console.log(this.formParent.value);
-    this.parent.partnPatch(2, this.formParent.value).subscribe((arg:any) =>console.log(arg)
-    );
-    
-    
+  prueba(){
+   this.parent.setParent(this.formParent.value).subscribe(
+    (res:any)=>{
+      console.log(res);
+      
+    }
+   )
   }
 
 }

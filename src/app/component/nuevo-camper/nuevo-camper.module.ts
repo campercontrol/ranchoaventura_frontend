@@ -5,6 +5,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { Ng5SliderModule } from 'ng5-slider';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormsModule, NgForm } from '@angular/forms';
+import { FormModule } from 'src/app/pages/form/form.module';
 
 
 
@@ -22,6 +24,7 @@ import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
     DropzoneModule,
     NgSelectModule,
     Ng5SliderModule,
+    FormsModule,
     NgbPaginationModule, NgbAlertModule
     
     

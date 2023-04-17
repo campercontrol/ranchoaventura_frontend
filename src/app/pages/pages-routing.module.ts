@@ -33,23 +33,26 @@ import { ListaCapacitacionesComponent } from '../staff/lista-capacitaciones/list
 import { PuntoControlComponent } from '../staff/punto-control/punto-control.component';
 import { MisCampamentosComponent } from '../staff/mis-campamentos/mis-campamentos.component';
 import { ListaStaffComponent } from '../staff/lista-staff/lista-staff.component';
+import { NewParentComponent } from '../component/new-parent/new-parent.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
   { path: 'dashboard', component: DefaultComponent },
-  { path: 'parents/miPerfil', component: PerfilComponent },
+  { path: 'parents/my-profile', component: PerfilComponent },
   { path: 'parents/registered-children', component: RegisteredChildrenComponent },
-  { path: 'parents/nuevo-camper', component: CamperNuevoComponent },
+  { path: 'parents/new-camper', component: CamperNuevoComponent },
   { path: 'parents/campamento', component: CampamentoComponent },
   { path: 'parents/camper', component: PerfilCamperComponent },
-  { path: 'parents/camper/Inscripcion', component: ParentsInscripcionCampComponent },
+  { path: 'parents/camper/inscription', component: ParentsInscripcionCampComponent },
   { path: 'staff/camps', component: CampamentosComponent },
   { path: 'camps/camp_add', component: NuevoCampamentoComponent },
   { path: 'camps/camp', component: CampamentosStaffComponent },
   { path: 'staff/grouping', component: GroupingComponent},
-  {path: 'consulta/camp',component:NuevaConsultaComponent},
+  { path: 'consultation/camp',component:NuevaConsultaComponent},
+  { path: 'parents/new-user',component:NewParentComponent},
 
-  {path: 'staff/trofeos',component:TrofeosComponent},
+
+  {path: 'staff/trophies',component:TrofeosComponent},
 
   {path: 'grouping/camp', component: AgregarAgrupacionComponent},
   {path: 'medical/care', component: MedicoComponent},
@@ -58,15 +61,15 @@ const routes: Routes = [
   {path: 'mailing', component: GmailingComponent},
   {path: 'school/profile', component: PerfilEscuelaComponent },
   {path: 'mailing', component: GmailingComponent},
-  {path: 'tiendita', component: TienditaComponent},
-  {path: 'pagos', component: PagosComponent},
+  {path: 'shop', component: TienditaComponent},
+  {path: 'payments', component: PagosComponent},
 
-  {path: 'staff/capacitaciones',component:CapacitacionesComponent},
-  {path: 'staff/capacitaciones_eventos',component:CapacitacionesEventoComponent},
-  {path: 'staff/capacitaciones_dashboard',component:ListaCapacitacionesComponent},
+  {path: 'staff/trainings',component:CapacitacionesComponent},
+  {path: 'staff/trainings-events',component:CapacitacionesEventoComponent},
+  {path: 'staff/trainings-dashboard',component:ListaCapacitacionesComponent},
 
   {path: 'staff/checkpoint',component:PuntoControlComponent},
-  {path: 'staff/campamentos',component: MisCampamentosComponent},
+  {path: 'staff/camps',component: MisCampamentosComponent},
   {path: 'staff/staff',component: ListaStaffComponent},
 
 

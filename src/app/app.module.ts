@@ -45,6 +45,7 @@ import {AvatarModule} from 'primeng/avatar';
 import {AvatarGroupModule} from 'primeng/avatargroup';
 import {DialogModule} from 'primeng/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NewParentComponent } from './component/new-parent/new-parent.component';
 
 
 
@@ -69,7 +70,8 @@ export function createTranslateLoader(http: HttpClient): any {
     PerfilComponent,
     RegisteredChildrenComponent,
     CampamentoComponent,
-    PerfilCamperComponent,    
+    PerfilCamperComponent,
+    NewParentComponent,    
   ],
   imports: [
     BrowserModule,
