@@ -83,11 +83,6 @@ const routes: Routes = [
 
   
 
-
-
-
-
-
   { path: 'calendar', component: CalendarComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'filemanager', component: FilemanagerComponent },

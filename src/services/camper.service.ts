@@ -12,4 +12,12 @@ export class CamperService {
   getCatalogos(idioma:string = 'es'){
     return this.http.get('http://142.93.12.234:8000/camper_form/'+idioma)
   }
+
+  setCamper(info:{}){
+    return this.http.post('http://142.93.12.234:8000/parent/',info)
+   }
+
+   prueba(){
+    return this.http.get('http://142.93.12.234:8000/camper_complete/13/es');
+   }
 }

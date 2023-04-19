@@ -266,7 +266,9 @@
                         <div class="row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Escuela*</label>
                             <div class="control-label col-sm-9">
-                                <ng-select>
+                                <ng-select [items]="school"   
+                                bindLabel="name" 
+                                bindValue="id" >
                                 </ng-select>
                             </div>
                         </div>
@@ -290,10 +292,6 @@
                         </div>
                     </form>
                 </div>
-
-
-
-
             </div>
 
             <div class="card">
@@ -329,13 +327,10 @@
                                     bindValue="id"
                                     [(ngModel)]="prueba"
                                     multiple="true"
+                                    name="prueba"
                                     >
                                 </ng-select>
-                                    </div>
-                                
-
-                           
-                               
+                                    </div>      
                         </div>
                         <div class="row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Tipo de
@@ -438,17 +433,8 @@
                             <div>
                                 <input type="checkbox">
                             </div>
-
-
-
-
                         </div>
-
                     </form>
-
-
-
-
                 </div>
 
 
@@ -540,10 +526,6 @@
                                 <input type="text" class="form-control" id="horizontal-firstname-input">
                             </div>
                         </div>
-
-
-
-
                     </form>
                 </div>
 

@@ -28,6 +28,15 @@ export class ParentService {
      return this.http.patch('http://142.93.12.234:8000/parent/'+ id,info)
   }
 
+  crearNuevoUsuario(info:{}){
+
+    let a =  this.http.post('http://142.93.12.234:8000/usuario/',info).subscribe((res:any)=>{
+          console.log(res);
+    })
+    
+    return a
+  }
+
   setParent(info:{}):Observable<any>{
    return this.http.post('http://142.93.12.234:8000/parent/',info)
   }

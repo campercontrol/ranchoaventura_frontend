@@ -44,7 +44,7 @@ import {PanelModule} from 'primeng/panel';
 import {AvatarModule} from 'primeng/avatar';
 import {AvatarGroupModule} from 'primeng/avatargroup';
 import {DialogModule} from 'primeng/dialog';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewParentComponent } from './component/new-parent/new-parent.component';
 
 
@@ -108,7 +108,8 @@ export function createTranslateLoader(http: HttpClient): any {
     ScrollToModule.forRoot(),
     NgbModule,
     FieldsetModule,
-    EscuelaModule
+    EscuelaModule,
+   FormsModule,
   ],
   bootstrap: [AppComponent],
   providers: [

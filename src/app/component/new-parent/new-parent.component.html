@@ -14,33 +14,32 @@
                         </div>
 
                         <div class="mt-5">
+                           <form>
                             <div class="row mb-4">
-                                <label for="horizontal-firstname-input"
-                                    class="col-sm-3 col-form-label">Correo electrónico*</label>
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label" >correo electrónico*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="contact_email">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" [(ngModel)]="correo" name="correo"   (change)="validatorsEmail()" >
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label" >Confirma correo electrónico*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" >
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" [(ngModel)]="confirmarCorreo" name="confirmarCorreo"  (change)="equalsEmail()">
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Contraseña</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="pasword">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" [(ngModel)]="contrasena" name="contrasena" (change)="validarContrasena()">
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label" >Confirma contraseña*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "pasword2" (change)="pass()">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" [(ngModel)]="confirmarContrasena"  name="confirmarContrasena" (change)="equalsCon()">
                                 </div>
                             </div>
-                           
-
+                           </form>
                         </div>
                     </div>
                 </div>
@@ -166,6 +165,13 @@
                                     <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "contact_home_phone">
                                 </div>
                             </div>
+                            <div class="row mb-4">
+                                <label for="horizontal-firstname-input"
+                                    class="col-sm-3 col-form-label">Correo electrónico*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="contact_email">
+                                </div>
+                            </div>
                           
                             
 
@@ -201,7 +207,12 @@
 
                         <div class="btn-footer">
                             <button class="btn btn-secondary w-lg btn-lg">Cancelar</button>
-                            <button class="btn btn-info w-lg btn-lg" [disabled]="formParent.invalid && !estadoContrasena" (click)="prueba()">Guardar</button>
+                            <div *ngIf="estadoContrasena&&confiCon&&estadoEmail&&estadoCorreo">
+                                <button class="btn btn-info w-lg btn-lg" [disabled]="formParent.invalid" (click)="prueba()">Guardar</button>
+                            </div>
+                            <div *ngIf="!estadoContrasena||!confiCon||!estadoEmail||!estadoCorreo">
+                                <button class="btn btn-info w-lg btn-lg" [disabled]="true" >Guardar</button>
+                            </div>
                         </div>
                     </div>
                 </div>

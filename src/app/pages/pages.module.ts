@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 
 import { NgbNavModule, NgbDropdownModule, NgbModalModule, NgbTooltipModule , NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgApexchartsModule } from 'ng-apexcharts';
@@ -95,7 +95,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FieldsetModule,
     DynamicDialogModule,
     PanelModule,
-    LightboxModule
+    LightboxModule,
+    FormsModule,
   ],
 })
 export class PagesModule { }
