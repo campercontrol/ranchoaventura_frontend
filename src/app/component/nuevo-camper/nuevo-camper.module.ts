@@ -5,8 +5,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { Ng5SliderModule } from 'ng5-slider';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormsModule, NgForm } from '@angular/forms';
+import { FormGroup, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { FormModule } from 'src/app/pages/form/form.module';
+import { UpdateCamperComponent } from './update-camper/update-camper.component';
 
 
 
@@ -15,7 +16,8 @@ import { FormModule } from 'src/app/pages/form/form.module';
 
 @NgModule({
   declarations: [
-    CamperNuevoComponent
+    CamperNuevoComponent,
+    UpdateCamperComponent
   ],exports:[
     NgSelectModule
   ],
@@ -25,7 +27,10 @@ import { FormModule } from 'src/app/pages/form/form.module';
     NgSelectModule,
     Ng5SliderModule,
     FormsModule,
-    NgbPaginationModule, NgbAlertModule
+    FormModule,
+    NgbPaginationModule, 
+    NgbAlertModule,
+    ReactiveFormsModule
     
     
   ]

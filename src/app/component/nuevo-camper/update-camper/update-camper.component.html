@@ -95,7 +95,7 @@
                                 <div class="input-datos-medicos">
                                     <p style="margin-top:2px ;">ACAMPADOR</p>
                                     <ng-container  *ngFor="let item of pathological_background;index as i">
-                                        <input (click)="pathological_backgroundValu(i)" type="checkbox" style="margin-top:10px ;" value="{{item.is_active}}"
+                                        <input (click)="pathological_backgroundValu(i)" type="checkbox"  [checked]="item.is_active" style="margin-top:10px ;" value="{{item.is_active}}"
                                             id="{{item.id}}">
                                         <br>
 
@@ -104,7 +104,7 @@
                                 <div class="input-datos-medicos">
                                     <p style="margin-top:2px ;">FAMILIA</p>
                                     <ng-container  *ngFor="let item of pathological_background_fm;index as i">
-                                        <input (click)="pathological_background_fmValu(i)" type="checkbox" style="margin-top:10px ;" value="{{item.is_active}}"
+                                        <input (click)="pathological_background_fmValu(i)" type="checkbox" style="margin-top:10px ;" [checked]="item.is_active" value="{{item.is_active}}"
                                             id="{{item.id}}">
                                         <br>
                                     </ng-container>
@@ -206,12 +206,12 @@
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="can_swim"
                                             id="inlineRadio1" [value]=1 formControlName="can_swim">
-                                        <label class="form-check-label" for="inlineRadio1">Si</label>
+                                        <label class="form-check-label" for="can_swim">Si</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="can_swim"
                                             id="inlineRadio2" [value]=0 formControlName="can_swim">
-                                        <label class="form-check-label" for="inlineRadio2">No</label>
+                                        <label class="form-check-label" for="can_swim">No</label>
                                     </div>
 
                                 </div>
@@ -294,9 +294,9 @@
                         </div>
                         <div class="mt-5">
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Escuela*</label>
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Escuela*</label>
                                 <div class="control-label col-sm-9">
-                                    <ng-select [items]="school" bindLabel="name" bindValue="id" formControlName="school_id" name = "school_id">
+                                    <ng-select [items]="school1" bindLabel="name" bindValue="id" formControlName="school_id">
                                     </ng-select>
                                 </div>
                             </div>
@@ -353,7 +353,7 @@
     
                                         <div class="form-check form-check-inline" *ngFor="let item of vaccines;index as i">
                                             <input (click)="vaccinesValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions"
-                                                id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}"
+                                                id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}" [checked]="item.is_active"
                                                 >
                                             <label class="form-check-label" for="inlineRadio1">{{item.name}}</label>
                                         </div>
@@ -416,7 +416,7 @@
                                 <div class="input-datos-medicos" style="margin-top: 0px;">
 
                                     <div *ngFor="let item of licensed_medicines; index as i" >
-                                        <input type="checkbox" style="margin-top:13px ;" (click)="licensed_medicinesValu(i)" value="{{item.is_active}}" 
+                                        <input type="checkbox" style="margin-top:13px ;" (click)="licensed_medicinesValu(i)" [checked]="item.is_active" [value]="item.is_active" 
                                             id="{{item.id}}">
                                         <br>
                                     </div>
@@ -498,8 +498,8 @@
 
 
                                     <div class="form-check form-check-inline" *ngFor="let item of food_restrictions;index as i">
-                                        <input (click)="food_restrictionsValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions" [checked]="item.is_active"
-                                            id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}"
+                                        <input (click)="food_restrictionsValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions"
+                                            id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}" [checked]="item.is_active"
                                             >
                                         <label class="form-check-label" for="inlineRadio1">{{item.name}}</label>
                                     </div>
