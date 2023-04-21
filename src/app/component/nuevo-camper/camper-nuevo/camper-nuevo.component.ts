@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 
 
+
 @Component({
   selector: 'app-camper-nuevo',
   templateUrl: './camper-nuevo.component.html',
@@ -30,6 +31,7 @@ export class CamperNuevoComponent implements OnInit {
   vaccines:any = [];
   foto:any;
   spinner:boolean= false;
+  photoSelect : string | ArrayBuffer;
 
   public formUser : FormGroup;
   public formGen : FormGroup;
@@ -106,9 +108,38 @@ export class CamperNuevoComponent implements OnInit {
   }
 
   
+  subiendo(event:any){
+    const archivo= event.target.files[0];
+
+    if(event.target.files && event.target.files[0]){
+    const reader = new FileReader();
+    reader.onload = e => this.photoSelect =reader.result;
+    reader.readAsDataURL(archivo);
+    this.catalogos.setPhoto(archivo).subscribe((res:any)=>{
+      console.log(res);
+
+  },
+  error=>{
+    console.log(error)
+  })
+    }
+    
+  
+    
+   
+}
 
 
 
+
+public fileOver(event){
+  console.log(event);
+}
+
+public fileLeave(event){
+  console.log(event);
+
+}
 
   
   prueba1(){
@@ -135,6 +166,8 @@ export class CamperNuevoComponent implements OnInit {
     
   }
   prueba2(){
+    console.log(this.foto);
+    
     this.catalogos.setPhoto(this.foto).subscribe((res:any)=>{
       console.log(res);
       

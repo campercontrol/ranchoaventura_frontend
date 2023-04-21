@@ -38,6 +38,8 @@ export class ParentService {
   }
 
   setParent(info:{}):Observable<any>{
-   return this.http.post('http://142.93.12.234:8000/parent/',info)
+   return this.http.post('http://142.93.12.234:8000/parent_create/',info)
   }
+
+  
 }

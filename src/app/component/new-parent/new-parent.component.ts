@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ParentService } from 'src/services/parent.service';
 
 @Component({
@@ -11,6 +12,7 @@ export class NewParentComponent implements OnInit {
   public formParent : FormGroup;
   estadoContrasena : boolean = false;
   estadoEmail : boolean = false;
+  spinner:boolean = false;
 
   confiCon:boolean = false;
   confiEmai:boolean = false;
@@ -26,7 +28,7 @@ export class NewParentComponent implements OnInit {
 
 
 
-  constructor(private formBuild:FormBuilder,private parent: ParentService) { }
+  constructor(private formBuild:FormBuilder,private parent: ParentService,private router :Router) { }
 
   ngOnInit(): void {
    
@@ -59,6 +61,7 @@ export class NewParentComponent implements OnInit {
                             Validators.pattern("^[0-9]*$"),
                             Validators.minLength(8), Validators.maxLength(10)]],
     terms:                   ['',[Validators.required,Validators.requiredTrue]],
+    user_id:                 [0]
     
   },{
     
@@ -99,12 +102,28 @@ export class NewParentComponent implements OnInit {
     }  }
 
   prueba(){
-   this.parent.setParent(this.formParent.value).subscribe(
+    this.spinner= true;
+    let a = { 
+      user:{
+        email:this.confirmarCorreo,
+        passw: this.confirmarContrasena,
+        role_id: 1,
+        is_superuser: false
+      },
+
+      parent:this.formParent.value,
+
+  }
+  
+   this.parent.setParent(a).subscribe(
     (res:any)=>{
       console.log(res);
-      
+      this.spinner = false;
+      this.router.navigate(['parents/new-camper']);
+
     }
    )
+   
   }
 
 }

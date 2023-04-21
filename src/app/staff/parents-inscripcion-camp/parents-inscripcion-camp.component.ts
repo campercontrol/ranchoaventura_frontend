@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CampsService } from 'src/services/camps.service';
+
 
 @Component({
   selector: 'app-parents-inscripcion-camp',
@@ -14,11 +17,90 @@ export class ParentsInscripcionCampComponent implements OnInit {
     selectedProducts: any[];
 
     submitted: boolean;
+    selectedCustomers: any[];
+    loading: boolean = false;
+    customer:any =[];
+    idCamps:any[]=[];
+    id= 0
+    
 
+    sedes = [{
+      "name": "Ex hacienda de Chautla",
+      "uid": "53d6e7c5-c379-4ddd-96ff-7f96f96b22de",
+      "email": "string",
+      "contact": "string",
+      "url": "string",
+      "updated_at": "2023-04-21T04:07:29.508989+00:00",
+      "phone": "string",
+      "id": 1,
+      "address": "string",
+      "active": true,
+      "created_at": "2023-04-19T21:17:13.053402+00:00"
+    },
+    {
+      "name": "Alpinia",
+      "uid": "e2cd398c-7ad6-4292-b1f9-23114345487f",
+      "email": "string",
+      "contact": "string",
+      "url": "string",
+      "updated_at": "2023-04-21T04:07:41.341131+00:00",
+      "phone": "string",
+      "id": 2,
+      "address": "string",
+      "active": true,
+      "created_at": "2023-04-19T21:17:13.053402+00:00"
+    },
+    {
+      "name": "Talo",
+      "uid": "9d14ff42-bb34-4227-a83b-993892edd9a8",
+      "email": "string",
+      "contact": "string",
+      "url": "string",
+      "updated_at": "2023-04-21T04:07:48.846039+00:00",
+      "phone": "string",
+      "id": 3,
+      "address": "string",
+      "active": true,
+      "created_at": "2023-04-19T21:17:13.053402+00:00"
+    }]
 
-  constructor() { }
+  constructor(private camps: CampsService,private routesA:ActivatedRoute) {
+    this.routesA.params.subscribe((params)=>{
+      this.id = params['id']
+    })
+   }
 
   ngOnInit(): void {
+    this.camps.getCampsDisponibles(this.id,1).subscribe(
+      (res:any)=>{
+        
+       this.customer = res.data;
+
+       this.customer.map((item:any)=>{
+        let fecha = item.end
+        fecha = fecha.split("T");
+        item.end = fecha[0];
+
+        let fechaI = item.start
+        fechaI = fechaI.split("T");
+        item.start = fechaI[0];
+          
+        item.location_id = this.searchSedes(item.location_id);
+            
+       })
+        
+      }
+    )
+
+  }
+
+  searchSedes(id){
+    let a = ""
+      this.sedes.map((item:any)=>{
+        id == item.id
+         a = item.name
+      })
+      return a
   }
 
   findIndexById(id: string): number {
@@ -31,6 +113,39 @@ export class ParentsInscripcionCampComponent implements OnInit {
     }
 
     return index;
+}
+
+filterCamps(){
+ 
+  this.selectedCustomers.forEach((item)=>{
+      let a = {
+        id: 0,
+        status: 1,
+        payment_balance: 0,
+        camp_id: item.id,
+        camper_id: this.id,
+
+      }
+      console.log(a)
+      this.setCamp(a)
+  })
+
+  
+}
+
+
+setCamp(a){
+
+  this.camps.setCamps(a).subscribe((res:any)=>{
+    console.log(res);    
+    console.log(res.status);    
+
+   },
+   (error)=>{
+     console.log(error)
+   }
+   )
+
 }
 
 

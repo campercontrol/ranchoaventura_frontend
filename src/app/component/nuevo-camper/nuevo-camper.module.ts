@@ -30,7 +30,8 @@ import { UpdateCamperComponent } from './update-camper/update-camper.component';
     FormModule,
     NgbPaginationModule, 
     NgbAlertModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
     
     
   ]

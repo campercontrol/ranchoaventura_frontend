@@ -208,10 +208,14 @@
                         <div class="btn-footer">
                             <button class="btn btn-secondary w-lg btn-lg">Cancelar</button>
                             <div *ngIf="estadoContrasena&&confiCon&&estadoEmail&&estadoCorreo">
-                                <button class="btn btn-info w-lg btn-lg" [disabled]="formParent.invalid" (click)="prueba()">Guardar</button>
+                                <button class="btn btn-info w-lg btn-lg" [disabled]="formParent.invalid" (click)="prueba()" *ngIf="!spinner">Guardar</button>
+                                <div class="spinner-border" role="status" *ngIf="spinner">
+                                    <span class="visually-hidden">Loading...</span>
+                                  </div>
                             </div>
                             <div *ngIf="!estadoContrasena||!confiCon||!estadoEmail||!estadoCorreo">
-                                <button class="btn btn-info w-lg btn-lg" [disabled]="true" >Guardar</button>
+                                <button class="btn btn-info w-lg btn-lg" [disabled]="true"  >Guardara</button>
+                                
                             </div>
                         </div>
                     </div>

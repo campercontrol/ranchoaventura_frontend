@@ -49,6 +49,7 @@ import {DialogModule} from 'primeng/dialog';
 
 
 
+
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin,
@@ -97,6 +98,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     PanelModule,
     LightboxModule,
     FormsModule,
+    
   ],
 })
 export class PagesModule { }

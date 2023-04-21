@@ -50,6 +50,8 @@ import { ListaCapacitacionesComponent } from './lista-capacitaciones/lista-capac
 import { PuntoControlComponent } from './punto-control/punto-control.component';
 import { MisCampamentosComponent } from './mis-campamentos/mis-campamentos.component';
 import { ListaStaffComponent } from './lista-staff/lista-staff.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 
 
 
@@ -111,7 +113,8 @@ import { ListaStaffComponent } from './lista-staff/lista-staff.component';
     SplitButtonModule,
     StepsModule,
     TabViewModule,
-    CalendarModule
+    CalendarModule,
+    ConfirmDialogModule
   ]
 })
 export class StaffModule { }

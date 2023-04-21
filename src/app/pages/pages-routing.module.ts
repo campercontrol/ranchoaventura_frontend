@@ -34,6 +34,7 @@ import { PuntoControlComponent } from '../staff/punto-control/punto-control.comp
 import { MisCampamentosComponent } from '../staff/mis-campamentos/mis-campamentos.component';
 import { ListaStaffComponent } from '../staff/lista-staff/lista-staff.component';
 import { NewParentComponent } from '../component/new-parent/new-parent.component';
+import { UpdateCamperComponent } from '../component/nuevo-camper/update-camper/update-camper.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -42,8 +43,9 @@ const routes: Routes = [
   { path: 'parents/registered-children', component: RegisteredChildrenComponent },
   { path: 'parents/new-camper', component: CamperNuevoComponent },
   { path: 'parents/campamento', component: CampamentoComponent },
+  { path: 'parents/update-camper/:id', component: UpdateCamperComponent },
   { path: 'parents/camper', component: PerfilCamperComponent },
-  { path: 'parents/camper/inscription', component: ParentsInscripcionCampComponent },
+  { path: 'parents/camper/inscription/:id', component: ParentsInscripcionCampComponent },
   { path: 'staff/camps', component: CampamentosComponent },
   { path: 'camps/camp_add', component: NuevoCampamentoComponent },
   { path: 'camps/camp', component: CampamentosStaffComponent },
@@ -71,6 +73,7 @@ const routes: Routes = [
   {path: 'staff/checkpoint',component:PuntoControlComponent},
   {path: 'staff/camps',component: MisCampamentosComponent},
   {path: 'staff/staff',component: ListaStaffComponent},
+  
 
 
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Options } from 'ng5-slider';
 import { CamperService } from 'src/services/camper.service';
 
@@ -33,10 +33,14 @@ export class UpdateCamperComponent implements OnInit {
   public formUser : FormGroup;
   public formGen : FormGroup;
   vacunas:any = [];
-  sexo:string[]=['Hombre','Mujer',"No binario"," Prefiero no decir"]
+  sexo:string[]=['Hombre','Mujer',"No binario"," Prefiero no decir"];
+  id=0;
 
-  constructor(private catalogos: CamperService , private formGrup: FormBuilder, private router:Router) {
-    this.catalogos.getCamper(9).subscribe((res:any)=>{
+  constructor(private catalogos: CamperService , private formGrup: FormBuilder, private router:Router,private routesA:ActivatedRoute) {
+    this.routesA.params.subscribe((params)=>{
+      this.id = params['id']
+    })
+    this.catalogos.getCamper(this.id).subscribe((res:any)=>{
 
       this.blood_types = res.blood_types;
       this.food_restrictions = res.food_restrictions;
@@ -46,10 +50,7 @@ export class UpdateCamperComponent implements OnInit {
       this.pathological_background = res.pathological_background;
       this.pathological_background_fm = res.pathological_background_fm;
       this.school1 = res.school[0];
-      this.vaccines = res.vaccines;   
-
-     
-      
+      this.vaccines = res.vaccines;       
     })
 
   }
@@ -106,7 +107,7 @@ export class UpdateCamperComponent implements OnInit {
 
 
   getcamper(){
-    this.catalogos.getCamper(9).subscribe(
+    this.catalogos.getCamper(this.id).subscribe(
       (res:any)=>{
         console.log('respuestas',res);
         
@@ -178,7 +179,7 @@ export class UpdateCamperComponent implements OnInit {
     }
     console.log(a);
     
-    this.catalogos.setCamper(a).subscribe((res:any)=>{
+    this.catalogos.updateCamper(9,a).subscribe((res:any)=>{
         console.log(res);
         if(res.succes = 200){
           this.spinner=false;
