@@ -42,7 +42,7 @@ const routes: Routes = [
   { path: 'parents/my-profile', component: PerfilComponent },
   { path: 'parents/registered-children', component: RegisteredChildrenComponent },
   { path: 'parents/new-camper', component: CamperNuevoComponent },
-  { path: 'parents/campamento', component: CampamentoComponent },
+  { path: 'parents/camp-info/:camper/:camp', component: CampamentoComponent },
   { path: 'parents/update-camper/:id', component: UpdateCamperComponent },
   { path: 'parents/camper', component: PerfilCamperComponent },
   { path: 'parents/camper/inscription/:id', component: ParentsInscripcionCampComponent },
