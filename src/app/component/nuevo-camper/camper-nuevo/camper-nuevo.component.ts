@@ -116,7 +116,7 @@ export class CamperNuevoComponent implements OnInit {
     reader.onload = e => this.photoSelect =reader.result;
     reader.readAsDataURL(archivo);
     this.catalogos.setPhoto(archivo).subscribe((res:any)=>{
-      console.log(res);
+     // console.log(res);
 
   },
   error=>{
@@ -159,7 +159,7 @@ public fileLeave(event){
         console.log(res);
         if(res.succes = 200){
           this.spinner=false;
-          this.router.navigate(['parents/registered-children']);
+         this.router.navigate(['parents/camper/inscription/1']);
         }
         
     });
@@ -174,7 +174,7 @@ public fileLeave(event){
     })
   }
 
-
+ 
  
 
   licensed_medicinesValu(i:any){

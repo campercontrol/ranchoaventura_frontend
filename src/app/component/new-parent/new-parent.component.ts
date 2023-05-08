@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfigService } from 'src/app/core/services/config.service';
+import { EventService } from 'src/app/core/services/event.service';
 import { ParentService } from 'src/services/parent.service';
 
 @Component({
@@ -13,7 +16,7 @@ export class NewParentComponent implements OnInit {
   estadoContrasena : boolean = false;
   estadoEmail : boolean = false;
   spinner:boolean = false;
-
+  @ViewChild('centerDataModal') content:ElementRef;
   confiCon:boolean = false;
   confiEmai:boolean = false;
    regex:  RegExp = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+~`|}{[\]:;?<,>.\/-]).{8,}$/;
@@ -24,14 +27,13 @@ export class NewParentComponent implements OnInit {
   correo:string = "";
   confirmarCorreo = "";
   estadoCorreo:boolean= false;
+  breadCrumbItems: Array<{}>;
 
-
-
-
-  constructor(private formBuild:FormBuilder,private parent: ParentService,private router :Router) { }
-
+  constructor(private formBuild:FormBuilder,private parent: ParentService,private router :Router,private modalService: NgbModal,private configService: ConfigService, private eventService: EventService) { }
+  
   ngOnInit(): void {
-   
+    this.breadCrumbItems = [{ label: 'UI Elements' }, { label: 'Modals', active: true }];
+
     this.formParent = this.formBuild.group({
       tutor_lastname_father:["",[Validators.required]],
       tutor_cellphone:      ["",[Validators.required,
@@ -68,6 +70,7 @@ export class NewParentComponent implements OnInit {
   })
   }
 
+
    pass(){
   
   }
@@ -84,6 +87,9 @@ export class NewParentComponent implements OnInit {
     }else{
       this.confiCon = false;
     }
+  }
+  openModal() {
+    this.modalService.open(this.content, { centered: true });
   }
 
   validatorsEmail(){
@@ -119,11 +125,26 @@ export class NewParentComponent implements OnInit {
     (res:any)=>{
       console.log(res);
       this.spinner = false;
-      this.router.navigate(['parents/new-camper']);
-
+      this.centerModal()
+      setTimeout(() => {
+        this.router.navigate(['parents/new-camper']);
+      }, 1000);
     }
    )
    
+  }
+
+  /**
+   * Change the layout onclick
+   * @param layout Change the layout
+   */
+  changeLayout(layout: string) {
+    this.eventService.broadcast('changeLayout', layout);
+  }
+  centerModal(centerDataModal: any = this.content) {
+    console.log(this.centerModal);
+    
+    this.modalService.open(centerDataModal, { centered: true });
   }
 
 }
