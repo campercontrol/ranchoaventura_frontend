@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Usergrid } from '../../pages/contacts/usergrid/usergrid.model';
 
 import { userGridData } from './data';
+import { CamperService } from 'src/services/camper.service';
 
 @Component({
   selector: 'app-registered-children',
@@ -20,10 +21,18 @@ export class RegisteredChildrenComponent implements OnInit {
   selected;
   userForm: FormGroup;
   submitted = false;
+  hijosRes:any=[];
   items: FormArray;
   // Select2 Dropdown
   selectValue: string[];
-  constructor(private modalService: NgbModal, private formBuilder: FormBuilder) { }
+  constructor(private modalService: NgbModal, private formBuilder: FormBuilder,private hijos:CamperService) { 
+    this.hijos.getHijos().subscribe(
+      (res:any)=>{
+        console.log(res.data);
+        this.hijosRes = res.data;
+      }
+    )
+  }
 
   ngOnInit() {
     this.selectValue = ['Photoshop', 'illustrator', 'Html', 'Css', 'Php', 'Java', 'Python'];

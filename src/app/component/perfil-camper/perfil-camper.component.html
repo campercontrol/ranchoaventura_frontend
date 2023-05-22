@@ -6,9 +6,9 @@
             <div class="card campamentos-header">
                 <div class="bg-primary text-white  p-3">
 
-                    <h3 class="text-white">Hijo Camper</h3>
-                    <h5 class="text-white">Colegio Camper Control</h5>
-                    <h6 class="text-white">25 años, 3 Meses</h6>
+                    <h3 class="text-white">{{infoCamp.name}}</h3>
+                    <h5 class="text-white">{{infoCamp.school_id}}</h5>
+                    <h6 class="text-white">{{infoCamp.birthdayA}}</h6>
                 </div>
                 <section class="campamentos ">
                     <div class="Campementos_anteriores">
@@ -57,11 +57,11 @@
                             </div>
 
                             <div class="container-fluid">
-                                <p> <span class="fw-bold">Nombre:</span> Camper Control </p>
-                                <p> <span class="fw-bold">Fecha de nacimiento:</span> 16 de Junio de 2009</p>
-                                <p> <span class="fw-bold">Edad: </span> 13 años, 2 meses.</p>
-                                <p> <span class="fw-bold">Sexo: </span> Hombre</p>
-                                <p> <span class="fw-bold"> Correo: </span> tupadre@campercontrol.com</p>
+                                <p> <span class="fw-bold">Nombre:</span>  {{infoCamp.name}}</p>
+                                <p> <span class="fw-bold">Fecha de nacimiento:</span>{{infoCamp.birthday}}</p>
+                                <p> <span class="fw-bold">Edad: </span> {{infoCamp.birthdayA}}</p>
+                                <p> <span class="fw-bold">Sexo: </span> {{infoCamp.gender_id}}</p>
+                                <p> <span class="fw-bold"> Correo: </span>{{infoCamp.email}}</p>
 
                             </div>
                             <hr>
@@ -74,8 +74,8 @@
                             </div>
 
                             <div class="container-fluid">
-                                <p> <span class="fw-bold">Escuela:</span> Camper Control </p>
-                                <p> <span class="fw-bold">Grado:</span> 1º de primaria | 1st</p>
+                                <p> <span class="fw-bold">Escuela:</span> {{infoCamp.school_id}} </p>
+                                <p> <span class="fw-bold">Grado:</span> {{infoCamp.grade}}</p>
 
                             </div>
                             <hr>
@@ -87,8 +87,8 @@
                             </div>
 
                             <div class="container-fluid">
-                                <p> <span class="fw-bold">¿Sabe nadar?:</span>No</p>
-                                <p> <span class="fw-bold">Impide realizar activida</span> No</p>
+                                <p> <span class="fw-bold">¿Sabe nadar?:</span>{{infoCamp.can_swim}}</p>
+                                <p> <span class="fw-bold">Impide realizar activida</span> {{infoCamp.prevent_activities}}</p>
 
                             </div>
 
@@ -103,17 +103,17 @@
                             <div class="container-fluid">
                                 <p> <span class="fw-bold">Requiere Instruciones Medicas:</span>Sí, se requiere una
                                     llamada previa al campamento por parte del medico</p>
-                                <p> <span class="fw-bold">Peso:</span> 51.0 kg.</p>
-                                <p> <span class="fw-bold">Estatura: </span> 84.0 cm.</p>
-                                <p> <span class="fw-bold">Tipo de sangre: </span> AB+</p>
+                                <p> <span class="fw-bold">Peso:</span> {{infoCamp.weight}} kg</p>
+                                <p> <span class="fw-bold">Estatura: </span> {{infoCamp.height}} cm.</p>
+                                <p> <span class="fw-bold">Tipo de sangre: </span> {{infoCamp.blood_type}}</p>
                                 <p> <span class="fw-bold">Vacunas:</span> </p>
 
                                 <p> <span class="fw-bold"> Enfermedades:</span>No</p>
-                                <p> <span class="fw-bold"> Problemas cardiacos:</span>No</p>
-                                <p> <span class="fw-bold"> Alergias a Medicamentos:</span>No</p>
-                                <p> <span class="fw-bold">Otras Alergias:</span>No</p>
-                                <p> <span class="fw-bold">Alteraciones nocturnas:</span>No</p>
-                                <p> <span class="fw-bold">Fobias o miedos:</span>Ninguna</p>
+                                <p> <span class="fw-bold"> Problemas cardiacos:</span>{{infoCamp.heart_problems}}</p>
+                                <p> <span class="fw-bold"> Alergias a Medicamentos:</span>{{infoCamp.drug_allergies}}</p>
+                                <p> <span class="fw-bold">Otras Alergias:</span>{{infoCamp.other_allergies}}</p>
+                                <p> <span class="fw-bold">Alteraciones nocturnas:</span>{{infoCamp.other_allergies}}</p>
+                                <p> <span class="fw-bold">Fobias o miedos:</span>{{infoCamp.nocturnal_disorders}}</p>
                                 <p> <span class="fw-bold">Medicacion:</span>Si</p>
                             </div>
 
@@ -133,8 +133,8 @@
 
                             <div class="container-fluid">
                                 <p> <span class="fw-bold">Tiene seguro médico:</span>IMMS</p>
-                                <p> <span class="fw-bold">Numero de seguridad:</span> no tiene</p>
-                                <p> <span class="fw-bold">Numero de póliza:</span> no tiene</p>
+                                <p> <span class="fw-bold">Numero de seguridad:</span>{{infoCamp.security_social_number}}</p>
+                                <p> <span class="fw-bold">Numero de póliza:</span>{{infoCamp.insurance_number}}</p>
                             </div>
 
                         </div>

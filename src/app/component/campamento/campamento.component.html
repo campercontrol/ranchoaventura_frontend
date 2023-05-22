@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="col">
+  <div class="row">
     <div class="col-lg-12">
       <div class="card">
         <div class="bodyCamper">
@@ -59,13 +59,14 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-9">
+    <div class="col-lg-12">
       <div class="card">
         <div class="bodyCamper1">
-          <h1 style="color:white ;">Campamento Inscrito: Campamento 2</h1>
+          
+          <h1  style="color:white ;"> Campamento Inscrito: {{dataCamp.name}}</h1>
         </div>
         <div class="mt-3 ms-3 container-pagos">
-          <h1>Camper Control </h1>
+          <h1>{{dataCamp.name}}</h1>
         </div>
         <hr>
         <div class="col-lg-12">
@@ -76,7 +77,7 @@
                           "> </i> Fechas: </p>
               </div>
               <div>
-                <p> 28/Nov/2023 - 30/Nov/2023</p>
+                <p> {{dataCamp.start.slice(0,10)}} - {{dataCamp.end.slice(0,10)}}</p>
               </div>
             </div>
             <div class="conatiner-info-camp">
@@ -84,7 +85,7 @@
                 <p class="fw-bold"> <i class="bx bxs-time"> </i> Salida: </p>
               </div>
               <div>
-                <p> Martes, 28 Noviembre 2023 - 9:38 p.m.</p>
+                <p> {{dataCamp.start.slice(0,10)}} : {{dataCamp.start.slice(14,19)}}</p>
               </div>
             </div>
             <div class="conatiner-info-camp">
@@ -92,7 +93,7 @@
                 <p class="fw-bold"> <i class="bx bxs-time"> </i> Regreso: </p>
               </div>
               <div>
-                <p> Martes, 28 Diciembre 2023 - 9:38 p.m.</p>
+                <p> {{dataCamp.end.slice(0,10)}} : {{dataCamp.end.slice(14,19)}}</p>
               </div>
             </div>
             <div class="conatiner-info-camp">
@@ -108,7 +109,7 @@
                 <p class="fw-bold"> <i class="fas fa-map"> </i> Lugar del campamento:  </p>
               </div>
               <div>
-                <p> Escuela</p>
+                <p> {{dataCamp.location_id}}</p>
               </div>
             </div>
             <div class="conatiner-info-camp">
@@ -116,7 +117,7 @@
                 <p class="fw-bold"> <i class="fab fa-google"> </i> Mas informacion </p>
               </div>
               <div>
-                <p> <a href=" http://www.campercontrol.com">  http://www.campercontrol.com</a></p>
+                <p> <a href={{dataCamp.url}}>  {{dataCamp.url}}</a></p>
               </div>
             </div>
           </div>
@@ -127,7 +128,7 @@
               <p class="fw-bold"> <i class="far fa-money-bill-alt"> </i> Precio del camp: </p>
             </div>
             <div>
-              <p>  $5,500.0 MXN.</p>
+              <p>  ${{dataCamp.public_price}}MXN.</p>
             </div>
           </div>
 

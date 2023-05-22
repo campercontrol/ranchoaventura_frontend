@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: 'parents/new-camper', component: CamperNuevoComponent },
   { path: 'parents/camp-info/:camper/:camp', component: CampamentoComponent },
   { path: 'parents/update-camper/:id', component: UpdateCamperComponent },
-  { path: 'parents/camper', component: PerfilCamperComponent },
+  { path: 'parents/camper/:id', component: PerfilCamperComponent },
   { path: 'parents/camper/inscription/:id', component: ParentsInscripcionCampComponent },
   { path: 'staff/camps', component: CampamentosComponent },
   { path: 'camps/camp_add', component: NuevoCampamentoComponent },

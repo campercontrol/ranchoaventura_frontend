@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { PrimeIcons } from "primeng/api";
 import { PrimeNGConfig } from 'primeng/api';
+import { CamperService } from 'src/services/camper.service';
 
 
 
@@ -15,8 +17,57 @@ export class PerfilCamperComponent implements OnInit {
   events1: any[];
   providers: [];
   isCollapsed = true;
+  id=0;
+  infoCamp:any = {};
+  catalogoEsculea;
+  catalogosGenero;
+  catalogosGrados;
+  catalogoSangre;
 
-  constructor( private primengConfig: PrimeNGConfig ) { }
+  constructor( private primengConfig: PrimeNGConfig,private routesA:ActivatedRoute ,private hijos: CamperService) { 
+    this.routesA.params.subscribe((params)=>{
+      this.id = params['id'];      
+    })
+    hijos.getPerfil(this.id).subscribe((res:any)=>{
+      console.log(res);
+      this.catalogoEsculea = res.camper_info.school[0];
+      this.catalogosGenero = res.camper_info.genders;
+      this.catalogoSangre = res.camper_info.blood_types;
+
+      this.catalogosGrados = res.camper_info.grades;
+      this.infoCamp=res.camper_info.camper
+      this.infoCamp.birthdayA = this.calculateAge(this.infoCamp.birthday);
+      console.log(this.catalogosGenero);
+      
+
+    this.catalogoEsculea.map((item:any)=>{
+        if( item.id == this.infoCamp.school_id ){
+       this.infoCamp.school_id = item.name
+     }
+    })
+    this.catalogosGenero.map((item:any)=>{
+          if( item.id == this.infoCamp.gender_id ){
+         this.infoCamp.gender_id = item.value
+       }
+    })
+    this.catalogosGrados.map((item:any)=>{
+      if( item.id == this.infoCamp.grade ){
+     this.infoCamp.grade = item.value
+      }
+    })
+    this.catalogoSangre.map((item:any)=>{
+      if( item.id == this.infoCamp.blood_type ){
+     this.infoCamp.blood_type = item.value
+      }
+    })
+    this.infoCamp.can_swim =  this.infoCamp.can_swim == 1 ? 'Si':'No';
+    this.infoCamp.insurance =  this.infoCamp.insurance == true ? 'Si':'No';
+
+
+
+      
+    })
+  }
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
@@ -51,5 +102,20 @@ export class PerfilCamperComponent implements OnInit {
     this.events2 = ["2020", "2021", "2022", "2023"];
   }
   
+
+  calculateAge(birthday:any) {
+    console.log(birthday);
+    
+    var hoy = new Date();
+    var cumpleanos = new Date(birthday);
+    var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+    var m = hoy.getMonth() - cumpleanos.getMonth();
+
+    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+        edad--;
+    }
+
+    return edad;
+}
 
 }

@@ -40,6 +40,18 @@ export class CamperService {
 
    }
 
+   getHijos(id = 1){
+    return this.http.get('http://142.93.12.234:8000/parent_dashboard/'+id)
+
+   }
+
+   informacionCampamento(camper_id :any, camp_id :any){
+    return this.http.get('http://142.93.12.234:8000/parent_camper_in_camp/' + camper_id +'/'+camp_id)
+   }
+   getPerfil(camper_id :any){
+    return this.http.get('http://142.93.12.234:8000/camper_profile/' + camper_id )
+   }
+
   
 
 }
