@@ -23,6 +23,9 @@ export class PerfilCamperComponent implements OnInit {
   catalogosGenero;
   catalogosGrados;
   catalogoSangre;
+  vacunas;
+  vacunasACtivos;
+  catalogosComida;
 
   constructor( private primengConfig: PrimeNGConfig,private routesA:ActivatedRoute ,private hijos: CamperService) { 
     this.routesA.params.subscribe((params)=>{
@@ -33,12 +36,18 @@ export class PerfilCamperComponent implements OnInit {
       this.catalogoEsculea = res.camper_info.school[0];
       this.catalogosGenero = res.camper_info.genders;
       this.catalogoSangre = res.camper_info.blood_types;
-
+      this.vacunas = res.camper_info.vaccines;
+      this.catalogosComida = res.camper_info.food_restrictions;
+      this.catalogosComida = this.catalogosComida.filter(item => item.is_active == false);
+      console.log(this.vacunas);
+      
       this.catalogosGrados = res.camper_info.grades;
       this.infoCamp=res.camper_info.camper
       this.infoCamp.birthdayA = this.calculateAge(this.infoCamp.birthday);
       console.log(this.catalogosGenero);
       
+
+      this.vacunasACtivos = this.vacunas.filter(item => item.is_active == false);
 
     this.catalogoEsculea.map((item:any)=>{
         if( item.id == this.infoCamp.school_id ){

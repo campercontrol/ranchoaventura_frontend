@@ -106,9 +106,10 @@
                                 <p> <span class="fw-bold">Peso:</span> {{infoCamp.weight}} kg</p>
                                 <p> <span class="fw-bold">Estatura: </span> {{infoCamp.height}} cm.</p>
                                 <p> <span class="fw-bold">Tipo de sangre: </span> {{infoCamp.blood_type}}</p>
-                                <p> <span class="fw-bold">Vacunas:</span> </p>
+                                <p> <span class="fw-bold">Vacunas:</span>   <span class="badge bg-info ms-1"  *ngFor="let item of vacunasACtivos">{{item.name}}</span></p>
+                              
 
-                                <p> <span class="fw-bold"> Enfermedades:</span>No</p>
+                                <p> <span class="fw-bold"> Enfermedades:</span>{{infoCamp.affliction}}</p>
                                 <p> <span class="fw-bold"> Problemas cardiacos:</span>{{infoCamp.heart_problems}}</p>
                                 <p> <span class="fw-bold"> Alergias a Medicamentos:</span>{{infoCamp.drug_allergies}}</p>
                                 <p> <span class="fw-bold">Otras Alergias:</span>{{infoCamp.other_allergies}}</p>
@@ -132,7 +133,7 @@
                             </div>
 
                             <div class="container-fluid">
-                                <p> <span class="fw-bold">Tiene seguro médico:</span>IMMS</p>
+                                <p> <span class="fw-bold">Tiene seguro médico:</span>{{infoCamp.insurance}}</p>
                                 <p> <span class="fw-bold">Numero de seguridad:</span>{{infoCamp.security_social_number}}</p>
                                 <p> <span class="fw-bold">Numero de póliza:</span>{{infoCamp.insurance_number}}</p>
                             </div>
@@ -146,8 +147,57 @@
                             </div>
 
                             <div class="container-fluid">
-                                <p> <span class="fw-bold">Comida prohibida:</span>Carnes y alimento de origen animal</p>
-                                <p> <span class="fw-bold">Alimentación:</span> Vegano</p>
+                                <p> <span class="fw-bold">Comida prohibida:</span>{{infoCamp.prohibited_foods}}</p>
+                                <p> <span class="fw-bold">Vacunas:</span>   <span class="badge bg-info ms-1"  *ngFor="let item of catalogosComida">{{item.name}}</span></p>
+                            </div>
+
+                        </div>
+                        <hr>
+                        <div class="container-fluid mt-5">
+                            <div class="titulo-info">
+                                <i class="bx bxs-bookmark-star"></i>
+                                <h4 style="margin-left: 10px;"> Tutor Principal</h4>
+                            </div>
+
+                            <div class="container-fluid" style="margin-left: 20px;">
+                                <p> <i class="bx bxs-envelope"></i>  {{infoCamp.prohibited_foods}}</p>
+                                <p> <i class="bx bxl-whatsapp"></i>  {{infoCamp.prohibited_foods}}</p>
+                                <p> <i class="bx bxs-contact"></i>  {{infoCamp.prohibited_foods}}</p>
+                                <p> <i class="bx bxs-city"></i>  {{infoCamp.prohibited_foods}}</p>
+
+
+
+                            </div>
+
+                        </div>
+                        <hr>
+                        <div class="container-fluid mt-5">
+                            <div class="titulo-info">
+                                <i class="bx bxs-bookmark-plus"></i>
+                                <h4 style="margin-left: 10px;">Tutor Secundario                                </h4>
+                            </div>
+
+                            <div class="container-fluid" style="margin-left: 20px;">
+                                <p> <i class="bx bxs-envelope"></i>  {{infoCamp.prohibited_foods}}</p>
+                                <p> <i class="bx bxl-whatsapp"></i>  {{infoCamp.prohibited_foods}}</p>
+                                <p> <i class="bx bxs-contact"></i>  {{infoCamp.prohibited_foods}}</p>
+                                <p> <i class="bx bxs-city"></i>  {{infoCamp.prohibited_foods}}</p>
+
+
+                            </div>
+
+                        </div>
+                        <hr>
+                        <div class="container-fluid mt-5">
+                            <div class="titulo-info">
+                                <i class="mdi-card-account-phone-outline"></i>
+                                <h4 style="margin-left: 10px;">Contacto de emergencia</h4>
+                            </div>
+
+                            <div class="container-fluid" style="margin-left: 20px;">
+                                <p> <i class="bx bxl-whatsapp"></i>  {{infoCamp.contact_cellphone}}</p>
+                                <p> <i class="bx bxs-city"></i>  {{infoCamp.contact_homephone}}</p>
+
 
                             </div>
 
