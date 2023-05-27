@@ -131,9 +131,32 @@
               <p>  ${{dataCamp.public_price}}MXN.</p>
             </div>
           </div>
+            <div class="container-btn">
+              <button class="btn  btn-info" style="height:60px;">Inicio</button>
+              <button class="btn  btn-secondary" style="height:60px;">Perfil acampador</button>
+              <button class="btn  btn-success" style="height:60px;"  (click)="extraLarge(exlargeModal)">ver respuestas</button>
+              <button class="btn  btn-info" style="height:60px;">servicios adicionales</button>
+              <button class="btn  btn-danger" style="height:60px;">cancelar inscripcion</button>
+            </div>
 
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #exlargeModal let-modal>
+  <div class="modal-header">
+
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Close click')">
+
+    </button>
+
+  </div>
+  <h2>Preguntas Extras</h2>
+
+  <p style="">
+    {{cargosExtras.name}}
+  </p>
+ 
+</ng-template>

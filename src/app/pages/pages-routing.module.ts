@@ -35,6 +35,7 @@ import { MisCampamentosComponent } from '../staff/mis-campamentos/mis-campamento
 import { ListaStaffComponent } from '../staff/lista-staff/lista-staff.component';
 import { NewParentComponent } from '../component/new-parent/new-parent.component';
 import { UpdateCamperComponent } from '../component/nuevo-camper/update-camper/update-camper.component';
+import { ProspectoComponent } from '../component/prospecto/prospecto.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -73,6 +74,7 @@ const routes: Routes = [
   {path: 'staff/checkpoint',component:PuntoControlComponent},
   {path: 'staff/camps',component: MisCampamentosComponent},
   {path: 'staff/staff',component: ListaStaffComponent},
+  {path:'staff/register', component:ProspectoComponent},
   
 
 

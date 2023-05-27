@@ -1,0 +1,214 @@
+<div class="container-fluid">
+    <form [formGroup]="formUser">
+        <div class="row">
+
+            <div class="col-lg-10">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container-footer-parents">
+                            <img src="assets/images/camp/prospectostaff.png" class="avatar-lg" alt="madre y padres">
+                            <h4 class="ms-3 mt-3"> Datos de acceso del staff</h4>
+                            <h5 class="mt-2">Información de acceso con la cual entrarás a Camper Control.
+                            </h5>
+                        </div>
+
+                        <div class="mt-5">
+                           <form>
+                            <div class="row mb-4">
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label" >correo electrónico*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" [(ngModel)]="correo" name="correo"   (change)="validatorsEmail()" >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label" >Confirma correo electrónico*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" [(ngModel)]="confirmarCorreo" name="confirmarCorreo"  (change)="equalsEmail()">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Contraseña</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" [(ngModel)]="contrasena" name="contrasena" (change)="validarContrasena()">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label" >Confirma contraseña*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" [(ngModel)]="confirmarContrasena"  name="confirmarContrasena" (change)="equalsCon()">
+                                </div>
+                            </div>
+                           </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="container-footer-parents">
+                            <img src="../../../assets/images/camp/datosdeacceso.png" class="avatar-lg" alt="madre y padres">
+                            <h4 class="ms-3"> Datos de acceso del staff</h4>
+                        </div>
+                        <div class="mt-5">
+                            <div class="row mb-4">
+                                <label for="horizontal-firstname-input"
+                                    class="col-sm-3 col-form-label">Nombre(s)*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input"
+                                        formControlName="name" name="name">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Apellido
+                                    paterno*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input"
+                                        formControlName="lastname_father" name="lastname_father">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Apellido
+                                    materno</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input"
+                                        formControlName="lastname_mother"  name="lastname_mother">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Curp</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input"
+                                        formControlName="curp"  name="lastname_mother">
+                                </div>
+                            </div>
+                         
+                         
+
+                            <div class="row mb-4 mt-3">
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Fecha de
+                                    nacimiento*</label>
+                                <div class=" control-label col-sm-9">
+                                    
+                                        <input type="date" class="form-control" placeholder="yyyy-mm-dd"
+                                        formControlName="birthday">
+                                   
+                                </div>
+                            </div>
+
+
+                                
+
+
+                            <div class="foto mt-4">
+                                <div class="container-footer-parents">
+                                    <img [src]="photoSelect || 'assets/images/camp/perfil-camper.png'" class="avatar-lg" alt="madre y padres">
+                                    
+                                </div>
+
+                                <div class="mt-3 foto">
+                                    <label for="">Foto de Perfil</label>
+                                    <input type="file"  (change)="subiendo($event)">
+                                    
+    
+                                    <label class="mt-2">La foto es obligatoria ,nos ayuda a identificar a los campers,
+                                        recomendamos subas una foto reciente y de poco peso, máximo 3Mb debe ser formato jpg</label>
+    
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <div class="row mb-4 mt-4">
+                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Biografía*</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="horizontal-firstname-input"
+                                    formControlName="bio"  name="bio">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+               
+
+               
+            </div>
+            
+        </div>
+
+        <div class="row">
+            <div class=col-lg-12>
+                <div class="card p-5">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="container-footer-parents">
+                                <img src="assets/images/camp/prospectostaff.png" class="avatar-lg" alt="madre y padres">
+                                <h4 class="ms-3 mt-3">Información de Contacto</h4>
+                                
+                            </div>
+    
+                            <div class="mt-5">
+                               
+                                <div class="row mb-4">
+                                    <label for="horizontal-firstname-input" class="col-sm-3 col-form-label" >Teléfono
+                                        móvil*</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "cellphone">
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Teléfono de
+                                        casa*</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "home_phone">
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Facebook*</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "facebook">
+                                    </div>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="terms" height="40px" formControlName = "terms"  >
+                            <label class="form-check-label fs-3 ms-3" for="terms">
+                                Acepto los términos y condiciones
+                            </label>
+                            <label class="form-check-label fs-3 ms-3" for="terms">
+                                <a
+                                    href="https://demo.campercontrol.com/media/uploads/files/terminos-y-condiciones.pdf">Ver
+                                    términos y condiciones</a>
+                            </label>
+
+                        </div>
+                    </div>
+                
+
+                    <div class="btn-footer">
+                        <button class="btn btn-secondary w-lg btn-lg">Cancelar</button>
+                        <div class="btn-footer">
+                            <div *ngIf="estadoContrasena&&confiCon&&estadoEmail&&estadoCorreo">
+                                <button class="btn btn-info w-lg btn-lg" [disabled]="formUser.invalid" (click)="prueba1()" *ngIf="!spinner">Guardar</button>
+                                <div class="spinner-border" role="status" *ngIf="spinner">
+                                    <span class="visually-hidden">Loading...</span>
+                                  </div>
+                            </div>
+                            <div *ngIf="!estadoContrasena||!confiCon||!estadoEmail||!estadoCorreo">
+                                <button class="btn btn-info w-lg btn-lg" [disabled]="true"  >Guardara</button>
+                                
+                            </div>
+                        </div>
+                       
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

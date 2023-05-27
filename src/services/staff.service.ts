@@ -1,0 +1,15 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class StaffService {
+
+  constructor(private http:HttpClient) { 
+      
+  }
+  prospectos(prospecto:any){
+    return this.http.post('http://142.93.12.234:8000/prospect/',prospecto)
+  }
+}
