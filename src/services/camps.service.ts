@@ -8,8 +8,8 @@ export class CampsService {
 
   constructor(private http:HttpClient) { }
 
-  getCampsDisponibles(id,school){
-    return this.http.get('http://142.93.12.234:8000/get_camps_for_camper/'+id+'/'+school)
+  getCampsDisponibles(id){
+    return this.http.get('http://142.93.12.234:8000/get_camps_for_camper/'+id)
   }
 
   setCamps(info:{}){

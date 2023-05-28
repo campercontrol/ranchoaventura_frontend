@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CampsService } from 'src/services/camps.service';
 
 
@@ -21,7 +22,9 @@ export class ParentsInscripcionCampComponent implements OnInit {
     loading: boolean = false;
     customer:any =[];
     idCamps:any[]=[];
-    id= 0
+    id= 0;
+    @ViewChild('centerDataModal') content:ElementRef;
+
     
 
     sedes = [{
@@ -64,28 +67,29 @@ export class ParentsInscripcionCampComponent implements OnInit {
       "created_at": "2023-04-19T21:17:13.053402+00:00"
     }]
 
-  constructor(private camps: CampsService,private routesA:ActivatedRoute) {
+  constructor(private camps: CampsService,private routesA:ActivatedRoute, private modalService:NgbModal) {
     this.routesA.params.subscribe((params)=>{
       this.id = params['id']
     })
    }
 
   ngOnInit(): void {
-    this.camps.getCampsDisponibles(this.id,1).subscribe(
+    this.camps.getCampsDisponibles(this.id).subscribe(
       (res:any)=>{
         
        this.customer = res.data;
+       console.log(this.customer);
+       
 
        this.customer.map((item:any)=>{
-        let fecha = item.end
+        let fecha = item.camp_end
         fecha = fecha.split("T");
-        item.end = fecha[0];
+        item.camp_end = fecha[0];
 
-        let fechaI = item.start
+        let fechaI = item.camp_start
         fechaI = fechaI.split("T");
-        item.start = fechaI[0];
+        item.camp_start = fechaI[0];
           
-        item.location_id = this.searchSedes(item.location_id);
             
        })
         
@@ -122,13 +126,15 @@ filterCamps(){
         id: 0,
         status: 36,
         payment_balance: 0,
-        camp_id: item.id,
+        camp_id: item.camp_id,
         camper_id: this.id,
 
       }
       console.log(a)
       this.setCamp(a)
   })
+  this.centerModal()
+
 
   
 }
@@ -145,7 +151,6 @@ setCamp(a){
      console.log(error)
    }
    )
-
 }
 
 
@@ -157,6 +162,12 @@ setCamp(a){
         id += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     return id;
+}
+
+centerModal(centerDataModal: any = this.content) {
+  console.log(this.centerModal);
+  
+  this.modalService.open(centerDataModal, { centered: true });
 }
 
 }

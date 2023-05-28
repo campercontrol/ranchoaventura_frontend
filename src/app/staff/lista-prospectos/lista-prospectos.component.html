@@ -1,0 +1,152 @@
+<div class="card">
+
+    <div class="card border border-success border-2">
+          <div class="p-1" style="width: 100%; background-color: #34C38F;">
+            <h1 class="card-title text-white">Lista de Prospectos</h1>
+  
+          </div>
+          <div class=" scroll-y">
+
+          <div class="card-body">
+            <div>
+              <div class="col text-end">
+  
+              </div>
+            </div>
+            <div class="container-btn">
+                <div class="d-inline-block" style="margin-right: 10px;">
+                    <div> 
+                        <button class="btn btn-success" style="margin-bottom: 10px;" (click)="open(content)" >Inscribir  a camp(s)</button>
+                  </div>
+                </div>
+             
+             
+            </div>
+  
+            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="prospectosArray" 
+            [globalFilterFields]="['name','country.name','representative.name','status']"
+              [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+              [globalFilterFields]="['name','location_id','start','end','public_price']">
+  
+              <ng-template pTemplate="header">
+                <tr>
+                    <th>
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                      </th>
+  
+                  <th pSortableColumn="name" class="camp">
+                    <div class="flex justify-content-between align-items-center" style="width: 250px;">
+                      Nombre
+                      <p-sortIcon field="name"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th pSortableColumn="location_id" class="camp">
+                    <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
+                      Fecha de Nacimiento
+                      <p-sortIcon field="location_id"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th pSortableColumn="start" class="record">
+                    <div class="flex justify-content-between align-items-center" style=" min-width: 250px;">
+                      Contacto
+                      <p-sortIcon field="start"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th pSortableColumn="end">
+                    <div class="flex justify-content-between align-items-center" style="width: 140px;">
+                    Temporada
+                      <p-sortIcon field="end"></p-sortIcon>
+                    </div>
+                  </th>
+               
+                  <th pSortableColumn="public_price" style="width: 130px; min-width: 120px;">
+                    <div class="flex justify-content-between align-items-center">
+                      Record
+                      <p-sortIcon field="public_price"></p-sortIcon>
+                    </div>
+                  </th>
+  
+                 
+                  <th pSortableColumn="precio">
+                    <div class="flex justify-content-between align-items-center" style="width: 140px;">
+                    </div>
+                  </th>
+  
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-customer>
+                <tr class="p-selectable-row">
+                    <td>
+                        <p-tableCheckbox [value]="customer"  ></p-tableCheckbox>
+                      </td>
+                 
+                  <td >
+                    {{customer.name}} {{customer.lastname_father}} {{customer.lastname_mother}}
+                  </td>
+                  <td> 
+                    {{customer.birthday}}
+                  </td>
+                  <td style="font-size: 12px;" class="container-contac">
+  
+                 <span> <i class="fas fa-envelope-open-text" style="margin-right: 5px;"></i>  {{customer.email}} </span> 
+                   <span> <i class="fab fa-whatsapp" style="margin-right: 5px;" ></i>{{customer.home_phone}}</span>
+                    
+                    <span> <i class="fas fa-industry" style="margin-right: 5px;"></i>  {{customer.staff_contact_homephone}}</span>
+  
+                  </td>
+                  <td>
+  
+                   
+                   {{customer.season_name}}
+  
+                  </td>
+                  <td>
+                    <p-badge value="0" pTooltip="Total" tooltipPosition="top"></p-badge>
+                   
+                    <p-badge value="0" pTooltip="Camps Anterior" tooltipPosition="top"
+                        severity="danger" severity="danger"></p-badge>
+                        
+                    <p-badge value="0" pTooltip="Próximos camps" tooltipPosition="top"
+                        severity="success" severity="success"></p-badge>
+  
+                  </td>
+               
+  
+                  <td>
+                    <button class="btn btn-primary" class="btn btn-primary">ver Perfil</button>
+                  </td>
+  
+  
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+  
+              </ng-template>
+            </p-table>
+
+        </div>
+        </div>
+      </div>
+
+
+
+
+   
+</div>
+
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Convertir prospectos a sfaffs</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<p>Deseas convertir a staff :</p>
+        <p *ngFor="let item of selectedCustomers">{{item.name}} {{item.lastname_father}} {{item.lastname_mother}}</p>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="filterCamps()">Aceptar</button>
+	</div>
+</ng-template>
+

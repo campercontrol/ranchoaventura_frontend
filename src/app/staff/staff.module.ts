@@ -51,6 +51,7 @@ import { PuntoControlComponent } from './punto-control/punto-control.component';
 import { MisCampamentosComponent } from './mis-campamentos/mis-campamentos.component';
 import { ListaStaffComponent } from './lista-staff/lista-staff.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ListaProspectosComponent } from './lista-prospectos/lista-prospectos.component';
 
 
 
@@ -83,7 +84,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ListaCapacitacionesComponent,
     PuntoControlComponent,
     MisCampamentosComponent,
-    ListaStaffComponent
+    ListaStaffComponent,
+    ListaProspectosComponent
     
   ],
   imports: [

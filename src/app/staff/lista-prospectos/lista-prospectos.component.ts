@@ -1,0 +1,77 @@
+import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { StaffService } from 'src/services/staff.service';
+
+@Component({
+  selector: 'app-lista-prospectos',
+  templateUrl: './lista-prospectos.component.html',
+  styleUrls: ['./lista-prospectos.component.scss']
+})
+export class ListaProspectosComponent implements OnInit {
+  selectedProducts: any[];
+
+  product: any;
+
+
+  submitted: boolean;
+  selectedCustomers: any[];
+  loading: boolean = false;
+  customer:any =[];
+  idCamps:any[]=[];
+  id= 0;
+  prospectosArray:any=[]
+  constructor(private prospectos: StaffService,private modalService: NgbModal) {
+
+   }
+
+  ngOnInit(): void {
+    this.getProspecto();
+  }
+
+
+
+
+  filterCamps(){
+ 
+    this.selectedCustomers.forEach((item)=>{
+       
+        this.setCamp(item.id)
+    }) ;
+    this.getProspecto();
+
+   this.modalService.dismissAll()
+  
+    
+  }
+  
+  
+  setCamp(a){
+
+    this.prospectos.aceptarProspectos(a).subscribe((res:any)=>{
+      console.log(res);
+      
+    })
+  }
+
+  open(content) {
+		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' })
+	
+	}
+
+  getProspecto(){
+    let a:any = []
+    this.prospectos.getProspectos().subscribe((res:any)=>{
+      this.prospectosArray = res.data;
+      this.prospectosArray.forEach((item:any)=>{
+            item.Staff.email = item.email;
+            item.Staff.season_name=item.season_name;
+            a.push(item.Staff)
+      })
+
+      this.prospectosArray = a;
+
+      //console.log(this.prospectosArray);
+      
+    });
+  }
+}

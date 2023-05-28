@@ -258,6 +258,8 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
    */
   initialize(): void {
     this.menuItems = MENU;
+    console.log(this.menuItems);
+    
   }
 
   /**

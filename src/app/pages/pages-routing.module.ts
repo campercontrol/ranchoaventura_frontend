@@ -36,6 +36,7 @@ import { ListaStaffComponent } from '../staff/lista-staff/lista-staff.component'
 import { NewParentComponent } from '../component/new-parent/new-parent.component';
 import { UpdateCamperComponent } from '../component/nuevo-camper/update-camper/update-camper.component';
 import { ProspectoComponent } from '../component/prospecto/prospecto.component';
+import { ListaProspectosComponent } from '../staff/lista-prospectos/lista-prospectos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -70,6 +71,8 @@ const routes: Routes = [
   {path: 'staff/trainings',component:CapacitacionesComponent},
   {path: 'staff/trainings-events',component:CapacitacionesEventoComponent},
   {path: 'staff/trainings-dashboard',component:ListaCapacitacionesComponent},
+  {path: 'staff/applicants',component:ListaProspectosComponent},
+
 
   {path: 'staff/checkpoint/:id',component:PuntoControlComponent},
   {path: 'staff/camps',component: MisCampamentosComponent},

@@ -47,11 +47,12 @@
     <div class="card">
 
         <div class="card border border-info border-3">
-            <div class=" scroll-y">
               <div class="bg-info p-2">
                 <h1 class="card-title text-white">Campamentos Disponibles</h1>
       
               </div>
+              <div class=" scroll-y">
+
               <div class="card-body">
                 <div>
                   <div class="col text-end">
@@ -126,14 +127,14 @@
                           </td>
                      
                       <td >
-                        {{customer.name}}
+                        {{customer.camp_name}}
                       </td>
                       <td> 
-                        {{customer.location_id}}
+                        {{customer.location_name}}
                       </td>
                       <td>
       
-                       {{customer.start}}
+                       {{customer.camp_start}}
       
       
                       </td>
@@ -141,7 +142,7 @@
                         <img src="../../../assets/images/camp/pastel-cumpleaños.png" alt="" *ngIf="customer.cumple">
       
                        
-                       {{customer.end}}
+                       {{customer.camp_end}}
       
                       </td>
                       <td>
@@ -391,6 +392,31 @@
 
 
 
+    <ng-template #centerDataModal let-modal>
+        <div class="modal-header">
+          
+        </div>
+        <div class="modal-body">
+            <div class="text-center mb-4">
+                <div class="avatar-md mx-auto mb-4">
+                    <div class="avatar-title bg-light rounded-circle text-success h1">
+                        <i class="mdi mdi-account-multiple-check"></i>
+                    </div>
+                </div>
+    
+                <div class="row justify-content-center">
+                    <div class="col-xl-10">
+                        <h4 class="text-success">Su Inscripcion fue realizada !</h4>
+                        <p class="text-muted font-size-14 mb-4">
+                        </p>
+    
+                       
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
     
 
 </header>
