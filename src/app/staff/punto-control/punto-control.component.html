@@ -2,40 +2,44 @@
     <div class="row">
         <div class="col-12">
 
-
-            <div class="card border border-success border-3">
+            <form [formGroup]="chekpoint">
+            <div class="card border border-success border-1">
                 <div class="bg-success p-2">
                     <h1 class="card-title text-white">Agregar un punto de control</h1>
                 </div>
-                <hr>
                 <div class="container-fluid col-10 mt-4 mb-2">
                     <div class="mb-3 row">
                         <label for="inputPassword" class="col-sm-5 d-flex justify-content-end col-form-label"> Nombre
                             del punto de control:</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control d-flex justify-content-start" id="inputPassword">
+                            <input type="text" class="form-control d-flex justify-content-start" id="inputPassword" formControlName="name">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="inputPassword" class="col-sm-5 d-flex justify-content-end col-form-label"> Fecha de
                             aplicacion: </label>
                         <div class="col-sm-4">
-                            <input type="date" class="form-control d-flex justify-content-start">
+                            <input type="date" class="form-control d-flex justify-content-start" formControlName="chekpoint_date">
                         </div>
                     </div>
+                    <div class="alert alert-primary" role="alert" *ngIf="letrero">
+                         Se agrego correctamente 
+                      </div>
+
                 </div>
 
                 <hr class="mb-4">
                 <div class="display-flex p-2">
                     <button class="btn btn-secondary" type="submit">ver camp</button>
-                    <button class="btn btn-primary" type="submit">Agregar punto de Control</button>
+                    <button class="btn btn-primary" type="submit" (click)="crearCheck()" [disabled]="chekpoint.invalid">Agregar punto de Control</button>
                 </div>
 
             </div>
+        </form>
 
 
-            <div class="card border border-success border-3">
-                <div class="bg-success p-2">
+            <div class="card border border-primary border-1">
+                <div class="bg-primary p-2">
                     <h1 class="card-title text-white">Acampadores</h1>
                 </div>
                 <hr>
@@ -63,38 +67,37 @@
                             <ng-template pTemplate="header">
                                 <tr >
 
-
-                                    <th pSortableColumn=item.name class="camp" *ngFor="let item of puntosControl">
-                                        <div class="flex justify-content-between align-items-center"
-                                            style=" width: auto;">
-                                            {{item.name}}
-                                            <br>
-                                            {{item.fecha}}
-                                            <br>
-                                            {{item.inscritos}} de {{item.cupos}}<p-sortIcon
-                                                field=item.name></p-sortIcon>
-                                        </div>
+                                    <th style="width: 20px;">
+                                        #
                                     </th>
+                                    <th style="min-width: 240px; width: 240px;">
+                                        Nombre
+                                    </th>
+                                    <th  *ngFor="let item of columnas">
+                                        <div  style="min-width: 70px; width: 240px; white-space: pre-line;" class="conatiner-th">
+                                           <div> {{item.name}} </div>
+                                         <div>{{item.chekpoint_date_esp}} <i class="bx bx-highlight" style="margin-left: 5px;"(click)="showDialog(item)"></i> </div> 
+                                     <div>  <span><i class="bx bxs-barcode p-1 bg-primary" style="color: white; font-size: 15px; margin-right: 4px;margin-top: 2px; border-radius: 2px;"></i> 1 de 5 </span>   </div>  
+                                        </div>
+                                      
 
-
-
-
-
+                                    </th>
 
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-customer>
                                 <tr class="p-selectable-row">
                                     <td>
-                                        {{customer.id}}
+                                       {{customer.id}}
                                     </td>
 
-                                    <td>
+                                    <td style="text-align: left; font-size: 10px;">
                                         {{customer.name}}
                                     </td>
-                                    <td style="background-color: rgb(223, 112, 112);">
+                                    <td *ngFor="let item of columnas">
 
                                     </td>
+                                  
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="emptymessage">
@@ -109,3 +112,34 @@
         </div>
     </div>
 </div>
+
+<p-button  icon="pi pi-external-link" label="Show"></p-button>
+<p-dialog header="Header" [(visible)]="visible" [style]="{width: '50vw'}">
+    <div class="container-fluid col-10 mt-4 mb-2">
+        <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-5 d-flex justify-content-end col-form-label"> Nombre
+                del punto de control:</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control d-flex justify-content-start" id="inputPassword" [(ngModel)]="updateName">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-5 d-flex justify-content-end col-form-label"> Fecha de
+                aplicacion: </label>
+            <div class="col-sm-4">
+                <input type="date" class="form-control d-flex justify-content-start" [(ngModel)]="updateDate">
+            </div>
+        </div>
+        
+
+    </div>
+
+    <hr class="mb-4">
+    <div class="display-flex p-2">
+        <button class="btn btn-secondary" type="submit" (click)="cerrarModal()">Cancelar</button>
+        <button class="btn btn-primary" type="submit" (click)="updadte()" *ngIf="!estatusUpdate">Actualizar </button >
+        <div class="spinner-border text-primary" role="status" *ngIf="estatusUpdate">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+    </div>
+</p-dialog>

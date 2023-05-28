@@ -120,7 +120,7 @@ filterCamps(){
   this.selectedCustomers.forEach((item)=>{
       let a = {
         id: 0,
-        status: 1,
+        status: 36,
         payment_balance: 0,
         camp_id: item.id,
         camper_id: this.id,

@@ -26,6 +26,7 @@ export class CamperService {
      return this.http.post('http://142.93.12.234:8000/parent/',info)
    }
    setPhoto(info:any):Observable<any>{
+    
     console.log(info);
     
     return this.http.post('http://142.93.12.234:8000/photo/upload_image',info)

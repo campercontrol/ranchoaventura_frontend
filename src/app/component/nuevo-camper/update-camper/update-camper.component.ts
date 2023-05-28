@@ -35,6 +35,8 @@ export class UpdateCamperComponent implements OnInit {
   vacunas:any = [];
   sexo:string[]=['Hombre','Mujer',"No binario"," Prefiero no decir"];
   id=0;
+  photoSelect: string | ArrayBuffer;
+
 
   constructor(private catalogos: CamperService , private formGrup: FormBuilder, private router:Router,private routesA:ActivatedRoute) {
     this.routesA.params.subscribe((params)=>{
@@ -189,12 +191,27 @@ export class UpdateCamperComponent implements OnInit {
     });
     
   }
-  prueba2(){
-    this.catalogos.setPhoto(this.foto).subscribe((res:any)=>{
-      console.log(res);
-      
-    })
+  prueba2(event){
+    const archivo = event.target.files[0];
+
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = e => this.photoSelect = reader.result;
+      reader.readAsDataURL(archivo);
+    const formulario = new FormData()
+    formulario.append('file',this.foto)
+    this.catalogos.setPhoto(formulario).subscribe((res: any) => {
+      console.log(res.path);
+      this.formUser.patchValue({
+        photo: res.path
+      })
+    },
+      error => {
+        console.log(error)
+      })
   }
+}
+  
 
 
   getVaccinesValues(){

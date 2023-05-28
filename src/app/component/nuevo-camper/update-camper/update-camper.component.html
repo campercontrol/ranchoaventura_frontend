@@ -66,7 +66,7 @@
                             <div class="foto">
                                 <label for="">Foto de Perfil</label>
                                 <input type="file" ([ngModel])="foto" >
-                                <button (click)="prueba2()">Subir Foto</button>
+                                <button (change)="prueba2($event)">Subir Foto</button>
 
                                 <label for="">La foto es obligatoria ,nos ayuda a identificar a los campers,
                                     recomendamos subas una foto reciente y de poco peso, máximo 3Mb debe ser formato jpg</label>

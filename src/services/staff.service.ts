@@ -10,6 +10,8 @@ export class StaffService {
       
   }
   prospectos(prospecto:any){
+    console.log(prospecto);
+    
     return this.http.post('http://142.93.12.234:8000/prospect/',prospecto)
   }
 }
