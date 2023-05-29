@@ -140,6 +140,7 @@ setCamp(a){
 getCampsDIs(){
   this.camps.getCampsDisponibles(this.id).subscribe(
     (res:any)=>{
+      console.log(res);
       
      this.customer = res.data;
      console.log(this.customer);
@@ -158,6 +159,8 @@ getCampsDIs(){
     }
   )
   this.info.getCapsT(1).subscribe((res:any)=>{
+    console.log(res);
+    
     this.summer_school_camps= res.summer_school_camps;
 
     this.summer_school_camps.map((item:any)=>{

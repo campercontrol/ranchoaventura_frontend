@@ -46,9 +46,13 @@ const routes: Routes = [
   { path: 'parents/registered-children', component: RegisteredChildrenComponent },
   { path: 'parents/new-camper', component: CamperNuevoComponent },
   { path: 'parents/camp-info/:camper/:camp', component: CampamentoComponent },
+  { path: 'parents/inscription/camp-info/:camper/:camp', component: CampamentoComponent },
+  { path: 'parents/inscription/camper/:id', component: PerfilCamperComponent },
+
+
   { path: 'parents/update-camper/:id', component: UpdateCamperComponent },
   { path: 'parents/camper/:id', component: PerfilCamperComponent },
-  { path: 'parents/camper/inscription/:id', component: ParentsInscripcionCampComponent },
+  { path: 'parents/inscription/:id', component: ParentsInscripcionCampComponent },
   { path: 'staff/camps', component: CampamentosComponent },
   { path: 'camps/camp_add', component: NuevoCampamentoComponent },
   { path: 'camps/camp', component: CampamentosStaffComponent },

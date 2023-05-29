@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PrimeIcons } from "primeng/api";
 import { PrimeNGConfig } from 'primeng/api';
 import { CamperService } from 'src/services/camper.service';
@@ -34,8 +34,9 @@ export class PerfilCamperComponent implements OnInit {
   emailTuto = "";
   comenarios: any = [];
   comment:any ="";
+  historialCaps:any = [];
 
-  constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private hijos: CamperService,private parents : ParentService) {
+  constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private hijos: CamperService,private parents : ParentService, private rou:Router) {
     this.routesA.params.subscribe((params) => {
       this.id = params['id'];
     })
@@ -115,6 +116,7 @@ export class PerfilCamperComponent implements OnInit {
   getInfo(){
     this.hijos.getPerfil(this.id).subscribe((res: any) => {
       console.log(res);
+      this.historialCaps = res.camper_subscribe_camps
       this.comenarios = res.camper_comments_parent
       console.log(this.comenarios);
 
@@ -169,6 +171,15 @@ export class PerfilCamperComponent implements OnInit {
 
 
     })
+  }
+
+  link(id){
+    this.rou.navigate(['parents/camp-info/1/'+id]);
+
+  }
+  linkPerfil(id = 1){
+    this.rou.navigate(['/parents/inscription/'+id]);
+
   }
 
 }

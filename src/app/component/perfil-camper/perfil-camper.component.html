@@ -270,7 +270,7 @@
             </div>
             <div class="col-lg-12">
                 <div class="card">
-                    <p-timeline [value]="events1" align="left" styleClass="customized-timeline" class="margin-timile">
+                    <p-timeline [value]="historialCaps" align="left" styleClass="customized-timeline" class="margin-timile">
                         <ng-template pTemplate="marker" let-event>
                             <div class="timilin-logo">
                                 <i class="fas fa-check"></i>
@@ -278,11 +278,11 @@
                         </ng-template>
                         <ng-template pTemplate="content" let-event>
                             <div class="contendor-timiline mt-3 p-1">
-                                <h3> {{event.status}} <i class="fa fa-info-circle"></i></h3>
-                                <p class="badge bg-warning ms-1">Pendiente de Pago: {{event.costo}} MXN</p>
+                                <h3> {{event.camp_name}} <i class="fa fa-info-circle" (click)="link(event.camper_id)"></i></h3>
+                                <p class="badge bg-warning ms-1">Pendiente de Pago: {{event.camper_payment_balance}} MXN</p>
                             </div>
                             <div class="contenedor-p">
-                                <p class="icononos-s">{{event.date}} <i class="fas fa-calendar-alt"> </i></p>
+                                <p class="icononos-s">{{event.camp_start.substring(0,10)}} - {{event.camp_end.substring(0,10)}}<i class="fas fa-calendar-alt"> </i></p>
                             </div>
                         </ng-template>
                     </p-timeline>

@@ -63,7 +63,7 @@ export class UpdateCamperComponent implements OnInit {
       name:["",[Validators.required]],
       lastname_father:["",[Validators.required]],
       lastname_mother:["",[Validators.required]],
-      photo:["",[Validators.required]],
+      photo:["",],
       gender_id:[0,[Validators.required]],
       birthday:["",[Validators.required]],
       height:[0,[Validators.required]],
