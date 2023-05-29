@@ -95,7 +95,8 @@ export class PuntoControlComponent implements OnInit {
     this.check.postchekpoint(this.chekpoint.value).subscribe(
       (res:any)=>{
             this.chekpoint.reset()
-            this.letrero = true
+            this.letrero = true;
+            this.getColumnas();
             this.chekpoint.patchValue({
               camp_id : this.id
             })  ;

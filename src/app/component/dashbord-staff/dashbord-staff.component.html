@@ -79,10 +79,10 @@
               <ng-template pTemplate="body" let-customer>
                 <tr class="p-selectable-row">
                     <td >
-                        {{customer.name}}
+                        {{customer.camp_name}}
                       </td>
                       <td>
-                        sede
+                        {{customer.location_name}}
                       </td>
                       <td> 
                         <p-badge value="0" pTooltip="Total" tooltipPosition="top"></p-badge>
@@ -95,19 +95,19 @@
                       </td>
                       <td style="font-size: 12px;" class="container-contac">
       
-                     <span> {{customer.start.substring(0,10)}} </span> 
+                     <span> {{customer.camp_start.substring(0,10)}} </span> 
                    
                       </td>
                       <td>
       
                        
-                       {{customer.end.substring(0,10)}}
+                       {{customer.camp_end.substring(0,10)}}
       
                       </td> 
                
   
                   <td>
-                    <button class="btn btn-primary" class="btn btn-primary">Yo me apunto !</button>
+                    <button class="btn btn-primary" class="btn btn-primary"  (click)="inscribirCamp(customer.camp_id)" value="">Yo me apunto !</button>
                   </td>
   
   
@@ -209,32 +209,32 @@
               </ng-template>
               <ng-template pTemplate="body" let-customer>
                 <tr class="p-selectable-row">         
-                    <td >
-                        {{customer.name}}
-                      </td>
-                      <td>
-                        sede
-                      </td>
-                      <td> 
-                        <p-badge value="0" pTooltip="Total" tooltipPosition="top"></p-badge>
-                       
-                        <p-badge value="0" pTooltip="Camps Anterior" tooltipPosition="top"
-                            severity="danger" severity="danger"></p-badge>
-                            
-                        <p-badge value="0" pTooltip="Próximos camps" tooltipPosition="top"
-                            severity="success" severity="success"></p-badge>
-                      </td>
-                      <td style="font-size: 12px;" class="container-contac">
-      
-                     <span> {{customer.start.substring(0,10)}} </span> 
+                  <td >
+                    {{customer.camp_name}}
+                  </td>
+                  <td>
+                    {{customer.location_name}}
+                  </td>
+                  <td> 
+                    <p-badge value="0" pTooltip="Total" tooltipPosition="top"></p-badge>
                    
-                      </td>
-                      <td>
-      
-                       
-                       {{customer.end.substring(0,10)}}
-      
-                      </td>  
+                    <p-badge value="0" pTooltip="Camps Anterior" tooltipPosition="top"
+                        severity="danger" severity="danger"></p-badge>
+                        
+                    <p-badge value="0" pTooltip="Próximos camps" tooltipPosition="top"
+                        severity="success" severity="success"></p-badge>
+                  </td>
+                  <td style="font-size: 12px;" class="container-contac">
+  
+                 <span> {{customer.camp_start.substring(0,10)}} </span> 
+               
+                  </td>
+                  <td>
+  
+                   
+                   {{customer.camp_end.substring(0,10)}}
+  
+                  </td> 
                   <td>
                     <button class="btn btn-danger" >Cancelar mi participacion</button>
                   </td>
@@ -329,13 +329,11 @@
               </ng-template>
               <ng-template pTemplate="body" let-customer>
                 <tr class="p-selectable-row">
-                 
-                 
                   <td >
-                    {{customer.name}}
+                    {{customer.camp_name}}
                   </td>
                   <td>
-                    sede
+                    {{customer.location_name}}
                   </td>
                   <td> 
                     <p-badge value="0" pTooltip="Total" tooltipPosition="top"></p-badge>
@@ -348,15 +346,15 @@
                   </td>
                   <td style="font-size: 12px;" class="container-contac">
   
-                 <span> {{customer.start.substring(0,10)}} </span> 
+                 <span> {{customer.camp_start.substring(0,10)}} </span> 
                
                   </td>
                   <td>
   
                    
-                   {{customer.end.substring(0,10)}}
+                   {{customer.camp_end.substring(0,10)}}
   
-                  </td>  
+                  </td> 
                 </tr>
               </ng-template>
              

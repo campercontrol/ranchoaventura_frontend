@@ -61,6 +61,8 @@ export class ListaProspectosComponent implements OnInit {
   getProspecto(){
     let a:any = []
     this.prospectos.getProspectos().subscribe((res:any)=>{
+      console.log(res);
+      
       this.prospectosArray = res.data;
       this.prospectosArray.forEach((item:any)=>{
             item.Staff.email = item.email;

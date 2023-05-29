@@ -20,6 +20,8 @@ export class CampamentoComponent implements OnInit {
   PreguntasExtras:any ;
   respuestPregunta:any="";
   cargosExtra:false;
+  estatusPago:Boolean= false;
+  pagos:boolean=false;
 
 
 
@@ -35,9 +37,10 @@ export class CampamentoComponent implements OnInit {
 
     })
     this.hijos.informacionCampamento(Number(this.idCamper),Number(this.idCamp)).subscribe((res:any)=>{
-        this.dataCamp = res.camp;
+      let a :any=res.camp
+        this.dataCamp = a;
         this.dataPagos = res.payments;
-        console.log(res);     
+        this.dataPagos.length()>0? this.pagos =true:this.pagos=false;   
     })
     this.camps.getPreguntas(Number(this.idCamp)).subscribe((res:any)=>{
       console.log(res,'preguntas');
@@ -68,6 +71,23 @@ export class CampamentoComponent implements OnInit {
 
     }
     this.camps.setPreguntas(this.PreguntasExtras[0].id,res).subscribe((res:any)=>{
+      console.log(res);
+      this.modalService.dismissAll()
+      
+    })
+
+  }
+  saveChange(){
+   
+    let res = {
+    
+
+      "is_selected": this.estatusPago,
+      "camper_id": this.idCamp,
+      "extra_charge_id": this.cargosExtras.id,
+
+    }
+    this.camps.setPagos(res).subscribe((res:any)=>{
       console.log(res);
       this.modalService.dismissAll()
       

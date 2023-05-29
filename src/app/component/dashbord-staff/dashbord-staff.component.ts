@@ -31,16 +31,25 @@ export class DashbordStaffComponent implements OnInit {
   }
 
   getCamps(){
-    this.camps.getDashbord().subscribe((res:any)=>{
+    this.camps.getDashbord(23).subscribe((res:any)=>{
       console.log(res.data);
       this.aCamp =res.data.next_camps;
       this.pCamp = res.data.available_camps;
-      this.ICamp =  res.data.staff_camps; 
-
-
-      
+      this.ICamp =  res.data.staff_camps;       
     })
+  }
+  inscribirCamp(a){
+    let idCamp = a;
+    let b ={
+      camp_id: idCamp,
+      staff_id:23
 
+    }
+    this.camps.inscribirCappStaff(b).subscribe((res:any)=>{
+          console.log(res);
+          this.getCamps();
+          
+    })
   }
 
 }
