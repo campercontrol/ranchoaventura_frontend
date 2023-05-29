@@ -63,7 +63,7 @@ export class UpdateCamperComponent implements OnInit {
       name:["",[Validators.required]],
       lastname_father:["",[Validators.required]],
       lastname_mother:["",[Validators.required]],
-      photo:[""],
+      photo:["",[Validators.required]],
       gender_id:[0,[Validators.required]],
       birthday:["",[Validators.required]],
       height:[0,[Validators.required]],
@@ -101,7 +101,6 @@ export class UpdateCamperComponent implements OnInit {
 
 
 
-
     this.getcamper();
 
     
@@ -112,7 +111,8 @@ export class UpdateCamperComponent implements OnInit {
     this.catalogos.getCamper(this.id).subscribe(
       (res:any)=>{
         console.log('respuestas',res);
-        
+         this.photoSelect = 'http://142.93.12.234:8000/'+res['camper'].photo,
+
           this.formUser.patchValue({
            
             
@@ -189,6 +189,7 @@ export class UpdateCamperComponent implements OnInit {
         }
         
     });
+    this.getcamper()
     
   }
   prueba2(event){
@@ -199,7 +200,7 @@ export class UpdateCamperComponent implements OnInit {
       reader.onload = e => this.photoSelect = reader.result;
       reader.readAsDataURL(archivo);
     const formulario = new FormData()
-    formulario.append('file',this.foto)
+    formulario.append('file',archivo)
     this.catalogos.setPhoto(formulario).subscribe((res: any) => {
       console.log(res.path);
       this.formUser.patchValue({

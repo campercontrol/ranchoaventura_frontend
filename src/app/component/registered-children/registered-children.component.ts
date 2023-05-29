@@ -28,7 +28,7 @@ export class RegisteredChildrenComponent implements OnInit {
   constructor(private modalService: NgbModal, private formBuilder: FormBuilder,private hijos:CamperService) { 
     this.hijos.getHijos().subscribe(
       (res:any)=>{
-        console.log(res.data);
+        console.log(res);
         this.hijosRes = res.data;
       }
     )

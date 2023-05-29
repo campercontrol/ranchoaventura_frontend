@@ -74,27 +74,7 @@ export class ParentsInscripcionCampComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.camps.getCampsDisponibles(this.id).subscribe(
-      (res:any)=>{
-        
-       this.customer = res.data;
-       console.log(this.customer);
-       
-
-       this.customer.map((item:any)=>{
-        let fecha = item.camp_end
-        fecha = fecha.split("T");
-        item.camp_end = fecha[0];
-
-        let fechaI = item.camp_start
-        fechaI = fechaI.split("T");
-        item.camp_start = fechaI[0];
-          
-            
-       })
-        
-      }
-    )
+    this.getCampsDIs();
 
   }
 
@@ -123,7 +103,6 @@ filterCamps(){
  
   this.selectedCustomers.forEach((item)=>{
       let a = {
-        id: 0,
         status: 36,
         payment_balance: 0,
         camp_id: item.camp_id,
@@ -133,6 +112,7 @@ filterCamps(){
       console.log(a)
       this.setCamp(a)
   })
+  this.getCampsDIs();
   this.centerModal()
 
 
@@ -151,6 +131,29 @@ setCamp(a){
      console.log(error)
    }
    )
+}
+getCampsDIs(){
+  this.camps.getCampsDisponibles(this.id).subscribe(
+    (res:any)=>{
+      
+     this.customer = res.data;
+     console.log(this.customer);
+     
+
+     this.customer.map((item:any)=>{
+      let fecha = item.camp_end
+      fecha = fecha.split("T");
+      item.camp_end = fecha[0];
+
+      let fechaI = item.camp_start
+      fechaI = fechaI.split("T");
+      item.camp_start = fechaI[0];
+        
+          
+     })
+      
+    }
+  )
 }
 
 

@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { CampsService } from 'src/services/camps.service';
 import { ChekpointService } from 'src/services/chekpoint.service';
 
 @Component({
@@ -35,14 +36,19 @@ export class PuntoControlComponent implements OnInit {
   fecha:any;
   visible: boolean;
   estatusUpdate = false
+  infoCamp: any ={};
 
    
 
-  constructor(private check: ChekpointService, private FormGroup: FormBuilder,private routesA : ActivatedRoute, ) { 
+  constructor(private check: ChekpointService, private FormGroup: FormBuilder,private routesA : ActivatedRoute,private camps:CampsService ) { 
     this.routesA.params.subscribe((params)=>{
       this.id = params['id']
     })
     const currentDate = new Date();
+
+    this.camps.getCamp(this.id).subscribe((res:any)=>{
+      this.infoCamp = res.data
+    })
  
   }
   cars = [{ Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },

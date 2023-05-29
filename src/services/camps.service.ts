@@ -22,6 +22,16 @@ export class CampsService {
   }
   getCargosExtras(cargo:number){
     return this.http.get('http://142.93.12.234:8000/extra_charge_by_camp/'+cargo)
+  }
+  setPreguntas(id,pregunta){
+    return this.http.patch('http://142.93.12.234:8000/camper_extra_answer/'+id,pregunta)
+  }
+  getDashbord(id=1){
+    return this.http.get('http://142.93.12.234:8000/staff_dashboard/'+id)
 
+  }
+
+  getCamp(id){
+    return this.http.get('http://142.93.12.234:8000/camp/'+id)
   }
 }

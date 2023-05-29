@@ -13,10 +13,14 @@ export class CampamentoComponent implements OnInit {
 
   idCamper=0;
   idCamp=0;
-  dataCamp;
+  dataCamp:any={};
   dataPagos:any={};
   nameCamp:any={};
   cargosExtras:any ;
+  PreguntasExtras:any ;
+  respuestPregunta:any="";
+  cargosExtra:false;
+
 
 
   constructor(private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal) { 
@@ -33,15 +37,16 @@ export class CampamentoComponent implements OnInit {
     this.hijos.informacionCampamento(Number(this.idCamper),Number(this.idCamp)).subscribe((res:any)=>{
         this.dataCamp = res.camp;
         this.dataPagos = res.payments;
-        console.log(this.dataCamp);     
+        console.log(res);     
     })
     this.camps.getPreguntas(Number(this.idCamp)).subscribe((res:any)=>{
       console.log(res,'preguntas');
+      this.PreguntasExtras = res.data
       
     })
     this.camps.getCargosExtras(Number(this.idCamp)).subscribe((res:any)=>{
       console.log(res,'cargos extras');
-      this.cargosExtras = res.data[0]
+      this.cargosExtras = res.data
       
     })
   }
@@ -50,8 +55,24 @@ export class CampamentoComponent implements OnInit {
   }
 
 
-  extraLarge(exlargeModal: any) {
-    this.modalService.open(exlargeModal, { size: 'xl', centered: true });
+  open(content) {
+		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' })
+		
+	}
+  saveRes(){
+    this.PreguntasExtras[0];
+    let res = {
+      question_id:this.PreguntasExtras[0].id,
+      answer:this.respuestPregunta,
+      camper_id:this.idCamper,
+
+    }
+    this.camps.setPreguntas(this.PreguntasExtras[0].id,res).subscribe((res:any)=>{
+      console.log(res);
+      this.modalService.dismissAll()
+      
+    })
+
   }
 
 }

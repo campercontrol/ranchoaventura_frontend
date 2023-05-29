@@ -23,6 +23,8 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() isCondensed = false;
   menu: any;
   data: any;
+  paretn = true;
+  staff= true;
 
   menuItems = [];
 

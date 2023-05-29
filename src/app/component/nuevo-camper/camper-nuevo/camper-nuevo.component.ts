@@ -69,7 +69,7 @@ export class CamperNuevoComponent implements OnInit {
       name:["",[Validators.required]],
       lastname_father:["",[Validators.required]],
       lastname_mother:["",[Validators.required]],
-      photo:[""],
+      photo:["",[Validators.required]],
       gender_id:[0,[Validators.required]],
       birthday:["",[Validators.required]],
       height:[0,[Validators.required]],
@@ -108,26 +108,27 @@ export class CamperNuevoComponent implements OnInit {
   }
 
   
-  subiendo(event:any){
-    const archivo= event.target.files[0];
+  subiendo(event: any) {
+    const archivo = event.target.files[0];
 
-    if(event.target.files && event.target.files[0]){
-    const reader = new FileReader();
-    reader.onload = e => this.photoSelect =reader.result;
-    reader.readAsDataURL(archivo);
-    this.catalogos.setPhoto(archivo).subscribe((res:any)=>{
-     // console.log(res);
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = e => this.photoSelect = reader.result;
+      reader.readAsDataURL(archivo);
 
-  },
-  error=>{
-    console.log(error)
-  })
+      const formulario = new FormData();
+      formulario.append('file',archivo)
+      this.catalogos.setPhoto(formulario).subscribe((res: any) => {
+        console.log(res.path);
+        this.formUser.patchValue({
+          photo: res.path
+        })
+      },
+        error => {
+          console.log(error)
+        })
     }
-    
-  
-    
-   
-}
+  }
 
 
 

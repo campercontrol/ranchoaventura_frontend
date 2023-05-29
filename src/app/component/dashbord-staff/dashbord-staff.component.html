@@ -1,0 +1,373 @@
+<div class="card">
+
+    <div class="card border border-info border-2">
+          <div class="p-1 bg-info" style="width: 100%;">
+            <h1 class="card-title text-white">Próximos camps</h1>
+  
+          </div>
+          <div class=" scroll-y">
+
+          <div class="card-body">
+            <div>
+              <div class="col text-end">
+  
+              </div>
+            </div>
+            <div class="container-btn">
+               
+                <div class="btn-grup">
+                  <div>
+                     
+                  </div>
+                  <input style="height: 30px;" class="mb-2" pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                      placeholder="Global Search" />
+              </div>
+             
+             
+            </div>
+  
+            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="aCamp" 
+            [globalFilterFields]="['name','lastname_father','birthday','email','season_name','lastname_mother']"
+              [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">
+              <ng-template pTemplate="header">
+                <tr>
+                   
+  
+                  <th pSortableColumn="lastname_father" class="camp">
+                    <div class="flex justify-content-between align-items-center" style="width: 200px;">
+                      Camp
+                      <p-sortIcon field="lastname_father"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th pSortableColumn="birthday" class="camp">
+                    <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
+                      Record
+                      <p-sortIcon field="birthday"></p-sortIcon>
+                    </div>
+                  </th>
+                 
+                  <th pSortableColumn="season_name">
+                    <div class="flex justify-content-between align-items-center" style="width: 140px;">
+                    Sede
+                      <p-sortIcon field="season_name"></p-sortIcon>
+                    </div>
+                  </th>
+               
+                  <th pSortableColumn="public_price" style="width: 130px; min-width: 120px;">
+                    <div class="flex justify-content-between align-items-center">
+                        Inicia
+                      <p-sortIcon field="public_price"></p-sortIcon>
+                    </div>
+                  </th>
+                  
+                  <th pSortableColumn="public_price" style="width: 130px; min-width: 120px;">
+                    <div class="flex justify-content-between align-items-center">
+                        Termina
+                      <p-sortIcon field="public_price"></p-sortIcon>
+                    </div>
+                  </th>
+  
+                 
+                  <th pSortableColumn="precio">
+                    <div class="flex justify-content-between align-items-center" style="min-width: 100px;">
+                    </div>
+                  </th>
+  
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-customer>
+                <tr class="p-selectable-row">
+                    <td >
+                        {{customer.name}}
+                      </td>
+                      <td>
+                        sede
+                      </td>
+                      <td> 
+                        <p-badge value="0" pTooltip="Total" tooltipPosition="top"></p-badge>
+                       
+                        <p-badge value="0" pTooltip="Camps Anterior" tooltipPosition="top"
+                            severity="danger" severity="danger"></p-badge>
+                            
+                        <p-badge value="0" pTooltip="Próximos camps" tooltipPosition="top"
+                            severity="success" severity="success"></p-badge>
+                      </td>
+                      <td style="font-size: 12px;" class="container-contac">
+      
+                     <span> {{customer.start.substring(0,10)}} </span> 
+                   
+                      </td>
+                      <td>
+      
+                       
+                       {{customer.end.substring(0,10)}}
+      
+                      </td> 
+               
+  
+                  <td>
+                    <button class="btn btn-primary" class="btn btn-primary">Yo me apunto !</button>
+                  </td>
+  
+  
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+  
+              </ng-template>
+            </p-table>
+
+        </div>
+        </div>
+      </div>
+
+
+
+
+   
+</div>
+
+<div class="card">
+
+    <div class="card border border-warning border-2">
+          <div class="p-1 bg-warning" style="width: 100%;">
+            <h1 class="card-title text-white">Camps a los que me he apuntado</h1>
+  
+          </div>
+          <div class=" scroll-y">
+
+          <div class="card-body">
+            <div>
+              <div class="col text-end">
+  
+              </div>
+            </div>
+            <div class="container-btn">
+               
+                <div class="btn-grup">
+                  <div>
+                     
+                  </div>
+                  <input style="height: 30px;" class="mb-2" pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                      placeholder="Global Search" />
+              </div>
+             
+             
+            </div>
+  
+            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="pCamp" 
+            [globalFilterFields]="['name','lastname_father','birthday','email','season_name','lastname_mother']"
+              [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">
+              <ng-template pTemplate="header">
+                <tr>
+                   
+  
+                  <th pSortableColumn="lastname_father" class="camp">
+                    <div class="flex justify-content-between align-items-center" style="width: 200px;">
+                      Camp
+                      <p-sortIcon field="lastname_father"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th pSortableColumn="birthday" class="camp">
+                    <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
+                      Record
+                      <p-sortIcon field="birthday"></p-sortIcon>
+                    </div>
+                  </th>
+               
+                  
+                  <th pSortableColumn="season_name">
+                    <div class="flex justify-content-between align-items-center" style="width: 140px;">
+                    Sede
+                      <p-sortIcon field="season_name"></p-sortIcon>
+                    </div>
+                  </th>
+               
+                  <th pSortableColumn="public_price" style="width: 130px; min-width: 120px;">
+                    <div class="flex justify-content-between align-items-center">
+                        Inicia
+                      <p-sortIcon field="public_price"></p-sortIcon>
+                    </div>
+                  </th>
+                  
+                  <th pSortableColumn="public_price" style="width: 130px; min-width: 120px;">
+                    <div class="flex justify-content-between align-items-center">
+                        Termina
+                      <p-sortIcon field="public_price"></p-sortIcon>
+                    </div>
+                  </th>
+  
+                 
+                  <th pSortableColumn="precio">
+                    <div class="flex justify-content-between align-items-center" style="width: 60px;">
+                    </div>
+                  </th>
+  
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-customer>
+                <tr class="p-selectable-row">         
+                    <td >
+                        {{customer.name}}
+                      </td>
+                      <td>
+                        sede
+                      </td>
+                      <td> 
+                        <p-badge value="0" pTooltip="Total" tooltipPosition="top"></p-badge>
+                       
+                        <p-badge value="0" pTooltip="Camps Anterior" tooltipPosition="top"
+                            severity="danger" severity="danger"></p-badge>
+                            
+                        <p-badge value="0" pTooltip="Próximos camps" tooltipPosition="top"
+                            severity="success" severity="success"></p-badge>
+                      </td>
+                      <td style="font-size: 12px;" class="container-contac">
+      
+                     <span> {{customer.start.substring(0,10)}} </span> 
+                   
+                      </td>
+                      <td>
+      
+                       
+                       {{customer.end.substring(0,10)}}
+      
+                      </td>  
+                  <td>
+                    <button class="btn btn-danger" >Cancelar mi participacion</button>
+                  </td>
+  
+  
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+  
+              </ng-template>
+            </p-table>
+
+        </div>
+        </div>
+      </div>   
+</div>
+
+<div class="card">
+
+    <div class="card border border-success border-2">
+          <div class="p-1 bg-success" style="width: 100%;">
+            <h1 class="card-title text-white">Camps que asistiré</h1>
+  
+          </div>
+          <div class=" scroll-y">
+
+          <div class="card-body">
+            <div>
+              <div class="col text-end">
+  
+              </div>
+            </div>
+            <div class="container-btn">
+               
+                <div class="btn-grup">
+                  <div>
+                     
+                  </div>
+                  <input style="height: 30px;" class="mb-2" pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                      placeholder="Global Search" />
+              </div>
+             
+             
+            </div>
+  
+            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="ICamp" 
+            [globalFilterFields]="['name','lastname_father','birthday','email','season_name','lastname_mother']"
+              [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">
+              <ng-template pTemplate="header">
+                <tr>
+                   
+  
+                  <th pSortableColumn="lastname_father" class="camp">
+                    <div class="flex justify-content-between align-items-center" style="width: 250px;">
+                      Camp
+                      <p-sortIcon field="lastname_father"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th pSortableColumn="birthday" class="camp">
+                    <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
+                      Record
+                      <p-sortIcon field="birthday"></p-sortIcon>
+                    </div>
+                  </th>
+                 
+                  <th pSortableColumn="season_name">
+                    <div class="flex justify-content-between align-items-center" style="width: 140px;">
+                    Sede
+                      <p-sortIcon field="season_name"></p-sortIcon>
+                    </div>
+                  </th>
+               
+                  <th pSortableColumn="public_price" style="width: 130px; min-width: 120px;">
+                    <div class="flex justify-content-between align-items-center">
+                        Inicia
+                      <p-sortIcon field="public_price"></p-sortIcon>
+                    </div>
+                  </th>
+                  
+                  <th pSortableColumn="public_price" style="width: 130px; min-width: 120px;">
+                    <div class="flex justify-content-between align-items-center">
+                        Termina
+                      <p-sortIcon field="public_price"></p-sortIcon>
+                    </div>
+                  </th>
+  
+                 
+                 
+  
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-customer>
+                <tr class="p-selectable-row">
+                 
+                 
+                  <td >
+                    {{customer.name}}
+                  </td>
+                  <td>
+                    sede
+                  </td>
+                  <td> 
+                    <p-badge value="0" pTooltip="Total" tooltipPosition="top"></p-badge>
+                   
+                    <p-badge value="0" pTooltip="Camps Anterior" tooltipPosition="top"
+                        severity="danger" severity="danger"></p-badge>
+                        
+                    <p-badge value="0" pTooltip="Próximos camps" tooltipPosition="top"
+                        severity="success" severity="success"></p-badge>
+                  </td>
+                  <td style="font-size: 12px;" class="container-contac">
+  
+                 <span> {{customer.start.substring(0,10)}} </span> 
+               
+                  </td>
+                  <td>
+  
+                   
+                   {{customer.end.substring(0,10)}}
+  
+                  </td>  
+                </tr>
+              </ng-template>
+             
+            </p-table>
+
+        </div>
+        </div>
+      </div>
+
+
+
+
+   
+</div>

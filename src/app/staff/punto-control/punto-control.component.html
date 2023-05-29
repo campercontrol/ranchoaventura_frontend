@@ -1,6 +1,30 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
+            <div class="card border border-warning border-1">
+                <div class="bg-warning p-2">
+                    <h1 class="card-title text-white">{{infoCamp.name}}</h1>
+                </div>
+                <div class="col-10 mt-4 mb-2" style="margin-left: 20px;">
+                   <h6 style="color: rgb(182, 184, 185);"> <span><i class="bx bx-notepad" style="font-size: 18px; margin-right: 5px; margin-top: 5px;" ></i></span> <span style="margin-bottom: 14px;"> {{infoCamp.start.substring(0,10)}}  - {{infoCamp.end.substring(0,10)}} </span></h6>
+                    <div class="iconos">
+                        <div>
+                        <span style="display: block; font-size: 16px;">Sede  <i class="fas fa-map"></i>:</span>
+                        <span style="display: block; font-size: 16px;">Salida <i class="dripicons-clock"></i> : {{infoCamp.start.substring(0,10)}}</span>
+                        <span style="display: block; font-size: 16px;">Regreso <i class="dripicons-clock"></i> : {{infoCamp.end.substring(0,10)}} </span>
+                        <span style="display: block; font-size: 16px;">Punto de reunión <i class="fas fa-map-marked "></i> :</span>
+                    </div>
+
+                    </div>
+                  
+
+
+
+                </div>
+
+              
+
+            </div>
 
             <form [formGroup]="chekpoint">
             <div class="card border border-success border-1">

@@ -14,49 +14,51 @@
               </div>
             </div>
             <div class="container-btn">
-                <div class="d-inline-block" style="margin-right: 10px;">
-                    <div> 
-                        <button class="btn btn-success" style="margin-bottom: 10px;" (click)="open(content)" >Inscribir  a camp(s)</button>
+               
+                <div class="btn-grup">
+                  <div>
+                      <button class="btn btn-success" style="margin-bottom: 10px;" (click)="open(content)" >Inscribir  a camp(s)</button>
+                      <button class="btn btn-warning" style="margin-bottom: 10px; margin-left: 5px;"  >Eliminar</button>
                   </div>
-                </div>
+                  <input style="height: 30px;" class="mt-2" pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                      placeholder="Global Search" />
+              </div>
              
              
             </div>
   
             <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="prospectosArray" 
-            [globalFilterFields]="['name','country.name','representative.name','status']"
+            [globalFilterFields]="['name','lastname_father','birthday','email','season_name','lastname_mother']"
               [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
-              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-              [globalFilterFields]="['name','location_id','start','end','public_price']">
-  
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">
               <ng-template pTemplate="header">
                 <tr>
                     <th>
                         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                       </th>
   
-                  <th pSortableColumn="name" class="camp">
+                  <th pSortableColumn="lastname_father" class="camp">
                     <div class="flex justify-content-between align-items-center" style="width: 250px;">
                       Nombre
-                      <p-sortIcon field="name"></p-sortIcon>
+                      <p-sortIcon field="lastname_father"></p-sortIcon>
                     </div>
                   </th>
-                  <th pSortableColumn="location_id" class="camp">
+                  <th pSortableColumn="birthday" class="camp">
                     <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
                       Fecha de Nacimiento
-                      <p-sortIcon field="location_id"></p-sortIcon>
+                      <p-sortIcon field="birthday"></p-sortIcon>
                     </div>
                   </th>
-                  <th pSortableColumn="start" class="record">
+                  <th pSortableColumn="email" class="record">
                     <div class="flex justify-content-between align-items-center" style=" min-width: 250px;">
                       Contacto
-                      <p-sortIcon field="start"></p-sortIcon>
+                      <p-sortIcon field="email"></p-sortIcon>
                     </div>
                   </th>
-                  <th pSortableColumn="end">
+                  <th pSortableColumn="season_name">
                     <div class="flex justify-content-between align-items-center" style="width: 140px;">
                     Temporada
-                      <p-sortIcon field="end"></p-sortIcon>
+                      <p-sortIcon field="season_name"></p-sortIcon>
                     </div>
                   </th>
                

@@ -5,7 +5,7 @@
 
   <div class="row">
     <div class="d-flex">
-      <button class="btn btn-success ms-auto mb-2" (click)="openModal(content)">Nuevo Camper </button>
+      <button class="btn btn-success ms-auto mb-2" [routerLink]="['../new-camper']" >Nuevo Camper </button>
     </div>
     <ng-template #content role="document" let-modal>
       <div class="modal-header">
@@ -81,15 +81,15 @@
         <div class="card-footer bg-transparent border-top">
           <div class="contact-links d-flex font-size-20">
             <div class="flex-fill">
-              <a href="javascript: void(0);" ngbTooltip="Editar informacion"><i
+              <a [routerLink]="['../update-camper/' +data.id ]"ngbTooltip="Editar informacion"><i
                   class="bx dripicons-document-edit"></i></a>
             </div>
 
             <div class="flex-fill">
-              <a href="javascript: void(0);" ngbTooltip="Perfil"><i class="bx bx-user-circle"></i></a>
+              <a [routerLink]="['../camper/'+data.id]" ngbTooltip="Perfil"><i class="bx bx-user-circle"></i></a>
             </div>
             <div class="flex-fill">
-              <a href="javascript: void(0);" ngbTooltip="Inscribir"><i
+              <a [routerLink]="['../camper/inscription/'+data.id]" ngbTooltip="Inscribir"><i
                   class="mdi  mdi-account-arrow-right-outline"></i></a>
             </div>
           </div>

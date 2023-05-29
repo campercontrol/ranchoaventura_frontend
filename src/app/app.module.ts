@@ -22,6 +22,7 @@ import { initFirebaseBackend } from './authUtils';
 import { CyptolandingComponent } from './cyptolanding/cyptolanding.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TableModule } from 'primeng/table';
 
 
 import { ErrorInterceptor } from './core/helpers/error.interceptor';
@@ -47,6 +48,7 @@ import {DialogModule} from 'primeng/dialog';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewParentComponent } from './component/new-parent/new-parent.component';
 import { ProspectoComponent } from './component/prospecto/prospecto.component';
+import { DashbordStaffComponent } from './component/dashbord-staff/dashbord-staff.component';
 
 
 
@@ -73,7 +75,8 @@ export function createTranslateLoader(http: HttpClient): any {
     CampamentoComponent,
     PerfilCamperComponent,
     NewParentComponent,
-    ProspectoComponent,    
+    ProspectoComponent,
+    DashbordStaffComponent,    
   ],
   imports: [
     BrowserModule,
@@ -90,6 +93,7 @@ export function createTranslateLoader(http: HttpClient): any {
     ReactiveFormsModule,
     BadgeModule,
     PanelModule,
+      TableModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
