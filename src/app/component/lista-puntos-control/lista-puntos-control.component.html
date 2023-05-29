@@ -1,0 +1,106 @@
+<div class="card border border-success border-2">
+    <div class="p-1" style="width: 100%; background-color: #34C38F;">
+      <h1 class="card-title text-white">Lista de Puntos de control</h1>
+
+    </div>
+    <div class=" scroll-y">
+
+    <div class="card-body">
+      <div>
+        <div class="col text-end">
+
+        </div>
+      </div>
+      <div class="container-btn">
+         
+          <div class="btn-grup">
+            <div>
+
+            </div>
+            <input style="height: 30px;" class="mt-2 mb-2" pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                placeholder="Global Search" />
+        </div>
+       
+       
+      </div>
+
+      <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="listaChcek" 
+      [globalFilterFields]="['name','season_id','start','end']"
+        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">
+        <ng-template pTemplate="header">
+          <tr>
+            
+
+            <th pSortableColumn="name" class="camp">
+              <div class="flex justify-content-between align-items-center" style="width: 250px;">
+                Camp
+                <p-sortIcon field="name"></p-sortIcon>
+              </div>
+            </th>
+            <th pSortableColumn="season_id" class="camp">
+              <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
+                Sede
+                <p-sortIcon field="season_id"></p-sortIcon>
+              </div>
+            </th>
+            <th pSortableColumn="start" class="record">
+              <div class="flex justify-content-between align-items-center" style=" min-width: 250px;">
+                Inicio
+                <p-sortIcon field="start"></p-sortIcon>
+              </div>
+            </th>
+            <th pSortableColumn="end">
+              <div class="flex justify-content-between align-items-center" style="width: 140px;">
+              Termina
+                <p-sortIcon field="end"></p-sortIcon>
+              </div>
+            </th>
+         
+        
+
+           
+            <th pSortableColumn="precio">
+              <div class="flex justify-content-between align-items-center" style="width: 140px;">
+              </div>
+            </th>
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-customer>
+          <tr class="p-selectable-row">
+             
+           
+            <td >
+              {{customer.name}}
+            </td>
+            <td> 
+              {{customer.season_id}}
+            </td>
+            <td>
+
+             
+             {{customer.start.substring (0,10)}}
+
+            </td>
+            <td>
+                {{customer.end.substring (0,10)}}
+
+            </td>
+         
+
+            <td>
+              <button class="btn btn-primary" class="btn btn-primary" (click)="redirecionar(customer.id)">ver camp</button>
+            </td>
+
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+
+        </ng-template>
+      </p-table>
+
+  </div>
+  </div>
+</div>

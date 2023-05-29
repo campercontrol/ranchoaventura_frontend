@@ -49,6 +49,7 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewParentComponent } from './component/new-parent/new-parent.component';
 import { ProspectoComponent } from './component/prospecto/prospecto.component';
 import { DashbordStaffComponent } from './component/dashbord-staff/dashbord-staff.component';
+import { ListaPuntosControlComponent } from './component/lista-puntos-control/lista-puntos-control.component';
 
 
 
@@ -76,7 +77,8 @@ export function createTranslateLoader(http: HttpClient): any {
     PerfilCamperComponent,
     NewParentComponent,
     ProspectoComponent,
-    DashbordStaffComponent,    
+    DashbordStaffComponent,
+    ListaPuntosControlComponent,    
   ],
   imports: [
     BrowserModule,

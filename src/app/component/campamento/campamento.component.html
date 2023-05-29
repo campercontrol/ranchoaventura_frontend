@@ -34,22 +34,16 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>2022-02-25</td>
-                      <td>Servicio Adicional *Costo Extra sleeping* metodo de pago:N/A</td>
-                      <td>$1,500.0 MXN</td>
-                      <td></td>
+                    <tr *ngFor="let item of dataPagos">
+                    
+                      <td>{{item.id}}</td>
+                      <td>{{item.created_at.substring(0,10)}}</td>
+                      <td>{{item.txn_number}}</td>
+                      <td>${{item.payment_amount}}MXM</td>
+                      <td>{{item.txn_type_id}}</td>
                       <td>$5,500.0 MXN</td>
                     </tr>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>2022-02-25</td>
-                      <td>Servicio Adicional *Costo Extra sleeping* metodo de pago:N/A</td>
-                      <td>$1,500.0 MXN</td>
-                      <td></td>
-                      <td>$5,500.0 MXN</td>
-                    </tr>
+                 
 
                   </tbody>
                 </table>

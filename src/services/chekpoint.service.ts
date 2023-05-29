@@ -18,4 +18,11 @@ export class ChekpointService {
     return this.http.patch('http://142.93.12.234:8000/camp_checkpoint/'+idCchackpoint,a)
 
   }
+  getListaCheckpoint(){
+    return this.http.get('http://142.93.12.234:8000/camp_checkpoint/')
+
+  }
+  getInfoCamp(id){
+    return this.http.get('http://142.93.12.234:8000/camp/'+id)
+  }
 }

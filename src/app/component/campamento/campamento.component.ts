@@ -37,10 +37,14 @@ export class CampamentoComponent implements OnInit {
 
     })
     this.hijos.informacionCampamento(Number(this.idCamper),Number(this.idCamp)).subscribe((res:any)=>{
+      //console.log(res);
+      
       let a :any=res.camp
         this.dataCamp = a;
         this.dataPagos = res.payments;
-        this.dataPagos.length()>0? this.pagos =true:this.pagos=false;   
+        console.log(this.dataPagos,'aqui la info');
+        
+        this.dataPagos.length> 0 ? this.pagos =true:this.pagos=false;   
     })
     this.camps.getPreguntas(Number(this.idCamp)).subscribe((res:any)=>{
       console.log(res,'preguntas');
