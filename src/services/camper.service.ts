@@ -53,6 +53,10 @@ export class CamperService {
     return this.http.get('http://142.93.12.234:8000/camper_profile/' + camper_id )
    }
 
+   getCapsT(camper_id :any){
+    return this.http.get('http://142.93.12.234:8000/camper_dashboard/' + camper_id )
+   }
+
   
 
 }

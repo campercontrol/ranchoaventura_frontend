@@ -44,9 +44,9 @@
     </div>
 
     <!--campamentos a los que asisitire-->
-    <div class="card">
+    <div >
 
-        <div class="card border border-info border-3">
+        <div class="card border border-info border-1">
               <div class="bg-info p-2">
                 <h1 class="card-title text-white">Campamentos Disponibles</h1>
       
@@ -139,7 +139,6 @@
       
                       </td>
                       <td>
-                        <img src="../../../assets/images/camp/pastel-cumpleaños.png" alt="" *ngIf="customer.cumple">
       
                        
                        {{customer.camp_end}}
@@ -170,224 +169,266 @@
 
 
 
-        <div class="bg-success text-white  rounded-top">
-            <p style="font-size: 20px; margin-left:30px; margin-top:5px ;" class="">Camps a los que asistiré </p>
-        </div>
-        <br>
-        <p-table #dt [value]="products" [rows]="10" 
-            [globalFilterFields]="['name','country.name','representative.name','status']"
-            [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [showCurrentPageReport]="true">
-          
-            <ng-template pTemplate="header">
-                <tr>
-                    
-                    <th pSortableColumn="camp">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
-                    <th pSortableColumn="sede">Sede <p-sortIcon field="sede"></p-sortIcon></th>
-                    <th pSortableColumn="inicio">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
-                    <th pSortableColumn="termino">Termino <p-sortIcon field="termino"></p-sortIcon></th>
-                    <th pSortableColumn="precio">Precio <p-sortIcon field="precio"></p-sortIcon></th>
-                    <th pSortableColumn="saldo">Saldo <p-sortIcon field="saldo"></p-sortIcon></th>
-
-                    <th></th>
-
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-product>
-                <tr>
-                    <td>{{product.camp}}</td>
-                    <td>{{product.sede}}</td>
-                    <td>{{product.inicio}}</td>
-                    <td>{{product.termino}}</td>
-                    <td>{{product.precio | currency:'USD'}}</td>
-                    <td>{{product.saldo | currency:'USD'}}</td>
-                    <td> <button class="btn btn-primary">ver detalles</button></td>
-
-                </tr>
-            </ng-template>
+        <div class="card border border-info border-1">
             
-        </p-table>
+            <div class="bg-info p-2">
+                <h1 class="card-title text-white">Camps a los que asistiré </h1>
+      
+              </div>
+              <br>
+              <p-table #dt [value]="subscribe_camps" [rows]="10" 
+                  [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
+                  [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
+                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                  [showCurrentPageReport]="true">
+                
+                  <ng-template pTemplate="header">
+                      <tr>
+                          
+                          <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
+                          <th pSortableColumn="location_name">Sede <p-sortIcon field="sede"></p-sortIcon></th>
+                          <th pSortableColumn=" camp_end">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
+                          <th pSortableColumn="camp_start">Termino <p-sortIcon field="termino"></p-sortIcon></th>
+                          <th pSortableColumn="public_price">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+      
+                          <th></th>
+      
+                      </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-customer>
+                      <tr>
+                          <td >
+                              {{customer.camp_name}}
+                            </td>
+                            <td> 
+                              {{customer.location_name}}
+                            </td>
+                            <td>
+            
+                             {{customer.camp_end}}
+            
+            
+                            </td>
+                            <td>
+            
+                             
+                             {{customer.camp_start}}
+            
+                            </td>
+                            <td>
+                             {{customer.public_price}}
+            
+                            </td>
+                         
+            
+                            <td>
+                              <button class="btn btn-primary" class="btn btn-primary">ver campamento</button>
+                            </td>
+      
+                      </tr>
+                  </ng-template>
+                  
+              </p-table>
+        </div>
+
+        <div class="card border border-secondary border-1">
+            
+            <div class="bg-secondary p-2">
+                <h1 class="card-title text-white">Campamentos Escolares Disponibles </h1>
+      
+              </div>
+              <br>
+              <p-table #dt [value]="summer_school_camps" [rows]="10" 
+                  [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
+                  [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
+                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                  [showCurrentPageReport]="true">
+                
+                  <ng-template pTemplate="header">
+                      <tr>
+                          
+                          <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
+                          <th pSortableColumn="location_name">Sede <p-sortIcon field="sede"></p-sortIcon></th>
+                          <th pSortableColumn=" camp_end">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
+                          <th pSortableColumn="camp_start">Termino <p-sortIcon field="termino"></p-sortIcon></th>
+                          <th pSortableColumn="public_price">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+      
+                          <th></th>
+      
+                      </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-customer>
+                      <tr>
+                          <td >
+                              {{customer.camp_name}}
+                            </td>
+                            <td> 
+                              {{customer.location_name}}
+                            </td>
+                            <td>
+            
+                             {{customer.camp_end}}
+            
+            
+                            </td>
+                            <td>
+            
+                             
+                             {{customer.camp_start}}
+            
+                            </td>
+                            <td>
+                             {{customer.public_price}}
+            
+                            </td>
+                         
+            
+                            <td>
+                              <button class="btn btn-primary" class="btn btn-primary">ver campamento</button>
+                            </td>
+      
+                      </tr>
+                  </ng-template>
+                  
+              </p-table>
+        </div>
+
+        <div class="card border border-success border-1">
+            
+            <div class="bg-success p-2">
+                <h1 class="card-title text-white">Camps a los que asisti  </h1>
+      
+              </div>
+              <br>
+              <p-table #dt [value]="passed_camps" [rows]="10" 
+                  [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
+                  [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
+                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                  [showCurrentPageReport]="true">
+                
+                  <ng-template pTemplate="header">
+                      <tr>
+                          
+                          <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
+                          <th pSortableColumn="location_name">Sede <p-sortIcon field="sede"></p-sortIcon></th>
+                          <th pSortableColumn=" camp_end">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
+                          <th pSortableColumn="camp_start">Termino <p-sortIcon field="termino"></p-sortIcon></th>
+                          <th pSortableColumn="public_price">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+      
+                          <th></th>
+      
+                      </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-customer>
+                      <tr>
+                          <td >
+                              {{customer.camp_name}}
+                            </td>
+                            <td> 
+                              {{customer.location_name}}
+                            </td>
+                            <td>
+            
+                             {{customer.camp_end}}
+            
+            
+                            </td>
+                            <td>
+            
+                             
+                             {{customer.camp_start}}
+            
+                            </td>
+                            <td>
+                             {{customer.public_price}}
+            
+                            </td>
+                         
+            
+                            <td>
+                              <button class="btn btn-primary" class="btn btn-primary">ver campamento</button>
+                            </td>
+      
+                      </tr>
+                  </ng-template>
+                  
+              </p-table>
+        </div>
+        <div class="card border border-danger border-1">
+            
+            <div class="bg-danger p-2">
+                <h1 class="card-title text-white">Campamentos Cancelados </h1>
+      
+              </div>
+              <br>
+              <p-table #dt [value]="cancelled_camps" [rows]="10" 
+                  [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
+                  [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
+                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                  [showCurrentPageReport]="true">
+                
+                  <ng-template pTemplate="header">
+                      <tr>
+                          
+                          <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
+                          <th pSortableColumn="location_name">Sede <p-sortIcon field="sede"></p-sortIcon></th>
+                          <th pSortableColumn=" camp_end">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
+                          <th pSortableColumn="camp_start">Termino <p-sortIcon field="termino"></p-sortIcon></th>
+                          <th pSortableColumn="public_price">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+      
+                          <th></th>
+      
+                      </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-customer>
+                      <tr>
+                          <td >
+                              {{customer.camp_name}}
+                            </td>
+                            <td> 
+                              {{customer.location_name}}
+                            </td>
+                            <td>
+            
+                             {{customer.camp_end}}
+            
+            
+                            </td>
+                            <td>
+            
+                             
+                             {{customer.camp_start}}
+            
+                            </td>
+                            <td>
+                             {{customer.public_price}}
+            
+                            </td>
+                         
+            
+                            <td>
+                              <button class="btn btn-primary" class="btn btn-primary">ver campamento</button>
+                            </td>
+      
+                      </tr>
+                  </ng-template>
+                  
+              </p-table>
+        </div>
+       
 
     </div>
     
     <!--campamentos disponible Escolares -->
-    <div class="card">
-        <div class="bg-primary text-white  rounded-top">
-            <p style="font-size: 20px; margin-left:30px; margin-top:5px ;" class="">Campamentos Disponibles </p>
-        </div>
-        <br>
-        <p-table #dt [value]="products" [rows]="10" 
-            [globalFilterFields]="['name','country.name','representative.name','status']"
-            [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [showCurrentPageReport]="true">
-          
-            <ng-template pTemplate="header">
-                <tr>
-                    <th style="width: 20px">
-                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                    </th>
-                    <th pSortableColumn="camp">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
-                    <th pSortableColumn="sede">Sede <p-sortIcon field="sede"></p-sortIcon></th>
-                    <th pSortableColumn="inicio">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
-                    <th pSortableColumn="termino">Termino <p-sortIcon field="termino"></p-sortIcon></th>
-                    <th pSortableColumn="precio">Precio <p-sortIcon field="precio"></p-sortIcon></th>
-                    <th></th>
-
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-product>
-                <tr>
-                    <td>
-                        <p-tableCheckbox [value]="product"></p-tableCheckbox>
-                    </td>
-                    <td>{{product.camp}}</td>
-                    <td>{{product.sede}}</td>
-                    <td>{{product.inicio}}</td>
-                    <td>{{product.termino}}</td>
-                    <td>{{product.precio | currency:'USD'}}</td>
-                    <td> <button class="btn btn-primary">ver detalles</button></td>
-
-                </tr>
-            </ng-template>
-            
-        </p-table>
-
-    </div>
+   
      <!--campamentos disponible inscribir -->
-     <div class="card">
-        <div class="bg-secondary text-white  rounded-top">
-            <p style="font-size: 20px; margin-left:30px; margin-top:5px ;" class="">Campamentos Escolares  Disponibles </p>
-        </div>
-        <br>
-        <p-table #dt [value]="products" [rows]="10" 
-            [globalFilterFields]="['name','country.name','representative.name','status']"
-            [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [showCurrentPageReport]="true">
-          
-            <ng-template pTemplate="header">
-                <tr>
-                    <th style="width: 20px">
-                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                    </th>
-                    <th pSortableColumn="camp">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
-                    <th pSortableColumn="sede">Sede <p-sortIcon field="sede"></p-sortIcon></th>
-                    <th pSortableColumn="inicio">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
-                    <th pSortableColumn="termino">Termino <p-sortIcon field="termino"></p-sortIcon></th>
-                    <th pSortableColumn="precio">Precio <p-sortIcon field="precio"></p-sortIcon></th>
-                    <th></th>
-
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-product>
-                <tr>
-                    <td>
-                        <p-tableCheckbox [value]="product"></p-tableCheckbox>
-                    </td>
-                    <td>{{product.camp}}</td>
-                    <td>{{product.sede}}</td>
-                    <td>{{product.inicio}}</td>
-                    <td>{{product.termino}}</td>
-                    <td>{{product.precio | currency:'USD'}}</td>
-                    <td> <button class="btn btn-primary">ver detalles</button></td>
-
-                </tr>
-            </ng-template>
-            
-        </p-table>
-
-    </div>
+    
 
     <!--campamentos a los que asisti -->
-    <div class="card">
-        <div class="back-color text-white  rounded-top">
-            <p style="font-size: 20px; margin-left:30px; margin-top:5px ;" class="">Camps a los que asisti </p>
-        </div>
-        <br>
-        <p-table #dt [value]="products" [rows]="10" 
-            [globalFilterFields]="['name','country.name','representative.name','status']"
-            [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [showCurrentPageReport]="true">
-          
-            <ng-template pTemplate="header">
-                <tr>
-                    
-                    <th pSortableColumn="camp">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
-                    <th pSortableColumn="sede">Sede <p-sortIcon field="sede"></p-sortIcon></th>
-                    <th pSortableColumn="inicio">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
-                    <th pSortableColumn="termino">Termino <p-sortIcon field="termino"></p-sortIcon></th>
-                    <th pSortableColumn="precio">Precio <p-sortIcon field="precio"></p-sortIcon></th>
-                    <th pSortableColumn="saldo">Saldo <p-sortIcon field="saldo"></p-sortIcon></th>
-
-                    <th></th>
-
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-product>
-                <tr>
-                    <td>{{product.camp}}</td>
-                    <td>{{product.sede}}</td>
-                    <td>{{product.inicio}}</td>
-                    <td>{{product.termino}}</td>
-                    <td>{{product.precio | currency:'USD'}}</td>
-                    <td>{{product.saldo | currency:'USD'}}</td>
-                    <td> <button class="btn btn-primary">ver detalles</button></td>
-
-                </tr>
-            </ng-template>
-            
-        </p-table>
-
-    </div>
+   
 
     <!--campamentos cancelados -->
-    <div class="card">
-        <div class="bg-danger text-white  rounded-top">
-            <p style="font-size: 20px; margin-left:30px; margin-top:5px ;" class="">Campamentos Cancelados </p>
-        </div>
-        <br>
-        <p-table #dt [value]="products" [rows]="10" 
-            [globalFilterFields]="['name','country.name','representative.name','status']"
-            [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [showCurrentPageReport]="true">
-          
-            <ng-template pTemplate="header">
-                <tr>
-                    <th style="width: 20px">
-                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                    </th>
-                    <th pSortableColumn="camp">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
-                    <th pSortableColumn="sede">Sede <p-sortIcon field="sede"></p-sortIcon></th>
-                    <th pSortableColumn="inicio">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
-                    <th pSortableColumn="termino">Termino <p-sortIcon field="termino"></p-sortIcon></th>
-                    <th pSortableColumn="precio">Precio <p-sortIcon field="precio"></p-sortIcon></th>
-                    <th></th>
-
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-product>
-                <tr>
-                    <td>
-                        <p-tableCheckbox [value]="product"></p-tableCheckbox>
-                    </td>
-                    <td>{{product.camp}}</td>
-                    <td>{{product.sede}}</td>
-                    <td>{{product.inicio}}</td>
-                    <td>{{product.termino}}</td>
-                    <td>{{product.precio | currency:'USD'}}</td>
-                    <td>{{product.saldo | currency:'USD'}}</td>                  
-                    <td> <button class="btn btn-primary">ver detalles</button></td>
-
-                </tr>
-            </ng-template>
-            
-        </p-table>
-
-    </div>
+   
 
 
 

@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CamperService } from 'src/services/camper.service';
 import { CampsService } from 'src/services/camps.service';
 
 
@@ -22,6 +23,10 @@ export class ParentsInscripcionCampComponent implements OnInit {
     loading: boolean = false;
     customer:any =[];
     idCamps:any[]=[];
+    summer_school_camps:any[] = [];
+    subscribe_camps:any[] = [];
+    cancelled_camps:any[] = [];
+    passed_camps:any[] = [];
     id= 0;
     @ViewChild('centerDataModal') content:ElementRef;
 
@@ -67,7 +72,7 @@ export class ParentsInscripcionCampComponent implements OnInit {
       "created_at": "2023-04-19T21:17:13.053402+00:00"
     }]
 
-  constructor(private camps: CampsService,private routesA:ActivatedRoute, private modalService:NgbModal) {
+  constructor(private camps: CampsService,private routesA:ActivatedRoute, private modalService:NgbModal, private info:CamperService) {
     this.routesA.params.subscribe((params)=>{
       this.id = params['id']
     })
@@ -147,13 +152,62 @@ getCampsDIs(){
 
       let fechaI = item.camp_start
       fechaI = fechaI.split("T");
-      item.camp_start = fechaI[0];
-        
-          
+      item.camp_start = fechaI[0];          
      })
       
     }
   )
+  this.info.getCapsT(1).subscribe((res:any)=>{
+    this.summer_school_camps= res.summer_school_camps;
+
+    this.summer_school_camps.map((item:any)=>{
+      let fecha = item.camp_end
+      fecha = fecha.split("T");
+      item.camp_end = fecha[0];
+
+      let fechaI = item.camp_start
+      fechaI = fechaI.split("T");
+      item.camp_start = fechaI[0];          
+     });
+
+
+    this.subscribe_camps= res.subscribe_camps;
+
+    this.subscribe_camps.map((item:any)=>{
+      let fecha = item.camp_end
+      fecha = fecha.split("T");
+      item.camp_end = fecha[0];
+
+      let fechaI = item.camp_start
+      fechaI = fechaI.split("T");
+      item.camp_start = fechaI[0];          
+     });
+
+    this.cancelled_camps= res.cancelled_camps;
+
+
+    this.cancelled_camps.map((item:any)=>{
+      let fecha = item.camp_end
+      fecha = fecha.split("T");
+      item.camp_end = fecha[0];
+
+      let fechaI = item.camp_start
+      fechaI = fechaI.split("T");
+      item.camp_start = fechaI[0];          
+     });
+
+    this.passed_camps= res.passed_camps;
+    this.passed_camps.map((item:any)=>{
+      let fecha = item.camp_end
+      fecha = fecha.split("T");
+      item.camp_end = fecha[0];
+
+      let fechaI = item.camp_start
+      fechaI = fechaI.split("T");
+      item.camp_start = fechaI[0];          
+     });
+    
+  })
 }
 
 
