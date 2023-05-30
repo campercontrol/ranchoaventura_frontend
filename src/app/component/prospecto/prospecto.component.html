@@ -15,7 +15,7 @@
                         <div class="mt-5">
                            <form>
                             <div class="row mb-4">
-                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label" >correo electrónico*</label>
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label" (change)="validatorsEmail()" >correo electrónico*</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="horizontal-firstname-input" [(ngModel)]="correo" name="correo"   (change)="validatorsEmail()" >
                                 </div>
@@ -186,6 +186,9 @@
                             </label>
 
                         </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="erroA">
+                           No se pudo registrar como prospecto intentalo de nuevo
+                          </div>
                     </div>
                 
 

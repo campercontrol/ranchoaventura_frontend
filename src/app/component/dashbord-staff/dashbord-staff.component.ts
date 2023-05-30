@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CampsService } from 'src/services/camps.service';
+import { StaffService } from 'src/services/staff.service';
 
 @Component({
   selector: 'app-dashbord-staff',
@@ -11,7 +12,7 @@ export class DashbordStaffComponent implements OnInit {
 
   product: any;
 
-
+  spiner= false;
   submitted: boolean;
   selectedCustomers: any[];
   loading: boolean = false;
@@ -23,7 +24,7 @@ export class DashbordStaffComponent implements OnInit {
   aCamp:any = [];// apuntado a camps
   ICamp:any = []; // confirmacion de camps
 
-  constructor(private camps: CampsService) {
+  constructor(private camps: CampsService, private staff:StaffService) {
     this.getCamps();
    }
 
@@ -31,12 +32,24 @@ export class DashbordStaffComponent implements OnInit {
   }
 
   getCamps(){
+    this.spiner=true
     this.camps.getDashbord(23).subscribe((res:any)=>{
       console.log(res.data);
       this.aCamp =res.data.next_camps;
       this.pCamp = res.data.available_camps;
       this.ICamp =  res.data.staff_camps;       
+      this.spiner= false;
     })
+  }
+
+  cancelar(id){
+      this.staff.cancelarParticipacio(id).subscribe((res)=>{
+        this.getCamps();
+
+      },erro=>{
+        console.log(erro);
+        
+      })
   }
   inscribirCamp(a){
     let idCamp = a;

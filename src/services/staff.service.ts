@@ -23,6 +23,10 @@ export class StaffService {
     return this.http.patch('http://142.93.12.234:8000/accept_prospect/'+id,{})
 
   }
+  cancelarParticipacio(id){
+    return this.http.delete('http://142.93.12.234:8000/staff_unsubscribe/'+id)
+
+  }
   
 
 }

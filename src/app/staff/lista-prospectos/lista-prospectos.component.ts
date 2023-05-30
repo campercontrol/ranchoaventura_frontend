@@ -19,12 +19,15 @@ export class ListaProspectosComponent implements OnInit {
   customer:any =[];
   idCamps:any[]=[];
   id= 0;
+  cargando:boolean=false;
   prospectosArray:any=[]
   constructor(private prospectos: StaffService,private modalService: NgbModal) {
 
    }
 
   ngOnInit(): void {
+    this.cargando=false;
+
     this.getProspecto();
   }
 
@@ -32,24 +35,19 @@ export class ListaProspectosComponent implements OnInit {
 
 
   filterCamps(){
- 
     this.selectedCustomers.forEach((item)=>{
        
-        this.setCamp(item.id)
+        this.setCamp(item.id);
     }) ;
-    this.getProspecto();
-
-   this.modalService.dismissAll()
-  
-    
+    this.cargando=true;
+   this.modalService.dismissAll();  
   }
   
   
   setCamp(a){
 
     this.prospectos.aceptarProspectos(a).subscribe((res:any)=>{
-      console.log(res);
-      
+      this.getProspecto(); 
     })
   }
 
@@ -75,5 +73,7 @@ export class ListaProspectosComponent implements OnInit {
       //console.log(this.prospectosArray);
       
     });
+    this.cargando=false;
+
   }
 }

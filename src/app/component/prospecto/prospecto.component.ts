@@ -24,6 +24,7 @@ export class ProspectoComponent implements OnInit {
   school: any = [];
   vaccines: any = [];
   foto: any;
+  erroA:any=false;
   spinner: boolean = false;
   photoSelect: string | ArrayBuffer;
 
@@ -104,15 +105,24 @@ export class ProspectoComponent implements OnInit {
     }
     
     this.staff.prospectos(a).subscribe((res:any)=>{
-      if(res.succes = 200){
+      
         this.spinner=false;
         this.centerModal();
         this.formUser.reset();
         this.contrasena="";
         this.correo="";
+        this.confirmarCorreo="";
+        this.confirmarContrasena=""
+        this.estadoCorreo=false;
+        this.estadoContrasena=false;
+      },error=>{
+        this.erroA=true;
+        this.spinner=false;
 
-      }
-    })
+        setTimeout(() => {
+          this.erroA=false;
+        }, 10000);
+      })
     
    
   }
@@ -126,6 +136,7 @@ export class ProspectoComponent implements OnInit {
   validatorsEmail(){
     this.estadoEmail = this.correoVal.test(this.correo);
     console.log(this.estadoEmail)
+    this.equalsEmail()
 
   }
   equalsEmail(){
@@ -147,6 +158,7 @@ export class ProspectoComponent implements OnInit {
   }
   validarContrasena(){
     this.estadoContrasena = this.regex.test(this.contrasena)  
+    this.equalsCon();
     console.log(this.estadoContrasena)
   }
 
