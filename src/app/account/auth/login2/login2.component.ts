@@ -79,14 +79,16 @@ export class Login2Component implements OnInit {
           });
       } else {
         this.authFackservice.login(this.f.email.value, this.f.password.value)
-          .pipe(first())
-          .subscribe(
+          .then(
             data => {
               this.router.navigate(['/dashboard']);
             },
             error => {
               this.error = error ? error : '';
-            });
+            }),error=>{
+              console.log(error);
+              
+            };
       }
     }
   }
