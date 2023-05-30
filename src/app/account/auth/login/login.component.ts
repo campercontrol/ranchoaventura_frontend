@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { environment } from '../../../../environments/environment';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,18 @@ export class LoginComponent implements OnInit {
   // set the currenr year
   year: number = new Date().getFullYear();
   alert: boolean= false;
-
+  carouselOption: OwlOptions = {
+    items: 1,
+    loop: false,
+    margin: 0,
+    nav: false,
+    dots: true,
+    responsive: {
+      680: {
+        items: 1
+      },
+    }
+  }
   // tslint:disable-next-line: max-line-length
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
     private authFackservice: AuthfakeauthenticationService) { }

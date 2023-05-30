@@ -56,10 +56,11 @@
     }
 
     .bg-overlay{
-        background: url("../../../images/bg-auth-overlay.png");
+        background: url("../../../images/camp/login.jpg");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
+        opacity: 1;
     }
 }
 
