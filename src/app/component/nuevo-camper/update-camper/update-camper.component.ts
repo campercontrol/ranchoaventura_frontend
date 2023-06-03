@@ -181,7 +181,7 @@ export class UpdateCamperComponent implements OnInit {
     }
     console.log(a);
     
-    this.catalogos.updateCamper(9,a).subscribe((res:any)=>{
+    this.catalogos.updateCamper(this.id,a).subscribe((res:any)=>{
         console.log(res);
         if(res.succes = 200){
           this.spinner=false;
