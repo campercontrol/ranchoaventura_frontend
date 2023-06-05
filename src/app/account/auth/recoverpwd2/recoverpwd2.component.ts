@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AuthenticationService } from '../../../core/services/auth.service';
 import { environment } from '../../../../environments/environment';
+import { LoginService } from 'src/services/login.service';
 
 @Component({
   selector: 'app-recoverpwd2',
@@ -22,7 +23,7 @@ export class Recoverpwd2Component implements OnInit {
    success = '';
    loading = false;
 
-   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService) { }
+   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private reset: LoginService) { }
 
   ngOnInit(): void {
     this.resetForm = this.formBuilder.group({
@@ -37,19 +38,12 @@ export class Recoverpwd2Component implements OnInit {
    * On submit form
    */
   onSubmit() {
-    this.success = '';
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.resetForm.invalid) {
-      return;
-    }
-    if (environment.defaultauth === 'firebase') {
-      this.authenticationService.resetPassword(this.f.email.value)
-        .catch(error => {
-          this.error = error ? error : '';
-        });
-    }
+    console.log(this.resetForm.value);
+    
+    this.reset.resetContrasena(this.resetForm.value).then((res)=>{
+      console.log(res);
+      
+    })
   }
 
   carouselOption: OwlOptions = {

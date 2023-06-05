@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   error = '';
   returnUrl: string;
+  passwordType= "password"
 
   // set the currenr year
   year: number = new Date().getFullYear();
@@ -80,6 +81,18 @@ export class LoginComponent implements OnInit {
       
     
   }
+
+  cambioTipo(){
+    if(this.passwordType =='password'){
+      this.passwordType = 'text';
+      
+    }else{
+      this.passwordType = 'password';
+
+    }
+  }
+
+ 
 
   link(){
     this.router.navigate(['parents/new-user'])

@@ -63,16 +63,37 @@ export class NewParentComponent implements OnInit {
                             Validators.pattern("^[0-9]*$"),
                             Validators.minLength(8), Validators.maxLength(10)]],
     terms:                   ['',[Validators.required,Validators.requiredTrue]],
-    user_id:                 [0]
+    user_id:                 [0],
+     password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]],
+    confirmPassword: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    confirmEmail: ['', [Validators.required,Validators.email]],
     
   },{
-    
+    validators: this.matchingFieldsValidator('password', 'confirmPassword', 'email', 'confirmEmail')
   })
   }
 
 
-   pass(){
+  matchingFieldsValidator(passwordField: string, confirmPasswordField: string, emailField: string, confirmEmailField: string) {
+    return (formGroup: FormGroup) => {
+      const password = formGroup.controls[passwordField];
+      const confirmPassword = formGroup.controls[confirmPasswordField];
+      const email = formGroup.controls[emailField];
+      const confirmEmail = formGroup.controls[confirmEmailField];
   
+      if (password.value !== confirmPassword.value) {
+        confirmPassword.setErrors({ passwordMismatch: true });
+      } else {
+        confirmPassword.setErrors(null);
+      }
+  
+      if (email.value !== confirmEmail.value) {
+        confirmEmail.setErrors({ emailMismatch: true });
+      } else {
+        confirmEmail.setErrors(null);
+      }
+    };
   }
 
   validarContrasena(){
@@ -98,6 +119,78 @@ export class NewParentComponent implements OnInit {
 
   }
 
+  gettutor_lastname_father(): boolean {
+    return this.formParent.get('tutor_lastname_father').invalid ;
+  }
+  getpassword(): boolean {
+    return this.formParent.get('password').invalid ;
+  }
+  getconfirmPassword(): boolean {
+    return this.formParent.get('confirmPassword').invalid ;
+  }
+  getemail(): boolean {
+    return this.formParent.get('email').invalid ;
+  }
+  getconfirmEmail(): boolean {
+    return this.formParent.get('confirmEmail').invalid;
+  }
+  
+  get tutor_cellphone(): FormControl {
+    return this.formParent.get('tutor_cellphone') as FormControl;
+  }
+  
+  get tutor_home_phone(): FormControl {
+    return this.formParent.get('tutor_home_phone') as FormControl;
+  }
+  
+  get contact_name(): FormControl {
+    return this.formParent.get('contact_name') as FormControl;
+  }
+  
+  get contact_lastname_mother(): FormControl {
+    return this.formParent.get('contact_lastname_mother') as FormControl;
+  }
+  
+  get contact_home_phone(): FormControl {
+    return this.formParent.get('contact_home_phone') as FormControl;
+  }
+  
+  get contact_email(): FormControl {
+    return this.formParent.get('contact_email') as FormControl;
+  }
+  
+  get tutor_name(): FormControl {
+    return this.formParent.get('tutor_name') as FormControl;
+  }
+  
+  get tutor_lastname_mother(): FormControl {
+    return this.formParent.get('tutor_lastname_mother') as FormControl;
+  }
+  
+  get tutor_work_phone(): FormControl {
+    return this.formParent.get('tutor_work_phone') as FormControl;
+  }
+  
+  get contact_lastname_father(): FormControl {
+    return this.formParent.get('contact_lastname_father') as FormControl;
+  }
+  
+  get contact_cellphone(): FormControl {
+    return this.formParent.get('contact_cellphone') as FormControl;
+  }
+  
+  get contact_work_phone(): FormControl {
+    return this.formParent.get('contact_work_phone') as FormControl;
+  }
+  
+  get terms(): FormControl {
+    return this.formParent.get('terms') as FormControl;
+  }
+  
+  get user_id(): FormControl {
+    return this.formParent.get('user_id') as FormControl;
+  }
+
   equalsEmail(){
     if( this.correo == this.confirmarCorreo){
       this.estadoCorreo = true;
@@ -111,10 +204,14 @@ export class NewParentComponent implements OnInit {
     this.spinner= true;
     let a = { 
       user:{
-        email:this.confirmarCorreo,
-        passw: this.confirmarContrasena,
+        email:this.formParent.get('email').value,
+        passw: this.formParent.get('password').value,
         role_id: 1,
-        is_superuser: false
+        "is_coordinator": true,
+        "is_admin": true,
+        "is_employee": true,
+        "is_superuser": true
+    
       },
 
       parent:this.formParent.value,
@@ -129,6 +226,11 @@ export class NewParentComponent implements OnInit {
       setTimeout(() => {
         this.router.navigate(['parents/new-camper']);
       }, 1000);
+    },error=>{
+      console.log(error);
+      this.spinner = false;
+      alert('No se pudo realizar su registro intentelo mas tarde ')
+      
     }
    )
    
