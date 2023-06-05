@@ -15,16 +15,17 @@
                                 <label for="horizontal-firstname-input"
                                     class="col-sm-3 col-form-label">Nombre(s)*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input"
+                                    <input type="text" class="form-control " id="horizontal-firstname-input"  [ngClass]="{'is-invalid':name.invalid == true,'is-valid':name.invalid == false}"
                                         formControlName="name" name="name">
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Apellido
                                     paterno*</label>
+                                   
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="horizontal-firstname-input"
-                                        formControlName="lastname_father" name="lastname_father">
+                                        formControlName="lastname_father" name="lastname_father" [ngClass]="{'is-invalid':lastname_father.invalid == true,'is-valid':lastname_father.invalid == false}">
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -32,7 +33,7 @@
                                     materno</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="horizontal-firstname-input"
-                                        formControlName="lastname_mother"  name="lastname_mother">
+                                        formControlName="lastname_mother"  name="lastname_mother" [ngClass]="{'is-invalid':lastname_mother.invalid == true,'is-valid':lastname_mother.invalid == false}">
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -41,14 +42,14 @@
                                     del acampador</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="horizontal-firstname-input"
-                                        formControlName="email"  name="email">
+                                        formControlName="email"  name="email" [ngClass]="{'is-invalid':email.invalid == true,'is-valid':email.invalid == false}">
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Genero</label>
 
                                 <div class="col-sm-9">
-                                    <ng-select [items]="genders" bindLabel="value" bindValue="id" formControlName="gender_id" style="width: 100%;">
+                                    <ng-select [items]="genders" bindLabel="value" bindValue="id" formControlName="gender_id" [ngClass]="{'is-invalid':gender_id.invalid == true,'is-valid':gender_id.invalid == false}" style="width: 100%;">
                                     </ng-select>
                                 </div>
                             </div>
@@ -59,7 +60,7 @@
                                 <div class=" control-label col-sm-9">
                                     
                                         <input type="date" class="form-control" placeholder="yyyy-mm-dd"
-                                        formControlName="birthday">
+                                        formControlName="birthday" [ngClass]="{'is-invalid':birthday.invalid == true,'is-valid':birthday.invalid == false}" style="width: 100%;">
                                    
                                 </div>
                             </div>
@@ -83,7 +84,15 @@
                                         recomendamos subas una foto reciente y de poco peso, máximo 3Mb debe ser formato jpg</label>
     
                                 </div>
-                               
+                                <div class="alert alert-danger" role="alert" *ngIf="photo.invalid">
+                                    Seleciona una Imagen Recuerda tiene que ser un imagen TIPO JPG
+                                  </div>
+
+                                  <div class="alert alert-secondary" role="alert" *ngIf="!photo.invalid">
+                                    Se Agrego corectamente
+                                  </div>
+                                
+                              
                             </div>
                         </div>
                     </div>
@@ -136,7 +145,12 @@
                                     placeholder="En caso de NO padecer ningun problema cardiaco, teclea la palabra NINGUNO"
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
-                                    formControlName = "heart_problems"></textarea>
+                                    formControlName = "heart_problems"
+                                    [ngClass]="{'text_area_invalid':heart_problems.invalid == true,'text_area_valid':heart_problems.invalid == false}" 
+                                    ></textarea>
+                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="heart_problems.invalid">
+                                        Campo requerido
+                                       </div>
 
                             </div>
                             <div class="container-medico mt-5">
@@ -145,7 +159,12 @@
                                     placeholder="En caso de NO haber tenido o tener cirugías, fracturas y/o esguinces que le impidan realizar actividades, teclea la palabra NINGUNA"
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
-                                    formControlName = "prevent_activities"></textarea>
+                                    formControlName = "prevent_activities"
+                                    [ngClass]="{'is-invalid':prevent_activities.invalid == true,'is-valid':prevent_activities.invalid == false}" 
+                                    ></textarea>
+                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="prevent_activities.invalid">
+                                        Campo requerido
+                                       </div>
 
                             </div>
 
@@ -155,7 +174,12 @@
                                     placeholder="En caso de NO padecer alguna enfermedad, teclea la palabra NINGUNO"
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
-                                    formControlName = "affliction"></textarea>
+                                    formControlName = "affliction"
+                                    [ngClass]="{'is-invalid':affliction.invalid == true,'is-valid':affliction.invalid == false}" 
+                                    ></textarea>
+                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="affliction.invalid">
+                                        Campo requerido
+                                       </div>
 
                             </div>
 
@@ -186,7 +210,12 @@
                                     placeholder="En caso de que el acampador no padezca de alteraciones nocturnas, teclea la palabra NINGUNA"
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
-                                    formControlName="nocturnal_disorders"></textarea>
+                                    formControlName="nocturnal_disorders"
+                                    [ngClass]="{'is-invalid':affliction.invalid == true,'is-valid':affliction.invalid == false}" 
+                                    ></textarea>
+                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="nocturnal_disorders.invalid">
+                                        Campo requerido
+                                       </div>
 
                             </div>
                             <div class="container-medico mt-5">
@@ -195,7 +224,12 @@
                                     placeholder="En caso de que el acampador no padezca de fobias, teclea la palabra NINGUNO"
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
-                                    formControlName="phobias"></textarea>
+                                    formControlName="phobias"
+                                    [ngClass]="{'is-invalid':phobias.invalid == true,'is-valid':phobias.invalid == false}" 
+                                    ></textarea>
+                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="phobias.invalid">
+                                        Campo requerido
+                                       </div>
 
                             </div>
 
@@ -205,7 +239,12 @@
                                     placeholder="En caso de NO estar en ningun tratamiento psicologico o psiquiatrico, teclea la palabra NINGUNO"
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
-                                    formControlName="psicology_treatments"></textarea>
+                                    formControlName="psicology_treatments"
+                                    [ngClass]="{'is-invalid':psicology_treatments.invalid == true,'is-valid':psicology_treatments.invalid == false}" 
+                                    ></textarea>
+                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="psicology_treatments.invalid">
+                                        Campo requerido
+                                       </div>
 
                             </div>
 
@@ -228,6 +267,9 @@
                                     </div>
 
                                 </div>
+                                <div class="alert alert-danger mt-2" role="alert" *ngIf="can_swim.invalid">
+                                   Campo requerido
+                                  </div>
                             </div>
 
                             <div class="alert alert-warning">
@@ -274,14 +316,18 @@
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Numero de
                                     póliza</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "insurance_number">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "insurance_number"
+                                    [ngClass]="{'is-invalid':insurance_number.invalid == true,'is-valid':insurance_number.invalid == false}" 
+                                    >
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Número de
                                     seguridad social </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="security_social_number">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="security_social_number"
+                                    [ngClass]="{'is-invalid':security_social_number.invalid == true,'is-valid':security_social_number.invalid == false}" 
+                                    >
                                 </div>
                             </div>
                             <div class="alert alert-success mt-3">
@@ -312,6 +358,9 @@
                                     <ng-select [items]="school" bindLabel="name" bindValue="id" formControlName="school_id" name = "school_id">
                                     </ng-select>
                                 </div>
+                                <div class="alert alert-danger mt-2" role="alert" *ngIf="school_id.invalid">
+                                    Campo requerido
+                                   </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Otra
@@ -319,6 +368,7 @@
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="school_other">
                                 </div>
+                               
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Grado
@@ -327,6 +377,9 @@
                                     <ng-select [items]="grades" bindLabel="value" bindValue="id" formControlName="grade">
                                     </ng-select>
                                 </div>
+                                <div class="alert alert-danger mt-2" role="alert" *ngIf="grade.invalid">
+                                                                             Campo requerido
+                                  </div>
                             </div>
                         </div>
                     </div>
@@ -344,14 +397,20 @@
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Estatura</label>
                                 <div class="control-label col-sm-9">
                                     <input type="number" class="form-control" id="horizontal-firstname-input"
-                                     formControlName="height">
+                                     formControlName="height"
+                                     [ngClass]="{'is-invalid':height.invalid == true,'is-valid':height.invalid == false}" 
+
+                                     >
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Peso</label>
                                 <div class="col-sm-9">
                                     <input type="number" class="form-control" id="horizontal-firstname-input"
-                                         formControlName="weight">
+                                         formControlName="weight"
+                                         [ngClass]="{'is-invalid':weight.invalid == true,'is-valid':weight.invalid == false}" 
+
+                                         >
                                 </div>
                             </div>
                             
@@ -457,6 +516,9 @@
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName = "drugs"></textarea>
+                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="drugs.invalid">
+                                                                                 Campo requerido
+                                      </div>
 
                             </div>
 
@@ -468,6 +530,9 @@
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName = "drug_allergies"></textarea>
+                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="drug_allergies.invalid">
+                                                                                 Campo requerido
+                                      </div>
 
                             </div>
                             <div class="container-medico mt-5" placement="top"
@@ -478,6 +543,10 @@
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName = "other_allergies"></textarea>
+                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="other_allergies.invalid">
+                                                                                 Campo requerido
+                                      </div>
+
 
                             </div>
                             <div class="container-fluid flex-container">
@@ -530,6 +599,10 @@
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName ="prohibited_foods"></textarea>
 
+                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="prohibited_foods.invalid">
+                                                                                 Campo requerido
+                                      </div>
+
                             </div>
 
                         </div>
@@ -558,7 +631,8 @@
                                 </label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="horizontal-firstname-input"
-                                    formControlName = "contact_name">
+                                    [ngClass]="{'is-invalid':contact_name.invalid == true,'is-valid':contact_name.invalid == false}" 
+                                    >
                                 </div>
                             </div>
 
@@ -567,7 +641,9 @@
                                     contacto* </label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="horizontal-firstname-input"
-                                    formControlName = "contact_relation">
+                                    formControlName = "contact_relation"
+                                    [ngClass]="{'is-invalid':contact_relation.invalid == true,'is-valid':contact_relation.invalid == false}" 
+                                    >
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -576,7 +652,9 @@
                                     contacto* </label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="horizontal-firstname-input"
-                                    formControlName = "contact_cellphone">
+                                    formControlName = "contact_cellphone"
+                                    [ngClass]="{'is-invalid':contact_cellphone.invalid == true,'is-valid':contact_cellphone.invalid == false}" 
+                                    >
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -584,7 +662,9 @@
                                     de
                                     contacto*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "contact_homephone">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "contact_homephone"
+                                    [ngClass]="{'is-invalid':contact_homephone.invalid == true,'is-valid':contact_homephone.invalid == false}" 
+                                    >
                                 </div>
                             </div>
                         </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Options } from 'ng5-slider';
 import { CamperService } from 'src/services/camper.service';
-import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 
 
@@ -19,7 +19,7 @@ export class CamperNuevoComponent implements OnInit {
     showSelectionBar: true
   };
   visibleSelection=0;
-
+  statusImg = false;
   blood_types:any = [];
   food_restrictions:any = [];
   genders:any = [];
@@ -72,8 +72,8 @@ export class CamperNuevoComponent implements OnInit {
       photo:["",[Validators.required]],
       gender_id:[0,[Validators.required]],
       birthday:["",[Validators.required]],
-      height:[0,[Validators.required]],
-      weight:[0,[Validators.required]],
+      height:[0,[Validators.required,Validators.min(0.20)]],
+      weight:[0,[Validators.required,Validators.min(0.20)]],
       grade:[0,[Validators.required]],
       school_id:[0,[Validators.required]],
       school_other:["",],
@@ -107,7 +107,149 @@ export class CamperNuevoComponent implements OnInit {
     
   }
 
+  get name(){
+    return this.formUser.get('name');
+  }
+
+  get lastname_father()  {
+    return this.formUser.get('lastname_father');
+  }
   
+  get lastname_mother() {
+    return this.formUser.get('lastname_mother');
+  }
+  
+  get photo() {
+    return this.formUser.get('photo');
+  }
+  
+  get gender_id() {
+    return this.formUser.get('gender_id');
+  }
+  
+  get birthday() {
+    return this.formUser.get('birthday');
+  }
+  
+  get height() {
+    return this.formUser.get('height');
+  }
+  
+  get weight() {
+    return this.formUser.get('weight')  ;
+  }
+  
+  get grade() {
+    return this.formUser.get('grade')  ;
+  }
+  
+  get school_id() {
+    return this.formUser.get('school_id')  ;
+  }
+  
+  get school_other() {
+    return this.formUser.get('school_other')  ;
+  }
+  
+  get email() {
+    return this.formUser.get('email')  ;
+  }
+  
+  get can_swim() {
+    return this.formUser.get('can_swim')  ;
+  }
+  
+  get affliction() {
+    return this.formUser.get('affliction')  ;
+  }
+  
+  get blood_type() {
+    return this.formUser.get('blood_type')  ;
+  }
+  
+  get heart_problems() {
+    return this.formUser.get('heart_problems')  ;
+  }
+  
+  get psicology_treatments() {
+    return this.formUser.get('psicology_treatments')  ;
+  }
+  
+  get prevent_activities() {
+    return this.formUser.get('prevent_activities')  ;
+  }
+  
+  get drug_allergies() {
+    return this.formUser.get('drug_allergies')  ;
+  }
+  
+  get other_allergies() {
+    return this.formUser.get('other_allergies')  ;
+  }
+  
+  get nocturnal_disorders() {
+    return this.formUser.get('nocturnal_disorders')  ;
+  }
+  
+  get phobias() {
+    return this.formUser.get('phobias')  ;
+  }
+  
+  get drugs() {
+    return this.formUser.get('drugs')  ;
+  }
+  
+  get doctor_precall() {
+    return this.formUser.get('doctor_precall')  ;
+  }
+  
+  get prohibited_foods() {
+    return this.formUser.get('prohibited_foods')  ;
+  }
+  
+  get comments_admin() {
+    return this.formUser.get('comments_admin')  ;
+  }
+  
+  get insurance() {
+    return this.formUser.get('insurance')  ;
+  }
+  
+  get insurance_company() {
+    return this.formUser.get('insurance_company')  ;
+  }
+  
+  get insurance_number() {
+    return this.formUser.get('insurance_number')  ;
+  }
+  
+  get security_social_number() {
+    return this.formUser.get('security_social_number')  ;
+  }
+  
+  get contact_name() {
+    return this.formUser.get('contact_name')  ;
+  }
+  
+  get contact_relation() {
+    return this.formUser.get('contact_relation')  ;
+  }
+  
+  get contact_homephone() {
+    return this.formUser.get('contact_homephone')  ;
+  }
+  
+  get contact_cellphone() {
+    return this.formUser.get('contact_cellphone')  ;
+  }
+  
+  get record_id()  {
+    return this.formUser.get('record_id') ;
+  }
+  
+  get parent_id() {
+    return this.formUser.get('parent_id') ;
+  }
   subiendo(event: any) {
     const archivo = event.target.files[0];
 
@@ -119,13 +261,16 @@ export class CamperNuevoComponent implements OnInit {
       const formulario = new FormData();
       formulario.append('file',archivo)
       this.catalogos.setPhoto(formulario).subscribe((res: any) => {
+        
+
         console.log(res.path);
         this.formUser.patchValue({
           photo: res.path
         })
       },
         error => {
-          console.log(error)
+          console.log(error);
+          this.statusImg= true;
         })
     }
   }
