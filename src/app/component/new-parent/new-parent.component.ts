@@ -229,7 +229,7 @@ export class NewParentComponent implements OnInit {
     },error=>{
       console.log(error);
       this.spinner = false;
-      alert('No se pudo realizar su registro intentelo mas tarde ')
+      alert('No se pudo realizar su registro intentelo mas tarde ,ya sea por que ya el correo este registrado')
       
     }
    )

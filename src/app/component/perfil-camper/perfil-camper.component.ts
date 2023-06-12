@@ -142,7 +142,7 @@ export class PerfilCamperComponent implements OnInit {
       console.log(this.catalogosGenero);
 
 
-      this.vacunasACtivos = this.vacunas.filter(item => item.is_active == false);
+      this.vacunasACtivos = this.vacunas.filter(item => item.is_active == true);
 
       this.catalogoEsculea.map((item: any) => {
         if (item.id == this.infoCamp.school_id) {
