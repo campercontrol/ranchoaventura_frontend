@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CamperService } from 'src/services/camper.service';
 import { CampsService } from 'src/services/camps.service';
@@ -22,10 +22,11 @@ export class CampamentoComponent implements OnInit {
   cargosExtra:false;
   estatusPago:Boolean= false;
   pagos:boolean=false;
+  statusInscri:false;
 
 
 
-  constructor(private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal) { 
+  constructor(private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router) { 
     this.routesA.params.subscribe((params)=>{
       this.idCamp = params['camp'];
     //  console.log(this.idCamp);
@@ -38,21 +39,30 @@ export class CampamentoComponent implements OnInit {
     })
     this.hijos.informacionCampamento(Number(this.idCamper),Number(this.idCamp)).subscribe((res:any)=>{
       //console.log(res);
-      
-      let a :any=res.camp
+      console.log(res);
+        let a :any=res.camp
+        this.statusInscri = res.camper_subscribe;
         this.dataCamp = a;
         this.dataPagos = res.payments;
-        console.log(this.dataPagos,'aqui la info');
+        this.dataCamp.length> 0 ? this.pagos =true:this.pagos=false;   
+
+    //   console.log(this.dataPagos,'aqui la info');
         
-        this.dataPagos.length> 0 ? this.pagos =true:this.pagos=false;   
-    })
+       
+      },error=>{
+        this.getcamps()
+      })
+
+
+
     this.camps.getPreguntas(Number(this.idCamp)).subscribe((res:any)=>{
-      console.log(res,'preguntas');
-      this.PreguntasExtras = res.data
+    //  console.log(res,'preguntas');
+      this.PreguntasExtras = res.data;
+      this.statusInscri = false;
       
     })
     this.camps.getCargosExtras(Number(this.idCamp)).subscribe((res:any)=>{
-      console.log(res,'cargos extras');
+   //   console.log(res,'cargos extras');
       this.cargosExtras = res.data
       
     })
@@ -66,6 +76,24 @@ export class CampamentoComponent implements OnInit {
 		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' })
 		
 	}
+  getcamps(){
+    this.camps.getCamp(this.idCamp).subscribe((res:any)=>{
+    //  console.log(res.data);
+      this.dataCamp = res.data;
+      
+  //   console.log(this.dataPagos,'aqui la info');
+      
+      this.dataPagos.length> 0 ? this.pagos =true:this.pagos=false;   
+      
+    })
+
+  }
+  incio(){
+    this.router.navigate(['parents/registered-children'])
+  }
+  perfil(){
+    this.router.navigate(['/parents/camper/'+this.idCamper])
+  }
   saveRes(){
     this.PreguntasExtras[0];
     let res = {
@@ -97,6 +125,15 @@ export class CampamentoComponent implements OnInit {
       
     })
 
+  }
+  deletCamp(){
+    this.camps.deletCamp(this.idCamper,this.idCamp).subscribe((res:any)=>{
+      console.log(res);
+      alert ('se cancelo la inscripcion correctamente')
+    },error=>{
+      console.log(error);
+      
+    })
   }
 
 }

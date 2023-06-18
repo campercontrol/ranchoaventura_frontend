@@ -44,6 +44,8 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {FieldsetModule} from 'primeng/fieldset';
 import {PanelModule} from 'primeng/panel';
 import {DialogModule} from 'primeng/dialog';
+import {InputTextModule} from 'primeng/inputtext';
+
 
 
 
@@ -74,6 +76,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     InvoicesModule,
     HttpClientModule,
     ProjectsModule,
+    InputTextModule,
     UIModule,
     TasksModule,
     DialogModule,

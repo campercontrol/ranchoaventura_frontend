@@ -138,15 +138,13 @@ setCamp(a){
    )
 }
 getCampsDIs(){
-  this.camps.getCampsDisponibles(this.id).subscribe(
-    (res:any)=>{
-      console.log(res);
-      
-     this.customer = res.data;
-     console.log(this.customer);
-     
+ 
+  this.info.getCapsT(this.id).subscribe((res:any)=>{
+    console.log(res);
 
-     this.customer.map((item:any)=>{
+    this.customer= res.available_school_camps;
+
+    this.customer.map((item:any)=>{
       let fecha = item.camp_end
       fecha = fecha.split("T");
       item.camp_end = fecha[0];
@@ -154,12 +152,7 @@ getCampsDIs(){
       let fechaI = item.camp_start
       fechaI = fechaI.split("T");
       item.camp_start = fechaI[0];          
-     })
-      
-    }
-  )
-  this.info.getCapsT(1).subscribe((res:any)=>{
-    console.log(res);
+     });
     
     this.summer_school_camps= res.summer_school_camps;
 

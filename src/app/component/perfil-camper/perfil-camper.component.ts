@@ -116,7 +116,18 @@ export class PerfilCamperComponent implements OnInit {
   getInfo(){
     this.hijos.getPerfil(this.id).subscribe((res: any) => {
       console.log(res);
-      this.historialCaps = res.camper_subscribe_camps
+      let b = []
+      b=b.concat(res.camper_subscribe_camps);
+     b= b.concat(res.camper_cancelled_camps);
+     b= b.concat(res.camper_passed_camps);
+
+
+      this.historialCaps = b;
+      this.historialCaps.sort((x,y)=>{
+        x.camp_start - y.camp_start
+      })
+      
+      
       this.comenarios = res.camper_comments_parent
       console.log(this.comenarios);
 
@@ -126,7 +137,7 @@ export class PerfilCamperComponent implements OnInit {
       this.catalogoSangre = res.camper_info.blood_types;
       this.vacunas = res.camper_info.vaccines;
       this.catalogosComida = res.camper_info.food_restrictions;
-      this.catalogosComida = this.catalogosComida.filter(item => item.is_active == false);
+      this.catalogosComida = this.catalogosComida.filter(item => item.is_active == true);
       console.log(this.vacunas);
       this.parent = res.parent;
       this.nombreTutor = this.parent.tutor_name + " " + this.parent.tutor_lastname_father + "" + this.parent.tutor_lastname_mother;

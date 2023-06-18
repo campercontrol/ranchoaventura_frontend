@@ -109,7 +109,7 @@
                 <p class="fw-bold"> <i class="fas fa-map"> </i> Lugar del campamento:  </p>
               </div>
               <div>
-                <p> {{dataCamp.location_id}}</p>
+                <p> {{dataCamp.location}}</p>
               </div>
             </div>
             <div class="conatiner-info-camp">
@@ -132,11 +132,11 @@
             </div>
           </div>
             <div class="container-btn">
-              <button class="btn  btn-info" style="height:60px;">Inicio</button>
-              <button class="btn  btn-secondary" style="height:60px;">Perfil acampador</button>
-              <button class="btn  btn-success" style="height:60px;"(click)="open(content)">ver respuestas</button>
-              <button class="btn  btn-info" style="height:60px;" (click)="open(content2)">servicios adicionales</button>
-              <button class="btn  btn-danger" style="height:60px;">cancelar inscripcion</button>
+              <button class="btn  btn-info" style="height:60px;" (click)="incio()">Inicio</button>
+              <button class="btn  btn-secondary" style="height:60px;" (click)="perfil()">Perfil acampador</button>
+              <button class="btn  btn-success" style="height:60px;"(click)="open(content)" *ngIf="statusInscri">ver respuestas</button>
+              <button class="btn  btn-info" style="height:60px;" (click)="open(content2)" *ngIf="statusInscri">servicios adicionales</button>
+              <button class="btn  btn-danger" style="height:60px;" (click)="deletCamp()" *ngIf="statusInscri">cancelar inscripcion</button>
             </div>
 
         </div>

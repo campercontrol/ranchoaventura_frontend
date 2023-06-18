@@ -39,6 +39,8 @@ import { ProspectoComponent } from '../component/prospecto/prospecto.component';
 import { ListaProspectosComponent } from '../staff/lista-prospectos/lista-prospectos.component';
 import { DashbordStaffComponent } from '../component/dashbord-staff/dashbord-staff.component';
 import { ListaPuntosControlComponent } from '../component/lista-puntos-control/lista-puntos-control.component';
+import { CreateTrainingComponent } from '../component/create-training/create-training.component';
+import { TemporadaComponent } from '../component/temporada/temporada.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -60,6 +62,8 @@ const routes: Routes = [
   { path: 'staff/grouping', component: GroupingComponent},
   { path: 'consultation/camp',component:NuevaConsultaComponent},
   { path: 'parents/new-user',component:NewParentComponent},
+  { path: 'admi/temp', component: TemporadaComponent },
+
 
 
   {path: 'staff/trophies',component:TrofeosComponent},
@@ -76,10 +80,11 @@ const routes: Routes = [
 
   {path: 'staff/trainings',component:CapacitacionesComponent},
   {path: 'staff/trainings-events',component:CapacitacionesEventoComponent},
-  {path: 'staff/trainings-dashboard',component:ListaCapacitacionesComponent},
+  {path: 'staff/trainings-dashboard',component:CreateTrainingComponent},
   {path: 'staff/applicants',component:ListaProspectosComponent},
   {path: 'staff/dashboard',component:DashbordStaffComponent},
   {path: 'staff/checkpoint',component:ListaPuntosControlComponent},
+  
 
 
 
