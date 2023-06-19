@@ -53,6 +53,14 @@ td{
     justify-content: right;
 }
 
+.error{
+    background-color: rgb(243, 153, 153);  height: 100%;
+}
+.acierto{
+    background-color: rgb(130, 130, 236);  height: 100%; text-align: center;
+    border-right: 1px;
+}
+
 @media (max-width: 600px) {
     .container-btn{
         display: flex;

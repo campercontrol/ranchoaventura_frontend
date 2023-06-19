@@ -67,9 +67,9 @@
                     <h1 class="card-title text-white">Acampadores</h1>
                 </div>
                 <hr>
-                <div class=" scroll-y">
+                <div class=" scroll-y" style="margin:0 auto  ;width: 100%;" >
                   
-                    <div class="card-body">
+                    <div class="card-body" *ngIf="!delteStatus">
                         <div>
                             <div class="col text-end">
 
@@ -101,7 +101,7 @@
                                         <div  style="min-width: 70px; width: 240px; white-space: pre-line;" class="conatiner-th">
                                            <div> {{item.name}} </div>
                                          <div>{{item.chekpoint_date_esp}} <i class="bx bx-highlight" style="margin-left: 5px;"(click)="showDialog(item)"></i> </div> 
-                                     <div>  <span><i class="bx bxs-barcode p-1 bg-primary" style="color: white; font-size: 15px; margin-right: 4px;margin-top: 2px; border-radius: 2px;"></i> 1 de 5 </span>   </div>  
+                                     <div>  <span><i class="bx bxs-barcode p-1 bg-primary" style="color: white; font-size: 15px; margin-right: 4px;margin-top: 2px; border-radius: 2px;" (click)="showDialog2(item)"></i> <i class="bx bx-x p-1 bg-primary" style="color: white; font-size: 15px; margin-right: 4px;margin-top: 2px; border-radius: 2px;" (click)="delet(item)"></i>1 de 5 </span>   </div>  
                                         </div>
                                       
 
@@ -112,15 +112,23 @@
                             <ng-template pTemplate="body" let-customer>
                                 <tr class="p-selectable-row">
                                     <td>
-                                       {{customer.id}}
+                                       {{customer.camper_id}}
                                     </td>
 
                                     <td style="text-align: left; font-size: 10px;">
-                                        {{customer.name}}
+                                        {{customer.camper_name}}
                                     </td>
-                                    <td *ngFor="let item of columnas">
+                                    <td style="text-align: left; font-size: 10px;" *ngFor="let b  of customer.camps" [ngClass]="{'acierto':b.checkin,'error':!b.checkin}">
+                                        <div *ngIf="b.checkin"  style="">
+                                            {{b.checkin_date}}
+                                        </div>
+                                        <div *ngIf="!b.checkin" style="">
 
+                                        </div>
+                                       
+                                        
                                     </td>
+                                 
                                   
                                 </tr>
                             </ng-template>
@@ -130,6 +138,9 @@
                         </p-table>
 
                     </div>
+                    <div class="spinner-border text-primary p-2" role="status" *ngIf="delteStatus" style="margin: auto ;">
+                        <span  style="margin: auto ;"class="sr-only">Loading...</span>
+                      </div>
                 </div>
 
             </div>
@@ -137,8 +148,7 @@
     </div>
 </div>
 
-<p-button  icon="pi pi-external-link" label="Show"></p-button>
-<p-dialog header="Header" [(visible)]="visible" [style]="{width: '50vw'}">
+<p-dialog header="Editar" [(visible)]="visible" [style]="{width: '50vw'}">
     <div class="container-fluid col-10 mt-4 mb-2">
         <div class="mb-3 row">
             <label for="inputPassword" class="col-sm-5 d-flex justify-content-end col-form-label"> Nombre
@@ -162,6 +172,43 @@
     <div class="display-flex p-2">
         <button class="btn btn-secondary" type="submit" (click)="cerrarModal()">Cancelar</button>
         <button class="btn btn-primary" type="submit" (click)="updadte()" *ngIf="!estatusUpdate">Actualizar </button >
+        <div class="spinner-border text-primary" role="status" *ngIf="estatusUpdate">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+    </div>
+</p-dialog>
+
+
+<p-dialog [header]="namePunto" [(visible)]="visibleCreate" [style]="{width: '50vw'}">
+    <div class="container-fluid col-10 mt-4 mb-2">
+        <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-5 d-flex justify-content-end col-form-label">Inscribir a punto de control:</label>
+            <div class="col-sm-7">
+                <input type="number" class="form-control d-flex justify-content-start" id="inputPassword" [(ngModel)]="inscribirPunto">
+            </div>
+
+            <div class="col-3">
+                <button class="btn btn-primary" style="width: 90%;" (click)="Inscribe()">Agregar</button>
+
+            </div>
+            
+        </div>
+
+        <div *ngIf="cuadroMensaje">
+            <div class="alert alert-primary" role="alert" *ngIf="mensajeerror">
+                Se agrego correctamente 
+              </div>
+
+              <div class="alert alert-danger" role="alert" *ngIf="mensajeActivo">
+                No se pudo agregar(id no se encontro)
+              </div>
+
+        </div>
+    </div>
+
+    <hr class="mb-4">
+    <div class="display-flex p-2">
+        <button class="btn btn-secondary" type="submit" (click)="cerrarModal2()">Cancelar</button>
         <div class="spinner-border text-primary" role="status" *ngIf="estatusUpdate">
             <span class="visually-hidden">Loading...</span>
           </div>

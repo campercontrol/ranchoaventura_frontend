@@ -23,6 +23,9 @@ export class PuntoControlComponent implements OnInit {
   updateName="";
   updateDate="";
   updateId=0;
+  delteStatus=false;
+  rowsCheck:any=[];
+  rows={}
 
   loading: boolean = false;
   displayMaximizable: boolean;
@@ -35,9 +38,17 @@ export class PuntoControlComponent implements OnInit {
   id: any;
   fecha:any;
   visible: boolean;
+  visibleCreate: boolean;
   estatusUpdate = false
   infoCamp: any ={};
-
+  inscribirPunto:any = 0;
+  idCheck=0;
+  idCamper=0;
+  numeroColumnas= 0;
+  namePunto: any;
+  mensajeerror: boolean= false;
+  cuadroMensaje= false;
+  mensajeActivo= false;
    
 
   constructor(private check: ChekpointService, private FormGroup: FormBuilder,private routesA : ActivatedRoute,private camps:CampsService ) { 
@@ -47,6 +58,8 @@ export class PuntoControlComponent implements OnInit {
     const currentDate = new Date();
 
     this.camps.getCamp(this.id).subscribe((res:any)=>{
+      console.log(res,'dadasass');
+      
       this.infoCamp = res.data
     })
  
@@ -57,10 +70,8 @@ export class PuntoControlComponent implements OnInit {
   { Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },
   { Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },
   ]
-  customer = [{id:2, name: "Alberto Ulises Hernandez Cruz", record: { n: 2, b: 2, d: 3 }, precio: 5500, sede: "Los Potros", inicio: "2023-11-28", termina: "2023-11-28", estado: "Pagado", cumple: true }
-    , {id:3, name: "Arueba de Nombre", record: { n: 12, b: 2, d: 3 }, precio: 2500, sede: "Los Potros", inicio: "2023-11-28", termina: "2023-11-28", estado: "Pagado", cumple: false },
-  {id:4, name: "Lrueba de Nombre", record: { n: 12, b: 2, d: 3 }, precio: 5500, sede: "aLos Potros", inicio: "2023-11-28", termina: "2023-11-28", estado: "Pagado", cumple: true }]
-
+  customer:any = [];
+  filas:any =[];
 
   ngOnInit(): void {
     this.chekpoint = this.FormGroup.group({
@@ -69,27 +80,15 @@ export class PuntoControlComponent implements OnInit {
       order: [0],
       camp_id:[0,],
     })
+    
 
     this.chekpoint.patchValue({
       camp_id : this.id
     })
-    this.check.getCheckPonitTable(Number(this.id)).subscribe((res:any)=>{
-       // console.log(res);
-        this.columnas = res.data;
-        this.columnas.map((item:any)=>{
- 
-          let a:string =item.chekpoint_date.slice(5,7)
-          
-          console.log(a);
-          item.chekpoint_date_esp =  item.chekpoint_date.slice(8,10) + ' de ' +this.mes[a]+ ' del ' + item.chekpoint_date.slice(0,4) 
-       //  console.log(this.mes[a.]);
-          
-        });
-        console.log(this.columnas);
-        
-        
-    });
+   this.getColumnas();
 
+
+   
   }
   crearCheck(){   
     this.check.postchekpoint(this.chekpoint.value).subscribe(
@@ -113,6 +112,12 @@ export class PuntoControlComponent implements OnInit {
     this.updateId= item.id;
   }
 
+  showDialog2(item){
+    this.visibleCreate = true;
+    this.idCheck = item.id;
+    this.namePunto=item.name
+  }
+
   updadte(){
     this.estatusUpdate = true;
 
@@ -131,14 +136,69 @@ export class PuntoControlComponent implements OnInit {
         }, 1000);
       })
   }
+  Inscribe(){
+    this.estatusUpdate = true;
+    let b = new Date()
+
+    let a = {
+      "checkin": true,
+      "checkin_date": b,
+      "checkpoint_id":this.idCheck,   
+      "camper_id": this.inscribirPunto,
+      "created_at": b
+    }
+      this.check.inscribir(a).subscribe((res:any)=>{
+        this.estatusUpdate = false;
+
+        this.getColumnas();
+        console.log(res);
+        this.cuadroMensaje=true;
+        this.mensajeActivo = true;
+        
+        setTimeout(() => {
+          this.cuadroMensaje=false
+          this.mensajeActivo = false;
+        }, 1000);
+      },error=>{
+        console.log(error);
+        this.estatusUpdate = false;
+        this.cuadroMensaje=true;
+        this.mensajeerror = true;
+        setTimeout(() => {
+          this.cuadroMensaje= false
+          this.mensajeerror = false;
+
+        }, 1000);
+        
+      })
+  }
+
+
+
+  delet(item:any){
+    this.delteStatus = true;
+   
+    
+  this.check.deletePoint(item.id).subscribe((res:any)=>{
+      this.getColumnas()
+    this.delteStatus= false;
+    },error=>{
+      alert('no se pudo eliminar el punto de control')
+    })
+
+  }
 
   cerrarModal(){
     this.visible = false;
+  }
+  cerrarModal2(){
+    this.visibleCreate = false;
   }
   getColumnas(){
     this.check.getCheckPonitTable(Number(this.id)).subscribe((res:any)=>{
       // console.log(res);
        this.columnas = res.data;
+       this.numeroColumnas= this.columnas.length
        this.columnas.map((item:any)=>{
 
          let a:string =item.chekpoint_date.slice(5,7)
@@ -152,6 +212,46 @@ export class PuntoControlComponent implements OnInit {
        
        
    });
+setTimeout(() => {
+  this.check.getCampscheckss(Number(this.id)).subscribe((res:any)=>{
+    console.log(res);
+    
+      this.customer=res.campers;
+      this.filas = res.campers_checkpoint
+      this.customer.forEach((element,index) => {
+    //  console.log('numero de columnas',this.numeroColumnas);
+      
+        element.camps= this.filas[index];
+        element.camps=this.rellenatabla(element.camps);
+        
+       
+  
+      });
+      console.log(this.customer,'eaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+      
+  })
+  
+}, 100);
+  
   }
 
+  rellenatabla(item){
+    let b = item;
+    
+    //console.log(this.numeroColumnas,'asass');
+      if(b.length<this.numeroColumnas){
+        for (let index = b.length; index <= this.numeroColumnas; index++) {
+          b.push({checkin:false});
+          index++
+          
+        }
+      
+      }
+     
+    
+    //console.log(b);
+    
+    return b;
+
+  }
 }

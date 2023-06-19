@@ -18,11 +18,23 @@ export class ChekpointService {
     return this.http.patch('http://142.93.12.234:8000/camp_checkpoint/'+idCchackpoint,a)
 
   }
+  deletePoint(idCchackpoint){
+    return this.http.delete('http://142.93.12.234:8000/delete_camp_checkpoint/'+idCchackpoint)
+
+  }
   getListaCheckpoint(){
     return this.http.get('http://142.93.12.234:8000/camp_checkpoint/')
 
   }
   getInfoCamp(id){
     return this.http.get('http://142.93.12.234:8000/camp/'+id)
+  }
+  getCampscheckss(id){
+    return this.http.get('http://142.93.12.234:8000/camp_checkpoint_module/'+id)
+
+  }
+  inscribir(a){
+    return this.http.post('http://142.93.12.234:8000/camper_checkpoint/',a)
+
   }
 }
