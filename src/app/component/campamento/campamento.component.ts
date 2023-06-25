@@ -22,7 +22,7 @@ export class CampamentoComponent implements OnInit {
   cargosExtra:false;
   estatusPago:Boolean= false;
   pagos:boolean=false;
-  statusInscri:false;
+  statusInscri:boolean=false;
 
 
 
@@ -41,6 +41,8 @@ export class CampamentoComponent implements OnInit {
       //console.log(res);
       console.log(res);
         let a :any=res.camp
+        console.log(res.camper_subscribe,'aasas');
+        
         this.statusInscri = res.camper_subscribe;
         this.dataCamp = a;
         this.dataPagos = res.payments;

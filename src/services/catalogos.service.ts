@@ -21,6 +21,7 @@ export class CatalogosService {
     return this.http.post('http://142.93.12.234:8000/food_restriction/'+id,a);
   }
   delerAlimentos(id){
+    console.log(id);
     return this.http.delete('http://142.93.12.234:8000/delete_food_restriction/'+id);
   }
 
@@ -37,6 +38,113 @@ export class CatalogosService {
     return this.http.post('http://142.93.12.234:8000/currency/'+id,a);
   }
   delecurrency(id){
+    console.log(id);
     return this.http.delete('http://142.93.12.234:8000/delete_currency/'+id);
   }
+
+
+
+
+  getPathological_background(){
+    return this.http.get('http://142.93.12.234:8000/pathological_background/');
+  }
+
+  posPathological_background(a:any){
+    return this.http.post('http://142.93.12.234:8000/pathological_background/',a);
+  }
+  updatPathological_background(a:any,id){
+    return this.http.post('http://142.93.12.234:8000/pathological_background/'+id,a);
+  }
+  delePathological_background(id){
+    console.log(id);
+    return this.http.delete('http://142.93.12.234:8000/delete_pathological_back/'+id);
+  }
+
+
+
+  getPathological_backgroundFamily(){
+    return this.http.get('http://142.93.12.234:8000/pathological_background_family/');
+  }
+
+  posPathological_backgroundFamily(a:any){
+    return this.http.post('http://142.93.12.234:8000/pathological_background_family/',a);
+  }
+  updatPathological_backgroundFamily(a:any,id){
+    return this.http.post('http://142.93.12.234:8000/pathological_background_family/'+id,a);
+  }
+  delePathological_backgroundFamily(id){
+    console.log(id);
+    
+    return this.http.delete('http://142.93.12.234:8000/delete_pathological_back_fm/'+id);
+  }
+
+
+
+  getpaymentaccounts(){
+    return this.http.get('http://142.93.12.234:8000/payment_account/');
+  }
+
+  postpaymentaccounts(a:any){
+    return this.http.post('http://142.93.12.234:8000/payment_account/',a);
+  }
+  updatpaymentaccounts(a:any,id){
+    return this.http.post('http://142.93.12.234:8000/payment_account/'+id,a);
+  }
+  delepaymentaccounts(id){
+    console.log(id);
+    return this.http.delete('http://142.93.12.234:8000/delete_payment_account/'+id);
+  }
+
+
+
+  getlicensed_medicine(){
+    return this.http.get('http://142.93.12.234:8000/licensed_medicine/');
+  }
+
+  postlicensed_medicine(a:any){
+    return this.http.post('http://142.93.12.234:8000/licensed_medicine/',a);
+  }
+  updatlicensed_medicine(a:any,id){
+    return this.http.post('http://142.93.12.234:8000/licensed_medicine/'+id,a);
+  }
+  delelicensed_medicine(id){
+    console.log(id);
+    return this.http.delete('http://142.93.12.234:8000/delete_licensed_medicine/'+id);
+  }
+
+
+  getVaccine(){
+    return this.http.get('http://142.93.12.234:8000/vaccine/');
+  }
+
+  postVaccine(a:any){
+    return this.http.post('http://142.93.12.234:8000/vaccine/',a);
+  }
+  updatVaccine(a:any,id){
+    return this.http.patch('http://142.93.12.234:8000/vaccine/'+id,a);
+  }
+
+  deleVaccine(id){
+    console.log(id);
+    return this.http.delete('http://142.93.12.234:8000/delete_vaccine/'+id);
+  }
+
+
+  getStaffroles(){
+    return this.http.get('http://142.93.12.234:8000/staff_role/');
+  }
+
+  postStaffroles(a:any){
+    return this.http.post('http://142.93.12.234:8000/staff_role/',a);
+  }
+  updatStaffroles(a:any,id){
+    return this.http.post('http://142.93.12.234:8000/staff_role/'+id,a);
+  }
+
+  deleStaffroles(id){
+    console.log(id);
+    return this.http.delete('http://142.93.12.234:8000/delete_staff_role/'+id);
+  }
+
+
 }
