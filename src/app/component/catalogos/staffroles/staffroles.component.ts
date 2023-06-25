@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ListaCapacitacionesComponent } from 'src/app/staff/lista-capacitaciones/lista-capacitaciones.component';
 import { CatalogosService } from 'src/services/catalogos.service';
-
 @Component({
-  selector: 'app-alimentacion',
-  templateUrl: './alimentacion.component.html',
-  styleUrls: ['./alimentacion.component.scss']
+  selector: 'app-staffroles',
+  templateUrl: './staffroles.component.html',
+  styleUrls: ['./staffroles.component.scss']
 })
-export class AlimentacionComponent implements OnInit {
+export class StaffrolesComponent implements OnInit {
+
+  
   listcatalogos: any = [];
   selectCatalogos: any;
   items: any;
@@ -40,8 +41,8 @@ export class AlimentacionComponent implements OnInit {
   ngOnInit(): void {
     this.formFood = this._FormBuild.group({
       name: ['', Validators.required],
-      assigned_id: [0, Validators.required],
-      order: [0, Validators.required],
+      payment: [0, Validators.required],
+      color: ['', Validators.required],
       created_at: [this.date, Validators.required]
     })
   }
@@ -69,16 +70,13 @@ export class AlimentacionComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.catalogos.getAlimentos().subscribe((res: any) => {
+    this.catalogos.getStaffroles().subscribe((res: any) => {
       this.listcatalogos = res.data;
-      this.listcatalogos.map((item: any) => {
-        item.assigned_id = this.cat[item.assigned_id.toString()];
-      })
     });
   }
 
   guardar() {
-    this.catalogos.postAlimentos(this.formFood.value).subscribe((res: any) => {
+    this.catalogos.postStaffroles(this.formFood.value).subscribe((res: any) => {
       this.getCatalogos();
       this.statuAgrgado = true;
       this.resteValu();
@@ -96,9 +94,11 @@ export class AlimentacionComponent implements OnInit {
   resteValu() {
     this.formFood.reset();
     this.formFood.patchValue({
-      assigned_id: 0,
-      order: 0,
+      name: '',
+      payment: 0, 
+      color: '', 
       created_at: this.date
+
     })
   }
 
@@ -109,8 +109,8 @@ export class AlimentacionComponent implements OnInit {
     this.updateId = item.id;
     this.formFood.patchValue({
       name: item.name,
-      assigned_id: item.assigned_id,
-      order: 0,
+      payment: item.payment,
+      color: item.color,
       created_at: this.date
 
     })
@@ -119,7 +119,7 @@ export class AlimentacionComponent implements OnInit {
   }
 
   keepUpdate(){
-    this.catalogos.updateAlimentos(this.formFood.value,this.updateId).subscribe((res: any) => {
+    this.catalogos.updatStaffroles(this.formFood.value,this.updateId).subscribe((res: any) => {
      console.log(res);
      
       this.getCatalogos();
@@ -140,13 +140,13 @@ export class AlimentacionComponent implements OnInit {
 
   deletModal(name,id){
     this.idDalete= id;
-    this.TextElimint='Deseas Eliminar '+ name + '  del catalogo';
+    this.TextElimint='Deseas Eliminar '+ name + ' del catalogo';
     this.display3 = true; 
    
   }
 
   delet(){
-    this.catalogos.delerAlimentos(this.idDalete).subscribe((res: any) => {
+    this.catalogos.deleStaffroles(this.idDalete).subscribe((res: any) => {
       this.statuAgrgado = true;
       this.resteValu();
       this.getCatalogos();
@@ -156,7 +156,7 @@ export class AlimentacionComponent implements OnInit {
       }, 1000);
 
     }, error => {
-      alert('No se pudo Agregar')
+      alert('No se pudo Eliminar')
     })
   }
   

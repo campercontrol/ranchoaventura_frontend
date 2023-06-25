@@ -5,13 +5,13 @@
 
     <div class="card border border-info border-1">
         <div class="bg-info p-2">
-            <h1 class="card-title text-white">Lista de Divisas</h1>
+            <h1 class="card-title text-white">Lista de  Vacunas</h1>
         </div>
         <div class="card-body">
         <div class="container-btn mt-1 mb-3">
             <div>
                 <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
-                    <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar nueva Divisa</button>
+                    <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar Vacunas</button>
 
                 </div>
             </div>
@@ -20,7 +20,7 @@
         </div>
 
         <p-table #dt [value]="listcatalogos" [rows]="10"
-            [globalFilterFields]="['name','symbol','acronyms']"
+            [globalFilterFields]="['name','assigned_id','acronyms']"
             [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [showCurrentPageReport]="true">
@@ -29,9 +29,8 @@
                 <tr>
                     <th pSortableColumn="name">Nombre<p-sortIcon field="name"
                             style="font-size: 10px;"></p-sortIcon></th>
-                    <th pSortableColumn="symbol">Simbolo de divisa <p-sortIcon field="symbol"></p-sortIcon></th>
-                    <th pSortableColumn="acronyms">Sigla<p-sortIcon field="acronyms"
-                        style="font-size: 10px;"></p-sortIcon></th>
+                    <th pSortableColumn="assigned_id">Mostrar a <p-sortIcon field="assigned_id"></p-sortIcon></th>
+
                     <th style="width: 40px;"></th>
                     <th style="width: 40px;"></th>
                 </tr>
@@ -42,11 +41,9 @@
                         {{customer.name}}
                     </td>
                     <td>
-                        {{customer.symbol}}
+                        {{customer.assigned_id}}
                     </td>
-                    <td>
-                        {{customer.acronyms}}
-                    </td>
+                   
                     <td>
                         <button class="btn btn-warning" (click)="update(customer)">Editar</button>
 
@@ -71,12 +68,11 @@
 <p-dialog header="Title" [(visible)]="display" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
     <ng-template pTemplate="header">
        <h2>
-        Agregar nueva divisa
+        Agregar Vacuna
        </h2> 
     </ng-template>
     <div class="col">
         <form action="" [formGroup]="formFood">
-          
             <div class="row mb-4">
                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Nombre</label>
                 <div class="col-sm-9">
@@ -84,18 +80,23 @@
                 </div>         
             </div>
             <div class="row mb-4">
-                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Simbolo de divisa</label>
+                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Order</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="symbol">
+                    <input type="number" class="form-control" id="horizontal-firstname-input" formControlName="order">
                 </div>         
             </div>
             <div class="row mb-4">
-                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Siglas</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="acronyms">
-                </div>         
+                <label for="horizontal-firstname-input" class="col-3 col-form-label">Mostrar a</label>
+                <div class="col-9">
+                    <select class="form-select" aria-label="Default select example" formControlName="assigned_id">
+                        <option value="0">Ninguno</option>
+                        <option value="1">Staff</option>
+                        <option value="2">Acampadores</option>
+                        <option value="3">Staff y Acampadores</option>
+                      </select>  
+                </div>
+                  
             </div>
-
         </form>
         <div class="alert alert-primary" role="alert" *ngIf="statuAgrgado">
             Se Agrego correctamente
@@ -111,12 +112,11 @@
 <p-dialog header="Title" [(visible)]="display2" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
     <ng-template pTemplate="header">
        <h2>
-        Editar  divisa
+        Editar Vacuna
        </h2> 
     </ng-template>
     <div class="col">
         <form action="" [formGroup]="formFood">
-          
             <div class="row mb-4">
                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Nombre</label>
                 <div class="col-sm-9">
@@ -124,16 +124,22 @@
                 </div>         
             </div>
             <div class="row mb-4">
-                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Simbolo de divisa</label>
+                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Order</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="symbol">
+                    <input type="number" class="form-control" id="horizontal-firstname-input" formControlName="order">
                 </div>         
             </div>
             <div class="row mb-4">
-                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Siglas</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="acronyms">
-                </div>         
+                <label for="horizontal-firstname-input" class="col-3 col-form-label">Mostrar a</label>
+                <div class="col-9">
+                    <select class="form-select" aria-label="Default select example" formControlName="assigned_id">
+                        <option value="0">Ninguno</option>
+                        <option value="1">Staff</option>
+                        <option value="2">Acampadores</option>
+                        <option value="3">Staff y Acampadores</option>
+                      </select>  
+                </div>
+                  
             </div>
         </form>
         <div class="alert alert-primary" role="alert" *ngIf="statuAgrgado">
@@ -151,7 +157,7 @@
 <p-dialog header="Title" [(visible)]="display3" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
     <ng-template pTemplate="header">
        <h2>
-        Eliminar  divisa
+        Eliminar Vacuna 
        </h2> 
     </ng-template>
     <div class="col">

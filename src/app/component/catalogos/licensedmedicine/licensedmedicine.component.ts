@@ -4,11 +4,12 @@ import { ListaCapacitacionesComponent } from 'src/app/staff/lista-capacitaciones
 import { CatalogosService } from 'src/services/catalogos.service';
 
 @Component({
-  selector: 'app-alimentacion',
-  templateUrl: './alimentacion.component.html',
-  styleUrls: ['./alimentacion.component.scss']
+  selector: 'app-licensedmedicine',
+  templateUrl: './licensedmedicine.component.html',
+  styleUrls: ['./licensedmedicine.component.scss']
 })
-export class AlimentacionComponent implements OnInit {
+export class LicensedmedicineComponent implements OnInit {
+
   listcatalogos: any = [];
   selectCatalogos: any;
   items: any;
@@ -69,16 +70,19 @@ export class AlimentacionComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.catalogos.getAlimentos().subscribe((res: any) => {
+    this.catalogos.getlicensed_medicine().subscribe((res: any) => {
       this.listcatalogos = res.data;
       this.listcatalogos.map((item: any) => {
         item.assigned_id = this.cat[item.assigned_id.toString()];
       })
+      console.log(this.listcatalogos);
     });
+   
+    
   }
 
   guardar() {
-    this.catalogos.postAlimentos(this.formFood.value).subscribe((res: any) => {
+    this.catalogos.postlicensed_medicine(this.formFood.value).subscribe((res: any) => {
       this.getCatalogos();
       this.statuAgrgado = true;
       this.resteValu();
@@ -110,7 +114,7 @@ export class AlimentacionComponent implements OnInit {
     this.formFood.patchValue({
       name: item.name,
       assigned_id: item.assigned_id,
-      order: 0,
+      order: item.order,
       created_at: this.date
 
     })
@@ -119,7 +123,7 @@ export class AlimentacionComponent implements OnInit {
   }
 
   keepUpdate(){
-    this.catalogos.updateAlimentos(this.formFood.value,this.updateId).subscribe((res: any) => {
+    this.catalogos.updatlicensed_medicine(this.formFood.value,this.updateId).subscribe((res: any) => {
      console.log(res);
      
       this.getCatalogos();
@@ -140,13 +144,17 @@ export class AlimentacionComponent implements OnInit {
 
   deletModal(name,id){
     this.idDalete= id;
+   // console.log(id);
+    
     this.TextElimint='Deseas Eliminar '+ name + '  del catalogo';
     this.display3 = true; 
    
   }
 
   delet(){
-    this.catalogos.delerAlimentos(this.idDalete).subscribe((res: any) => {
+    console.log(this.idDalete,'aaa');
+    
+    this.catalogos.delelicensed_medicine(this.idDalete).subscribe((res: any) => {
       this.statuAgrgado = true;
       this.resteValu();
       this.getCatalogos();
@@ -156,8 +164,9 @@ export class AlimentacionComponent implements OnInit {
       }, 1000);
 
     }, error => {
-      alert('No se pudo Agregar')
+      alert('No se pudo Eliminar')
     })
   }
   
+
 }
