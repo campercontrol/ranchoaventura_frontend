@@ -129,6 +129,8 @@ import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TemporadaComponent } from './component/temporada/temporada.component';
+import { AlimentacionComponent } from './component/catalogos/alimentacion/alimentacion.component';
+import { CurrencyComponent } from './component/catalogos/currency/currency.component';
 
 
 
@@ -161,7 +163,9 @@ export function createTranslateLoader(http: HttpClient): any {
     DashbordStaffComponent,
     ListaPuntosControlComponent,
     CreateTrainingComponent,
-    TemporadaComponent,    
+    TemporadaComponent,
+    AlimentacionComponent,
+    CurrencyComponent,    
   ],
   imports: [
     BrowserModule,

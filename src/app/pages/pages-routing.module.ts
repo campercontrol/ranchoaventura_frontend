@@ -41,6 +41,7 @@ import { DashbordStaffComponent } from '../component/dashbord-staff/dashbord-sta
 import { ListaPuntosControlComponent } from '../component/lista-puntos-control/lista-puntos-control.component';
 import { CreateTrainingComponent } from '../component/create-training/create-training.component';
 import { TemporadaComponent } from '../component/temporada/temporada.component';
+import { AlimentacionComponent } from '../component/catalogos/alimentacion/alimentacion.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -85,6 +86,8 @@ const routes: Routes = [
   {path: 'staff/dashboard',component:DashbordStaffComponent},
   {path: 'staff/checkpoint',component:ListaPuntosControlComponent},
   
+//Catalogos
+{path: 'catalogs/food-restriction',component:AlimentacionComponent},
 
 
 
