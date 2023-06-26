@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ListaCapacitacionesComponent } from 'src/app/staff/lista-capacitaciones/lista-capacitaciones.component';
+import { AdmiService } from 'src/services/admi.service';
 import { CatalogosService } from 'src/services/catalogos.service';
-
 @Component({
-  selector: 'app-vaccines',
-  templateUrl: './vaccines.component.html',
-  styleUrls: ['./vaccines.component.scss']
+  selector: 'app-campercomment',
+  templateUrl: './campercomment.component.html',
+  styleUrls: ['./campercomment.component.scss']
 })
-export class VaccinesComponent implements OnInit {
-
-
+export class CampercommentComponent implements OnInit {
   listcatalogos: any = [];
   selectCatalogos: any;
   items: any;
@@ -19,32 +17,42 @@ export class VaccinesComponent implements OnInit {
   display3: boolean = false;
   idDalete =0;
   updateId= 0;
+  listCampers:any = [];
   text: any;
   TextElimint="";
+  listUser:any=[];
   formFood: FormGroup;
   date: Date = new Date();
   statuAgrgado = false;
   cat: any = {
-    '0': 'ninguno',
-    '1': 'Staff',
-    '2': 'Acampador',
-    '3': 'Staff y Acampador'
+    "0": "Sin Grupo",
+    "1": "Tutor",
+    "2": "Staff",
+    "3": "Escuela",
+    "4": "Cordinador",
+    "5": "Admi",
+    "6": "Teacher",
+    "7": "Doctor"
   }
   capa = {
     name: ''
   }
   breadCrumbItems: Array<{}>;
   selectedCities: string[] = [];
-  constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder) {
+  constructor(private catalogos: AdmiService, private _FormBuild: FormBuilder) {
     this.getCatalogos()
   }
 
   ngOnInit(): void {
     this.formFood = this._FormBuild.group({
-      name: ['', Validators.required],
-      assigned_id: [0, Validators.required],
-      order: [0, Validators.required],
-      created_at: [this.date, Validators.required]
+      comment: ['', Validators.required],
+      is_public: [true,],
+      show_to: [0, Validators.required],
+      camp_id: [0, Validators.required],
+      user_id: [0, Validators.required],
+      camper_id: [0, Validators.required],
+      updated_at: [this.date, Validators.required],
+
     })
   }
 
@@ -71,19 +79,27 @@ export class VaccinesComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.catalogos.getVaccine().subscribe((res: any) => {
+    this.catalogos.getComments().subscribe((res: any) => {
+      console.log(res);      
       this.listcatalogos = res.data;
-      this.listcatalogos.map((item: any) => {
-        item.assigned_id = this.cat[item.assigned_id.toString()];
-      })
-      console.log(this.listcatalogos);
+
     });
-   
-    
+    this.catalogos.getCampers().subscribe((res: any) => {
+      console.log(res);
+      
+      this.listCampers = res.data;
+
+    });
+    this.catalogos.getUsers().subscribe((res: any) => {
+      console.log(res);
+      
+      this.listUser = res.data;
+
+    });
   }
 
   guardar() {
-    this.catalogos.postVaccine(this.formFood.value).subscribe((res: any) => {
+    this.catalogos.postComments(this.formFood.value).subscribe((res: any) => {
       this.getCatalogos();
       this.statuAgrgado = true;
       this.resteValu();
@@ -101,9 +117,12 @@ export class VaccinesComponent implements OnInit {
   resteValu() {
     this.formFood.reset();
     this.formFood.patchValue({
-      assigned_id: 0,
-      order: 0,
-      created_at: this.date
+      is_public: [true,],
+      show_to: 0,
+      camp_id: 0,
+      user_id: 0,
+      camper_id: 0,
+      updated_at: this.date,
     })
   }
 
@@ -113,20 +132,19 @@ export class VaccinesComponent implements OnInit {
     this.showDialog2();
     this.updateId = item.id;
     this.formFood.patchValue({
-      name: item.name,
-      assigned_id: item.assigned_id,
-      order: item.order,
-      created_at: this.date
-
+      comment: item.comment,
+      is_public: item.is_public,
+      show_to: item.show_to,
+      camp_id: item.user_id,
+      user_id:item.camp_id,
+      camper_id: item.camper_id
     })
   
     
   }
 
   keepUpdate(){
-    console.log(this.formFood.value);
-    
-    this.catalogos.updatVaccine(this.formFood.value,this.updateId).subscribe((res: any) => {
+    this.catalogos.updateComments(this.formFood.value,this.updateId).subscribe((res: any) => {
      console.log(res);
      
       this.getCatalogos();
@@ -147,17 +165,13 @@ export class VaccinesComponent implements OnInit {
 
   deletModal(name,id){
     this.idDalete= id;
-   // console.log(id);
-    
     this.TextElimint='Deseas Eliminar '+ name + '  del catalogo';
     this.display3 = true; 
    
   }
 
   delet(){
-    console.log(this.idDalete,'ss');
-    
-    this.catalogos.deleVaccine(this.idDalete).subscribe((res: any) => {
+    this.catalogos.deletComments(this.idDalete).subscribe((res: any) => {
       this.statuAgrgado = true;
       this.resteValu();
       this.getCatalogos();
@@ -167,8 +181,8 @@ export class VaccinesComponent implements OnInit {
       }, 1000);
 
     }, error => {
-      alert('No se pudo Eliminar')
+      alert('No se pudo Agregar')
     })
   }
-  
+
 }

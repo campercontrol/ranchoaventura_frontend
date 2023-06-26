@@ -5,13 +5,13 @@
 
     <div class="card border border-info border-1">
         <div class="bg-info p-2">
-            <h1 class="card-title text-white">Lista de capacitaciones</h1>
+            <h1 class="card-title text-white">Lista de Alimentos restringidos</h1>
         </div>
         <div class="card-body">
         <div class="container-btn mt-1 mb-3">
             <div>
                 <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
-                    <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar nueva capacitacion</button>
+                    <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar Alimentacion restringida</button>
 
                 </div>
             </div>
@@ -156,7 +156,7 @@
     </div>
     <ng-template pTemplate="footer">
         <button type="button" class="btn btn-outline-secondary" (click)="this.display3 = false">Cancel</button>
-        <button type="button" class="btn btn-danger" (click)="keepUpdate()">Eliminar</button>
+        <button type="button" class="btn btn-danger" (click)="delet()">Eliminar</button>
     </ng-template>
 </p-dialog>
 

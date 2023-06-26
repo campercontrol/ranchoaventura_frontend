@@ -49,6 +49,7 @@ import { PaymentaccountsComponent } from '../component/catalogos/paymentaccounts
 import { LicensedmedicineComponent } from '../component/catalogos/licensedmedicine/licensedmedicine.component';
 import { VaccinesComponent } from '../component/catalogos/vaccines/vaccines.component';
 import { StaffrolesComponent } from '../component/catalogos/staffroles/staffroles.component';
+import { CampercommentComponent } from '../component/admi/campercomment/campercomment.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -102,6 +103,10 @@ const routes: Routes = [
 {path: 'catalogs/licensedmedicine',component:LicensedmedicineComponent},
 {path: 'catalogs/vaccines',component:VaccinesComponent},
 {path: 'catalogs/staffroles',component:StaffrolesComponent},
+
+//campers
+{path: 'catalogs/campercomment',component:CampercommentComponent},
+
 
 
 

@@ -137,6 +137,7 @@ import { PaymentaccountsComponent } from './component/catalogos/paymentaccounts/
 import { LicensedmedicineComponent } from './component/catalogos/licensedmedicine/licensedmedicine.component';
 import { VaccinesComponent } from './component/catalogos/vaccines/vaccines.component';
 import { StaffrolesComponent } from './component/catalogos/staffroles/staffroles.component';
+import { CampercommentComponent } from './component/admi/campercomment/campercomment.component';
 
 
 
@@ -177,7 +178,8 @@ export function createTranslateLoader(http: HttpClient): any {
     PaymentaccountsComponent,
     LicensedmedicineComponent,
     VaccinesComponent,
-    StaffrolesComponent,    
+    StaffrolesComponent,
+    CampercommentComponent,    
   ],
   imports: [
     BrowserModule,
