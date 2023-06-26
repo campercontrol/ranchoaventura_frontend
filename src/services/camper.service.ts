@@ -56,7 +56,9 @@ export class CamperService {
    getCapsT(camper_id :any){
     return this.http.get('http://142.93.12.234:8000/camper_dashboard/' + camper_id )
    }
-
+   postTraining(info: any) {
+    return this.http.post('http://142.93.12.234:8000/training', info)
+   }
   
 
 }

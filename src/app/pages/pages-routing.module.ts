@@ -81,6 +81,8 @@ const routes: Routes = [
   {path: 'staff/trainings',component:CapacitacionesComponent},
   {path: 'staff/trainings-events',component:CapacitacionesEventoComponent},
   {path: 'staff/trainings-dashboard',component:CreateTrainingComponent},
+  {path: 'staff/trainings-card', component: ListaCapacitacionesComponent},
+
   {path: 'staff/applicants',component:ListaProspectosComponent},
   {path: 'staff/dashboard',component:DashbordStaffComponent},
   {path: 'staff/checkpoint',component:ListaPuntosControlComponent},
