@@ -52,20 +52,22 @@ export class CampamentoComponent implements OnInit {
         
        
       },error=>{
-        this.getcamps()
+        alert('no se pudo cargar')
       })
 
 
 
-    this.camps.getPreguntas(Number(this.idCamp)).subscribe((res:any)=>{
-    //  console.log(res,'preguntas');
+    this.camps.getPreguntas(Number(this.idCamp),).subscribe((res:any)=>{
+     console.log(res,'preguntas');
       this.PreguntasExtras = res.data;
-      this.statusInscri = false;
+     
       
     })
-    this.camps.getCargosExtras(Number(this.idCamp)).subscribe((res:any)=>{
-   //   console.log(res,'cargos extras');
+    this.camps.getCargosExtras(this.idCamp,Number(this.idCamper)).subscribe((res:any)=>{
+    console.log(res,'cargos extras');
       this.cargosExtras = res.data
+      console.log(this.cargosExtras,'cargos extras');
+
       
     })
   }
@@ -112,13 +114,12 @@ export class CampamentoComponent implements OnInit {
 
   }
   saveChange(){
-   
-    let res = {
+    this.cargosExtras.forEach(element => {
+           let res = {
     
-
-      "is_selected": this.estatusPago,
-      "camper_id": this.idCamp,
-      "extra_charge_id": this.cargosExtras.id,
+            "is_selected": element.extra_selected,
+            "camper_id":  this.idCamp,
+            "extra_charge_id": element.extra_charge_id, 
 
     }
     this.camps.setPagos(res).subscribe((res:any)=>{
@@ -126,6 +127,8 @@ export class CampamentoComponent implements OnInit {
       this.modalService.dismissAll()
       
     })
+    });
+   
 
   }
   deletCamp(){
