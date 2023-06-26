@@ -41,6 +41,15 @@ import { DashbordStaffComponent } from '../component/dashbord-staff/dashbord-sta
 import { ListaPuntosControlComponent } from '../component/lista-puntos-control/lista-puntos-control.component';
 import { CreateTrainingComponent } from '../component/create-training/create-training.component';
 import { TemporadaComponent } from '../component/temporada/temporada.component';
+import { AlimentacionComponent } from '../component/catalogos/alimentacion/alimentacion.component';
+import { CurrencyComponent } from '../component/catalogos/currency/currency.component';
+import { PathologicalBackgroundComponent } from '../component/catalogos/pathological-background/pathological-background.component';
+import { PathologicalBackgroundFamilyComponent } from '../component/catalogos/pathological-background-family/pathological-background-family.component';
+import { PaymentaccountsComponent } from '../component/catalogos/paymentaccounts/paymentaccounts.component';
+import { LicensedmedicineComponent } from '../component/catalogos/licensedmedicine/licensedmedicine.component';
+import { VaccinesComponent } from '../component/catalogos/vaccines/vaccines.component';
+import { StaffrolesComponent } from '../component/catalogos/staffroles/staffroles.component';
+import { CampercommentComponent } from '../component/admi/campercomment/campercomment.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -87,6 +96,25 @@ const routes: Routes = [
   {path: 'staff/dashboard',component:DashbordStaffComponent},
   {path: 'staff/checkpoint',component:ListaPuntosControlComponent},
   
+//Catalogos
+{path: 'catalogs/food-restriction',component:AlimentacionComponent},
+{path: 'catalogs/currency',component:CurrencyComponent},
+{path: 'catalogs/pathological_background',component:PathologicalBackgroundComponent},
+{path: 'catalogs/pathological_background_Family',component:PathologicalBackgroundFamilyComponent},
+{path: 'catalogs/paymentaccounts',component:PaymentaccountsComponent},
+{path: 'catalogs/licensedmedicine',component:LicensedmedicineComponent},
+{path: 'catalogs/vaccines',component:VaccinesComponent},
+{path: 'catalogs/staffroles',component:StaffrolesComponent},
+
+//campers
+{path: 'catalogs/campercomment',component:CampercommentComponent},
+
+
+
+
+
+
+
 
 
 

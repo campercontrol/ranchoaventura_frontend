@@ -52,6 +52,7 @@ import {InputTextModule} from 'primeng/inputtext';
 
 
 
+
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin,

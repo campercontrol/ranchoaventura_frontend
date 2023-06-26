@@ -20,8 +20,8 @@ export class CampsService {
     return this.http.get('http://142.93.12.234:8000/extra_question_by_camp/'+preguntas)
 
   }
-  getCargosExtras(cargo:number){
-    return this.http.get('http://142.93.12.234:8000/extra_charge_by_camp/'+cargo)
+  getCargosExtras(id,cargo:number){
+    return this.http.get('http://142.93.12.234:8000/camper_extra_charge_by_camp/'+id+'/'+cargo)
   }
   setPreguntas(id,pregunta){
     return this.http.patch('http://142.93.12.234:8000/camper_extra_answer/'+id,pregunta)

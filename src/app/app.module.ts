@@ -129,6 +129,15 @@ import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TemporadaComponent } from './component/temporada/temporada.component';
+import { AlimentacionComponent } from './component/catalogos/alimentacion/alimentacion.component';
+import { CurrencyComponent } from './component/catalogos/currency/currency.component';
+import { PathologicalBackgroundComponent } from './component/catalogos/pathological-background/pathological-background.component';
+import { PathologicalBackgroundFamilyComponent } from './component/catalogos/pathological-background-family/pathological-background-family.component';
+import { PaymentaccountsComponent } from './component/catalogos/paymentaccounts/paymentaccounts.component';
+import { LicensedmedicineComponent } from './component/catalogos/licensedmedicine/licensedmedicine.component';
+import { VaccinesComponent } from './component/catalogos/vaccines/vaccines.component';
+import { StaffrolesComponent } from './component/catalogos/staffroles/staffroles.component';
+import { CampercommentComponent } from './component/admi/campercomment/campercomment.component';
 
 
 
@@ -161,7 +170,16 @@ export function createTranslateLoader(http: HttpClient): any {
     DashbordStaffComponent,
     ListaPuntosControlComponent,
     CreateTrainingComponent,
-    TemporadaComponent,    
+    TemporadaComponent,
+    AlimentacionComponent,
+    CurrencyComponent,
+    PathologicalBackgroundComponent,
+    PathologicalBackgroundFamilyComponent,
+    PaymentaccountsComponent,
+    LicensedmedicineComponent,
+    VaccinesComponent,
+    StaffrolesComponent,
+    CampercommentComponent,    
   ],
   imports: [
     BrowserModule,

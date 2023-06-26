@@ -86,7 +86,7 @@
                             [loading]="loading" [paginator]="true"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                             [filterDelay]="0"
-                            [globalFilterFields]="['name','country.name','representative.name','status']">
+                            [globalFilterFields]="['camper.id','camper.camper_name','representative.name','status']">
 
                             <ng-template pTemplate="header">
                                 <tr >
@@ -112,17 +112,17 @@
                             <ng-template pTemplate="body" let-customer>
                                 <tr class="p-selectable-row">
                                     <td>
-                                       {{customer.camper_id}}
+                                       {{customer.camper.camper_id}}
                                     </td>
 
                                     <td style="text-align: left; font-size: 10px;">
-                                        {{customer.camper_name}}
+                                        {{customer.camper.camper_name}}
                                     </td>
-                                    <td style="text-align: left; font-size: 10px;" *ngFor="let b  of customer.camps" [ngClass]="{'acierto':b.checkin,'error':!b.checkin}">
-                                        <div *ngIf="b.checkin"  style="">
-                                            {{b.checkin_date}}
+                                    <td style="text-align: left; font-size: 10px;" *ngFor="let b  of customer.checkpoints" [ngClass]="{'acierto':b.checkpoint_check,'error':!b.checkpoint_check}">
+                                        <div *ngIf="b.checkpoint_date"  style="">
+                                            {{b.checkpoint_date}}
                                         </div>
-                                        <div *ngIf="!b.checkin" style="">
+                                        <div *ngIf="!b.checkpoint_check" style="">
 
                                         </div>
                                        
@@ -195,11 +195,11 @@
         </div>
 
         <div *ngIf="cuadroMensaje">
-            <div class="alert alert-primary" role="alert" *ngIf="mensajeerror">
+            <div class="alert alert-primary" role="alert" *ngIf="mensajeActivo">
                 Se agrego correctamente 
               </div>
 
-              <div class="alert alert-danger" role="alert" *ngIf="mensajeActivo">
+              <div class="alert alert-danger" role="alert" *ngIf="mensajeerror">
                 No se pudo agregar(id no se encontro)
               </div>
 
