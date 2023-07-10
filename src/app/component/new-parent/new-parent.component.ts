@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -23,35 +23,62 @@ export class NewParentComponent implements OnInit {
    correoVal: RegExp =/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   contrasena:string=""
   confirmarContrasena:string = "";
+  confirmEmailAlert= false;
+  confirmEmailAlertInstruc= false;
+  confirmPaswordAlert = false;
+
+  @ViewChild("email") email: ElementRef;
+  @ViewChild("password") password: ElementRef;
+
+  @ViewChild("emailConfir") emailConfir: ElementRef;
+  @ViewChild("confirmPassword") confirmPassword: ElementRef;
+  @ViewChild("tutor_name") tutor_name: ElementRef; 
+  @ViewChild("tutor_lastname_father") tutor_lastname_father: ElementRef; 
+  @ViewChild("tutor_lastname_mother") tutor_lastname_mother: ElementRef; 
+  @ViewChild("tutor_cellphone") tutor_cellphone: ElementRef; 
+  @ViewChild("tutor_home_phone") tutor_home_phone: ElementRef; 
+  @ViewChild("tutor_work_phone") tutor_work_phone: ElementRef; 
+  @ViewChild("contact_name") contact_name: ElementRef; 
+  @ViewChild("contact_lastname_father") contact_lastname_father: ElementRef; 
+  @ViewChild("contact_lastname_mother") contact_lastname_mother: ElementRef; 
+  @ViewChild("contact_cellphone") contact_cellphone: ElementRef; 
+  @ViewChild("contact_work_phone") contact_work_phone: ElementRef; 
+  @ViewChild("contact_home_phone") contact_home_phone: ElementRef; 
+  @ViewChild("contact_email") contact_email: ElementRef; 
+
+
+
+
+
 
   correo:string = "";
   confirmarCorreo = "";
   estadoCorreo:boolean= false;
   breadCrumbItems: Array<{}>;
 
-  constructor(private formBuild:FormBuilder,private parent: ParentService,private router :Router,private modalService: NgbModal,private configService: ConfigService, private eventService: EventService) { }
+  constructor(private formBuild:FormBuilder,private parent: ParentService,private router :Router,private modalService: NgbModal,private configService: ConfigService, private eventService: EventService,private render :Renderer2) { }
   
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'UI Elements' }, { label: 'Modals', active: true }];
 
     this.formParent = this.formBuild.group({
-      tutor_lastname_father:["",[Validators.required]],
+      tutor_lastname_father:["",[Validators.required,,Validators.minLength(1)]],
       tutor_cellphone:      ["",[Validators.required,
                              Validators.pattern("^[0-9]*$"),
                              Validators.minLength(8), Validators.maxLength(10)]],
       tutor_home_phone:     ["",[Validators.required,
                               Validators.pattern("^[0-9]*$"),
                               Validators.minLength(8), Validators.maxLength(10)]],
-      contact_name:         ["",[Validators.required]],
+      contact_name:         ["",[Validators.required,Validators.minLength(1)]],
     
-    contact_lastname_mother:["",[Validators.required]],
+    contact_lastname_mother:["",[Validators.required,Validators.minLength(1)]],
     contact_home_phone:     ["",[Validators.required,
                             Validators.pattern("^[0-9]*$"),
                             Validators.minLength(8), Validators.maxLength(10)]], 
     contact_email:          ["",[Validators.required,
                                    Validators.email]],
-    tutor_name :            ["",[Validators.required]],
-    tutor_lastname_mother:  ["",[Validators.required]], 
+    tutor_name :            ["",[Validators.required,Validators.minLength(1)]],
+    tutor_lastname_mother:  ["",[Validators.required,Validators.minLength(1)]], 
     tutor_work_phone:       ["",[Validators.required,
                             Validators.pattern("^[0-9]*$"),
                             Validators.minLength(8), Validators.maxLength(10)]],
@@ -119,77 +146,66 @@ export class NewParentComponent implements OnInit {
 
   }
 
-  gettutor_lastname_father(): boolean {
-    return this.formParent.get('tutor_lastname_father').invalid ;
+  getpassword() {
+    if( this.formParent.get('password').valid){
+      this.render.removeClass(this.password.nativeElement,"is-invalid");
+        this.render.addClass(this.password.nativeElement,"is-valid");
+     }else{
+      this.render.removeClass(this.password.nativeElement,"is-valid");
+      this.render.addClass(this.password.nativeElement,"is-invalid");
+     }
   }
-  getpassword(): boolean {
-    return this.formParent.get('password').invalid ;
+  getconfirmPassword() {
+    if( this.formParent.get('confirmPassword').valid){
+      this.render.removeClass(this.confirmPassword.nativeElement,"is-invalid");
+        this.render.addClass(this.confirmPassword.nativeElement,"is-valid");
+        this.confirmPaswordAlert = false;        
+     }else{
+      this.render.removeClass(this.confirmPassword.nativeElement,"is-valid");
+      this.render.addClass(this.confirmPassword.nativeElement,"is-invalid");
+      this.confirmPaswordAlert = true;
+     }
   }
-  getconfirmPassword(): boolean {
-    return this.formParent.get('confirmPassword').invalid ;
+  getemail() {
+    //console.log(this.formParent.get('email').valid);
+    
+   if(this.formParent.get('email').valid){
+    this.render.removeClass(this.email.nativeElement,"is-invalid");
+      this.render.addClass(this.email.nativeElement,"is-valid");
+      console.log('respyesta');
+      
+   }else{
+    this.render.removeClass(this.email.nativeElement,"is-valid");
+    this.render.addClass(this.email.nativeElement,"is-invalid");
+
+   }
   }
-  getemail(): boolean {
-    return this.formParent.get('email').invalid ;
+  getconfirmEmail() {
+    if( this.formParent.get('confirmEmail').valid){
+      this.render.removeClass(this.emailConfir.nativeElement,"is-invalid");
+        this.render.addClass(this.emailConfir.nativeElement,"is-valid");
+        this.confirmEmailAlert = false;        
+     }else{
+      this.render.removeClass(this.emailConfir.nativeElement,"is-valid");
+      this.render.addClass(this.emailConfir.nativeElement,"is-invalid");
+      this.confirmEmailAlert = true;
+     }
+    
   }
-  getconfirmEmail(): boolean {
-    return this.formParent.get('confirmEmail').invalid;
-  }
-  
-  get tutor_cellphone(): FormControl {
-    return this.formParent.get('tutor_cellphone') as FormControl;
-  }
-  
-  get tutor_home_phone(): FormControl {
-    return this.formParent.get('tutor_home_phone') as FormControl;
-  }
-  
-  get contact_name(): FormControl {
-    return this.formParent.get('contact_name') as FormControl;
-  }
-  
-  get contact_lastname_mother(): FormControl {
-    return this.formParent.get('contact_lastname_mother') as FormControl;
-  }
-  
-  get contact_home_phone(): FormControl {
-    return this.formParent.get('contact_home_phone') as FormControl;
-  }
-  
-  get contact_email(): FormControl {
-    return this.formParent.get('contact_email') as FormControl;
-  }
-  
-  get tutor_name(): FormControl {
-    return this.formParent.get('tutor_name') as FormControl;
-  }
-  
-  get tutor_lastname_mother(): FormControl {
-    return this.formParent.get('tutor_lastname_mother') as FormControl;
-  }
-  
-  get tutor_work_phone(): FormControl {
-    return this.formParent.get('tutor_work_phone') as FormControl;
-  }
-  
-  get contact_lastname_father(): FormControl {
-    return this.formParent.get('contact_lastname_father') as FormControl;
-  }
-  
-  get contact_cellphone(): FormControl {
-    return this.formParent.get('contact_cellphone') as FormControl;
+  getTutor_name() {
+    if( this.formParent.get('tutor_name').valid){
+      this.render.removeClass(this.tutor_name.nativeElement,"is-invalid");
+        this.render.addClass(this.tutor_name.nativeElement,"is-valid");
+     }else{
+      this.render.removeClass(this.tutor_name.nativeElement,"is-valid");
+      this.render.addClass(this.tutor_name.nativeElement,"is-invalid");
+     }
+    
   }
   
-  get contact_work_phone(): FormControl {
-    return this.formParent.get('contact_work_phone') as FormControl;
-  }
+
   
-  get terms(): FormControl {
-    return this.formParent.get('terms') as FormControl;
-  }
-  
-  get user_id(): FormControl {
-    return this.formParent.get('user_id') as FormControl;
-  }
+ 
 
   equalsEmail(){
     if( this.correo == this.confirmarCorreo){
@@ -235,7 +251,121 @@ export class NewParentComponent implements OnInit {
    )
    
   }
+  getTutor_lastname_father(){
+    if( this.formParent.get('tutor_lastname_father').valid){
+      this.render.removeClass(this.tutor_lastname_father.nativeElement,"is-invalid");
+        this.render.addClass(this.tutor_lastname_father.nativeElement,"is-valid");
+     }else{
+      this.render.removeClass(this.tutor_lastname_father.nativeElement,"is-valid");
+      this.render.addClass(this.tutor_lastname_father.nativeElement,"is-invalid");
+     }
+  }
+  gettutor_lastname_mother(){
+    if( this.formParent.get('tutor_lastname_mother').valid){
+      this.render.removeClass(this.tutor_lastname_mother.nativeElement,"is-invalid");
+        this.render.addClass(this.tutor_lastname_mother.nativeElement,"is-valid");
+     }else{
+      this.render.removeClass(this.tutor_lastname_mother.nativeElement,"is-valid");
+      this.render.addClass(this.tutor_lastname_mother.nativeElement,"is-invalid");
+     }
+  }
+  gettutor_cellphone(){
+    if( this.formParent.get('tutor_cellphone').valid){
+      this.render.removeClass(this.tutor_cellphone.nativeElement,"is-invalid");
+        this.render.addClass(this.tutor_cellphone.nativeElement,"is-valid");
+     }else{
+      this.render.removeClass(this.tutor_cellphone.nativeElement,"is-valid");
+      this.render.addClass(this.tutor_cellphone.nativeElement,"is-invalid");
+     }
+  }
+  gettutor_home_phone(){
+    if( this.formParent.get('tutor_home_phone').valid){
+      this.render.removeClass(this.tutor_home_phone.nativeElement,"is-invalid");
+        this.render.addClass(this.tutor_home_phone.nativeElement,"is-valid");
+     }else{
+      this.render.removeClass(this.tutor_home_phone.nativeElement,"is-valid");
+      this.render.addClass(this.tutor_home_phone.nativeElement,"is-invalid");
+     }
+  }
+  gettutor_work_phone(){
+    if( this.formParent.get('tutor_work_phone').valid){
+      this.render.removeClass(this.tutor_work_phone.nativeElement,"is-invalid");
+        this.render.addClass(this.tutor_work_phone.nativeElement,"is-valid");
+     }else{
+      this.render.removeClass(this.tutor_work_phone.nativeElement,"is-valid");
+      this.render.addClass(this.tutor_work_phone.nativeElement,"is-invalid");
+     }
+  }
 
+  getcontact_name(){
+    if( this.formParent.get('contact_name').valid){
+      this.render.removeClass(this.contact_name.nativeElement,"is-invalid");
+        this.render.addClass(this.contact_name.nativeElement,"is-valid");
+     }else{
+      this.render.removeClass(this.contact_name.nativeElement,"is-valid");
+      this.render.addClass(this.contact_name.nativeElement,"is-invalid");
+     }
+  }
+
+  getcontact_lastname_father(){
+    if( this.formParent.get('contact_lastname_father').valid){
+      this.render.removeClass(this.contact_lastname_father.nativeElement,"is-invalid");
+        this.render.addClass(this.contact_lastname_father.nativeElement,"is-valid");
+     }else{
+      this.render.removeClass(this.contact_lastname_father.nativeElement,"is-valid");
+      this.render.addClass(this.contact_lastname_father.nativeElement,"is-invalid");
+     }
+
+  }
+
+  getcontact_lastname_mother(){
+    if( this.formParent.get('contact_lastname_mother').valid){
+      this.render.removeClass(this.contact_lastname_mother.nativeElement,"is-invalid");
+        this.render.addClass(this.contact_lastname_mother.nativeElement,"is-valid");
+     }else{
+      this.render.removeClass(this.contact_lastname_mother.nativeElement,"is-valid");
+      this.render.addClass(this.contact_lastname_mother.nativeElement,"is-invalid");
+     }
+
+  }
+  getcontact_cellphone(){
+    if( this.formParent.get('contact_cellphone').valid){
+      this.render.removeClass(this.contact_cellphone.nativeElement,"is-invalid");
+        this.render.addClass(this.contact_cellphone.nativeElement,"is-valid");
+     }else{
+      this.render.removeClass(this.contact_cellphone.nativeElement,"is-valid");
+      this.render.addClass(this.contact_cellphone.nativeElement,"is-invalid");
+     }
+
+  }
+  getcontact_work_phone(){
+    if( this.formParent.get('contact_work_phone').valid){
+      this.render.removeClass(this.contact_work_phone.nativeElement,"is-invalid");
+        this.render.addClass(this.contact_work_phone.nativeElement,"is-valid");
+     }else{
+      this.render.removeClass(this.contact_work_phone.nativeElement,"is-valid");
+      this.render.addClass(this.contact_work_phone.nativeElement,"is-invalid");
+     }
+
+  }
+  getcontact_home_phone(){
+    if( this.formParent.get('contact_home_phone').valid){
+      this.render.removeClass(this.contact_home_phone.nativeElement,"is-invalid");
+        this.render.addClass(this.contact_home_phone.nativeElement,"is-valid");
+     }else{
+      this.render.removeClass(this.contact_home_phone.nativeElement,"is-valid");
+      this.render.addClass(this.contact_home_phone.nativeElement,"is-invalid");
+     }
+  }
+  getcontact_email(){
+    if( this.formParent.get('contact_email').valid){
+      this.render.removeClass(this.contact_email.nativeElement,"is-invalid");
+        this.render.addClass(this.contact_email.nativeElement,"is-valid");
+     }else{
+      this.render.removeClass(this.contact_email.nativeElement,"is-valid");
+      this.render.addClass(this.contact_email.nativeElement,"is-invalid");
+     }
+  }
   /**
    * Change the layout onclick
    * @param layout Change the layout

@@ -14,28 +14,34 @@
                         </div>
 
                         <div class="mt-5">
-                            <div class="row mb-4">
+                            <div class="row mb-3">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label" >correo electrónico*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="email" name="email"  [ngClass]="{'is-invalid':getpassword() == true,'is-valid':getpassword() == false}">
+                                    
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="email" name="email"   (input)="getemail()" #email>
+                                    <p> <small style=" font-size: 14px; color: red;"> Será el usuario de acceso a la cuenta.</small></p>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label" >Confirma correo electrónico*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="confirmEmail"  name="confirmEmail" [ngClass]="{'is-invalid':getconfirmEmail() == true,'is-valid':getconfirmEmail() == false}">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="confirmEmail"  name="confirmEmail" #emailConfir  (input)="getconfirmEmail()">
+                                    <div  class="alert alert-danger" *ngIf="confirmEmailAlert"><small style="color: red; font-size: 14px    ;">El correo no coincide.</small></div>
                                 </div>
                             </div>
-                            <div class="row mb-4">
+                            <div class="row mb-1">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Contraseña</label>
                                 <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="horizontal-firstname-input" formControlName="password"  name="password" [ngClass]="{'is-invalid':getpassword() == true,'is-valid':getpassword() == false}" >
+                                    <input type="password" class="form-control" id="horizontal-firstname-input" formControlName="password"  name="password" #password (input)="getpassword()">
+                                    <div  class="alert alert-warning mt-1"> Se usará para ingresar a Camper Control. Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra minuscula y un caracter especial</div>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label" >Confirma contraseña*</label>
                                 <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="horizontal-firstname-input" formControlName="confirmPassword"  name="confirmPassword" [ngClass]="{'is-invalid':getconfirmPassword() == true,'is-valid':getconfirmPassword() == false}">
+                                    <input type="password" class="form-control" id="horizontal-firstname-input" formControlName="confirmPassword"  name="confirmPassword" #confirmPassword (input)="getconfirmPassword()">
+                                    <div  class="alert alert-danger" *ngIf="confirmPaswordAlert"><small style="color: red; font-size: 14px    ;">Las contraseñas no coinciden.</small></div>
+
                                 </div>
                             </div>
                         </div>
@@ -58,43 +64,43 @@
                                 <label for="horizontal-firstname-input"
                                     class="col-sm-3 col-form-label">Nombre(s)*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="tutor_name" [ngClass]="{'is-invalid':tutor_name.invalid == true,'is-valid':tutor_name.invalid == false}" 
-                                    >
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="tutor_name" #tutor_name
+                                    (input)=" getTutor_name()">
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label" >Apellido
                                     paterno*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="tutor_lastname_father"  [ngClass]="{'is-invalid':gettutor_lastname_father() == true,'is-valid':gettutor_lastname_father() == false}" >
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="tutor_lastname_father" (input)="getTutor_lastname_father()" #tutor_lastname_father>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Apellido
                                     materno</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="tutor_lastname_mother"   [ngClass]="{'is-invalid':tutor_lastname_mother.invalid == true,'is-valid':tutor_lastname_mother.invalid == false}" >
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="tutor_lastname_mother" (input)="gettutor_lastname_mother()" #tutor_lastname_mother>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label" >Teléfono
                                     móvil*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "tutor_cellphone"  [ngClass]="{'is-invalid':tutor_cellphone.invalid == true,'is-valid':tutor_cellphone.invalid == false}">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "tutor_cellphone" #tutor_cellphone (input)="gettutor_cellphone()">
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Teléfono de
                                     casa*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "tutor_home_phone"  [ngClass]="{'is-invalid':tutor_home_phone.invalid == true,'is-valid':tutor_home_phone.invalid == false}">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "tutor_home_phone" #tutor_home_phone (input)="gettutor_home_phone()" >
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Teléfono de
                                     oficina*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "tutor_work_phone"  [ngClass]="{'is-invalid':tutor_work_phone.invalid == true,'is-valid':tutor_work_phone.invalid == false}">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "tutor_work_phone" #tutor_work_phone (input)="gettutor_work_phone()">
                                 </div>
                             </div>
 
@@ -126,49 +132,49 @@
                                 <label for="horizontal-firstname-input"
                                     class="col-sm-3 col-form-label">Nombre(s)*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "contact_name"  [ngClass]="{'is-invalid':contact_name.invalid == true,'is-valid':contact_name.invalid == false}">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "contact_name" #contact_name (input)="getcontact_name()" >
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Apellido
                                     paterno*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "contact_lastname_father" [ngClass]="{'is-invalid':contact_lastname_father.invalid == true,'is-valid':contact_lastname_father.invalid == false}">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "contact_lastname_father" #contact_lastname_father  (input)="getcontact_lastname_father()">
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Apellido
                                     materno</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input"  formControlName = "contact_lastname_mother"  [ngClass]="{'is-invalid':contact_lastname_mother.invalid == true,'is-valid':contact_lastname_mother.invalid == false}">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input"  formControlName = "contact_lastname_mother" #contact_lastname_mother (input)="getcontact_lastname_mother()" >
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Teléfono
                                     móvil*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input"  formControlName = "contact_cellphone" [ngClass]="{'is-invalid':contact_cellphone.invalid == true,'is-valid':contact_cellphone.invalid == false}">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input"  formControlName = "contact_cellphone" (input)="getcontact_cellphone()" #contact_cellphone >
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Teléfono de
                                     oficina*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "contact_work_phone" [ngClass]="{'is-invalid':contact_work_phone.invalid == true,'is-valid':contact_work_phone.invalid == false}">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "contact_work_phone" (input)="getcontact_work_phone()" #contact_work_phone >
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Teléfono de
                                     casa*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "contact_home_phone" [ngClass]="{'is-invalid':contact_home_phone.invalid == true,'is-valid':contact_home_phone.invalid == false}">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName ="contact_home_phone" (input)="getcontact_home_phone()" #contact_home_phone >
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input"
                                     class="col-sm-3 col-form-label">Correo electrónico*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="contact_email" [ngClass]="{'is-invalid':contact_email.invalid == true,'is-valid':contact_email.invalid == false}">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="contact_email" #contact_email (input)="getcontact_email()">
                                 </div>
                             </div>
                           
