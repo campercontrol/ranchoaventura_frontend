@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Options } from 'ng5-slider';
 import { CamperService } from 'src/services/camper.service';
 import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
@@ -35,8 +35,33 @@ export class CamperNuevoComponent implements OnInit {
 
   public formUser : FormGroup;
   public formGen : FormGroup;
+ 
   vacunas:any = [];
-
+  @ViewChild("name") name: ElementRef;
+  @ViewChild("lastname_father") lastname_father: ElementRef;
+  @ViewChild("lastname_mother") lastname_mother: ElementRef;
+  @ViewChild("email") email: ElementRef;
+  @ViewChild("gender_id") gender_id: ElementRef;
+  @ViewChild("birthday") birthday: ElementRef;
+  @ViewChild("school_id") school_id: ElementRef; 
+  @ViewChild("grade") grade: ElementRef; 
+  @ViewChild("blood_type") blood_type: ElementRef; 
+  @ViewChild("heart_problems") heart_problems: ElementRef; 
+  @ViewChild("prevent_activities") prevent_activities: ElementRef; 
+  @ViewChild("affliction") affliction: ElementRef; 
+  @ViewChild("nocturnal_disorders") nocturnal_disorders: ElementRef; 
+  @ViewChild("phobias") phobias: ElementRef; 
+  @ViewChild("psicology_treatments") psicology_treatments: ElementRef; 
+  @ViewChild("security_social_number") security_social_number: ElementRef; 
+  @ViewChild("insurance_number") insurance_number: ElementRef;  
+  @ViewChild("drugs") drugs: ElementRef; 
+  @ViewChild("drug_allergies") drug_allergies: ElementRef;  
+  @ViewChild("other_allergies") other_allergies: ElementRef; 
+  @ViewChild("prohibited_foods") prohibited_foods: ElementRef; 
+  @ViewChild("contact_relation") contact_relation: ElementRef; 
+  @ViewChild("contact_name") contact_name: ElementRef; 
+  @ViewChild("contact_cellphone") contact_cellphone: ElementRef; 
+  @ViewChild("contact_homephone") contact_homephone: ElementRef; 
 
 
 
@@ -45,7 +70,7 @@ export class CamperNuevoComponent implements OnInit {
 
   sexo:string[]=['Hombre','Mujer',"No binario"," Prefiero no decir"]
 
-  constructor(private catalogos: CamperService , private formGrup: FormBuilder, private router:Router) {
+  constructor(private catalogos: CamperService , private formGrup: FormBuilder, private router:Router,private render:Renderer2) {
     this.catalogos.getCatalogos().subscribe((res:any)=>{
 
       this.blood_types = res.blood_types;
@@ -66,38 +91,38 @@ export class CamperNuevoComponent implements OnInit {
   ngOnInit(): void {
 
     this.formUser = this.formGrup.group({
-      name:["",[Validators.required]],
-      lastname_father:["",[Validators.required]],
-      lastname_mother:["",[Validators.required]],
+      name:["",[Validators.required,Validators.minLength(2)]],
+      lastname_father:["",[Validators.required,,Validators.minLength(2)]],
+      lastname_mother:["",[Validators.required,,Validators.minLength(2)]],
       photo:["",[Validators.required]],
-      gender_id:[0,[Validators.required]],
+      gender_id:[0,[Validators.required,Validators.min(1)]],
       birthday:["",[Validators.required]],
       height:[0,[Validators.required,Validators.min(0.20)]],
       weight:[0,[Validators.required,Validators.min(0.20)]],
-      grade:[0,[Validators.required]],
-      school_id:[0,[Validators.required]],
+      grade:[0,[Validators.required,Validators.min(1)]],
+      school_id:[0,[Validators.required,Validators.min(1)]],
       school_other:["",],
       email: ["",[Validators.required,Validators.email]],
       can_swim: [0],
       affliction: ["",[Validators.required]],
-      blood_type: [0,[Validators.required]],
-      heart_problems: ["",[Validators.required]],
-      psicology_treatments: ["",[Validators.required]],
-      prevent_activities: ["",[Validators.required]],
-      drug_allergies: ["",[Validators.required]],
-      other_allergies: ["",[Validators.required]],
-      nocturnal_disorders: ["",[Validators.required]],
-      phobias: ["",[Validators.required]],
-      drugs: ["",[Validators.required]],
+      blood_type: [0,[Validators.required,Validators.min(1)]],
+      heart_problems: ["",[Validators.required,Validators.minLength(2)]],
+      psicology_treatments: ["",[Validators.required,Validators.minLength(2)]],
+      prevent_activities: ["",[Validators.required,Validators.minLength(2)]],
+      drug_allergies: ["",[Validators.required,Validators.minLength(2)]],
+      other_allergies: ["",[Validators.required,Validators.minLength(2)]],
+      nocturnal_disorders: ["",[Validators.required,Validators.minLength(2)]],
+      phobias: ["",[Validators.required,Validators.minLength(2)]],
+      drugs: ["",[Validators.required,Validators.minLength(2)]],
       doctor_precall: [false],
-      prohibited_foods: ["",[Validators.required]],
+      prohibited_foods: ["",[Validators.required,Validators.minLength(2)]],
       comments_admin: ["Ninguno"],
       insurance: [false],
       insurance_company: [true],
       insurance_number: [""],
       security_social_number: ["",],
-      contact_name: ["",[Validators.required]],
-      contact_relation: ["",[Validators.required]],
+      contact_name: ["",[Validators.required,Validators.minLength(2)]],
+      contact_relation: ["",[Validators.required,Validators.minLength(3)]],
       contact_homephone: ["",[Validators.required,Validators.minLength(8)]],
       contact_cellphone: ["",[Validators.required,Validators.minLength(8)]],
       record_id: [0,],
@@ -107,28 +132,60 @@ export class CamperNuevoComponent implements OnInit {
     
   }
 
-  get name(){
-    return this.formUser.get('name');
+  getname(){
+    if( this.formUser.get('name').valid){
+      this.render.removeClass(this.name.nativeElement,"is-invalid");
+      this.render.addClass(this.name.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.name.nativeElement,"is-valid");
+    this.render.addClass(this.name.nativeElement,"is-invalid");
+   }
+    
   }
 
-  get lastname_father()  {
-    return this.formUser.get('lastname_father');
+  getlastname_father()  {
+    if( this.formUser.get('lastname_father').valid){
+      this.render.removeClass(this.lastname_father.nativeElement,"is-invalid");
+      this.render.addClass(this.lastname_father.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.lastname_father.nativeElement,"is-valid");
+    this.render.addClass(this.lastname_father.nativeElement,"is-invalid");
+   }  
   }
   
-  get lastname_mother() {
-    return this.formUser.get('lastname_mother');
+  getlastname_mother() {
+    
+    if( this.formUser.get('lastname_mother').valid){
+      this.render.removeClass(this.lastname_mother.nativeElement,"is-invalid");
+      this.render.addClass(this.lastname_mother.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.lastname_mother.nativeElement,"is-valid");
+    this.render.addClass(this.lastname_mother.nativeElement,"is-invalid");
+   } 
   }
   
   get photo() {
     return this.formUser.get('photo');
   }
   
-  get gender_id() {
-    return this.formUser.get('gender_id');
+  getgender_id() {
+    if( this.formUser.get('gender_id').valid){
+      this.render.removeClass(this.gender_id.nativeElement,"is-invalid");
+      this.render.addClass(this.gender_id.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.gender_id.nativeElement,"is-valid");
+    this.render.addClass(this.gender_id.nativeElement,"is-invalid");
+   }
   }
   
-  get birthday() {
-    return this.formUser.get('birthday');
+  getbirthday() {
+    if( this.formUser.get('birthday').valid){
+      this.render.removeClass(this.birthday.nativeElement,"is-invalid");
+      this.render.addClass(this.birthday.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.birthday.nativeElement,"is-valid");
+    this.render.addClass(this.birthday.nativeElement,"is-invalid");
+   }
   }
   
   get height() {
@@ -139,117 +196,235 @@ export class CamperNuevoComponent implements OnInit {
     return this.formUser.get('weight')  ;
   }
   
-  get grade() {
-    return this.formUser.get('grade')  ;
+  getgrade() {
+    if( this.formUser.get('grade').valid){
+      this.render.removeClass(this.grade.nativeElement,"is-invalid");
+      this.render.addClass(this.grade.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.grade.nativeElement,"is-valid");
+    this.render.addClass(this.grade.nativeElement,"is-invalid");
+   }
   }
   
-  get school_id() {
-    return this.formUser.get('school_id')  ;
+  getschool_id() {
+    if( this.formUser.get('school_id').valid){
+      this.render.removeClass(this.school_id.nativeElement,"is-invalid");
+      this.render.addClass(this.school_id.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.school_id.nativeElement,"is-valid");
+    this.render.addClass(this.school_id.nativeElement,"is-invalid");
+   }
   }
   
   get school_other() {
     return this.formUser.get('school_other')  ;
   }
   
-  get email() {
-    return this.formUser.get('email')  ;
+  getemail() {
+   
+    if( this.formUser.get('email').valid){
+      this.render.removeClass(this.email.nativeElement,"is-invalid");
+      this.render.addClass(this.email.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.email.nativeElement,"is-valid");
+    this.render.addClass(this.email.nativeElement,"is-invalid");
+   } 
   }
   
   get can_swim() {
     return this.formUser.get('can_swim')  ;
   }
   
-  get affliction() {
-    return this.formUser.get('affliction')  ;
+  getaffliction() {
+    if( this.formUser.get('affliction').valid){
+      this.render.removeClass(this.affliction.nativeElement,"is-invalid");
+      this.render.addClass(this.affliction.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.affliction.nativeElement,"is-valid");
+    this.render.addClass(this.affliction.nativeElement,"is-invalid");
+   }
   }
   
-  get blood_type() {
-    return this.formUser.get('blood_type')  ;
+  getblood_type() {
+    if( this.formUser.get('blood_type').valid){
+      this.render.removeClass(this.blood_type.nativeElement,"is-invalid");
+      this.render.addClass(this.blood_type.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.birthday.nativeElement,"is-valid");
+    this.render.addClass(this.blood_type.nativeElement,"is-invalid");
+   }
   }
   
-  get heart_problems() {
-    return this.formUser.get('heart_problems')  ;
+  getheart_problems() {
+    if( this.formUser.get('heart_problems').valid){
+      this.render.removeClass(this.heart_problems.nativeElement,"is-invalid");
+      this.render.addClass(this.heart_problems.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.heart_problems.nativeElement,"is-valid");
+    this.render.addClass(this.heart_problems.nativeElement,"is-invalid");
+   }
   }
   
-  get psicology_treatments() {
-    return this.formUser.get('psicology_treatments')  ;
+  getpsicology_treatments() {
+    if( this.formUser.get('psicology_treatments').valid){
+      this.render.removeClass(this.psicology_treatments.nativeElement,"is-invalid");
+      this.render.addClass(this.psicology_treatments.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.psicology_treatments.nativeElement,"is-valid");
+    this.render.addClass(this.psicology_treatments.nativeElement,"is-invalid");
+   }
   }
   
-  get prevent_activities() {
-    return this.formUser.get('prevent_activities')  ;
+  getprevent_activities() {
+    if( this.formUser.get('prevent_activities').valid){
+      this.render.removeClass(this.prevent_activities.nativeElement,"is-invalid");
+      this.render.addClass(this.prevent_activities.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.prevent_activities.nativeElement,"is-valid");
+    this.render.addClass(this.prevent_activities.nativeElement,"is-invalid");
+   }
   }
   
-  get drug_allergies() {
-    return this.formUser.get('drug_allergies')  ;
+  getdrug_allergies() {
+    if( this.formUser.get('drug_allergies').valid){
+      this.render.removeClass(this.drug_allergies.nativeElement,"is-invalid");
+      this.render.addClass(this.drug_allergies.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.drug_allergies.nativeElement,"is-valid");
+    this.render.addClass(this.drug_allergies.nativeElement,"is-invalid");
+   }
+  
   }
   
-  get other_allergies() {
-    return this.formUser.get('other_allergies')  ;
+  getother_allergies() {
+    if( this.formUser.get('other_allergies').valid){
+      this.render.removeClass(this.other_allergies.nativeElement,"is-invalid");
+      this.render.addClass(this.other_allergies.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.other_allergies.nativeElement,"is-valid");
+    this.render.addClass(this.other_allergies.nativeElement,"is-invalid");
+   }
   }
   
-  get nocturnal_disorders() {
-    return this.formUser.get('nocturnal_disorders')  ;
+  getnocturnal_disorders() {
+    if( this.formUser.get('nocturnal_disorders').valid){
+      this.render.removeClass(this.nocturnal_disorders.nativeElement,"is-invalid");
+      this.render.addClass(this.nocturnal_disorders.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.nocturnal_disorders.nativeElement,"is-valid");
+    this.render.addClass(this.nocturnal_disorders.nativeElement,"is-invalid");
+   }
   }
   
-  get phobias() {
-    return this.formUser.get('phobias')  ;
+  getphobias() {
+    if( this.formUser.get('phobias').valid){
+      this.render.removeClass(this.phobias.nativeElement,"is-invalid");
+      this.render.addClass(this.phobias.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.phobias.nativeElement,"is-valid");
+    this.render.addClass(this.phobias.nativeElement,"is-invalid");
+   }
   }
   
-  get drugs() {
-    return this.formUser.get('drugs')  ;
+  getdrugs() {
+    if( this.formUser.get('drugs').valid){
+      this.render.removeClass(this.drugs.nativeElement,"is-invalid");
+      this.render.addClass(this.drugs.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.drugs.nativeElement,"is-valid");
+    this.render.addClass(this.drugs.nativeElement,"is-invalid");
+   }
+    
   }
   
   get doctor_precall() {
     return this.formUser.get('doctor_precall')  ;
   }
   
-  get prohibited_foods() {
-    return this.formUser.get('prohibited_foods')  ;
+  getprohibited_foods() {
+    if( this.formUser.get('insurance_number').valid){
+      this.render.removeClass(this.prohibited_foods.nativeElement,"is-invalid");
+      this.render.addClass(this.prohibited_foods.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.prohibited_foods.nativeElement,"is-valid");
+    this.render.addClass(this.prohibited_foods.nativeElement,"is-invalid");
+   }
+   
   }
   
-  get comments_admin() {
+  getcomments_admin() {
     return this.formUser.get('comments_admin')  ;
   }
   
-  get insurance() {
+  getinsurance() {
     return this.formUser.get('insurance')  ;
   }
   
-  get insurance_company() {
+  getinsurance_company() {
     return this.formUser.get('insurance_company')  ;
   }
   
-  get insurance_number() {
-    return this.formUser.get('insurance_number')  ;
+  getinsurance_number() {
+    if( this.formUser.get('insurance_number').valid){
+      this.render.removeClass(this.insurance_number.nativeElement,"is-invalid");
+      this.render.addClass(this.insurance_number.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.insurance_number.nativeElement,"is-valid");
+    this.render.addClass(this.insurance_number.nativeElement,"is-invalid");
+   }
   }
   
-  get security_social_number() {
-    return this.formUser.get('security_social_number')  ;
+  getsecurity_social_number() {
+    if( this.formUser.get('security_social_number').valid){
+      this.render.removeClass(this.security_social_number.nativeElement,"is-invalid");
+      this.render.addClass(this.security_social_number.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.security_social_number.nativeElement,"is-valid");
+    this.render.addClass(this.security_social_number.nativeElement,"is-invalid");
+   }
   }
   
-  get contact_name() {
-    return this.formUser.get('contact_name')  ;
+  getcontact_name() {
+    if( this.formUser.get('contact_name').valid){
+      this.render.removeClass(this.contact_name.nativeElement,"is-invalid");
+      this.render.addClass(this.contact_name.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.contact_name.nativeElement,"is-valid");
+    this.render.addClass(this.contact_name.nativeElement,"is-invalid");
+   }
   }
   
-  get contact_relation() {
-    return this.formUser.get('contact_relation')  ;
+  getcontact_relation() {
+    if( this.formUser.get('contact_relation').valid){
+      this.render.removeClass(this.contact_relation.nativeElement,"is-invalid");
+      this.render.addClass(this.contact_relation.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.contact_relation.nativeElement,"is-valid");
+    this.render.addClass(this.contact_relation.nativeElement,"is-invalid");
+   }
   }
   
-  get contact_homephone() {
-    return this.formUser.get('contact_homephone')  ;
+  getcontact_homephone() {
+    if( this.formUser.get('contact_homephone').valid){
+      this.render.removeClass(this.contact_homephone.nativeElement,"is-invalid");
+      this.render.addClass(this.contact_homephone.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.contact_homephone.nativeElement,"is-valid");
+    this.render.addClass(this.contact_homephone.nativeElement,"is-invalid");
+   }
   }
   
-  get contact_cellphone() {
-    return this.formUser.get('contact_cellphone')  ;
+  getcontact_cellphone() {
+    if( this.formUser.get('contact_cellphone').valid){
+      this.render.removeClass(this.contact_cellphone.nativeElement,"is-invalid");
+      this.render.addClass(this.contact_cellphone.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.contact_cellphone.nativeElement,"is-valid");
+    this.render.addClass(this.contact_cellphone.nativeElement,"is-invalid");
+   }
   }
   
-  get record_id()  {
-    return this.formUser.get('record_id') ;
-  }
-  
-  get parent_id() {
-    return this.formUser.get('parent_id') ;
-  }
+ 
   subiendo(event: any) {
     const archivo = event.target.files[0];
 
@@ -290,25 +465,55 @@ public fileLeave(event){
   
   prueba1(){
     this.spinner=true;
-    let a = {
-      "camper":this.formUser.value,
-      "vaccines": this.vaccines,
-      "licensed_medicines": this.licensed_medicines,
-      "food_restrictions": this.food_restrictions,
-      "pathological_background":this.pathological_background,
-      "pathological_background_fm": this.pathological_background_fm
+    if(this.formUser.valid){
+      let a = {
+        "camper":this.formUser.value,
+        "vaccines": this.vaccines,
+        "licensed_medicines": this.licensed_medicines,
+        "food_restrictions": this.food_restrictions,
+        "pathological_background":this.pathological_background,
+        "pathological_background_fm": this.pathological_background_fm
+  
+      }
+      console.log(a);
+      
+      this.catalogos.setCamper(a).subscribe((res:any)=>{
+          console.log(res);
+          if(res.succes = 200){
+            this.spinner=false;
+           this.router.navigate(['parents/camper/inscription/1']);
+          }
+          
+      });
+    }else{
+      this.getcontact_homephone();
+      this.getcontact_cellphone();
+      this.getcontact_relation();
+      this.getcontact_name();
+      this.getprohibited_foods();
+      this.getother_allergies();
+      this.getdrug_allergies();
+      this.getdrugs();
+      this.getsecurity_social_number();
+      this.getinsurance_number();
+      this.getpsicology_treatments();
+      this.getphobias();
+      this.getnocturnal_disorders();
+      this.getaffliction();
+      this.getprevent_activities();
+      this.getheart_problems();
+      this.getgrade();
+      this.getschool_id();
+      this.getbirthday();
+      this.getgender_id();
+      this.getemail();
+      this.getlastname_mother();
+      this.getlastname_father();
+      this.getname();
+     
 
     }
-    console.log(a);
-    
-    this.catalogos.setCamper(a).subscribe((res:any)=>{
-        console.log(res);
-        if(res.succes = 200){
-          this.spinner=false;
-         this.router.navigate(['parents/camper/inscription/1']);
-        }
-        
-    });
+
     
   }
   prueba2(){

@@ -15,8 +15,7 @@
                                 <label for="horizontal-firstname-input"
                                     class="col-sm-3 col-form-label">Nombre(s)*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control " id="horizontal-firstname-input"  [ngClass]="{'is-invalid':name.invalid == true,'is-valid':name.invalid == false}"
-                                        formControlName="name" name="name">
+                                    <input type="text" class="form-control " id="horizontal-firstname-input" formControlName="name" name="name" #name (input)="getname()">
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -25,7 +24,7 @@
                                    
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="horizontal-firstname-input"
-                                        formControlName="lastname_father" name="lastname_father" [ngClass]="{'is-invalid':lastname_father.invalid == true,'is-valid':lastname_father.invalid == false}">
+                                        formControlName="lastname_father" name="lastname_father" (input)="getlastname_father()" #lastname_father>
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -33,7 +32,7 @@
                                     materno</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="horizontal-firstname-input"
-                                        formControlName="lastname_mother"  name="lastname_mother" [ngClass]="{'is-invalid':lastname_mother.invalid == true,'is-valid':lastname_mother.invalid == false}">
+                                        formControlName="lastname_mother"  name="lastname_mother" #lastname_mother (input)="getlastname_mother()">
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -42,15 +41,16 @@
                                     del acampador</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="horizontal-firstname-input"
-                                        formControlName="email"  name="email" [ngClass]="{'is-invalid':email.invalid == true,'is-valid':email.invalid == false}">
+                                        formControlName="email"  name="email" #email (input)="getemail()">
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Genero</label>
 
                                 <div class="col-sm-9">
-                                    <ng-select [items]="genders" bindLabel="value" bindValue="id" formControlName="gender_id" [ngClass]="{'is-invalid':gender_id.invalid == true,'is-valid':gender_id.invalid == false}" style="width: 100%;">
-                                    </ng-select>
+                                    <select bindLabel="value" bindValue="id" formControlName="gender_id"  style="width: 100%;" (input)="getgender_id()" class=" form-control" #gender_id>
+                                        <option *ngFor="let item of genders" [value]="item.id"> {{item.value}}</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -60,15 +60,10 @@
                                 <div class=" control-label col-sm-9">
                                     
                                         <input type="date" class="form-control" placeholder="yyyy-mm-dd"
-                                        formControlName="birthday" [ngClass]="{'is-invalid':birthday.invalid == true,'is-valid':birthday.invalid == false}" style="width: 100%;">
+                                        formControlName="birthday" style="width: 100%;"  (input)="getbirthday()" #birthday>
                                    
                                 </div>
                             </div>
-
-
-                                
-
-
                             <div class="foto mt-4">
                                 <div class="container-footer-parents">
                                     <img [src]="photoSelect || 'assets/images/camp/perfil-camper.png'" class="avatar-lg" alt="madre y padres">
@@ -99,6 +94,121 @@
 
                 </div>
                 <div class="card">
+
+                    <div class="card-body">
+                        <div class="container-footer-parents">
+                            <img src="assets/images/camp/datos-escolares.png" class="avatar-lg" alt="madre y padres">
+                            <h4 class="ms-3">Datos Escolares</h4>
+                        </div>
+                        <div class="mt-5">
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Escuela*</label>
+                                <div class="control-label col-sm-9">
+                                    <select name="school_id" id="school_id" formControlName="school_id" (input)="getschool_id()" class="form-control" #school_id>
+                                        <option *ngFor="let item of school" [value]="item.id" >
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                  
+                                </div>
+                               
+                            </div>
+                            <div class="row mb-4">
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Otra
+                                    escuela</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="school_other">
+                                </div>
+                               
+                            </div>
+                            <div class="row mb-4">
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Grado
+                                    escolar*</label>
+                                <div class="control-label col-sm-9">
+                                  
+
+                                    <select name="school_id" id="school_id" formControlName="grade" (input)="getgrade()" class="form-control" #grade>
+                                        <option *ngFor="let item of grades" [value]="item.id" >
+                                            {{item.value}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="alert alert-danger mt-2" role="alert" *ngIf="grade.invalid">
+                                                                             Campo requerido
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="container-footer-parents">
+                            <img src="assets/images/camp/datos-medico.png" class="avatar-lg" alt="madre y padres">
+                            <h4 class="ms-3">Datos Médicos Generales</h4>
+                        </div>
+                        <div class="mt-5">
+                            <div class="row mb-4">
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Estatura</label>
+                                <div class="control-label col-sm-9">
+                                    <input type="number" class="form-control" min="0" max="2" step="0.5" id="customRange3" formControlName="height">
+                                    
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Peso</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="horizontal-firstname-input"
+                                         formControlName="weight"
+                                         [ngClass]="{'is-invalid':weight.invalid == true,'is-valid':weight.invalid == false}" 
+
+                                         >
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-4">
+
+                                <label for="horizontal-firstname-input" class="col-sm-6 col-form-label">
+                                    Vacuna que
+                                    tiene:</label>
+                                <div class="container-genero">
+                                    <div class="mb-3">
+    
+    
+                                        <div class="form-check form-check-inline" *ngFor="let item of vaccines;index as i">
+                                            <input (click)="vaccinesValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions"
+                                                id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}"
+                                                >
+                                            <label class="form-check-label" for="inlineRadio1">{{item.name}}</label>
+                                        </div>
+    
+    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Tipo de
+                                    sangre*</label>
+                                <div class="control-label col-sm-9">
+                                    <select name="school_id" id="school_id" formControlName="grade" (input)="getblood_type()" class="form-control" #blood_type>
+                                        <option *ngFor="let item of blood_types" [value]="item.id" >
+                                            {{item.value}}
+                                        </option>
+                                    </select>
+                                   
+
+                                    <small>En caso de no conocer el tipo de sangre, escribe NO RECUERDO
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
 
                     <div class="card-body">
                         <div class="container-footer-parents">
@@ -146,12 +256,9 @@
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName = "heart_problems"
-                                    [ngClass]="{'text_area_invalid':heart_problems.invalid == true,'text_area_valid':heart_problems.invalid == false}" 
-                                    ></textarea>
-                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="heart_problems.invalid">
-                                        Campo requerido
-                                       </div>
-
+                                    class="form-control"
+                                    (input)="getheart_problems()"
+                                     #heart_problems></textarea>
                             </div>
                             <div class="container-medico mt-5">
                                 <h3>Circunstancias medicas que le impidan realizar actividades*</h3>
@@ -160,11 +267,11 @@
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName = "prevent_activities"
-                                    [ngClass]="{'is-invalid':prevent_activities.invalid == true,'is-valid':prevent_activities.invalid == false}" 
+                                    class="form-control"
+                                    (input)="getprevent_activities()"
+                                     #prevent_activities
                                     ></textarea>
-                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="prevent_activities.invalid">
-                                        Campo requerido
-                                       </div>
+                                   
 
                             </div>
 
@@ -175,12 +282,9 @@
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName = "affliction"
-                                    [ngClass]="{'is-invalid':affliction.invalid == true,'is-valid':affliction.invalid == false}" 
-                                    ></textarea>
-                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="affliction.invalid">
-                                        Campo requerido
-                                       </div>
-
+                                    class="form-control"
+                                    (input)="getaffliction()"
+                                     #affliction></textarea>
                             </div>
 
 
@@ -211,11 +315,10 @@
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName="nocturnal_disorders"
-                                    [ngClass]="{'is-invalid':affliction.invalid == true,'is-valid':affliction.invalid == false}" 
-                                    ></textarea>
-                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="nocturnal_disorders.invalid">
-                                        Campo requerido
-                                       </div>
+                                    class="form-control"
+                                    (input)="getnocturnal_disorders()"
+                                     #nocturnal_disorders></textarea>
+                                 
 
                             </div>
                             <div class="container-medico mt-5">
@@ -225,11 +328,10 @@
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName="phobias"
-                                    [ngClass]="{'is-invalid':phobias.invalid == true,'is-valid':phobias.invalid == false}" 
-                                    ></textarea>
-                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="phobias.invalid">
-                                        Campo requerido
-                                       </div>
+                                    class="form-control"
+                                    (input)="getphobias()"
+                                     #phobias></textarea>
+                                   
 
                             </div>
 
@@ -240,11 +342,10 @@
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName="psicology_treatments"
-                                    [ngClass]="{'is-invalid':psicology_treatments.invalid == true,'is-valid':psicology_treatments.invalid == false}" 
-                                    ></textarea>
-                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="psicology_treatments.invalid">
-                                        Campo requerido
-                                       </div>
+                                    class="form-control"
+                                    (input)="getpsicology_treatments()"
+                                     #psicology_treatments></textarea>
+                                   
 
                             </div>
 
@@ -267,9 +368,7 @@
                                     </div>
 
                                 </div>
-                                <div class="alert alert-danger mt-2" role="alert" *ngIf="can_swim.invalid">
-                                   Campo requerido
-                                  </div>
+                           
                             </div>
 
                             <div class="alert alert-warning">
@@ -317,7 +416,7 @@
                                     póliza</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "insurance_number"
-                                    [ngClass]="{'is-invalid':insurance_number.invalid == true,'is-valid':insurance_number.invalid == false}" 
+                                    (input)="getinsurance_number()" #insurance_number
                                     >
                                 </div>
                             </div>
@@ -325,8 +424,8 @@
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Número de
                                     seguridad social </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="security_social_number"
-                                    [ngClass]="{'is-invalid':security_social_number.invalid == true,'is-valid':security_social_number.invalid == false}" 
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="security_social_number" #security_social_number
+                                    (input)="getsecurity_social_number()"
                                     >
                                 </div>
                             </div>
@@ -344,113 +443,8 @@
                 </div>
             </div>
             <div class="col-lg-10">
-                <div class="card">
+                
 
-                    <div class="card-body">
-                        <div class="container-footer-parents">
-                            <img src="assets/images/camp/datos-escolares.png" class="avatar-lg" alt="madre y padres">
-                            <h4 class="ms-3">Datos Escolares</h4>
-                        </div>
-                        <div class="mt-5">
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Escuela*</label>
-                                <div class="control-label col-sm-9">
-                                    <ng-select [items]="school" bindLabel="name" bindValue="id" formControlName="school_id" name = "school_id">
-                                    </ng-select>
-                                </div>
-                                <div class="alert alert-danger mt-2" role="alert" *ngIf="school_id.invalid">
-                                    Campo requerido
-                                   </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Otra
-                                    escuela</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="school_other">
-                                </div>
-                               
-                            </div>
-                            <div class="row mb-4">
-                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Grado
-                                    escolar*</label>
-                                <div class="control-label col-sm-9">
-                                    <ng-select [items]="grades" bindLabel="value" bindValue="id" formControlName="grade">
-                                    </ng-select>
-                                </div>
-                                <div class="alert alert-danger mt-2" role="alert" *ngIf="grade.invalid">
-                                                                             Campo requerido
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-
-                    <div class="card-body">
-                        <div class="container-footer-parents">
-                            <img src="assets/images/camp/datos-medico.png" class="avatar-lg" alt="madre y padres">
-                            <h4 class="ms-3">Datos Médicos Generales</h4>
-                        </div>
-                        <div class="mt-5">
-                            <div class="row mb-4">
-                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Estatura</label>
-                                <div class="control-label col-sm-9">
-                                    <input type="number" class="form-control" id="horizontal-firstname-input"
-                                     formControlName="height"
-                                     [ngClass]="{'is-invalid':height.invalid == true,'is-valid':height.invalid == false}" 
-
-                                     >
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Peso</label>
-                                <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="horizontal-firstname-input"
-                                         formControlName="weight"
-                                         [ngClass]="{'is-invalid':weight.invalid == true,'is-valid':weight.invalid == false}" 
-
-                                         >
-                                </div>
-                            </div>
-                            
-                            <div class="row mb-4">
-
-                                <label for="horizontal-firstname-input" class="col-sm-6 col-form-label">
-                                    Vacuna que
-                                    tiene:</label>
-                                <div class="container-genero">
-                                    <div class="mb-3">
-    
-    
-                                        <div class="form-check form-check-inline" *ngFor="let item of vaccines;index as i">
-                                            <input (click)="vaccinesValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions"
-                                                id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}"
-                                                >
-                                            <label class="form-check-label" for="inlineRadio1">{{item.name}}</label>
-                                        </div>
-    
-    
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Tipo de
-                                    sangre*</label>
-                                <div class="control-label col-sm-9">
-                                    <ng-select [items]="blood_types" bindLabel="value" bindValue="id" formControlName="blood_type" >
-                                    </ng-select>
-
-                                    <small>En caso de no conocer el tipo de sangre, escribe NO RECUERDO
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                </div>
 
 
                 <div class="card">
@@ -515,7 +509,10 @@
                                     placeholder="Especificar dosis y horarios para la toma de medicamentos en tal caso de no necitar poner NINGUNO"
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
-                                    formControlName = "drugs"></textarea>
+                                    formControlName = "drugs"
+                                    class="form-control"
+                                    (input)="getdrugs()"
+                                     #drugs></textarea>
                                     <div class="alert alert-danger mt-2" role="alert" *ngIf="drugs.invalid">
                                                                                  Campo requerido
                                       </div>
@@ -529,10 +526,11 @@
                                     placeholder="En caso de que el acampador no sea alérgico a algún medicamento, teclea la palabra NINGUNO"
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
-                                    formControlName = "drug_allergies"></textarea>
-                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="drug_allergies.invalid">
-                                                                                 Campo requerido
-                                      </div>
+                                    formControlName = "drug_allergies"
+                                    class="form-control"
+                                    (input)="getdrug_allergies()"
+                                     #drug_allergies></textarea>
+                                    
 
                             </div>
                             <div class="container-medico mt-5" placement="top"
@@ -542,7 +540,10 @@
                                     placeholder="En caso de que el acampador no sea alérgico, teclea la palabra NINGUNA"
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
-                                    formControlName = "other_allergies"></textarea>
+                                    formControlName = "other_allergies"
+                                    class="form-control"
+                                    (input)="getother_allergies()"
+                                     #other_allergies></textarea>
                                     <div class="alert alert-danger mt-2" role="alert" *ngIf="other_allergies.invalid">
                                                                                  Campo requerido
                                       </div>
@@ -597,7 +598,10 @@
                                     placeholder="En caso de que el acampador pueda comer cualquier tipo de comida, teclea la palabra NINGUNA"
                                     name="" id="" cols="90" rows="10"
                                     style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
-                                    formControlName ="prohibited_foods"></textarea>
+                                    formControlName ="prohibited_foods"
+                                    class="form-control"
+                                    (input)="getprohibited_foods()"
+                                     #prohibited_foods></textarea>
 
                                     <div class="alert alert-danger mt-2" role="alert" *ngIf="prohibited_foods.invalid">
                                                                                  Campo requerido
@@ -631,8 +635,7 @@
                                 </label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="horizontal-firstname-input"
-                                    formControlName = "contact_name"
-                                    [ngClass]="{'is-invalid':contact_name.invalid == true,'is-valid':contact_name.invalid == false}" 
+                                    formControlName = "contact_name"  #contact_name (input)="getcontact_name()"
                                     >
                                 </div>
                             </div>
@@ -642,8 +645,7 @@
                                     contacto* </label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="horizontal-firstname-input"
-                                    formControlName = "contact_relation"
-                                    [ngClass]="{'is-invalid':contact_relation.invalid == true,'is-valid':contact_relation.invalid == false}" 
+                                    formControlName = "contact_relation" #contact_relation (input)="getcontact_relation()"
                                     >
                                 </div>
                             </div>
@@ -653,8 +655,7 @@
                                     contacto* </label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="horizontal-firstname-input"
-                                    formControlName = "contact_cellphone"
-                                    [ngClass]="{'is-invalid':contact_cellphone.invalid == true,'is-valid':contact_cellphone.invalid == false}" 
+                                    formControlName = "contact_cellphone"  #contact_cellphone (input)="getcontact_cellphone()"
                                     >
                                 </div>
                             </div>
@@ -663,8 +664,8 @@
                                     de
                                     contacto*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "contact_homephone"
-                                    [ngClass]="{'is-invalid':contact_homephone.invalid == true,'is-valid':contact_homephone.invalid == false}" 
+                                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName ="contact_homephone"
+                                    #contact_homephone (input)="getcontact_homephone()"
                                     >
                                 </div>
                             </div>
@@ -700,7 +701,7 @@
                     <div class="btn-footer">
                         <button class="btn btn-secondary w-lg btn-lg">Cancelar</button>
                         <div >
-                            <button class="btn btn-info w-lg btn-lg" [disabled]="formUser.invalid" (click)="prueba1()" *ngIf="!spinner">Guardar</button>
+                            <button class="btn btn-info w-lg btn-lg"  (click)="prueba1()" *ngIf="!spinner">Guardar</button>
                             <div class="spinner-border" role="status" *ngIf="spinner">
                                 <span class="visually-hidden">Loading...</span>
                               </div>
