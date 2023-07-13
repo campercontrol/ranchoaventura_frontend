@@ -26,6 +26,7 @@ export class NewParentComponent implements OnInit {
   confirmEmailAlert= false;
   confirmEmailAlertInstruc= false;
   confirmPaswordAlert = false;
+  alertcorreo = false;
 
   @ViewChild("email") email: ElementRef;
   @ViewChild("password") password: ElementRef;
@@ -55,6 +56,7 @@ export class NewParentComponent implements OnInit {
   confirmarCorreo = "";
   estadoCorreo:boolean= false;
   breadCrumbItems: Array<{}>;
+  alertConfirCorre
 
   constructor(private formBuild:FormBuilder,private parent: ParentService,private router :Router,private modalService: NgbModal,private configService: ConfigService, private eventService: EventService,private render :Renderer2) { }
   
@@ -153,6 +155,8 @@ export class NewParentComponent implements OnInit {
      }else{
       this.render.removeClass(this.password.nativeElement,"is-valid");
       this.render.addClass(this.password.nativeElement,"is-invalid");
+      this.password.nativeElement.focus()
+
      }
   }
   getconfirmPassword() {
@@ -164,11 +168,13 @@ export class NewParentComponent implements OnInit {
       this.render.removeClass(this.confirmPassword.nativeElement,"is-valid");
       this.render.addClass(this.confirmPassword.nativeElement,"is-invalid");
       this.confirmPaswordAlert = true;
+      this.confirmPassword.nativeElement.focus()
+
      }
   }
   getemail() {
     //console.log(this.formParent.get('email').valid);
-    
+    this.alertcorreo = true;
    if(this.formParent.get('email').valid){
     this.render.removeClass(this.email.nativeElement,"is-invalid");
       this.render.addClass(this.email.nativeElement,"is-valid");
@@ -177,8 +183,10 @@ export class NewParentComponent implements OnInit {
    }else{
     this.render.removeClass(this.email.nativeElement,"is-valid");
     this.render.addClass(this.email.nativeElement,"is-invalid");
+    this.email.nativeElement.focus()
 
    }
+   this.getconfirmEmail();
   }
   getconfirmEmail() {
     if( this.formParent.get('confirmEmail').valid){
@@ -189,6 +197,8 @@ export class NewParentComponent implements OnInit {
       this.render.removeClass(this.emailConfir.nativeElement,"is-valid");
       this.render.addClass(this.emailConfir.nativeElement,"is-invalid");
       this.confirmEmailAlert = true;
+      this.emailConfir.nativeElement.focus()
+
      }
     
   }
@@ -199,6 +209,8 @@ export class NewParentComponent implements OnInit {
      }else{
       this.render.removeClass(this.tutor_name.nativeElement,"is-valid");
       this.render.addClass(this.tutor_name.nativeElement,"is-invalid");
+      this.tutor_name.nativeElement.focus()
+
      }
     
   }
@@ -218,37 +230,56 @@ export class NewParentComponent implements OnInit {
 
   prueba(){
     this.spinner= true;
-    let a = { 
-      user:{
-        email:this.formParent.get('email').value,
-        passw: this.formParent.get('password').value,
-        role_id: 1,
-        "is_coordinator": true,
-        "is_admin": true,
-        "is_employee": true,
-        "is_superuser": true
-    
-      },
-
-      parent:this.formParent.value,
-
-  }
-  
-   this.parent.setParent(a).subscribe(
-    (res:any)=>{
-      console.log(res);
-      this.spinner = false;
-      this.centerModal()
-      setTimeout(() => {
-        this.router.navigate(['parents/new-camper']);
-      }, 1000);
-    },error=>{
-      console.log(error);
-      this.spinner = false;
-      alert('No se pudo realizar su registro intentelo mas tarde ,ya sea por que ya el correo este registrado')
+    if(this.formParent.valid){
+      let a = { 
+        user:{
+          email:this.formParent.get('email').value,
+          passw: this.formParent.get('password').value,
+          role_id: 1,
+          "is_coordinator": true,
+          "is_admin": true,
+          "is_employee": true,
+          "is_superuser": true
       
+        },
+        parent:this.formParent.value,
     }
-   )
+    
+     this.parent.setParent(a).subscribe(
+      (res:any)=>{
+        console.log(res);
+        this.spinner = false;
+        this.centerModal()
+        setTimeout(() => {
+          this.router.navigate(['parents/new-camper']);
+        }, 1000);
+      },error=>{
+        console.log(error);
+        this.spinner = false;
+        alert('No se pudo realizar su registro intentelo mas tarde ,ya sea por que ya el correo este registrado')
+        
+      }
+     )
+    }else{
+      this.getcontact_email();
+      this.getcontact_home_phone();
+      this.getcontact_work_phone();
+      this.getcontact_cellphone();
+      this.getcontact_lastname_mother();
+      this.getcontact_lastname_father();
+      this.getcontact_name();
+      this.gettutor_work_phone();
+      this.gettutor_home_phone();
+      this.gettutor_cellphone();
+      this.gettutor_lastname_mother();
+      this.getTutor_lastname_father();
+      this. getTutor_name();
+      this.getconfirmPassword();
+      this.getpassword();
+      this.getconfirmEmail();
+      this.getemail();
+    }
+    
    
   }
   getTutor_lastname_father(){
@@ -258,6 +289,8 @@ export class NewParentComponent implements OnInit {
      }else{
       this.render.removeClass(this.tutor_lastname_father.nativeElement,"is-valid");
       this.render.addClass(this.tutor_lastname_father.nativeElement,"is-invalid");
+      this.tutor_lastname_father.nativeElement.focus()
+
      }
   }
   gettutor_lastname_mother(){
@@ -267,6 +300,8 @@ export class NewParentComponent implements OnInit {
      }else{
       this.render.removeClass(this.tutor_lastname_mother.nativeElement,"is-valid");
       this.render.addClass(this.tutor_lastname_mother.nativeElement,"is-invalid");
+      this.tutor_lastname_mother.nativeElement.focus()
+
      }
   }
   gettutor_cellphone(){
@@ -276,6 +311,8 @@ export class NewParentComponent implements OnInit {
      }else{
       this.render.removeClass(this.tutor_cellphone.nativeElement,"is-valid");
       this.render.addClass(this.tutor_cellphone.nativeElement,"is-invalid");
+      this.tutor_cellphone.nativeElement.focus()
+
      }
   }
   gettutor_home_phone(){
@@ -285,6 +322,8 @@ export class NewParentComponent implements OnInit {
      }else{
       this.render.removeClass(this.tutor_home_phone.nativeElement,"is-valid");
       this.render.addClass(this.tutor_home_phone.nativeElement,"is-invalid");
+      this.tutor_home_phone.nativeElement.focus()
+
      }
   }
   gettutor_work_phone(){
@@ -294,6 +333,8 @@ export class NewParentComponent implements OnInit {
      }else{
       this.render.removeClass(this.tutor_work_phone.nativeElement,"is-valid");
       this.render.addClass(this.tutor_work_phone.nativeElement,"is-invalid");
+      this.tutor_work_phone.nativeElement.focus()
+
      }
   }
 
@@ -304,6 +345,8 @@ export class NewParentComponent implements OnInit {
      }else{
       this.render.removeClass(this.contact_name.nativeElement,"is-valid");
       this.render.addClass(this.contact_name.nativeElement,"is-invalid");
+      this.contact_name.nativeElement.focus()
+
      }
   }
 
@@ -314,6 +357,8 @@ export class NewParentComponent implements OnInit {
      }else{
       this.render.removeClass(this.contact_lastname_father.nativeElement,"is-valid");
       this.render.addClass(this.contact_lastname_father.nativeElement,"is-invalid");
+      this.contact_lastname_father.nativeElement.focus()
+
      }
 
   }
@@ -325,6 +370,8 @@ export class NewParentComponent implements OnInit {
      }else{
       this.render.removeClass(this.contact_lastname_mother.nativeElement,"is-valid");
       this.render.addClass(this.contact_lastname_mother.nativeElement,"is-invalid");
+      this.contact_lastname_mother.nativeElement.focus()
+
      }
 
   }
@@ -335,6 +382,8 @@ export class NewParentComponent implements OnInit {
      }else{
       this.render.removeClass(this.contact_cellphone.nativeElement,"is-valid");
       this.render.addClass(this.contact_cellphone.nativeElement,"is-invalid");
+      this.contact_cellphone.nativeElement.focus()
+
      }
 
   }
@@ -345,6 +394,8 @@ export class NewParentComponent implements OnInit {
      }else{
       this.render.removeClass(this.contact_work_phone.nativeElement,"is-valid");
       this.render.addClass(this.contact_work_phone.nativeElement,"is-invalid");
+      this.contact_work_phone.nativeElement.focus()
+
      }
 
   }
@@ -355,6 +406,8 @@ export class NewParentComponent implements OnInit {
      }else{
       this.render.removeClass(this.contact_home_phone.nativeElement,"is-valid");
       this.render.addClass(this.contact_home_phone.nativeElement,"is-invalid");
+      this.contact_home_phone.nativeElement.focus()
+
      }
   }
   getcontact_email(){
@@ -364,6 +417,8 @@ export class NewParentComponent implements OnInit {
      }else{
       this.render.removeClass(this.contact_email.nativeElement,"is-valid");
       this.render.addClass(this.contact_email.nativeElement,"is-invalid");
+      this.contact_email.nativeElement.focus()
+
      }
   }
   /**
