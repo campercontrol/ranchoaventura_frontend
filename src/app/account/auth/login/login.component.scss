@@ -7,4 +7,23 @@
     background-size:cover ;
 
 }
+body{
+    background:#ffe259 ;
+    background: linear-gradient(to right,#ffa751,#ffe259);
+}
+.bg{
+    background-image: url("../../../../assets/images/camp/login.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    background-size:cover ;
+}
+
+@media screen and(max-width:780px){
+    .imagen{
+        display: none;
+    }
+    
+}
 

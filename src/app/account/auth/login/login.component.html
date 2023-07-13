@@ -1,145 +1,109 @@
-<div class="container-fluid p-0">
-  <div class="row g-0">
+<div class="container-fluid ">
+    <div class="row align-items-stretch">
+  
+        <div class="col bg d-none d-lg-block d-md-block">
+            
+        </div>
+        <!-- end col -->
+  
+        <div class="col-xl-4 col-sm-12 col-md-7">
+            <div class=" p-4">
+                <div class="w-100">
+  
+                    <div class=" h-100">
+                        <div class="mb-4 mb-md-5">
+                            <a routerLink="/" class="d-block auth-logo">
+                                <img src="../../../../assets/images/camp/logoCamper.png" alt="" height="auto" class="auth-logo-dark" style="margin: 0 auto;">
+                                <img src="../../../../assets/images/camp/logoCamper.png" alt="" height="auto" class="auth-logo-light">
+                            </a>
+                        </div>
+                        <div class="mt-4">
+  
+                            <div>
+                                <h2 class="text-primary">Bienvenido!</h2>
+                                
+                            </div>
+  
+                            <div class="mt-5">
+                                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  
+                                    <div class="mb-3 mt-4">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" id="email" formControlName="email"
+                                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                                            placeholder="Enter email">
+                                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                            <div *ngIf="f.email.errors.required">Email is required</div>
+                                            <div *ngIf="f.email.errors.email">Email must be a valid email address
+                                            </div>
+                                        </div>
+                                    </div>
+  
+                                    <div class="mb-3 mt-4">
+                                       
+                                        <label for="userpassword">Password</label>
+                                        <div class="input-group auth-pass-inputgroup">
+                                            <input [type]="passwordType" class="form-control" formControlName="password"
+                                                [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                                                placeholder="Enter password" aria-label="Password"
+                                                aria-describedby="password-addon">
+                                            <button class="btn btn-light " type="button" id="password-addon"><i
+                                                    class="mdi mdi-eye-outline" (click)="cambioTipo()"></i></button>
+                                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                                <span *ngIf="f.password.errors.required">Password is required</span>
+                                            </div>
+                                        </div>
+                                    </div>
+  
+                                    
+  
+                                    <div class="mt-5 d-grid">
+                                        <button class="btn btn-primary btn-block" type="submit">Log In</button>
+                                    </div>
+                                    <div class="mt-5">
+                                        <h4 style="text-align: center;">
+                                            ¿No tienes cuenta? ¡ Regístrate aquí!
+                                        </h4>
+                                        <div class=" d-grid"> <button class="btn btn-warning"  (click)="open(content)"> Crear Cuenta Nueva</button> </div>
 
-      <div class="col-xl-9">
-          <div class="auth-full-bg pt-lg-5 p-4">
-              <div class="w-100">
-                  <div class="bg-overlay"></div>
-                  <div class="d-flex h-100 flex-column">
-
-                      <div class="p-4 mt-auto">
-                          <div class="row justify-content-center">
-                              <div class="col-lg-7">
-                                  <div class="text-center">
-                                      <h1 class="mb-3" style="color: white;">
-                                              Camper Control</h1>
-
-                                      <div dir="ltr">
-                                          <owl-carousel-o class="owl-theme auth-review-carousel"
-                                              [options]="carouselOption">
-                                              <ng-template carouselSlide>
-                                                  <div style="color: white;">
-                                                      <div class="">
-                                                          <p class="font-size-16 mb-4">" Fantastic theme with a
-                                                              ton of
-                                                              options. If you just want the HTML to integrate with
-                                                              your project, then this is the package. You can find
-                                                              the
-                                                              files in the 'dist' folder...no need to install git
-                                                              and
-                                                              all the other stuff the documentation talks about. "
-                                                          </p>
-
-                                                          <div>
-                                                              <h4 class="font-size-16 text-primary">Abs1981</h4>
-                                                              <p class="font-size-14 mb-0">- Skote User</p>
-                                                          </div>
-                                                      </div>
-
-                                                  </div>
-                                              </ng-template>
-                                              <ng-template carouselSlide>
-                                                  <div class="item">
-                                                      <div class="py-3">
-                                                          <p class="font-size-16 mb-4">" If Every Vendor on Envato
-                                                              are
-                                                              as supportive as Themesbrand, Development with be a
-                                                              nice
-                                                              experience. You guys are Wonderful. Keep us the good
-                                                              work. "</p>
-
-                                                          <div>
-                                                              <h4 class="font-size-16 text-primary">nezerious</h4>
-                                                              <p class="font-size-14 mb-0">- Skote User</p>
-                                                          </div>
-                                                      </div>
-
-                                                  </div>
-                                              </ng-template>
-                                          </owl-carousel-o>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <!-- end col -->
-
-      <div class="col-xl-3">
-          <div class="auth-full-page-content p-md-5 p-4">
-              <div class="w-100">
-
-                  <div class="d-flex flex-column h-100">
-                      <div class="mb-4 mb-md-5">
-                          <a routerLink="/" class="d-block auth-logo">
-                              <img src="assets/images/logo-dark.png" alt="" height="18" class="auth-logo-dark">
-                              <img src="assets/images/logo-light.png" alt="" height="18" class="auth-logo-light">
-                          </a>
-                      </div>
-                      <div class="mt-4">
-
-                          <div>
-                              <h2 class="text-primary">Bienvenido!</h2>
-                              
-                          </div>
-
-                          <div class="mt-4">
-                              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-
-                                  <div class="mb-3">
-                                      <label for="email">Email</label>
-                                      <input type="email" class="form-control" id="email" formControlName="email"
-                                          [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
-                                          placeholder="Enter email">
-                                      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                          <div *ngIf="f.email.errors.required">Email is required</div>
-                                          <div *ngIf="f.email.errors.email">Email must be a valid email address
-                                          </div>
-                                      </div>
-                                  </div>
-
-                                  <div class="mb-3">
-                                      <div class="float-end">
-                                         
-                                      </div>
-                                      <label for="userpassword">Password</label>
-                                      <div class="input-group auth-pass-inputgroup">
-                                          <input [type]="passwordType" class="form-control" formControlName="password"
-                                              [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-                                              placeholder="Enter password" aria-label="Password"
-                                              aria-describedby="password-addon">
-                                          <button class="btn btn-light " type="button" id="password-addon"><i
-                                                  class="mdi mdi-eye-outline" (click)="cambioTipo()"></i></button>
-                                          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                              <span *ngIf="f.password.errors.required">Password is required</span>
-                                          </div>
-                                      </div>
-                                  </div>
-
-                                  
-
-                                  <div class="mt-3 d-grid">
-                                      <button class="btn btn-primary btn-block" type="submit">Log In</button>
-                                  </div>
-                                  <div class="mt-3 d-grid"> <button class="btn btn-warning" (click)="link()"> Crear Cuenta Nueva</button> </div>
-
-
-                          
-                              </form>
-                             
-                          </div>
-                      </div>
-
-                      
-                  </div>
-              </div>
-          </div>
-      </div>
-      <!-- end col -->
+                                    </div>
+  
+  
+                            
+                                </form>
+                               
+                            </div>
+                        </div>
+  
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- end row -->
   </div>
-  <!-- end row -->
-</div>
-<!-- end container-fluid -->
+  <!-- end container-fluid -->
+
+  <ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		Si en años anteriores ya has enviado a un hijo o hija a Camper Control, no debes crear una cuenta nueva, pues ya tenemos todos tus datos. Da click en Recupera tu contraseña para poder activar de nuevo tu cuenta o bien ponte en contacto con nosotros para poder ayudarte a acceder a tu cuenta registrada.
+
+Comunícate con nosotros al (777) 560 9123 o del interior al 01·800·700·2267 y con mucho gusto te ayudaremos.
+
+Si eres completamente nuevo, ¡Gracias por la confianza!
+	</div>
+	<div class="modal-footer">
+        <div class="row">
+            <button type="button" class="btn btn-primary"  (click)="link()" >Soy nuevo en Camper Control y quiero crear una nueva cuenta</button>
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+    
+        </div>
+	
+	</div>
+</ng-template>

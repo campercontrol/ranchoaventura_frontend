@@ -9,6 +9,7 @@ import { first } from 'rxjs/operators';
 
 import { environment } from '../../../../environments/environment';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
   // set the currenr year
   year: number = new Date().getFullYear();
   alert: boolean= false;
+  closeResult = '';
   carouselOption: OwlOptions = {
     items: 1,
     loop: false,
@@ -43,7 +45,7 @@ export class LoginComponent implements OnInit {
     }
   }
   // tslint:disable-next-line: max-line-length
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,private modalService: NgbModal,
     private authFackservice: AuthfakeauthenticationService) { }
 
   ngOnInit() {
@@ -81,6 +83,16 @@ export class LoginComponent implements OnInit {
       
     
   }
+  open(content) {
+		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+			(result) => {
+				this.closeResult = `Closed with: ${result}`;
+			},
+			(reason) => {
+				this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+			},
+		);
+	}
 
   cambioTipo(){
     if(this.passwordType =='password'){
@@ -92,9 +104,21 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  private getDismissReason(reason: any): string {
+		if (reason === ModalDismissReasons.ESC) {
+			return 'by pressing ESC';
+		} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+			return 'by clicking on a backdrop';
+		} else {
+			return `with: ${reason}`;
+		}
+	}
+
+
  
 
   link(){
+    this.modalService.dismissAll();
     this.router.navigate(['parents/new-user'])
   }
 }
