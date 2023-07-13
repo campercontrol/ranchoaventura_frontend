@@ -2,7 +2,7 @@
     <form [formGroup]="formUser">
         <div class="row">
 
-            <div class="col-lg-10">
+            <div class="col-lg-12">
                 <div class="card">
 
                     <div class="card-body">
@@ -72,18 +72,18 @@
 
                                 <div class="mt-3 foto">
                                     <label for="">Foto de Perfil</label>
-                                    <input type="file"  (change)="subiendo($event)">
+                                    <input type="file" accept="image/jpeg" (change)="subiendo($event)" >
                                     
     
                                     <label class="mt-2">La foto es obligatoria ,nos ayuda a identificar a los campers,
                                         recomendamos subas una foto reciente y de poco peso, máximo 3Mb debe ser formato jpg</label>
     
                                 </div>
-                                <div class="alert alert-danger" role="alert" *ngIf="photo.invalid">
-                                    Seleciona una Imagen Recuerda tiene que ser un imagen TIPO JPG
+                                <div class="alert alert-danger" role="alert" *ngIf="!getphoto()">
+                                   Aun no has  seleciona una imagen Recuerda tiene que ser un imagen TIPO JPG
                                   </div>
 
-                                  <div class="alert alert-secondary" role="alert" *ngIf="!photo.invalid">
+                                  <div class="alert alert-secondary" role="alert" *ngIf="getphoto()">
                                     Se Agrego corectamente
                                   </div>
                                 
@@ -153,7 +153,10 @@
                             <div class="row mb-4">
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Estatura</label>
                                 <div class="control-label col-sm-9">
-                                    <input type="number" class="form-control" min="0" max="2" step="0.5" id="customRange3" formControlName="height">
+                                    <input type="number" class="form-control" min="0" max="2" step="0.5" id="customRange3" formControlName="height"
+                                    #height
+                                    (input)="getheight()"
+                                   >
                                     
                                 </div>
                             </div>
@@ -161,9 +164,9 @@
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Peso</label>
                                 <div class="col-sm-9">
                                     <input type="number" class="form-control" id="horizontal-firstname-input"
-                                         formControlName="weight"
-                                         [ngClass]="{'is-invalid':weight.invalid == true,'is-valid':weight.invalid == false}" 
-
+                                         formControlName="weight" #weight
+                                         (input)="getweight()"
+                                        
                                          >
                                 </div>
                             </div>
@@ -254,7 +257,6 @@
                                 <textarea
                                     placeholder="En caso de NO padecer ningun problema cardiaco, teclea la palabra NINGUNO"
                                     name="" id="" cols="90" rows="10"
-                                    style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName = "heart_problems"
                                     class="form-control"
                                     (input)="getheart_problems()"
@@ -265,7 +267,6 @@
                                 <textarea
                                     placeholder="En caso de NO haber tenido o tener cirugías, fracturas y/o esguinces que le impidan realizar actividades, teclea la palabra NINGUNA"
                                     name="" id="" cols="90" rows="10"
-                                    style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName = "prevent_activities"
                                     class="form-control"
                                     (input)="getprevent_activities()"
@@ -280,7 +281,6 @@
                                 <textarea
                                     placeholder="En caso de NO padecer alguna enfermedad, teclea la palabra NINGUNO"
                                     name="" id="" cols="90" rows="10"
-                                    style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName = "affliction"
                                     class="form-control"
                                     (input)="getaffliction()"
@@ -313,7 +313,6 @@
                                 <textarea
                                     placeholder="En caso de que el acampador no padezca de alteraciones nocturnas, teclea la palabra NINGUNA"
                                     name="" id="" cols="90" rows="10"
-                                    style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName="nocturnal_disorders"
                                     class="form-control"
                                     (input)="getnocturnal_disorders()"
@@ -326,7 +325,6 @@
                                 <textarea
                                     placeholder="En caso de que el acampador no padezca de fobias, teclea la palabra NINGUNO"
                                     name="" id="" cols="90" rows="10"
-                                    style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName="phobias"
                                     class="form-control"
                                     (input)="getphobias()"
@@ -340,7 +338,6 @@
                                 <textarea
                                     placeholder="En caso de NO estar en ningun tratamiento psicologico o psiquiatrico, teclea la palabra NINGUNO"
                                     name="" id="" cols="90" rows="10"
-                                    style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName="psicology_treatments"
                                     class="form-control"
                                     (input)="getpsicology_treatments()"
@@ -508,7 +505,6 @@
                                 <textarea
                                     placeholder="Especificar dosis y horarios para la toma de medicamentos en tal caso de no necitar poner NINGUNO"
                                     name="" id="" cols="90" rows="10"
-                                    style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName = "drugs"
                                     class="form-control"
                                     (input)="getdrugs()"
@@ -525,7 +521,6 @@
                                 <textarea
                                     placeholder="En caso de que el acampador no sea alérgico a algún medicamento, teclea la palabra NINGUNO"
                                     name="" id="" cols="90" rows="10"
-                                    style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName = "drug_allergies"
                                     class="form-control"
                                     (input)="getdrug_allergies()"
@@ -539,7 +534,6 @@
                                 <textarea
                                     placeholder="En caso de que el acampador no sea alérgico, teclea la palabra NINGUNA"
                                     name="" id="" cols="90" rows="10"
-                                    style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName = "other_allergies"
                                     class="form-control"
                                     (input)="getother_allergies()"
@@ -597,7 +591,6 @@
                                 <textarea
                                     placeholder="En caso de que el acampador pueda comer cualquier tipo de comida, teclea la palabra NINGUNA"
                                     name="" id="" cols="90" rows="10"
-                                    style="border:1px solid rgb(223, 220, 220); border-radius: 5px;"
                                     formControlName ="prohibited_foods"
                                     class="form-control"
                                     (input)="getprohibited_foods()"
@@ -700,8 +693,8 @@
 
                     <div class="btn-footer">
                         <button class="btn btn-secondary w-lg btn-lg">Cancelar</button>
-                        <div >
-                            <button class="btn btn-info w-lg btn-lg"  (click)="prueba1()" *ngIf="!spinner">Guardar</button>
+                        <div>
+                            <button class="btn btn-info w-lg btn-lg"  (click)="prueba1()" >Guardar</button>
                             <div class="spinner-border" role="status" *ngIf="spinner">
                                 <span class="visually-hidden">Loading...</span>
                               </div>

@@ -45,6 +45,9 @@ export class CamperNuevoComponent implements OnInit {
   @ViewChild("birthday") birthday: ElementRef;
   @ViewChild("school_id") school_id: ElementRef; 
   @ViewChild("grade") grade: ElementRef; 
+  @ViewChild("weight") weight: ElementRef; 
+  @ViewChild("height") height: ElementRef;
+
   @ViewChild("blood_type") blood_type: ElementRef; 
   @ViewChild("heart_problems") heart_problems: ElementRef; 
   @ViewChild("prevent_activities") prevent_activities: ElementRef; 
@@ -62,7 +65,7 @@ export class CamperNuevoComponent implements OnInit {
   @ViewChild("contact_name") contact_name: ElementRef; 
   @ViewChild("contact_cellphone") contact_cellphone: ElementRef; 
   @ViewChild("contact_homephone") contact_homephone: ElementRef; 
-
+  @ViewChild("photo") photo: ElementRef;
 
 
 
@@ -139,6 +142,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.name.nativeElement,"is-valid");
     this.render.addClass(this.name.nativeElement,"is-invalid");
+    this.name.nativeElement.focus()
+
    }
     
   }
@@ -150,6 +155,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.lastname_father.nativeElement,"is-valid");
     this.render.addClass(this.lastname_father.nativeElement,"is-invalid");
+    this.lastname_father.nativeElement.focus()
+
    }  
   }
   
@@ -161,11 +168,19 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.lastname_mother.nativeElement,"is-valid");
     this.render.addClass(this.lastname_mother.nativeElement,"is-invalid");
+    this.lastname_mother.nativeElement.focus()
+
    } 
   }
   
-  get photo() {
-    return this.formUser.get('photo');
+  getphoto() {
+    if(this.formUser.get('photo').valid){
+      return true
+    }else{
+      return false
+
+    }
+     
   }
   
   getgender_id() {
@@ -175,6 +190,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.gender_id.nativeElement,"is-valid");
     this.render.addClass(this.gender_id.nativeElement,"is-invalid");
+    this.gender_id.nativeElement.focus()
+
    }
   }
   
@@ -185,15 +202,33 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.birthday.nativeElement,"is-valid");
     this.render.addClass(this.birthday.nativeElement,"is-invalid");
+    this.birthday.nativeElement.focus()
+
    }
   }
   
-  get height() {
-    return this.formUser.get('height');
+  getheight() {
+    if( this.formUser.get('height').valid){
+      this.render.removeClass(this.height.nativeElement,"is-invalid");
+      this.render.addClass(this.height.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.height.nativeElement,"is-valid");
+    this.render.addClass(this.height.nativeElement,"is-invalid");
+    this.height.nativeElement.focus()
+
+   }
   }
   
-  get weight() {
-    return this.formUser.get('weight')  ;
+  getweight() {
+    if( this.formUser.get('weight').valid){
+      this.render.removeClass(this.weight.nativeElement,"is-invalid");
+      this.render.addClass(this.weight.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.weight.nativeElement,"is-valid");
+    this.render.addClass(this.weight.nativeElement,"is-invalid");
+    this.weight.nativeElement.focus()
+
+   }
   }
   
   getgrade() {
@@ -203,6 +238,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.grade.nativeElement,"is-valid");
     this.render.addClass(this.grade.nativeElement,"is-invalid");
+    this.grade.nativeElement.focus()
+
    }
   }
   
@@ -213,6 +250,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.school_id.nativeElement,"is-valid");
     this.render.addClass(this.school_id.nativeElement,"is-invalid");
+    this.school_id.nativeElement.focus()
+
    }
   }
   
@@ -228,6 +267,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.email.nativeElement,"is-valid");
     this.render.addClass(this.email.nativeElement,"is-invalid");
+    this.email.nativeElement.focus()
+
    } 
   }
   
@@ -242,6 +283,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.affliction.nativeElement,"is-valid");
     this.render.addClass(this.affliction.nativeElement,"is-invalid");
+    this.affliction.nativeElement.focus()
+
    }
   }
   
@@ -252,6 +295,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.birthday.nativeElement,"is-valid");
     this.render.addClass(this.blood_type.nativeElement,"is-invalid");
+    this.blood_type.nativeElement.focus()
+
    }
   }
   
@@ -262,6 +307,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.heart_problems.nativeElement,"is-valid");
     this.render.addClass(this.heart_problems.nativeElement,"is-invalid");
+    this.heart_problems.nativeElement.focus()
+
    }
   }
   
@@ -272,6 +319,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.psicology_treatments.nativeElement,"is-valid");
     this.render.addClass(this.psicology_treatments.nativeElement,"is-invalid");
+    this.psicology_treatments.nativeElement.focus()
+
    }
   }
   
@@ -282,6 +331,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.prevent_activities.nativeElement,"is-valid");
     this.render.addClass(this.prevent_activities.nativeElement,"is-invalid");
+    this.prevent_activities.nativeElement.focus()
+
    }
   }
   
@@ -292,6 +343,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.drug_allergies.nativeElement,"is-valid");
     this.render.addClass(this.drug_allergies.nativeElement,"is-invalid");
+    this.drug_allergies.nativeElement.focus()
+
    }
   
   }
@@ -303,6 +356,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.other_allergies.nativeElement,"is-valid");
     this.render.addClass(this.other_allergies.nativeElement,"is-invalid");
+    this.other_allergies.nativeElement.focus()
+
    }
   }
   
@@ -313,6 +368,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.nocturnal_disorders.nativeElement,"is-valid");
     this.render.addClass(this.nocturnal_disorders.nativeElement,"is-invalid");
+    this.nocturnal_disorders.nativeElement.focus()
+
    }
   }
   
@@ -323,6 +380,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.phobias.nativeElement,"is-valid");
     this.render.addClass(this.phobias.nativeElement,"is-invalid");
+    this.phobias.nativeElement.focus()
+
    }
   }
   
@@ -333,6 +392,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.drugs.nativeElement,"is-valid");
     this.render.addClass(this.drugs.nativeElement,"is-invalid");
+    this.drugs.nativeElement.focus()
+
    }
     
   }
@@ -348,6 +409,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.prohibited_foods.nativeElement,"is-valid");
     this.render.addClass(this.prohibited_foods.nativeElement,"is-invalid");
+    this.prohibited_foods.nativeElement.focus()
+
    }
    
   }
@@ -371,6 +434,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.insurance_number.nativeElement,"is-valid");
     this.render.addClass(this.insurance_number.nativeElement,"is-invalid");
+    this.insurance_number.nativeElement.focus()
+
    }
   }
   
@@ -381,6 +446,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.security_social_number.nativeElement,"is-valid");
     this.render.addClass(this.security_social_number.nativeElement,"is-invalid");
+    this.security_social_number.nativeElement.focus()
+
    }
   }
   
@@ -391,6 +458,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.contact_name.nativeElement,"is-valid");
     this.render.addClass(this.contact_name.nativeElement,"is-invalid");
+    this.contact_name.nativeElement.focus()
+
    }
   }
   
@@ -401,6 +470,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.contact_relation.nativeElement,"is-valid");
     this.render.addClass(this.contact_relation.nativeElement,"is-invalid");
+    this.contact_relation.nativeElement.focus()
+
    }
   }
   
@@ -411,6 +482,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.contact_homephone.nativeElement,"is-valid");
     this.render.addClass(this.contact_homephone.nativeElement,"is-invalid");
+    this.contact_homephone.nativeElement.focus()
+
    }
   }
   
@@ -421,6 +494,8 @@ export class CamperNuevoComponent implements OnInit {
    }else{
     this.render.removeClass(this.contact_cellphone.nativeElement,"is-valid");
     this.render.addClass(this.contact_cellphone.nativeElement,"is-invalid");
+    this.contact_cellphone.nativeElement.focus()
+
    }
   }
   
@@ -510,6 +585,9 @@ public fileLeave(event){
       this.getlastname_mother();
       this.getlastname_father();
       this.getname();
+      this.getheight();
+      this.getweight();
+      this.getphoto();
      
 
     }
