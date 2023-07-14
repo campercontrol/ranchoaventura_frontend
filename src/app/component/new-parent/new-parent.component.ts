@@ -186,7 +186,21 @@ export class NewParentComponent implements OnInit {
     this.email.nativeElement.focus()
 
    }
-   this.getconfirmEmail();
+   this.getconfirmEmailChanceEmail();
+  }
+
+  getconfirmEmailChanceEmail(){
+    if( this.formParent.get('confirmEmail').valid){
+      this.render.removeClass(this.emailConfir.nativeElement,"is-invalid");
+        this.render.addClass(this.emailConfir.nativeElement,"is-valid");
+        this.confirmEmailAlert = false;        
+     }else{
+      this.render.removeClass(this.emailConfir.nativeElement,"is-valid");
+      this.render.addClass(this.emailConfir.nativeElement,"is-invalid");
+      this.confirmEmailAlert = true;
+
+     }
+
   }
   getconfirmEmail() {
     if( this.formParent.get('confirmEmail').valid){
@@ -261,6 +275,8 @@ export class NewParentComponent implements OnInit {
       }
      )
     }else{
+      this.spinner= false;
+
       this.getcontact_email();
       this.getcontact_home_phone();
       this.getcontact_work_phone();
