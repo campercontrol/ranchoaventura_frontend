@@ -17,7 +17,7 @@ export class ParentsInscripcionCampComponent implements OnInit {
     product: any;
 
     selectedProducts: any[];
-
+    camper_band:any = [];
     submitted: boolean;
     selectedCustomers: any[];
     loading: boolean = false;
@@ -141,6 +141,8 @@ getCampsDIs(){
  
   this.info.getCapsT(this.id).subscribe((res:any)=>{
     console.log(res);
+    this.camper_band = res.camper_band
+    this.camper_band.birthday =  this.calculateAge(this.camper_band.birthday)
 
     this.customer= res.available_school_camps;
 
@@ -206,7 +208,20 @@ getCampsDIs(){
   })
 }
 
+calculateAge(birthday: any) {
+  console.log(birthday);
 
+  var hoy = new Date();
+  var cumpleanos = new Date(birthday);
+  var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+  var m = hoy.getMonth() - cumpleanos.getMonth();
+
+  if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+    edad--;
+  }
+
+  return edad;
+}
 
   createId(): string {
     let id = '';

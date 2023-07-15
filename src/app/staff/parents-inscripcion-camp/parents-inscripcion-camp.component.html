@@ -5,9 +5,9 @@
             <div class="campamentos-header">
                 <div class="bg-primary text-white ps-5 pe-5 pt-3 pb-3" style="width: 100%;">
 
-                    <h3 class="text-white">Hijo Camper</h3>
-                    <h5 class="text-white">Colegio Camper Control</h5>
-                    <h6 class="text-white">25 años, 3 Meses</h6>
+                    <h3 class="text-white">{{camper_band.full_name}}</h3>
+                    <h5 class="text-white">{{camper_band.school}}</h5>
+                    <h6 class="text-white">{{camper_band.birthday}}</h6>
                 </div>
                 <section class="campamentos pt-4">
                     <div class="Campementos_anteriores">
@@ -19,9 +19,9 @@
                         </div>
                     </div>
                     <div class="foto-perfil">
-                        <img src="assets/images/users/avatar-1.jpg" class="avatar-lg rounded-circle" alt="">
+                        <img src="src=http://142.93.12.234:8000/{{camper_band.photo}}" class="avatar-lg rounded-circle" alt="">
                         <button class="btn-rounded btn btn-success mt-3 ">
-                            <a class="text-white" style="width: 100%;" [routerLink]="['../camper/1']" >Ver Perfil</a>
+                            <a class="text-white" style="width: 100%;" [routerLink]="['../camper/'+id]" >Ver Perfil</a>
                         </button>
                     </div>
 
