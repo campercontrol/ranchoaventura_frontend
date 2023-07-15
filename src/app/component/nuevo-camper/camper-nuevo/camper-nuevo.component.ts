@@ -560,7 +560,11 @@ public fileLeave(event){
           }
           
       });
+      this.spinner=false;
+
     }else{
+      this.spinner=false;
+
       this.getcontact_homephone();
       this.getcontact_cellphone();
       this.getcontact_relation();
