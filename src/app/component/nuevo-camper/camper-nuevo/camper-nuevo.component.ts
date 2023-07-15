@@ -108,7 +108,7 @@ export class CamperNuevoComponent implements OnInit {
       email: ["",[Validators.required,Validators.email]],
       can_swim: [0],
       affliction: ["",[Validators.required]],
-      blood_type: [0,[Validators.required,Validators.min(1)]],
+      blood_type: [0,[Validators.required]],
       heart_problems: ["",[Validators.required,Validators.minLength(2)]],
       psicology_treatments: ["",[Validators.required,Validators.minLength(2)]],
       prevent_activities: ["",[Validators.required,Validators.minLength(2)]],
