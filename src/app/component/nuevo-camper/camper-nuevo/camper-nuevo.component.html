@@ -195,7 +195,7 @@
                                 <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Tipo de
                                     sangre*</label>
                                 <div class="control-label col-sm-9">
-                                    <select name="school_id" id="school_id" formControlName="grade" (input)="getblood_type()" class="form-control" #blood_type>
+                                    <select name="school_id" id="school_id" formControlName="blood_type" (input)="getblood_type()" class="form-control" #blood_type>
                                         <option *ngFor="let item of blood_types" [value]="item.id" >
                                             {{item.value}}
                                         </option>
