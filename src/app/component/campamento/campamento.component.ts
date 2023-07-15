@@ -23,6 +23,7 @@ export class CampamentoComponent implements OnInit {
   estatusPago:Boolean= false;
   pagos:boolean=false;
   statusInscri:boolean=false;
+  location= "";
 
 
 
@@ -42,10 +43,13 @@ export class CampamentoComponent implements OnInit {
       console.log(res);
         let a :any=res.camp
         console.log(res.camper_subscribe,'aasas');
+        this.location = res.location
         
         this.statusInscri = res.camper_subscribe;
         this.dataCamp = a;
         this.dataPagos = res.payments;
+        console.log(this.dataCamp,'aa');
+        
         this.dataCamp.length> 0 ? this.pagos =true:this.pagos=false;   
 
     //   console.log(this.dataPagos,'aqui la info');

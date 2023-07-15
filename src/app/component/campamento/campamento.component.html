@@ -1,13 +1,14 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-12">
-      <div class="card">
+      <div class="card" *ngIf="statusInscri">
         <div class="bodyCamper">
           <h1 style="color:white ;">Detalle de pagos</h1>
         </div>
         <div class="mt-5px container-pagos" *ngIf="pagos">
-          <h1>Tu saldo actual es de: $5,500.0 MXN</h1>
+          <h1>Tu saldo actual es de: $ MXN</h1>
         </div>
+
 
         <div class="col-lg-12">
           <div class="card">
@@ -48,6 +49,8 @@
                   </tbody>
                 </table>
               </div>
+              <button class="btn  btn-success p-2" style="height:60px;"(click)="open(content)" *ngIf="dataCamp.show_payment_parent">Ficha de Pagos</button>
+
               <div *ngIf="!pagos">
                 <div class="alert alert-success" role="alert">
                   Favor de consultar el estado de los pagos con el colegio
@@ -109,15 +112,39 @@
                 <p class="fw-bold"> <i class="fas fa-map"> </i> Lugar del campamento:  </p>
               </div>
               <div>
-                <p> {{dataCamp.location}}</p>
+                <p> {{location}}</p>
               </div>
             </div>
             <div class="conatiner-info-camp">
               <div>
-                <p class="fw-bold"> <i class="fab fa-google"> </i> Mas informacion </p>
+                <p class="fw-bold"> <i class="bx bxs-camera-plus"> </i> Fotos </p>
               </div>
               <div>
-                <p> <a href={{dataCamp.url}}>  {{dataCamp.url}}</a></p>
+                <p> <a href={{dataCamp.photo_url}}> Ver fotos</a></p>
+              </div>
+            </div>
+            <div class="conatiner-info-camp">
+              <div>
+                <p class="fw-bold"> <i class="bx bx-globe"> </i> Ma informacion </p>
+              </div>
+              <div>
+                <p> <a href={{dataCamp.url}}> {{dataCamp.url}}</a></p>
+              </div>
+            </div>
+            <div class="conatiner-info-camp">
+              <div>
+                <p class="fw-bold"> <i class="bx bx-key"> </i> Contraseña </p>
+              </div>
+              <div>
+                <p> {{dataCamp.photo_password}}</p>
+              </div>
+            </div>
+            <div class="conatiner-info-camp" *ngIf="dataCamp.show_paypal_button">
+              <div>
+                <p class="fw-bold"> <i class="bx bxl-paypal"> </i> Paypal</p>
+              </div>
+              <div>
+                <p> <a href={{dataCamp.paypal_button}}>Paypal</a></p>
               </div>
             </div>
           </div>
@@ -132,11 +159,11 @@
             </div>
           </div>
             <div class="container-btn">
-              <button class="btn  btn-info" style="height:60px;" (click)="incio()">Inicio</button>
-              <button class="btn  btn-secondary" style="height:60px;" (click)="perfil()">Perfil acampador</button>
-              <button class="btn  btn-success" style="height:60px;"(click)="open(content)" *ngIf="statusInscri">ver respuestas</button>
-              <button class="btn  btn-info" style="height:60px;" (click)="open(content2)" *ngIf="statusInscri">servicios adicionales</button>
-              <button class="btn  btn-danger" style="height:60px;" (click)="deletCamp()" *ngIf="statusInscri">cancelar inscripcion</button>
+              <button class="btn  btn-info p-2" style="height:60px;" (click)="incio()">Inicio</button>
+              <button class="btn  btn-secondary p-2" style="height:60px;" (click)="perfil()">Perfil acampador</button>
+              <button class="btn  btn-success p-2" style="height:60px;"(click)="open(content)" *ngIf="statusInscri">ver respuestas</button>
+              <button class="btn  btn-info p-2" style="height:60px;" (click)="open(content2)" *ngIf="statusInscri">servicios adicionales</button>
+              <button class="btn  btn-danger p-2" style="height:60px;" (click)="deletCamp()" *ngIf="statusInscri">cancelar inscripcion</button>
             </div>
 
         </div>

@@ -112,7 +112,7 @@ export class PerfilCamperComponent implements OnInit {
 
     return edad;
   }
-
+  // doctor_precall varibles
   getInfo(){
     this.hijos.getPerfil(this.id).subscribe((res: any) => {
       console.log(res);
