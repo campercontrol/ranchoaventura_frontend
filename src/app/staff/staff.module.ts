@@ -53,6 +53,7 @@ import { ListaStaffComponent } from './lista-staff/lista-staff.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ListaProspectosComponent } from './lista-prospectos/lista-prospectos.component';
 import { CardCapacitacionesComponent } from './card-capacitaciones/card-capacitaciones.component';
+import { FormModule } from '../pages/form/form.module';
 
 
 
@@ -87,7 +88,7 @@ import { CardCapacitacionesComponent } from './card-capacitaciones/card-capacita
     MisCampamentosComponent,
     ListaStaffComponent,
     ListaProspectosComponent,
-    CardCapacitacionesComponent
+    CardCapacitacionesComponent,
     
   ],
   imports: [
@@ -119,7 +120,9 @@ import { CardCapacitacionesComponent } from './card-capacitaciones/card-capacita
     StepsModule,
     TabViewModule,
     CalendarModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    FormsModule,
+    FormModule
   ]
 })
 export class StaffModule { }

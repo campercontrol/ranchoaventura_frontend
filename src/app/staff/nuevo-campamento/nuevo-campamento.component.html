@@ -1,52 +1,51 @@
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid" >
+    <form class="row" [formGroup]="formCamp" >
         <div class="col-lg-12">
             <div class="card">
-
                 <div class="card-body">
                     <div class="container-footer-parents">
                         <h4 class="ms-3">Datos Generales del Campamento</h4>
                     </div>
 
-                    <form class="mt-5">
+                    <div class="mt-5">
                         <div class="row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Nombre del
                                 campamento*</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="horizontal-firstname-input">
+                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "name" #name>
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Sede*
                             </label>
                             <div class="control-label col-sm-9">
-                                <ng-select
-                                    [items]="['PK3','PK4','Kinder','1º de primaria | 1st','2º de primaria | 2nd','3º de primaria | 3rd','4º de primaria | 4th','5º de primaria | 5th','6º de primaria | 6th','1º de secundario | 7th','2º de secundario | 8th','3º de secundario | 9th','1º de preparatoria | 10th','2º de preparatoria | 11th','3º de preparatoria | 12th']">
-                                </ng-select>
+                                <select style="width: 100%;" class="form-control" formControlName = "location_id" #location_id>
+                                    <option *ngFor="let item of location" [value]="item.id">{{item.name}}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Escuela*
                                 </label>
                             <div class="control-label col-sm-9">
-                                <ng-select
-                                    [items]="['PK3','PK4','Kinder','1º de primaria | 1st','2º de primaria | 2nd','3º de primaria | 3rd','4º de primaria | 4th','5º de primaria | 5th','6º de primaria | 6th','1º de secundario | 7th','2º de secundario | 8th','3º de secundario | 9th','1º de preparatoria | 10th','2º de preparatoria | 11th','3º de preparatoria | 12th']">
-                                </ng-select>
+                                <select style="width: 100%;" class="form-control" formControlName ="school_id" #school_id>
+                                    <option *ngFor="let item of school" [value]="item.id">{{item.name}}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Temporada*</label>
                             <div class="control-label col-sm-9">
-                                <ng-select
-                                    [items]="['PK3','PK4','Kinder','1º de primaria | 1st','2º de primaria | 2nd','3º de primaria | 3rd','4º de primaria | 4th','5º de primaria | 5th','6º de primaria | 6th','1º de secundario | 7th','2º de secundario | 8th','3º de secundario | 9th','1º de preparatoria | 10th','2º de preparatoria | 11th','3º de preparatoria | 12th']">
-                                </ng-select>
+                                <select style="width: 100%;" class="form-control" formControlName ="season_id" #season_id>
+                                    <option *ngFor="let item of temporada" [value]="item.id">{{item.name}}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Link para
                                 información adicional del acampador</label>
                             <div class="col-sm-9 mt-4">
-                                <input type="text" class="form-control" id="horizontal-firstname-input">
+                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="url" #url>
                             </div>
                         </div>
 
@@ -55,27 +54,71 @@
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Inicio del
                                 Campamento</label>
                             <div class=" control-label col-sm-9">
-                                <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd">
+                                <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd"  formControlName="start" #start>
                             </div>
                         </div>
                         <div class="row mb-4 mt-3">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Final del
                                 Campamento</label>
                             <div class=" control-label col-sm-9">
-                                <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd">
+                                <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="end" #end>
+                            </div>
+                        </div>
+                        <div class="row mb-4 mt-3">
+                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Inicio de
+                                inscripción</label>
+                            <div class=" control-label col-sm-9">
+                                <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="start_registration" #start_registration>
+                            </div>
+                        </div>
+                        <div class="row mb-4 mt-3">
+                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Final de
+                                inscripción</label>
+                            <div class=" control-label col-sm-9">
+                                <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="end_registration" #end_registration>
                             </div>
                         </div>
 
-                        <div class="checkbox-b">
-                            <div class="p-field-checkbox">
-                                <p-checkbox name="group1" value="New York" [(ngModel)]="selectedCities" inputId="ny"
-                                    class="mb-2"></p-checkbox>
-                                <label style="margin-left: 20px;" for="ny">Registro abierto</label>
-                            </div>
-                            <div class="p-field-checkbox">
-                                <p-checkbox name="group1" value="San Francisco" [(ngModel)]="selectedCities"
-                                    inputId="sf" class="mb-2"></p-checkbox>
-                                <label style="margin-left: 20px; " for="sf">Activo</label>
+                       
+                        <div class="row">
+                           
+                            <div class="row">
+                                <div>
+                                    <div class="col-3">
+
+                                    </div>
+                                    <div class="p-field-checkbox col-9 d-flex flex-row">
+                                        <input type="checkbox"  value= "true"  formControlName="active"
+                                        class="mb-2"/>
+                                      <label style="margin-left: 20px; " for="sf">Activo</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-3">
+
+                                    </div>
+                                    <div class="p-field-checkbox col-9 d-flex flex-row">
+                                        <input type="checkbox" value="true" formControlName="registration" 
+                                        class="mb-2"/>
+                                    <label style="margin-left: 20px;" for="ny">Registro abierto</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-3">
+
+                                    </div>
+                                      
+                                <div class="p-field-checkbox col-9 d-flex flex-row">
+                                    <div class="p-field-checkbox">
+                                        <input type="checkbox" value="true" formControlName="general_camp" 
+                                            class="mb-2"/>
+                                        <label style="margin-left: 20px;" for="ny">Campamento de verano</label>
+                                    </div>
+                                </div>
+
+                                </div>
+                               
+                              
                             </div>
 
                         </div>
@@ -83,9 +126,8 @@
 
 
 
-                    </form>
+                    </div>
                 </div>
-
             </div>
         </div>
         <div class="col-lg-12">
@@ -96,38 +138,38 @@
                         <h4 class="ms-3">Datos Importantes</h4>
                     </div>
 
-                    <form class="mt-5">
+                    <div class="mt-5">
                         <div class="row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Monto del
                                 seguro*</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="horizontal-firstname-input">
+                                <input type="number" class="form-control" id="horizontal-firstname-input" formControlName = "insurance" #insurance>
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Punto de
                                 reunion*</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="horizontal-firstname-input">
+                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="venue" #venue>
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Fotos del
                                 camp*</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="horizontal-firstname-input">
+                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="photo_url" #photo_url>
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Contraseña del
                                 camp*</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="horizontal-firstname-input">
+                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="photo_password" #photo_password>
                             </div>
                         </div>
 
 
-                    </form>
+                    </div>
                 </div>
 
             </div>
@@ -138,117 +180,192 @@
                         <h4 class="ms-3">Precio y permisos </h4>
                     </div>
 
-                    <form class="mt-5">
+                    <div class="mt-5">
+                     
                         <div class="row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Precio del
                                 campamento*</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="horizontal-firstname-input">
+                                <input type="number" class="form-control" id="horizontal-firstname-input" formControlName="public_price" #public_price>
                             </div>
                         </div>
-
-                        <div class="checkbox">
-                            <div class="p-field-checkbox">
-                                <p-checkbox name="group1" value="New York" [(ngModel)]="selectedCities" inputId="ny"
-                                    class="mb-2" class="mb-2"></p-checkbox>
-                                <label style="margin-left: 20px;" for="ny"> Mostrar boton de paypal</label>
-                            </div>
-                            <div class="p-field-checkbox">
-                                <p-checkbox name="group1" value="San Francisco" [(ngModel)]="selectedCities"
-                                    inputId="sf" class="mb-2"></p-checkbox>
-                                <label style="margin-left: 20px; " for="sf">Mostrar pagos a padres</label>
-                            </div>
-                            <div class="p-field-checkbox">
-                                <p-checkbox name="group1" value="2" [(ngModel)]="selectedCities"
-                                    inputId="xf" class="mb-2"></p-checkbox>
-                                <label style="margin-left: 20px; " for="xf"> Mostrar descuentos a padres</label>
+                        <div class="row mb-4">
+                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Divisa*
+                                </label>
+                            <div class="control-label col-sm-9">
+                                <select style="width: 100%;" class="form-control" formControlName ="currency_id" #currency_id>
+                                    <option *ngFor="let item of currency" [value]="item.id">{{item.name}}</option>
+                                </select>
                             </div>
                         </div>
+                        <div class="row mb-4">
+                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Recordatorio antes del camp:</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="horizontal-firstname-input" formControlName="reminder_camp_days" #reminder_camp_days>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Recordatorio vigencia del descuento:</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="horizontal-firstname-input" formControlName="reminder_discount_days" #reminder_discount_days>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Reporte medico:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="medical_report" #medical_report>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Link Paypal:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="paypal_button" #paypal_button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-3">
 
-                    </form>
+                                </div>
+                            
+                                <div class="p-field-checkbox col-9 d-flex flex-row">
+                                    <input type="checkbox" name="group1"  inputId="ny"
+                                        class="mb-2" class="mb-2" value="true" formControlName = "show_paypal_button" #show_paypal_button>
+                                    <label style="margin-left: 20px;" for="ny"> Mostrar boton de paypal</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+
+                                </div>
+                            
+                                <div class="p-field-checkbox col-9 d-flex flex-row">
+                                    <input type="checkbox" name="group1"  inputId="ny"
+                                        class="mb-2" class="mb-2" value="true" formControlName = "show_payment_order" #show_payment_order>
+                                    <label style="margin-left: 20px;" for="ny"> Habilitar orden de pago con referencia</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3">
+
+                                </div>
+                                <div class="p-field-checkbox col-9 d-flex flex-row">
+                                    <input type="checkbox"
+                                        inputId="sf" class="mb-2" value="true" formControlName="show_payment_parent" #show_payment_parent>
+                                    <label style="margin-left: 20px; " for="sf">Mostrar pagos a padres</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+
+                                </div>
+                             
+                                <div class="p-field-checkbox col-9 d-flex flex-row">
+                                    <input type="checkbox"
+                                        inputId="xf" class="mb-2"  value="true" formControlName="show_rebate_parent"  #show_rebate_parent>
+                                    <label style="margin-left: 20px; " for="xf"> Mostrar descuentos a padres</label>
+                                </div>
+                            </div>
+                          
+                           
+                            
+                        </div>
+
+                    </div>
                 </div>
 
             </div>
         </div>
-
-
-    </div>
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-body">
-
-                <div class="container-footer-parents">
-                    <h4 class="ms-3">Informacion extra </h4>
-                </div>
-                <div class="row">
-
-                    <div class="col-lg-6 mt-4">
-                        <div class="container">
-                            <div class="col mb-6">
-                                <h4 for="horizontal-firstname-input">Mensaje
-                                    especial*</h4>
-                                <hr>
-                                <ckeditor class="mt-4" [editor]="Editor" data="<p>Content of the editor.</p>">
-                                </ckeditor>
-                            </div>
-                        </div>
-
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+    
+                    <div class="container-footer-parents">
+                        <h4 class="ms-3">Informacion extra </h4>
                     </div>
-                    <div class="col-lg-6 mt-4">
-                        <div class="container">
-                            <div class="col mb-6">
-                                <h4 for="horizontal-firstname-input" class="display-7">Mensaje especial
-                                    para admin*</h4>
-                                <hr>
-                                <ckeditor class="mt-4" [editor]="Editor" data="<p>Content of the editor.</p>">
-                                </ckeditor>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-lg-6 mt-4">
-                        <div class="container">
-                            <div class="col mb-6">
-                                <h4 for="horizontal-firstname-input">
-                                    Preguntas Extras</h4>
-                                <hr>
-                                <ckeditor class="mt-4" [editor]="Editor" data="<p>Content of the editor.</p>">
-                                </ckeditor>
-
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                    <div class="col-lg-6 mt-4">
-                        <div class="container">
-                            <div class="col mb-6">
-                                <h4 for="horizontal-firstname-input">
-                                    Cargos extras</h4>
-                                <hr>
-
-                                <label for="horizontal-firstname-input" class="col-sm-6 col-form-label">Nombre del
-                                    Cargo</label>
-                                <div class=" control-label col-lg-10">
-                                    <input type="text" class="form-control">
+                    <div class="row">
+    
+                        <div class="col-lg-6 mt-4">
+                            <div class="container">
+                                <div class="col mb-6">
+                                    <h4 for="horizontal-firstname-input">Mensaje
+                                        especial*</h4>
+                                    <hr>
+                                    <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message" >
+                                    </ckeditor>
+                                  
                                 </div>
-                                <label for="horizontal-firstname-input" class="col-sm-6 col-form-label">Cantidad</label>
-                                <div class=" control-label col-lg-10">
-                                    <input type="text" class="form-control">
-                                </div>
-
-
-
                             </div>
+    
                         </div>
-
-
-
+                        <div class="col-lg-6 mt-4">
+                            <div class="container">
+                                <div class="col mb-6">
+                                    <h4 for="horizontal-firstname-input" class="display-7">Mensaje especial
+                                        para admin*</h4>
+                                    <hr>
+                                    <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message_admin" >
+                                    </ckeditor>
+                                    
+                                </div>
+                            </div>
+    
+                        </div>
+                        <div class="col-lg-6 mt-4">
+                            <div class="container">
+                                <div class="col mb-6">
+                                    <h4 for="horizontal-firstname-input">
+                                        Preguntas Extras</h4>
+                                    <hr>
+                                    
+    
+                                </div>
+                            </div>
+    
+    
+    
+                        </div>
+                        <div class="col-lg-6 mt-4">
+                            <div class="row">
+                                <div class="col mb-6">
+                                    <h4 for="horizontal-firstname-input">
+                                        Cargos extras</h4>
+                                    <hr>
+    
+                                    <label for="horizontal-firstname-input" class="col-sm-6 col-form-label">Nombre del
+                                        Cargo</label>
+                                    <div class=" control-label col-lg-10">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                    <label for="horizontal-firstname-input" class="col-sm-6 col-form-label">Cantidad</label>
+                                    <div class=" control-label col-lg-10">
+                                        <input type="text" class="form-control">
+                                    </div>
+    
+    
+    
+                                </div>
+                            </div>
+    
+    
+    
+                        </div>
+    
+    
                     </div>
-
-
                 </div>
             </div>
-        </div>
-    </div>
+            <div class="btn-footer">
+                <button class="btn btn-secondary w-lg btn-lg">Cancelar</button>
+                <div>
+                    <button class="btn btn-info w-lg btn-lg" (click)="createCampPost()">Guardar</button>
+                    <div class="spinner-border" role="status" *ngIf="spinner">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                </div>
+              
+            </div>
+            </div>
+    </form>
+    
