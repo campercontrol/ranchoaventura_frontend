@@ -9,6 +9,7 @@ import { tableData, editableTable } from './data';
 
 import { AdvancedService } from './advanced.service';
 import { AdvancedSortableDirective,SortEvent } from './advanced-sortable.directive';
+import { CreateCampsService } from 'src/services/create-camps.service';
 
 @Component({
   selector: 'app-campamentos',
@@ -30,8 +31,9 @@ export class CampamentosComponent implements OnInit {
   loading: boolean = false;
 
   activityValues: number[] = [0, 100];
+  customer:any =[]
 
-constructor() { }
+constructor(private camps: CreateCampsService) { }
 cars=[{Nombre:"Campamento con agrupaciones",grado:"prueba2",inicio:"2020-11-10 ",termina:"2020-11-10 " },
 {Nombre:"Campamento con agrupaciones", grado:"prueba2",inicio:"2020-11-10 ",termina:"2020-11-10 "   },
 {Nombre:"Campamento con agrupaciones", grado:"prueba2",inicio:"2020-11-10 ",termina:"2020-11-10 "   },
@@ -39,12 +41,12 @@ cars=[{Nombre:"Campamento con agrupaciones",grado:"prueba2",inicio:"2020-11-10 "
 {Nombre:"Campamento con agrupaciones", grado:"prueba2",inicio:"2020-11-10 ",termina:"2020-11-10 "},    
   ]
 
-  customer=[{name: "Prueba de Nombre subiendo ",record:{n:2,b:2,d:3},precio:5500,sede:"Los Potros",inicio:"2023-11-28 (3 días)",termina:"2023-11-28"}
-  ,{name: "Arueba de Nombre",record:{n:12,b:2,d:3},precio:2500,sede:"Los Potros",inicio:"2023-11-28 (3 días)",termina:"2023-11-28"},
-  {name: "Lrueba de Nombre",record:{n:12,b:2,d:3},precio:5500,sede:"aLos Potros",inicio:"2023-11-28 (3 días)",termina:"2023-11-28"}]
-
   ngOnInit(): void {
-    
+     this.camps.getCamp().subscribe((res:any)=>{
+      this.customer = res.data;
+      console.log(this.customer);
+      
+     })
   }
 }
 

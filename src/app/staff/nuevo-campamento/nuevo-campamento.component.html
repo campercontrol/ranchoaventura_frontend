@@ -12,14 +12,14 @@
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Nombre del
                                 campamento*</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "name" #name>
+                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName = "name" #name (input)="validateName()">
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Sede*
                             </label>
                             <div class="control-label col-sm-9">
-                                <select style="width: 100%;" class="form-control" formControlName = "location_id" #location_id>
+                                <select style="width: 100%;" class="form-control" formControlName = "location_id" #location_id (input)="validateLocationId()">
                                     <option *ngFor="let item of location" [value]="item.id">{{item.name}}</option>
                                 </select>
                             </div>
@@ -28,7 +28,7 @@
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Escuela*
                                 </label>
                             <div class="control-label col-sm-9">
-                                <select style="width: 100%;" class="form-control" formControlName ="school_id" #school_id>
+                                <select style="width: 100%;" class="form-control" formControlName ="school_id" #school_id (input)="validateSchoolId()">
                                     <option *ngFor="let item of school" [value]="item.id">{{item.name}}</option>
                                 </select>
                             </div>
@@ -36,7 +36,7 @@
                         <div class="row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Temporada*</label>
                             <div class="control-label col-sm-9">
-                                <select style="width: 100%;" class="form-control" formControlName ="season_id" #season_id>
+                                <select style="width: 100%;" class="form-control" formControlName ="season_id" #season_id (input)="validateSeasonId()">
                                     <option *ngFor="let item of temporada" [value]="item.id">{{item.name}}</option>
                                 </select>
                             </div>
@@ -54,28 +54,28 @@
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Inicio del
                                 Campamento</label>
                             <div class=" control-label col-sm-9">
-                                <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd"  formControlName="start" #start>
+                                <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd"  formControlName="start" #start (input)="validateStart()">
                             </div>
                         </div>
                         <div class="row mb-4 mt-3">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Final del
                                 Campamento</label>
                             <div class=" control-label col-sm-9">
-                                <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="end" #end>
+                                <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="end" #end (input)="validateEnd()">
                             </div>
                         </div>
                         <div class="row mb-4 mt-3">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Inicio de
                                 inscripción</label>
                             <div class=" control-label col-sm-9">
-                                <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="start_registration" #start_registration>
+                                <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="start_registration" #start_registration (input)="validateStartRegistration()">
                             </div>
                         </div>
                         <div class="row mb-4 mt-3">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Final de
                                 inscripción</label>
                             <div class=" control-label col-sm-9">
-                                <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="end_registration" #end_registration>
+                                <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="end_registration" #end_registration (input)="validateEndRegistration()">
                             </div>
                         </div>
 
@@ -150,21 +150,21 @@
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Punto de
                                 reunion*</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="venue" #venue>
+                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="venue" #venue (input)="validateVenue()">
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Fotos del
                                 camp*</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="photo_url" #photo_url>
+                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="photo_url" #photo_url (input)="validatePhotoUrl()">
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Contraseña del
                                 camp*</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="photo_password" #photo_password>
+                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="photo_password" #photo_password (input)="validatePhotoPassword()">
                             </div>
                         </div>
 
@@ -292,7 +292,7 @@
                                     <h4 for="horizontal-firstname-input">Mensaje
                                         especial*</h4>
                                     <hr>
-                                    <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message" >
+                                    <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message"  (input)="validateSpecialMessage()">
                                     </ckeditor>
                                   
                                 </div>
@@ -305,7 +305,7 @@
                                     <h4 for="horizontal-firstname-input" class="display-7">Mensaje especial
                                         para admin*</h4>
                                     <hr>
-                                    <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message_admin" >
+                                    <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message_admin" (input)="validateSpecialMessageAdmin()">
                                     </ckeditor>
                                     
                                 </div>

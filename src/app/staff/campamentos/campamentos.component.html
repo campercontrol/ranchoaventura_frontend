@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <div class="card border border-success border-3">
-        <div class="bg-success p-4">
+        <div class="bg-success p-2">
           <h4 class="card-title text-white">Campamentos</h4>
 
         </div>
@@ -53,6 +53,12 @@
                         <p-sortIcon field="inicio"></p-sortIcon>
                     </div>
                 </th>
+                <th pSortableColumn="inicio" style="min-width: 10rem" style="min-width: 170px;">
+                    <div class="flex justify-content-between align-items-center">
+                        Termina
+                        <p-sortIcon field="inicio"></p-sortIcon>
+                    </div>
+                </th>
                 <th pSortableColumn="status" style="min-width: 8rem">
                     <div class="flex justify-content-between align-items-center">
 
@@ -68,24 +74,27 @@
                     {{customer.name}}
                 </td>
                 <td>
-
-                    <p-badge [value]="customer.record.n" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
-                    <p-badge [value]="customer.record.b" pTooltip="Staff apuntados" tooltipPosition="top"
+                    <p-badge value="4" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
+                    <p-badge value="2" pTooltip="Staff apuntados" tooltipPosition="top"
                         severity="info" severity="warning"></p-badge>
-                    <p-badge [value]="customer.record.d" pTooltip="Staff confirmado" tooltipPosition="top"
+                    <p-badge value="2" pTooltip="Staff confirmado" tooltipPosition="top"
                         severity="danger" severity="danger"></p-badge>
+                </td>
+                <td>
+                    {{customer.public_price}}  <small *ngIf="customer.show_payment_parent"><i class="bx bx-dollar-circle" pTooltip="Se muestra el precio a los padres" tooltipPosition="top"></i></small>
+                </td>
+                <td>
+                    {{customer.location_id}}
+                </td>
+              
+                <td>
+                    {{customer.start.substring(0,10)}}
+                </td>
+                <td>
+                    {{customer.end.substring(0,10)}}
+                </td>
 
-
-                </td>
-                <td>
-                    ${{customer.precio}}MXM
-                </td>
-                <td>
-                    {{customer.sede}}
-                </td>
-                <td>
-                    {{customer.inicio}}
-                </td>
+             
                 <td>
                     <button class="btn btn-primary" class="btn btn-primary">ver campamento</button>
                 </td>
