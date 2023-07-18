@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -44,14 +44,24 @@ export class ProspectoComponent implements OnInit {
   confirmarCorreo = "";
   estadoCorreo:boolean= false;
   breadCrumbItems: Array<{}>;
+  @ViewChild("name") name: ElementRef;
+  @ViewChild("lastname_father") lastname_father: ElementRef;
 
-  constructor(private catalogos: CamperService, private formGrup: FormBuilder, private router: Router,private staff: StaffService,private modalService: NgbModal) { }
+  @ViewChild("photo") photo: ElementRef;
+  @ViewChild("birthday") birthday: ElementRef;
+  @ViewChild("curp") curp: ElementRef;
+  @ViewChild("bio") bio: ElementRef;
+  @ViewChild("home_phone") home_phone: ElementRef;
+  @ViewChild("cellphone") cellphone: ElementRef;
+
+
+  constructor(private catalogos: CamperService, private formGrup: FormBuilder, private router: Router,private staff: StaffService,private modalService: NgbModal,private render :Renderer2) { }
 
   ngOnInit(): void {
     this.formUser = this.formGrup.group({
       name: ["", [Validators.required]],
       lastname_father: ["", [Validators.required]],
-      lastname_mother: ["", [Validators.required]],
+      lastname_mother: ["",],
       photo: ["",[Validators.required]],
       birthday: ["",[Validators.required]], //fecha de nacimiento
       curp: ["",[Validators.required]],
@@ -89,7 +99,7 @@ export class ProspectoComponent implements OnInit {
   prueba1(){
     this.spinner=true;
   
-    console.log(this.formUser.value);
+   // console.log(this.formUser.value);
     let a = {
       "user": {
         "email": this.correo,
@@ -103,8 +113,8 @@ export class ProspectoComponent implements OnInit {
       "prospect":this.formUser.value
       
     }
-    
-    this.staff.prospectos(a).subscribe((res:any)=>{
+    if(this.formUser.validator){
+      this.staff.prospectos(a).subscribe((res:any)=>{
       
         this.spinner=false;
         this.centerModal();
@@ -123,6 +133,13 @@ export class ProspectoComponent implements OnInit {
           this.erroA=false;
         }, 10000);
       })
+
+    }else{
+      this.spinner=false;
+
+    }
+    
+  
     
    
   }
@@ -160,6 +177,50 @@ export class ProspectoComponent implements OnInit {
     this.estadoContrasena = this.regex.test(this.contrasena)  
     this.equalsCon();
     console.log(this.estadoContrasena)
+  }
+
+  validateName(): void {
+    this.validateFormField(this.name,'name');
+  }
+  
+  validatelastname_father(): void {
+    this.validateFormField(this.lastname_father,'lastname_father');
+  }
+  
+  validatephoto(): void {
+    this.validateFormField(this.photo,'photo');
+  }
+  
+  validatebirthday(): void {
+    this.validateFormField(this.birthday,'birthday');
+  }
+  
+  validatecurp(): void {
+    this.validateFormField(this.curp,'curp');
+  }
+  
+  validatebio(): void {
+    this.validateFormField(this.bio,'bio');
+  }
+  
+  validatehome_phone(): void {
+    this.validateFormField(this.home_phone,'home_phone');
+  }
+  
+  validatecellphone(): void {
+    this.validateFormField(this.cellphone,'cellphone');
+  }
+  
+ 
+  validateFormField(elementRef: any,name): void {
+    if (this.formUser.get(name).valid) {
+      this.render.removeClass(elementRef.nativeElement, "is-invalid");
+      this.render.addClass(elementRef.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(elementRef.nativeElement, "is-valid");
+      this.render.addClass(elementRef.nativeElement, "is-invalid");
+      elementRef.nativeElement.focus();
+    }
   }
 
 }

@@ -27,6 +27,10 @@ export class StaffService {
     return this.http.delete('http://142.93.12.234:8000/staff_unsubscribe/'+id)
 
   }
+
+  getPerfil(id = 18){
+    return this.http.get('http://142.93.12.234:8000/staff/'+id)
+  }
   
 
 }

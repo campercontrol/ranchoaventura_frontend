@@ -138,6 +138,7 @@ import { LicensedmedicineComponent } from './component/catalogos/licensedmedicin
 import { VaccinesComponent } from './component/catalogos/vaccines/vaccines.component';
 import { StaffrolesComponent } from './component/catalogos/staffroles/staffroles.component';
 import { CampercommentComponent } from './component/admi/campercomment/campercomment.component';
+import { PerfilStaffComponent } from './component/perfil-staff/perfil-staff.component';
 
 
 
@@ -179,7 +180,8 @@ export function createTranslateLoader(http: HttpClient): any {
     LicensedmedicineComponent,
     VaccinesComponent,
     StaffrolesComponent,
-    CampercommentComponent,    
+    CampercommentComponent,
+    PerfilStaffComponent,    
   ],
   imports: [
     BrowserModule,

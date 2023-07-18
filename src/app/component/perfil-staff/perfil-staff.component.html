@@ -7,7 +7,6 @@
                 <div class="bg-primary text-white  p-3">
 
                     <h3 class="text-white">{{infoCamp.name}}</h3>
-                    <h5 class="text-white">{{infoCamp.school_id}}</h5>
                     <h6 class="text-white">{{infoCamp.birthdayA}}</h6>
                 </div>
                 <section class="campamentos ">
@@ -20,10 +19,8 @@
                         </div>
                     </div>
                     <div class="foto-perfil">
-                        <img src="http://142.93.12.234:8000/{{photo}}" class="avatar-lg rounded-circle" alt="">
-                        <button class="btn-rounded btn btn-success mt-3 ">
-                            <a class="text-white" (click)="linkPerfil()" style="width: 100%;">Inscribir a Camps</a>
-                        </button>
+                        <img src="http://142.93.12.234:8000/{{infoCamp.photo}}" class="avatar-lg rounded-circle" alt="">
+                      
                     </div>
 
 
@@ -47,53 +44,53 @@
     <div class="row">
         <div class="col-lg-7">
             <div class="card p-5">
-                <h4>Perfil del Acampador </h4>
+                <h4>Perfil del Staff </h4>
                 <div class="row mt-4">
                     <div class="col-lg-12">
                         <div class="container-fluid">
                             <div class="titulo-info">
                                 <i class="bx bx-id-card"></i>
-                                <h4 style="margin-left: 10px;">Campista</h4>
+                                <h4 style="margin-left: 10px;">Staff</h4>
+                                
+
                             </div>
 
                             <div class="container-fluid">
+                                
+                                <p> <span class="fw-bold">Bio:</span>  {{infoCamp.bio}}</p>
+
                                 <p> <span class="fw-bold">Nombre:</span>  {{infoCamp.name}}</p>
                                 <p> <span class="fw-bold">Fecha de nacimiento:</span>{{infoCamp.birthday}}</p>
                                 <p> <span class="fw-bold">Edad: </span> {{infoCamp.birthdayA}}</p>
-                                <p> <span class="fw-bold">Sexo: </span> {{infoCamp.gender_id}}</p>
-                                <p> <span class="fw-bold"> Correo: </span>{{infoCamp.email}}</p>
+                                <p> <span class="fw-bold">RFC:</span> {{infoCamp.rfc}}</p>
+                                <p> <span class="fw-bold">CURP: </span> {{infoCamp.curp}}</p>
+                                <p> <span class="fw-bold"> Correo: </span>{{infoCamp.email}} // faltante del back</p>
 
                             </div>
                             <hr>
-
-                        </div>
-                        <div class="container-fluid">
-                            <div class="titulo-info">
-                                <i class="fas fa-book-reader"></i>
-                                <h4 style="margin-left: 10px;"> Educación</h4>
+                            <div class="row">
+                                <div class="container-fluid mt-5">
+                                    <div class="titulo-info col-12">
+                                        <i class="bx bxs-bookmark-star"></i>
+                                        <h4 style="margin-left: 10px;"> Datos de contacto</h4>
+                                    </div>
+        
+                                    <div class="container-fluid">
+        
+                                        <p> <i class="bx bxs-envelope"></i>  {{infoCamp.email}} // falta del back</p>
+                                        <p> <i class="bx bxl-whatsapp"></i>  {{infoCamp.staff_contact_cellphone}}</p>
+                                        <p> <i class="bx bxs-contact"></i>  {{infoCamp.staff_contact_homephone}}</p>
+                                        <p> <i class="bx bxl-facebook-square"></i>  {{infoCamp.facebook}}</p>   
+                                    </div>
+        
+                                </div>
                             </div>
-
-                            <div class="container-fluid">
-                                <p> <span class="fw-bold">Escuela:</span> {{infoCamp.school_id}} </p>
-                                <p> <span class="fw-bold">Grado:</span> {{infoCamp.grade}}</p>
-
-                            </div>
+                           
                             <hr>
-                            <br>
-
-                            <div class="titulo-info">
-                                <i class="fas fa-diagnoses"></i>
-                                <h4 style="margin-left: 10px;">Habilidades</h4>
-                            </div>
-
-                            <div class="container-fluid">
-                                <p> <span class="fw-bold">¿Sabe nadar?:</span>{{infoCamp.can_swim}}</p>
-                                <p> <span class="fw-bold">Impide realizar activida</span> {{infoCamp.prevent_activities}}</p>
-
-                            </div>
 
                         </div>
-                        <hr>
+                    
+                       
                         <div class="container-fluid">
                             <div class="titulo-info">
                                 <i class="fas fa-ambulance "></i>
@@ -101,44 +98,24 @@
                             </div>
 
                             <div class="container-fluid">
-                                <p> <span class="fw-bold">Requiere Instruciones Medicas:</span>{{ infoCamp.doctor_precall}} </p>
-                                <p> <span class="fw-bold">Peso:</span> {{infoCamp.weight}} kg</p>
-                                <p> <span class="fw-bold">Estatura: </span> {{infoCamp.height}} cm.</p>
                                 <p> <span class="fw-bold">Tipo de sangre: </span> {{infoCamp.blood_type}}</p>
                                 <p> <span class="fw-bold">Vacunas:</span>   <span class="badge bg-info ms-1"  *ngFor="let item of vacunasACtivos">{{item.name}}</span></p>
                               
 
                                 <p> <span class="fw-bold"> Enfermedades:</span>{{infoCamp.affliction}}</p>
-                                <p> <span class="fw-bold"> Problemas cardiacos:</span>{{infoCamp.heart_problems}}</p>
                                 <p> <span class="fw-bold"> Alergias a Medicamentos:</span>{{infoCamp.drug_allergies}}</p>
                                 <p> <span class="fw-bold">Otras Alergias:</span>{{infoCamp.other_allergies}}</p>
                                 <p> <span class="fw-bold">Alteraciones nocturnas:</span>{{infoCamp.other_allergies}}</p>
                                 <p> <span class="fw-bold">Fobias o miedos:</span>{{infoCamp.nocturnal_disorders}}</p>
-                                <p> <span class="fw-bold">Medicacion:</span>{{infoCamp.drugs}}</p>
                             </div>
 
                         </div>
                     </div>
-
-
                 </div>
                 <div class="row mt-4">
                     <hr>
                     <div class="col-lg-12">
-                        <div class="container-fluid">
-                            <div class="titulo-info">
-                                <i class="fas fa-ambulance"></i>
-                                <h4 style="margin-left: 10px;"> Seguro médico</h4>
-                            </div>
-
-                            <div class="container-fluid">
-                                <p> <span class="fw-bold">Tiene seguro médico:</span>{{infoCamp.insurance}}</p>
-                                <p> <span class="fw-bold">Numero de seguridad:</span>{{infoCamp.security_social_number}}</p>
-                                <p> <span class="fw-bold">Numero de póliza:</span>{{infoCamp.insurance_number}}</p>
-                            </div>
-
-                        </div>
-                        <hr>
+                       
                         <div class="container-fluid mt-5">
                             <div class="titulo-info">
                                 <i class="fas fa-drumstick-bite"></i>
@@ -152,44 +129,7 @@
 
                         </div>
                         <hr>
-                        <div class="container-fluid mt-5">
-                            <div class="titulo-info">
-                                <i class="bx bxs-bookmark-star"></i>
-                                <h4 style="margin-left: 10px;"> Tutor Principal</h4>
-                            </div>
-
-                            <div class="container-fluid" style="margin-left: 20px;">
-                                <p>{{nombreTutor}}</p>
-
-                                <p> <i class="bx bxs-envelope"></i>  {{emailTuto}}</p>
-                                <p> <i class="bx bxl-whatsapp"></i>  {{parent.tutor_cellphone}}</p>
-                                <p> <i class="bx bxs-contact"></i>  {{parent.tutor_home_phone}}</p>
-                                <p> <i class="bx bxs-city"></i>  {{parent.tutor_work_phone}}</p>
-
-
-
-                            </div>
-
-                        </div>
-                        <hr>
-                        <div class="container-fluid mt-5">
-                            <div class="titulo-info">
-                                <i class="bx bxs-bookmark-plus"></i>
-                                <h4 style="margin-left: 10px;">Tutor Secundario</h4>
-                            </div>
-
-                            <div class="container-fluid" style="margin-left: 20px;">
-                                <p>{{nombreTutorSecundario}}</p>
-                                <p> <i class="bx bxs-envelope"></i>  {{parent.contact_email}}</p>
-                                <p> <i class="bx bxl-whatsapp"></i>  {{parent.contact_cellphone}}</p>
-                                <p> <i class="bx bxs-contact"></i>  {{parent.contact_home_phone}}</p>
-                                <p> <i class="bx bxs-city"></i>  {{parent.contact_work_phone}}</p>
-
-
-                            </div>
-
-                        </div>
-                        <hr>
+                        
                         <div class="container-fluid mt-5">
                             <div class="titulo-info">
                                 <i class="mdi-card-account-phone-outline"></i>

@@ -50,6 +50,7 @@ import { LicensedmedicineComponent } from '../component/catalogos/licensedmedici
 import { VaccinesComponent } from '../component/catalogos/vaccines/vaccines.component';
 import { StaffrolesComponent } from '../component/catalogos/staffroles/staffroles.component';
 import { CampercommentComponent } from '../component/admi/campercomment/campercomment.component';
+import { PerfilStaffComponent } from '../component/perfil-staff/perfil-staff.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -77,6 +78,7 @@ const routes: Routes = [
 
 
   {path: 'staff/trophies',component:TrofeosComponent},
+  {path: 'staff/perfil/:id',component:PerfilStaffComponent},
 
   {path: 'grouping/camp', component: AgregarAgrupacionComponent},
   {path: 'medical/care', component: MedicoComponent},
@@ -87,6 +89,8 @@ const routes: Routes = [
   {path: 'mailing', component: GmailingComponent},
   {path: 'shop', component: TienditaComponent},
   {path: 'payments', component: PagosComponent},
+
+
 
   {path: 'staff/trainings',component:CapacitacionesComponent},
   {path: 'staff/trainings-events',component:CapacitacionesEventoComponent},

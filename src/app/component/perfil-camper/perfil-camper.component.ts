@@ -145,8 +145,6 @@ export class PerfilCamperComponent implements OnInit {
       this.nombreTutorSecundario = this.parent.contact_name + " " + this.parent.contact_lastname_father + "" + this.parent.contact_lastname_mother
       this.emailTuto = res.user_email
       console.log(this.parent);
-
-
       this.catalogosGrados = res.camper_info.grades;
       this.infoCamp = res.camper_info.camper
       this.infoCamp.birthdayA = this.calculateAge(this.infoCamp.birthday);
@@ -178,6 +176,7 @@ export class PerfilCamperComponent implements OnInit {
       this.infoCamp.can_swim = this.infoCamp.can_swim == 1 ? 'Si' : 'No';
       this.infoCamp.insurance = this.infoCamp.insurance == true ? 'Si' : 'No';
 
+      this.infoCamp.doctor_precall=this.infoCamp.doctor_precall== true ? "Sí, se requiere una llamada previa al campamento por parte del medico" :  "No, se requiere una llamada previa"
 
 
 
@@ -185,11 +184,11 @@ export class PerfilCamperComponent implements OnInit {
   }
 
   link(id){
-    this.rou.navigate(['parents/camp-info/1/'+id]);
+    this.rou.navigate(['parents/camp-info/'+this.id+'/'+id]);
 
   }
-  linkPerfil(id = 1){
-    this.rou.navigate(['/parents/inscription/'+id]);
+  linkPerfil(){
+    this.rou.navigate(['/parents/inscription/'+this.id]);
 
   }
 

@@ -25,6 +25,10 @@ export class CatalogosService {
     return this.http.delete('http://142.93.12.234:8000/delete_food_restriction/'+id);
   }
 
+  getGener(id = 'es'){
+    console.log(id);
+    return this.http.delete('http://142.93.12.234:8000/get_all_gender/'+id);
+  }
 
 
   getcurrency(){
