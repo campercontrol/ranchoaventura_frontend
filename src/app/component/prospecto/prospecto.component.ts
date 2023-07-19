@@ -39,6 +39,11 @@ export class ProspectoComponent implements OnInit {
   confirmarContrasena:string = "";
   estadoContrasena : boolean = false;
   estadoEmail : boolean = false;
+  confirmEmailAlert= false;
+  confirmEmailAlertInstruc= false;
+  confirmPaswordAlert = false;
+  alertcorreo = false;
+  alertConfirCorre = false;
 
   correo:string = "";
   confirmarCorreo = "";
@@ -53,12 +58,22 @@ export class ProspectoComponent implements OnInit {
   @ViewChild("bio") bio: ElementRef;
   @ViewChild("home_phone") home_phone: ElementRef;
   @ViewChild("cellphone") cellphone: ElementRef;
+  @ViewChild("email") email: ElementRef;
+  @ViewChild("password") password: ElementRef;
+  @ViewChild("emailConfir") emailConfir: ElementRef;
+  @ViewChild("confirmPassword") confirmPassword: ElementRef;
+  @ViewChild("facebook") facebook: ElementRef;
+
 
 
   constructor(private catalogos: CamperService, private formGrup: FormBuilder, private router: Router,private staff: StaffService,private modalService: NgbModal,private render :Renderer2) { }
 
   ngOnInit(): void {
     this.formUser = this.formGrup.group({
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]],
+      confirmPassword: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      confirmEmail: ['', [Validators.required,Validators.email]],
       name: ["", [Validators.required]],
       lastname_father: ["", [Validators.required]],
       lastname_mother: ["",],
@@ -72,7 +87,39 @@ export class ProspectoComponent implements OnInit {
       login_id:[0],
       coordinator:[false],
       terms: ["", [Validators.required, Validators.requiredTrue]],
+    },{
+      validators: this.matchingFieldsValidator('password', 'confirmPassword', 'email', 'confirmEmail')
     })
+    
+  }
+  matchingFieldsValidator(passwordField: string, confirmPasswordField: string, emailField: string, confirmEmailField: string) {
+    return (formGroup: FormGroup) => {
+      const password = formGroup.controls[passwordField];
+      const confirmPassword = formGroup.controls[confirmPasswordField];
+      const email = formGroup.controls[emailField];
+      const confirmEmail = formGroup.controls[confirmEmailField];
+  
+      if (password.value !== confirmPassword.value) {
+        confirmPassword.setErrors({ passwordMismatch: true });
+      } else {
+        confirmPassword.setErrors(null);
+      }
+  
+      if (email.value !== confirmEmail.value) {
+        confirmEmail.setErrors({ emailMismatch: true });
+      } else {
+        confirmEmail.setErrors(null);
+      }
+    };
+  }
+  getphoto() {
+    if(this.formUser.get('photo').valid){
+      return true
+    }else{
+      return false
+
+    }
+     
   }
   subiendo(event: any) {
     const archivo = event.target.files[0];
@@ -102,8 +149,8 @@ export class ProspectoComponent implements OnInit {
    // console.log(this.formUser.value);
     let a = {
       "user": {
-        "email": this.correo,
-        "passw":this.contrasena,
+        email:this.formUser.get('email').value,
+        passw: this.formUser.get('password').value,
         role_id: 2,
         is_coordinator: false,
         is_admin: false,
@@ -113,9 +160,10 @@ export class ProspectoComponent implements OnInit {
       "prospect":this.formUser.value
       
     }
-    if(this.formUser.validator){
+    if(this.formUser.valid){
       this.staff.prospectos(a).subscribe((res:any)=>{
-      
+        console.log(res);
+        
         this.spinner=false;
         this.centerModal();
         this.formUser.reset();
@@ -125,17 +173,32 @@ export class ProspectoComponent implements OnInit {
         this.confirmarContrasena=""
         this.estadoCorreo=false;
         this.estadoContrasena=false;
+        this.router.navigate(['account/login']);
+
       },error=>{
         this.erroA=true;
         this.spinner=false;
 
         setTimeout(() => {
           this.erroA=false;
+          
         }, 10000);
       })
 
     }else{
       this.spinner=false;
+      this.validateFace();
+      this.validatecellphone();
+      this.validatehome_phone();
+      this.validatebio();
+      this.validatebirthday();
+      this.validatecurp();
+      this.validatelastname_father();
+      this.validateName();
+      this.getconfirmPassword();
+      this.getpassword();
+      this.getconfirmEmail();
+      this.getemail();
 
     }
     
@@ -150,35 +213,87 @@ export class ProspectoComponent implements OnInit {
     this.modalService.open(centerDataModal, { centered: true });
   }
 
-  validatorsEmail(){
-    this.estadoEmail = this.correoVal.test(this.correo);
-    console.log(this.estadoEmail)
-    this.equalsEmail()
+  getpassword() {
+    if( this.formUser.get('password').valid){
+      this.render.removeClass(this.password.nativeElement,"is-invalid");
+        this.render.addClass(this.password.nativeElement,"is-valid");
+     }else{
+      this.render.removeClass(this.password.nativeElement,"is-valid");
+      this.render.addClass(this.password.nativeElement,"is-invalid");
+      this.password.nativeElement.focus()
+
+     }
+    this.getpasworddnotfocus();
+  }
+
+  getpasworddnotfocus(){
+    if( this.formUser.get('confirmPassword').valid){
+      this.render.removeClass(this.confirmPassword.nativeElement,"is-invalid");
+        this.render.addClass(this.confirmPassword.nativeElement,"is-valid");
+        this.confirmPaswordAlert = false;        
+     }else{
+      this.render.removeClass(this.confirmPassword.nativeElement,"is-valid");
+      this.render.addClass(this.confirmPassword.nativeElement,"is-invalid");
+      this.confirmPaswordAlert = true;
+
+     }
+  }
+  getconfirmPassword() {
+    if( this.formUser.get('confirmPassword').valid){
+      this.render.removeClass(this.confirmPassword.nativeElement,"is-invalid");
+        this.render.addClass(this.confirmPassword.nativeElement,"is-valid");
+        this.confirmPaswordAlert = false;        
+     }else{
+      this.render.removeClass(this.confirmPassword.nativeElement,"is-valid");
+      this.render.addClass(this.confirmPassword.nativeElement,"is-invalid");
+      this.confirmPaswordAlert = true;
+      this.confirmPassword.nativeElement.focus()
+
+     }
+  }
+  getemail() {
+    //console.log(this.formParent.get('email').valid);
+    this.alertcorreo = true;
+   if(this.formUser.get('email').valid){
+    this.render.removeClass(this.email.nativeElement,"is-invalid");
+      this.render.addClass(this.email.nativeElement,"is-valid");
+      console.log('respyesta');
+      
+   }else{
+    this.render.removeClass(this.email.nativeElement,"is-valid");
+    this.render.addClass(this.email.nativeElement,"is-invalid");
+    this.email.nativeElement.focus()
+
+   }
+   this.getconfirmEmailChanceEmail();
+  }
+
+  getconfirmEmailChanceEmail(){
+    if( this.formUser.get('confirmEmail').valid){
+      this.render.removeClass(this.emailConfir.nativeElement,"is-invalid");
+        this.render.addClass(this.emailConfir.nativeElement,"is-valid");
+        this.confirmEmailAlert = false;        
+     }else{
+      this.render.removeClass(this.emailConfir.nativeElement,"is-valid");
+      this.render.addClass(this.emailConfir.nativeElement,"is-invalid");
+      this.confirmEmailAlert = true;
+
+     }
 
   }
-  equalsEmail(){
-    if( this.correo == this.confirmarCorreo){
-      this.estadoCorreo = true;
-      console.log(this.estadoCorreo)
+  getconfirmEmail() {
+    if( this.formUser.get('confirmEmail').valid){
+      this.render.removeClass(this.emailConfir.nativeElement,"is-invalid");
+        this.render.addClass(this.emailConfir.nativeElement,"is-valid");
+        this.confirmEmailAlert = false;        
+     }else{
+      this.render.removeClass(this.emailConfir.nativeElement,"is-valid");
+      this.render.addClass(this.emailConfir.nativeElement,"is-invalid");
+      this.confirmEmailAlert = true;
+      this.emailConfir.nativeElement.focus()
 
-    }else{
-      this.estadoCorreo = false;
-    }  
-  }
-  equalsCon(){
-    if( this.contrasena == this.confirmarContrasena){
-      this.confiCon = true;
-      console.log(this.confiCon)
-    }else{
-      this.confiCon = false;
+     }
     }
-  }
-  validarContrasena(){
-    this.estadoContrasena = this.regex.test(this.contrasena)  
-    this.equalsCon();
-    console.log(this.estadoContrasena)
-  }
-
   validateName(): void {
     this.validateFormField(this.name,'name');
   }
@@ -209,6 +324,9 @@ export class ProspectoComponent implements OnInit {
   
   validatecellphone(): void {
     this.validateFormField(this.cellphone,'cellphone');
+  }
+  validateFace(): void {
+    this.validateFormField(this.facebook,'facebook');
   }
   
  
