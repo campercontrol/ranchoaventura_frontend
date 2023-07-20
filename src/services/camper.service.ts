@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -59,6 +59,13 @@ export class CamperService {
    postTraining(info: any) {
     return this.http.post('http://142.93.12.234:8000/training', info)
    }
+
+   public getBauch(camper_id :any,capm_id){
+    const headers = new HttpHeaders().set('Content-Type','application/json');
+    return this.http.get('http://142.93.12.234:8000/payment_boucher/' + camper_id+"/"+capm_id, {headers,responseType: 'blob' as 'json'} )
+   }
+
+
   
 
 }

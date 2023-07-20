@@ -35,6 +35,7 @@ export class PerfilCamperComponent implements OnInit {
   comenarios: any = [];
   comment:any ="";
   historialCaps:any = [];
+  camperband:any = [];
 
   constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private hijos: CamperService,private parents : ParentService, private rou:Router) {
     this.routesA.params.subscribe((params) => {
@@ -115,13 +116,13 @@ export class PerfilCamperComponent implements OnInit {
   // doctor_precall varibles
   getInfo(){
     this.hijos.getPerfil(this.id).subscribe((res: any) => {
-      console.log(res);
+      console.log(res,'hola');
       let b = []
       b=b.concat(res.camper_subscribe_camps);
      b= b.concat(res.camper_cancelled_camps);
      b= b.concat(res.camper_passed_camps);
 
-
+     this.camperband = res.camper_band[0];
       this.historialCaps = b;
       this.historialCaps.sort((x,y)=>{
         x.camp_start - y.camp_start

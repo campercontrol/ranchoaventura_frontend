@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CamperService } from 'src/services/camper.service';
@@ -17,17 +17,17 @@ export class CampamentoComponent implements OnInit {
   dataPagos:any={};
   nameCamp:any={};
   cargosExtras:any ;
-  PreguntasExtras:any ;
+  PreguntasExtras:any =[] ;
   respuestPregunta:any="";
   cargosExtra:false;
   estatusPago:Boolean= false;
   pagos:boolean=false;
   statusInscri:boolean=false;
   location= "";
+  @ViewChild('baucher') baucher  :ElementRef;
 
 
-
-  constructor(private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router) { 
+  constructor(private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router,private render:Renderer2) { 
     this.routesA.params.subscribe((params)=>{
       this.idCamp = params['camp'];
     //  console.log(this.idCamp);
@@ -57,11 +57,11 @@ export class CampamentoComponent implements OnInit {
        
       },error=>{
         alert('no se pudo cargar')
-      })
+      });
 
 
 
-    this.camps.getPreguntas(Number(this.idCamp),).subscribe((res:any)=>{
+    this.camps.getPreguntas(Number(this.idCamp),Number(this.idCamper)).subscribe((res:any)=>{
      console.log(res,'preguntas');
       this.PreguntasExtras = res.data;
      
@@ -103,18 +103,22 @@ export class CampamentoComponent implements OnInit {
     this.router.navigate(['/parents/camper/'+this.idCamper])
   }
   saveRes(){
-    this.PreguntasExtras[0];
-    let res = {
-      question_id:this.PreguntasExtras[0].id,
-      answer:this.respuestPregunta,
-      camper_id:this.idCamper,
-
-    }
-    this.camps.setPreguntas(this.PreguntasExtras[0].id,res).subscribe((res:any)=>{
-      console.log(res);
-      this.modalService.dismissAll()
+   
+    this.PreguntasExtras.forEach(element => {
+   
+      let res = {
+        "answer": element.answer,
+        "camper_id": this.idCamp,
+        "question_id": 2
+      }
+      this.camps.setPreguntas(res).subscribe((res:any)=>{
+        console.log(res);
+        
+      })
       
-    })
+    });
+
+  
 
   }
   saveChange(){
@@ -141,6 +145,22 @@ export class CampamentoComponent implements OnInit {
       alert ('se cancelo la inscripcion correctamente')
     },error=>{
       console.log(error);
+      
+    })
+  }
+  getBaucher(){
+    this.hijos.getBauch(this.idCamper,this.idCamp).subscribe((res:any)=>{
+      console.log(res);
+      const dataBinary = [];
+      dataBinary.push(res);
+      const filePath =  window.URL.createObjectURL(new Blob(dataBinary,{type: 'application/pdf'}));
+      const link = document.createElement('a');
+      link.href =filePath;
+      link.setAttribute('download','ficha de pago');
+      document.body.appendChild(link);
+      link.click();
+
+     
       
     })
   }

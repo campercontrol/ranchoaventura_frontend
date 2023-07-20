@@ -141,7 +141,7 @@ getCampsDIs(){
  
   this.info.getCapsT(this.id).subscribe((res:any)=>{
     console.log(res);
-    this.camper_band = res.camper_band
+    this.camper_band = res.camper_band[0]
     this.camper_band.birthday =  this.calculateAge(this.camper_band.birthday)
 
     this.customer= res.available_school_camps;

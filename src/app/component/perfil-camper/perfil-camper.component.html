@@ -6,14 +6,14 @@
             <div class="card campamentos-header">
                 <div class="bg-primary text-white  p-3">
 
-                    <h3 class="text-white">{{infoCamp.name}}</h3>
-                    <h5 class="text-white">{{infoCamp.school_id}}</h5>
+                    <h3 class="text-white">{{camperband.full_name}}</h3>
+                    <h5 class="text-white">{{camperband.school}}</h5>
                     <h6 class="text-white">{{infoCamp.birthdayA}}</h6>
                 </div>
                 <section class="campamentos ">
                     <div class="Campementos_anteriores">
                         <div>
-                            0
+                            {{camperband.past_camps}}
                         </div>
                         <div>
                             <p>Camps Anteriores</p>
@@ -29,7 +29,7 @@
 
                     <div class="Campamentos_proximo">
                         <div>
-                            4
+                            {{camperband.future_camps}}
                         </div>
                         <div>
                             <p>Camps Proximo</p>

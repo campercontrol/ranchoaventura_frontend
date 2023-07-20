@@ -29,7 +29,7 @@ export class RegisteredChildrenComponent implements OnInit {
     this.hijos.getHijos().subscribe(
       (res:any)=>{
         console.log(res);
-        this.hijosRes = res.data;
+        this.hijosRes = res.campers;
       }
     )
   }
