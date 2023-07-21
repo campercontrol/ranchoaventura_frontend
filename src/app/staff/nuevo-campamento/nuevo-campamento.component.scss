@@ -61,3 +61,13 @@
     align-items: center;
     justify-content: space-between;
 }
+.footerMensje{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.delet{
+    color: red;
+    cursor: pointer;
+}
+.big-checkbox {width: 15px; height: 15px;}

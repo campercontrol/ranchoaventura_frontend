@@ -30,6 +30,14 @@ export class NuevoCampamentoComponent implements OnInit {
   @ViewChild("location_id") location_id: ElementRef;
   @ViewChild("school_id") school_id: ElementRef;
   @ViewChild("season_id") season_id: ElementRef;
+  @ViewChild("insurance") insurance: ElementRef;
+  @ViewChild("public_price") public_price: ElementRef;
+
+  extra_question : any = [];
+  extra_charges:any = [];
+  alerQuestion = false;
+  alercharges= false;
+  fecha = new Date();
 
 
 
@@ -47,6 +55,7 @@ export class NuevoCampamentoComponent implements OnInit {
    }
   breadCrumbItems: Array<{}>;
   selectedCities: string[] = [];
+  payment_accounts:any = [];
 
 
  public Editor = ClassicEditor;
@@ -73,43 +82,58 @@ export class NuevoCampamentoComponent implements OnInit {
 
      });
     this.formCamp = this.formGrup.group({
-      name: ["",[Validators.required]], //listo
+      name: ["",[Validators.required,Validators.minLength(2)]], //listo
       start: ["",[Validators.required]], //listo
       end:  ["",[Validators.required]], //listo
       start_registration: ["",[Validators.required]], //listo
       end_registration:["",[Validators.required]], //listo
-      registration: [false], //listo insurance
+      registration: [true], //listo insurance
       url: [""], //listo
       special_message: ["",[Validators.required]],
       special_message_admin: ["",[Validators.required]],
-      public_price:  [0], // listo 
-      show_payment_parent:  [false], //listo
-      show_rebate_parent:  [false],//listo
-      show_paypal_button:  [false],// listo
+      public_price:  [0,[Validators.required,Validators.min(1)]], // listo 
+      show_payment_parent:  [true], //listo
+      show_rebate_parent:  [true],//listo
+      show_paypal_button:  [true],// listo
       paypal_button:  ["string"],//listo
-      show_payment_order:  [false],
+      show_payment_order:  [true],
       reminder_camp_days:  [15],//listo
       reminder_discount_days:  [15],//listo
-      insurance:  [0], // listo
+      insurance:  [0,[Validators.required,Validators.min(1)]], // listo
       venue:  ["",[Validators.required]], // listo 
       photo_url:  ["",[Validators.required]], // listo
       photo_password:  ["",[Validators.required]], // listo
       medical_report:  [""],//listo
       occupancy_camp:  [0],
       active:  [true], //listo
-      general_camp:  [false], //listo
-      currency_id: [0,[Validators.required,Validators.minLength(1)]],// listo
-      location_id:  [0,[Validators.required,Validators.minLength(1)]], //listo
-      school_id:  [0,[Validators.required,Validators.minLength(1)]], // listo
-      season_id:  [0,[Validators.required,Validators.minLength(1)]], // listo
+      general_camp:  [true], //listo
+      currency_id: [0,[Validators.required,Validators.min(1)]],// listo
+      location_id:  [0,[Validators.required,Validators.min(1)]], //listo
+      school_id:  [0,[Validators.required,Validators.min(1)]], // listo
+      season_id:  [0,[Validators.required,Validators.min(1)]], // listo
+      created_at: ['2023-07-20T16:21:21.283177'],
+      extra_charges: [this.extra_charges],
+      extra_question:[ this.extra_question],
+      payment_accounts:[this.payment_accounts]
     })
   }
 
   createCampPost(){
     console.log(this.formCamp.value);
-    if(this.formCamp.validator){
-      this.createCamp.postCamp(this.formCamp.value).subscribe((res:any)=>{
+    if(this.formCamp.valid){
+      let a = {
+          camp:this.formCamp.value
+      }
+      if(this.payment_accounts.length==0){this.formCamp.patchValue({payment_accounts:[]})}
+      if(this.extra_question.length==0){this.formCamp.patchValue({extra_question:[]})}
+      if(this.extra_charges.length==0){this.formCamp.patchValue({extra_charges:[]})}
+
+
+      this.createCamp.postCamp(a).subscribe((res:any)=>{
         console.log(res);
+        this.extra_charges = [];
+        this.extra_question= [];
+        this.formCamp.reset;
         
       },error=>{
         console.log(error);
@@ -123,8 +147,9 @@ export class NuevoCampamentoComponent implements OnInit {
       this.validatePhotoPassword();
       this.validatePhotoUrl();
       this.validateVenue();
-      this.validateSpecialMessageAdmin();
-      this.validateSpecialMessage();
+      
+      this.validateinsurance()
+      this.validatepublic_price()
       this.validateEndRegistration();
       this.validateStartRegistration();
       this.validateEnd();
@@ -166,16 +191,16 @@ export class NuevoCampamentoComponent implements OnInit {
     this.validateFormField(this.end_registration,'end_registration');
   }
   
-  validateSpecialMessage(): void {
-    this.validateFormField(this.special_message,'special_message');
-  }
-  
-  validateSpecialMessageAdmin(): void {
-    this.validateFormField(this.special_message_admin,'special_message_admin');
-  }
+ 
   
   validateVenue(): void {
     this.validateFormField(this.venue,'venue');
+  }
+  validateinsurance(): void {
+    this.validateFormField(this.insurance,'insurance');
+  }
+  validatepublic_price(): void {
+    this.validateFormField(this.public_price,'public_price');
   }
   
   validatePhotoUrl(): void {
@@ -200,6 +225,72 @@ export class NuevoCampamentoComponent implements OnInit {
   
   validateSeasonId(): void {
     this.validateFormField(this.season_id,'season_id');
+  }
+  newExtraQuestion(){
+    let a = this.extra_question.length;
+    if(this.extra_question.length>0){
+      let b =this.extra_question[a-1].question
+      if( b.length>0){
+        let a = {
+          "question": "",
+          "is_required": false,
+          "created_at":this.fecha
+
+        }
+        this.extra_question.push(a);
+        this.alerQuestion = false;
+      }else{
+        this.alerQuestion = true;
+      }
+    }else{
+      let a = {
+        "question": "",
+        "is_required": false,
+        "created_at":this.fecha
+
+      }
+      this.extra_question.push(a);
+      this.alerQuestion = false
+    }
+   
+  }
+  deletExtraQuestion(i){
+    this.extra_question.splice(i);
+
+  }
+
+  newExtracharges(){
+    let a = this.extra_charges.length;
+    if(this.extra_charges.length>0){
+      let b =this.extra_charges[a-1].name;
+      if( b.length>0){
+        let a = {
+          "name": "",
+          "price": 0,
+          "currency_id": 0,
+          "created_at":this.fecha
+
+        }
+        this.extra_charges.push(a);
+        this.alercharges = false;
+      }else{
+        this.alercharges = true;
+      }
+    }else{
+      let a = {
+        "name": "",
+        "price": 0,
+        "currency_id": 0,
+        "created_at":this.fecha
+      }
+      this.extra_charges.push(a);
+      this.alercharges = false
+    }
+   
+  }
+  deletExtracharges(i){
+    this.extra_charges.splice(i);
+
   }
 
 }
