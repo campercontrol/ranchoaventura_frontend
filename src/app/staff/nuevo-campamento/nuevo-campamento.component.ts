@@ -95,7 +95,6 @@ export class NuevoCampamentoComponent implements OnInit {
       show_payment_parent:  [true], //listo
       show_rebate_parent:  [true],//listo
       show_paypal_button:  [true],// listo
-      paypal_button:  ["string"],//listo
       show_payment_order:  [true],
       reminder_camp_days:  [15],//listo
       reminder_discount_days:  [15],//listo
@@ -104,7 +103,7 @@ export class NuevoCampamentoComponent implements OnInit {
       photo_url:  ["",[Validators.required]], // listo
       photo_password:  ["",[Validators.required]], // listo
       medical_report:  [""],//listo
-      occupancy_camp:  [0],
+      occupancy_camp:  [0], // cupo de campamentos faltante
       active:  [true], //listo
       general_camp:  [true], //listo
       currency_id: [0,[Validators.required,Validators.min(1)]],// listo
