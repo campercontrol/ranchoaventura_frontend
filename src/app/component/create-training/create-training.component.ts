@@ -14,7 +14,14 @@ export class CreateTrainingComponent implements OnInit {
   selectCapcitacion: any;
   items: any;
   display: boolean = false;
+  display2: boolean = false;
+  display3: boolean = false;
   text: any;
+  statuAgrgado = false;
+  TextElimint="";
+  idDalete=0;
+  updateId =0;
+
   capa = {
     name: ''
   }
@@ -27,7 +34,7 @@ export class CreateTrainingComponent implements OnInit {
     name: ['', [Validators.required]],
     photo: ['', [Validators.required]],
     description: ['', [Validators.required, Validators.min(0)]],
-    url: [0, [Validators.required, Validators.min(0)]],
+    url: ['', [Validators.required, Validators.min(0)]],
     active: [true, [Validators.required]],
     created_at: [this.date]
   })
@@ -47,7 +54,14 @@ export class CreateTrainingComponent implements OnInit {
 
   onSave () : void {
     console.log(this.addTrainingForm.value)
-    this.catalogos.postTraining(this.addTrainingForm.value).subscribe((res) => {console.log(res)});
+    this.catalogos.postTraining(this.addTrainingForm.value).subscribe((res) => {
+      this.addTrainingForm.reset();
+      this.getTrainig()
+      this.closeModal();
+      },error=>{
+        console.log(error);
+        
+      });
   }
 
 
@@ -58,10 +72,85 @@ export class CreateTrainingComponent implements OnInit {
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Forms' }, { label: 'Form Editor', active: true }];
+    this.getTrainig();
+  }
+  getTrainig(){
+    this.catalogos.getTraining().subscribe((res:any)=>{
+      this.capacitaciones = res.data;
+      console.log(this.capacitaciones);
+      
+    })
+  }
+
+  
+  update(item){
+    console.log(item);
+    
+    this.showDialog2();
+    this.updateId = item.id;
+    this.addTrainingForm.patchValue({
+      id:this.updateId,
+      name: item.name,
+      photo: item.photo,
+      description:item.description,
+      url: item.url,
+      active:item.active,
+
+    })
+  
+    
+  }
+  showDialog() {
+    this.display = true;
+  }
+  showDialog2() {
+    this.display2 = true;
+  }
+  closeModal() {
+    this.display = false;
 
   }
 
-  showDialog() {
-    this.display = true;
+  closeModal3() {
+    this.display3 = false;
+
+  }
+  closeModal2() {
+    this.display2 = false;
+    this.resteValu();
+
+  }
+  resteValu(){
+    this.addTrainingForm.reset()
+  }
+
+  keepUpdate(){
+    this.catalogos.updateTraining(this.addTrainingForm.value,this.updateId).subscribe((res: any) => {
+     console.log(res);
+      this.getTrainig();
+      this.statuAgrgado = true;
+      this.resteValu();
+      setTimeout(() => {
+        this.statuAgrgado = false;
+        this.closeModal2();
+      }, 1000);
+
+    }, error => {
+      console.log(error);
+      
+      alert('No se pudo Agregar')
+    })
+  }
+
+
+  deletModal(name,id){
+    this.idDalete= id;
+    this.TextElimint='Deseas Eliminar '+ name + '  del catalogo';
+    this.display3 = true; 
+   
+  }
+
+  delet(){
+ 
   }
 }

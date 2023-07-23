@@ -27,9 +27,11 @@
                 <ng-template pTemplate="header">
                     <tr>
                      
-                        <th pSortableColumn="name">Nombre de la capacitacion <p-sortIcon field="camp"
+                        <th pSortableColumn="name"> Capacitacion <p-sortIcon field="camp"
                                 style="font-size: 10px;"></p-sortIcon></th>
-                        <th pSortableColumn="description">Descripcion <p-sortIcon field="sede"></p-sortIcon></th>
+                        <th pSortableColumn="description">Fecha de inicio <p-sortIcon field="sede"></p-sortIcon></th>
+                        <th pSortableColumn=" camp_end">Fecha de  finalización <p-sortIcon field="Activo"></p-sortIcon></th>
+                        <th pSortableColumn=" camp_end">Temporada <p-sortIcon field="Activo"></p-sortIcon></th>
                         <th pSortableColumn=" camp_end">Activo <p-sortIcon field="Activo"></p-sortIcon></th>
 
 
@@ -39,10 +41,16 @@
                     <tr>
                         
                         <td>
-                            {{customer.name}}
+                            {{customer.training}}
                         </td>
                         <td>
-                            {{customer.description}}
+                            {{customer.start.substring(0,11)}}
+                        </td>
+                        <td>
+                            {{customer.end.substring(0,11)}}
+                        </td>
+                        <td>
+                            {{customer.season}}
                         </td>
                         <td>
                             {{customer.active}}
@@ -76,47 +84,64 @@
     [style]="{width: '50vw'}">
     <ng-template pTemplate="header">
         <h2>
-            Agregar nueva capacitacion
+            Agregar nueva evento
         </h2>
     </ng-template>
     <div class="col">
         <form [formGroup]="addTrainingForm" (ngSubmit)="onSave()">
 
             <div class="row mb-4">
-                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Nueva Capacitacion</label>
+                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Capacitaciones</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="name">
+                    <select name="" id="" formControlName="training_id" class="form-control">
+                        <option value="" *ngFor="let item of capacitacionesName" [value]="item.id" style="width: 100%;" class="form-control">{{item.name}}</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="row mb-4">
+                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Fecha de inicio</label>
+                <div class="col-sm-9">
+                    <input input type="datetime-local"  placeholder="yyyy-mm-dd" class="form-control" id="horizontal-firstname-input"
+                        formControlName="start">
                 </div>
 
             </div>
             <div class="row mb-4">
-                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Imagen de la
-                    capacitacion</label>
+                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Fecha de finalización</label>
                 <div class="col-sm-9">
-                    <input type="file" class="form-control" id="horizontal-firstname-input" (change)="subiendo($event)">
+                    <input type="datetime-local"  placeholder="yyyy-mm-dd" class="form-control" id="horizontal-firstname-input"
+                        formControlName="end">
+                </div>
+            </div>
+            <div class="row mb-4">
+                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Lugar</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="horizontal-firstname-input"
+                        formControlName="location">
+                </div>
+            </div>
+            <div class="row mb-4">
+                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Temporada</label>
+                <div class="col-sm-9">
+                    <select name="" id="" formControlName="season_id" class="form-control">
+                        <option value="" *ngFor="let item of temporada" [value]="item.id" style="width: 100%;" class="form-control">{{item.name}}</option>
+                    </select>
                 </div>
 
             </div>
-            <div class="row mb-4">
-                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Imagen del Capacitacion</label>
-                <ckeditor class="mt-4" [editor]="Editor" data="" formControlName="description">
-                </ckeditor>
-
-            </div>
-            <div class="row mb-4">
-                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">URL</label>
-                <div class="col-sm-9">
-                    <input type="url" class="form-control" id="horizontal-firstname-input"
-                        formControlName="url">
-                </div>
-
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked2" checked formControlName="open_enrollment">
+                <label class="form-check-label" for="flexSwitchCheckChecked2">Inscripcion abierta</label>
             </div>
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked formControlName="active">
                 <label class="form-check-label" for="flexSwitchCheckChecked">Activo</label>
             </div>
-            <div>
-                <button type="submit" class="btn btn-primary">
+            
+            <div class="button">
+                <button type="submit" class="btn btn-primary p-3">
                 Guardar
                 </button>
             </div>
@@ -133,45 +158,62 @@
 <p-dialog header="Title" [(visible)]="display2" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
     <ng-template pTemplate="header">
         <h2>
-            Agregar nueva capacitacion
+            Editar Evento
         </h2>
     </ng-template>
     <div class="col">
         <form [formGroup]="addTrainingForm" (ngSubmit)="onSave()">
 
             <div class="row mb-4">
-                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Nueva Capacitacion</label>
+                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Capacitaciones</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="name">
+                    <select name="" id="" formControlName="training_id" class="form-control">
+                        <option value="" *ngFor="let item of capacitacionesName" [value]="item.id" style="width: 100%;" class="form-control">{{item.name}}</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="row mb-4">
+                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Fecha de inicio</label>
+                <div class="col-sm-9">
+                    <input input type="datetime-local" class="form-control" id="horizontal-firstname-input"
+                        formControlName="start">
                 </div>
 
             </div>
             <div class="row mb-4">
-                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Imagen de la
-                    capacitacion</label>
+                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Fecha de finalización</label>
                 <div class="col-sm-9">
-                    <input type="file" class="form-control" id="horizontal-firstname-input" (change)="subiendo($event)">
+                    <input type="datetime-local"  class="form-control" id="horizontal-firstname-input"
+                        formControlName="end">
+                </div>
+            </div>
+            <div class="row mb-4">
+                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Lugar</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="horizontal-firstname-input"
+                        formControlName="location">
+                </div>
+            </div>
+            <div class="row mb-4">
+                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Temporada</label>
+                <div class="col-sm-9">
+                    <select name="" id="" formControlName="season_id" class="form-control">
+                        <option value="" *ngFor="let item of temporada" [value]="item.id" style="width: 100%;" class="form-control">{{item.name}}</option>
+                    </select>
                 </div>
 
             </div>
-            <div class="row mb-4">
-                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Imagen del Capacitacion</label>
-                <ckeditor class="mt-4" [editor]="Editor" data="" formControlName="description">
-                </ckeditor>
-
-            </div>
-            <div class="row mb-4">
-                <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">URL</label>
-                <div class="col-sm-9">
-                    <input type="url" class="form-control" id="horizontal-firstname-input"
-                        formControlName="url">
-                </div>
-
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked2" checked formControlName="open_enrollment">
+                <label class="form-check-label" for="flexSwitchCheckChecked2">Inscripcion abierta</label>
             </div>
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked formControlName="active">
                 <label class="form-check-label" for="flexSwitchCheckChecked">Activo</label>
             </div>
+            
             
 
 

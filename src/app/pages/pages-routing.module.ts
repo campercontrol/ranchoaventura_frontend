@@ -51,6 +51,7 @@ import { VaccinesComponent } from '../component/catalogos/vaccines/vaccines.comp
 import { StaffrolesComponent } from '../component/catalogos/staffroles/staffroles.component';
 import { CampercommentComponent } from '../component/admi/campercomment/campercomment.component';
 import { PerfilStaffComponent } from '../component/perfil-staff/perfil-staff.component';
+import { TrainingEventComponent } from '../component/training-event/training-event.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -93,7 +94,8 @@ const routes: Routes = [
 
 
   {path: 'staff/trainings',component:CapacitacionesComponent},
-  {path: 'staff/trainings-events',component:CapacitacionesEventoComponent},
+  {path: 'staff/trainings-events',component:TrainingEventComponent},
+  {path: 'staff/training',component:CapacitacionesEventoComponent},
   {path: 'staff/trainings-dashboard',component:CreateTrainingComponent},
   {path: 'staff/trainings-card', component: ListaCapacitacionesComponent},
 

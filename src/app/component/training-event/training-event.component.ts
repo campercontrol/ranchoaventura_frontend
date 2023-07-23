@@ -1,0 +1,209 @@
+import { Component, OnInit } from '@angular/core';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CamperService } from 'src/services/camper.service';
+import { CreateCampsService } from 'src/services/create-camps.service';
+
+@Component({
+  selector: 'app-training-event',
+  templateUrl: './training-event.component.html',
+  styleUrls: ['./training-event.component.scss']
+})
+export class TrainingEventComponent implements OnInit {
+  capacitaciones: any = [];
+  selectCapcitacion: any;
+  items: any;
+  display: boolean = false;
+  display2: boolean = false;
+  display3: boolean = false;
+  text: any;
+  statuAgrgado = false;
+  TextElimint="";
+  idDalete=0;
+  updateId =0;
+  capacitacionesName:any = [];
+  temporada:any = [];
+
+  capa = {
+    name: ''
+  }
+  breadCrumbItems: Array<{}>;
+  selectedCities: string[] = [];
+  
+  date :Date =new Date()
+
+  
+
+  public addTrainingForm: FormGroup = this.fb.group({
+    "start": ["",[Validators.required]],//listo
+    "end": ["",[Validators.required]],//listo
+    "location": ["",[Validators.required]],//listo
+    "open_enrollment": [false],
+    "active":  [true],
+    "season_id":  [0,[Validators.required,Validators.min(1)]],
+    "training_id":[0,[Validators.required,Validators.min(1)]]// listo
+  })
+
+
+ 
+
+  onSave () : void {
+    console.log(this.addTrainingForm.value)
+    this.catalogos.postTrainingPost(this.addTrainingForm.value).subscribe((res) => {
+      console.log(res);
+      
+      this.addTrainingForm.reset();
+      this.closeModal();
+      this.getTrainig()
+      },error=>{
+        console.log(error);
+        
+      });
+  }
+
+
+  public Editor = ClassicEditor;
+
+
+  constructor(private fb: FormBuilder, private catalogos: CamperService,private ca : CreateCampsService) { }
+
+  ngOnInit(): void {
+    this.breadCrumbItems = [{ label: 'Forms' }, { label: 'Form Editor', active: true }];
+    this.getTrainig();
+    this.ca.getTemporada().subscribe((res:any)=>{
+      this.temporada = res.data
+    })
+  }
+  async getTrainig(){
+
+    this.capacitacionesName = await this.name()
+   
+    this.capacitaciones= await this.events();
+    
+
+   await this.nameCapa();
+   console.log(this.capacitaciones,this.capacitacionesName);
+
+
+   
+    
+  }
+
+
+  async nameCapa(){
+    this.capacitaciones.forEach(element => {
+      this.capacitacionesName.forEach((item)=>{
+        if(item.id == element.training_id){
+          element.training =  item.name
+        }
+      })     
+    });
+    this.capacitaciones.forEach(element => {
+      this.temporada.forEach((item)=>{
+        if(item.id == element.season_id){
+          element.season =  item.name
+        }
+      })     
+    });
+    
+
+  }
+
+
+   name(){
+    return  new Promise((resolve,reject)=>{
+      this.catalogos.getTraining().subscribe((res:any)=>{
+        resolve(res.data);                
+      },error=>{
+        reject(error)
+      })
+    })
+  }
+  events(){
+    return  new Promise((resolve,reject)=>{
+      this.catalogos.getTrainingEvent().subscribe((res:any)=>{
+        resolve(res.data);                
+      },error=>{
+        reject(error)
+      })
+    })
+  }
+
+
+  
+
+  
+  update(item){
+    console.log(item);
+    
+    this.showDialog2();
+    this.updateId = item.id;
+    this.addTrainingForm.patchValue({
+      "id": this.updateId,
+      start: item.start,
+      end: item.end ,
+      "location": item .location,
+      "open_enrollment": item.open_enrollment,
+      "active": item.active,
+      "season_id":  item .season_id,
+      "training_id":item .training_id
+
+    })
+  
+    
+  }
+  showDialog() {
+    this.display = true;
+  }
+  showDialog2() {
+    this.display2 = true;
+  }
+  closeModal() {
+    this.display = false;
+
+  }
+
+  closeModal3() {
+    this.display3 = false;
+
+  }
+  closeModal2() {
+    this.display2 = false;
+    this.resteValu();
+
+  }
+  resteValu(){
+    this.addTrainingForm.reset()
+  }
+
+  keepUpdate(){
+    this.catalogos.updateTrainingEvent(this.addTrainingForm.value,this.updateId).subscribe((res: any) => {
+     console.log(res);
+      this.getTrainig();
+      this.statuAgrgado = true;
+      this.resteValu();
+      setTimeout(() => {
+        this.statuAgrgado = false;
+        this.closeModal2();
+      }, 1000);
+
+    }, error => {
+      console.log(error);
+      
+      alert('No se pudo Agregar')
+    })
+  }
+
+
+  deletModal(name,id){
+    this.idDalete= id;
+    this.TextElimint='Deseas Eliminar '+ name + '  del catalogo';
+    this.display3 = true; 
+   
+  }
+
+  delet(){
+ 
+  }
+
+}

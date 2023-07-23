@@ -59,6 +59,24 @@ export class CamperService {
    postTraining(info: any) {
     return this.http.post('http://142.93.12.234:8000/training', info)
    }
+   getTraining() {
+    return this.http.get('http://142.93.12.234:8000/training' )
+   }
+   updateTraining(info,id) {
+    return this.http.patch('http://142.93.12.234:8000/training/'+id,info )
+   }
+   //eventos
+   getTrainingEvent() {
+    return this.http.get('http://142.93.12.234:8000/training_event/' )
+   }
+
+   postTrainingPost(info: any) {
+    return this.http.post('http://142.93.12.234:8000/training_event', info)
+   }
+   updateTrainingEvent(info,id) {
+    return this.http.patch('http://142.93.12.234:8000/training_event/'+id,info )
+   }
+   
 
    public getBauch(camper_id :any,capm_id){
     const headers = new HttpHeaders().set('Content-Type','application/json');
