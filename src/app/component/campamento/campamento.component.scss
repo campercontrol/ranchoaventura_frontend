@@ -18,7 +18,15 @@
 .container-btn{
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    flex-grow: 20px;
 
+}
+.container-btn button{
+    min-width:200px ;
+    margin-top: 20px;
 }
 
 .bodyCamper1{
@@ -60,5 +68,15 @@ i{
         flex-direction: column;
         
     }
+  
 
 }
+
+@media (max-width: 800px) {
+    .conatiner-info-camp{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+

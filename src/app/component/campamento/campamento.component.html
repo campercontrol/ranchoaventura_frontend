@@ -1,4 +1,10 @@
-<div class="container-fluid">
+<div class="d-flex justify-content-center"  *ngIf="!cargando">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<div class="container-fluid" *ngIf="cargando">
   <div class="row">
     <div class="col-lg-12">
       <div class="card" *ngIf="statusInscri">
@@ -67,7 +73,7 @@
       <div class="card">
         <div class="bodyCamper1">
           
-          <h1  style="color:white ;"> Campamento Inscrito: {{dataCamp.name}}</h1>
+          <h1  style="color:white ;"> Campamento : {{dataCamp.name}}</h1>
         </div>
         <div class="mt-3 ms-3 container-pagos">
           <h1>{{dataCamp.name}}</h1>

@@ -13,7 +13,7 @@ export class CampamentoComponent implements OnInit {
 
   idCamper=0;
   idCamp=0;
-  dataCamp:any={};
+  dataCamp:Camp;
   dataPagos:any={};
   nameCamp:any={};
   cargosExtras:any ;
@@ -25,6 +25,7 @@ export class CampamentoComponent implements OnInit {
   statusInscri:boolean=false;
   location= "";
   @ViewChild('baucher') baucher  :ElementRef;
+  cargando= false;
 
 
   constructor(private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router,private render:Renderer2) { 
@@ -50,10 +51,11 @@ export class CampamentoComponent implements OnInit {
         this.dataPagos = res.payments;
         console.log(this.dataCamp,'aa');
         
-        this.dataCamp.length> 0 ? this.pagos =true:this.pagos=false;   
+        this.dataPagos.length> 0 ? this.pagos =true:this.pagos=false;   
 
     //   console.log(this.dataPagos,'aqui la info');
-        
+     this.cargando= true;
+
        
       },error=>{
         alert('no se pudo cargar')
@@ -165,4 +167,39 @@ export class CampamentoComponent implements OnInit {
     })
   }
 
+}
+export interface Camp {
+  end:                    string;
+  show_payment_parent:    boolean;
+  insurance:              number;
+  general_camp:           boolean;
+  start_registration:     Date;
+  show_rebate_parent:     boolean;
+  venue:                  string;
+  currency_id:            number;
+  updated_at:             Date;
+  end_registration:       Date;
+  show_paypal_button:     boolean;
+  photo_url:              string;
+  location_id:            number;
+  created_at:             Date;
+  uid:                    string;
+  registration:           boolean;
+  paypal_button:          string;
+  photo_password:         string;
+  school_id:              number;
+  id:                     number;
+  url:                    string;
+  show_payment_order:     boolean;
+  medical_report:         string;
+  season_id:              number;
+  name:                   string;
+  special_message:        string;
+  reminder_camp_days:     number;
+  occupancy_camp:         number;
+  start:                  string;
+  special_message_admin:  string;
+  reminder_discount_days: number;
+  public_price:           number;
+  active:                 boolean;
 }
