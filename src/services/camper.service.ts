@@ -65,6 +65,9 @@ export class CamperService {
    updateTraining(info,id) {
     return this.http.patch('http://142.93.12.234:8000/training/'+id,info )
    }
+   deletTraining(id) {
+    return this.http.delete('http://142.93.12.234:8000/staff_unsubscribe/'+id, )
+   }
    //eventos
    getTrainingEvent() {
     return this.http.get('http://142.93.12.234:8000/training_event/' )
@@ -75,6 +78,9 @@ export class CamperService {
    }
    updateTrainingEvent(info,id) {
     return this.http.patch('http://142.93.12.234:8000/training_event/'+id,info )
+   }
+   deletTrainingEvents(id) {
+    return this.http.delete('http://142.93.12.234:8000/staff_unsubscribe_training/'+id, )
    }
    
 

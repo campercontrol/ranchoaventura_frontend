@@ -25,6 +25,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   data: any;
   paretn = true;
   staff= true;
+  catalogos= false;
 
   menuItems = [];
 

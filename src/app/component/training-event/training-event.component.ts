@@ -203,7 +203,24 @@ export class TrainingEventComponent implements OnInit {
   }
 
   delet(){
- 
+    this.catalogos.deletTrainingEvents(this.idDalete).subscribe((res: any) => {
+      this.statuAgrgado = true;
+      this.resteValu();
+      this.getTrainig();
+      if(res.data == null){
+      alert('No se pudo Eliminar por favor intentelo mas tarde')
+    }else{
+      setTimeout(() => {
+        this.statuAgrgado = false;
+        this.closeModal3();
+      }, 1000);
+
+    }
+    
+     
+    }, error => {
+      
+    })
   }
 
 }

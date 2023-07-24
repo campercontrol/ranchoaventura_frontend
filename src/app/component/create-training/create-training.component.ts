@@ -145,12 +145,29 @@ export class CreateTrainingComponent implements OnInit {
 
   deletModal(name,id){
     this.idDalete= id;
-    this.TextElimint='Deseas Eliminar '+ name + '  del catalogo';
+    this.TextElimint='Deseas Eliminar '+ name + '  de la lista de capacitaciones';
     this.display3 = true; 
    
   }
 
   delet(){
- 
+    this.catalogos.deletTraining(this.idDalete).subscribe((res: any) => {
+      this.statuAgrgado = true;
+      this.resteValu();
+      this.getTrainig();
+      if(res.data == null){
+      alert('No se pudo Eliminar por favor intentelo mas tarde')
+    }else{
+      setTimeout(() => {
+        this.statuAgrgado = false;
+        this.closeModal3();
+      }, 1000);
+
+    }
+    
+     
+    }, error => {
+      
+    })
   }
 }
