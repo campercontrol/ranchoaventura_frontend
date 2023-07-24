@@ -98,12 +98,12 @@ export class CamperNuevoComponent implements OnInit {
       lastname_father:["",[Validators.required,,Validators.minLength(2)]],
       lastname_mother:["",[Validators.required,,Validators.minLength(2)]],
       photo:["",[Validators.required]],
-      gender_id:[0,[Validators.required,Validators.min(1)]],
+      gender_id:[0,[Validators.required,Validators.min(0)]],
       birthday:["",[Validators.required]],
       height:[0,[Validators.required,Validators.min(0.20)]],
       weight:[0,[Validators.required,Validators.min(0.20)]],
-      grade:[0,[Validators.required,Validators.min(1)]],
-      school_id:[0,[Validators.required,Validators.min(1)]],
+      grade:[0,[Validators.required,Validators.min(0)]],
+      school_id:[0,[Validators.required,Validators.min(0)]],
       school_other:["",],
       email: ["",[Validators.required,Validators.email]],
       can_swim: [0],
@@ -556,7 +556,7 @@ public fileLeave(event){
           console.log(res);
           if(res.succes = 200){
             this.spinner=false;
-           this.router.navigate(['parents/camper/inscription/1']);
+           this.router.navigate(['parents/registered-children']);
           }
           
       });

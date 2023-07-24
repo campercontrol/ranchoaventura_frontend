@@ -7,6 +7,7 @@ import { Usergrid } from '../../pages/contacts/usergrid/usergrid.model';
 
 import { userGridData } from './data';
 import { CamperService } from 'src/services/camper.service';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-registered-children',
@@ -23,13 +24,15 @@ export class RegisteredChildrenComponent implements OnInit {
   submitted = false;
   hijosRes:any=[];
   items: FormArray;
+  cargando= false;
   // Select2 Dropdown
   selectValue: string[];
-  constructor(private modalService: NgbModal, private formBuilder: FormBuilder,private hijos:CamperService) { 
+  constructor(private modalService: NgbModal, private formBuilder: FormBuilder,private hijos:CamperService, private router:Router) { 
     this.hijos.getHijos().subscribe(
       (res:any)=>{
         console.log(res);
         this.hijosRes = res.campers;
+        this.cargando = true;
       }
     )
   }
@@ -100,6 +103,14 @@ export class RegisteredChildrenComponent implements OnInit {
 
   status(){
      this.modalVista= !this.modalVista
+  }
+  redirect(camp,camper){
+    this.router.navigate(['/parents/camp-info/'+camper+'/'+camp])
+
+  }
+  redirectPerfil(camp){
+    this.router.navigate(['/parents/camper/'+camp])
+
   }
 
 }

@@ -117,16 +117,35 @@ export class PerfilCamperComponent implements OnInit {
   getInfo(){
     this.hijos.getPerfil(this.id).subscribe((res: any) => {
       console.log(res,'hola');
-      let b = []
-      b=b.concat(res.camper_subscribe_camps);
-     b= b.concat(res.camper_cancelled_camps);
-     b= b.concat(res.camper_passed_camps);
+      let b = [];
+
+      let camps = res.camper_subscribe_camps
+      camps.forEach(element => {
+        element.type= 'subscribe';
+      });
+      let campsCan = res.camper_cancelled_camps
+      campsCan.forEach(element => {
+        element.type= 'cancelled';
+      });
+      let campsPassed = res.camper_passed_camps
+      campsPassed.forEach(element => {
+        element.type= 'passed';
+      });
+      
+      b=b.concat(camps);
+     b= b.concat(campsCan);
+     b= b.concat(campsPassed);
+
+
 
      this.camperband = res.camper_band[0];
       this.historialCaps = b;
       this.historialCaps.sort((x,y)=>{
         x.camp_start - y.camp_start
       })
+
+      console.log(this.historialCaps,'ddd');
+      
       
       
       this.comenarios = res.camper_comments_parent
