@@ -9,14 +9,14 @@
 
                     <div class="mt-5">
                         <div class="row mb-4">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Nombre del
+                            <label for="" class="col-sm-3 col-form-label">Nombre del
                                 campamento*</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName ="name" #name (input)="validateName()">
+                                <input type="text" class="form-control" id="" formControlName ="name" #name (input)="validateName()">
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Sede*
+                            <label for="" class="col-sm-3 col-form-label">Sede*
                             </label>
                             <div class="control-label col-sm-9">
                                 <select style="width: 100%;" class="form-control" formControlName = "location_id" name="location_id" #location_id (input)="validateLocationId()">
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Escuela*
+                            <label for="" class="col-sm-3 col-form-label">Escuela*
                                 </label>
                             <div class="control-label col-sm-9">
                                 <select style="width: 100%;" class="form-control" formControlName ="school_id" name="school_id" #school_id (input)="validateSchoolId()">
@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Temporada*</label>
+                            <label for="" class="col-sm-3 col-form-label">Temporada*</label>
                             <div class="control-label col-sm-9">
                                 <select style="width: 100%;" class="form-control" formControlName ="season_id" name="season_id" #season_id (input)="validateSeasonId()">
                                     <option *ngFor="let item of temporada" [value]="item.id">{{item.name}}</option>
@@ -42,37 +42,37 @@
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Link para
+                            <label for="" class="col-sm-3 col-form-label">Link para
                                 información adicional del acampador</label>
                             <div class="col-sm-9 mt-4">
-                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="url" #url>
+                                <input type="text" class="form-control" id="" formControlName="url" #url>
                             </div>
                         </div>
 
 
                         <div class="row mb-4 mt-3">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Inicio del
+                            <label for="" class="col-sm-3 col-form-label">Inicio del
                                 Campamento</label>
                             <div class=" control-label col-sm-9">
                                 <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd"  formControlName="start" #start (input)="validateStart()">
                             </div>
                         </div>
                         <div class="row mb-4 mt-3">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Final del
+                            <label for="" class="col-sm-3 col-form-label">Final del
                                 Campamento</label>
                             <div class=" control-label col-sm-9">
                                 <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="end" #end (input)="validateEnd()">
                             </div>
                         </div>
                         <div class="row mb-4 mt-3">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Inicio de
+                            <label for="" class="col-sm-3 col-form-label">Inicio de
                                 inscripción</label>
                             <div class=" control-label col-sm-9">
                                 <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="start_registration" #start_registration (input)="validateStartRegistration()">
                             </div>
                         </div>
                         <div class="row mb-4 mt-3">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Final de
+                            <label for="" class="col-sm-3 col-form-label">Final de
                                 inscripción</label>
                             <div class=" control-label col-sm-9">
                                 <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="end_registration" #end_registration (input)="validateEndRegistration()">
@@ -140,31 +140,31 @@
 
                     <div class="mt-5">
                         <div class="row mb-4">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Monto del
+                            <label for="" class="col-sm-3 col-form-label">Monto del
                                 seguro*</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="horizontal-firstname-input" formControlName = "insurance" #insurance>
+                                <input type="number" class="form-control" id="" formControlName = "insurance" #insurance>
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Punto de
+                            <label for="" class="col-sm-3 col-form-label">Punto de
                                 reunion*</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="venue" #venue (input)="validateVenue()">
+                                <input type="text" class="form-control" id="" formControlName="venue" #venue (input)="validateVenue()">
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Fotos del
+                            <label for="" class="col-sm-3 col-form-label">Fotos del
                                 camp*</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="photo_url" #photo_url (input)="validatePhotoUrl()">
+                                <input type="text" class="form-control" id="" formControlName="photo_url" #photo_url (input)="validatePhotoUrl()">
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Contraseña del
+                            <label for="" class="col-sm-3 col-form-label">Contraseña del
                                 camp*</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="photo_password" #photo_password (input)="validatePhotoPassword()">
+                                <input type="text" class="form-control" id="" formControlName="photo_password" #photo_password (input)="validatePhotoPassword()">
                             </div>
                         </div>
 
@@ -183,14 +183,14 @@
                     <div class="mt-5">
                      
                         <div class="row mb-4">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Precio del
+                            <label for="" class="col-sm-3 col-form-label">Precio del
                                 campamento*</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="horizontal-firstname-input" formControlName="public_price" #public_price>
+                                <input type="number" class="form-control" id="" formControlName="public_price" #public_price>
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Divisa*
+                            <label for="" class="col-sm-3 col-form-label">Divisa*
                                 </label>
                             <div class="control-label col-sm-9">
                                 <select style="width: 100%;" class="form-control" formControlName ="currency_id" name="currency_id" #currency_id>
@@ -199,21 +199,21 @@
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Recordatorio antes del camp:</label>
+                            <label for="" class="col-sm-3 col-form-label">Recordatorio antes del camp:</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="horizontal-firstname-input" formControlName="reminder_camp_days" #reminder_camp_days>
+                                <input type="number" class="form-control" id="" formControlName="reminder_camp_days" #reminder_camp_days>
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Recordatorio vigencia del descuento:</label>
+                            <label for="" class="col-sm-3 col-form-label">Recordatorio vigencia del descuento:</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="horizontal-firstname-input" formControlName="reminder_discount_days" #reminder_discount_days>
+                                <input type="number" class="form-control" id="" formControlName="reminder_discount_days" #reminder_discount_days>
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Reporte medico:</label>
+                            <label for="" class="col-sm-3 col-form-label">Reporte medico:</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="horizontal-firstname-input" formControlName="medical_report" #medical_report>
+                                <input type="text" class="form-control" id="" formControlName="medical_report" #medical_report>
                             </div>
                         </div>
                        
@@ -284,7 +284,7 @@
                         <div class="col-lg-6 mt-4">
                             <div class="container">
                                 <div class="col mb-6">
-                                    <h4 for="horizontal-firstname-input">Mensaje
+                                    <h4 for="">Mensaje
                                         especial*</h4>
                                     <hr>
                                     <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message"  >
@@ -297,7 +297,7 @@
                         <div class="col-lg-6 mt-4">
                             <div class="container">
                                 <div class="col mb-6">
-                                    <h4 for="horizontal-firstname-input" class="display-7">Mensaje especial
+                                    <h4 for="" class="display-7">Mensaje especial
                                         para admin*</h4>
                                     <hr>
                                     <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message_admin" >
@@ -310,7 +310,7 @@
                         <div class="col-lg-6 mt-4 ">
                             <div class="container">
                                 <div class="col mb-6">
-                                    <h4 for="horizontal-firstname-input">
+                                    <h4 for="">
                                         Preguntas Extras</h4>
                                     <hr>
                                     <div *ngFor="let item of extra_question let i = index">
@@ -353,7 +353,7 @@
                         <div class="col-lg-6 mt-4">
                             <div class="row">
                                 <div >
-                                    <h4 for="horizontal-firstname-input">
+                                    <h4 for="">
                                         Cargos extras</h4>
                                     <hr>
                                     <div *ngFor="let item of extra_charges let i = index">
