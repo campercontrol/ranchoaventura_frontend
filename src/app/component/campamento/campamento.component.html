@@ -12,10 +12,8 @@
           <h1 style="color:white ;">Detalle de pagos</h1>
         </div>
         <div class="mt-5px container-pagos" *ngIf="pagos">
-          <h1>Tu saldo actual es de: $ MXN</h1>
+          <h1>Tu saldo actual es de: ${{balance}} MXN</h1>
         </div>
-
-
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
@@ -46,9 +44,23 @@
                       <td>{{item.id}}</td>
                       <td>{{item.created_at.substring(0,10)}}</td>
                       <td>{{item.txn_number}}</td>
-                      <td>${{item.payment_amount}}MXM</td>
-                      <td>{{item.txn_type_id}}</td>
-                      <td>$5,500.0 MXN</td>
+                      <td>
+                        <div *ngIf="item.payment_amount>=0">
+                          ${{item.payment_amount}}MXN
+                        </div>
+                        <div *ngIf="item.payment_amount<0">
+                          
+                        </div>
+                      </td>
+                      <td>
+                        <div *ngIf="item.payment_amount<0">
+                          ${{item.payment_amount*-1}}MXN
+                        </div>
+                        <div *ngIf="item.payment_amount>=0">
+                          
+                        </div>
+                      </td>
+                      <td>${{item.saldo}}MXN</td>
                     </tr>
                  
 
@@ -111,7 +123,7 @@
                 <p class="fw-bold"> <i class="fas fa-map-marked-alt"> </i> Punto de reunión:  </p>
               </div>
               <div>
-                <p> Escuela</p>
+                <p>   {{dataCamp.venue}}</p>
               </div>
             </div>
             <div class="conatiner-info-camp">

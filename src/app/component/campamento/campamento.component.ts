@@ -24,6 +24,7 @@ export class CampamentoComponent implements OnInit {
   pagos:boolean=false;
   statusInscri:boolean=false;
   location= "";
+  balance = 0;
   @ViewChild('baucher') baucher  :ElementRef;
   cargando= false;
 
@@ -43,6 +44,7 @@ export class CampamentoComponent implements OnInit {
       //console.log(res);
       console.log(res,'respuesta');
         let a :any=res.camp
+        this.balance= res.payment_balance;
         console.log(res.camper_subscribe,'aasas');
         this.location = res.location
         
@@ -51,6 +53,7 @@ export class CampamentoComponent implements OnInit {
         this.dataPagos = res.payments;
         console.log(this.dataCamp,'aa');
         this.cargando= true;
+        
         if(this.dataPagos){
           this.dataPagos.length> 0 ? this.pagos =true:this.pagos=false;   
 
@@ -170,6 +173,10 @@ export class CampamentoComponent implements OnInit {
   }
 
 }
+
+
+
+
 export interface Camp {
   end:                    string;
   show_payment_parent:    boolean;

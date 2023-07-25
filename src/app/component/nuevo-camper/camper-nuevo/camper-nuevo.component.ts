@@ -403,7 +403,7 @@ export class CamperNuevoComponent implements OnInit {
   }
   
   getprohibited_foods() {
-    if( this.formUser.get('insurance_number').valid){
+    if( this.formUser.get('prohibited_foods').valid){
       this.render.removeClass(this.prohibited_foods.nativeElement,"is-invalid");
       this.render.addClass(this.prohibited_foods.nativeElement,"is-valid");
    }else{
