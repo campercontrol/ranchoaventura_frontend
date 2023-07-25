@@ -5,47 +5,17 @@ import 'firebase/firestore';
 
 class FirebaseAuthBackend {
     constructor(firebaseConfig) {
-        if (firebaseConfig) {
-            // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-            firebase.auth().onAuthStateChanged((user) => {
-                if (user) {
-                    sessionStorage.setItem('authUser', JSON.stringify(user));
-                } else {
-                    sessionStorage.removeItem('authUser');
-                }
-            });
-        }
+       
     }
 
     /**
      * Registers the user with given details
      */
-    registerUser = (email, password) => {
-        return new Promise((resolve, reject) => {
-            firebase.auth().createUserWithEmailAndPassword(email, password).then((user: any) => {
-                var user: any = firebase.auth().currentUser;
-                resolve(user);
-            }, (error) => {
-                reject(this._handleError(error));
-            });
-        });
-    }
+    
 
     /**
      * Login user with given details
-     */
-    loginUser = (email, password) => {
-        return new Promise((resolve, reject) => {
-            firebase.auth().signInWithEmailAndPassword(email, password).then((user: any) => {
-                // eslint-disable-next-line no-redeclare
-                var user: any = firebase.auth().currentUser;
-                resolve(user);
-            }, (error) => {
-                reject(this._handleError(error));
-            });
-        });
-    }
+   
 
     /**
      * forget Password user with given details

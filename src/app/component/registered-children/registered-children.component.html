@@ -10,7 +10,7 @@
 
   <div class="row" *ngIf="cargando">
     <div class="d-flex">
-      <button class="btn btn-success ms-auto mb-2" [routerLink]="['../new-camper']" >Nuevo Camper </button>
+      <button class="btn btn-success ms-auto mb-2" [routerLink]="['parents/new-camper']" >Nuevo Camper </button>
     </div>
     <ng-template #content role="document" let-modal>
       <div class="modal-header">
@@ -93,15 +93,15 @@
         <div class="card-footer bg-transparent border-top">
           <div class="contact-links d-flex font-size-20">
             <div class="flex-fill">
-              <a [routerLink]="['../update-camper/' + data.camper.id ]"ngbTooltip="Editar informacion"><i
+              <a [routerLink]="['../dashboard/parents/update-camper/' + data.camper.id ]"ngbTooltip="Editar informacion"><i
                   class="bx dripicons-document-edit"></i></a>
             </div>
 
             <div class="flex-fill">
-              <a [routerLink]="['../camper/'+data.camper.id]" ngbTooltip="Perfil"><i class="bx bx-user-circle"></i></a>
+              <a [routerLink]="['../dashboard/parents/camper/'+data.camper.id]" ngbTooltip="Perfil"><i class="bx bx-user-circle"></i></a>
             </div>
             <div class="flex-fill">
-              <a [routerLink]="['../inscription/'+data.camper.id]" ngbTooltip="Inscribir"><i
+              <a [routerLink]="['../dashboard/parents/inscription/'+data.camper.id]" ngbTooltip="Inscribir"><i
                   class="mdi  mdi-account-arrow-right-outline"></i></a>
             </div>
           </div>

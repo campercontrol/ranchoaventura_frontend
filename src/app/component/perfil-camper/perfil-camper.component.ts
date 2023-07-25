@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PrimeIcons } from "primeng/api";
 import { PrimeNGConfig } from 'primeng/api';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CamperService } from 'src/services/camper.service';
 import { ParentService } from 'src/services/parent.service';
 
@@ -37,7 +38,7 @@ export class PerfilCamperComponent implements OnInit {
   historialCaps:any = [];
   camperband:any = [];
 
-  constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private hijos: CamperService,private parents : ParentService, private rou:Router) {
+  constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private hijos: CamperService,private parents : ParentService, private rou:Router,private info: AuthenticationService) {
     this.routesA.params.subscribe((params) => {
       this.id = params['id'];
     })
@@ -82,7 +83,7 @@ export class PerfilCamperComponent implements OnInit {
       "comment": this.comment,
       "is_public": true,
       "show_to": 1,
-      "user_id": 1,
+      "user_id": this.info.infToken.user_id,
       "camp_id": 2,
       "camper_id": this.id,     
     }
@@ -204,11 +205,11 @@ export class PerfilCamperComponent implements OnInit {
   }
 
   link(id){
-    this.rou.navigate(['parents/camp-info/'+this.id+'/'+id]);
+    this.rou.navigate(['dashboard/parents/camp-info/'+this.id+'/'+id]);
 
   }
   linkPerfil(){
-    this.rou.navigate(['/parents/inscription/'+this.id]);
+    this.rou.navigate(['dashboard/parents/inscription/'+this.id]);
 
   }
 

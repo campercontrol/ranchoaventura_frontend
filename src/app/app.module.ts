@@ -140,6 +140,7 @@ import { StaffrolesComponent } from './component/catalogos/staffroles/staffroles
 import { CampercommentComponent } from './component/admi/campercomment/campercomment.component';
 import { PerfilStaffComponent } from './component/perfil-staff/perfil-staff.component';
 import { TrainingEventComponent } from './component/training-event/training-event.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -183,7 +184,8 @@ export function createTranslateLoader(http: HttpClient): any {
     StaffrolesComponent,
     CampercommentComponent,
     PerfilStaffComponent,
-    TrainingEventComponent,    
+    TrainingEventComponent,
+    LoginComponent,    
   ],
   imports: [
     BrowserModule,

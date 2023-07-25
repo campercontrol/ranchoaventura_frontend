@@ -41,7 +41,7 @@ export class CamperService {
 
    }
 
-   getHijos(id = 1){
+   getHijos(id){
     return this.http.get('http://142.93.12.234:8000/parent_dashboard/'+id)
 
    }

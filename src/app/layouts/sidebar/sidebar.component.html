@@ -9,18 +9,18 @@
       <ng-container>
         <li class="menu-title">Menú</li>
         <li *ngIf="paretn">
-          <a routerLink='/parents/registered-children' class="side-nav-link-ref" routerLinkActive="active">
+          <a routerLink='../dashboard' class="side-nav-link-ref" routerLinkActive="active">
             <i class="dripicons-user-id"></i>
             <span> Mis hijos registrados</span>
 
           </a>
 
-          <a routerLink='/parents/my-profile' class="side-nav-link-ref" routerLinkActive="active">
+          <a routerLink='parents/my-profile' class="side-nav-link-ref" routerLinkActive="active">
             <i class="dripicons-user"></i>
             <span>Mi perfil</span>
 
           </a>
-          <a routerLink='/parents/new-camper' class="side-nav-link-ref" routerLinkActive="active">
+          <a routerLink='parents/new-camper' class="side-nav-link-ref" routerLinkActive="active">
             <i class="bx bx-user-plus"></i>
             <span>Nuevo acampador</span>
 
@@ -87,7 +87,7 @@
             <span>Nuevo evento</span>
 
           </a>
-          <a routerLink='staff/dashboard' class="side-nav-link-ref " routerLinkActive="active"
+          <a  class="side-nav-link-ref " routerLinkActive="active"
             (click)="catalogos = !catalogos">
             <div class="nav-d">
               <div>

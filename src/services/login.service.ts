@@ -1,12 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) { }
+  logged = false;
+
+  constructor(private http: HttpClient,private router:Router) { }
   resetContrasena(a){
     return new Promise((resolve,reject)=>{
         this.http.post('http://142.93.12.234:8000/usuario/reset_password',a).subscribe((res:any)=>{
@@ -14,7 +17,10 @@ export class LoginService {
         },error=>{
           reject = error;
         })
-
+        this.router.navigate(['login'])
     })
  }
+
+ 
+
 }

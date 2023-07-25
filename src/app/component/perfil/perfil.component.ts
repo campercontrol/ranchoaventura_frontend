@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ParentService } from '../../../services/parent.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-perfil',
@@ -11,7 +12,7 @@ export class PerfilComponent implements OnInit {
 
   public formParent : FormGroup;
 
-  constructor(private parent : ParentService, private formBuild:FormBuilder) { }
+  constructor(private parent : ParentService, private formBuild:FormBuilder,private info: AuthenticationService) { }
 
   ngOnInit(): void {
 
@@ -52,7 +53,7 @@ export class PerfilComponent implements OnInit {
   }
 
   getParent(){
-    this.parent.getParet(1).subscribe(
+    this.parent.getParet(this.info.infToken.user_id ).subscribe(
       (res:any)=>{
         console.log('respuestas',res);
         

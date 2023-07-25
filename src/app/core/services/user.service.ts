@@ -7,11 +7,5 @@ import { User } from '../models/auth.models';
 export class UserProfileService {
     constructor(private http: HttpClient) { }
 
-    getAll() {
-        return this.http.get<User[]>(`/api/login`);
-    }
-
-    register(user: User) {
-        return this.http.post(`/users/register`, user);
-    }
+  
 }

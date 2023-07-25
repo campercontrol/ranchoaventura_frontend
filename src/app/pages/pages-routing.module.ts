@@ -54,8 +54,8 @@ import { PerfilStaffComponent } from '../component/perfil-staff/perfil-staff.com
 import { TrainingEventComponent } from '../component/training-event/training-event.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard' },
-  { path: 'dashboard', component: DefaultComponent },
+  
+  { path: '', component: RegisteredChildrenComponent },
   { path: 'parents/my-profile', component: PerfilComponent },
   { path: 'parents/registered-children', component: RegisteredChildrenComponent },
   { path: 'parents/new-camper', component: CamperNuevoComponent },
@@ -73,7 +73,7 @@ const routes: Routes = [
   { path: 'camps/camp', component: CampamentosStaffComponent },
   { path: 'staff/grouping', component: GroupingComponent},
   { path: 'consultation/camp',component:NuevaConsultaComponent},
-  { path: 'parents/new-user',component:NewParentComponent},
+//  { path: 'parents/new-user',component:NewParentComponent},
   { path: 'admi/temp', component: TemporadaComponent },
 
 

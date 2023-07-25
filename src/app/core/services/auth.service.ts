@@ -3,64 +3,54 @@ import { Injectable } from '@angular/core';
 import { getFirebaseBackend } from '../../authUtils';
 
 import { User } from '../models/auth.models';
+import { HttpClient } from '@angular/common/http';
+import { preventDefault } from '@fullcalendar/core';
+import { Router } from '@angular/router';
+import jwt_decode from "jwt-decode";
+
 
 @Injectable({ providedIn: 'root' })
 
 export class AuthenticationService {
 
-    user: User;
+    loggedIn:boolean = false;
+    infToken!:any;
 
-    constructor() {
+    constructor(private http: HttpClient,private router:Router ) {
     }
 
     /**
      * Returns the current user
      */
-    public currentUser(): User {
-        return getFirebaseBackend().getAuthenticatedUser();
+   
+    resetContrasena(a){
+        return new Promise((resolve,reject)=>{
+            this.http.post('http://142.93.12.234:8000/usuario/reset_password',a).subscribe((res:any)=>{
+              resolve = res;
+            },error=>{
+              reject = error;
+            })
+    
+        })
+     }
+    
+     login(email: string, password: string) {
+      return new Promise((resolve,reject)=>{
+           this.http.post("http://142.93.12.234:8000/token?username=" +email+ "&password="+password +"&lang=es",{ })
+          .subscribe((user:any) => {
+              console.log(user);
+              this.loggedIn = true;
+              this.router.navigate(['/dashboard']);
+              localStorage.setItem('currentUser', JSON.stringify(user));
+                this.infToken = jwt_decode(user.access_token);
+                console.log(this.infToken);
+                
+              resolve(user);
+          }),error =>{
+              reject(error);
+          };
+      })
     }
-
-    /**
-     * Performs the auth
-     * @param email email of user
-     * @param password password of user
-     */
-    login(email: string, password: string) {
-        return getFirebaseBackend().loginUser(email, password).then((response: any) => {
-            const user = response;
-            return user;
-        });
-    }
-
-    /**
-     * Performs the register
-     * @param email email
-     * @param password password
-     */
-    register(email: string, password: string) {
-        return getFirebaseBackend().registerUser(email, password).then((response: any) => {
-            const user = response;
-            return user;
-        });
-    }
-
-    /**
-     * Reset password
-     * @param email email
-     */
-    resetPassword(email: string) {
-        return getFirebaseBackend().forgetPassword(email).then((response: any) => {
-            const message = response.data;
-            return message;
-        });
-    }
-
-    /**
-     * Logout the user
-     */
-    logout() {
-        // logout the user
-        
-    }
+   
 }
 

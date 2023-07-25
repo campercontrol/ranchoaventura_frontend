@@ -3,6 +3,7 @@ import { Options } from 'ng5-slider';
 import { CamperService } from 'src/services/camper.service';
 import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 
 
 
@@ -73,9 +74,10 @@ export class CamperNuevoComponent implements OnInit {
 
   sexo:string[]=['Hombre','Mujer',"No binario"," Prefiero no decir"]
 
-  constructor(private catalogos: CamperService , private formGrup: FormBuilder, private router:Router,private render:Renderer2) {
+  constructor(private catalogos: CamperService , private formGrup: FormBuilder, private router:Router,private render:Renderer2,private info: AuthenticationService) {
     this.catalogos.getCatalogos().subscribe((res:any)=>{
-
+      console.log(info.infToken);
+      
       this.blood_types = res.blood_types;
       this.food_restrictions = res.food_restrictions;
       this.genders = res.genders;
@@ -129,7 +131,7 @@ export class CamperNuevoComponent implements OnInit {
       contact_homephone: ["",[Validators.required,Validators.minLength(8)]],
       contact_cellphone: ["",[Validators.required,Validators.minLength(8)]],
       record_id: [0,],
-      parent_id: [1,[Validators.required]],
+      parent_id: [this.info.infToken.user_id,[Validators.required]],
       terms: ["",[Validators.required,Validators.requiredTrue]],
     })
     
@@ -556,7 +558,7 @@ public fileLeave(event){
           console.log(res);
           if(res.succes = 200){
             this.spinner=false;
-           this.router.navigate(['parents/registered-children']);
+           this.router.navigate(['dashboard']);
           }
           
       });
