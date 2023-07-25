@@ -41,7 +41,7 @@ export class CampamentoComponent implements OnInit {
     })
     this.hijos.informacionCampamento(Number(this.idCamper),Number(this.idCamp)).subscribe((res:any)=>{
       //console.log(res);
-      console.log(res);
+      console.log(res,'respuesta');
         let a :any=res.camp
         console.log(res.camper_subscribe,'aasas');
         this.location = res.location
@@ -50,11 +50,13 @@ export class CampamentoComponent implements OnInit {
         this.dataCamp = a;
         this.dataPagos = res.payments;
         console.log(this.dataCamp,'aa');
-        
-        this.dataPagos.length> 0 ? this.pagos =true:this.pagos=false;   
+        this.cargando= true;
+        if(this.dataPagos){
+          this.dataPagos.length> 0 ? this.pagos =true:this.pagos=false;   
 
-    //   console.log(this.dataPagos,'aqui la info');
-     this.cargando= true;
+        }
+
+     //console.log(this.dataPagos,'aqui la info');
 
        
       },error=>{
@@ -94,7 +96,7 @@ export class CampamentoComponent implements OnInit {
   //   console.log(this.dataPagos,'aqui la info');
       
       this.dataPagos.length> 0 ? this.pagos =true:this.pagos=false;   
-      
+      this.cargando= true;
     })
 
   }

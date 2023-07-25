@@ -28,6 +28,7 @@ export class ParentsInscripcionCampComponent implements OnInit {
     cancelled_camps:any[] = [];
     passed_camps:any[] = [];
     id= 0;
+    available_school_camps:any[]=[];
     @ViewChild('centerDataModal') content:ElementRef;
 
     
@@ -183,7 +184,16 @@ getCampsDIs(){
 
     this.cancelled_camps= res.cancelled_camps;
 
+     this.available_school_camps=res.available_school_camps;
+     this.available_school_camps.map((item:any)=>{
+      let fecha = item.camp_end
+      fecha = fecha.split("T");
+      item.camp_end = fecha[0];
 
+      let fechaI = item.camp_start
+      fechaI = fechaI.split("T");
+      item.camp_start = fechaI[0];          
+     });
     this.cancelled_camps.map((item:any)=>{
       let fecha = item.camp_end
       fecha = fecha.split("T");
@@ -236,6 +246,25 @@ centerModal(centerDataModal: any = this.content) {
   console.log(this.centerModal);
   
   this.modalService.open(centerDataModal, { centered: true });
+}
+filterCampsSummer(){
+ 
+  this.selectedProducts.forEach((item)=>{
+      let a = {
+        status: 36,
+        payment_balance: 0,
+        camp_id: item.camp_id,
+        camper_id: this.id,
+
+      }
+      console.log(a)
+      this.setCamp(a)
+  })
+  this.getCampsDIs();
+  this.centerModal()
+
+
+  
 }
 
 }

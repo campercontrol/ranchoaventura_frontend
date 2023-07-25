@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="foto-perfil">
-                        <img src="src=http://142.93.12.234:8000/{{camper_band.photo}}" class="avatar-lg rounded-circle" alt="">
+                        <img src="http://142.93.12.234:8000/{{camper_band.photo}}" class="avatar-lg rounded-circle" alt="">
                         <button class="btn-rounded btn btn-success mt-3 ">
                             <a class="text-white" style="width: 100%;" [routerLink]="['../camper/'+id]" >Ver Perfil</a>
                         </button>
@@ -46,7 +46,7 @@
     <!--campamentos a los que asisitire-->
     <div >
 
-        <div class="card border border-info border-1">
+        <div class="card border border-info border-1" >
               <div class="bg-info p-2">
                 <h1 class="card-title text-white">Campamentos Disponibles</h1>
       
@@ -170,9 +170,9 @@
 
 
 
-        <div class="card border border-info border-1">
+        <div class="card border border-success border-1" *ngIf="subscribe_camps.length>0">
             
-            <div class="bg-info p-2">
+            <div class="bg-success p-2">
                 <h1 class="card-title text-white">Camps a los que asistiré </h1>
       
               </div>
@@ -232,14 +232,15 @@
               </p-table>
         </div>
 
-        <div class="card border border-secondary border-1">
+        <div class="card border border-secondary border-1"  *ngIf="available_school_camps.length>0">
             
             <div class="bg-secondary p-2">
                 <h1 class="card-title text-white">Campamentos Escolares Disponibles </h1>
       
               </div>
+              
               <br>
-              <p-table #dt [value]="summer_school_camps" [rows]="10" 
+              <p-table #dt [value]="available_school_camps" [rows]="10" 
                   [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
                   [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -294,10 +295,10 @@
               </p-table>
         </div>
 
-        <div class="card border border-success border-1">
+        <div class="card border border-secondary border-1"  *ngIf="passed_camps.length>0">
             
-            <div class="bg-success p-2">
-                <h1 class="card-title text-white">Camps a los que asisti  </h1>
+            <div class="bg-secondary p-2">
+                <h1 class="card-title text-white">Camps a los que asisti</h1>
       
               </div>
               <br>
@@ -355,7 +356,7 @@
                   
               </p-table>
         </div>
-        <div class="card border border-danger border-1">
+        <div class="card border border-danger border-1" *ngIf="cancelled_camps.length>0">
             
             <div class="bg-danger p-2">
                 <h1 class="card-title text-white">Campamentos Cancelados </h1>
@@ -416,6 +417,87 @@
                   
               </p-table>
         </div>
+
+        <div class="card border border-info border-1" *ngIf="summer_school_camps.length>0">
+            
+          <div class="bg-info p-2">
+              <h1 class="card-title text-white">Campamentos escolares de verano  Disponible</h1>
+    
+            </div>
+            <div class="card-body">
+              <div>
+                <div class="col text-end">
+    
+                </div>
+              </div>
+              <div class="container-btn">
+                  <div class="d-inline-block" style="margin-right: 10px;">
+                      <div> 
+                          <button class="btn btn-success" (click)="filterCampsSummer()" >Inscribir  a camp(s)</button>
+                    </div>
+                  </div>
+               
+               
+              </div>
+            
+            <br>
+            <p-table #dt [value]="summer_school_camps" [rows]="10"  [(selection)]="selectedProducts" 
+                [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
+                [rowHover]="true" dataKey="id"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [showCurrentPageReport]="true">
+              
+                <ng-template pTemplate="header">
+                    <tr>
+                      <th>
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                      </th>
+                        <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
+                        <th pSortableColumn="location_name">Sede <p-sortIcon field="sede"></p-sortIcon></th>
+                        <th pSortableColumn=" camp_end">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
+                        <th pSortableColumn="camp_start">Termino <p-sortIcon field="termino"></p-sortIcon></th>
+                        <th pSortableColumn="public_price">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+    
+                        <th></th>
+    
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-customer>
+                    <tr>
+                      <td>
+                        <p-tableCheckbox [value]="customer" ></p-tableCheckbox>
+                      </td>
+                        <td >
+                            {{customer.camp_name}}
+                          </td>
+                          <td> 
+                            {{customer.location_name}}
+                          </td>
+                          <td>
+          
+                           {{customer.camp_end}}
+          
+          
+                          </td>
+                          <td>
+          
+                           
+                           {{customer.camp_start}}
+          
+                          </td>
+                          <td>
+                           {{customer.public_price}}
+          
+                          </td>
+                       
+          
+    
+                    </tr>
+                </ng-template>
+                
+            </p-table>
+            </div>
+      </div>
        
 
     </div>
