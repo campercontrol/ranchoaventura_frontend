@@ -8,6 +8,7 @@ import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { FormModule } from 'src/app/pages/form/form.module';
 import { UpdateCamperComponent } from './update-camper/update-camper.component';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 
 
@@ -31,6 +32,8 @@ import { UpdateCamperComponent } from './update-camper/update-camper.component';
     NgbPaginationModule, 
     NgbAlertModule,
     ReactiveFormsModule,
+    InputNumberModule,
+    
     
     
     

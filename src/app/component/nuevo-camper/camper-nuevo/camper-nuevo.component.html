@@ -70,7 +70,7 @@
                                     
                                 </div>
 
-                                <div class="mt-3 foto"  #photo tabindex="0">
+                                <div class="mt-3 foto"  #photo tabindex="0" id="photo">
                                     <label for="">Foto de Perfil</label>
                                     <input type="file" accept="image/jpeg" (change)="subiendo($event)" >
                                     
@@ -79,14 +79,19 @@
                                         recomendamos subas una foto reciente y de poco peso, máximo 3Mb debe ser formato jpg</label>
     
                                 </div>
-                                <div class="alert alert-danger" role="alert" *ngIf="!getphoto()">
-                                   Aun no has  seleciona una imagen Recuerda tiene que ser un imagen TIPO JPG
+                                <div *ngIf="spinerPhot">
+                                    <div class="alert alert-danger" role="alert" *ngIf="!photoSatus">
+                                        Aun no has  seleciona una imagen Recuerda tiene que ser un imagen TIPO JPG
+                                       </div>
+     
+                                       <div class="alert alert-secondary" role="alert" *ngIf="photoSatus">
+                                         Se Agrego corectamente
+                                       </div>
+                                </div>
+        
+                                  <div class="spinner-border" role="status" *ngIf="!spinerPhot">
+                                    <span class="visually-hidden">Loading...</span>
                                   </div>
-
-                                  <div class="alert alert-secondary" role="alert" *ngIf="getphoto()">
-                                    Se Agrego corectamente
-                                  </div>
-                                
                               
                             </div>
                         </div>
@@ -121,7 +126,7 @@
                                 </div>
                                
                             </div>
-                            <div class="row mb-4">
+                            <div class="row mb-4" >
                                 <label for="" class="col-sm-3 col-form-label">Grado
                                     escolar*</label>
                                 <div class="control-label col-sm-9">
@@ -152,22 +157,35 @@
                         <div class="mt-5">
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label">Estatura</label>
+                                
+
                                 <div class="control-label col-sm-9">
-                                    <input type="number" class="form-control" min="0" max="200" step="0.5" id="customRange3" formControlName="height" 
-                                    #height
-                                    (input)="getheight()"
-                                   >
-                                    
-                                </div>
+                                    <div class="input-group mb-3">
+                                        <input class="form-control" type="number"  min="0" max="200" step="0.5" id="customRange3"   suffix="cm" formControlName="height" 
+                                        #height
+                                        (input)="getheight()"
+                                      />
+                                        <div class="input-group-append">
+                                          <span class="input-group-text" id="basic-addon2">CM</span>
+                                        </div>
+                                    </div>
+                                  
+                                  </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label">Peso</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id=""  step="5"
-                                         formControlName="weight" #weight
-                                         (input)="getweight()"
-                                        
-                                         >
+                                 
+                                         <div class="input-group mb-3">
+                                            <input type="number" class="form-control" id=""  step="5" min="0" max="200"
+                                            formControlName="weight" #weight
+                                            (input)="getweight()"
+                                           
+                                            >
+                                            <div class="input-group-append">
+                                              <span class="input-group-text" id="basic-addon2">kg</span>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                             
@@ -395,9 +413,10 @@
 
                             </div>
                             <div class="container-fluid flex-container">
-                                <div>
-                                    <input type="checkbox" class="mt-2 me-2" formControlName="doctor_precall">
-                                    <label for=""> ¿Te gustaría que el médico del campamento se ponga en contacto con
+                               
+                                <div class="form-check">
+                                    <input type="checkbox" class=" form-check-input" formControlName="doctor_precall">
+                                    <label for="" class="form-check-label"> ¿Te gustaría que el médico del campamento se ponga en contacto con
                                         usted antes del campamento?</label>
                                 </div>
                             </div>
@@ -614,15 +633,15 @@
 
                     <div class="card-body">
                         <div class="container-footer-parents">
-                            <img src="assets/images/camp/bombero.png" class="avatar-lg" alt="madre y padres">
+                            <img src="assets/images/camp/seguro.png" class="avatar-lg" alt="madre y padres">
                             <h4 class="ms-3"> Seguro Médico
                             </h4>
                         </div>
                         <div class="mt-5">
                             <div class="container-fluid flex-container">
-                                <div>
-                                    <input type="checkbox" class="mt-2 me-2" formControlName="insurance">
-                                    <label for=""> ¿Cuenta con Seguro de Gastos Médicos Mayores?</label>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" formControlName="insurance">
+                                    <label for="" class="form-check-label"> ¿Cuenta con Seguro de Gastos Médicos Mayores?</label>
                                 </div>
                             </div>
                             <div class="row mb-4 mt-3">

@@ -69,6 +69,8 @@ export class CamperNuevoComponent implements OnInit {
   @ViewChild("photo") photo: ElementRef;
   @ViewChild("school_other") school_other: ElementRef;
   @ViewChild("insurance_company") insurance_company: ElementRef;
+  photoSatus = false;
+  spinerPhot= true;
   
 
 
@@ -178,12 +180,14 @@ export class CamperNuevoComponent implements OnInit {
   
   getphoto() {
     if(this.formUser.get('photo').valid){
-      return true
+      this.photoSatus = true;
     }else{
      // this.photo.nativeElement.focus();
       console.log('ere');
-      
-      return false
+      const element:any = document.getElementById("photo");
+      element.scrollIntoViewIfNeeded();
+
+      this.photoSatus= false;
     }
      
   }
@@ -525,6 +529,8 @@ export class CamperNuevoComponent implements OnInit {
   
  
   subiendo(event: any) {
+    this.spinerPhot = false;
+
     const archivo = event.target.files[0];
 
     if (event.target.files && event.target.files[0]) {
@@ -538,13 +544,17 @@ export class CamperNuevoComponent implements OnInit {
         
 
         console.log(res.path);
+
         this.formUser.patchValue({
           photo: res.path
-        })
+        });
+        this.photoSatus= true;
+        this.spinerPhot = true;
+
       },
         error => {
           console.log(error);
-          this.statusImg= true;
+          this.photoSatus= false;
         })
     }
   }
