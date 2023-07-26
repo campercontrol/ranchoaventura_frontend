@@ -13,7 +13,7 @@ import jwt_decode from "jwt-decode";
 
 export class AuthenticationService {
 
-    loggedIn:boolean = false;
+    loggedIn:boolean = true;
     infToken!:any;
 
     constructor(private http: HttpClient,private router:Router ) {
@@ -40,9 +40,10 @@ export class AuthenticationService {
           .subscribe((user:any) => {
               console.log(user);
               this.loggedIn = true;
-              this.router.navigate(['/dashboard']);
               localStorage.setItem('currentUser', JSON.stringify(user));
-                this.infToken = jwt_decode(user.access_token);
+              this.infToken = jwt_decode(user.access_token);
+              this.router.navigate(['/dashboard']);
+           
                 console.log(this.infToken);
                 
               resolve(user);
@@ -50,6 +51,18 @@ export class AuthenticationService {
               reject(error);
           };
       })
+    }
+
+    logaot(){
+     let a =JSON.parse(localStorage.getItem('currentUser'));
+     if(a){
+      this.infToken = jwt_decode(a.access_token);
+      this.loggedIn = true;
+     }else{
+      this.router.navigate(['/login']);
+
+     }
+
     }
    
 }

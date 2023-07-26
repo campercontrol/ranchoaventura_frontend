@@ -69,10 +69,11 @@
                  
                 </div>
       
-                <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="customer" 
+                <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="5" [value]="customer" 
                   [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-                  [globalFilterFields]="['name','location_id','start','end','public_price']">
+                  [globalFilterFields]="['name','location_id','start','end','public_price']"
+                  [paginator]="true">
       
                   <ng-template pTemplate="header">
                     <tr>
@@ -177,11 +178,14 @@
       
               </div>
               <br>
-              <p-table #dt [value]="subscribe_camps" [rows]="10" 
+              <p-table #dt [value]="subscribe_camps" [rows]="5" 
                   [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
-                  [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
+                  [(selection)]="selectedProducts" [rowHover]="true" dataKey="camp_id"
                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                  [showCurrentPageReport]="true">
+                  [showCurrentPageReport]="true"
+                  responsiveLayout="scroll"
+                  [paginator]="true"
+                scrollHeight="flex">
                 
                   <ng-template pTemplate="header">
                       <tr>
@@ -240,15 +244,36 @@
               </div>
               
               <br>
-              <p-table #dt [value]="available_school_camps" [rows]="10" 
+                           
+              <div class="card-body">
+              <div>
+                <div class="col text-end">
+    
+                </div>
+              </div>
+              <div class="container-btn">
+                  <div class="d-inline-block" style="margin-right: 10px;">
+                      <div> 
+                          <button class="btn btn-success" (click)="filterCampsScholl()" >Inscribir  a camp(s)</button>
+                    </div>
+                  </div>
+               
+               
+              </div>
+              <p-table #dt [value]="available_school_camps" [rows]="5" 
                   [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
-                  [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
+                  [(selection)]="campsSchool" [rowHover]="true" dataKey="camp_id"
                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                  [showCurrentPageReport]="true">
+                  [showCurrentPageReport]="true"
+                  responsiveLayout="scroll"
+                  [paginator]="true"
+                scrollHeight="flex">
                 
                   <ng-template pTemplate="header">
                       <tr>
-                          
+                        <th>
+                          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
                           <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
                           <th pSortableColumn="location_name">Sede <p-sortIcon field="sede"></p-sortIcon></th>
                           <th pSortableColumn=" camp_end">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
@@ -261,6 +286,9 @@
                   </ng-template>
                   <ng-template pTemplate="body" let-customer>
                       <tr>
+                        <td>
+                          <p-tableCheckbox [value]="customer"></p-tableCheckbox>
+                        </td>
                           <td >
                               {{customer.camp_name}}
                             </td>
@@ -293,135 +321,15 @@
                   </ng-template>
                   
               </p-table>
+            </div>
         </div>
 
-        <div class="card border border-secondary border-1"  *ngIf="passed_camps.length>0">
-            
-            <div class="bg-secondary p-2">
-                <h1 class="card-title text-white">Camps a los que asisti</h1>
-      
-              </div>
-              <br>
-              <p-table #dt [value]="passed_camps" [rows]="10" 
-                  [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
-                  [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
-                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                  [showCurrentPageReport]="true">
-                
-                  <ng-template pTemplate="header">
-                      <tr>
-                          
-                          <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
-                          <th pSortableColumn="location_name">Sede <p-sortIcon field="sede"></p-sortIcon></th>
-                          <th pSortableColumn=" camp_end">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
-                          <th pSortableColumn="camp_start">Termino <p-sortIcon field="termino"></p-sortIcon></th>
-                          <th pSortableColumn="public_price">Precio <p-sortIcon field="precio"></p-sortIcon></th>
-      
-                          <th></th>
-      
-                      </tr>
-                  </ng-template>
-                  <ng-template pTemplate="body" let-customer>
-                      <tr>
-                          <td >
-                              {{customer.camp_name}}
-                            </td>
-                            <td> 
-                              {{customer.location_name}}
-                            </td>
-                            <td>
-            
-                             {{customer.camp_end}}
-            
-            
-                            </td>
-                            <td>
-            
-                             
-                             {{customer.camp_start}}
-            
-                            </td>
-                            <td>
-                             {{customer.public_price}}
-            
-                            </td>
-                         
-            
-                            <td>
-                              <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../camp-info/'+id+'/'+customer.camp_id]">ver campamento</button>
-                            </td>
-      
-                      </tr>
-                  </ng-template>
-                  
-              </p-table>
-        </div>
-        <div class="card border border-danger border-1" *ngIf="cancelled_camps.length>0">
-            
-            <div class="bg-danger p-2">
-                <h1 class="card-title text-white">Campamentos Cancelados </h1>
-      
-              </div>
-              <br>
-              <p-table #dt [value]="cancelled_camps" [rows]="10" 
-                  [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
-                  [(selection)]="selectedProducts" [rowHover]="true" dataKey="id"
-                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                  [showCurrentPageReport]="true">
-                
-                  <ng-template pTemplate="header">
-                      <tr>
-                          
-                          <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
-                          <th pSortableColumn="location_name">Sede <p-sortIcon field="sede"></p-sortIcon></th>
-                          <th pSortableColumn=" camp_end">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
-                          <th pSortableColumn="camp_start">Termino <p-sortIcon field="termino"></p-sortIcon></th>
-                          <th pSortableColumn="public_price">Precio <p-sortIcon field="precio"></p-sortIcon></th>
-      
-                          <th></th>
-      
-                      </tr>
-                  </ng-template>
-                  <ng-template pTemplate="body" let-customer>
-                      <tr>
-                          <td >
-                              {{customer.camp_name}}
-                            </td>
-                            <td> 
-                              {{customer.location_name}}
-                            </td>
-                            <td>
-            
-                             {{customer.camp_end}}
-            
-            
-                            </td>
-                            <td>
-            
-                             
-                             {{customer.camp_start}}
-            
-                            </td>
-                            <td>
-                             {{customer.public_price}}
-            
-                            </td>
-                         
-            
-                            <td>
-                              <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../../../parents/camp-info/'+id+'/'+customer.camp_id]">ver campamento</button>
-                            </td>
-      
-                      </tr>
-                  </ng-template>
-                  
-              </p-table>
-        </div>
+        
 
         <div class="card border border-info border-1" *ngIf="summer_school_camps.length>0">
             
           <div class="bg-info p-2">
-              <h1 class="card-title text-white">Campamentos escolares de verano  Disponible</h1>
+              <h1 class="card-title text-white">Campamentos de verano  Disponible</h1>
     
             </div>
             <div class="card-body">
@@ -441,11 +349,15 @@
               </div>
             
             <br>
-            <p-table #dt [value]="summer_school_camps" [rows]="10"  [(selection)]="selectedProducts" 
+            <p-table #dt [value]="summer_school_camps" [rows]="5"  [(selection)]="campsSummer" 
                 [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
-                [rowHover]="true" dataKey="id"
+                dataKey="camp_id"
+                responsiveLayout="scroll"
+                scrollHeight="flex"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                [showCurrentPageReport]="true">
+                [showCurrentPageReport]="true"
+                [paginator]="true"
+                >
               
                 <ng-template pTemplate="header">
                     <tr>
@@ -465,7 +377,7 @@
                 <ng-template pTemplate="body" let-customer>
                     <tr>
                       <td>
-                        <p-tableCheckbox [value]="customer" ></p-tableCheckbox>
+                        <p-tableCheckbox [value]="customer"></p-tableCheckbox>
                       </td>
                         <td >
                             {{customer.camp_name}}
@@ -489,6 +401,11 @@
                            {{customer.public_price}}
           
                           </td>
+
+                            <td>
+                              <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../camp-info/'+id+'/'+customer.camp_id]">ver campamento</button>
+                            </td>
+                         
                        
           
     
@@ -498,6 +415,135 @@
             </p-table>
             </div>
       </div>
+      <div class="card border border-secondary border-1"  *ngIf="passed_camps.length>0">
+            
+        <div class="bg-secondary p-2">
+            <h1 class="card-title text-white">Camps a los que asisti</h1>
+  
+          </div>
+          <br>
+          <p-table #dt [value]="passed_camps" [rows]="5" 
+              [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
+              [(selection)]="selectedProducts" [rowHover]="true" dataKey="camp_id"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+              [showCurrentPageReport]="true"
+              responsiveLayout="scroll"
+                scrollHeight="flex"
+                [paginator]="true">
+            
+              <ng-template pTemplate="header">
+                  <tr>
+                      
+                      <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
+                      <th pSortableColumn="location_name">Sede <p-sortIcon field="sede"></p-sortIcon></th>
+                      <th pSortableColumn=" camp_end">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
+                      <th pSortableColumn="camp_start">Termino <p-sortIcon field="termino"></p-sortIcon></th>
+                      <th pSortableColumn="public_price">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+  
+                      <th></th>
+  
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-customer>
+                  <tr>
+                      <td >
+                          {{customer.camp_name}}
+                        </td>
+                        <td> 
+                          {{customer.location_name}}
+                        </td>
+                        <td>
+        
+                         {{customer.camp_end}}
+        
+        
+                        </td>
+                        <td>
+        
+                         
+                         {{customer.camp_start}}
+        
+                        </td>
+                        <td>
+                         {{customer.public_price}}
+        
+                        </td>
+                     
+        
+                        <td>
+                          <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../camp-info/'+id+'/'+customer.camp_id]">ver campamento</button>
+                        </td>
+  
+                  </tr>
+              </ng-template>
+              
+          </p-table>
+    </div>
+    <div class="card border border-danger border-1" *ngIf="cancelled_camps.length>0">
+        
+        <div class="bg-danger p-2">
+            <h1 class="card-title text-white">Campamentos Cancelados </h1>
+  
+          </div>
+          <br>
+
+          <p-table #dt [value]="cancelled_camps" [rows]="5" 
+              [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
+              [(selection)]="selectedProducts" [rowHover]="true" dataKey="camp_id"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+              [showCurrentPageReport]="true"
+              responsiveLayout="scroll"
+                scrollHeight="flex"
+                [paginator]="true">
+            
+              <ng-template pTemplate="header">
+                  <tr>
+                      
+                      <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
+                      <th pSortableColumn="location_name">Sede <p-sortIcon field="sede"></p-sortIcon></th>
+                      <th pSortableColumn=" camp_end">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
+                      <th pSortableColumn="camp_start">Termino <p-sortIcon field="termino"></p-sortIcon></th>
+                      <th pSortableColumn="public_price">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+  
+                      <th></th>
+  
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-customer>
+                  <tr>
+                      <td >
+                          {{customer.camp_name}}
+                        </td>
+                        <td> 
+                          {{customer.location_name}}
+                        </td>
+                        <td>
+        
+                         {{customer.camp_end}}
+        
+        
+                        </td>
+                        <td>
+        
+                         
+                         {{customer.camp_start}}
+        
+                        </td>
+                        <td>
+                         {{customer.public_price}}
+        
+                        </td>
+                     
+        
+                        <td>
+                          <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../../../parents/camp-info/'+id+'/'+customer.camp_id]">ver campamento</button>
+                        </td>
+  
+                  </tr>
+              </ng-template>
+              
+          </p-table>
+    </div>
        
 
     </div>

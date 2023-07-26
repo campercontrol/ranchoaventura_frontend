@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Options } from 'ng5-slider';
 import { CamperService } from 'src/services/camper.service';
-import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 
@@ -33,7 +33,7 @@ export class CamperNuevoComponent implements OnInit {
   foto:any;
   spinner:boolean= false;
   photoSelect : string | ArrayBuffer;
-
+  estatura ='';
   public formUser : FormGroup;
   public formGen : FormGroup;
  
@@ -67,8 +67,9 @@ export class CamperNuevoComponent implements OnInit {
   @ViewChild("contact_cellphone") contact_cellphone: ElementRef; 
   @ViewChild("contact_homephone") contact_homephone: ElementRef; 
   @ViewChild("photo") photo: ElementRef;
-
-
+  @ViewChild("school_other") school_other: ElementRef;
+  @ViewChild("insurance_company") insurance_company: ElementRef;
+  
 
 
 
@@ -99,18 +100,18 @@ export class CamperNuevoComponent implements OnInit {
       name:["",[Validators.required,Validators.minLength(2)]],
       lastname_father:["",[Validators.required,,Validators.minLength(2)]],
       lastname_mother:["",],
-      photo:["",[Validators.required]],
-      gender_id:[0,[Validators.required,Validators.min(1)]],
+      photo:["",[Validators.required,Validators.minLength(2)]],
+      gender_id:[0,[Validators.required,this.greaterThanZeroValidator()]],
       birthday:["",[Validators.required]],
       height:[0,[Validators.required,Validators.min(0.20)]],
       weight:[0,[Validators.required,Validators.min(0.20)]],
-      grade:[0,[Validators.required,Validators.min(1)]],
-      school_id:[0,[Validators.required,Validators.min(1)]],
+      grade:[0,[Validators.required,this.greaterThanZeroValidator()]],
+      school_id:[0,[Validators.required,this.greaterThanZeroValidator()]],
       school_other:["",],
-      email: ["",[Validators.required,Validators.email]],
+      email: ["",],
       can_swim: [0],
       affliction: ["",[Validators.required]],
-      blood_type: [0,[Validators.required]],
+      blood_type: [0,[Validators.required,this.greaterThanZeroValidator()]],
       heart_problems: ["",[Validators.required,Validators.minLength(2)]],
       psicology_treatments: ["",[Validators.required,Validators.minLength(2)]],
       prevent_activities: ["",[Validators.required,Validators.minLength(2)]],
@@ -179,14 +180,18 @@ export class CamperNuevoComponent implements OnInit {
     if(this.formUser.get('photo').valid){
       return true
     }else{
+     // this.photo.nativeElement.focus();
+      console.log('ere');
+      
       return false
-
     }
      
   }
   
   getgender_id() {
     if( this.formUser.get('gender_id').valid){
+      console.log( this.formUser.get('gender_id').valid);
+      
       this.render.removeClass(this.gender_id.nativeElement,"is-invalid");
       this.render.addClass(this.gender_id.nativeElement,"is-valid");
    }else{
@@ -257,9 +262,16 @@ export class CamperNuevoComponent implements OnInit {
    }
   }
   
-  get school_other() {
-    return this.formUser.get('school_other')  ;
-  }
+  getSchool_other() {
+    if( this.formUser.get('school_other').valid){
+      this.render.removeClass(this.school_other.nativeElement,"is-invalid");
+      this.render.addClass(this.school_other.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.school_other.nativeElement,"is-valid");
+    this.render.addClass(this.school_other.nativeElement,"is-invalid");
+    this.school_other.nativeElement.focus()
+
+   }  }
   
   getemail() {
    
@@ -295,7 +307,7 @@ export class CamperNuevoComponent implements OnInit {
       this.render.removeClass(this.blood_type.nativeElement,"is-invalid");
       this.render.addClass(this.blood_type.nativeElement,"is-valid");
    }else{
-    this.render.removeClass(this.birthday.nativeElement,"is-valid");
+    this.render.removeClass(this.blood_type.nativeElement,"is-valid");
     this.render.addClass(this.blood_type.nativeElement,"is-invalid");
     this.blood_type.nativeElement.focus()
 
@@ -426,7 +438,16 @@ export class CamperNuevoComponent implements OnInit {
   }
   
   getinsurance_company() {
-    return this.formUser.get('insurance_company')  ;
+  
+    if( this.formUser.get('insurance_company').valid){
+      this.render.removeClass(this.insurance_company.nativeElement,"is-invalid");
+      this.render.addClass(this.insurance_company.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.insurance_company.nativeElement,"is-valid");
+    this.render.addClass(this.insurance_company.nativeElement,"is-invalid");
+    this.insurance_company.nativeElement.focus()
+
+   }
   }
   
   getinsurance_number() {
@@ -476,7 +497,8 @@ export class CamperNuevoComponent implements OnInit {
 
    }
   }
-  
+
+ 
   getcontact_homephone() {
     if( this.formUser.get('contact_homephone').valid){
       this.render.removeClass(this.contact_homephone.nativeElement,"is-invalid");
@@ -543,7 +565,7 @@ public fileLeave(event){
   prueba1(){
     this.spinner=true;
     if(this.formUser.valid){
-      let a = {
+      let a ={ 
         "camper":this.formUser.value,
         "vaccines": this.vaccines,
         "licensed_medicines": this.licensed_medicines,
@@ -566,34 +588,38 @@ public fileLeave(event){
 
     }else{
       this.spinner=false;
-
+      this.getinsurance_company()
+      this.getsecurity_social_number();
+      this.getinsurance_number();
       this.getcontact_homephone();
       this.getcontact_cellphone();
       this.getcontact_relation();
       this.getcontact_name();
       this.getprohibited_foods();
-      this.getother_allergies();
-      this.getdrug_allergies();
-      this.getdrugs();
-      this.getsecurity_social_number();
-      this.getinsurance_number();
-      this.getpsicology_treatments();
+      this.getpsicology_treatments()
       this.getphobias();
       this.getnocturnal_disorders();
+      this.getother_allergies();
+      this.getdrug_allergies()
+      this.getdrugs();
       this.getaffliction();
       this.getprevent_activities();
       this.getheart_problems();
+      this.getblood_type();
+      this.getweight();
+      this.getheight();
       this.getgrade();
+      this.getSchool_other();
       this.getschool_id();
+      this.getphoto();
       this.getbirthday();
       this.getgender_id();
       this.getemail();
       this.getlastname_mother();
       this.getlastname_father();
       this.getname();
-      this.getheight();
-      this.getweight();
-      this.getphoto();
+     
+    
      
 
     }
@@ -608,6 +634,17 @@ public fileLeave(event){
       
     })
   }
+
+   greaterThanZeroValidator() {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const value = control.value;
+      if (value === null || value === undefined || isNaN(value) || value <= 0) {
+        return { greaterThanZero: true };
+      }
+      return null;
+    };
+  }
+ 
 
  
  

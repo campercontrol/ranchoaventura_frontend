@@ -29,6 +29,9 @@ export class ParentsInscripcionCampComponent implements OnInit {
     passed_camps:any[] = [];
     id= 0;
     available_school_camps:any[]=[];
+    campsSummer:any [];
+    campsSchool:any [];
+
     @ViewChild('centerDataModal') content:ElementRef;
 
     
@@ -105,25 +108,7 @@ export class ParentsInscripcionCampComponent implements OnInit {
     return index;
 }
 
-filterCamps(){
- 
-  this.selectedCustomers.forEach((item)=>{
-      let a = {
-        status: 36,
-        payment_balance: 0,
-        camp_id: item.camp_id,
-        camper_id: this.id,
 
-      }
-      console.log(a)
-      this.setCamp(a)
-  })
-  this.getCampsDIs();
-  this.centerModal()
-
-
-  
-}
 
 
 setCamp(a){
@@ -249,7 +234,44 @@ centerModal(centerDataModal: any = this.content) {
 }
 filterCampsSummer(){
  
-  this.selectedProducts.forEach((item)=>{
+  this.campsSummer.forEach((item)=>{
+      let a = {
+        status: 36,
+        payment_balance: 0,
+        camp_id: item.camp_id,
+        camper_id: this.id,
+
+      }
+      console.log(a)
+      this.setCamp(a)
+  })
+  this.getCampsDIs();
+  this.centerModal()
+
+ 
+}
+filterCamps(){
+ 
+  this.selectedCustomers.forEach((item)=>{
+      let a = {
+        status: 36,
+        payment_balance: 0,
+        camp_id: item.camp_id,
+        camper_id: this.id,
+
+      }
+      console.log(a)
+      this.setCamp(a)
+  })
+  this.getCampsDIs();
+  this.centerModal()
+
+
+  
+}
+filterCampsScholl(){
+ 
+  this.campsSchool.forEach((item)=>{
       let a = {
         status: 36,
         payment_balance: 0,
