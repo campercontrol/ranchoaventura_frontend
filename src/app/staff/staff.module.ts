@@ -54,6 +54,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ListaProspectosComponent } from './lista-prospectos/lista-prospectos.component';
 import { CardCapacitacionesComponent } from './card-capacitaciones/card-capacitaciones.component';
 import { FormModule } from '../pages/form/form.module';
+import { UpdatePerfilComponent } from './parents-inscripcion-camp/update-perfil/update-perfil.component';
 
 
 
@@ -89,6 +90,7 @@ import { FormModule } from '../pages/form/form.module';
     ListaStaffComponent,
     ListaProspectosComponent,
     CardCapacitacionesComponent,
+    UpdatePerfilComponent,
     
   ],
   imports: [

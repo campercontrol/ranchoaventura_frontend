@@ -31,50 +31,13 @@ export class ParentsInscripcionCampComponent implements OnInit {
     available_school_camps:any[]=[];
     campsSummer:any [];
     campsSchool:any [];
-
+    inscripcion = true;
+    typeSucribe = 0;
     @ViewChild('centerDataModal') content:ElementRef;
 
     
 
-    sedes = [{
-      "name": "Ex hacienda de Chautla",
-      "uid": "53d6e7c5-c379-4ddd-96ff-7f96f96b22de",
-      "email": "string",
-      "contact": "string",
-      "url": "string",
-      "updated_at": "2023-04-21T04:07:29.508989+00:00",
-      "phone": "string",
-      "id": 1,
-      "address": "string",
-      "active": true,
-      "created_at": "2023-04-19T21:17:13.053402+00:00"
-    },
-    {
-      "name": "Alpinia",
-      "uid": "e2cd398c-7ad6-4292-b1f9-23114345487f",
-      "email": "string",
-      "contact": "string",
-      "url": "string",
-      "updated_at": "2023-04-21T04:07:41.341131+00:00",
-      "phone": "string",
-      "id": 2,
-      "address": "string",
-      "active": true,
-      "created_at": "2023-04-19T21:17:13.053402+00:00"
-    },
-    {
-      "name": "Talo",
-      "uid": "9d14ff42-bb34-4227-a83b-993892edd9a8",
-      "email": "string",
-      "contact": "string",
-      "url": "string",
-      "updated_at": "2023-04-21T04:07:48.846039+00:00",
-      "phone": "string",
-      "id": 3,
-      "address": "string",
-      "active": true,
-      "created_at": "2023-04-19T21:17:13.053402+00:00"
-    }]
+    
 
   constructor(private camps: CampsService,private routesA:ActivatedRoute, private modalService:NgbModal, private info:CamperService) {
     this.routesA.params.subscribe((params)=>{
@@ -87,15 +50,7 @@ export class ParentsInscripcionCampComponent implements OnInit {
 
   }
 
-  searchSedes(id){
-    let a = ""
-      this.sedes.map((item:any)=>{
-        id == item.id
-         a = item.name
-      })
-      return a
-  }
-
+ 
   findIndexById(id: string): number {
     let index = -1;
     for (let i = 0; i < this.products.length; i++) {
@@ -233,60 +188,112 @@ centerModal(centerDataModal: any = this.content) {
   this.modalService.open(centerDataModal, { centered: true });
 }
 filterCampsSummer(){
- 
-  this.campsSummer.forEach((item)=>{
-      let a = {
-        status: 36,
-        payment_balance: 0,
-        camp_id: item.camp_id,
-        camper_id: this.id,
+  if(this.cancelled_camps.length<1&& this.subscribe_camps.length<1 && this.passed_camps.length <1 ){
+   this.suscribeCamps(1)
+  }else{
+   // alert('actualiza los datos de tu hijo')
+    this.inscripcion = false;
+    this.typeSucribe = 1;
 
-      }
-      console.log(a)
-      this.setCamp(a)
-  })
-  this.getCampsDIs();
-  this.centerModal()
+  }
+ 
+  
+ 
 
  
 }
 filterCamps(){
- 
-  this.selectedCustomers.forEach((item)=>{
-      let a = {
-        status: 36,
-        payment_balance: 0,
-        camp_id: item.camp_id,
-        camper_id: this.id,
+  if(this.cancelled_camps.length<1&& this.subscribe_camps.length<1 && this.passed_camps.length <1 ){
+    this.suscribeCamps(2);
+  }else{
+   // alert('actualiza los datos de tu hijo')
+    this.inscripcion = false;
+    this.typeSucribe = 2;
 
-      }
-      console.log(a)
-      this.setCamp(a)
-  })
-  this.getCampsDIs();
-  this.centerModal()
+  }
+ 
 
 
   
 }
 filterCampsScholl(){
- 
-  this.campsSchool.forEach((item)=>{
-      let a = {
-        status: 36,
-        payment_balance: 0,
-        camp_id: item.camp_id,
-        camper_id: this.id,
+  if(this.cancelled_camps.length<1&& this.subscribe_camps.length<1 && this.passed_camps.length <1 ){
+    this.suscribeCamps(3);
+  }else{
+    //alert('actualiza los datos de tu hijo')
+    this.inscripcion = false;
+    this.typeSucribe = 3;
 
-      }
-      console.log(a)
-      this.setCamp(a)
-  })
-  this.getCampsDIs();
-  this.centerModal()
+  }
+ 
 
 
   
+}
+
+suscribeCamps(typeCamp:number){
+  switch (typeCamp) {
+    //campamento de verano
+    case 1:
+      this.campsSummer.forEach((item)=>{
+        let a = {
+          status: 36,
+          payment_balance: 0,
+          camp_id: item.camp_id,
+          camper_id: this.id,
+  
+        }
+        console.log(a)
+        this.setCamp(a)
+    })
+    this.centerModal();
+    this.inscripcion = true;
+    this.getCampsDIs();
+      break;
+    case 2:
+      //campamentos disponibles
+      this.selectedCustomers.forEach((item)=>{
+        let a = {
+          status: 36,
+          payment_balance: 0,
+          camp_id: item.camp_id,
+          camper_id: this.id,
+  
+        }
+        console.log(a)
+        this.setCamp(a)
+    })
+
+    this.getCampsDIs();
+  this.inscripcion = true;
+    this.centerModal();
+
+    break;
+    case 3:
+      //campamentos por escuela
+      this.campsSchool.forEach((item)=>{
+        let a = {
+          status: 36,
+          payment_balance: 0,
+          camp_id: item.camp_id,
+          camper_id: this.id,
+  
+        }
+        console.log(a)
+        this.setCamp(a)
+    })
+    this.getCampsDIs();
+    this.inscripcion = true;
+    this.centerModal();
+
+    break;
+  
+    default:
+      this.inscripcion = true;
+     // this.centerModal();
+
+      break;
+  }
 }
 
 }
