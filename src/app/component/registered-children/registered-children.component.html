@@ -87,7 +87,7 @@
          
           <div style="margin: 0 auto;" *ngIf="data.camps.length<1">
             <hr>
-             <button class="btn btn-success" style="width: 90%;">Camps disponibles</button>
+             <a  [routerLink]="['../dashboard/parents/inscription/'+data.camper.id]" class="btn btn-success" style="width: 90%;">Camps disponibles</a>
           </div>
         </div>
         <div class="card-footer bg-transparent border-top">
