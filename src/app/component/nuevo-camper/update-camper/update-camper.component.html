@@ -110,7 +110,7 @@
                                 <label for="" class="col-sm-3 col-form-label">Escuela*</label>
                                 <div class="control-label col-sm-9">
                                     <select name="school_id" id="school_id" formControlName="school_id" (change)="getschool_id()" class="form-control" #school_id>
-                                        <option *ngFor="let item of school_id" [value]="item.id" >
+                                        <option *ngFor="let item of school1" [value]="item.id" >
                                             {{item.name}}
                                         </option>
                                     </select>
@@ -714,7 +714,7 @@
                     <div class="btn-footer">
                         <button class="btn btn-secondary w-lg btn-lg">Cancelar</button>
                         <div>
-                            <button class="btn btn-info w-lg btn-lg"  (click)="prueba1()" >Guardar</button>
+                            <button class="btn btn-info w-lg btn-lg"  (click)="prueba1()" *ngIf="!spinner">Guardar</button>
                             <div class="spinner-border" role="status" *ngIf="spinner">
                                 <span class="visually-hidden">Loading...</span>
                               </div>

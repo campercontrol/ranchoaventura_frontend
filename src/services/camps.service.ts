@@ -20,21 +20,21 @@ export class CampsService {
     return this.http.get('http://142.93.12.234:8000/extra_answers_camper/'+idCamp+"/"+idCamper)
 
   }
-  getCargosExtras(id,cargo:number){
-    return this.http.get('http://142.93.12.234:8000/camper_extra_charge_by_camp/'+id+'/'+cargo)
+  getCargosExtras(camperid,campid){
+    return this.http.get('http://142.93.12.234:8000/camper_extra_charge_by_camp/'+camperid+'/'+campid)
   }
   setPreguntas(pregunta){
-    return this.http.post('http://142.93.12.234:8000/camper_extra_answer/',pregunta)
+    return this.http.post('http://142.93.12.234:8000/camper/extra_answers/',pregunta)
   }
   setPagos(pregunta){
-    return this.http.post('http://142.93.12.234:8000/camper_extra_charge/',pregunta)
+    return this.http.post('http://142.93.12.234:8000/camper/extra_charges/',pregunta)
   }
   getDashbord(id=18){
     return this.http.get('http://142.93.12.234:8000/staff_dashboard/'+id)
 
   }
   deletCamp(idcamper:any,idcamp:any){
-    return this.http.post('http://142.93.12.234:8000/unsubscribe_camp/'+idcamp+'/'+idcamper,{})
+    return this.http.post('http://142.93.12.234:8000/unsubscribe_camp/?camp_id='+idcamp+'&camper_id='+idcamper,{})
 
   }
 

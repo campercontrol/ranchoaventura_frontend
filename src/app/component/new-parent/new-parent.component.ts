@@ -265,12 +265,12 @@ export class NewParentComponent implements OnInit {
         this.spinner = false;
         this.centerModal()
         setTimeout(() => {
-          this.router.navigate(['parents/new-camper']);
+          this.router.navigate(['login'])
         }, 1000);
       },error=>{
         console.log(error);
         this.spinner = false;
-        alert('No se pudo realizar su registro intentelo mas tarde ,ya sea por que ya el correo este registrado')
+        alert('No se pudo realizar su registro,al parecer el correo ya esta registrado')
         
       }
      )

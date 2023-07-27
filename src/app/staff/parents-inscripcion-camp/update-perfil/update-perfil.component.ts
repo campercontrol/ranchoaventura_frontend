@@ -70,6 +70,8 @@ export class UpdatePerfilComponent implements OnInit {
   @ViewChild("school_other") school_other: ElementRef;
   @ViewChild("insurance_company") insurance_company: ElementRef;
   @Input( ) typeSucribe: number;
+  photoSatus = false;
+  spinerPhot= true;
  
 
 
@@ -183,12 +185,14 @@ export class UpdatePerfilComponent implements OnInit {
   
   getphoto() {
     if(this.formUser.get('photo').valid){
-      return true
+      this.photoSatus = true;
     }else{
      // this.photo.nativeElement.focus();
       console.log('ere');
-      
-      return false
+      const element:any = document.getElementById("photo");
+      element.scrollIntoViewIfNeeded();
+
+      this.photoSatus= false;
     }
      
   }
@@ -650,25 +654,35 @@ export class UpdatePerfilComponent implements OnInit {
    
     
   }
-  subiendo(event){
+  subiendo(event: any) {
+    this.spinerPhot = false;
+
     const archivo = event.target.files[0];
 
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = e => this.photoSelect = reader.result;
       reader.readAsDataURL(archivo);
-    const formulario = new FormData()
-    formulario.append('file',archivo)
-    this.catalogos.setPhoto(formulario).subscribe((res: any) => {
-      console.log(res.path);
-      this.formUser.patchValue({
-        photo: res.path
-      })
-    },
-      error => {
-        console.log(error)
-      })
-  }
+
+      const formulario = new FormData();
+      formulario.append('file',archivo)
+      this.catalogos.setPhoto(formulario).subscribe((res: any) => {
+        
+
+        console.log(res.path);
+
+        this.formUser.patchValue({
+          photo: res.path
+        });
+        this.photoSatus= true;
+        this.spinerPhot = true;
+
+      },
+        error => {
+          console.log(error);
+          this.photoSatus= false;
+        })
+    }
 }
   
 

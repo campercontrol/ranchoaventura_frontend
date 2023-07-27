@@ -17,7 +17,7 @@ export class CampamentoComponent implements OnInit {
   dataPagos:any={};
   nameCamp:any={};
   cargosExtras:any ;
-  PreguntasExtras:any =[] ;
+  PreguntasExtras:any ;
   respuestPregunta:any="";
   cargosExtra:false;
   estatusPago:Boolean= false;
@@ -60,27 +60,11 @@ export class CampamentoComponent implements OnInit {
         }
 
      //console.log(this.dataPagos,'aqui la info');
-
+        this.getQuestion();
        
       },error=>{
         alert('no se pudo cargar')
       });
-
-
-
-    this.camps.getPreguntas(Number(this.idCamp),Number(this.idCamper)).subscribe((res:any)=>{
-     console.log(res,'preguntas');
-      this.PreguntasExtras = res.data;
-     
-      
-    })
-    this.camps.getCargosExtras(this.idCamp,Number(this.idCamper)).subscribe((res:any)=>{
-    console.log(res,'cargos extras');
-      this.cargosExtras = res.data
-      console.log(this.cargosExtras,'cargos extras');
-
-      
-    })
   }
 
   ngOnInit(): void {
@@ -103,53 +87,80 @@ export class CampamentoComponent implements OnInit {
     })
 
   }
+  getQuestion(){
+    this.camps.getPreguntas(Number(this.idCamp),Number(this.idCamper)).subscribe((res:any)=>{
+     // console.log(res,'preguntas');
+       this.PreguntasExtras = res.data;
+
+    
+       console.log(this.PreguntasExtras,'preguntas');
+
+       
+     });
+     
+     this.camps.getCargosExtras(this.idCamper,this.idCamp).subscribe((res:any)=>{
+     console.log(res,'cargos extras');
+       this.cargosExtras = res.data
+       console.log(this.cargosExtras,'cargos extras');
+ 
+       
+     })
+  }
   incio(){
-    this.router.navigate(['parents/registered-children'])
+    this.router.navigate(['dashboard'])
   }
   perfil(){
-    this.router.navigate(['/parents/camper/'+this.idCamper])
+    this.router.navigate(['dashboard/parents/camper/'+this.idCamper])
   }
   saveRes(){
-   
-    this.PreguntasExtras.forEach(element => {
-   
-      let res = {
-        "answer": element.answer,
-        "camper_id": this.idCamp,
-        "question_id": 2
-      }
-      this.camps.setPreguntas(res).subscribe((res:any)=>{
-        console.log(res);
-        
-      })
-      
+    let b :any[]=[];
+    this.PreguntasExtras[0].forEach(element => {
+        let a = {
+          
+            "id": element.id,
+            "question": element.question,
+            "is_required": true,
+            "camper_id": this.idCamper,
+            "answer": 'element.answer'
+          
+        }
+        b = b.concat(a);
     });
-
-  
-
+   
+    let question = {
+      extra_answers:b
+    }
+      this.camps.setPreguntas(question).subscribe((res:any)=>{
+        console.log(res);
+        this.getQuestion();
+        
+      });
   }
   saveChange(){
-    this.cargosExtras.forEach(element => {
-           let res = {
     
-            "is_selected": element.extra_selected,
-            "camper_id":  this.idCamp,
-            "extra_charge_id": element.extra_charge_id, 
-
+      this.cargosExtras.forEach(element => {
+          element.camper_id = this.idCamper
+          element.is_selected = true
+      });
+    let res = {
+      "extra_charges":this.cargosExtras
     }
+
     this.camps.setPagos(res).subscribe((res:any)=>{
       console.log(res);
       this.modalService.dismissAll()
       
     })
-    });
+    
    
 
   }
   deletCamp(){
     this.camps.deletCamp(this.idCamper,this.idCamp).subscribe((res:any)=>{
       console.log(res);
-      alert ('se cancelo la inscripcion correctamente')
+      //alert ('se cancelo la inscripcion correctamente')
+      window.location.reload();
+
     },error=>{
       console.log(error);
       
