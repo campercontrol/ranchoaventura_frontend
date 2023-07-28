@@ -8,6 +8,8 @@
       <!-- {{menuItems}} -->
       <ng-container>
         <li class="menu-title">Menú</li>
+      
+     
         <li *ngIf="paretn">
           <a routerLink='../dashboard' class="side-nav-link-ref" routerLinkActive="active">
             <i class="dripicons-user-id"></i>
@@ -153,6 +155,12 @@
           </a>
 
 
+        </li>
+        <li>
+          <a (click)="login()" class="side-nav-link-ref" routerLinkActive="active" style="cursor: pointer;">
+            <i class="bx bx-undo"></i>
+            <span>login</span>
+          </a>
         </li>
       </ng-container>
     </ul>

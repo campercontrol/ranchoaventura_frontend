@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { ConfigService } from 'src/app/core/services/config.service';
 import { EventService } from 'src/app/core/services/event.service';
 import { ParentService } from 'src/services/parent.service';
@@ -58,7 +59,8 @@ export class NewParentComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   alertConfirCorre
 
-  constructor(private formBuild:FormBuilder,private parent: ParentService,private router :Router,private modalService: NgbModal,private configService: ConfigService, private eventService: EventService,private render :Renderer2) { }
+  constructor(private formBuild:FormBuilder,private parent: ParentService,private router :Router,private modalService: NgbModal,private configService: ConfigService, private eventService: EventService,private render :Renderer2,
+    private info :AuthenticationService) { }
   
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'UI Elements' }, { label: 'Modals', active: true }];
@@ -73,14 +75,14 @@ export class NewParentComponent implements OnInit {
                               Validators.minLength(8), Validators.maxLength(10)]],
       contact_name:         ["",[Validators.required,Validators.minLength(1)]],
     
-    contact_lastname_mother:["",[Validators.required,Validators.minLength(1)]],
+    contact_lastname_mother:[""],
     contact_home_phone:     ["",[Validators.required,
                             Validators.pattern("^[0-9]*$"),
                             Validators.minLength(8), Validators.maxLength(10)]], 
     contact_email:          ["",[Validators.required,
                                    Validators.email]],
     tutor_name :            ["",[Validators.required,Validators.minLength(1)]],
-    tutor_lastname_mother:  ["",[Validators.required,Validators.minLength(1)]], 
+    tutor_lastname_mother:  [""], 
     tutor_work_phone:       ["",[Validators.required,
                             Validators.pattern("^[0-9]*$"),
                             Validators.minLength(8), Validators.maxLength(10)]],
@@ -262,11 +264,10 @@ export class NewParentComponent implements OnInit {
      this.parent.setParent(a).subscribe(
       (res:any)=>{
         console.log(res);
-        this.spinner = false;
-        this.centerModal()
-        setTimeout(() => {
-          this.router.navigate(['login'])
-        }, 1000);
+       // this.centerModal();
+       this.info.login(this.formParent.get('email').value,this.formParent.get('password').value)
+       this.spinner = false;
+
       },error=>{
         console.log(error);
         this.spinner = false;

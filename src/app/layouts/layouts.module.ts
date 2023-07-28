@@ -29,6 +29,10 @@ import { TranslateModule } from '@ngx-translate/core';
     ClickOutsideModule,
     UIModule,
     SimplebarAngularModule
+  ],exports:[
+    SidebarComponent,
+    TopbarComponent,
+    VerticalComponent
   ],
   providers: [LanguageService]
 })

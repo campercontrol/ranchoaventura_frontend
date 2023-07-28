@@ -1,239 +1,256 @@
-<div class="container-fluid">
-    <form [formGroup]="formParent"  >
 
 
-        <div class="row">
-            <div class="col-lg-10">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="container-footer-parents">
-                            <img src="assets/images/camp/papa-mama.png" class="avatar-lg" alt="madre y padres">
-                            <h4 class="ms-3 mt-3">Datos de acceso del Padre, Madre o Tutor titular de la cuenta</h4>
-                            <h5 class="mt-2">Información de acceso con la cual entrarás a Camper Control.
-                            </h5>
+
+<div id="layout-wrapper">
+    <app-vertical></app-vertical>
+    <div class="main-content">
+      <div class="page-content">
+        
+        
+        <!-- content -->
+
+        <div class="container-fluid p-3">
+            <form [formGroup]="formParent"  >
+        
+        
+                <div class="row">
+                    <div class="col-lg-10">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="container-footer-parents">
+                                    <img src="assets/images/camp/papa-mama.png" class="avatar-lg" alt="madre y padres">
+                                    <h4 class="ms-3 mt-3">Datos de acceso del Padre, Madre o Tutor titular de la cuenta</h4>
+                                    <h5 class="mt-2">Información de acceso con la cual entrarás a Camper Control.
+                                    </h5>
+                                </div>
+        
+                                <div class="mt-5">
+                                    <div class="row mb-3">
+                                        <label for="" class="col-sm-3 col-form-label" >correo electrónico*</label>
+                                        <div class="col-sm-9">
+                                            
+                                            <input type="text" class="form-control" id="" formControlName="email" name="email"   (input)="getemail()" #email (focus)="alertcorreo =true" (focusout)="alertcorreo = false">
+                                            <p> <small style=" font-size: 14px; color: red;"> Será el usuario de acceso a la cuenta.</small></p>
+                                            <div *ngIf="alertcorreo" class="alert alert-warning mt-2" role="alert">
+                                                Asegurate de que sea  una dirección de correo  válida, ya que te enviaremos mensajes referentes a los camps a los que asistiran tus hijo(a)s
+                                              </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label" >Confirma correo electrónico*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName="confirmEmail"  name="confirmEmail" #emailConfir  (input)="getconfirmEmail()" (focus)="alertConfirCorre =true" (focusout)="alertConfirCorre = false">
+                                            <div  class="alert alert-danger" *ngIf="confirmEmailAlert"><small style="color: red; font-size: 14px    ;" >El correo no coincide.</small></div>
+                                            <div *ngIf="alertConfirCorre" class="alert alert-warning mt-2" role="alert">
+                                                Al finalizar el registro se enviará un mensaje de confirmación a esta cuenta de correo, te pedimos que revises tu bandeja de Correo no deseado para asegurar  que lo recibiste bien.Si no lo recibes ,ponte en contacto con nosotros
+                                              </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-1">
+                                        <label for="" class="col-sm-3 col-form-label">Contraseña</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control" id="" formControlName="password"  name="password" #password (input)="getpassword()">
+                                            <div  class="alert alert-warning mt-1"> Se usará para ingresar a Camper Control. Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra minuscula y un caracter especial los cuales pueden ser :@
+                                        $,!,?,&</div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label" >Confirma contraseña*</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control" id="" formControlName="confirmPassword"  name="confirmPassword" #confirmPassword (input)="getconfirmPassword()">
+                                            <div  class="alert alert-danger" *ngIf="confirmPaswordAlert"><small style="color: red; font-size: 14px    ;">Las contraseñas no coinciden.</small></div>
+        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="mt-5">
-                            <div class="row mb-3">
-                                <label for="" class="col-sm-3 col-form-label" >correo electrónico*</label>
-                                <div class="col-sm-9">
+                    </div>
+        
+                    <div class="col-lg-10">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="container-footer-parents">
+                                    <img src="assets/images/camp/papa-mama.png" class="avatar-lg" alt="madre y padres">
+                                    <h4 class="ms-3 mt-3">Titular de la cuenta (PADRE, MADRE o TUTOR)</h4>
+                                    <h5 class="mt-2">Ingresa la información del padre, madre o tutor titular de la cuenta.
+                                    </h5>
+                                </div>
+        
+                                <div class="mt-5">
+                                    <div class="row mb-4">
+                                        <label for=""
+                                            class="col-sm-3 col-form-label">Nombre(s)*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName="tutor_name" #tutor_name
+                                            (input)=" getTutor_name()">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label" >Apellido
+                                            paterno*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName="tutor_lastname_father" (input)="getTutor_lastname_father()" #tutor_lastname_father>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Apellido
+                                            materno</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName="tutor_lastname_mother" (input)="gettutor_lastname_mother()" #tutor_lastname_mother>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label" >Teléfono
+                                            móvil*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName = "tutor_cellphone" #tutor_cellphone (input)="gettutor_cellphone()">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Teléfono de
+                                            casa*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName = "tutor_home_phone" #tutor_home_phone (input)="gettutor_home_phone()" >
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Teléfono de
+                                            oficina*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName = "tutor_work_phone" #tutor_work_phone (input)="gettutor_work_phone()">
+                                        </div>
+                                    </div>
+        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="col-lg-10">
+                        <div class="card">
+        
+                            <div class="card-body">
+                                <div class="container-footer-parents">
+                                    <img src="assets/images/camp/papa-mama.png" class="avatar-lg" alt="madre y padres">
+                                    <h4 class="ms-3 mt-3">Segundo titular de la cuenta (PADRE, MADRE o SEGUNDO TUTOR)</h4>
+                                </div>
+        
+                                <h5 class="mt-4">No es el titular de la cuenta, pero es igual de importante ya que es a quien
+                                    llamaremos en caso de no poder contactar al primer titular, tambien recibe los correos
+                                    referentes a los campamentos.
+        
+                                </h5>
+        
+        
+        
+        
+                                <div class="mt-5">
+                                    <div class="row mb-4">
+                                        <label for=""
+                                            class="col-sm-3 col-form-label">Nombre(s)*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName = "contact_name" #contact_name (input)="getcontact_name()" >
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Apellido
+                                            paterno*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName = "contact_lastname_father" #contact_lastname_father  (input)="getcontact_lastname_father()">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Apellido
+                                            materno</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id=""  formControlName = "contact_lastname_mother" #contact_lastname_mother (input)="getcontact_lastname_mother()" >
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Teléfono
+                                            móvil*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id=""  formControlName = "contact_cellphone" (input)="getcontact_cellphone()" #contact_cellphone >
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Teléfono de
+                                            oficina*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName = "contact_work_phone" (input)="getcontact_work_phone()" #contact_work_phone >
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Teléfono de
+                                            casa*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName ="contact_home_phone" (input)="getcontact_home_phone()" #contact_home_phone >
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for=""
+                                            class="col-sm-3 col-form-label">Correo electrónico*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName="contact_email" #contact_email (input)="getcontact_email()">
+                                        </div>
+                                    </div>
+                                  
                                     
-                                    <input type="text" class="form-control" id="" formControlName="email" name="email"   (input)="getemail()" #email (focus)="alertcorreo =true" (focusout)="alertcorreo = false">
-                                    <p> <small style=" font-size: 14px; color: red;"> Será el usuario de acceso a la cuenta.</small></p>
-                                    <div *ngIf="alertcorreo" class="alert alert-warning mt-2" role="alert">
-                                        Asegurate de que sea  una dirección de correo  válida, ya que te enviaremos mensajes referentes a los camps a los que asistiran tus hijo(a)s
-                                      </div>
+        
                                 </div>
                             </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label" >Confirma correo electrónico*</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName="confirmEmail"  name="confirmEmail" #emailConfir  (input)="getconfirmEmail()" (focus)="alertConfirCorre =true" (focusout)="alertConfirCorre = false">
-                                    <div  class="alert alert-danger" *ngIf="confirmEmailAlert"><small style="color: red; font-size: 14px    ;" >El correo no coincide.</small></div>
-                                    <div *ngIf="alertConfirCorre" class="alert alert-warning mt-2" role="alert">
-                                        Al finalizar el registro se enviará un mensaje de confirmación a esta cuenta de correo, te pedimos que revises tu bandeja de Correo no deseado para asegurar  que lo recibiste bien.Si no lo recibes ,ponte en contacto con nosotros
-                                      </div>
+        
+                        </div>
+                    </div>
+        
+        
+                    <div class="row">
+                        <div class=col-lg-12>
+                            <div class="card p-5">
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="terms" height="40px" formControlName = "terms"  >
+                                        <label class="form-check-label fs-3 ms-3" for="terms">
+                                            Acepto los términos y condiciones
+                                        </label>
+                                        <label class="form-check-label fs-3 ms-3" for="terms">
+                                            <a
+                                                href="https://demo.campercontrol.com/media/uploads/files/terminos-y-condiciones.pdf">Ver
+                                                términos y condiciones</a>
+                                        </label>
+        
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mb-1">
-                                <label for="" class="col-sm-3 col-form-label">Contraseña</label>
-                                <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="" formControlName="password"  name="password" #password (input)="getpassword()">
-                                    <div  class="alert alert-warning mt-1"> Se usará para ingresar a Camper Control. Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra minuscula y un caracter especial</div>
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label" >Confirma contraseña*</label>
-                                <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="" formControlName="confirmPassword"  name="confirmPassword" #confirmPassword (input)="getconfirmPassword()">
-                                    <div  class="alert alert-danger" *ngIf="confirmPaswordAlert"><small style="color: red; font-size: 14px    ;">Las contraseñas no coinciden.</small></div>
-
+                                <p class="fs-5">Se enviará un correo electrónico de confirmación a tu correo, te pedimos que
+                                    revises tu bandeja
+                                    de <span> Correo no deseado </span> para asegurar que lo recibiste bien. Si no lo recibes,
+                                    ponte en contacto
+                                    con nosotros.</p>
+        
+                                <div class="btn-footer">
+                                    <button class="btn btn-secondary w-lg btn-lg">Cancelar</button>
+                                    <div >
+                                        <button class="btn btn-info w-lg btn-lg"  (click)="prueba()" *ngIf="!spinner">Guardar</button>
+                                        <div class="spinner-border" role="status" *ngIf="spinner">
+                                            <span class="visually-hidden">Loading...</span>
+                                          </div>
+                                    </div>
+                                        
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-lg-10">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="container-footer-parents">
-                            <img src="assets/images/camp/papa-mama.png" class="avatar-lg" alt="madre y padres">
-                            <h4 class="ms-3 mt-3">Titular de la cuenta (PADRE, MADRE o TUTOR)</h4>
-                            <h5 class="mt-2">Ingresa la información del padre, madre o tutor titular de la cuenta.
-                            </h5>
-                        </div>
-
-                        <div class="mt-5">
-                            <div class="row mb-4">
-                                <label for=""
-                                    class="col-sm-3 col-form-label">Nombre(s)*</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName="tutor_name" #tutor_name
-                                    (input)=" getTutor_name()">
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label" >Apellido
-                                    paterno*</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName="tutor_lastname_father" (input)="getTutor_lastname_father()" #tutor_lastname_father>
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Apellido
-                                    materno</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName="tutor_lastname_mother" (input)="gettutor_lastname_mother()" #tutor_lastname_mother>
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label" >Teléfono
-                                    móvil*</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName = "tutor_cellphone" #tutor_cellphone (input)="gettutor_cellphone()">
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Teléfono de
-                                    casa*</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName = "tutor_home_phone" #tutor_home_phone (input)="gettutor_home_phone()" >
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Teléfono de
-                                    oficina*</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName = "tutor_work_phone" #tutor_work_phone (input)="gettutor_work_phone()">
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-10">
-                <div class="card">
-
-                    <div class="card-body">
-                        <div class="container-footer-parents">
-                            <img src="assets/images/camp/papa-mama.png" class="avatar-lg" alt="madre y padres">
-                            <h4 class="ms-3 mt-3">Segundo titular de la cuenta (PADRE, MADRE o SEGUNDO TUTOR)</h4>
-                        </div>
-
-                        <h5 class="mt-4">No es el titular de la cuenta, pero es igual de importante ya que es a quien
-                            llamaremos en caso de no poder contactar al primer titular, tambien recibe los correos
-                            referentes a los campamentos.
-
-                        </h5>
-
-
-
-
-                        <div class="mt-5">
-                            <div class="row mb-4">
-                                <label for=""
-                                    class="col-sm-3 col-form-label">Nombre(s)*</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName = "contact_name" #contact_name (input)="getcontact_name()" >
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Apellido
-                                    paterno*</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName = "contact_lastname_father" #contact_lastname_father  (input)="getcontact_lastname_father()">
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Apellido
-                                    materno</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id=""  formControlName = "contact_lastname_mother" #contact_lastname_mother (input)="getcontact_lastname_mother()" >
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Teléfono
-                                    móvil*</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id=""  formControlName = "contact_cellphone" (input)="getcontact_cellphone()" #contact_cellphone >
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Teléfono de
-                                    oficina*</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName = "contact_work_phone" (input)="getcontact_work_phone()" #contact_work_phone >
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Teléfono de
-                                    casa*</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName ="contact_home_phone" (input)="getcontact_home_phone()" #contact_home_phone >
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for=""
-                                    class="col-sm-3 col-form-label">Correo electrónico*</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName="contact_email" #contact_email (input)="getcontact_email()">
-                                </div>
-                            </div>
-                          
-                            
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class=col-lg-12>
-                    <div class="card p-5">
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="terms" height="40px" formControlName = "terms"  >
-                                <label class="form-check-label fs-3 ms-3" for="terms">
-                                    Acepto los términos y condiciones
-                                </label>
-                                <label class="form-check-label fs-3 ms-3" for="terms">
-                                    <a
-                                        href="https://demo.campercontrol.com/media/uploads/files/terminos-y-condiciones.pdf">Ver
-                                        términos y condiciones</a>
-                                </label>
-
-                            </div>
-                        </div>
-                        <p class="fs-5">Se enviará un correo electrónico de confirmación a tu correo, te pedimos que
-                            revises tu bandeja
-                            de <span> Correo no deseado </span> para asegurar que lo recibiste bien. Si no lo recibes,
-                            ponte en contacto
-                            con nosotros.</p>
-
-                        <div class="btn-footer">
-                            <button class="btn btn-secondary w-lg btn-lg">Cancelar</button>
-                            <div >
-                                <button class="btn btn-info w-lg btn-lg"  (click)="prueba()" *ngIf="!spinner">Guardar</button>
-                                <div class="spinner-border" role="status" *ngIf="spinner">
-                                    <span class="visually-hidden">Loading...</span>
-                                  </div>
-                            </div>
-                                
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </form>
+        
+            <!-- end row -->
         </div>
-    </form>
-
-    <!-- end row -->
-</div>
+    </div>
+  
+      <!-- footer -->
+    </div>
+  </div>
 
 
 <ng-template #centerDataModal let-modal>

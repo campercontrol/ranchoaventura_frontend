@@ -12,57 +12,12 @@
     <div class="d-flex">
       <button class="btn btn-success ms-auto mb-2" [routerLink]="['parents/new-camper']" >Nuevo Camper </button>
     </div>
-    <ng-template #content role="document" let-modal>
-      <div class="modal-header">
-        <h5 class="modal-title mt-0">Add Customer</h5>
-        <button type="button" class="btn-close" aria-hidden="true" (click)="modal.dismiss('Cross click')"></button>
-      </div>
-      <div class="modal-body">
-        <form (ngSubmit)="saveUser()">
-          <div class="row">
-            <div class="col-12">
-              <div class="mb-3">
-                <label class="control-label">Username</label>
-                <input class="form-control" placeholder="Enter Username" type="text" name="name" formControlName="name"
-                  [ngClass]="{'is-invalid': submitted && form.name.errors}" />
-                <div *ngIf="submitted && form.name.errors" class="invalid-feedback">
-                  <span *ngIf="form.name.errors.required">Username is required.</span>
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <label class="control-label">Designation</label>
-                <input class="form-control" placeholder="Enter designation" type="text" name="designation"
-                  formControlName="designation" [ngClass]="{'is-invalid': submitted && form.designation.errors}" />
-                <div *ngIf="submitted && form.designation.errors" class="invalid-feedback">
-                  <span *ngIf="form.designation.errors.required">Username is required.</span>
-                </div>
-              </div>
-              <div class="mb-3">
-                <label class="control-label">Email</label>
-                <input class="form-control" placeholder="Enter email" type="text" name="email" formControlName="email"
-                  [ngClass]="{'is-invalid': submitted && form.email.errors}" />
-                <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
-                  <span *ngIf="form.email.errors.required">Email is required.</span>
-                  <span *ngIf="form.email.errors.pattern">This value should be a valid email.</span>
-                </div>
-              </div>
-              <div class="mb-3">
-                <label class="control-label">Select</label>
-              </div>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-success" id="btn-save-event">
-            Save
-          </button>
-        </form>
-      </div>
-    </ng-template>
+ 
 
 
 
-    <div class="col-xl-3 col-sm-6" *ngFor="let data of hijosRes">
-      <div class="card text-center">
+    <div class="col-xl-6 col-sm-12 " *ngFor="let data of hijosRes" >
+      <div class="card text-center " >
         <div class="card-body">
           <div class="avatar-sm mx-auto mb-4" *ngIf="!data.camper.photo" (click)="redirectPerfil(data.camper.id)" style="cursor: pointer;">
             <span class="avatar-title rounded-circle bg-soft bg-primary text-primary font-size-16">
@@ -77,7 +32,7 @@
           <p class="text-muted">Saldo Pendiente {{data.camper.full_name}}</p>
           <p class="text-muted">${{data.camper_balance}}MXN</p>
           <p class="text-muted">Asistirá a los siguientes camps:</p>
-          <div>
+          <div class="col-6 card-info" style="margin: 0 auto;">
             <a href="javascript: void(0);" class="badge bg-primary font-size-11 m-1 camps"
               *ngFor="let a of data.camps"  (click)="redirect(a.camp_id,data.camper.id)">
             {{a.camp_name}} : {{a.camper_payment_balance}}

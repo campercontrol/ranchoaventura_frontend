@@ -39,9 +39,16 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
         this._scrollElement();
       }
     });
-    if(info.infToken.role_id == 1){
+    if(!info.infToken){
+      this.paretn = false;
+      this.staff = false;
+    }
+    else if(info.infToken.role_id == 1){
       this.paretn = true;
       this.staff = false;
+    }else if(info.infToken.role_id >1){
+      this.paretn = false;
+      this.staff = true;
     }
   }
 
@@ -53,6 +60,9 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   ngAfterViewInit() {
     this.menu = new MetisMenu(this.sideMenu.nativeElement);
     this._activateMenuDropdown();
+  }
+  login(){
+    this.router.navigate(['login'])
   }
 
   toggleMenu(event) {

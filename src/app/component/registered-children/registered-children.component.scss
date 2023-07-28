@@ -7,7 +7,10 @@
 .camps::-webkit-scrollbar{
     display: none;
 }
-
+.card-info{
+    height: 150px;
+    overflow: auto;
+}
 .bodyCamper{
     background-color: #34c38f;
     width: 100%;
@@ -116,3 +119,40 @@ i{
     }
 
 }
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #0E2975 #DFE9EB;
+  }
+  
+  /* Chrome, Edge and Safari */
+  *::-webkit-scrollbar {
+    width: 10px;
+    width: 10px;
+  }
+  *::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: #DFE9EB;
+  }
+  
+  *::-webkit-scrollbar-track:hover {
+    background-color: #B8C0C2;
+  }
+  
+  *::-webkit-scrollbar-track:active {
+    background-color: #B8C0C2;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: #0E2975;
+  }
+  
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #2830A3;
+  }
+  
+  *::-webkit-scrollbar-thumb:active {
+    background-color: #1A31A3;
+  }
+  
