@@ -655,7 +655,9 @@ public fileLeave(event){
     };
   }
  
-
+  cancelar(){
+    this.router.navigate(["dashboard"])
+  }
  
  
 

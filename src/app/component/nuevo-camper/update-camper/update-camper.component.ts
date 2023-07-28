@@ -243,7 +243,9 @@ export class UpdateCamperComponent implements OnInit {
 
    }
   }
-  
+  cancelar(){
+    this.router.navigate(["dashboard"])
+  }
   getgrade() {
     if( this.formUser.get('grade').valid){
       this.render.removeClass(this.grade.nativeElement,"is-invalid");

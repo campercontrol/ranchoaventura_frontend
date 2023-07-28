@@ -438,6 +438,9 @@ export class NewParentComponent implements OnInit {
 
      }
   }
+  cancelar(){
+    this.router.navigate(['login'])
+  }
   /**
    * Change the layout onclick
    * @param layout Change the layout

@@ -229,7 +229,7 @@
                                     con nosotros.</p>
         
                                 <div class="btn-footer">
-                                    <button class="btn btn-secondary w-lg btn-lg">Cancelar</button>
+                                    <button class="btn btn-secondary w-lg btn-lg" (click)="cancelar()">Cancelar</button>
                                     <div >
                                         <button class="btn btn-info w-lg btn-lg"  (click)="prueba()" *ngIf="!spinner">Guardar</button>
                                         <div class="spinner-border" role="status" *ngIf="spinner">
