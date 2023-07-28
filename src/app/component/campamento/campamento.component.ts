@@ -114,7 +114,7 @@ export class CampamentoComponent implements OnInit {
   }
   saveRes(){
     let b :any[]=[];
-    this.PreguntasExtras[0].forEach(element => {
+    this.PreguntasExtras.forEach(element => {
         let a = {
           
             "id": element.id,
