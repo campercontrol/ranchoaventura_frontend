@@ -265,8 +265,11 @@ export class NewParentComponent implements OnInit {
       (res:any)=>{
         console.log(res);
        // this.centerModal();
-       this.info.login(this.formParent.get('email').value,this.formParent.get('password').value)
-       this.spinner = false;
+       this.info.login2(this.formParent.get('email').value,this.formParent.get('password').value).then((res:any)=>{
+        console.log(res);
+        this.spinner = false;
+
+       })
 
       },error=>{
         console.log(error);

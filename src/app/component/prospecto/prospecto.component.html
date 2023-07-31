@@ -1,256 +1,329 @@
-<div class="container-fluid">
-    <form [formGroup]="formUser">
-        <div class="row">
-
-            <div class="col-lg-10">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="container-footer-parents">
-                            <img src="assets/images/camp/prospectostaff.png" class="avatar-lg" alt="madre y padres">
-                            <h4 class="ms-3 mt-3"> Datos de acceso del staff</h4>
-                            <h5 class="mt-2">Información de acceso con la cual entrarás a Camper Control.
-                            </h5>
-                        </div>
-
-                        <div class="mt-5">
-                            <div class="row mb-3">
-                                <label for="" class="col-sm-3 col-form-label" >correo electrónico*</label>
-                                <div class="col-sm-9">
-                                    
-                                    <input type="text" class="form-control" id="" formControlName="email" name="email"   (input)="getemail()" #email (focus)="alertcorreo =true" (focusout)="alertcorreo = false">
-                                    <p> <small style=" font-size: 14px; color: red;"> Será el usuario de acceso a la cuenta.</small></p>
-                                    <div *ngIf="alertcorreo" class="alert alert-warning mt-2" role="alert">
-                                        Asegurate que sea una direcion de correo valida,ya que te enviaremos mensajes de correo para la próxima temporada de reclutamiento
-                                      </div>
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label" >Confirma correo electrónico*</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName="confirmEmail"  name="confirmEmail" #emailConfir  (input)="getconfirmEmail()" (focus)="alertConfirCorre =true" (focusout)="alertConfirCorre = false">
-                                    <div  class="alert alert-danger" *ngIf="confirmEmailAlert"><small style="color: red; font-size: 14px    ;" >El correo no coincide.</small></div>
-                                    <div *ngIf="alertConfirCorre" class="alert alert-warning mt-2" role="alert">
-                                        Al finalizar tu registro se enviará a este correo un link  para activar  tu cuenta,te pedimos que revises tu bandeja de correo no deseado para asegurar que lo recibiste,si no lo recibiste,ponte en contacto con nosotros
-                                      </div>
-                                </div>
-                            </div>
-                            <div class="row mb-1">
-                                <label for="" class="col-sm-3 col-form-label">Contraseña</label>
-                                <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="" formControlName="password"  name="password" #password (input)="getpassword()">
-                                    <div  class="alert alert-warning mt-1"> Se usará para ingresar a Camper Control. Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra minuscula y un caracter especial</div>
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label" >Confirma contraseña*</label>
-                                <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="" formControlName="confirmPassword"  name="confirmPassword" #confirmPassword (input)="getconfirmPassword()">
-                                    <div  class="alert alert-danger" *ngIf="confirmPaswordAlert"><small style="color: red; font-size: 14px    ;">Las contraseñas no coinciden.</small></div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-
-                    <div class="card-body">
-                        <div class="container-footer-parents">
-                            <img src="../../../assets/images/camp/datosdeacceso.png" class="avatar-lg" alt="madre y padres">
-                            <h4 class="ms-3"> Datos de acceso del staff</h4>
-                        </div>
-                        <div class="mt-5">
-                            <div class="row mb-4">
-                                <label for=""
-                                    class="col-sm-3 col-form-label">Nombre(s)*</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id=""
-                                        formControlName="name" name="name" (input)="validateName()" #name>
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Apellido
-                                    paterno*</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id=""
-                                        formControlName="lastname_father" name="lastname_father" (input)="validatelastname_father()" #lastname_father>
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Apellido
-                                    materno</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id=""
-                                        formControlName="lastname_mother"  name="lastname_mother"  >
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Curp*</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id=""
-                                        formControlName="curp"  name="lastname_mother" (input)="validatecurp()" #curp>
-                                </div>
-                            </div>
-                         
-                         
-
-                            <div class="row mb-4 mt-3">
-                                <label for="" class="col-sm-3 col-form-label">Fecha de
-                                    nacimiento*</label>
-                                <div class=" control-label col-sm-9">
-                                    
-                                        <input type="date" class="form-control" placeholder="yyyy-mm-dd"
-                                        formControlName="birthday" (input)="validatebirthday()" #birthday>
-                                   
-                                </div>
-                            </div>
+<div id="layout-wrapper">
+    <app-vertical></app-vertical>
+    <div class="main-content">
+        <div class="page-content">
 
 
-                                
 
+            <div class="">
+                <form [formGroup]="formUser">
+                    <div class="row">
 
-                            <div class="foto mt-4">
-                                <div class="container-footer-parents">
-                                    <img [src]="photoSelect || 'assets/images/camp/perfil-camper.png'" class="avatar-lg" alt="madre y padres">
-                                    
-                                </div>
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="container-footer-parents">
+                                        <img src="assets/images/camp/prospectostaff.png" class="avatar-lg"
+                                            alt="madre y padres">
+                                        <h4 class="ms-3 mt-3"> Datos de acceso del staff</h4>
+                                        <h5 class="mt-2">Información de acceso con la cual entrarás a Camper Control.
+                                        </h5>
+                                    </div>
 
-                                <div class="mt-3 foto">
-                                    <label for="">Foto de Perfil</label>
-                                    <input type="file" accept="image/jpeg"   (change)="subiendo($event)">
-                                    
-    
-                                    <label class="mt-2">La foto es obligatoria ,nos ayuda a identificar a los campers,
-                                        recomendamos subas una foto reciente y de poco peso, máximo 3Mb debe ser formato jpg</label>
-    
-                                </div>
-                                <div class="alert alert-danger" role="alert" *ngIf="!getphoto()">
-                                    Aun no has  seleciona una imagen Recuerda tiene que ser un imagen TIPO JPG
-                                   </div>
- 
-                                   <div class="alert alert-secondary" role="alert" *ngIf="getphoto()">
-                                     Se Agrego corectamente
-                                   </div>
-                               
-                            </div>
-                        </div>
-                        <div class="row mb-4 mt-4">
-                            <label for="" class="col-sm-3 col-form-label">Biografía*</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id=""
-                                    formControlName="bio"  name="bio" (input)="validatebio()"#bio>
-                            </div>
-                        </div>
-                    </div>
+                                    <div class="mt-5">
+                                        <div class="row mb-3">
+                                            <label for="" class="col-sm-3 col-form-label">correo electrónico*</label>
+                                            <div class="col-sm-9">
 
-                </div>
-               
+                                                <input type="text" class="form-control" id="" formControlName="email"
+                                                    name="email" (input)="getemail()" #email (focus)="alertcorreo =true"
+                                                    (focusout)="alertcorreo = false">
+                                                <p> <small style=" font-size: 14px; color: red;"> Será el usuario de
+                                                        acceso a la cuenta.</small></p>
+                                                <div *ngIf="alertcorreo" class="alert alert-warning mt-2" role="alert">
+                                                    Asegurate que sea una direcion de correo valida,ya que te enviaremos
+                                                    mensajes de correo para la próxima temporada de reclutamiento
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <label for="" class="col-sm-3 col-form-label">Confirma correo
+                                                electrónico*</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id=""
+                                                    formControlName="confirmEmail" name="confirmEmail" #emailConfir
+                                                    (input)="getconfirmEmail()" (focus)="alertConfirCorre =true"
+                                                    (focusout)="alertConfirCorre = false">
+                                                <div class="alert alert-danger" *ngIf="confirmEmailAlert"><small
+                                                        style="color: red; font-size: 14px    ;">El correo no
+                                                        coincide.</small></div>
+                                                <div *ngIf="alertConfirCorre" class="alert alert-warning mt-2"
+                                                    role="alert">
+                                                    Al finalizar tu registro se enviará a este correo un link para
+                                                    activar tu cuenta,te pedimos que revises tu bandeja de correo no
+                                                    deseado para asegurar que lo recibiste,si no lo recibiste,ponte en
+                                                    contacto con nosotros
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-1">
+                                            <label for="" class="col-sm-3 col-form-label">Contraseña</label>
+                                            <div class="col-sm-9">
+                                                <input type="password" class="form-control" id=""
+                                                    formControlName="password" name="password" #password
+                                                    (input)="getpassword()">
+                                                <div class="alert alert-warning mt-1"> Se usará para ingresar a Camper
+                                                    Control. Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra
+                                                    minuscula y un caracter especial</div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <label for="" class="col-sm-3 col-form-label">Confirma contraseña*</label>
+                                            <div class="col-sm-9">
+                                                <input type="password" class="form-control" id=""
+                                                    formControlName="confirmPassword" name="confirmPassword"
+                                                    #confirmPassword (input)="getconfirmPassword()">
+                                                <div class="alert alert-danger" *ngIf="confirmPaswordAlert"><small
+                                                        style="color: red; font-size: 14px    ;">Las contraseñas no
+                                                        coinciden.</small></div>
 
-               
-            </div>
-            
-        </div>
-
-        <div class="row">
-            <div class=col-lg-12>
-                <div class="card p-5">
-
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="container-footer-parents">
-                                <img src="assets/images/camp/prospectostaff.png" class="avatar-lg" alt="madre y padres">
-                                <h4 class="ms-3 mt-3">Información de Contacto</h4>
-                                
-                            </div>
-    
-                            <div class="mt-5">
-                               
-                                <div class="row mb-4">
-                                    <label for="" class="col-sm-3 col-form-label" >Teléfono
-                                        móvil*</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="" formControlName = "cellphone" (input)="validatecellphone()" #cellphone>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
-                                    <label for="" class="col-sm-3 col-form-label">Teléfono de
-                                        casa*</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="" formControlName = "home_phone" (input)="validatehome_phone()" #home_phone>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <label for="" class="col-sm-3 col-form-label">Facebook*</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="" formControlName = "facebook" (input)="validateFace()" #facebook>
-                                    </div>
-                                </div>
-    
                             </div>
+                            <div class="card">
+
+                                <div class="card-body" id="cv">
+                                    <div class="container-footer-parents">
+                                        <img src="../../../assets/images/camp/datosdeacceso.png" class="avatar-lg"
+                                            alt="madre y padres">
+                                        <h4 class="ms-3"> Datos de acceso del staff</h4>
+                                    </div>
+                                    <div class="mt-5">
+                                        <div class="row mb-4">
+                                            <label for="" class="col-sm-3 col-form-label">Nombre(s)*</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="" formControlName="name"
+                                                    name="name" (input)="validateName()" #name>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <label for="" class="col-sm-3 col-form-label">Apellido
+                                                paterno*</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id=""
+                                                    formControlName="lastname_father" name="lastname_father"
+                                                    (input)="validatelastname_father()" #lastname_father>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <label for="" class="col-sm-3 col-form-label">Apellido
+                                                materno</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id=""
+                                                    formControlName="lastname_mother" name="lastname_mother">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <label for="" class="col-sm-3 col-form-label">Curp*</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="" formControlName="curp"
+                                                    name="lastname_mother" (input)="validatecurp()" #curp>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row mb-4 mt-3">
+                                            <label for="" class="col-sm-3 col-form-label">Fecha de
+                                                nacimiento*</label>
+                                            <div class=" control-label col-sm-9">
+
+                                                <input type="date" class="form-control" placeholder="yyyy-mm-dd"
+                                                    formControlName="birthday" (input)="validatebirthday()" #birthday>
+
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                        <div class="foto mt-4">
+                                            <div class="container-footer-parents">
+                                                <img [src]="photoSelect || 'assets/images/camp/perfil-camper.png'"
+                                                    class="avatar-lg" alt="madre y padres">
+
+                                            </div>
+
+                                            <div class="mt-3 foto" id="photo">
+                                                <label for="">Foto de Perfil</label>
+                                                <input type="file" accept="image/jpeg" (change)="subiendo($event)">
+
+
+                                                <label class="mt-2">La foto es obligatoria ,nos ayuda a identificar a
+                                                    los campers,
+                                                    recomendamos subas una foto reciente y de poco peso, máximo 3Mb debe
+                                                    ser formato jpg</label>
+
+                                            </div>
+                                            <div class="alert alert-danger" role="alert" *ngIf="!photoSatus">
+                                                Aun no has seleciona una imagen Recuerda tiene que ser un imagen TIPO
+                                                JPG
+                                            </div>
+
+                                            <div class="alert alert-secondary" role="alert" *ngIf="photoSatus">
+                                                Se Agrego corectamente
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4 mt-4">
+                                        <label for="" class="col-sm-3 col-form-label">Biografía*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName="bio"
+                                                name="bio" (input)="validatebio()" #bio>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4 mt-4" id="cv">
+                                        <label for="" class="col-sm-3 col-form-label">CV</label>
+                                        <div class="col-sm-9">
+                                            <input type="file" accept="image/pdf" (change)="subiendoPdf($event)">
+
+                                            <div class="alert alert-danger" role="alert" *ngIf="!cvSatus">
+                                                Aun no has agregado tu cv
+                                            </div>
+
+                                            <div class="alert alert-secondary" role="alert" *ngIf="cvSatus">
+                                                Se Agrego corectamente
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
                         </div>
+
                     </div>
 
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="terms" height="40px" formControlName = "terms"  >
-                            <label class="form-check-label fs-3 ms-3" for="terms">
-                                Acepto los términos y condiciones
-                            </label>
-                            <label class="form-check-label fs-3 ms-3" for="terms">
-                                <a
-                                    href="https://demo.campercontrol.com/media/uploads/files/terminos-y-condiciones.pdf">Ver
-                                    términos y condiciones</a>
-                            </label>
+                    <div class="row">
+                        <div class=col-lg-12>
+                            <div class="card p-5">
 
-                        </div>
-                        <div class="alert alert-danger" role="alert" *ngIf="erroA">
-                           No se pudo registrar como prospecto intentalo de nuevo
-                          </div>
-                    </div>
-                
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="container-footer-parents">
+                                            <img src="assets/images/camp/prospectostaff.png" class="avatar-lg"
+                                                alt="madre y padres">
+                                            <h4 class="ms-3 mt-3">Información de Contacto</h4>
 
-                    <div class="btn-footer">
-                        <button class="btn btn-secondary w-lg btn-lg">Cancelar</button>
-                        <div class="btn-footer">
+                                        </div>
+
+                                        <div class="mt-5">
+
+                                            <div class="row mb-4">
+                                                <label for="" class="col-sm-3 col-form-label">Teléfono
+                                                    móvil*</label>
+                                                <div class="col-sm-9">
+                                                    <input type="txt" class="form-control" id=""
+                                                        formControlName="cellphone" (input)="validatecellphone()"
+                                                        #cellphone>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-4">
+                                                <label for="" class="col-sm-3 col-form-label">Teléfono de
+                                                    casa*</label>
+                                                <div class="col-sm-9">
+                                                    <input type="txt" class="form-control" id=""
+                                                        formControlName="home_phone" (input)="validatehome_phone()"
+                                                        #home_phone>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-4">
+                                                <label for="" class="col-sm-3 col-form-label">Facebook*</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id=""
+                                                        formControlName="facebook" (input)="validateFace()" #facebook>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
                             <div >
-                                <button class="btn btn-info w-lg btn-lg"  (click)="prueba1()" *ngIf="!spinner">Guardar</button>
-                                <div class="spinner-border" role="status" *ngIf="spinner">
-                                    <span class="visually-hidden">Loading...</span>
-                                  </div>
+                                <div class="card col-12">
+                                    <div>
+                                        <div class="mb-3 p-5">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="terms" height="40px"
+                                                    formControlName="terms">
+                                                <label class="form-check-label fs-3 ms-3" for="terms">
+                                                    Acepto los términos y condiciones
+                                                </label>
+                                                <label class="form-check-label fs-3 ms-3" for="terms">
+                                                    <a
+                                                        href="https://demo.campercontrol.com/media/uploads/files/terminos-y-condiciones.pdf">Ver
+                                                        términos y condiciones</a>
+                                                </label>
+
+                                            </div>
+                                            <div class="alert alert-danger" role="alert" *ngIf="erroA">
+                                                No se pudo registrar como prospecto intentalo de nuevo
+                                            </div>
+                                            <div class="btn-footer mt-5">
+                                                <button class="btn btn-secondary w-lg btn-lg">Cancelar</button>
+                                                <div class="btn-footer">
+                                                    <div>
+                                                        <button class="btn btn-info w-lg btn-lg" (click)="prueba1()"
+                                                            *ngIf="!spinner">Guardar</button>
+                                                        <div class="spinner-border" role="status" *ngIf="spinner">
+                                                            <span class="visually-hidden">Loading...</span>
+                                                        </div>
+                                                    </div>
+    
+                                                </div>
+    
+    
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+
+                                </div>
+
                             </div>
                             
+
                         </div>
-                       
-                      
+                    </div>
+
+
+                </form>
+            </div>
+            <ng-template #centerDataModal let-modal>
+                <div class="modal-header">
+
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <div class="avatar-md mx-auto mb-4">
+                            <div class="avatar-title bg-light rounded-circle text-success h1">
+                                <i class="mdi mdi-account-multiple-check"></i>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="col-xl-10">
+                                <h4 class="text-success">Ya estas Registrado Felicidades !</h4>
+                                <h4 class="text-success">Por favor REVISE su correo se envio un link para activar su
+                                    cuenta !</h4>
+                                <p class="text-muted font-size-14 mb-4">
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </ng-template>
         </div>
-
-    </form>
+    </div>
 </div>
-
-
-<ng-template #centerDataModal let-modal>
-    <div class="modal-header">
-      
-    </div>
-    <div class="modal-body">
-        <div class="text-center mb-4">
-            <div class="avatar-md mx-auto mb-4">
-                <div class="avatar-title bg-light rounded-circle text-success h1">
-                    <i class="mdi mdi-account-multiple-check"></i>
-                </div>
-            </div>
-
-            <div class="row justify-content-center">
-                <div class="col-xl-10">
-                    <h4 class="text-success">Ya estas Registrado Felicidades !</h4>
-                    <h4 class="text-success">Por favor REVISE su correo se envio un link  para activar su cuenta !</h4>
-                    <p class="text-muted font-size-14 mb-4">
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</ng-template>

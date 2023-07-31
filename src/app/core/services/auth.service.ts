@@ -36,13 +36,35 @@ export class AuthenticationService {
     
      login(email: string, password: string) {
       return new Promise((resolve,reject)=>{
+        
            this.http.post("http://142.93.12.234:8000/token?username=" +email+ "&password="+password +"&lang=es",{ })
           .subscribe((user:any) => {
               console.log(user);
               this.loggedIn = true;
               localStorage.setItem('currentUser', JSON.stringify(user));
               this.infToken = jwt_decode(user.access_token);
+              if(this.infToken.user_id>1){
+                this.router.navigate(['/staff/dashboard']);
+              }
               this.router.navigate(['/dashboard']);
+           
+                console.log(this.infToken);
+                
+              resolve(true);
+          }),error =>{
+            throw new Error('Uh-oh!');
+          };
+      })
+    }
+    login2(email: string, password: string) {
+      return new Promise((resolve,reject)=>{
+           this.http.post("http://142.93.12.234:8000/token?username=" +email+ "&password="+password +"&lang=es",{ })
+          .subscribe((user:any) => {
+              console.log(user);
+              this.loggedIn = true;
+              localStorage.setItem('currentUser', JSON.stringify(user));
+              this.infToken = jwt_decode(user.access_token);
+              this.router.navigate(['/dashboard/parents/new-camper']);
            
                 console.log(this.infToken);
                 

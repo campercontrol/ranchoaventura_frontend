@@ -18,42 +18,42 @@
                                 <label for=""
                                     class="col-sm-3 col-form-label">Nombre(s)*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName="tutor_name">
+                                    <input type="text" class="form-control" id="" formControlName="tutor_name"  (input)="gettutor_name()" #tutor_name>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label" >Apellido
                                     paterno*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName="tutor_lastname_father">
+                                    <input type="text" class="form-control" id="" formControlName="tutor_lastname_father"  (input)="getTutor_lastname_father()" #tutor_lastname_father>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label">Apellido
                                     materno</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName="tutor_lastname_mother">
+                                    <input type="text" class="form-control" id="" formControlName="tutor_lastname_mother"  (input)="gettutor_lastname_mother()" #tutor_lastname_mother>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label" >Teléfono
                                     móvil*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName = "tutor_cellphone">
+                                    <input type="text" class="form-control" id="" formControlName = "tutor_cellphone"  (input)="getTutor_cellphone()" #tutor_cellphone>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label">Teléfono de
                                     casa*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName = "tutor_home_phone">
+                                    <input type="text" class="form-control" id="" formControlName = "tutor_home_phone"  (input)="gettutor_home_phone()" #tutor_home_phone>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label">Teléfono de
                                     oficina*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName = "tutor_work_phone">
+                                    <input type="text" class="form-control" id="" formControlName = "tutor_work_phone"  (input)="gettutor_work_phone()" #tutor_work_phone>
                                 </div>
                             </div>
 
@@ -85,56 +85,56 @@
                                 <label for=""
                                     class="col-sm-3 col-form-label">Nombre(s)*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName = "contact_name">
+                                    <input type="text" class="form-control" (input)="getcontact_name()" id="" formControlName = "contact_name" #contact_name>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label">Apellido
                                     paterno*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName = "contact_lastname_father">
+                                    <input type="text" class="form-control" id="" (input)="getcontact_lastname_father()" formControlName = "contact_lastname_father" #contact_lastname_father>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label">Apellido
                                     materno</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id=""  formControlName = "contact_lastname_mother">
+                                    <input type="text" class="form-control" id="" (input)="getcontact_lastname_mother()"  formControlName = "contact_lastname_mother" #contact_lastname_mother>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label">Teléfono
                                     móvil*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id=""  formControlName = "contact_cellphone">
+                                    <input type="text" class="form-control" id="" (input)="getcontact_cellphone()" formControlName = "contact_cellphone" #contact_cellphone>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label">Teléfono de
                                     oficina*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName = "contact_work_phone">
+                                    <input type="text" class="form-control" id="" (input)="getcontact_work_phone()" formControlName = "contact_work_phone" #contact_work_phone>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label">Teléfono de
                                     casa*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName = "contact_home_phone">
+                                    <input type="text" class="form-control" (input)="getcontact_home_phone()" id="" formControlName ="contact_home_phone"  #contact_home_phone>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label">Correo
                                     electrónico*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName = "contact_email">
+                                    <input type="text" class="form-control" (input)="getcontact_email()" id="" formControlName = "contact_email" #contact_email>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label">Confirmar correo
                                     electrónico*</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName = "contact_email">
+                                    <input type="text" class="form-control" (input)="getconfirmEmail()" id="" formControlName = "confirmEmail"  #confirmEmail>
                                 </div>
                             </div>
                             
@@ -171,7 +171,10 @@
 
                         <div class="btn-footer">
                             <button class="btn btn-secondary w-lg btn-lg">Cancelar</button>
-                            <button class="btn btn-info w-lg btn-lg" [disabled]="formParent.invalid">Guardar</button>
+                            <button class="btn btn-info w-lg btn-lg"  *ngIf="!spinner">Guardar</button>
+                            <div class="spinner-border" role="status" *ngIf="spinner">
+                                <span class="visually-hidden">Loading...</span>
+                              </div>
                         </div>
                     </div>
                 </div>

@@ -4,13 +4,12 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CamperService } from 'src/services/camper.service';
 import { StaffService } from 'src/services/staff.service';
-
 @Component({
-  selector: 'app-prospecto',
-  templateUrl: './prospecto.component.html',
-  styleUrls: ['./prospecto.component.scss']
+  selector: 'app-update-staff',
+  templateUrl: './update-staff.component.html',
+  styleUrls: ['./update-staff.component.scss']
 })
-export class ProspectoComponent implements OnInit {
+export class UpdateStaffComponent implements OnInit {
   visibleSelection = 0;
 
   blood_types: any = [];
@@ -74,10 +73,10 @@ export class ProspectoComponent implements OnInit {
 
   ngOnInit(): void {
     this.formUser = this.formGrup.group({
-      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]],
-      confirmPassword: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      confirmEmail: ['', [Validators.required,Validators.email]],
+    //  password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]],
+    //  confirmPassword: ['', [Validators.required]],
+   //   email: ['', [Validators.required, Validators.email]],
+   //   confirmEmail: ['', [Validators.required,Validators.email]],
       name: ["", [Validators.required]],
       lastname_father: ["", [Validators.required]],
       lastname_mother: ["",],
@@ -94,31 +93,9 @@ export class ProspectoComponent implements OnInit {
       login_id:[0],
       coordinator:[false],
       terms: ["", [Validators.required, Validators.requiredTrue]],
-    },{
-      validators: this.matchingFieldsValidator('password', 'confirmPassword', 'email', 'confirmEmail')
     })
-    
   }
-  matchingFieldsValidator(passwordField: string, confirmPasswordField: string, emailField: string, confirmEmailField: string) {
-    return (formGroup: FormGroup) => {
-      const password = formGroup.controls[passwordField];
-      const confirmPassword = formGroup.controls[confirmPasswordField];
-      const email = formGroup.controls[emailField];
-      const confirmEmail = formGroup.controls[confirmEmailField];
-  
-      if (password.value !== confirmPassword.value) {
-        confirmPassword.setErrors({ passwordMismatch: true });
-      } else {
-        confirmPassword.setErrors(null);
-      }
-  
-      if (email.value !== confirmEmail.value) {
-        confirmEmail.setErrors({ emailMismatch: true });
-      } else {
-        confirmEmail.setErrors(null);
-      }
-    };
-  }
+
   getphoto() {
     if(this.formUser.get('photo').valid){
       this.photoSatus = true;
@@ -225,10 +202,8 @@ export class ProspectoComponent implements OnInit {
       this.validatelastname_mother();
       this.validatelastname_father();
       this.validateName();
-      this.getconfirmPassword();
-      this.getpassword();
-      this.getconfirmEmail();
-      this.getemail();
+     
+   
 
     }
     
@@ -243,87 +218,9 @@ export class ProspectoComponent implements OnInit {
     this.modalService.open(centerDataModal, { centered: true });
   }
 
-  getpassword() {
-    if( this.formUser.get('password').valid){
-      this.render.removeClass(this.password.nativeElement,"is-invalid");
-        this.render.addClass(this.password.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.password.nativeElement,"is-valid");
-      this.render.addClass(this.password.nativeElement,"is-invalid");
-      this.password.nativeElement.focus()
+ 
 
-     }
-    this.getpasworddnotfocus();
-  }
-
-  getpasworddnotfocus(){
-    if( this.formUser.get('confirmPassword').valid){
-      this.render.removeClass(this.confirmPassword.nativeElement,"is-invalid");
-        this.render.addClass(this.confirmPassword.nativeElement,"is-valid");
-        this.confirmPaswordAlert = false;        
-     }else{
-      this.render.removeClass(this.confirmPassword.nativeElement,"is-valid");
-      this.render.addClass(this.confirmPassword.nativeElement,"is-invalid");
-      this.confirmPaswordAlert = true;
-
-     }
-  }
-  getconfirmPassword() {
-    if( this.formUser.get('confirmPassword').valid){
-      this.render.removeClass(this.confirmPassword.nativeElement,"is-invalid");
-        this.render.addClass(this.confirmPassword.nativeElement,"is-valid");
-        this.confirmPaswordAlert = false;        
-     }else{
-      this.render.removeClass(this.confirmPassword.nativeElement,"is-valid");
-      this.render.addClass(this.confirmPassword.nativeElement,"is-invalid");
-      this.confirmPaswordAlert = true;
-      this.confirmPassword.nativeElement.focus()
-
-     }
-  }
-  getemail() {
-    //console.log(this.formParent.get('email').valid);
-    this.alertcorreo = true;
-   if(this.formUser.get('email').valid){
-    this.render.removeClass(this.email.nativeElement,"is-invalid");
-      this.render.addClass(this.email.nativeElement,"is-valid");
-      console.log('respyesta');
-      
-   }else{
-    this.render.removeClass(this.email.nativeElement,"is-valid");
-    this.render.addClass(this.email.nativeElement,"is-invalid");
-    this.email.nativeElement.focus()
-
-   }
-   this.getconfirmEmailChanceEmail();
-  }
-
-  getconfirmEmailChanceEmail(){
-    if( this.formUser.get('confirmEmail').valid){
-      this.render.removeClass(this.emailConfir.nativeElement,"is-invalid");
-        this.render.addClass(this.emailConfir.nativeElement,"is-valid");
-        this.confirmEmailAlert = false;        
-     }else{
-      this.render.removeClass(this.emailConfir.nativeElement,"is-valid");
-      this.render.addClass(this.emailConfir.nativeElement,"is-invalid");
-      this.confirmEmailAlert = true;
-
-     }
-
-  }
-  getconfirmEmail() {
-    if( this.formUser.get('confirmEmail').valid){
-      this.render.removeClass(this.emailConfir.nativeElement,"is-invalid");
-        this.render.addClass(this.emailConfir.nativeElement,"is-valid");
-        this.confirmEmailAlert = false;        
-     }else{
-      this.render.removeClass(this.emailConfir.nativeElement,"is-valid");
-      this.render.addClass(this.emailConfir.nativeElement,"is-invalid");
-      this.confirmEmailAlert = true;
-      this.emailConfir.nativeElement.focus()
-
-     }
-    }
+ 
   validateName(): void {
     this.validateFormField(this.name,'name');
   }
@@ -398,5 +295,6 @@ export class ProspectoComponent implements OnInit {
 
     
   }
+
 
 }

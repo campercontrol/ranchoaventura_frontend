@@ -52,6 +52,7 @@ import { StaffrolesComponent } from '../component/catalogos/staffroles/staffrole
 import { CampercommentComponent } from '../component/admi/campercomment/campercomment.component';
 import { PerfilStaffComponent } from '../component/perfil-staff/perfil-staff.component';
 import { TrainingEventComponent } from '../component/training-event/training-event.component';
+import { UpdateStaffComponent } from '../component/update-staff/update-staff.component';
 
 const routes: Routes = [
   
@@ -90,6 +91,7 @@ const routes: Routes = [
   {path: 'mailing', component: GmailingComponent},
   {path: 'shop', component: TienditaComponent},
   {path: 'payments', component: PagosComponent},
+  {path: 'staff/update',component:UpdateStaffComponent},
 
 
 
@@ -127,7 +129,7 @@ const routes: Routes = [
 
   {path: 'staff/checkpoint/:id',component:PuntoControlComponent},
   {path: 'staff/camps',component: MisCampamentosComponent},
-  {path:'staff/register', component:ProspectoComponent},
+  //{path:'staff/register', component:ProspectoComponent},
   
 
 

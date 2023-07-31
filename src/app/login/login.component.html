@@ -23,8 +23,13 @@
                                 <h2 class="text-primary">Bienvenido!</h2>
                                 
                             </div>
+                            
+                           
   
                             <div class="mt-5">
+                                <div class="alert alert-danger" role="alert" *ngIf="errologin">
+                                    Usuario o password incorrecto.
+                                  </div>
                                 <form [formGroup]="loginForm">
   
                                     <div class="mb-3 mt-4">

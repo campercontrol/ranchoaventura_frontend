@@ -31,6 +31,12 @@ export class CamperService {
     
     return this.http.post('http://142.93.12.234:8000/photo/upload_image',info)
    }
+   setpdf(info:any):Observable<any>{
+    
+    //console.log(info);
+    
+    return this.http.post('http://142.93.12.234:8000/staff/upload_cv',info)
+   }
 
    getCamper(id:any):Observable<any>{
     return this.http.get('http://142.93.12.234:8000/camper_complete/'+id+'/es')

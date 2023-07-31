@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
   submitted = false;
   error = '';
   returnUrl: string;
-  passwordType= "password"
+  passwordType= "password";
+  errologin = false;
 
   // set the currenr year
   year: number = new Date().getFullYear();
@@ -37,11 +38,15 @@ export class LoginComponent implements OnInit {
   login(event:Event) {
     this.submitted = true;
       this.authenticationService.login(this.f.email.value, this.f.password.value).then((res:any)=>{
-
-      },error=>{
-        event.preventDefault()
-        console.log(error);
+        this.errologin = false;
+        // console.log(res.type);
+         
+       
         
+      }).catch((error:any)=>{
+        //console.log(res);
+        throw new Error("oh, no!");
+
       });
         
     //  event.preventDefault();
