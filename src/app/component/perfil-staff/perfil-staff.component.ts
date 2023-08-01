@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CamperService } from 'src/services/camper.service';
 import { CatalogosService } from 'src/services/catalogos.service';
 import { ParentService } from 'src/services/parent.service';
@@ -35,7 +36,7 @@ export class PerfilStaffComponent implements OnInit {
   comment:any ="";
   historialCaps:any = [];
 
-  constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private staff: StaffService,private parents : ParentService, private rou:Router,private catalogos: CatalogosService) { }
+  constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private staff: StaffService,private parents : ParentService, private rou:Router,private catalogos: CatalogosService, private info:AuthenticationService) { }
 
   ngOnInit(): void {
     this.routesA.params.subscribe((params) => {
@@ -44,26 +45,7 @@ export class PerfilStaffComponent implements OnInit {
     this.getInfo()
   }
 
-  comentario() {
-    let a = {
-      "comment": this.comment,
-      "is_public": true,
-      "show_to": 1,
-      "user_id": 1,
-      "camp_id": 2,
-      "camper_id": this.id,     
-    }
-    this.parents.setComentarios(a).subscribe((res:any)=>{
-      console.log(res.data);
-      
-      if(res.data){
-        this.getInfo()
-        this.comment = ""
-
-      }
-    })
-
-  }
+ 
 
 
   calculateAge(birthday: any) {
@@ -116,6 +98,26 @@ export class PerfilStaffComponent implements OnInit {
   }
   linkPerfil(id = 1){
     this.rou.navigate(['/parents/inscription/'+id]);
+
+  }
+  comentario() {
+    let a = {
+      "comment": this.comment,
+      "is_public": true,
+      "show_to": 1,
+      "user_id": this.info.infToken.user_id,
+      "camp_id": 2,
+      "camper_id": this.id,     
+    }
+    this.parents.setComentarios(a).subscribe((res:any)=>{
+      console.log(res.data);
+      
+      if(res.data){
+        this.getInfo()
+        this.comment = ""
+
+      }
+    })
 
   }
 }
