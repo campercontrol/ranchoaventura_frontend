@@ -168,6 +168,251 @@
 
 
                 </div>
+
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="container-footer-parents">
+                            <img src="assets/images/camp/datos-medico.png" class="avatar-lg" alt="madre y padres">
+                            <h4 class="ms-3">Datos Médicos Generales</h4>
+                        </div>
+                        <div class="mt-5">
+                           
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Tipo de
+                                    sangre*</label>
+                                <div class="control-label col-sm-9">
+                                    <select name="school_id" id="school_id" formControlName="blood_type" (change)="getblood_type()" class="form-control" #blood_type>
+                                        <option *ngFor="let item of blood_types" [value]="item.id" >
+                                            {{item.value}}
+                                        </option>
+                                    </select>
+                                   
+
+                                    <small>En caso de no conocer el tipo de sangre, escribe NO RECUERDO
+                                    </small>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-4">
+
+                                <label for="" class="col-sm-6 col-form-label">
+                                    Vacuna que
+                                    tiene:</label>
+                                <div class="container-genero">
+                                    <div class="mb-3">
+    
+    
+                                        <div class="form-check form-check-inline" *ngFor="let item of vaccines;index as i">
+                                            <input (click)="vaccinesValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions"
+                                                id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}"
+                                                >
+                                            <label class="form-check-label" for="inlineRadio1">{{item.name}}</label>
+                                        </div>
+    
+    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container-medico mt-5">
+                                <h3>Enfermedades que padece*</h3>
+                                <textarea
+                                    placeholder="En caso de NO padecer alguna enfermedad, teclea la palabra NINGUNO"
+                                    name="" id="" cols="90" rows="10"
+                                    formControlName = "affliction"
+                                    class="form-control"
+                                    (input)="getaffliction()"
+                                     #affliction></textarea>
+                            </div>
+                            <div class="container-medico mt-5" placement="top"
+                            ngbTooltip="Si no requiere de tratamiento médico, teclea la palabra NINGUNO">
+                            <h3>Alergias a medicamentos*</h3>
+                            <textarea
+                                placeholder="En caso de que el acampador no sea alérgico a algún medicamento, teclea la palabra NINGUNO"
+                                name="" id="" cols="90" rows="10"
+                                formControlName = "drug_allergies"
+                                class="form-control"
+                                (input)="getdrug_allergies()"
+                                 #drug_allergies></textarea>
+                                
+
+                            </div>
+                            <div class="container-medico mt-5" placement="top"
+                            ngbTooltip="Si no requiere de tratamiento médico, teclea la palabra NINGUNO">
+                            <h3>Otras Alergias*</h3>
+                            <textarea
+                                placeholder="En caso de que el acampador no sea alérgico, teclea la palabra NINGUNA"
+                                name="" id="" cols="90" rows="10"
+                                formControlName = "other_allergies"
+                                class="form-control"
+                                (input)="getother_allergies()"
+                                 #other_allergies></textarea>
+                                <div class="alert alert-danger mt-2" role="alert" *ngIf="other_allergies.invalid">
+                                                                             Campo requerido
+                                  </div>
+
+
+                            </div>
+                            <div class="container-medico mt-5">
+                                <h3>Alteraciones nocturnas*</h3>
+                                <textarea
+                                    placeholder="En caso de que el acampador no padezca de alteraciones nocturnas, teclea la palabra NINGUNA"
+                                    name="" id="" cols="90" rows="10"
+                                    formControlName="nocturnal_disorders"
+                                    class="form-control"
+                                    (input)="getnocturnal_disorders()"
+                                     #nocturnal_disorders></textarea>
+                                 
+
+                            </div>
+                            <div class="container-medico mt-5">
+                                <h3>Fobias o miedos*</h3>
+                                <textarea
+                                    placeholder="En caso de que el acampador no padezca de fobias, teclea la palabra NINGUNO"
+                                    name="" id="" cols="90" rows="10"
+                                    formControlName="phobias"
+                                    class="form-control"
+                                    (input)="getphobias()"
+                                     #phobias></textarea>
+                                   
+
+                            </div>
+                            <div class="container-medico mt-5" placement="top"
+                            ngbTooltip="Si no requiere de tratamiento médico, teclea la palabra NINGUNO">
+                            <h3>Durante el camp, ¿Estará tomando algún medicamento?*</h3>
+                            <textarea
+                                placeholder="Especificar dosis y horarios para la toma de medicamentos en tal caso de no necitar poner NINGUNO"
+                                name="" id="" cols="90" rows="10"
+                                formControlName = "drugs"
+                                class="form-control"
+                                (input)="getdrugs()"
+                                 #drugs></textarea>
+                                <div class="alert alert-danger mt-2" role="alert" *ngIf="drugs.invalid">
+                                                                             Campo requerido
+                                  </div>
+
+                        </div>
+
+                           
+                        </div>
+                    </div>
+
+                   
+
+
+                </div>
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="container-footer-parents">
+                            <img src="assets/images/camp/chef.png" class="avatar-lg" alt="madre y padres">
+                            <h4 class="ms-3"> Alimentación
+                            </h4>
+                        </div>
+
+
+                        <div class="mt-5">
+                            <label for="" class="col-sm-6 col-form-label">
+                                Alimentación:</label>
+                            <div class="container-genero">
+                                <div class="mb-3">
+
+
+                                    <div class="form-check form-check-inline" *ngFor="let item of food_restrictions;index as i">
+                                        <input (click)="food_restrictionsValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions" [checked]="item.is_active"
+                                            id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}"
+                                            >
+                                        <label class="form-check-label" for="inlineRadio1">{{item.name}}</label>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="container-medico mt-5">
+                                <h3>Comida prohibida*</h3>
+                                <textarea
+                                    placeholder="En caso de que el acampador pueda comer cualquier tipo de comida, teclea la palabra NINGUNA"
+                                    name="" id="" cols="90" rows="10"
+                                    formControlName ="prohibited_foods"
+                                    class="form-control"
+                                    (input)="getprohibited_foods()"
+                                     #prohibited_foods></textarea>
+
+                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="prohibited_foods.invalid">
+                                                                                 Campo requerido
+                                      </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                 <div class="card">
+
+                    <div class="card-body">
+                        <div class="container-footer-parents">
+                            <img src="assets/images/camp/bombero.png" class="avatar-lg" alt="madre y padres">
+                            <h4 class="ms-3"> Contacto de emergencia
+                            </h4>
+                        </div>
+
+                        <div class="alert alert-success mt-3">
+                            En caso de emergencia y NO PODER CONTACTAR A LOS PADRES, registra los datos de una tercera
+                            persona.
+                        </div>
+
+
+                        <div class="mt-5">
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label"> Nombre de
+                                    contacto*
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id=""
+                                    formControlName = "contact_name"  #contact_name (input)="getcontact_name()"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label"> Parentesco de
+                                    contacto* </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id=""
+                                    formControlName = "contact_relation" #contact_relation (input)="getcontact_relation()"
+                                    >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Teléfono movil
+                                    de
+                                    contacto* </label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id=""
+                                    formControlName = "contact_cellphone"  #contact_cellphone (input)="getcontact_cellphone()"
+                                    >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Teléfono de casa
+                                    de
+                                    contacto*</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="" formControlName ="contact_homephone"
+                                    #contact_homephone (input)="getcontact_homephone()"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
                 <div>
                     <div class="card col-12">
                         <div>
@@ -185,9 +430,7 @@
                                     </label>
 
                                 </div>
-                                <div class="alert alert-danger" role="alert" *ngIf="erroA">
-                                    No se pudo registrar como prospecto intentalo de nuevo
-                                </div>
+                               
                                 <div class="btn-footer mt-5">
                                     <button class="btn btn-secondary w-lg btn-lg">Cancelar</button>
                                     <div class="btn-footer">

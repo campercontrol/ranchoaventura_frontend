@@ -61,7 +61,20 @@ export class UpdateStaffComponent implements OnInit {
   @ViewChild("password") password: ElementRef;
   @ViewChild("emailConfir") emailConfir: ElementRef;
   @ViewChild("confirmPassword") confirmPassword: ElementRef;
-  @ViewChild("facebook") facebook: ElementRef;
+  @ViewChild("facebook") facebook: ElementRef; 
+  @ViewChild("blood_type") blood_type: ElementRef; 
+  @ViewChild("affliction") affliction: ElementRef;   
+  @ViewChild("drug_allergies") drug_allergies: ElementRef;   
+  @ViewChild("other_allergies") other_allergies: ElementRef;  
+  @ViewChild("nocturnal_disorders") nocturnal_disorders: ElementRef;
+  @ViewChild("phobias") phobias: ElementRef;
+  @ViewChild("phobias") drugs: ElementRef; 
+  @ViewChild("prohibited_foods") prohibited_foods: ElementRef; 
+  @ViewChild("contact_name") contact_name: ElementRef; 
+  @ViewChild("contact_relation") contact_relation: ElementRef; 
+  @ViewChild("contact_cellphone") contact_cellphone: ElementRef;  
+  @ViewChild("contact_homephone") contact_homephone: ElementRef; 
+
   filetemp:any ={};
   cvSatus= false;
 
@@ -258,6 +271,52 @@ export class UpdateStaffComponent implements OnInit {
   validateFace(): void {
     this.validateFormField(this.facebook,'facebook');
   }
+  getdrug_allergies() {
+    if( this.formUser.get('drug_allergies').valid){
+      this.render.removeClass(this.drug_allergies.nativeElement,"is-invalid");
+      this.render.addClass(this.drug_allergies.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.drug_allergies.nativeElement,"is-valid");
+    this.render.addClass(this.drug_allergies.nativeElement,"is-invalid");
+    this.drug_allergies.nativeElement.focus()
+
+   }
+  
+  }
+  getother_allergies() {
+    if( this.formUser.get('other_allergies').valid){
+      this.render.removeClass(this.other_allergies.nativeElement,"is-invalid");
+      this.render.addClass(this.other_allergies.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.other_allergies.nativeElement,"is-valid");
+    this.render.addClass(this.other_allergies.nativeElement,"is-invalid");
+    this.other_allergies.nativeElement.focus()
+
+   }
+  }
+  
+  getnocturnal_disorders() {
+    if( this.formUser.get('nocturnal_disorders').valid){
+      this.render.removeClass(this.nocturnal_disorders.nativeElement,"is-invalid");
+      this.render.addClass(this.nocturnal_disorders.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.nocturnal_disorders.nativeElement,"is-valid");
+    this.render.addClass(this.nocturnal_disorders.nativeElement,"is-invalid");
+    this.nocturnal_disorders.nativeElement.focus()
+
+   }
+  }
+  getphobias() {
+    if( this.formUser.get('phobias').valid){
+      this.render.removeClass(this.phobias.nativeElement,"is-invalid");
+      this.render.addClass(this.phobias.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.phobias.nativeElement,"is-valid");
+    this.render.addClass(this.phobias.nativeElement,"is-invalid");
+    this.phobias.nativeElement.focus()
+
+   }
+  }
   
  
   validateFormField(elementRef: any,name): void {
@@ -269,6 +328,73 @@ export class UpdateStaffComponent implements OnInit {
       this.render.addClass(elementRef.nativeElement, "is-invalid");
       elementRef.nativeElement.focus();
     }
+  }
+  getblood_type() {
+    if( this.formUser.get('blood_type').valid){
+      this.render.removeClass(this.blood_type.nativeElement,"is-invalid");
+      this.render.addClass(this.blood_type.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.blood_type.nativeElement,"is-valid");
+    this.render.addClass(this.blood_type.nativeElement,"is-invalid");
+    this.blood_type.nativeElement.focus()
+
+   }
+  }
+  getaffliction() {
+    if( this.formUser.get('affliction').valid){
+      this.render.removeClass(this.affliction.nativeElement,"is-invalid");
+      this.render.addClass(this.affliction.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.affliction.nativeElement,"is-valid");
+    this.render.addClass(this.affliction.nativeElement,"is-invalid");
+    this.affliction.nativeElement.focus()
+
+   }
+  }
+  getdrugs() {
+    if( this.formUser.get('drugs').valid){
+      this.render.removeClass(this.drugs.nativeElement,"is-invalid");
+      this.render.addClass(this.drugs.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.drugs.nativeElement,"is-valid");
+    this.render.addClass(this.drugs.nativeElement,"is-invalid");
+    this.drugs.nativeElement.focus()
+
+   }
+  }
+  getprohibited_foods() {
+    if( this.formUser.get('prohibited_foods').valid){
+      this.render.removeClass(this.prohibited_foods.nativeElement,"is-invalid");
+      this.render.addClass(this.prohibited_foods.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.prohibited_foods.nativeElement,"is-valid");
+    this.render.addClass(this.prohibited_foods.nativeElement,"is-invalid");
+    this.prohibited_foods.nativeElement.focus()
+
+   }
+   
+  }
+  getcontact_cellphone() {
+    if( this.formUser.get('contact_cellphone').valid){
+      this.render.removeClass(this.contact_cellphone.nativeElement,"is-invalid");
+      this.render.addClass(this.contact_cellphone.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.contact_cellphone.nativeElement,"is-valid");
+    this.render.addClass(this.contact_cellphone.nativeElement,"is-invalid");
+    this.contact_cellphone.nativeElement.focus()
+
+   }
+  }
+  getcontact_name(){
+    if( this.formUser.get('contact_name').valid){
+      this.render.removeClass(this.contact_name.nativeElement,"is-invalid");
+        this.render.addClass(this.contact_name.nativeElement,"is-valid");
+     }else{
+      this.render.removeClass(this.contact_name.nativeElement,"is-valid");
+      this.render.addClass(this.contact_name.nativeElement,"is-invalid");
+      this.contact_name.nativeElement.focus()
+
+     }
   }
 
   subiendoPdf(event: any) {
@@ -294,6 +420,35 @@ export class UpdateStaffComponent implements OnInit {
         })
 
     
+  }
+  vaccinesValu(i:any){
+    this.vaccines[i].is_active =! this.vaccines[i].is_active;
+  }
+  food_restrictionsValu(i:any){
+    this.food_restrictions[i].is_active =! this.food_restrictions[i].is_active;
+  }
+
+  getcontact_relation() {
+    if( this.formUser.get('contact_relation').valid){
+      this.render.removeClass(this.contact_relation.nativeElement,"is-invalid");
+      this.render.addClass(this.contact_relation.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.contact_relation.nativeElement,"is-valid");
+    this.render.addClass(this.contact_relation.nativeElement,"is-invalid");
+    this.contact_relation.nativeElement.focus()
+
+   }
+  }
+  getcontact_homephone() {
+    if( this.formUser.get('contact_homephone').valid){
+      this.render.removeClass(this.contact_homephone.nativeElement,"is-invalid");
+      this.render.addClass(this.contact_homephone.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.contact_homephone.nativeElement,"is-valid");
+    this.render.addClass(this.contact_homephone.nativeElement,"is-invalid");
+    this.contact_homephone.nativeElement.focus()
+
+   }
   }
 
 
