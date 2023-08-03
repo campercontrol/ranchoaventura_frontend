@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CamperService } from 'src/services/camper.service';
 import { StaffService } from 'src/services/staff.service';
 @Component({
@@ -68,7 +69,7 @@ export class UpdateStaffComponent implements OnInit {
   @ViewChild("other_allergies") other_allergies: ElementRef;  
   @ViewChild("nocturnal_disorders") nocturnal_disorders: ElementRef;
   @ViewChild("phobias") phobias: ElementRef;
-  @ViewChild("phobias") drugs: ElementRef; 
+  @ViewChild("drugs") drugs: ElementRef; 
   @ViewChild("prohibited_foods") prohibited_foods: ElementRef; 
   @ViewChild("contact_name") contact_name: ElementRef; 
   @ViewChild("contact_relation") contact_relation: ElementRef; 
@@ -82,17 +83,29 @@ export class UpdateStaffComponent implements OnInit {
 
 
 
-  constructor(private catalogos: CamperService, private formGrup: FormBuilder, private router: Router,private staff: StaffService,private modalService: NgbModal,private render :Renderer2) { }
+  constructor(private catalogos: CamperService, private formGrup: FormBuilder, private router: Router,private staff: StaffService,private modalService: NgbModal,private render :Renderer2, private info : AuthenticationService) { }
 
   ngOnInit(): void {
     this.formUser = this.formGrup.group({
-    //  password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]],
-    //  confirmPassword: ['', [Validators.required]],
-   //   email: ['', [Validators.required, Validators.email]],
-   //   confirmEmail: ['', [Validators.required,Validators.email]],
-      name: ["", [Validators.required]],
+      other_allergies: ["", [Validators.required,Validators.minLength(2)]],
+      staff_contact_cellphone:["", [Validators.required,Validators.pattern("^[0-9]*$"), Validators.minLength(8)]],
+      nocturnal_disorders: ["", [Validators.required,Validators.minLength(2)]],
+      "employee_email_send": false,  
+      phobias: ["", [Validators.required,Validators.minLength(2)]],
+      drugs:["", [Validators.required,Validators.minLength(2)]],
+      "record_id": 1, // por detras se parsea
+      affliction: ["", [Validators.required,Validators.minLength(2)]],
+      prohibited_foods: ["", [Validators.required,Validators.minLength(2)]],
+      staff_contact_name: ["", [Validators.required,Validators.minLength(2)]],
+      "season_id": 1,   // por detras se parseas  
+      blood_type: [0, [Validators.required,Validators.min(1)]],   // sangre 
+      staff_contact_relation: ["", [Validators.required,Validators.minLength(2)]],
+      drug_allergies: ["", [Validators.required,Validators.minLength(2)]],
+      staff_contact_homephone:["", [Validators.required,Validators.pattern("^[0-9]*$"), Validators.minLength(8)]], 
+      name: ["", [Validators.required,Validators.minLength(2)]],
+      rfc: ["", [Validators.required,Validators.minLength(2)]],
       lastname_father: ["", [Validators.required]],
-      lastname_mother: ["",],
+      lastname_mother: [""],
       photo: ["",[Validators.required]],
       birthday: ["",[Validators.required]], //fecha de nacimiento
       curp: ["",[Validators.required]],
@@ -101,11 +114,59 @@ export class UpdateStaffComponent implements OnInit {
       home_phone: ["", [Validators.required,Validators.pattern("^[0-9]*$"), Validators.minLength(8)]],
       cellphone: ["", [Validators.required, Validators.pattern("^[0-9]*$"),Validators.minLength(8)]],
       cv: ["", [Validators.required]],
-      gender_id:[0],
+      gender_id:[0, [Validators.required,Validators.min(1)]],
+      employee:[false,],
 
-      login_id:[0],
+      
       coordinator:[false],
       terms: ["", [Validators.required, Validators.requiredTrue]],
+    })
+    this.getPerfil();
+  }
+
+  getPerfil(){
+    
+    
+    this.staff.infoPerfil(this.info.infToken.profile_id).subscribe((res:any)=>{
+      console.log(res);
+      this.vaccines = res.vaccines;
+      this.food_restrictions = res.food_restrictions;
+      this.blood_types = res.blood_types;
+      let staff = res.staff
+        this.photoSelect = staff.photo;
+        this.formUser.patchValue({
+          other_allergies: staff.other_allergies,
+          staff_contact_cellphone:staff.staff_contact_cellphone,
+          nocturnal_disorders: staff.nocturnal_disorders,
+     
+          phobias:staff.phobias,
+          drugs:staff.drugs,
+       
+          affliction:staff.affliction,
+          prohibited_foods:staff.prohibited_foods,
+          staff_contact_name: staff.staff_contact_name,
+         // por detras se parseas  
+          blood_type:staff.blood_type,// sangre 
+          staff_contact_relation: staff.staff_contact_relation,
+          drug_allergies: staff.drug_allergies,
+          staff_contact_homephone:staff.staff_contact_homephone, 
+          name: staff.name,
+          rfc: staff.rfc,
+          lastname_father:staff.lastname_father,
+          lastname_mother: staff.lastname_mother,
+          photo: staff.photo,
+          birthday: staff.birthday,//fecha de nacimiento
+          curp:staff.curp,
+          bio: staff.bio,// biografia
+          facebook: staff.facebook,
+          home_phone:staff.home_phone,
+          cellphone:staff.cellphone,
+          cv:staff.cv,
+          gender_id:staff.gender_id,
+          employee:staff.employee,        
+          coordinator:staff,
+
+        })
     })
   }
 
@@ -165,32 +226,17 @@ export class UpdateStaffComponent implements OnInit {
   
    // console.log(this.formUser.value);
     let a = {
-      "user": {
-        email:this.formUser.get('email').value,
-        passw: this.formUser.get('password').value,
-        role_id: 2,
-        is_coordinator: false,
-        is_admin: false,
-        is_employee: false,
-        is_superuser:false
-      },
-      "prospect":this.formUser.value
+      "staff":this.formUser.value,
+      "vaccines":this.vaccines,
+      "food_restrictions":this.food_restrictions
       
     }
     if(this.formUser.valid){
-      this.staff.prospectos(a).subscribe((res:any)=>{
-        console.log(res);
+      this.staff.editStaff(a,this.info.infToken.profile_id).subscribe((res:any)=>{
+        this.spinner = false;
         
-        this.spinner=false;
-        this.centerModal();
-        this.formUser.reset();
-        this.contrasena="";
-        this.correo="";
-        this.confirmarCorreo="";
-        this.confirmarContrasena=""
-        this.estadoCorreo=false;
-        this.estadoContrasena=false;
-        this.router.navigate(['/login']);
+    
+       
 
       },error=>{
         this.erroA=true;
@@ -204,6 +250,18 @@ export class UpdateStaffComponent implements OnInit {
 
     }else{
       this.spinner=false;
+      this.getcontact_homephone();
+      this.getcontact_cellphone();
+      this.getcontact_relation();
+      this.getcontact_name();
+      this.getprohibited_foods();
+      this.getdrugs();
+      this.getphobias();
+      this.getnocturnal_disorders();
+      this.getother_allergies();
+      this.getdrug_allergies();
+      this.getaffliction();
+      this.getblood_type();
       this.validateFace();
       this.validatecellphone();
       this.validatehome_phone();
@@ -375,7 +433,7 @@ export class UpdateStaffComponent implements OnInit {
    
   }
   getcontact_cellphone() {
-    if( this.formUser.get('contact_cellphone').valid){
+    if( this.formUser.get('staff_contact_cellphone').valid){
       this.render.removeClass(this.contact_cellphone.nativeElement,"is-invalid");
       this.render.addClass(this.contact_cellphone.nativeElement,"is-valid");
    }else{
@@ -386,7 +444,7 @@ export class UpdateStaffComponent implements OnInit {
    }
   }
   getcontact_name(){
-    if( this.formUser.get('contact_name').valid){
+    if( this.formUser.get('staff_contact_name').valid){
       this.render.removeClass(this.contact_name.nativeElement,"is-invalid");
         this.render.addClass(this.contact_name.nativeElement,"is-valid");
      }else{
@@ -429,7 +487,7 @@ export class UpdateStaffComponent implements OnInit {
   }
 
   getcontact_relation() {
-    if( this.formUser.get('contact_relation').valid){
+    if( this.formUser.get('staff_contact_relation').valid){
       this.render.removeClass(this.contact_relation.nativeElement,"is-invalid");
       this.render.addClass(this.contact_relation.nativeElement,"is-valid");
    }else{
@@ -440,7 +498,7 @@ export class UpdateStaffComponent implements OnInit {
    }
   }
   getcontact_homephone() {
-    if( this.formUser.get('contact_homephone').valid){
+    if( this.formUser.get('staff_contact_homephone').valid){
       this.render.removeClass(this.contact_homephone.nativeElement,"is-invalid");
       this.render.addClass(this.contact_homephone.nativeElement,"is-valid");
    }else{
@@ -450,6 +508,7 @@ export class UpdateStaffComponent implements OnInit {
 
    }
   }
+
 
 
 }

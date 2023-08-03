@@ -102,7 +102,7 @@ const routes: Routes = [
   {path: 'staff/trainings-card', component: ListaCapacitacionesComponent},
 
   {path: 'staff/applicants',component:ListaProspectosComponent},
-  {path: 'staff/dashboard',component:DashbordStaffComponent},
+  {path: 'staff',component:DashbordStaffComponent},
   {path: 'staff/checkpoint',component:ListaPuntosControlComponent},
   
 //Catalogos

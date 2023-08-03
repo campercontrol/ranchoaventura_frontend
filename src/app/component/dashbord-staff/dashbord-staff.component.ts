@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CampsService } from 'src/services/camps.service';
 import { StaffService } from 'src/services/staff.service';
 
@@ -24,7 +25,7 @@ export class DashbordStaffComponent implements OnInit {
   aCamp:any = [];// apuntado a camps
   ICamp:any = []; // confirmacion de camps
 
-  constructor(private camps: CampsService, private staff:StaffService) {
+  constructor(private camps: CampsService, private staff:StaffService, private info : AuthenticationService) {
     this.getCamps();
    }
 
@@ -33,7 +34,9 @@ export class DashbordStaffComponent implements OnInit {
 
   getCamps(){
     this.spiner=true
-    this.camps.getDashbord(23).subscribe((res:any)=>{
+    this.camps.getDashbord(this.info.infToken.profile_id).subscribe((res:any)=>{
+      console.log(res);
+      
       console.log(res.data);
       this.aCamp =res.data.next_camps;
       this.pCamp = res.data.available_camps;
@@ -55,7 +58,7 @@ export class DashbordStaffComponent implements OnInit {
     let idCamp = a;
     let b ={
       camp_id: idCamp,
-      staff_id:23
+      staff_id:this.info.infToken.profile_id
 
     }
     this.camps.inscribirCappStaff(b).subscribe((res:any)=>{

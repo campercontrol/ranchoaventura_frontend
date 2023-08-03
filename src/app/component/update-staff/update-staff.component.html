@@ -33,7 +33,7 @@
                                     materno</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="" formControlName="lastname_mother"
-                                        name="lastname_mother">
+                                        name="lastname_mother" #lastname_mother>
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -139,7 +139,7 @@
                                     <label for="" class="col-sm-3 col-form-label">Teléfono
                                         móvil*</label>
                                     <div class="col-sm-9">
-                                        <input type="txt" class="form-control" id="" formControlName="cellphone"
+                                        <input type="txt" class="form-control" id="" formControlName="cellphone" name="cellphone"
                                             (input)="validatecellphone()" #cellphone>
                                     </div>
                                 </div>
@@ -147,14 +147,14 @@
                                     <label for="" class="col-sm-3 col-form-label">Teléfono de
                                         casa*</label>
                                     <div class="col-sm-9">
-                                        <input type="txt" class="form-control" id="" formControlName="home_phone"
+                                        <input type="txt" class="form-control" id="" formControlName="home_phone" name="home_phone"
                                             (input)="validatehome_phone()" #home_phone>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
                                     <label for="" class="col-sm-3 col-form-label">Facebook*</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="" formControlName="facebook"
+                                        <input type="text" class="form-control" id="" formControlName="facebook" name="facebook"
                                             (input)="validateFace()" #facebook>
                                     </div>
                                 </div>
@@ -182,7 +182,7 @@
                                 <label for="" class="col-sm-3 col-form-label">Tipo de
                                     sangre*</label>
                                 <div class="control-label col-sm-9">
-                                    <select name="school_id" id="school_id" formControlName="blood_type" (change)="getblood_type()" class="form-control" #blood_type>
+                                    <select name="school_id" id="school_id" formControlName="blood_type" (change)="getblood_type()" class="form-control" name="blood_type" #blood_type>
                                         <option *ngFor="let item of blood_types" [value]="item.id" >
                                             {{item.value}}
                                         </option>
@@ -193,6 +193,7 @@
                                     </small>
                                 </div>
                             </div>
+                            <!--  tipode  sangre el de abrriba-->
                             
                             <div class="row mb-4">
 
@@ -214,6 +215,10 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <!-- vacuna-->
+
+
                             <div class="container-medico mt-5">
                                 <h3>Enfermedades que padece*</h3>
                                 <textarea
@@ -221,6 +226,7 @@
                                     name="" id="" cols="90" rows="10"
                                     formControlName = "affliction"
                                     class="form-control"
+                                    name="affliction"
                                     (input)="getaffliction()"
                                      #affliction></textarea>
                             </div>
@@ -229,8 +235,9 @@
                             <h3>Alergias a medicamentos*</h3>
                             <textarea
                                 placeholder="En caso de que el acampador no sea alérgico a algún medicamento, teclea la palabra NINGUNO"
-                                name="" id="" cols="90" rows="10"
+                                id="" cols="90" rows="10"
                                 formControlName = "drug_allergies"
+                                name="drug_allergies"
                                 class="form-control"
                                 (input)="getdrug_allergies()"
                                  #drug_allergies></textarea>
@@ -242,7 +249,7 @@
                             <h3>Otras Alergias*</h3>
                             <textarea
                                 placeholder="En caso de que el acampador no sea alérgico, teclea la palabra NINGUNA"
-                                name="" id="" cols="90" rows="10"
+                                name="other_allergies" id="" cols="90" rows="10"
                                 formControlName = "other_allergies"
                                 class="form-control"
                                 (input)="getother_allergies()"
@@ -257,7 +264,7 @@
                                 <h3>Alteraciones nocturnas*</h3>
                                 <textarea
                                     placeholder="En caso de que el acampador no padezca de alteraciones nocturnas, teclea la palabra NINGUNA"
-                                    name="" id="" cols="90" rows="10"
+                                    name="nocturnal_disorders" id="" cols="90" rows="10"
                                     formControlName="nocturnal_disorders"
                                     class="form-control"
                                     (input)="getnocturnal_disorders()"
@@ -269,7 +276,7 @@
                                 <h3>Fobias o miedos*</h3>
                                 <textarea
                                     placeholder="En caso de que el acampador no padezca de fobias, teclea la palabra NINGUNO"
-                                    name="" id="" cols="90" rows="10"
+                                    name="phobias" id="" cols="90" rows="10"
                                     formControlName="phobias"
                                     class="form-control"
                                     (input)="getphobias()"
@@ -282,7 +289,7 @@
                             <h3>Durante el camp, ¿Estará tomando algún medicamento?*</h3>
                             <textarea
                                 placeholder="Especificar dosis y horarios para la toma de medicamentos en tal caso de no necitar poner NINGUNO"
-                                name="" id="" cols="90" rows="10"
+                                name="drugs" id="" cols="90" rows="10"
                                 formControlName = "drugs"
                                 class="form-control"
                                 (input)="getdrugs()"
@@ -319,7 +326,7 @@
 
 
                                     <div class="form-check form-check-inline" *ngFor="let item of food_restrictions;index as i">
-                                        <input (click)="food_restrictionsValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions" [checked]="item.is_active"
+                                        <input (click)="food_restrictionsValu(i)" class="form-check-input" type="checkbox" name="sss" [checked]="item.is_active"
                                             id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}"
                                             >
                                         <label class="form-check-label" for="inlineRadio1">{{item.name}}</label>
@@ -334,7 +341,7 @@
                                 <h3>Comida prohibida*</h3>
                                 <textarea
                                     placeholder="En caso de que el acampador pueda comer cualquier tipo de comida, teclea la palabra NINGUNA"
-                                    name="" id="" cols="90" rows="10"
+                                    name="prohibited_foods" id="" cols="90" rows="10"
                                     formControlName ="prohibited_foods"
                                     class="form-control"
                                     (input)="getprohibited_foods()"
@@ -371,8 +378,8 @@
                                     contacto*
                                 </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id=""
-                                    formControlName = "contact_name"  #contact_name (input)="getcontact_name()"
+                                    <input type="text" class="form-control" id=""  name="staff_contact_name"
+                                    formControlName = "staff_contact_name"  #contact_name (input)="getcontact_name()"
                                     >
                                 </div>
                             </div>
@@ -381,8 +388,8 @@
                                 <label for="" class="col-sm-3 col-form-label"> Parentesco de
                                     contacto* </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id=""
-                                    formControlName = "contact_relation" #contact_relation (input)="getcontact_relation()"
+                                    <input type="text" class="form-control" id="" name="staff_contact_relation"
+                                    formControlName = "staff_contact_relation" #contact_relation (input)="getcontact_relation()"
                                     >
                                 </div>
                             </div>
@@ -391,8 +398,8 @@
                                     de
                                     contacto* </label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id=""
-                                    formControlName = "contact_cellphone"  #contact_cellphone (input)="getcontact_cellphone()"
+                                    <input type="text" class="form-control" id="" name="staff_contact_cellphone"
+                                    formControlName = "staff_contact_cellphone"  #contact_cellphone (input)="getcontact_cellphone()"
                                     >
                                 </div>
                             </div>
@@ -401,7 +408,7 @@
                                     de
                                     contacto*</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="" formControlName ="contact_homephone"
+                                    <input type="text" class="form-control" id="" formControlName ="staff_contact_homephone" name="staff_contact_homephone"
                                     #contact_homephone (input)="getcontact_homephone()"
                                     >
                                 </div>
@@ -436,7 +443,7 @@
                                     <div class="btn-footer">
                                         <div>
                                             <button class="btn btn-info w-lg btn-lg" 
-                                                *ngIf="!spinner">Guardar</button>
+                                                *ngIf="!spinner" (click)="prueba1()">Guardar</button>
                                             <div class="spinner-border" role="status" *ngIf="spinner">
                                                 <span class="visually-hidden">Loading...</span>
                                             </div>

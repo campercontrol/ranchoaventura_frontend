@@ -134,7 +134,7 @@ export class CamperNuevoComponent implements OnInit {
       contact_homephone: [0,[Validators.required,Validators.minLength(8)]],
       contact_cellphone: [0,[Validators.required,Validators.minLength(8)]],
       record_id: [0,],
-      parent_id: [this.info.infToken.user_id,[Validators.required]],
+      parent_id: [this.info.infToken.profile_id,[Validators.required]],
       terms: ["",[Validators.required,Validators.requiredTrue]],
     })
     

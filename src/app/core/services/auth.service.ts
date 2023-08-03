@@ -43,12 +43,18 @@ export class AuthenticationService {
               this.loggedIn = true;
               localStorage.setItem('currentUser', JSON.stringify(user));
               this.infToken = jwt_decode(user.access_token);
-              if(this.infToken.user_id>1){
-                this.router.navigate(['/staff/dashboard']);
-              }
-              this.router.navigate(['/dashboard']);
-           
+              console.log(this.infToken.role_id);
+              
+              if(this.infToken.role_id>1){
+                this.router.navigate(['dashboard/staff']);
                 console.log(this.infToken);
+
+              }else{
+                this.router.navigate(['dashboard']);
+                console.log(this.infToken);
+
+              }
+           
                 
               resolve(true);
           }),error =>{

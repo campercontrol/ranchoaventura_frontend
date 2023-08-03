@@ -83,7 +83,7 @@ export class PerfilCamperComponent implements OnInit {
       "comment": this.comment,
       "is_public": true,
       "show_to": 1,
-      "user_id": this.info.infToken.user_id,
+      "user_id": this.info.infToken.profile_id,
       "camp_id": 2,
       "camper_id": this.id,     
     }

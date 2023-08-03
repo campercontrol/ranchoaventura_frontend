@@ -29,7 +29,7 @@ export class RegisteredChildrenComponent implements OnInit {
   // Select2 Dropdown
   selectValue: string[];
   constructor(private modalService: NgbModal, private formBuilder: FormBuilder,private hijos:CamperService, private router:Router,private info: AuthenticationService) { 
-    this.hijos.getHijos(this.info.infToken.user_id).subscribe(
+    this.hijos.getHijos(this.info.infToken.profile_id).subscribe(
       (res:any)=>{
         console.log(res);
         this.hijosRes = res.campers;

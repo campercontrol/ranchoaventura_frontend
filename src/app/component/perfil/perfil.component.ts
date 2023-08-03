@@ -78,7 +78,7 @@ export class PerfilComponent implements OnInit {
   }
 
   getParent(){
-    this.parent.getParet(this.info.infToken.user_id ).subscribe(
+    this.parent.getParet(this.info.infToken.profile_id ).subscribe(
       (res:any)=>{
         console.log('respuestas',res);
         
@@ -108,7 +108,7 @@ export class PerfilComponent implements OnInit {
   send(){
     this.spinner = true;
     if(this.formParent.valid){
-      this.parent.partnPatch(this.info.infToken.user_id, this.formParent.value).subscribe((arg:any) =>{
+      this.parent.partnPatch(this.info.infToken.profile_id, this.formParent.value).subscribe((arg:any) =>{
         this.spinner = true;
         this.router.navigate(['dashboard'])
       });
