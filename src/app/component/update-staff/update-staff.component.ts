@@ -75,11 +75,13 @@ export class UpdateStaffComponent implements OnInit {
   @ViewChild("contact_relation") contact_relation: ElementRef; 
   @ViewChild("contact_cellphone") contact_cellphone: ElementRef;  
   @ViewChild("contact_homephone") contact_homephone: ElementRef; 
+  @ViewChild("rfc") rfc: ElementRef; 
+
 
   filetemp:any ={};
-  cvSatus= false;
+  cvSatus= true;
 
-  photoSatus = false;
+  photoSatus = true;
 
 
 
@@ -114,14 +116,15 @@ export class UpdateStaffComponent implements OnInit {
       home_phone: ["", [Validators.required,Validators.pattern("^[0-9]*$"), Validators.minLength(8)]],
       cellphone: ["", [Validators.required, Validators.pattern("^[0-9]*$"),Validators.minLength(8)]],
       cv: ["", [Validators.required]],
-      gender_id:[0, [Validators.required,Validators.min(1)]],
-      employee:[false,],
+      gender_id:[0],
+      employee:[true],
 
       
-      coordinator:[false],
+     
       terms: ["", [Validators.required, Validators.requiredTrue]],
     })
     this.getPerfil();
+   
   }
 
   getPerfil(){
@@ -133,7 +136,9 @@ export class UpdateStaffComponent implements OnInit {
       this.food_restrictions = res.food_restrictions;
       this.blood_types = res.blood_types;
       let staff = res.staff
-        this.photoSelect = staff.photo;
+        this.photoSelect = 'http://142.93.12.234:8000/'+staff.photo;
+        console.log(this.photoSelect);
+        
         this.formUser.patchValue({
           other_allergies: staff.other_allergies,
           staff_contact_cellphone:staff.staff_contact_cellphone,
@@ -164,10 +169,11 @@ export class UpdateStaffComponent implements OnInit {
           cv:staff.cv,
           gender_id:staff.gender_id,
           employee:staff.employee,        
-          coordinator:staff,
+          
 
         })
     })
+   
   }
 
   getphoto() {
@@ -191,6 +197,7 @@ export class UpdateStaffComponent implements OnInit {
       console.log('ere');
       const element:any = document.getElementById("cv");
       element.scrollIntoViewIfNeeded();
+      this.cvSatus = false;
 
     //  this.photoSatus= false;
     }
@@ -234,6 +241,8 @@ export class UpdateStaffComponent implements OnInit {
     if(this.formUser.valid){
       this.staff.editStaff(a,this.info.infToken.profile_id).subscribe((res:any)=>{
         this.spinner = false;
+        console.log(res);
+        
         
     
        
@@ -250,6 +259,8 @@ export class UpdateStaffComponent implements OnInit {
 
     }else{
       this.spinner=false;
+      console.log(this.formUser.validator);
+      
       this.getcontact_homephone();
       this.getcontact_cellphone();
       this.getcontact_relation();
@@ -269,6 +280,7 @@ export class UpdateStaffComponent implements OnInit {
       this.validatebio();
       this.getphoto();
       this.validatebirthday();
+      this.validatelastRFC();
       this.validatecurp();
       this.validatelastname_mother();
       this.validatelastname_father();
@@ -298,6 +310,10 @@ export class UpdateStaffComponent implements OnInit {
   
   validatelastname_father(): void {
     this.validateFormField(this.lastname_father,'lastname_father');
+  }
+
+  validatelastRFC(): void {
+    this.validateFormField(this.rfc,'rfc');
   }
   validatelastname_mother(): void {
     this.validateFormField(this.lastname_mother,'lastname_mother');

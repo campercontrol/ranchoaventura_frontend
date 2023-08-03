@@ -36,11 +36,15 @@ export class PerfilStaffComponent implements OnInit {
   comment:any ="";
   historialCaps:any = [];
 
-  constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private staff: StaffService,private parents : ParentService, private rou:Router,private catalogos: CatalogosService, private info:AuthenticationService) { }
+  constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private staff: StaffService,private parents : ParentService, private rou:Router,private catalogos: CatalogosService, private info:AuthenticationService,private router: Router) { }
 
   ngOnInit(): void {
     this.routesA.params.subscribe((params) => {
       this.id = params['id'];
+      if(!this.id){
+        this.id = this.info.infToken.profile_id;
+        
+      }
     })
     this.getInfo()
   }
@@ -64,34 +68,36 @@ export class PerfilStaffComponent implements OnInit {
   }
   // doctor_precall varibles
   getInfo(){
-    this.catalogos.getGener().subscribe((res:any)=>{
-      this.catalogosGenero = res.data
-    })
-    this.catalogos.getVaccine().subscribe((res:any)=>{
-      this.vacunas = res.data
-    })
-    this.staff.getPerfil(this.id).subscribe((res:any)=>{
-      this.infoCamp = res.data;
+
+    this.staff.infoPerfil(this.id).subscribe((res:any)=>{
+      console.log(res);
+      this.vacunas = res.vaccines
+      this.infoCamp = res.staff;
+      this.catalogoSangre = res.blood_types;
+      this.catalogosComida = res.food_restrictions
+
       this.infoCamp.birthdayA = this.calculateAge(this.infoCamp.birthday);
       console.log(this.infoCamp);
+      this.catalogoSangre.map((item: any) => {
+        if (item.id == this.infoCamp.blood_type) {
+          this.infoCamp.blood_type = item.value
+        }
+      })
+      this.vacunasACtivos = this.vacunas.filter(item => item.is_active == true);
+      this.catalogosComida = this.catalogosComida.filter(item => item.is_active == true);
+
+  
       
     });
-    this.catalogosGenero.map((item: any) => {
-      if (item.id == this.infoCamp.gender_id) {
-        this.infoCamp.gender_id = item.value
-      }
-    })
-    this.catalogoSangre.map((item: any) => {
-      if (item.id == this.infoCamp.blood_type) {
-        this.infoCamp.blood_type = item.value
-      }
-    })
-    this.vacunasACtivos = this.vacunas.filter(item => item.is_active == true);
-
+   
+ 
     
     
   }
+  update(){
+    this.router.navigate(['dashboard/staff/update'])
 
+  }
   link(id){
     this.rou.navigate(['parents/camp-info/1/'+id]);
 

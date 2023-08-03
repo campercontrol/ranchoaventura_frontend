@@ -62,34 +62,40 @@
 
         </li>
         <li *ngIf="staff">
+          
 
 
-          <a routerLink='staff/dashboard' class="side-nav-link-ref" routerLinkActive="active">
+          <a routerLink='staff' class="side-nav-link-ref" routerLinkActive="active" *ngIf="rol_id > 1">
             <i class="bx bxs-spreadsheet"></i>
             <span>Mis Campamentos</span>
 
           </a>
-          <a routerLink='staff/applicants' class="side-nav-link-ref">
+          <a routerLink='staff/perfil' class="side-nav-link-ref" routerLinkActive="active" *ngIf="rol_id > 1">
+            <i class="dripicons-user"></i>
+            <span>Mi perfil</span>
+
+          </a>
+          <a routerLink='staff/applicants' class="side-nav-link-ref" *ngIf="rol_id > 2">
             <i class="mdi  mdi-account-question"></i>
             <span>Prospectos</span>
 
           </a>
-          <a routerLink='staff/checkpoint' class="side-nav-link-ref">
+          <a routerLink='staff/checkpoint' class="side-nav-link-ref"  *ngIf="rol_id > 2">
             <i class="bx bx-barcode"></i>
             <span>Lista de puntos de control</span>
 
           </a>
-          <a routerLink='staff/trainings-events' class="side-nav-link-ref">
+          <a routerLink='staff/trainings-events' class="side-nav-link-ref"  *ngIf="rol_id > 2">
             <i class="bx bxs-graduation"></i>
             <span>Nueva capacitacion</span>
 
           </a>
-          <a routerLink='staff/trainings-dashboard' class="side-nav-link-ref">
+          <a routerLink='staff/trainings-dashboard' class="side-nav-link-ref"  *ngIf="rol_id > 2">
             <i class="bx bxs-calendar-plus"></i>
             <span>Nuevo evento</span>
 
           </a>
-          <a  class="side-nav-link-ref " routerLinkActive="active"
+          <a  class="side-nav-link-ref " routerLinkActive="active" *ngIf="rol_id > 2"
             (click)="catalogos = !catalogos">
             <div class="nav-d">
               <div>

@@ -81,6 +81,7 @@ const routes: Routes = [
 
   {path: 'staff/trophies',component:TrofeosComponent},
   {path: 'staff/perfil/:id',component:PerfilStaffComponent},
+  {path: 'staff/perfil',component:PerfilStaffComponent},
 
   {path: 'grouping/camp', component: AgregarAgrupacionComponent},
   {path: 'medical/care', component: MedicoComponent},

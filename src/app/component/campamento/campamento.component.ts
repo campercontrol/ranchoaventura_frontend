@@ -121,7 +121,7 @@ export class CampamentoComponent implements OnInit {
             "question": element.question,
             "is_required": true,
             "camper_id": this.idCamper,
-            "answer": 'element.answer'
+            "answer": element.answer
           
         }
         b = b.concat(a);

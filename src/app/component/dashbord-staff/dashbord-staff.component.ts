@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CampsService } from 'src/services/camps.service';
 import { StaffService } from 'src/services/staff.service';
@@ -24,8 +25,12 @@ export class DashbordStaffComponent implements OnInit {
   pCamp:any = [];// inscripcion cap
   aCamp:any = [];// apuntado a camps
   ICamp:any = []; // confirmacion de camps
+  complete_profile = false;
+  is_active = false;
+  is_employee = false;
+  alerts:boolean;
 
-  constructor(private camps: CampsService, private staff:StaffService, private info : AuthenticationService) {
+  constructor(private camps: CampsService, private staff:StaffService, private info : AuthenticationService,private router: Router) {
     this.getCamps();
    }
 
@@ -38,10 +43,23 @@ export class DashbordStaffComponent implements OnInit {
       console.log(res);
       
       console.log(res.data);
-      this.aCamp =res.data.next_camps;
-      this.pCamp = res.data.available_camps;
-      this.ICamp =  res.data.staff_camps;       
-      this.spiner= false;
+      if(res.data.complete_profile == undefined){
+
+        this.alerts = false;
+        this.aCamp =res.data.next_camps;
+        this.pCamp = res.data.available_camps;
+        this.ICamp =  res.data.staff_camps;       
+        this.spiner= false;
+      }else{
+        
+        this.spiner= false;
+        this.alerts = true;
+        this.is_active = res.data.is_active;
+        this.is_employee =  res.data.is_employee ;
+        this.complete_profile =  res.data.complete_profile ;
+
+      }
+    
     })
   }
 
@@ -66,6 +84,10 @@ export class DashbordStaffComponent implements OnInit {
           this.getCamps();
           
     })
+  }
+  
+  myPerfil(){
+    this.router.navigate(['dashboard/staff/update'])
   }
 
 }

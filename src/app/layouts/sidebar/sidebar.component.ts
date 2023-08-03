@@ -27,12 +27,17 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   paretn = true;
   staff= true;
   catalogos= false;
+  rol_id = 0;
+  rol = ''
 
   menuItems = [];
 
   @ViewChild('sideMenu') sideMenu: ElementRef;
 
   constructor(private eventService: EventService, private router: Router, public translate: TranslateService, private http: HttpClient,private info: AuthenticationService ) {
+  
+    this.rol_id =info.infToken.role_id; 
+
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this._activateMenuDropdown();

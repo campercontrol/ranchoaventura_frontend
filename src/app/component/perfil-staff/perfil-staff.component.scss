@@ -110,6 +110,10 @@ h3{
     
     width: auto;
 }
+.header{
+    display: flex;
+    justify-content: space-between;
+}
 
 
 @media (max-width:980) {

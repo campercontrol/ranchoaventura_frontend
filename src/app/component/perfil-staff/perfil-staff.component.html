@@ -44,7 +44,16 @@
     <div class="row">
         <div class="col-lg-7">
             <div class="card p-5">
-                <h4>Perfil del Staff </h4>
+                <div class="header">
+                    <div>
+                        <h4>Perfil del Staff </h4>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-sm"  (click)="update()">editar</button>
+                    </div>
+                </div>
+                
+            
                 <div class="row mt-4">
                     <div class="col-lg-12">
                         <div class="container-fluid">
@@ -64,8 +73,8 @@
                                 <p> <span class="fw-bold">Edad: </span> {{infoCamp.birthdayA}}</p>
                                 <p> <span class="fw-bold">RFC:</span> {{infoCamp.rfc}}</p>
                                 <p> <span class="fw-bold">CURP: </span> {{infoCamp.curp}}</p>
-                                <p> <span class="fw-bold"> Correo: </span>{{infoCamp.email}} // faltante del back</p>
-
+                             <!-- <p> <span class="fw-bold"> Correo: </span>{{infoCamp.email}} // faltante del back</p>
+ -->   
                             </div>
                             <hr>
                             <div class="row">
@@ -77,7 +86,7 @@
         
                                     <div class="container-fluid">
         
-                                        <p> <i class="bx bxs-envelope"></i>  {{infoCamp.email}} // falta del back</p>
+                                     <!--  <p> <i class="bx bxs-envelope"></i>  {{infoCamp.email}} // falta del back</p>-->  
                                         <p> <i class="bx bxl-whatsapp"></i>  {{infoCamp.staff_contact_cellphone}}</p>
                                         <p> <i class="bx bxs-contact"></i>  {{infoCamp.staff_contact_homephone}}</p>
                                         <p> <i class="bx bxl-facebook-square"></i>  {{infoCamp.facebook}}</p>   
@@ -137,8 +146,9 @@
                             </div>
 
                             <div class="container-fluid" style="margin-left: 20px;">
-                                <p> <i class="bx bxl-whatsapp"></i>  {{infoCamp.contact_cellphone}}</p>
-                                <p> <i class="bx bxs-city"></i>  {{infoCamp.contact_homephone}}</p>
+                                {{infoCamp.staff_contact_name}}
+                                <p> <i class="bx bxl-whatsapp"></i>  {{infoCamp.staff_contact_cellphone}}</p>
+                                <p> <i class="bx bxs-city"></i>  {{infoCamp.staff_contact_homephone}}</p>
 
 
                             </div>

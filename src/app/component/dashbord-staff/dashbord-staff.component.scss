@@ -46,6 +46,11 @@ td{
 .back-color{
     background-color: rgb(161, 161, 161);
 }
+small{
+    text-decoration: underline ;
+    cursor: pointer;
+    font-size: 15px;
+}
 
 @media (max-width: 750px) {
     .campamentos{
