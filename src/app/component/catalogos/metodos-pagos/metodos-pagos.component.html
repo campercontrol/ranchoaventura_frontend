@@ -1,0 +1,138 @@
+
+
+
+<div>
+
+    <div class="card border border-info border-1">
+        <div class="bg-info p-2">
+            <h1 class="card-title text-white">Lista de metodos de pago</h1>
+        </div>
+        <div class="card-body">
+        <div class="container-btn mt-1 mb-3">
+            <div>
+                <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
+                    <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar Metodo de pago</button>
+
+                </div>
+            </div>
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                placeholder="Global Search" />
+        </div>
+
+        <p-table #dt [value]="listcatalogos" [rows]="10"
+            [globalFilterFields]="['name','assigned_id']"
+            [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true">
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="name">Nombre<p-sortIcon field="name"
+                            style="font-size: 10px;"></p-sortIcon></th>
+                    <th pSortableColumn="assigned_id">Mostrar a <p-sortIcon field="assigned_id"></p-sortIcon></th>
+                    <th style="width: 40px;"></th>
+                    <th style="width: 40px;"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-customer>
+                <tr>
+                    <td>
+                        {{customer.name}}
+                    </td>
+                  
+                    <td>
+                        <button class="btn btn-warning" (click)="update(customer)">Editar</button>
+
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" (click)="deletModal(customer.name,customer.id)">Eliminar</button>
+                    </td>
+                 
+                </tr>
+            </ng-template>
+
+        </p-table>
+    </div>
+    </div>
+
+
+
+
+
+</div>
+
+<p-dialog header="Title" [(visible)]="display" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <ng-template pTemplate="header">
+       <h2>
+        Agregar nuevo metodo de pago
+       </h2> 
+    </ng-template>
+    <div class="col">
+        <form action="" [formGroup]="formFood">
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="name">
+                </div>         
+            </div>
+            
+        </form>
+        <div class="alert alert-primary" role="alert" *ngIf="statuAgrgado">
+            Se Agrego correctamente
+          </div>
+
+          
+    </div>
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="guardar()" [disabled]="formFood.invalid">Guardar</button>
+    </ng-template>
+</p-dialog>
+<p-dialog header="Title" [(visible)]="display2" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <ng-template pTemplate="header">
+       <h2>
+        Editar  metodo de pago
+       </h2> 
+    </ng-template>
+    <div class="col">
+        <form action="" [formGroup]="formFood">
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="name">
+                </div>         
+            </div>
+          
+        </form>
+        <div class="alert alert-primary" role="alert" *ngIf="statuAgrgado">
+            Se actualizo correctamente
+          </div>
+
+          
+    </div>
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="closeModal2()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="keepUpdate()">Guardar</button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog header="Title" [(visible)]="display3" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <ng-template pTemplate="header">
+       <h2>
+        Eliminar  restricion de alimimentos
+       </h2> 
+    </ng-template>
+    <div class="col">
+       {{TextElimint}}
+        <div class="alert alert-danger" role="alert" *ngIf="statuAgrgado">
+            Se elimino correctamente
+          </div>
+
+          
+    </div>
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="this.display3 = false">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="delet()">Eliminar</button>
+    </ng-template>
+</p-dialog>
+

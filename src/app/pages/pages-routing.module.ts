@@ -53,6 +53,8 @@ import { CampercommentComponent } from '../component/admi/campercomment/camperco
 import { PerfilStaffComponent } from '../component/perfil-staff/perfil-staff.component';
 import { TrainingEventComponent } from '../component/training-event/training-event.component';
 import { UpdateStaffComponent } from '../component/update-staff/update-staff.component';
+import { MetodosPagosComponent } from '../component/catalogos/metodos-pagos/metodos-pagos.component';
+import { PreguntasExtrasComponent } from '../component/catalogos/preguntas-extras/preguntas-extras.component';
 
 const routes: Routes = [
   
@@ -120,6 +122,9 @@ const routes: Routes = [
 {path: 'catalogs/licensedmedicine',component:LicensedmedicineComponent},
 {path: 'catalogs/vaccines',component:VaccinesComponent},
 {path: 'catalogs/staffroles',component:StaffrolesComponent},
+{path: 'catalogs/payment/method',component:MetodosPagosComponent},
+{path: 'catalogs/camp_extra_question',component:PreguntasExtrasComponent},
+
 
 //campers
 {path: 'catalogs/campercomment',component:CampercommentComponent},

@@ -142,6 +142,8 @@ import { PerfilStaffComponent } from './component/perfil-staff/perfil-staff.comp
 import { TrainingEventComponent } from './component/training-event/training-event.component';
 import { LoginComponent } from './login/login.component';
 import { UpdateStaffComponent } from './component/update-staff/update-staff.component';
+import { MetodosPagosComponent } from './component/catalogos/metodos-pagos/metodos-pagos.component';
+import { PreguntasExtrasComponent } from './component/catalogos/preguntas-extras/preguntas-extras.component';
 
 
 
@@ -187,7 +189,9 @@ export function createTranslateLoader(http: HttpClient): any {
     PerfilStaffComponent,
     TrainingEventComponent,
     LoginComponent,
-    UpdateStaffComponent,    
+    UpdateStaffComponent,
+    MetodosPagosComponent,
+    PreguntasExtrasComponent,    
   ],
   imports: [
     BrowserModule,

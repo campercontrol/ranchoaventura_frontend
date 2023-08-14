@@ -51,7 +51,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
     else if(info.infToken.role_id == 1){
       this.paretn = true;
       this.staff = false;
-    }else if(info.infToken.role_id >1){
+    }else if(info.infToken.role_id == 2){
       this.paretn = false;
       this.staff = true;
     }

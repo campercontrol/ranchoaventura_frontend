@@ -95,7 +95,7 @@
             <span>Nuevo evento</span>
 
           </a>
-          <a  class="side-nav-link-ref " routerLinkActive="active" *ngIf="rol_id > 2"
+          <a  class="side-nav-link-ref " routerLinkActive="active" *ngIf="rol_id > 1"
             (click)="catalogos = !catalogos">
             <div class="nav-d">
               <div>
@@ -140,6 +140,14 @@
           <a routerLink='catalogs/currency' class="side-nav-link-ref" routerLinkActive="active" *ngIf="catalogos">
 
             <span>Divisas </span>
+          </a>
+          <a routerLink='catalogs/payment/method' class="side-nav-link-ref" routerLinkActive="active" *ngIf="catalogos">
+
+            <span>Metodos de pago </span>
+          </a>
+          <a routerLink='catalogs/camp_extra_question' class="side-nav-link-ref" routerLinkActive="active" *ngIf="catalogos">
+
+            <span>Preguntas extras </span>
           </a>
           <a routerLink='catalogs/licensedmedicine' class="side-nav-link-ref" routerLinkActive="active"
             *ngIf="catalogos">

@@ -45,4 +45,7 @@ export class CampsService {
   inscribirCappStaff(a){
     return this.http.post('http://142.93.12.234:8000/staff_volunteer/',a)
   }
+  getCamps() {
+    return this.http.get('http://142.93.12.234:8000/camp/')
+ }
 }

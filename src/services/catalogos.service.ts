@@ -149,6 +149,37 @@ export class CatalogosService {
     console.log(id);
     return this.http.delete('http://142.93.12.234:8000/delete_staff_role/'+id);
   }
+  //metodos de pago
+  getpayment_method(){
+    return this.http.get('http://142.93.12.234:8000/payment_method/');
+  }
 
+  postpayment_method(a:any){
+    return this.http.post('http://142.93.12.234:8000/payment_method/',a);
+  }
+  upddatepayment_method(a:any,id){
+    return this.http.patch('http://142.93.12.234:8000/payment_method/'+id,a);
+  }
 
+  deletpayment_method(id){
+    console.log(id);
+    return this.http.delete('http://142.93.12.234:8000/delete/payment_method/'+id);
+  }
+  //Preguntas extras
+
+  getcamp_extra_question(){
+    return this.http.get('http://142.93.12.234:8000/camp_extra_question/');
+  }
+
+  postcamp_extra_question(a:any){
+    return this.http.post('http://142.93.12.234:8000/camp_extra_question/',a);
+  }
+  upddatcamp_extra_question(a:any,id){
+    return this.http.patch('http://142.93.12.234:8000/camp_extra_question/'+id,a);
+  }
+
+  deletcamp_extra_question(id){
+    console.log(id);
+    return this.http.delete('http://142.93.12.234:8000/delete/camp_extra_question/'+id);
+  }
 }
