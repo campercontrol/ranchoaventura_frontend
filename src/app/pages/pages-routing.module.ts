@@ -82,6 +82,11 @@ const routes: Routes = [
   {path: 'staff/trophies',component:TrofeosComponent},
   {path: 'staff/perfil/:id',component:PerfilStaffComponent},
   {path: 'staff/perfil',component:PerfilStaffComponent},
+  // pagos
+  {path: 'payments/:idCamp/:idCamper', component: PagosComponent},
+  {path: 'payments', component: PagosComponent},
+
+  //
 
   {path: 'grouping/camp', component: AgregarAgrupacionComponent},
   {path: 'medical/care', component: MedicoComponent},
@@ -91,7 +96,7 @@ const routes: Routes = [
   {path: 'school/profile', component: PerfilEscuelaComponent },
   {path: 'mailing', component: GmailingComponent},
   {path: 'shop', component: TienditaComponent},
-  {path: 'payments', component: PagosComponent},
+
   {path: 'staff/update',component:UpdateStaffComponent},
 
 

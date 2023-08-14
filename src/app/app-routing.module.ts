@@ -12,7 +12,7 @@ import { ProspectoComponent } from './component/prospecto/prospecto.component';
 const routes: Routes = [
  // { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
   // tslint:disable-next-line: max-line-length
-  {},
+
 
   {path:'login',component:LoginComponent},
   {path:'prospects',component:ProspectoComponent},

@@ -1,161 +1,289 @@
-<div class="card">
-    <div class="p-2">
-        <div>
 
-            <div class="card border border-warning border-3">
-                <div class="bg-warning p-2">
-                    <h1 class="card-title text-white">Agregar Pagos
+<div *ngIf="camperIncamp">
+    <div class="card">
+        <h2>{{this.info.camper_name}}-{{this.info.camp_name}}</h2>
+        <div class="p-2">
+            <div>
+           
+    
+                <div class="card border border-warning border-3" [formGroup]="newPayments">
+                    <div class="bg-warning p-2">
+                        <h1 class="card-title text-white">Agregar Pagos
+                        </h1>
+                    </div>
+                    <div class="col-12 p-5" >
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">Método de pago*</label>
+                            <div class="col-sm-8">
+                                <select 
+                                formControlName="payment_method_id"
+                                name="payment_method_id"
+                                style="width: 100%;" 
+                                class=" form-control">
+                                <option  value="0">Método de pago*</option>
+                                 <option *ngFor="let item of tiposPago" [value]="item.id">{{item.name}}</option>
+    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Monto*</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" id="inputPassword3" formControlName="payment_amount" name="payment_amount" >
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">Tipo de Movimiento*</label>
+                            <div class="col-sm-8">
+                                <select 
+                                formControlName="txn_type_id"
+                                name="txn_type_id"
+                                style="width: 100%;" 
+                                 class=" form-control">
+                                 <option  value="0">Seleciona un Tipo de Movimiento</option>
+
+                                 <option *ngFor="let item of tiposMovimiento" [value]="item.id">{{item.name}}</option>
+    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Número de transacción*</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" formControlName="txn_number"  name="txn_number" >
+                            </div>
+                        </div>
+    
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Fecha*</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" formControlName="payment_date" name="payment_date" >
+                            </div>
+                        </div>
+    
+                       
+                        <hr>
+    
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button class="btn btn-secondary" type="button">Regresar</button>
+                            <button class="btn btn-primary" type="button" (click)="createPage()">Agregar Pago</button>
+                          </div>
+    
+    
+                          
+                    </div>
+    
+                </div>
+        
+    
+            </div>
+    
+        </div>
+    </div>
+    
+    
+    <div class="card">
+        <div class="p-2">
+            <div class="card border border-success border-3">
+                <div class="bg-success p-2">
+                    <h1 class="card-title text-white">Detalles de Pagos
                     </h1>
                 </div>
-                <form class="col-12 p-5">
-                    <div class="row mb-3">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Método de pago*</label>
-                        <div class="col-sm-8">
-                            <ng-select [(ngModel)]="metodoPago"
-                            [items]="tiposPago"
-                            bindLabel="desc" 
-                             bindValue="id">
-
-                            </ng-select>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="inputPassword3" class="col-sm-3 col-form-label">Monto*</label>
-                        <div class="col-sm-8">
-                            <input type="number" class="form-control" id="inputPassword3" [(ngModel)]="monto">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Tipo de Movimiento*</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="inputEmail3" [(ngModel)]="tipMovimiento">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="inputPassword3" class="col-sm-3 col-form-label">Número de transacción*</label>
-                        <div class="col-sm-8">
-                            <input type="number" class="form-control" id="inputPassword3" [(ngModel)]="numeroTrans">
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label for="inputPassword3" class="col-sm-3 col-form-label">Fecha*</label>
-                        <div class="col-sm-8">
-                            <p-calendar [(ngModel)]="fecha" [showIcon]="true" inputId="icon"></p-calendar>
-                        </div>
-                    </div>
-
-                   
-                    <hr>
-
-                    <div class="d-grid gap-2 col-6 mx-auto">
-                        <button class="btn btn-secondary" type="button">Regresar</button>
-                        <button class="btn btn-primary" type="button">Agregar Pago</button>
-                      </div>
-
-
-                      
-                </form>
-
-            </div>
-
-
-        </div>
-
-    </div>
-</div>
-
-
-<div class="card">
-    <div class="p-2">
-        <div class="card border border-success border-3">
-            <div class="bg-success p-2">
-                <h1 class="card-title text-white">Detalles de Pagos
-                </h1>
-            </div>
-            <div class="mt-3 ms-4">
-                <h2>
-                    Tu saldo actual es de:</h2>
-
-            </div>
-            <div class="p-2">
-                <div class="container-btn">
-                    <div class="center-search">
-                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                            placeholder="Global Search" class="mb-2" />
-                    </div>
-
+                <div class="mt-3 ms-4">
+                    <h2>
+                        Tu saldo actual es de: {{info.payment_balance}}</h2>
+    
                 </div>
-                <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
-                    [value]="tabla" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
-                    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                    [filterDelay]="0" [globalFilterFields]="['fecha','descripcion','entrada','sale','saldo',]">
-
-                    <ng-template pTemplate="header">
-                        <tr>
-
-                            <th pSortableColumn="fecha" class="camp">
-                                <div class="flex justify-content-between align-items-center" style="width: 120px;">
-                                    fecha
-                                    <p-sortIcon field="fecha"></p-sortIcon>
-                                </div>
-                            </th>
-                            <th pSortableColumn="descripcion">
-                                <div class="flex justify-content-between align-items-center" style="width: 230px;">
-                                    Descripción
-                                    <p-sortIcon field="descripcion"></p-sortIcon>
-                                </div>
-                            </th>
-                            <th pSortableColumn="entrada">
-                                <div class="flex justify-content-between align-items-center" style="width: 90px;">
-                                    Entrada
-                                    <p-sortIcon field="entrada"></p-sortIcon>
-                                </div>
-                            </th>
-                            <th pSortableColumn="sale">
-                                <div class="flex justify-content-between align-items-center" style="width: 90px;">
-                                    Sale
-                                    <p-sortIcon field="sale"></p-sortIcon>
-                                </div>
-                            </th>
-                            <th pSortableColumn="saldo">
-                                <div class="flex justify-content-between align-items-center" style="width: 90px;">
-                                    Saldo
-                                    <p-sortIcon field="saldo"></p-sortIcon>
-                                </div>
-                            </th>
-
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-tabla>
-                        <tr class="p-selectable-row">
-
-                            <td>
-                                {{tabla.fecha}}
-                            </td>
-                            <td>
-                                {{tabla.descripcion}}
-                            </td>
-                            <td>
-                                {{tabla.entrada}}
-                            </td>
-                            <td>
-                                {{tabla.sale}}
-                            </td>
-                            <td>
-                                {{tabla.saldo}}
-                            </td>
-
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="emptymessage" class="mt-2">
-
-                    </ng-template>
-                </p-table>
-
+                <div class="p-2">
+                    <div class="container-btn">
+                        <div class="center-search">
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Global Search" class="mb-2" />
+                        </div>
+    
+                    </div>
+                    <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
+                        [value]="tabla" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
+                        [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [filterDelay]="0" [globalFilterFields]="['payment_date','txn_number','payment_amount','balance']">
+    
+                        <ng-template pTemplate="header">
+                            <tr>
+    
+                                <th pSortableColumn="payment_date" class="camp">
+                                    <div class="flex justify-content-between align-items-center" style="width: 120px;">
+                                        fecha
+                                        <p-sortIcon field="payment_date"></p-sortIcon>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="txn_number">
+                                    <div class="flex justify-content-between align-items-center" style="width: 230px;">
+                                        Descripción
+                                        <p-sortIcon field="txn_number"></p-sortIcon>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="payment_amount">
+                                    <div class="flex justify-content-between align-items-center" style="width: 90px;">
+                                        Cargo
+                                        <p-sortIcon field="payment_amount"></p-sortIcon>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="payment_amount">
+                                    <div class="flex justify-content-between align-items-center" style="width: 90px;">
+                                        Abono
+                                        <p-sortIcon field="payment_amount"></p-sortIcon>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="balance">
+                                    <div class="flex justify-content-between align-items-center" style="width: 90px;">
+                                        Saldo
+                                        <p-sortIcon field="balance"></p-sortIcon>
+                                    </div>
+                                </th>
+    
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-tabla>
+                            <tr class="p-selectable-row">
+    
+                                <td style="cursor: default;">
+                                    {{tabla.payment_date}} <i (click)="open(tabla.id)" class="bx bx-pencil" style="cursor: pointer;"></i>
+                                </td>
+                                <td>
+                                    {{tabla.txn_number}}
+                                </td>
+                                <td>
+                                    {{tabla.payment_amount}}
+                                </td>
+                                <td>
+                                    <div *ngIf="tabla.payment_amount<0">
+                                        ${{tabla.payment_amount*-1}}MXN
+                                      </div>
+                                      <div *ngIf="tabla.payment_amount>=0">
+                                        
+                                      </div>
+                                </td>
+                                <td>
+                                    {{tabla.balance}}
+                                </td>
+    
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage" class="mt-2">
+    
+                        </ng-template>
+                    </p-table>
+    
+                </div>
+    
             </div>
-
+    
         </div>
-
     </div>
 </div>
+<div *ngIf="!camperIncamp">
+    <div class="card">
+        <h2>{{this.info.camper_name}}-{{this.info.camp_name}}</h2>
+        <div class="p-2">
+            <div>
+           
+    
+                <form class="card border border-warning border-3">
+                    <div class="bg-warning p-2">
+                        <h1 class="card-title text-white">Buscador camper in camp pagos
+                        </h1>
+                    </div>
+                    <div class="col-12 p-5" >
+                        <div class="row mb-3">
+                            <label for="inputPassword3" class="col-sm-3 col-form-label">Codigo camper in camp</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" id="inputPassword3" name="camperIncampValue" [(ngModel)]="camperIncampValue">
+                            </div>
+                        </div>
+    
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button class="btn btn-secondary" type="button">Regresar</button>
+                            <button class="btn btn-primary" type="button" (click)="camperIncampview()" >Buscar</button>
+                          </div>
+    
+    
+                          
+                    </div>
+    
+                </form>
+        
+    
+            </div>
+    
+        </div>
+    </div>
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+	</div>
+    <div class="col-12 p-5" [formGroup]="updatePage">
+        <div class="row mb-3" >
+            <label for="inputEmail3" class="col-sm-3 col-form-label">Método de pago*</label>
+            <div class="col-sm-8">
+                <select 
+                formControlName="payment_method_id"
+                name="payment_method_id"
+                style="width: 100%;" 
+                class=" form-control">
+                <option  value="0">Método de pago*</option>
+                 <option *ngFor="let item of tiposPago" [value]="item.id">{{item.name}}</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputPassword3" class="col-sm-3 col-form-label">Monto*</label>
+            <div class="col-sm-8">
+                <input type="number" class="form-control" id="inputPassword3" formControlName="payment_amount" name="payment_amount" >
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputEmail3" class="col-sm-3 col-form-label">Tipo de Movimiento*</label>
+            <div class="col-sm-8">
+                <select 
+                formControlName="txn_type_id"
+                name="txn_type_id"
+                style="width: 100%;" 
+                 class=" form-control">
+                 <option  value="0">Seleciona un Tipo de Movimiento</option>
+
+                 <option *ngFor="let item of tiposMovimiento" [value]="item.id">{{item.name}}</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputPassword3" class="col-sm-3 col-form-label">Número de transacción*</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="txn_number"  name="txn_number" >
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="inputPassword3" class="col-sm-3 col-form-label">Fecha*</label>
+            <div class="col-sm-8">
+                <input type="date" class="form-control" formControlName="payment_date" name="payment_date" >
+            </div>
+        </div>
+
+       
+        <hr>
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-primary" type="button" (click)="update()">Editar Pago</button>
+          </div>
+
+
+          
+    </div>
+	
+</ng-template>
