@@ -144,6 +144,7 @@ import { LoginComponent } from './login/login.component';
 import { UpdateStaffComponent } from './component/update-staff/update-staff.component';
 import { MetodosPagosComponent } from './component/catalogos/metodos-pagos/metodos-pagos.component';
 import { PreguntasExtrasComponent } from './component/catalogos/preguntas-extras/preguntas-extras.component';
+import { CargosExtrasComponent } from './component/catalogos/cargos-extras/cargos-extras.component';
 
 
 
@@ -191,7 +192,8 @@ export function createTranslateLoader(http: HttpClient): any {
     LoginComponent,
     UpdateStaffComponent,
     MetodosPagosComponent,
-    PreguntasExtrasComponent,    
+    PreguntasExtrasComponent,
+    CargosExtrasComponent,    
   ],
   imports: [
     BrowserModule,

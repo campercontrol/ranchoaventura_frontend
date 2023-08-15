@@ -55,6 +55,7 @@ import { TrainingEventComponent } from '../component/training-event/training-eve
 import { UpdateStaffComponent } from '../component/update-staff/update-staff.component';
 import { MetodosPagosComponent } from '../component/catalogos/metodos-pagos/metodos-pagos.component';
 import { PreguntasExtrasComponent } from '../component/catalogos/preguntas-extras/preguntas-extras.component';
+import { CargosExtrasComponent } from '../component/catalogos/cargos-extras/cargos-extras.component';
 
 const routes: Routes = [
   
@@ -124,6 +125,8 @@ const routes: Routes = [
 {path: 'catalogs/staffroles',component:StaffrolesComponent},
 {path: 'catalogs/payment/method',component:MetodosPagosComponent},
 {path: 'catalogs/camp_extra_question',component:PreguntasExtrasComponent},
+{path: 'catalogs/camp_extra_change',component:CargosExtrasComponent},
+
 
 
 //campers

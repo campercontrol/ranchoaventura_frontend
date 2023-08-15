@@ -182,4 +182,21 @@ export class CatalogosService {
     console.log(id);
     return this.http.delete('http://142.93.12.234:8000/delete/camp_extra_question/'+id);
   }
+    //Cargos extras
+
+    getcamp_extra_charge(){
+      return this.http.get('http://142.93.12.234:8000/camp_extra_charge/');
+    }
+  
+    postcamp_extra_charge(a:any){
+      return this.http.post('http://142.93.12.234:8000/camp_extra_charge/',a);
+    }
+    upddatcamp_extra_charge(a:any,id){
+      return this.http.patch('http://142.93.12.234:8000/camp_extra_charge/'+id,a);
+    }
+  
+    deletcamp_extra_charge(id){
+      console.log(id);
+      return this.http.delete('http://142.93.12.234:8000/delete/camp_extra_charge/'+id);
+    }
 }

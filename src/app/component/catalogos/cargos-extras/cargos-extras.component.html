@@ -5,13 +5,13 @@
 
     <div class="card border border-info border-1">
         <div class="bg-info p-2">
-            <h1 class="card-title text-white">Lista de Preguntas Nuevas</h1>
+            <h1 class="card-title text-white">Lista de Cargos Extras</h1>
         </div>
         <div class="card-body">
         <div class="container-btn mt-1 mb-3">
             <div>
                 <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
-                    <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar Nueva pregunta</button>
+                    <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar Nueva Cargo</button>
 
                 </div>
             </div>
@@ -20,7 +20,7 @@
         </div>
 
         <p-table #dt [value]="listcatalogos" [rows]="10"
-            [globalFilterFields]="['question','assigned_id']"
+            [globalFilterFields]="['currency_id','price']"
             [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [showCurrentPageReport]="true">
@@ -29,6 +29,8 @@
                 <tr>
                     <th pSortableColumn="name">Nombre<p-sortIcon field="name"
                             style="font-size: 10px;"></p-sortIcon></th>
+                            <th pSortableColumn="price">precio<p-sortIcon field="price"
+                                style="font-size: 10px;"></p-sortIcon></th>
                     <th style="width: 40px;"></th>
                     <th style="width: 40px;"></th>
                 </tr>
@@ -36,7 +38,10 @@
             <ng-template pTemplate="body" let-customer>
                 <tr>
                     <td>
-                        {{customer.question}}
+                        {{customer.name}}
+                    </td>
+                    <td>
+                        {{customer.price}}
                     </td>
                   
                     <td>
@@ -63,15 +68,21 @@
 <p-dialog header="Title" [(visible)]="display" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
     <ng-template pTemplate="header">
        <h2>
-        Agregar nueva pregunta
+        Agregar nuevo cargo
        </h2> 
     </ng-template>
     <div class="col">
         <form action="" [formGroup]="formFood">
             <div class="row mb-4">
-                <label for="" class="col-sm-3 col-form-label">Pregunta</label>
+                <label for="" class="col-sm-3 col-form-label">Nombre del cargo</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="" formControlName="question">
+                    <input type="text" class="form-control" id="" formControlName="name">
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Costo</label>
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" id="" formControlName="price">
                 </div>         
             </div>
             <div class="row mb-4">
@@ -84,17 +95,7 @@
                 </div>
                   
             </div>
-            <div class="row mb-4">
-                <div class="col-3">
-
-                </div>
-                <div class="col-9 form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate" formControlName="is_required">
-                    <label class="form-check-label" for="flexCheckIndeterminate">
-                      Es obligatoria la pregunta
-                    </label>
-                  </div>
-            </div>
+           
         </form>
         <div class="alert alert-primary" role="alert" *ngIf="statuAgrgado">
             Se Agrego correctamente
@@ -116,13 +117,19 @@
     <div class="col">
         <form action="" [formGroup]="formFood">
             <div class="row mb-4">
-                <label for="" class="col-sm-3 col-form-label">Nombre</label>
+                <label for="" class="col-sm-3 col-form-label">Nombre del cargo</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="" formControlName="question">
+                    <input type="text" class="form-control" id="" formControlName="name">
                 </div>         
             </div>
             <div class="row mb-4">
-                <label for="" class="col-3 col-form-label">Campamento</label>
+                <label for="" class="col-sm-3 col-form-label">Costo</label>
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" id="" formControlName="price">
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-3 col-form-label">Campamento </label>
                 <div class="col-9">
                     <select class="form-select" aria-label="Default select example" formControlName="camp_id">
                         <option *ngFor="let item of campsArray" [value]="item.id">{{item.name}}</option>
@@ -131,17 +138,7 @@
                 </div>
                   
             </div>
-            <div class="row mb-4">
-                <div class="col-3">
-
-                </div>
-                <div class="form-check col-9">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate" formControlName="is_required">
-                    <label class="form-check-label" for="flexCheckIndeterminate">
-                      Es obligatoria la pregunta
-                    </label>
-                  </div>
-            </div>
+           
         </form>
         <div class="alert alert-primary" role="alert" *ngIf="statuAgrgado">
             Se actualizo correctamente
