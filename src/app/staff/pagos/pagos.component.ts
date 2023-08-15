@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -43,9 +43,15 @@ export class PagosComponent implements OnInit {
   parent_id =0;
   closeResult = '';
   idUpdate = 0;
-
-
-  constructor(private routesA:ActivatedRoute,private pages: PaymentsService, private formBuild:FormBuilder,private modalService: NgbModal,config: NgbModalConfig ) {
+  pageCorrect =false;
+  spinner:boolean=false;
+  notcode = false;
+  @ViewChild("payment_date") payment_date: ElementRef; 
+  @ViewChild("txn_number") txn_number: ElementRef; 
+  @ViewChild("payment_method_id") payment_method_id: ElementRef; 
+  @ViewChild("txn_type_id")  txn_type_id: ElementRef; 
+  @ViewChild("payment_amount")  payment_amount: ElementRef; 
+  constructor(private routesA:ActivatedRoute,private pages: PaymentsService, private formBuild:FormBuilder,private modalService: NgbModal,config: NgbModalConfig, private render:Renderer2 ) {
     this.routesA.params.subscribe((params) => {
       this.idCamp = params['idCamp'];
       this.idCamper = params['idCamper'];
@@ -103,20 +109,90 @@ export class PagosComponent implements OnInit {
     });
   }
 
+  getpayment_dater()  {
+    if( this.newPayments.get('payment_date').valid){
+      this.render.removeClass(this.payment_date.nativeElement,"is-invalid");
+      this.render.addClass(this.payment_date.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.payment_date.nativeElement,"is-valid");
+    this.render.addClass(this.payment_date.nativeElement,"is-invalid");
+    this.payment_date.nativeElement.focus()
+
+   }  
+  }
+  gettxn_number()  {
+    if( this.newPayments.get('txn_number').valid){
+      this.render.removeClass(this.txn_number.nativeElement,"is-invalid");
+      this.render.addClass(this.txn_number.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.txn_number.nativeElement,"is-valid");
+    this.render.addClass(this.txn_number.nativeElement,"is-invalid");
+    this.txn_number.nativeElement.focus()
+
+   }  
+  }
+  getpayment_method_id()  {
+    if( this.newPayments.get('payment_method_id').valid){
+      this.render.removeClass(this.payment_method_id.nativeElement,"is-invalid");
+      this.render.addClass(this.payment_method_id.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.payment_method_id.nativeElement,"is-valid");
+    this.render.addClass(this.payment_method_id.nativeElement,"is-invalid");
+    this.payment_method_id.nativeElement.focus()
+
+   }  
+  }
+  gettxn_type_id()  {
+    if( this.newPayments.get('txn_type_id').valid){
+      this.render.removeClass(this.txn_type_id.nativeElement,"is-invalid");
+      this.render.addClass(this.txn_type_id.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.txn_type_id.nativeElement,"is-valid");
+    this.render.addClass(this.txn_type_id.nativeElement,"is-invalid");
+    this.txn_type_id.nativeElement.focus()
+
+   }  
+  }
+  getpayment_amount(){
+    if( this.newPayments.get('payment_amount').valid){
+      this.render.removeClass(this.payment_amount.nativeElement,"is-invalid");
+      this.render.addClass(this.payment_amount.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.payment_amount.nativeElement,"is-valid");
+    this.render.addClass(this.payment_amount.nativeElement,"is-invalid");
+    this.payment_amount.nativeElement.focus()
+
+   }  
+  }
+
 
   createPage(){
+    this.spinner = true;
     this.newPayments.patchValue({
       parent_id:this.info.parent_id,
       camper_id:this.info.camper_id,
       camp_id:this.info.camp_id
     })
-    this.pages.setpage(this.newPayments.value).subscribe((res)=>{
-      console.log(res);
-     
-      this.returnInfo();
-      this.reteForm();
-      
-    })
+    if(this.newPayments.valid){
+      this.pages.setpage(this.newPayments.value).subscribe((res)=>{
+        console.log(res);
+        this.pageCorrect= true;
+        this.spinner = false;
+        this.returnInfo();
+        this.reteForm();
+        setTimeout(() => {
+          this.pageCorrect= false;
+        }, 1000);
+        
+      })
+    }else{
+      this.spinner = false;
+      this.getpayment_method_id();
+      this.gettxn_type_id();
+      this.gettxn_number();
+      this.getpayment_method_id();
+    }
+   
   }
 
   reteForm(){
@@ -133,6 +209,20 @@ export class PagosComponent implements OnInit {
 
 
     })
+    this.render.removeClass(this.payment_date.nativeElement,"is-invalid");
+    this.render.removeClass(this.payment_date.nativeElement,"is-valid");
+
+    this.render.removeClass(this.txn_number.nativeElement,"is-invalid");
+    this.render.removeClass(this.txn_number.nativeElement,"is-valid");
+
+    this.render.removeClass(this.payment_method_id.nativeElement,"is-invalid");
+    this.render.removeClass(this.payment_method_id.nativeElement,"is-valid");
+
+    this.render.removeClass(this.txn_type_id.nativeElement,"is-invalid");
+    this.render.removeClass(this.txn_type_id.nativeElement,"is-valid");
+
+    this.render.removeClass(this.payment_amount.nativeElement,"is-invalid");
+    this.render.removeClass(this.payment_amount.nativeElement,"is-valid");
   }
 
   returnInfo(){
@@ -155,16 +245,23 @@ export class PagosComponent implements OnInit {
 
   camperIncampview(){
     console.log(this.camperIncampValue);
+    this.spinner = true;
     
     this.pages.getpage(0,0,this.camperIncampValue).subscribe((res)=>{
       console.log(res);
-      
+      this.spinner = false;
       this.info = res;
       this.camperIncamp = true;
       this.tiposPago = this.info.payment_methods;
       this.tiposMovimiento = this.info.transaction_type;
       this.parent_id = this.info.parent_id;
       this.tabla = this.info.payment_table
+    },erro=>{
+      this.spinner = false;
+      this.notcode = true;
+      setTimeout(() => {
+        this.notcode = false;
+      }, 1000);
     })
   }
 

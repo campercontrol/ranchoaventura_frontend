@@ -16,10 +16,12 @@
                             <label for="inputEmail3" class="col-sm-3 col-form-label">Método de pago*</label>
                             <div class="col-sm-8">
                                 <select 
+                                (change)="getpayment_method_id()"
                                 formControlName="payment_method_id"
                                 name="payment_method_id"
                                 style="width: 100%;" 
-                                class=" form-control">
+                                class=" form-control"
+                                #payment_method_id>
                                 <option  value="0">Método de pago*</option>
                                  <option *ngFor="let item of tiposPago" [value]="item.id">{{item.name}}</option>
     
@@ -29,7 +31,7 @@
                         <div class="row mb-3">
                             <label for="inputPassword3" class="col-sm-3 col-form-label">Monto*</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" id="inputPassword3" formControlName="payment_amount" name="payment_amount" >
+                                <input type="number" class="form-control" id="inputPassword3" formControlName="payment_amount" name="payment_amount" (input)="getpayment_amount() "#payment_amount>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -39,7 +41,9 @@
                                 formControlName="txn_type_id"
                                 name="txn_type_id"
                                 style="width: 100%;" 
-                                 class=" form-control">
+                                 class=" form-control"
+                                 (change)="gettxn_type_id()"
+                                 #txn_type_id>
                                  <option  value="0">Seleciona un Tipo de Movimiento</option>
 
                                  <option *ngFor="let item of tiposMovimiento" [value]="item.id">{{item.name}}</option>
@@ -50,23 +54,30 @@
                         <div class="row mb-3">
                             <label for="inputPassword3" class="col-sm-3 col-form-label">Número de transacción*</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" formControlName="txn_number"  name="txn_number" >
+                                <input type="text" class="form-control" formControlName="txn_number"  name="txn_number" (input)="gettxn_number()" #txn_number>
                             </div>
                         </div>
     
                         <div class="row mb-3">
                             <label for="inputPassword3" class="col-sm-3 col-form-label">Fecha*</label>
                             <div class="col-sm-8">
-                                <input type="date" class="form-control" formControlName="payment_date" name="payment_date" >
+                                <input type="date" class="form-control" formControlName="payment_date" name="payment_date" (input)="getpayment_dater()" #payment_date>
                             </div>
                         </div>
     
                        
                         <hr>
+                        <div class="alert alert-primary" role="alert" *ngIf="pageCorrect">
+                            Se Agrego correctamente el pago
+                          </div>
     
-                        <div class="d-grid gap-2 col-6 mx-auto">
+                        <div class="d-grid gap-2 col-6 mx-auto" *ngIf="!spinner">
                             <button class="btn btn-secondary" type="button">Regresar</button>
                             <button class="btn btn-primary" type="button" (click)="createPage()">Agregar Pago</button>
+                          </div>
+
+                          <div class="spinner-border text-primary" role="status" *ngIf="spinner">
+                            <span class="sr-only">Loading...</span>
                           </div>
     
     
@@ -200,10 +211,16 @@
                                 <input type="number" class="form-control" id="inputPassword3" name="camperIncampValue" [(ngModel)]="camperIncampValue">
                             </div>
                         </div>
+                        <div class="alert alert-dark" role="alert">
+                           No se encontro ningun codigo!
+                          </div>
     
-                        <div class="d-grid gap-2 col-6 mx-auto">
+                        <div class="d-grid gap-2 col-6 mx-auto" *ngIf="!spinner">
                             <button class="btn btn-secondary" type="button">Regresar</button>
                             <button class="btn btn-primary" type="button" (click)="camperIncampview()" >Buscar</button>
+                          </div>
+                          <div class="spinner-border text-primary" role="status" *ngIf="spinner">
+                            <span class="sr-only">Loading...</span>
                           </div>
     
     
@@ -222,7 +239,7 @@
 
 <ng-template #content let-c="close" let-d="dismiss">
 	<div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+		
 		<button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
 	</div>
     <div class="col-12 p-5" [formGroup]="updatePage">
