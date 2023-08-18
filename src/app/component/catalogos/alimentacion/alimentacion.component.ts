@@ -159,5 +159,15 @@ export class AlimentacionComponent implements OnInit {
       alert('No se pudo Agregar')
     })
   }
+  getSeverity(status: string) {
+    switch (status) {
+        case 'INSTOCK':
+            return 'success';
+        case 'LOWSTOCK':
+            return 'warning';
+        case 'OUTOFSTOCK':
+            return 'danger';
+    }
+}
   
 }

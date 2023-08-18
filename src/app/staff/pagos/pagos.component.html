@@ -163,8 +163,14 @@
                                 <td>
                                     {{tabla.txn_number}}
                                 </td>
+                               
                                 <td>
-                                    {{tabla.payment_amount}}
+                                    <div *ngIf="tabla.payment_amount>0">
+                                        ${{tabla.payment_amount}}MXN
+                                      </div>
+                                      <div *ngIf="tabla.payment_amount<0">
+                                        
+                                      </div>
                                 </td>
                                 <td>
                                     <div *ngIf="tabla.payment_amount<0">
@@ -211,9 +217,7 @@
                                 <input type="number" class="form-control" id="inputPassword3" name="camperIncampValue" [(ngModel)]="camperIncampValue">
                             </div>
                         </div>
-                        <div class="alert alert-dark" role="alert">
-                           No se encontro ningun codigo!
-                          </div>
+                
     
                         <div class="d-grid gap-2 col-6 mx-auto" *ngIf="!spinner">
                             <button class="btn btn-secondary" type="button">Regresar</button>

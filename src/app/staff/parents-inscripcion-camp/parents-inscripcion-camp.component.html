@@ -195,7 +195,9 @@
                           <th pSortableColumn=" camp_end">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
                           <th pSortableColumn="camp_start">Termino <p-sortIcon field="termino"></p-sortIcon></th>
                           <th pSortableColumn="public_price">Precio <p-sortIcon field="precio"></p-sortIcon></th>
-      
+                          <th pSortableColumn="public_price">Sede <p-sortIcon field="precio"></p-sortIcon></th>
+                          <th pSortableColumn="public_price">Saldo <p-sortIcon field="precio"></p-sortIcon></th>
+
                           <th></th>
       
                       </tr>
@@ -224,6 +226,14 @@
                              {{customer.public_price}}
             
                             </td>
+                            <td>
+                              {{customer.location_name}}
+             
+                             </td>
+                             <td>
+                              {{customer.camper_payment_balance}}
+             
+                             </td>
                          
             
                             <td>
