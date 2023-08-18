@@ -66,6 +66,8 @@ const routes: Routes = [
   { path: 'parents/camp-info/:camper/:camp', component: CampamentoComponent },
   { path: 'parents/inscription/camp-info/:camper/:camp', component: CampamentoComponent },
   { path: 'parents/inscription/camper/:id', component: PerfilCamperComponent },
+
+
   { path: 'camps/camp_add', component: NuevoCampamentoComponent },
 
 
@@ -73,9 +75,9 @@ const routes: Routes = [
   { path: 'parents/update-camper/:id', component: UpdateCamperComponent },
   { path: 'parents/camper/:id', component: PerfilCamperComponent },
   { path: 'parents/inscription/:id', component: ParentsInscripcionCampComponent },
-  { path: 'staff/camps', component: CampamentosComponent },
-  { path: 'camps/camp', component: CampamentosStaffComponent },
-  { path: 'staff/grouping', component: GroupingComponent},
+  { path: 'staff/camps', component: CampamentosComponent },// vista de lista de camps
+  { path: 'camps/camp', component: CampamentosStaffComponent }, // vista del campamento
+  { path: 'staff/grouping', component: GroupingComponent}, 
   { path: 'consultation/camp',component:NuevaConsultaComponent},
 //  { path: 'parents/new-user',component:NewParentComponent},
   { path: 'admi/temp', component: TemporadaComponent },

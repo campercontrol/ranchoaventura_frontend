@@ -1,46 +1,125 @@
-.flex{
+.campamentos{
     display: flex;
-    justify-content: right;
-    
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content:space-around;
 }
 
-
-
-.btn-grup{
+.container-info{
     display: flex;
-    justify-content:space-around ;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content:space-around;
 }
-
-.btn-altura{
-    max-height: 40px;
-}
-
-.container-btn{
+.titulo-info{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+   max-width:200px;
 }
-td , th{
-    font-size: 13px;
-}
-td{
+
+.Campementos_anteriores{
     text-align: center;
 }
-.scroll-y{
-    overflow-x: scroll;
+.Campamentos_proximo{
+    text-align: center;
 }
-.center{
+.foto-perfil{
+    position: relative;
+    top: -70px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.left{
+
+
+.container-info-camping{
     display: flex;
-    justify-content: right;
+   
+}
+th{
+    font-size: 14px;
+}
+td{
+    font-size: 14px;
+}
+.back-color{
+    background-color: rgb(161, 161, 161);
 }
 
-@media (max-width: 600px) {
-    .container-btn{
-        display: flex;
+@media (max-width: 750px) {
+    .campamentos{
+      display: flex;
       flex-direction: column;
+    }
+    .foto-perfil{  
+        position: static;
+
+    }
+    .campamentos-header{
+        height: auto;
+    }
+  }
+
+  .campamentos{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content:space-around;
+}
+
+.container-info{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content:space-around;
+}
+.titulo-info{
+    display: flex;
+    justify-content: flex-start;
+   max-width:200px;
+}
+
+.Campementos_anteriores{
+    text-align: center;
+}
+.Campamentos_proximo{
+    text-align: center;
+}
+.foto-perfil{
+    position: relative;
+    top: -70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.container-info-camping{
+    display: flex;
+   
+}
+th{
+    font-size: 14px;
+}
+td{
+    font-size: 14px;
+}
+.back-color{
+    background-color: rgb(161, 161, 161);
+}
+
+@media (max-width: 750px) {
+    .campamentos{
+      display: flex;
+      flex-direction: column;
+    }
+    .foto-perfil{  
+        position: static;
+
+    }
+    .campamentos-header{
+        height: 100%;
     }
   }
