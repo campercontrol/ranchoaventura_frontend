@@ -17,6 +17,8 @@
 .container-btn{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    
 }
 
 .Campementos_anteriores{
@@ -33,11 +35,20 @@
     align-items: center;
     justify-content: center;
 }
+.item{
+    
+    border: 1px solid rgb(163, 161, 158) ;
+ 
+}
 
 
 .container-info-camping{
     display: flex;
    
+}
+.center{
+   margin: 0 auto;
+   width: 80%;
 }
 th{
     font-size: 14px;

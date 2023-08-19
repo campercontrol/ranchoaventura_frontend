@@ -193,7 +193,8 @@ export function createTranslateLoader(http: HttpClient): any {
     UpdateStaffComponent,
     MetodosPagosComponent,
     PreguntasExtrasComponent,
-    CargosExtrasComponent,    
+    CargosExtrasComponent, 
+       
   ],
   imports: [
     BrowserModule,
@@ -212,8 +213,9 @@ export function createTranslateLoader(http: HttpClient): any {
     ReactiveFormsModule,
     BadgeModule,
     PanelModule,
-    
+    OrderListModule,
     NgbToastModule,
+    TabViewModule,
     
 
       TableModule,

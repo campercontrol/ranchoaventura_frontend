@@ -10,6 +10,11 @@ export class CatalogosService {
 
   }
 
+  order(id,info){
+    return this.http.post('http://142.93.12.234:8000/update/order/catalogs?catalog_type='+id,info);
+
+  }
+
   getAlimentos(){
     return this.http.get('http://142.93.12.234:8000/food_restriction/');
   }

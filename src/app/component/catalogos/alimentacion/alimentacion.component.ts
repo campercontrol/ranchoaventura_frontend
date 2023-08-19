@@ -71,10 +71,24 @@ export class AlimentacionComponent implements OnInit {
   getCatalogos() {
     this.catalogos.getAlimentos().subscribe((res: any) => {
       this.listcatalogos = res.data;
+      this.listcatalogos.sort((a, b) => a.order - b.order)
       this.listcatalogos.map((item: any) => {
         item.assigned_id = this.cat[item.assigned_id.toString()];
       })
     });
+  }
+
+  guardarOrder(){
+    let a = []
+    this.listcatalogos.forEach((element,index) => {
+      a.push({id:element.id,order:index})     
+    });
+    this.catalogos.order(1,a).subscribe((res: any) => {
+      console.log(res);
+      
+      this.getCatalogos();
+      })
+   
   }
 
   guardar() {

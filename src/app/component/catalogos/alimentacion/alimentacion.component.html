@@ -1,80 +1,9 @@
 
 
 
-<div>
-
-    <div class="card border border-info border-1">
-        <div class="bg-info p-2">
-            <h1 class="card-title text-white">Lista de Alimentos restringidos</h1>
-        </div>
-        <div class="card-body">
-        <div class="container-btn mt-1 mb-3">
-            <div>
-                <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
-                    <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar Alimentacion restringida</button>
-
-                </div>
-            </div>
-            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                placeholder="Global Search" />
-        </div>
-
-        <p-table #dt [value]="listcatalogos" [rows]="10"
-            [globalFilterFields]="['name','assigned_id']"
-            [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [showCurrentPageReport]="true">
-
-            <ng-template pTemplate="header">
-                <tr>
-                    <th pSortableColumn="name">Nombre<p-sortIcon field="name"
-                            style="font-size: 10px;"></p-sortIcon></th>
-                    <th pSortableColumn="assigned_id">Mostrar a <p-sortIcon field="assigned_id"></p-sortIcon></th>
-                    <th style="width: 40px;"></th>
-                    <th style="width: 40px;"></th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-customer>
-                <tr>
-                    <td>
-                        {{customer.name}}
-                    </td>
-                    <td>
-                        {{customer.assigned_id}}
-                    </td>
-                    <td>
-                        <button class="btn btn-warning" (click)="update(customer)">Editar</button>
-
-                    </td>
-                    <td>
-                        <button class="btn btn-danger" (click)="deletModal(customer.name,customer.id)">Eliminar</button>
-                    </td>
-                 
-                </tr>
-            </ng-template>
-
-        </p-table>
-    </div>
-    </div>
 
 
 
-
-
-</div>
-
-<p-orderList [value]="listcatalogos" [listStyle]="{'max-height':'30rem'}" header="List of Products" filterBy="name" filterPlaceholder="Filter by name" >
-    <ng-template let-product pTemplate="item">
-        <div class="product-item">
-           
-            <div class="product-list-detail">
-                <h5 class="mb-2">{{product.name}}</h5>
-              
-            </div>
-           
-        </div>
-    </ng-template>
-</p-orderList>
 
 <p-dialog header="Title" [(visible)]="display" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
     <ng-template pTemplate="header">
@@ -173,3 +102,90 @@
     </ng-template>
 </p-dialog>
 
+
+
+
+
+<p-tabView>
+    <p-tabPanel header=" Alimentos restringidos">
+        <div>
+            <div class="card border border-info border-1">
+                <div class="bg-info p-2">
+                    <h1 class="card-title text-white">Lista de Alimentos restringidos</h1>
+                </div>
+                <div class="card-body">
+                <div class="container-btn mt-1 mb-3">
+                    <div>
+                        <div ngbDropdown placement="top-end" class="d-inline-block mt-3" style="margin-right: 10px;">
+                            <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar Alimentacion restringida</button>
+        
+                        </div>
+                    </div>
+                    <input class="mt-3" type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        placeholder="Global Search" />
+                </div>
+        
+                <p-table #dt [value]="listcatalogos" [rows]="10"
+                    [globalFilterFields]="['name','assigned_id']"
+                    [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true">
+        
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="name">Nombre<p-sortIcon field="name"
+                                    style="font-size: 10px;"></p-sortIcon></th>
+                            <th pSortableColumn="assigned_id">Mostrar a <p-sortIcon field="assigned_id"></p-sortIcon></th>
+                            <th style="width: 40px;"></th>
+                            <th style="width: 40px;"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-customer>
+                        <tr>
+                            <td>
+                                {{customer.name}}
+                            </td>
+                            <td>
+                                {{customer.assigned_id}}
+                            </td>
+                            <td>
+                                <button class="btn btn-warning" (click)="update(customer)">Editar</button>
+        
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" (click)="deletModal(customer.name,customer.id)">Eliminar</button>
+                            </td>
+                         
+                        </tr>
+                    </ng-template>
+        
+                </p-table>
+            </div>
+            </div>
+        </div>
+    </p-tabPanel>
+    <p-tabPanel header="Header 2">
+        <div class="container-fluid">
+            <div >
+                <button class="btn btn-primary" (click)="guardarOrder()">Guardar</button>
+                <div class="center">
+                    <div style="width: 100%;">
+                        <p-orderList [value]="listcatalogos" [dragdrop]="true"  >
+              
+                            <ng-template let-car pTemplate="item" >
+                                <div class="item">
+                                    <div style="font-size:20px;float:right;margin:15px 5px 0 0" >{{car.name}}  -  {{car.assigned_id}} </div>
+                                </div>
+                            </ng-template>
+                        </p-orderList>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+       
+    </p-tabPanel>
+  
+</p-tabView>
