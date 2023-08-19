@@ -76,7 +76,7 @@ const routes: Routes = [
   { path: 'parents/camper/:id', component: PerfilCamperComponent },
   { path: 'parents/inscription/:id', component: ParentsInscripcionCampComponent },
   { path: 'staff/camps', component: CampamentosComponent },// vista de lista de camps
-  { path: 'camps/camp', component: CampamentosStaffComponent }, // vista del campamento
+  { path: 'camps/camp/:id', component: CampamentosStaffComponent }, // vista del campamento
   { path: 'staff/grouping', component: GroupingComponent}, 
   { path: 'consultation/camp',component:NuevaConsultaComponent},
 //  { path: 'parents/new-user',component:NewParentComponent},

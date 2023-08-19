@@ -5,6 +5,8 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AdvancedService } from './advanced.service';
 import { AdvancedSortableDirective, SortEvent } from './advanced-sortable.directive';
+import { CampsVistaService } from 'src/services/camps-vista.service';
+import { ActivatedRoute, RouterEvent } from '@angular/router';
 @Component({
   selector: 'app-campamentos-staff',
   templateUrl: './campamentos-staff.component.html',
@@ -23,12 +25,26 @@ export class CampamentosStaffComponent implements OnInit {
 
   loading: boolean = false;
   displayMaximizable: boolean;
+  listCampers:any= [];
+  listStaffConfirm:any= [];
+  
+  
 
-
+  idCamp = 0;
   activityValues: number[] = [0, 100];
   items = []
 
-  constructor() { }
+  constructor(private capms:CampsVistaService,private router :ActivatedRoute) { 
+    router.params.subscribe((res)=>{
+        this.idCamp= res.id;
+    })
+    capms.getInfoCamp(this.idCamp).subscribe((res:any)=>{
+      console.log(res);
+      this.listCampers = res.campers;
+      this.listStaffConfirm = res.staff_confirmed
+      
+    })
+  }
   cars = [{ Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },
   { Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },
   { Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },

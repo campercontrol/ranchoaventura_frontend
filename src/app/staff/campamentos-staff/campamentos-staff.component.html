@@ -2,11 +2,12 @@
   <div class="row">
     <div class="col-12">
       <div class="card border border-info border-3">
-        <div class=" scroll-y">
+      
           <div class="bg-info p-2">
             <h1 class="card-title text-white">Acampadores</h1>
   
           </div>
+          
           <div class="card-body">
             <div>
               <div class="col text-end">
@@ -44,55 +45,62 @@
               <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
                 placeholder="Global Search" />
             </div>
-  
-            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="customer" 
+            <div class=" scroll-y">
+            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="listCampers" 
               [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-              [globalFilterFields]="['name','country.name','representative.name','status']">
+              [globalFilterFields]="['camper_full_name','camper_birthday','tutor_full_name','second_tutor_full_name']">
   
               <ng-template pTemplate="header">
                 <tr>
   
-                  <th pSortableColumn="name" class="camp">
-                    <div class="flex justify-content-between align-items-center" style="width: 50px;">
+                  <th pSortableColumn="name" >
+                    <div >
                       Foto
                     </div>
                   </th>
-                  <th pSortableColumn="name" class="camp">
-                    <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
+                  <th pSortableColumn="camper_full_name" style=" min-width: 200px;">
+                    <div >
                       Nombre
-                      <p-sortIcon field="name"></p-sortIcon>
+                      <p-sortIcon field="camper_full_name"></p-sortIcon>
                     </div>
                   </th>
-                  <th pSortableColumn="record.n" class="record">
-                    <div class="flex justify-content-between align-items-center" style="min-width: 70px; width: 90px;">
+                  <th pSortableColumn="record.n" style=" min-width: 150px;">
+                    <div>
                       Record
                       <p-sortIcon field="record.n"></p-sortIcon>
                     </div>
                   </th>
-                  <th pSortableColumn="precio">
-                    <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                  <th pSortableColumn="camper_birthday" style=" min-width: 140px;">
+                    <div >
                       Fecha de nacimiento
-                      <p-sortIcon field="precio"></p-sortIcon>
+                      <p-sortIcon field="camper_birthday"></p-sortIcon>
                     </div>
                   </th>
                
-                  <th pSortableColumn="sede" style="width: 130px; min-width: 120px;">
-                    <div class="flex justify-content-between align-items-center">
+                  <th pSortableColumn="camper_total_balance" style=" min-width: 100px;">
+                    <div>
                       Saldo
-                      <p-sortIcon field="sede"></p-sortIcon>
+                      <p-sortIcon field="camper_total_balance"></p-sortIcon>
                     </div>
                   </th>
   
-                  <th pSortableColumn="status" style="min-width: 2rem">
-                    <div class="flex justify-content-between align-items-center">
+                  <th pSortableColumn="tutor_full_name" style=" min-width: 100%;">
+                    <div>
                       Tutor 1
+                      <p-sortIcon field="tutor_full_name"></p-sortIcon>
+   
+                    </div>
+                  </th>
+                  <th pSortableColumn="status" style=" min-width: 100%;">
+                    <div>
+                      Tutor 2
                       <p-sortIcon field="sede"></p-sortIcon>
    
                     </div>
                   </th>
                   <th pSortableColumn="precio">
-                    <div class="flex justify-content-between align-items-center" style="width: 140px;">
+                    <div  style="width: 140px;">
                     </div>
                   </th>
   
@@ -102,42 +110,44 @@
                 <tr class="p-selectable-row">
   
                   <td>
-                    <p-avatar image="../../../assets/images/users/avatar-2.jpg" shape="circle" size="large"></p-avatar>
+                    <p-avatar [image]="'http://142.93.12.234:8000/'+customer.photo_url" shape="circle" size="large"></p-avatar>
                   </td>
                   <td>
-                    {{customer.name}}
+                    {{customer.camper_full_name}}
                   </td>
                   <td>
   
-                    <p-badge [value]="customer.record.n" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
-                    <p-badge [value]="customer.record.b" pTooltip="Staff apuntados" tooltipPosition="top" severity="info"
-                      severity="warning"></p-badge>
-                    <p-badge [value]="customer.record.d" pTooltip="Staff confirmado" tooltipPosition="top"
-                      severity="danger" severity="danger"></p-badge>
+                    <p-badge [value]="customer.camper_total" pTooltip="Total" tooltipPosition="top"></p-badge>
+                    <p-badge [value]="customer.camper_attended" pTooltip="Camps anteriores" tooltipPosition="top" severity="danger"
+                      severity="danger"></p-badge>
+                    <p-badge [value]="customer.camper_attend" pTooltip="Proximos camps" tooltipPosition="top"
+                      severity="success" severity="success"></p-badge>
   
   
                   </td>
                   <td>
-                    <img src="../../../assets/images/camp/pastel-cumpleaños.png" alt="" *ngIf="customer.cumple">
   
-                    {{customer.inicio}}
+                    {{customer.camper_birthday}}
                     <br>
-                    18 años
+                   
   
                   </td>
                   <td>
-                    $MXM
-                    <br>
-                    <p-badge [value]="customer.estado"></p-badge>
+                   {{ customer.camper_total_balance}}
+                    
   
                   </td>
                   <td>
-                    Juan Sánchez Sánchez <br>
-                    papa@campercontrol.com
+                   {{customer.tutor_full_name}} <br>
+                    {{customer.tutor_email}}
                   </td>
+                  <td>
+                    {{customer.second_tutor_full_name}} <br>
+                     {{customer.second_tutor_email}}
+                   </td>
   
                   <td>
-                    <button class="btn btn-primary" class="btn btn-primary">ver campamento</button>
+                    <button class="btn btn-primary" class="btn btn-primary">ver acampador</button>
                   </td>
   
   
@@ -191,9 +201,9 @@
           </div>
 
           <div class="scroll-y">
-            <p-table #dt [(selection)]="selectedCustomers" dataKey="id"  [rowHover]="true" [rows]="10" [value]="customer"
+            <p-table #dt [(selection)]="selectedCustomers" dataKey="id"  [rowHover]="true" [rows]="10" [value]="listStaffConfirm"
             [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0" dataKey="staff_id"
             [globalFilterFields]="['name','country.name','representative.name','status']">
 
             <ng-template pTemplate="header">
@@ -259,38 +269,36 @@
                   <p-tableCheckbox [value]="customer"></p-tableCheckbox>
                 </td>
                 <td>
-                  <p-avatar image="../../../assets/images/users/avatar-2.jpg" shape="circle" size="large"></p-avatar>
+                  <p-avatar [image]="'http://142.93.12.234:8000/'+customer.staff_photo" shape="circle" size="large"></p-avatar>
                 </td>
                 <td>
-                  {{customer.name}}
+                  {{customer.staff_full_name}}
                 </td>
                
                 <td>
-                  <img src="../../../assets/images/camp/pastel-cumpleaños.png" alt="" *ngIf="customer.cumple">
-
-                  {{customer.inicio}}
+                  {{customer.staff_birthday}}
                   <br>
 
                 </td>
                 <td>
-                  5512391274
+                 {{customer.staff_cellphone}}
                 </td>
                 
                 <td>
-                  papa@campercontrol.com
+                  {{customer.staff_email}}
                 </td>
                 <td>
-
-                  <p-badge [value]="customer.record.n" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
-                  <p-badge [value]="customer.record.b" pTooltip="Staff apuntados" tooltipPosition="top" severity="info"
-                    severity="warning"></p-badge>
-                  <p-badge [value]="customer.record.d" pTooltip="Staff confirmado" tooltipPosition="top"
-                    severity="danger" severity="danger"></p-badge>
+                 
+                  <p-badge [value]="customer.camper_total" pTooltip="Total" tooltipPosition="top"></p-badge>
+                  <p-badge [value]="customer.camper_attended" pTooltip="Camps anteriores" tooltipPosition="top" severity="danger"
+                    severity="danger"></p-badge>
+                  <p-badge [value]="customer.camper_attend" pTooltip="Proximos camps" tooltipPosition="top"
+                    severity="success" severity="success"></p-badge>
 
 
                 </td>
                 <td>
-                  Director
+                  {{customer.staff_role}}
                 </td>
 
                 <td>
@@ -480,7 +488,8 @@
           <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
           placeholder="Global Search" />
         </div>
-        <p-table #dt [(selection)]="selectedCustomers" dataKey="id"  [rowHover]="true" [rows]="10" [value]="customer"
+        <div class=" scroll-y">
+        <p-table #dt [(selection)]="selectedCustomers" dataKey="id"  [rowHover]="true" [rows]="10" [value]="listStaffConfirm"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
         [globalFilterFields]="['name','country.name','representative.name','status']">
@@ -518,6 +527,7 @@
     
         </ng-template>
       </p-table>
+      </div>
       </div>
     </div>
   
