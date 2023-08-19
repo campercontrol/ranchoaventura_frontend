@@ -192,7 +192,7 @@
                 </div>
               </div>
               <div ngbDropdown placement="top-end" class="d-inline-block"  style="margin-right: 10px;">
-                <button type="button" class="btn btn-primary">Selecciona rol</button>
+                <button type="button" class="btn btn-primary" (click)="modalConfir = !modalConfir">Selecciona rol</button>
                 
               </div>
             </div>
@@ -201,7 +201,7 @@
           </div>
 
           <div class="scroll-y">
-            <p-table #dt [(selection)]="selectedCustomers" dataKey="id"  [rowHover]="true" [rows]="10" [value]="listStaffConfirm"
+            <p-table #dt [(selection)]="selectedCustomers" dataKey="staff_id"  [rowHover]="true" [rows]="10" [value]="listStaffConfirm"
             [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0" dataKey="staff_id"
             [globalFilterFields]="['name','country.name','representative.name','status']">
@@ -302,7 +302,7 @@
                 </td>
 
                 <td>
-                  <button class="btn btn-primary" class="btn btn-primary">ver campamento</button>
+                  <button class="btn btn-primary" class="btn btn-primary">ver staff</button>
                 </td>
 
 
@@ -344,7 +344,7 @@
               
               </div>
               <div ngbDropdown placement="top-end" class="d-inline-block"  style="margin-right: 10px;">
-                <button type="button" class="btn btn-danger">seleciona staff</button>
+                <button type="button" class="btn btn-danger" (click)="displayMaximizable2= !displayMaximizable2">seleciona staff</button>
                 
               </div>
             </div>
@@ -353,7 +353,7 @@
           </div>
 
           <div class="scroll-y">
-            <p-table #dt [(selection)]="selectedCustomers" dataKey="id"  [rowHover]="true" [rows]="10" [value]="customer"
+            <p-table #dt [(selection)]="staffSelecionado" dataKey="staff_id"  [rowHover]="true" [rows]="10" [value]="staffApuntado"
             [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
             [globalFilterFields]="['name','country.name','representative.name','status']">
@@ -419,43 +419,40 @@
                   <p-tableCheckbox [value]="customer"></p-tableCheckbox>
                 </td>
                 <td>
-                  <p-avatar image="../../../assets/images/users/avatar-2.jpg" shape="circle" size="large"></p-avatar>
+                  <p-avatar [image]="'http://142.93.12.234:8000/'+customer.staff_photo" shape="circle" size="large"></p-avatar>
                 </td>
                 <td>
-                  {{customer.name}}
+                  {{customer.staff_full_name}}
                 </td>
                
                 <td>
-                  <img src="../../../assets/images/camp/pastel-cumpleaños.png" alt="" *ngIf="customer.cumple">
-
-                  {{customer.inicio}}
+                  {{customer.staff_birthday}}
                   <br>
 
                 </td>
                 <td>
-                 5512391274
+                 {{customer.staff_cellphone}}
                 </td>
                 
                 <td>
-                  papa@campercontrol.com
+                  {{customer.staff_email}}
                 </td>
                 <td>
-                  18 de Octubre de 2017	
-                </td>
-                <td>
-
-                  <p-badge [value]="customer.record.n" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
-                  <p-badge [value]="customer.record.b" pTooltip="Staff apuntados" tooltipPosition="top" severity="info"
-                    severity="warning"></p-badge>
-                  <p-badge [value]="customer.record.d" pTooltip="Staff confirmado" tooltipPosition="top"
-                    severity="danger" severity="danger"></p-badge>
+                 
+                  <p-badge [value]="customer.camper_total" pTooltip="Total" tooltipPosition="top"></p-badge>
+                  <p-badge [value]="customer.camper_attended" pTooltip="Camps anteriores" tooltipPosition="top" severity="danger"
+                    severity="danger"></p-badge>
+                  <p-badge [value]="customer.camper_attend" pTooltip="Proximos camps" tooltipPosition="top"
+                    severity="success" severity="success"></p-badge>
 
 
                 </td>
-                
+                <td>
+                  {{customer.staff_role}}
+                </td>
 
                 <td>
-                  <button class="btn btn-primary" class="btn btn-primary">ver campamento</button>
+                  <button class="btn btn-primary" class="btn btn-primary">ver staff</button>
                 </td>
 
 
@@ -480,7 +477,7 @@
 
 
 
-<p-dialog header="staff  no apuntado" [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '50vw'}" [maximizable]="true" [baseZIndex]="10000"
+<p-dialog header="staff  no apuntado" [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '90%'}" [maximizable]="true" [baseZIndex]="10000"
     [draggable]="false" [resizable]="false">
     <div class="center">
       <div class="col-10">
@@ -489,24 +486,20 @@
           placeholder="Global Search" />
         </div>
         <div class=" scroll-y">
-        <p-table #dt [(selection)]="selectedCustomers" dataKey="id"  [rowHover]="true" [rows]="10" [value]="listStaffConfirm"
+        <p-table #dt [(selection)]="staffNoselecionado" dataKey="Staff.id"  [rowHover]="true" [rows]="10" [value]="listaStaff"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-        [globalFilterFields]="['name','country.name','representative.name','status']">
+        [globalFilterFields]="['Staff.name','Staff.lastname_father','Staff.lastname_mother','status']">
     
         <ng-template pTemplate="header">
           <tr>
-            <th>
-              <div style=" width: 30%;">
-                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-              </div>
-            </th>
+           
     
            
-            <th pSortableColumn="name" class="camp">
+            <th pSortableColumn="Staff.name" class="camp">
               <div class="flex justify-content-between align-items-center" style=" width: 60%;">
                 Nombre
-                <p-sortIcon field="name"></p-sortIcon>
+                <p-sortIcon field="Staff.name"></p-sortIcon>
               </div>
             </th>
             
@@ -515,11 +508,9 @@
         </ng-template>
         <ng-template pTemplate="body" let-customer>
           <tr class="p-selectable-row">
+           
             <td>
-              <p-tableCheckbox [value]="customer"></p-tableCheckbox>
-            </td>
-            <td>
-              {{customer.name}}
+              {{customer.Staff.name}} {{customer.Staff.lastname_father}}  {{customer.Staff.lastname_mother}}
             </td>
           </tr>
         </ng-template>
@@ -534,6 +525,116 @@
     
         <ng-template pTemplate="footer">
             <p-button icon="pi pi-check" (click)="displayMaximizable=false" label="Cancelar" class="p-button-text"></p-button>
-            <p-button icon="pi pi-times" (click)="displayMaximizable=false" label="Aceptar staff"></p-button>
+            <p-button icon="pi pi-times"  label="Aceptar staff" (click)="agregarStaffNoApuntado()"></p-button>
+        </ng-template>
+</p-dialog>
+
+
+
+
+<p-dialog header="Confirmar" [(visible)]="displayMaximizable2" [modal]="true" [style]="{width: '90%'}" [maximizable]="true" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <div class="center">
+      <div class="col-10">
+        <div class="left mb-2">
+          <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Global Search" />
+        </div>
+        <div class=" scroll-y">
+        <p-table #dt [(selection)]="staffSelecionado" dataKey="Staff.id"  [rowHover]="true" [rows]="10" [value]="staffSelecionado"
+        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+        [globalFilterFields]="['staff_full_name']">
+    
+        <ng-template pTemplate="header">
+          <tr>
+            
+    
+           
+            <th pSortableColumn="Staff.name" class="camp">
+              <div class="flex justify-content-between align-items-center" style=" width: 60%;">
+                Nombre
+                <p-sortIcon field="Staff.name"></p-sortIcon>
+              </div>
+            </th>
+            
+    
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-customer>
+          <tr class="p-selectable-row">
+            
+            <td>
+              {{customer.staff_full_name}} 
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+    
+        </ng-template>
+      </p-table>
+      </div>
+      </div>
+    </div>
+  
+    
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="displayMaximizable2=false" label="Cancelar" class="p-button-text"></p-button>
+            <p-button icon="pi pi-times"  label="Aceptar staff" (click)="agregarStaffApuntado()"></p-button>
+        </ng-template>
+</p-dialog>
+
+
+<p-dialog header="Confirmar" [(visible)]="modalConfir" [modal]="true" [style]="{width: '90%'}" [maximizable]="true" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+    <div class="center">
+      <div class="col-10">
+        <select class="form-select" aria-label="Default select example"[(ngModel)]="selectRol">
+          <option selected value="0">Seleciona un rol</option>
+          <option *ngFor="let item of rolSatff" [value]="item.id">{{item.name}}</option>
+         
+        </select>
+     
+        <div class=" scroll-y">
+        <p-table #dt [(selection)]="staffSelecionado" dataKey="Staff.id"  [rowHover]="true" [rows]="10" [value]="selectedCustomers"
+        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+        [globalFilterFields]="['staff_full_name']">
+    
+        <ng-template pTemplate="header">
+          <tr>
+           
+    
+           
+            <th pSortableColumn="Staff.name" class="camp">
+              <div class="flex justify-content-between align-items-center" style=" width: 60%;">
+                Nombre
+                <p-sortIcon field="Staff.name"></p-sortIcon>
+              </div>
+            </th>
+            
+    
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-customer>
+          <tr class="p-selectable-row">
+            
+            <td>
+              {{customer.staff_full_name}} 
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+    
+        </ng-template>
+      </p-table>
+      </div>
+      </div>
+    </div>
+  
+    
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="modalConfir=false" label="Cancelar" class="p-button-text"></p-button>
+            <p-button icon="pi pi-times"  label="Aceptar" (click)="selectstaff()" *ngIf="selectRol>0"></p-button>
         </ng-template>
 </p-dialog>
