@@ -87,8 +87,7 @@ export class AlimentacionComponent implements OnInit {
       console.log(res);
       
       this.getCatalogos();
-      })
-   
+      })  
   }
 
   guardar() {

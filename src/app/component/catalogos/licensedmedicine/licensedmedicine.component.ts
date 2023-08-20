@@ -167,6 +167,17 @@ export class LicensedmedicineComponent implements OnInit {
       alert('No se pudo Eliminar')
     })
   }
+  guardarOrder(){
+    let a = []
+    this.listcatalogos.forEach((element,index) => {
+      a.push({id:element.id,order:index})     
+    });
+    this.catalogos.order(3,a).subscribe((res: any) => {
+      console.log(res);
+      
+      this.getCatalogos();
+      })  
+  }
   
 
 }

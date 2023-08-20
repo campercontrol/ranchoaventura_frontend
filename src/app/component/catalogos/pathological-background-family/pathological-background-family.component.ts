@@ -122,6 +122,17 @@ export class PathologicalBackgroundFamilyComponent implements OnInit {
   
     
   }
+  guardarOrder(){
+    let a = []
+    this.listcatalogos.forEach((element,index) => {
+      a.push({id:element.id,order:index})     
+    });
+    this.catalogos.order(5,a).subscribe((res: any) => {
+      console.log(res);
+      
+      this.getCatalogos();
+      })  
+  }
 
   keepUpdate(){
     this.catalogos.updatPathological_backgroundFamily(this.formFood.value,this.updateId).subscribe((res: any) => {

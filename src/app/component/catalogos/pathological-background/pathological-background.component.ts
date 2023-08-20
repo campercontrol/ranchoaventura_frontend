@@ -104,6 +104,17 @@ export class PathologicalBackgroundComponent implements OnInit {
       created_at: this.date
     })
   }
+  guardarOrder(){
+    let a = []
+    this.listcatalogos.forEach((element,index) => {
+      a.push({id:element.id,order:index})     
+    });
+    this.catalogos.order(4,a).subscribe((res: any) => {
+      console.log(res);
+      
+      this.getCatalogos();
+      })  
+  }
 
   update(item){
     console.log(item);

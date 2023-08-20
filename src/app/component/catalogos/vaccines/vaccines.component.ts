@@ -154,6 +154,18 @@ export class VaccinesComponent implements OnInit {
    
   }
 
+  guardarOrder(){
+    let a = []
+    this.listcatalogos.forEach((element,index) => {
+      a.push({id:element.id,order:index})     
+    });
+    this.catalogos.order(2,a).subscribe((res: any) => {
+      console.log(res);
+      
+      this.getCatalogos();
+      })  
+  }
+
   delet(){
     console.log(this.idDalete,'ss');
     
