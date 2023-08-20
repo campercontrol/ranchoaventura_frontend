@@ -145,6 +145,7 @@ import { UpdateStaffComponent } from './component/update-staff/update-staff.comp
 import { MetodosPagosComponent } from './component/catalogos/metodos-pagos/metodos-pagos.component';
 import { PreguntasExtrasComponent } from './component/catalogos/preguntas-extras/preguntas-extras.component';
 import { CargosExtrasComponent } from './component/catalogos/cargos-extras/cargos-extras.component';
+import { EscuelaComponent } from './component/catalogos/escuela/escuela.component';
 
 
 
@@ -193,7 +194,8 @@ export function createTranslateLoader(http: HttpClient): any {
     UpdateStaffComponent,
     MetodosPagosComponent,
     PreguntasExtrasComponent,
-    CargosExtrasComponent, 
+    CargosExtrasComponent,
+    EscuelaComponent, 
        
   ],
   imports: [

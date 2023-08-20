@@ -204,4 +204,19 @@ export class CatalogosService {
       console.log(id);
       return this.http.delete('http://142.93.12.234:8000/delete/camp_extra_charge/'+id);
     }
+    ///
+     getSchool(){
+      return this.http.get('http://142.93.12.234:8000/school/');
+
+     }
+     postSchool(info){
+      return this.http.post('http://142.93.12.234:8000/school/',info);
+     }
+     updateSchool(a:any,id){
+      return this.http.patch('http://142.93.12.234:8000/school/'+id,a);
+    }
+    deleteSchool(id){
+      return this.http.delete('http://142.93.12.234:8000/delete_school/'+id);
+    }
+  
 }
