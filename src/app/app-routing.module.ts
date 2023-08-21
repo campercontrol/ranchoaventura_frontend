@@ -8,23 +8,24 @@ import { Page404Component } from './extrapages/page404/page404.component';
 import { LoginComponent } from './login/login.component';
 import { NewParentComponent } from './component/new-parent/new-parent.component';
 import { ProspectoComponent } from './component/prospecto/prospecto.component';
+import { RedirigirComponent } from './redirigir/redirigir.component';
 
 const routes: Routes = [
  // { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
   // tslint:disable-next-line: max-line-length
 
-
+  {path:'',component:RedirigirComponent},
   {path:'login',component:LoginComponent},
   {path:'prospects',component:ProspectoComponent},
   {path:'Singup',component:NewParentComponent},
-  { path: 'dashboard', component: LayoutComponent, loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule), canActivate: [AuthGuard] },
+  { path: 'dashboard', component: LayoutComponent, loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
   { path: 'pages', loadChildren: () => import('./extrapages/extrapages.module').then(m => m.ExtrapagesModule),  },
  // { path: 'crypto-ico-landing', component: CyptolandingComponent },
   { path: '**', component: Page404Component },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top', relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 

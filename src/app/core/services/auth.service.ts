@@ -87,7 +87,8 @@ export class AuthenticationService {
       this.infToken = jwt_decode(a.access_token);
       this.loggedIn = true;
      }else{
-      this.router.navigate(['/login']);
+      this.loggedIn = false;
+      this.router.navigate(['login']);
 
      }
 

@@ -146,6 +146,7 @@ import { MetodosPagosComponent } from './component/catalogos/metodos-pagos/metod
 import { PreguntasExtrasComponent } from './component/catalogos/preguntas-extras/preguntas-extras.component';
 import { CargosExtrasComponent } from './component/catalogos/cargos-extras/cargos-extras.component';
 import { EscuelaComponent } from './component/catalogos/escuela/escuela.component';
+import { RedirigirComponent } from './redirigir/redirigir.component';
 
 
 
@@ -195,7 +196,8 @@ export function createTranslateLoader(http: HttpClient): any {
     MetodosPagosComponent,
     PreguntasExtrasComponent,
     CargosExtrasComponent,
-    EscuelaComponent, 
+    EscuelaComponent,
+    RedirigirComponent, 
        
   ],
   imports: [

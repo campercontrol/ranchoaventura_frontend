@@ -10,7 +10,7 @@ import { AuthenticationService } from './core/services/auth.service';
 export class AppComponent implements OnInit  {
 
   constructor(private info:AuthenticationService){
-      this.info.logaot()
+     
   }
 
   ngOnInit() {

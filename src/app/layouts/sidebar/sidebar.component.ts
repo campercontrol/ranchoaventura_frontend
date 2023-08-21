@@ -36,7 +36,9 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
 
   constructor(private eventService: EventService, private router: Router, public translate: TranslateService, private http: HttpClient,private info: AuthenticationService ) {
   
-    this.rol_id =info.infToken.role_id; 
+    if(this.info.infToken){
+      this.rol_id =info.infToken.role_id; 
+    }
 
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
