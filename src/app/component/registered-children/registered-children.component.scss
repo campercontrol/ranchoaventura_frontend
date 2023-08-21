@@ -155,4 +155,10 @@ i{
   *::-webkit-scrollbar-thumb:active {
     background-color: #1A31A3;
   }
+
+  .center{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   

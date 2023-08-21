@@ -7,10 +7,11 @@
       <span class="sr-only">Loading...</span>
     </div>
   </div>
+  <div *ngIf="cargando"><h2>{{textos['subtitel']}} {{total}}</h2></div>
 
   <div class="row" *ngIf="cargando">
     <div class="d-flex">
-      <button class="btn btn-success ms-auto mb-2" [routerLink]="['parents/new-camper']" >Nuevo Camper </button>
+      <button class="btn btn-success ms-auto mb-2" [routerLink]="['parents/new-camper']" >{{textos['Botton']}} </button>
     </div>
  
 
@@ -29,9 +30,9 @@
           </div>
           <h5 class="font-size-15 mb-1" (click)="redirectPerfil(data.camper.id)" style="cursor: pointer;"><a href="javascript: void(0);" class="text-dark">{{data.camper.full_name}}</a></h5>
           <p class="text-muted">{{data.camper.school}}</p>
-          <p class="text-muted">Saldo Pendiente {{data.camper.full_name}}</p>
+          <p class="text-muted">{{textos['subtitul2']}} {{data.camper.full_name}}</p>
           <p class="text-muted">${{data.camper_balance}}MXN</p>
-          <p class="text-muted">Asistirá a los siguientes camps:</p>
+          <p class="text-muted">{{textos['cardSubt']}}</p>
           <div class="col-6 card-info" style="margin: 0 auto;">
             <a href="javascript: void(0);" class="badge bg-primary font-size-11 m-1 camps"
               *ngFor="let a of data.camps"  (click)="redirect(a.camp_id,data.camper.id)">
@@ -42,7 +43,7 @@
          
           <div style="margin: 0 auto;" *ngIf="data.camps.length<1">
             <hr>
-             <a  [routerLink]="['../dashboard/parents/inscription/'+data.camper.id]" class="btn btn-success" style="width: 90%;">Camps disponibles</a>
+             <a  [routerLink]="['../dashboard/parents/inscription/'+data.camper.id]" class="btn btn-success" style="width: 90%;">{{textos['cardBotton']}} Camps disponibles</a>
           </div>
         </div>
         <div class="card-footer bg-transparent border-top">

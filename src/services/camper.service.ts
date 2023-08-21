@@ -17,6 +17,11 @@ export class CamperService {
   setCamper(info:{}){
     return this.http.post('http://142.93.12.234:8000/camper/',info)
    }
+   
+
+   lengua(){
+    return this.http.get('/src/assets/json/lengua.json');
+   }
 
    prueba(){
     return this.http.get('http://142.93.12.234:8000/camper_complete/13/es');

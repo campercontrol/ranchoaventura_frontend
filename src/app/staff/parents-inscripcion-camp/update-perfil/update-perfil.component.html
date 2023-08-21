@@ -8,19 +8,18 @@
                     <div class="card-body">
                         <div class="container-footer-parents">
                             <img src="assets/images/camp/perfil-camper.png" class="avatar-lg" alt="madre y padres">
-                            <h4 class="ms-3">Datos personales del acampador</h4>
+                            <h4 class="ms-3">{{textos['CampersPersonalInformation']}}</h4>
                         </div>
                         <div class="mt-5">
                             <div class="row mb-4">
                                 <label for=""
-                                    class="col-sm-3 col-form-label">Nombre(s)*</label>
+                                    class="col-sm-3 col-form-label">{{textos['Name']}}</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control " id="" formControlName="name" name="name" #name (input)="getname()">
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Apellido
-                                    paterno*</label>
+                                <label for="" class="col-sm-3 col-form-label">{{textos['lastname']}}</label>
                                    
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id=""
@@ -28,24 +27,21 @@
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Apellido
-                                    materno</label>
+                                <label for="" class="col-sm-3 col-form-label">{{textos['motherslastname']}}</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id=""
                                         formControlName="lastname_mother"  name="lastname_mother" #lastname_mother (input)="getlastname_mother()">
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Correo
-                                    Electrónico
-                                    del acampador</label>
+                                <label for="" class="col-sm-3 col-form-label">{{textos['email']}}</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id=""
                                         formControlName="email"  name="email" #email (input)="getemail()">
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Genero</label>
+                                <label for="" class="col-sm-3 col-form-label">{{textos['Gender']}}</label>
 
                                 <div class="col-sm-9">
                                     <select bindLabel="value" bindValue="id" formControlName="gender_id"  style="width: 100%;" (change)="getgender_id()"  class=" form-control" #gender_id>
@@ -55,8 +51,7 @@
                             </div>
 
                             <div class="row mb-4 mt-3">
-                                <label for="" class="col-sm-3 col-form-label">Fecha de
-                                    nacimiento*</label>
+                                <label for="" class="col-sm-3 col-form-label">{{textos['Birthdate']}}</label>
                                 <div class=" control-label col-sm-9">
                                     
                                         <input type="date" class="form-control" placeholder="yyyy-mm-dd"
@@ -70,8 +65,8 @@
                                     
                                 </div>
 
-                                <div class="mt-3 foto"  #photo tabindex="0" id="photo">
-                                    <label for="">Foto de Perfil</label>
+                                <div class="mt-3 foto"  tabindex="0" id="photo">
+                                    <label for="">{{textos['Profilepicture']}}</label>
                                     <input type="file" accept="image/jpeg" (change)="subiendo($event)" >
                                     
     
@@ -103,11 +98,11 @@
                     <div class="card-body">
                         <div class="container-footer-parents">
                             <img src="assets/images/camp/datos-escolares.png" class="avatar-lg" alt="madre y padres">
-                            <h4 class="ms-3">Datos Escolares</h4>
+                            <h4 class="ms-3">{{textos['Schoolinformation']}}</h4>
                         </div>
                         <div class="mt-5">
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Escuela*</label>
+                                <label for="" class="col-sm-3 col-form-label">{{textos['School']}}</label>
                                 <div class="control-label col-sm-9">
                                     <select name="school_id" id="school_id" formControlName="school_id" (change)="getschool_id()" class="form-control" #school_id>
                                         <option *ngFor="let item of school1" [value]="item.id" >
@@ -119,16 +114,14 @@
                                
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Otra
-                                    escuela</label>
+                                <label for="" class="col-sm-3 col-form-label">{{textos['Otherschool']}}</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="" formControlName="school_other" (input)="getSchool_other()" #school_other>
                                 </div>
                                
                             </div>
                             <div class="row mb-4" >
-                                <label for="" class="col-sm-3 col-form-label">Grado
-                                    escolar*</label>
+                                <label for="" class="col-sm-3 col-form-label">{{textos['Grade']}}</label>
                                 <div class="control-label col-sm-9">
                                   
 
@@ -152,11 +145,11 @@
                     <div class="card-body">
                         <div class="container-footer-parents">
                             <img src="assets/images/camp/datos-medico.png" class="avatar-lg" alt="madre y padres">
-                            <h4 class="ms-3">Datos Médicos Generales</h4>
+                            <h4 class="ms-3">{{textos['MedicalinformationGeneralMedicalData']}}</h4>
                         </div>
                         <div class="mt-5">
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Estatura</label>
+                                <label for="" class="col-sm-3 col-form-label">{{textos['Height']}}</label>
                                 
 
                                 <div class="control-label col-sm-9">
@@ -173,7 +166,7 @@
                                   </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Peso</label>
+                                <label for="" class="col-sm-3 col-form-label">{{textos['Weight']}}</label>
                                 <div class="col-sm-9">
                                  
                                          <div class="input-group mb-3">
@@ -192,8 +185,7 @@
                             <div class="row mb-4">
 
                                 <label for="" class="col-sm-6 col-form-label">
-                                    Vacuna que
-                                    tiene:</label>
+                                    {{textos['Currentvaccines']}}</label>
                                 <div class="container-genero">
                                     <div class="mb-3">
     
@@ -210,8 +202,7 @@
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Tipo de
-                                    sangre*</label>
+                                <label for="" class="col-sm-3 col-form-label">{{textos['Bloodtype']}}</label>
                                 <div class="control-label col-sm-9">
                                     <select name="school_id" id="school_id" formControlName="blood_type" (change)="getblood_type()" class="form-control" #blood_type>
                                         <option *ngFor="let item of blood_types" [value]="item.id" >
@@ -220,7 +211,7 @@
                                     </select>
                                    
 
-                                    <small>En caso de no conocer el tipo de sangre, escribe NO RECUERDO
+                                    <small>{{textos['Ifyoudon']}}
                                     </small>
                                 </div>
                             </div>
@@ -236,19 +227,19 @@
                 <div class="card-body card">
                     <div class="container-footer-parents">
                         <img src="assets/images/camp/historial-medico.png" class="avatar-lg" alt="madre y padres">
-                        <h4 class="ms-3">Registro de Enfermedades
+                        <h4 class="ms-3">{{textos['DiseaseRegistry']}}
                         </h4>
                     </div>
 
-                    <h2 style="text-align:center ; margin-top: 30px;">Antecedentes patológicos:</h2>
+                    <h2 style="text-align:center ; margin-top: 30px;">{{textos['Pathologicalhistory']}}</h2>
                     <div class="mt-5">
                         <div class="contenedor-datos">
                             <div class="titulos-datos-medicos">
-                                <p style="margin-top:2px ;">NOMBRE</p>
+                                <p style="margin-top:2px ;">Nombre</p>
                                 <p *ngFor="let item of pathological_background" class="mt-2">{{item.name}}</p>
                             </div>
                             <div class="input-datos-medicos">
-                                <p style="margin-top:2px ;">ACAMPADOR</p>
+                                <p style="margin-top:2px ;">{{textos['CAMPER']}}</p>
                                 <ng-container  *ngFor="let item of pathological_background;index as i">
                                     <input (click)="pathological_backgroundValu(i)" type="checkbox" style="margin-top:10px ;" value="{{item.is_active}}"
                                         id="{{item.id}}">
@@ -257,7 +248,7 @@
                                 </ng-container>
                             </div>
                             <div class="input-datos-medicos">
-                                <p style="margin-top:2px ;">FAMILIA</p>
+                                <p style="margin-top:2px ;">{{textos['FAMILY']}}</p>
                                 <ng-container  *ngFor="let item of pathological_background_fm;index as i">
                                     <input (click)="pathological_background_fmValu(i)" type="checkbox" style="margin-top:10px ;" value="{{item.is_active}}"
                                         id="{{item.id}}">
@@ -273,7 +264,7 @@
 
 
                         <div class="container-medico mt-5">
-                            <h3>Problemas cardíacos*</h3>
+                            <h3>{{textos['Heartproblems']}}</h3>
                             <textarea
                                 placeholder="En caso de NO padecer ningun problema cardiaco, teclea la palabra NINGUNO"
                                 name="" id="" cols="90" rows="10"
@@ -283,7 +274,7 @@
                                  #heart_problems></textarea>
                         </div>
                         <div class="container-medico mt-5">
-                            <h3>Circunstancias medicas que le impidan realizar actividades*</h3>
+                            <h3>{{textos['Medicalcircumstances']}}</h3>
                             <textarea
                                 placeholder="En caso de NO haber tenido o tener cirugías, fracturas y/o esguinces que le impidan realizar actividades, teclea la palabra NINGUNA"
                                 name="" id="" cols="90" rows="10"
@@ -297,9 +288,9 @@
                         </div>
 
                         <div class="container-medico mt-5">
-                            <h3>Enfermedades que padece*</h3>
+                            <h3>{{textos['Medicalcondition']}}</h3>
                             <textarea
-                                placeholder="En caso de NO padecer alguna enfermedad, teclea la palabra NINGUNO"
+                                [placeholder]="textos['Ifhe/she']"
                                 name="" id="" cols="90" rows="10"
                                 formControlName = "affliction"
                                 class="form-control"
@@ -317,7 +308,7 @@
                     <div class="card-body">
                         <div class="container-footer-parents">
                             <img src="assets/images/camp/medicamento.png" class="avatar-lg" alt="madre y padres">
-                            <h4 class="ms-3">Medicamentos</h4>
+                            <h4 class="ms-3">{{textos['Medicines']}}</h4>
                         </div>
 
                         <p style="margin-top: 20px; color:#f46a6a;" class="fw-bold">
@@ -334,7 +325,7 @@
                         </p>
 
 
-                        <h3 style="margin-top: 40px;">Medicamentos preautorizados:
+                        <h3 style="margin-top: 40px;">{{textos['Medicamentospreautorizados']}}
                         </h3>
 
                         <div action="" class="mt-5">
@@ -369,7 +360,7 @@
 
                             <div class="container-medico mt-5" placement="top"
                                 ngbTooltip="Si no requiere de tratamiento médico, teclea la palabra NINGUNO">
-                                <h3>Durante el camp, ¿Estará tomando algún medicamento?*</h3>
+                                <h3>{{textos['Duringcamp']}}</h3>
                                 <textarea
                                     placeholder="Especificar dosis y horarios para la toma de medicamentos en tal caso de no necitar poner NINGUNO"
                                     name="" id="" cols="90" rows="10"
@@ -385,7 +376,7 @@
 
                             <div class="container-medico mt-5" placement="top"
                                 ngbTooltip="Si no requiere de tratamiento médico, teclea la palabra NINGUNO">
-                                <h3>Alergias a medicamentos*</h3>
+                                <h3>{{textos['Drugallergies']}}</h3>
                                 <textarea
                                     placeholder="En caso de que el acampador no sea alérgico a algún medicamento, teclea la palabra NINGUNO"
                                     name="" id="" cols="90" rows="10"
@@ -398,7 +389,7 @@
                             </div>
                             <div class="container-medico mt-5" placement="top"
                                 ngbTooltip="Si no requiere de tratamiento médico, teclea la palabra NINGUNO">
-                                <h3>Otras Alergias*</h3>
+                                <h3><h3>{{textos['OtrasCondiciones']}}</h3></h3>
                                 <textarea
                                     placeholder="En caso de que el acampador no sea alérgico, teclea la palabra NINGUNA"
                                     name="" id="" cols="90" rows="10"
@@ -433,7 +424,7 @@
                     <div class="card-body">
                         <div class="container-footer-parents">
                             <img src="assets/images/camp/otros.png" class="avatar-lg" alt="madre y padres">
-                            <h4 class="ms-3">Otras Condiciones
+                            <h4 class="ms-3">{{textos['OtrasCondicionest']}}
                             </h4>
                         </div>
 
@@ -442,7 +433,7 @@
 
 
                             <div class="container-medico mt-5">
-                                <h3>Alteraciones nocturnas*</h3>
+                                <h3>{{textos['Nightdisturbance']}}</h3>
                                 <textarea
                                     placeholder="En caso de que el acampador no padezca de alteraciones nocturnas, teclea la palabra NINGUNA"
                                     name="" id="" cols="90" rows="10"
@@ -454,7 +445,7 @@
 
                             </div>
                             <div class="container-medico mt-5">
-                                <h3>Fobias o miedos*</h3>
+                                <h3>{{textos['Phobiasfears']}}</h3>
                                 <textarea
                                     placeholder="En caso de que el acampador no padezca de fobias, teclea la palabra NINGUNO"
                                     name="" id="" cols="90" rows="10"
@@ -467,7 +458,7 @@
                             </div>
 
                             <div class="container-medico mt-5">
-                                <h3>Tratamientos psiquiátricos o psicológicos*</h3>
+                                <h3>{{textos['Psychiatricpsychologicaltreatments']}}</h3>
                                 <textarea
                                     placeholder="En caso de NO estar en ningun tratamiento psicologico o psiquiatrico, teclea la palabra NINGUNO"
                                     name="" id="" cols="90" rows="10"
@@ -479,9 +470,7 @@
 
                             </div>
 
-                            <label for="" class="mt-5 col-sm-6 col-form-label">¿ Él/la camper
-                                sabe
-                                nadar ?</label>
+                            <label for="" class="mt-5 col-sm-6 col-form-label">{{textos['Doeshe/she']}}</label>
                             <div class="container-genero">
                                 <div class="mb-3">
 
@@ -520,14 +509,14 @@
                     <div class="card-body">
                         <div class="container-footer-parents">
                             <img src="assets/images/camp/chef.png" class="avatar-lg" alt="madre y padres">
-                            <h4 class="ms-3"> Alimentación
+                            <h4 class="ms-3">{{textos['Food']}}
                             </h4>
                         </div>
 
 
                         <div class="mt-5">
                             <label for="" class="col-sm-6 col-form-label">
-                                Alimentación:</label>
+                                {{textos['Food']}}</label>
                             <div class="container-genero">
                                 <div class="mb-3">
 
@@ -545,7 +534,7 @@
 
 
                             <div class="container-medico mt-5">
-                                <h3>Comida prohibida*</h3>
+                                <h3>{{textos['Forbiddenfood']}}</h3>
                                 <textarea
                                     placeholder="En caso de que el acampador pueda comer cualquier tipo de comida, teclea la palabra NINGUNA"
                                     name="" id="" cols="90" rows="10"
@@ -582,8 +571,7 @@
 
                         <div class="mt-5">
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label"> Nombre de
-                                    contacto*
+                                <label for="" class="col-sm-3 col-form-label"> {{textos['ContactName']}}
                                 </label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id=""
@@ -593,8 +581,7 @@
                             </div>
 
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label"> Parentesco de
-                                    contacto* </label>
+                                <label for="" class="col-sm-3 col-form-label">  {{textos['Relationcamper']}} </label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id=""
                                     formControlName = "contact_relation" #contact_relation (input)="getcontact_relation()"
@@ -602,21 +589,17 @@
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Teléfono movil
-                                    de
-                                    contacto* </label>
+                                <label for="" class="col-sm-3 col-form-label"> {{textos['Mobilephone']}} </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id=""
+                                    <input type="number" class="form-control" id=""
                                     formControlName = "contact_cellphone"  #contact_cellphone (input)="getcontact_cellphone()"
                                     >
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Teléfono de casa
-                                    de
-                                    contacto*</label>
+                                <label for="" class="col-sm-3 col-form-label"> {{textos['Homephone']}} </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" formControlName ="contact_homephone"
+                                    <input type="number" class="form-control" id="" formControlName ="contact_homephone"
                                     #contact_homephone (input)="getcontact_homephone()"
                                     >
                                 </div>
@@ -641,26 +624,21 @@
                             <div class="container-fluid flex-container">
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" formControlName="insurance">
-                                    <label for="" class="form-check-label"> ¿Cuenta con Seguro de Gastos Médicos Mayores?</label>
+                                    <label for="" class="form-check-label"> {{textos['Doyouhave']}} </label>
                                 </div>
                             </div>
                             <div class="row mb-4 mt-3">
-                                <label for="" class="col-sm-3 col-form-label"> Compañía de
-                                    seguros
+                                <label for="" class="col-sm-3 col-form-label"> {{textos['InsuranceCompany']}}
                                 </label>
                                 <div class="col-sm-9">
 
-                                    <input type="text" class="form-control" id=""   #insurance_company (input)="getinsurance_company()">
-
-                                 <!--  <input type="text" class="form-control" id="" formControlName="insurance_company"  #insurance_company (input)="getinsurance_company()">
- -->  
+                                <input type="text" class="form-control" id="" formControlName="insurance_company"  #insurance_company (input)="getinsurance_company()">
                                   
                                 </div>
                             </div>
 
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Numero de
-                                    póliza</label>
+                                <label for="" class="col-sm-3 col-form-label"> {{textos['policynumber']}}</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="" formControlName = "insurance_number"
                                     (input)="getinsurance_number()" #insurance_number
@@ -668,8 +646,7 @@
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Número de
-                                    seguridad social </label>
+                                <label for="" class="col-sm-3 col-form-label">{{textos['SocialSecurity']}} </label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="" formControlName="security_social_number" #security_social_number
                                     (input)="getsecurity_social_number()"

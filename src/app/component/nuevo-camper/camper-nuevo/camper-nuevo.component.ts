@@ -4,6 +4,8 @@ import { CamperService } from 'src/services/camper.service';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
+import traducciones  from 'src/assets/json/lengua.json';
+
 
 
 
@@ -71,6 +73,8 @@ export class CamperNuevoComponent implements OnInit {
   @ViewChild("insurance_company") insurance_company: ElementRef;
   photoSatus = false;
   spinerPhot= true;
+  textos ={}
+  idioma = 'eng' 
   
 
 
@@ -78,6 +82,10 @@ export class CamperNuevoComponent implements OnInit {
   sexo:string[]=['Hombre','Mujer',"No binario"," Prefiero no decir"]
 
   constructor(private catalogos: CamperService , private formGrup: FormBuilder, private router:Router,private render:Renderer2,private info: AuthenticationService) {
+    
+    
+    this.textos  = traducciones['traduciones'][this.idioma]['formUserChildren'];
+    
     this.catalogos.getCatalogos().subscribe((res:any)=>{
       console.log(info.infToken);
       
@@ -126,7 +134,7 @@ export class CamperNuevoComponent implements OnInit {
       prohibited_foods: ["",[Validators.required,Validators.minLength(2)]],
       comments_admin: ["Ninguno"],
       insurance: [false],
-      insurance_company: [true],
+      insurance_company: [""],
       insurance_number: [""],
       security_social_number: ["",],
       contact_name: ["",[Validators.required,Validators.minLength(2)]],

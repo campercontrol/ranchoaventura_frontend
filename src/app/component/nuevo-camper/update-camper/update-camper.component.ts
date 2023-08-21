@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Options } from 'ng5-slider';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CamperService } from 'src/services/camper.service';
+import traducciones  from 'src/assets/json/lengua.json';
+
 
 @Component({
   selector: 'app-update-camper',
@@ -70,6 +72,8 @@ export class UpdateCamperComponent implements OnInit {
   @ViewChild("insurance_company") insurance_company: ElementRef;
   photoSatus = false;
   spinerPhot= true;
+  textos ={}
+  idioma = 'eng' 
   
 
 
@@ -78,6 +82,8 @@ export class UpdateCamperComponent implements OnInit {
     this.routesA.params.subscribe((params)=>{
       this.id = params['id']
     })
+    this.textos  = traducciones['traduciones'][this.idioma]['formUserChildren'];
+
     this.catalogos.getCamper(this.id).subscribe((res:any)=>{
       console.log(res.school);
       
@@ -124,7 +130,7 @@ export class UpdateCamperComponent implements OnInit {
       prohibited_foods: ["",[Validators.required]],
       comments_admin: ["Ninguno"],
       insurance: [false],
-      insurance_company: [true],
+      insurance_company: [""],
       insurance_number: [""],
       security_social_number: ["",],
       contact_name: ["",[Validators.required]],

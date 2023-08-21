@@ -9,6 +9,8 @@ import { userGridData } from './data';
 import { CamperService } from 'src/services/camper.service';
 import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
+import traducciones  from 'src/assets/json/lengua.json';
+
 
 @Component({
   selector: 'app-registered-children',
@@ -28,14 +30,22 @@ export class RegisteredChildrenComponent implements OnInit {
   cargando= false;
   // Select2 Dropdown
   selectValue: string[];
+  idioma = 'esp'
+  textos = {}
+  total:any ;
   constructor(private modalService: NgbModal, private formBuilder: FormBuilder,private hijos:CamperService, private router:Router,private info: AuthenticationService) { 
     this.hijos.getHijos(this.info.infToken.profile_id).subscribe(
       (res:any)=>{
         console.log(res);
         this.hijosRes = res.campers;
         this.cargando = true;
+        this.total = res.parent_total_amount
       }
     )
+
+    this.textos  = traducciones['traduciones'][this.idioma]['dashboardParent']
+    
+    
   }
 
   ngOnInit() {
