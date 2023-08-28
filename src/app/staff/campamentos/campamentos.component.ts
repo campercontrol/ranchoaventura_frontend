@@ -10,6 +10,7 @@ import { tableData, editableTable } from './data';
 import { AdvancedService } from './advanced.service';
 import { AdvancedSortableDirective,SortEvent } from './advanced-sortable.directive';
 import { CreateCampsService } from 'src/services/create-camps.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-campamentos',
@@ -33,7 +34,7 @@ export class CampamentosComponent implements OnInit {
   activityValues: number[] = [0, 100];
   customer:any =[]
 
-constructor(private camps: CreateCampsService) { }
+constructor(private camps: CreateCampsService,private router :Router) { }
 cars=[{Nombre:"Campamento con agrupaciones",grado:"prueba2",inicio:"2020-11-10 ",termina:"2020-11-10 " },
 {Nombre:"Campamento con agrupaciones", grado:"prueba2",inicio:"2020-11-10 ",termina:"2020-11-10 "   },
 {Nombre:"Campamento con agrupaciones", grado:"prueba2",inicio:"2020-11-10 ",termina:"2020-11-10 "   },
@@ -47,6 +48,10 @@ cars=[{Nombre:"Campamento con agrupaciones",grado:"prueba2",inicio:"2020-11-10 "
       console.log(this.customer);
       
      })
+  }
+
+  reditCamps(id){
+    this.router.navigate(['dashboard/camp/'+id])
   }
 }
 

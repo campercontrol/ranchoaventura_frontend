@@ -51,6 +51,10 @@ export class CamperService {
     return this.http.patch('http://142.93.12.234:8000/camper/'+id,info)
 
    }
+   deletCamper(id:any){
+    return this.http.delete('http://142.93.12.234:8000/delete_school/'+id,{})
+
+   }
 
    getHijos(id){
     return this.http.get('http://142.93.12.234:8000/parent_dashboard/'+id)

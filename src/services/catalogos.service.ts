@@ -218,5 +218,16 @@ export class CatalogosService {
     deleteSchool(id){
       return this.http.delete('http://142.93.12.234:8000/delete_school/'+id);
     }
+
+    searchPerent(id){
+      return this.http.get('http://142.93.12.234:8000/search/parent/'+id);
+
+    }
+
+    getcampers(){
+      return this.http.get('http://142.93.12.234:8000/camper/');
+
+    }
+  
   
 }

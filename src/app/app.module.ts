@@ -147,6 +147,8 @@ import { PreguntasExtrasComponent } from './component/catalogos/preguntas-extras
 import { CargosExtrasComponent } from './component/catalogos/cargos-extras/cargos-extras.component';
 import { EscuelaComponent } from './component/catalogos/escuela/escuela.component';
 import { RedirigirComponent } from './redirigir/redirigir.component';
+import { AdmiParentComponent } from './component/admi-parent/admi-parent.component';
+import { AdmiuserComponent } from './component/admiuser/admiuser.component';
 
 
 
@@ -197,7 +199,9 @@ export function createTranslateLoader(http: HttpClient): any {
     PreguntasExtrasComponent,
     CargosExtrasComponent,
     EscuelaComponent,
-    RedirigirComponent, 
+    RedirigirComponent,
+    AdmiParentComponent,
+    AdmiuserComponent, 
        
   ],
   imports: [
