@@ -83,7 +83,7 @@ const routes: Routes = [
   { path: 'consultation/camp',component:NuevaConsultaComponent},
 //  { path: 'parents/new-user',component:NewParentComponent},
   { path: 'admi/temp', component: TemporadaComponent },
-  { path: 'admi/camper', component: AdmiuserComponent },
+  { path: 'admi/camper', component: AdmiuserComponent },// admi a acamapdores
 
 
 
