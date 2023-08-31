@@ -23,7 +23,7 @@ export class AdmiService {
     return this.http.post('http://142.93.12.234:8000/camper_comment/',info)
   }
   updateComments(info:any,id){
-    return this.http.post('http://142.93.12.234:8000/camper_comment/'+id,info)
+    return this.http.patch('http://142.93.12.234:8000/camper_comment/'+id,info)
   }
 
   deletComments(id){
