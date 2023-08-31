@@ -228,6 +228,25 @@ export class CatalogosService {
       return this.http.get('http://142.93.12.234:8000/camper/');
 
     }
+    // parent admi
+
+    getParent(){
+      return this.http.get('http://142.93.12.234:8000/parent/');
+
+     }
+     getParentU(id){
+      return this.http.get('http://142.93.12.234:8000/parent/'+id);
+
+     }
+     postParent(info){
+      return this.http.post('http://142.93.12.234:8000/parent/',info);
+     }
+     patchParent(a:any,id){
+      return this.http.patch('http://142.93.12.234:8000/parent/'+id,a);
+    }
+    deletParent(id){
+      return this.http.delete('http://142.93.12.234:8000/delete_parent/'+id);
+    }
   
   
 }

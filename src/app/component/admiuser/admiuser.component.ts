@@ -191,7 +191,7 @@ export class AdmiuserComponent implements OnInit {
   }
 
   schoolinf(id) {
-    console.log(this.school);
+    //console.log(this.school);
     
     let b = this.school.filter((res:any) => {   
   return res.id == Number(id);

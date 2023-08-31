@@ -86,14 +86,6 @@ export class AuthenticationService {
      if(a){
       this.infToken = jwt_decode(a.access_token);
       this.loggedIn = true;
-      if(this.infToken.role_id>1){
-        this.router.navigate(['dashboard/staff']);
-        console.log(this.infToken);
-
-      }else{
-        this.router.navigate(['dashboard']);
-        console.log(this.infToken);
-      }
      }else{
       this.loggedIn = false;
       this.router.navigate(['login']);

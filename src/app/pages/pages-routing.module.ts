@@ -58,6 +58,7 @@ import { PreguntasExtrasComponent } from '../component/catalogos/preguntas-extra
 import { CargosExtrasComponent } from '../component/catalogos/cargos-extras/cargos-extras.component';
 import { EscuelaComponent } from '../component/catalogos/escuela/escuela.component';
 import { AdmiuserComponent } from '../component/admiuser/admiuser.component';
+import { AdmiParentComponent } from '../component/admi-parent/admi-parent.component';
 
 const routes: Routes = [
   
@@ -84,6 +85,7 @@ const routes: Routes = [
 //  { path: 'parents/new-user',component:NewParentComponent},
   { path: 'admi/temp', component: TemporadaComponent },
   { path: 'admi/camper', component: AdmiuserComponent },// admi a acamapdores
+  { path: 'admi/parent', component: AdmiParentComponent },// admi a acamapdores
 
 
 

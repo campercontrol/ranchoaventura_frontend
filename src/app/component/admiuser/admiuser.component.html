@@ -10,6 +10,9 @@
        </h2> 
     </ng-template>
     <div class="col">
+        <div class="alert alert-primary" role="alert" *ngIf="statuAgrgado">
+            Se Agrego correctamente
+          </div>
         <form [formGroup]="formFood">
             <div class="row">
     
@@ -716,7 +719,7 @@
 <p-dialog header="Title" [(visible)]="display2" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '80vw'}" *ngIf="display2">
     <ng-template pTemplate="header">
        <h2>
-        Editar  Escuela
+        Editar  Camper
        </h2>
      
       
@@ -1425,7 +1428,7 @@
 <p-dialog header="Title" [(visible)]="display3" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
     <ng-template pTemplate="header">
        <h2>
-        Eliminar  Escuela
+        Eliminar  Camper
        </h2> 
     </ng-template>
     <div class="col">
@@ -1453,7 +1456,7 @@
                 <div class="container-btn mt-1 mb-3">
                     <div>
                         <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
-                            <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar nueva escuela</button>
+                            <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar nuevo Acampador</button>
         
                         </div>
                     </div>

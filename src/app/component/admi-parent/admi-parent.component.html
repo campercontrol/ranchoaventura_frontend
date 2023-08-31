@@ -1,1 +1,353 @@
-<p>admi-parent works!</p>
+<p-tabView *ngIf="table">
+    <p-tabPanel header="Acampadores">
+        <div>
+
+            <div class="card border border-info border-1">
+                <div class="bg-info p-2">
+                    <h1 class="card-title text-white">Titulares de cuenta</h1>
+                </div>
+                <div class="card-body">
+                <div class="container-btn mt-1 mb-3">
+                    <div>
+                        <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
+                            <button type="button" class="btn btn-primary" (click)="showDialog()">Añadir Titular de cuenta</button>
+        
+                        </div>
+                    </div>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        placeholder="Global Search" />
+                </div>
+        <div style="overflow: auto;">
+            <p-table #dt [value]="listcatalogos" [rows]="5"
+            [rowsPerPageOptions]="[5, 25, 50]"
+            [globalFilterFields]="['name','lastname_father','lastname_mother','tutor_cellphone','contact_email','acronyms','tutor_home_phone','tutor_work_phone']"
+            [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true"
+            [paginator]="true">
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="name" style="min-width: 120px;">Nombre<p-sortIcon field="name"style="font-size: 10px;"></p-sortIcon></th>
+                    <th pSortableColumn="lastname_father" style="min-width: 120px;">Primer apellido<p-sortIcon field="lastname_father"></p-sortIcon></th>
+                    <th pSortableColumn="lastname_mother" style="min-width: 120px;">Segundo apellido<p-sortIcon field="lastname_mother"></p-sortIcon></th>
+                    <th pSortableColumn="school_id" style="min-width: 190px;">Telefono<p-sortIcon field="school_id"></p-sortIcon></th>
+                    <th pSortableColumn="updated_at" style="min-width: 190px;">Correo principal<p-sortIcon field="updated_at"></p-sortIcon></th>
+                    <th pSortableColumn="contact_name" style="min-width: 190px;">Email del contacto<p-sortIcon field="contact_name"></p-sortIcon></th>
+                    <th pSortableColumn="concta_email" style="min-width: 210px;">Acampador<p-sortIcon field="contact_name"></p-sortIcon></th>
+                    <th style="width: 40px;"></th>               
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-customer>
+                <tr>
+                    <td (click)="update(customer)" style="cursor:pointer;">
+                        {{customer.tutor_name}}
+                    </td>
+                    <td (click)="update(customer)" style="cursor:pointer;">
+                        {{customer.tutor_lastname_father}}
+                    </td>
+                    <td (click)="update(customer)" style="cursor:pointer;">
+                        {{customer.tutor_lastname_mother}}
+                    </td>
+                    <td>
+                        {{customer.tutor_home_phone}}
+                        <br>
+                        {{customer.tutor_work_phone}}
+                        <br>
+                        {{customer.tutor_work_phone}}
+
+
+                    </td>
+                    <td>
+                        falta-info
+                    </td>
+                    <td>
+                        {{customer.contact_name}}
+                    </td>
+                    <td>
+                        falta-info
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" >Agregar camper</button>
+                    </td>
+                 
+                </tr>
+            </ng-template>
+
+        </p-table>
+        </div>
+                
+            </div>
+            </div>
+        
+        
+        
+        
+        
+        </div>
+        
+    </p-tabPanel>
+    
+  
+</p-tabView>
+<div *ngIf="!table && !display2">
+    <form [formGroup]="formFood"  >
+        
+        
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="card">
+                    <div class="card-body">
+                       <h2>Añadir Titular de la cuenta</h2>
+
+                        <div class="mt-5">
+                            <div class="row mb-4">
+                                <label for=""
+                                    class="col-sm-3 col-form-label">Nombre(s)*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName="tutor_name" #tutor_name
+                                    (input)=" getTutor_name()">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label" >Apellido
+                                    paterno*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName="tutor_lastname_father" (input)="getTutor_lastname_father()" #tutor_lastname_father>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Apellido
+                                    materno </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName="tutor_lastname_mother" (input)="gettutor_lastname_mother()" #tutor_lastname_mother>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label" >Teléfono
+                                    móvil padre o tutor*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName = "tutor_cellphone" #tutor_cellphone (input)="gettutor_cellphone()">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Teléfono de
+                                    casa padre o tutor*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName = "tutor_home_phone" #tutor_home_phone (input)="gettutor_home_phone()" >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Teléfono de
+                                    oficina padre o tutor*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName = "tutor_work_phone" #tutor_work_phone (input)="gettutor_work_phone()">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for=""
+                                    class="col-sm-3 col-form-label">Nombre(s) contacto*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName = "contact_name" #contact_name (input)="getcontact_name()" >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Apellido
+                                    paterno contacto*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName = "contact_lastname_father" #contact_lastname_father  (input)="getcontact_lastname_father()">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Apellido
+                                    materno contacto</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id=""  formControlName = "contact_lastname_mother" #contact_lastname_mother (input)="getcontact_lastname_mother()" >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Teléfono
+                                    móvil contacto*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id=""  formControlName = "contact_cellphone" (input)="getcontact_cellphone()" #contact_cellphone >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Teléfono de
+                                    oficina contacto*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName = "contact_work_phone" (input)="getcontact_work_phone()" #contact_work_phone >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Teléfono de
+                                    casa contacto* </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName ="contact_home_phone" (input)="getcontact_home_phone()" #contact_home_phone >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for=""
+                                    class="col-sm-3 col-form-label">Email del contacto*:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName="contact_email" #contact_email (input)="getcontact_email()">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+                <div class=col-3>
+                    <div class="card p-5">
+                       
+                       
+
+                        <div class="btn-footer">
+                            <button class="btn btn-secondary btn-lg mt-3" (click)="table=!table" style="width: 90%;">Cancelar</button>
+                            <div class="mt-3">
+                                <button class="btn btn-info  btn-lg"  (click)="prueba()" style="width: 90%;" *ngIf="!spinner">Guardar</button>
+                                <div class="spinner-border" role="status" *ngIf="spinner">
+                                    <span class="visually-hidden">Loading...</span>
+                                  </div>
+                            </div>
+                                
+                        </div>
+                    </div>
+                </div>
+           
+        </div>
+    </form>
+</div>
+
+<div *ngIf="display2">
+    <form [formGroup]="formFood"  >
+        
+        
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="card">
+                    <div class="card-body">
+                       <h2>Editar Titular de la cuenta</h2>
+
+                        <div class="mt-5">
+                            <div class="row mb-4">
+                                <label for=""
+                                    class="col-sm-3 col-form-label">Nombre(s)*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName="tutor_name" #tutor_name
+                                    (input)=" getTutor_name()">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label" >Apellido
+                                    paterno*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName="tutor_lastname_father" (input)="getTutor_lastname_father()" #tutor_lastname_father>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Apellido
+                                    materno </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName="tutor_lastname_mother" (input)="gettutor_lastname_mother()" #tutor_lastname_mother>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label" >Teléfono
+                                    móvil padre o tutor*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName = "tutor_cellphone" #tutor_cellphone (input)="gettutor_cellphone()">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Teléfono de
+                                    casa padre o tutor*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName = "tutor_home_phone" #tutor_home_phone (input)="gettutor_home_phone()" >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Teléfono de
+                                    oficina padre o tutor*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName = "tutor_work_phone" #tutor_work_phone (input)="gettutor_work_phone()">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for=""
+                                    class="col-sm-3 col-form-label">Nombre(s) contacto*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName = "contact_name" #contact_name (input)="getcontact_name()" >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Apellido
+                                    paterno contacto*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName = "contact_lastname_father" #contact_lastname_father  (input)="getcontact_lastname_father()">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Apellido
+                                    materno contacto</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id=""  formControlName = "contact_lastname_mother" #contact_lastname_mother (input)="getcontact_lastname_mother()" >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Teléfono
+                                    móvil contacto*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id=""  formControlName = "contact_cellphone" (input)="getcontact_cellphone()" #contact_cellphone >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Teléfono de
+                                    oficina contacto*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName = "contact_work_phone" (input)="getcontact_work_phone()" #contact_work_phone >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Teléfono de
+                                    casa contacto* </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName ="contact_home_phone" (input)="getcontact_home_phone()" #contact_home_phone >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for=""
+                                    class="col-sm-3 col-form-label">Email del contacto*:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName="contact_email" #contact_email (input)="getcontact_email()">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+                <div class=col-3>
+                    <div class="card p-5">
+                       
+                       
+
+                        <div class="btn-footer">
+                            <button class="btn btn-secondary btn-lg mt-3" (click)="cancelarUpdate()" style="width: 90%;">Cancelar</button>
+                            <div class="mt-3">
+                                <button class="btn btn-info  btn-lg"  (click)="prueba()" style="width: 90%;" *ngIf="!spinner">Guardar</button>
+                                <div class="spinner-border" role="status" *ngIf="spinner">
+                                    <span class="visually-hidden">Loading...</span>
+                                  </div>
+                            </div>
+                                
+                        </div>
+                    </div>
+                </div>
+           
+        </div>
+    </form>
+</div>
