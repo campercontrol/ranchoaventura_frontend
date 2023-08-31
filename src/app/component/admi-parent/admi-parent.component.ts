@@ -241,49 +241,38 @@ export class AdmiParentComponent implements OnInit {
 
   resteValu() {
     this.formFood.reset();
-    this.formFood.patchValue({
-      assigned_id: 0,
-      order: 0,
-      created_at: this.date
-    })
+  }
+  canelar(){
+    this.formFood.reset();
+    this.table=true;
+    this.display2= false
+
   }
 
   update(item){
-    this.updateId = item.id;
+    this.resteValu()
+     this.updateId = item.id;
     this.display2= true;
     this.table= false;
    this.catalogos.getParentU(item.id).subscribe((res:any)=>{
    
     this.formFood.patchValue({
      
-      tutor_lastname_father:["",[Validators.required,,Validators.minLength(1)]],
-      tutor_cellphone:      ["",[Validators.required,
-                             Validators.pattern("^[0-9]*$"),
-                             Validators.minLength(8), Validators.maxLength(10)]],
-      tutor_home_phone:     ["",[Validators.required,
-                              Validators.pattern("^[0-9]*$"),
-                              Validators.minLength(8), Validators.maxLength(10)]],
-      contact_name:         ["",[Validators.required,Validators.minLength(1)]],
+      tutor_lastname_father:item.tutor_lastname_father,
+      tutor_cellphone:      item.tutor_cellphone,
+      tutor_home_phone:     item.tutor_home_phone,
+      contact_name:         item.contact_name,
     
-    contact_lastname_mother:[""],
-    contact_home_phone:     ["",[Validators.required,
-                            Validators.pattern("^[0-9]*$"),
-                            Validators.minLength(8), Validators.maxLength(10)]], 
-    contact_email:          ["",[Validators.required,
-                                   Validators.email]],
-    tutor_name :            ["",[Validators.required,Validators.minLength(1)]],
-    tutor_lastname_mother:  [""], 
-    tutor_work_phone:       ["",[Validators.required,
-                            Validators.pattern("^[0-9]*$"),
-                            Validators.minLength(8), Validators.maxLength(10)]],
-    contact_lastname_father:  ["",[Validators.required]], 
-    contact_cellphone:      ["",[Validators.required,
-                            Validators.pattern("^[0-9]*$"),
-                            Validators.minLength(8), Validators.maxLength(10)]],
-    contact_work_phone:     ["",[Validators.required,
-                            Validators.pattern("^[0-9]*$"),
-                            Validators.minLength(8), Validators.maxLength(10)]],
-    user_id:                ["",[Validators.required,Validators.min(1)]],
+    contact_lastname_mother:item.contact_lastname_mother,
+    contact_home_phone:     item.contact_home_phone, 
+    contact_email:          item.contact_email,
+    tutor_name :           item.tutor_name,
+    tutor_lastname_mother:  item.tutor_lastname_mother, 
+    tutor_work_phone:      item.tutor_work_phone,
+    contact_lastname_father:  item.contact_lastname_father, 
+    contact_cellphone:      item.contact_cellphone,
+    contact_work_phone:     item.contact_work_phone,
+    user_id:                item.user_id
     })
    
    })
