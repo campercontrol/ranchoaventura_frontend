@@ -272,5 +272,16 @@ export class CatalogosService {
       return this.http.get('http://142.93.12.234:8000/rol?is_active=true');
     }
   
+    // admi camper
+    getCamps( ){
+      return this.http.get('http://142.93.12.234:8000/camp/');
+
+     }
+     patchCamps(a:any,id){
+      return this.http.patch('http://142.93.12.234:8000/camp/'+id,a);
+    }
+    deletCamps(id){
+      return this.http.delete('http://142.93.12.234:8000/delete_camp/'+id);
+    }
   
 }

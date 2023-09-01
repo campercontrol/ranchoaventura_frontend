@@ -150,6 +150,7 @@ import { RedirigirComponent } from './redirigir/redirigir.component';
 import { AdmiParentComponent } from './component/admi-parent/admi-parent.component';
 import { AdmiuserComponent } from './component/admiuser/admiuser.component';
 import { AdmiUserComponent } from './component/admi-user/admi-user.component';
+import { AdmiCamperComponent } from './component/admi-camper/admi-camper.component';
 
 
 
@@ -203,7 +204,8 @@ export function createTranslateLoader(http: HttpClient): any {
     RedirigirComponent,
     AdmiParentComponent,
     AdmiuserComponent,
-    AdmiUserComponent, 
+    AdmiUserComponent,
+    AdmiCamperComponent, 
        
   ],
   imports: [

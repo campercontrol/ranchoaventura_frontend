@@ -60,6 +60,7 @@ import { EscuelaComponent } from '../component/catalogos/escuela/escuela.compone
 import { AdmiuserComponent } from '../component/admiuser/admiuser.component';
 import { AdmiParentComponent } from '../component/admi-parent/admi-parent.component';
 import { AdmiUserComponent } from '../component/admi-user/admi-user.component';
+import { AdmiCamperComponent } from '../component/admi-camper/admi-camper.component';
 
 const routes: Routes = [
   
@@ -88,6 +89,8 @@ const routes: Routes = [
   { path: 'admi/camper', component: AdmiuserComponent },// admi a acamapdores
   { path: 'admi/parent', component: AdmiParentComponent },// admi a acamapdores
   { path: 'admi/user', component: AdmiUserComponent },// admi a acamapdores
+  { path: 'admi/camps', component: AdmiCamperComponent },// admi a camps
+
 
 
 

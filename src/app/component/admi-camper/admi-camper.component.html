@@ -1,0 +1,915 @@
+<div *ngIf="!cargando">
+    <p-tabView *ngIf="table">
+        <p-tabPanel header="Camps">
+            <div>
+
+                <div class="card border border-info border-1">
+                    <div class="bg-info p-2">
+                        <h1 class="card-title text-white">Usuarios</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="container-btn mt-1 mb-3">
+                            <div>
+                                <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
+                                    <button type="button" class="btn btn-primary" (click)="showDialog()">Añadir Nuevo
+                                        usuario</button>
+
+                                </div>
+                            </div>
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Global Search" />
+                        </div>
+                        <div style="overflow: auto;">
+                            <p-table #dt [value]="listcatalogos" [rows]="5" [rowsPerPageOptions]="[5, 25, 50]"
+                                [globalFilterFields]="['name','start','lastname_mother','tutor_cellphone','contact_email','acronyms','tutor_home_phone','tutor_work_phone']"
+                                [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                                [showCurrentPageReport]="true" [paginator]="true">
+
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th pSortableColumn="name" style="min-width: 190px; text-align: center;">
+                                            Campamento <p-sortIcon field="name"
+                                                style="font-size: 10px;"></p-sortIcon></th>
+                                        <th pSortableColumn="start" style="min-width: 150px;text-align: center;">
+                                            Inicio<p-sortIcon field="start"></p-sortIcon></th>
+                                        <th pSortableColumn="end" style="min-width: 150px;text-align: center;">
+                                            Finalización<p-sortIcon field="end"></p-sortIcon></th>
+                                            <th pSortableColumn="venue" style="min-width: 150px;text-align: center;">
+                                                Sede<p-sortIcon field="venue"></p-sortIcon></th>
+                                                <th pSortableColumn="school_id" style="min-width: 150px;text-align: center;">
+                                                    Escuela<p-sortIcon field="school_id"></p-sortIcon></th>
+                                                    <th pSortableColumn="public_price" style="min-width: 110px;text-align: center;">
+                                                        Precio<p-sortIcon field="public_price"></p-sortIcon></th>
+                                                        <th pSortableColumn="active" style="min-width: 60px;text-align: center;">
+                                                            Activo<p-sortIcon field="active"></p-sortIcon></th>
+                                                        <th pSortableColumn="registration" style="min-width: 50px;text-align: center;">
+                                                            Registro Abierto<p-sortIcon field="registration"></p-sortIcon></th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-customer>
+                                    <tr>
+                                        <td (click)="update(customer)" style="cursor:pointer; text-align: center;">
+                                            {{customer.name}}
+                                        </td>
+                                        <td style="font-size: 12px; font-size: 12px;">
+                                            {{customer.start.slice(0,10) }} - {{ customer.start.slice(11,16)}}
+                                        </td>
+                                        <td style="font-size: 12px; font-size: 12px;">
+                                            {{customer.end.slice(0,10)}} - {{ customer.start.slice(11,16)}}
+                                        </td>
+                                        <td style="text-align: center; font-size: 12px;">
+                                            {{customer.venue}}
+                                        </td>
+                                        <td style="text-align: center; font-size: 12px;">
+                                            {{customer.school_id}}
+                                        </td>
+                                        <td style="text-align: center; font-size: 12px;" >
+                                            {{customer.public_price}}
+                                        </td>
+                                     
+
+                                        <td style="text-align: center;">
+                                            <div *ngIf="customer.active"><i class="bx bx-check-circle"
+                                                    style="color: green;text-align: center;"></i></div>
+                                            <div *ngIf="!customer.active"><i class="dripicons-cross"
+                                                    style="color: red;text-align: center;"></i></div>
+
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <div *ngIf="customer.registration"><i class="bx bx-check-circle"
+                                                    style="color: green;text-align: center;"></i></div>
+                                            <div *ngIf="!customer.registration"><i class="dripicons-cross"
+                                                    style="color: red;text-align: center;"></i></div>
+                                        </td>
+
+
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+        </p-tabPanel>
+
+
+    </p-tabView>
+    <div *ngIf="!table && !display2">
+        <form [formGroup]="formFood">
+
+
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="card">
+                        <h1>Agergar Camp</h1>
+                        <div class="card-body">
+                            <div class="container-footer-parents">
+                                <h4 class="ms-3">Datos Generales del Campamento</h4>
+                            </div>
+        
+                            <div class="mt-5">
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Nombre del
+                                        campamento*</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="" formControlName ="name" #name (input)="validateName()">
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Sede*
+                                    </label>
+                                    <div class="control-label col-sm-9">
+                                        <select style="width: 100%;" class="form-control" formControlName = "location_id" name="location_id" #location_id (change)="validateLocationId()">
+                                            <option *ngFor="let item of location" [value]="item.id">{{item.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Escuela*
+                                        </label>
+                                    <div class="control-label col-sm-9">
+                                        <select style="width: 100%;" class="form-control" formControlName ="school_id" name="school_id" #school_id (change)="validateSchoolId()">
+                                            <option *ngFor="let item of school" [value]="item.id">{{item.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Temporada*</label>
+                                    <div class="control-label col-sm-9">
+                                        <select style="width: 100%;" class="form-control" formControlName ="season_id" name="season_id" #season_id (change)="validateSeasonId()">
+                                            <option *ngFor="let item of temporada" [value]="item.id">{{item.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Link para
+                                        información adicional del acampador</label>
+                                    <div class="col-sm-9 mt-4">
+                                        <input type="text" class="form-control" id="" formControlName="url" #url>
+                                    </div>
+                                </div>
+        
+        
+                                <div class="row mb-4 mt-3">
+                                    <label for="" class="col-sm-3 col-form-label">Inicio del
+                                        Campamento</label>
+                                    <div class=" control-label col-sm-9">
+                                        <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd"  formControlName="start" #start (input)="validateStart()">
+                                    </div>
+                                </div>
+                                <div class="row mb-4 mt-3">
+                                    <label for="" class="col-sm-3 col-form-label">Final del
+                                        Campamento</label>
+                                    <div class=" control-label col-sm-9">
+                                        <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="end" #end (input)="validateEnd()">
+                                    </div>
+                                </div>
+                                <div class="row mb-4 mt-3">
+                                    <label for="" class="col-sm-3 col-form-label">Inicio de
+                                        inscripción</label>
+                                    <div class=" control-label col-sm-9">
+                                        <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="start_registration" #start_registration (input)="validateStartRegistration()">
+                                    </div>
+                                </div>
+                                <div class="row mb-4 mt-3">
+                                    <label for="" class="col-sm-3 col-form-label">Final de
+                                        inscripción</label>
+                                    <div class=" control-label col-sm-9">
+                                        <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="end_registration" #end_registration (input)="validateEndRegistration()">
+                                    </div>
+                                </div>
+        
+                               
+                                <div class="row">
+                                   
+                                    <div class="row">
+                                        <div>
+                                            <div class="col-3">
+        
+                                            </div>
+                                            <div class="p-field-checkbox col-9 d-flex flex-row">
+                                                <input type="checkbox"  value= "true"  formControlName="active"
+                                                class="mb-2"/>
+                                              <label style="margin-left: 20px; " for="sf">Activo</label>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-3">
+        
+                                            </div>
+                                            <div class="p-field-checkbox col-9 d-flex flex-row">
+                                                <input type="checkbox" value="true" formControlName="registration" 
+                                                class="mb-2"/>
+                                            <label style="margin-left: 20px;" for="ny">Registro abierto</label>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-3">
+        
+                                            </div>
+                                              
+                                        <div class="p-field-checkbox col-9 d-flex flex-row">
+                                            <div class="p-field-checkbox">
+                                                <input type="checkbox" value="true" formControlName="general_camp" 
+                                                    class="mb-2"/>
+                                                <label style="margin-left: 20px;" for="ny">Campamento de verano</label>
+                                            </div>
+                                        </div>
+        
+                                        </div>
+                                       
+                                      
+                                    </div>
+        
+                                </div>
+        
+        
+        
+        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="card">
+            
+                            <div class="card-body">
+                                <div class="container-footer-parents">
+                                    <h4 class="ms-3">Datos Importantes</h4>
+                                </div>
+            
+                                <div class="mt-5">
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Monto del
+                                            seguro*</label>
+                                        <div class="col-sm-9">
+                                            <input type="number" class="form-control" id="" formControlName = "insurance" #insurance>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Punto de
+                                            reunion*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName="venue" #venue (input)="validateVenue()">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Fotos del
+                                            camp*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName="photo_url" #photo_url (input)="validatePhotoUrl()">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Contraseña del
+                                            camp*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName="photo_password" #photo_password (input)="validatePhotoPassword()">
+                                        </div>
+                                    </div>
+            
+            
+                                </div>
+                            </div>
+            
+                        </div>
+                        <div class="card">
+            
+                            <div class="card-body">
+                                <div class="container-footer-parents">
+                                    <h4 class="ms-3">Precio y permisos </h4>
+                                </div>
+            
+                                <div class="mt-5">
+                                 
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Precio del
+                                            campamento*</label>
+                                        <div class="col-sm-9">
+                                            <input type="number" class="form-control" id="" formControlName="public_price" #public_price>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Divisa*
+                                            </label>
+                                        <div class="control-label col-sm-9">
+                                            <select style="width: 100%;" class="form-control" formControlName ="currency_id" name="currency_id" #currency_id>
+                                                <option *ngFor="let item of currency" [value]="item.id">{{item.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Recordatorio antes del camp:</label>
+                                        <div class="col-sm-9">
+                                            <input type="number" class="form-control" id="" formControlName="reminder_camp_days" #reminder_camp_days>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Recordatorio vigencia del descuento:</label>
+                                        <div class="col-sm-9">
+                                            <input type="number" class="form-control" id="" formControlName="reminder_discount_days" #reminder_discount_days>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Reporte medico:</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName="medical_report" #medical_report>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="row">
+                                        <div class="row">
+                                            <div class="col-3">
+            
+                                            </div>
+                                        
+                                            <div class="p-field-checkbox col-9 d-flex flex-row">
+                                                <input type="checkbox" name="group1"  inputId="ny"
+                                                    class="mb-2" class="mb-2" value="true" formControlName = "show_paypal_button" #show_paypal_button>
+                                                <label style="margin-left: 20px;" for="ny"> Mostrar boton de paypal</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-3">
+            
+                                            </div>
+                                        
+                                            <div class="p-field-checkbox col-9 d-flex flex-row">
+                                                <input type="checkbox" name="group1"  inputId="ny"
+                                                    class="mb-2" class="mb-2" value="true" formControlName = "show_payment_order" #show_payment_order>
+                                                <label style="margin-left: 20px;" for="ny"> Habilitar orden de pago con referencia</label>
+                                            </div>
+                                        </div>
+            
+                                        <div class="row">
+                                            <div class="col-3">
+            
+                                            </div>
+                                            <div class="p-field-checkbox col-9 d-flex flex-row">
+                                                <input type="checkbox"
+                                                    inputId="sf" class="mb-2" value="true" formControlName="show_payment_parent" #show_payment_parent>
+                                                <label style="margin-left: 20px; " for="sf">Mostrar pagos a padres</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-3">
+            
+                                            </div>
+                                         
+                                            <div class="p-field-checkbox col-9 d-flex flex-row">
+                                                <input type="checkbox"
+                                                    inputId="xf" class="mb-2"  value="true" formControlName="show_rebate_parent"  #show_rebate_parent>
+                                                <label style="margin-left: 20px; " for="xf"> Mostrar descuentos a padres</label>
+                                            </div>
+                                        </div>
+                                      
+                                       
+                                        
+                                    </div>
+            
+                                </div>
+                            </div>
+            
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+            
+                            <div class="container-footer-parents">
+                                <h4 class="ms-3">Informacion extra </h4>
+                            </div>
+                            <div class="row">
+            
+                                <div class="col-lg-6 mt-4">
+                                    <div class="container">
+                                        <div class="col mb-6">
+                                            <h4 for="">Mensaje
+                                                especial*</h4>
+                                            <hr>
+                                            <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message"  >
+                                            </ckeditor>
+                                          
+                                        </div>
+                                    </div>
+            
+                                </div>
+                                <div class="col-lg-6 mt-4">
+                                    <div class="container">
+                                        <div class="col mb-6">
+                                            <h4 for="" class="display-7">Mensaje especial
+                                                para admin*</h4>
+                                            <hr>
+                                            <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message_admin" >
+                                            </ckeditor>
+                                            
+                                        </div>
+                                    </div>
+            
+                                </div>
+                                <div class="col-lg-6 mt-4 ">
+                                    <div class="container">
+                                        <div class="col mb-6">
+                                            <h4 for="">
+                                                Preguntas Extras</h4>
+                                            <hr>
+                                            <div *ngFor="let item of extra_question let i = index">
+                                                <div class="footerMensje">
+                                                    <div>
+                                                        <h3>Preguntas extras {{i+1}}</h3>
+                                                    </div>
+                                                    <div>
+                                                        <h3 class="delet" (click)="deletExtraQuestion(i)">
+                                                            Elminar pregunta
+                                                        </h3>
+                                                    </div>
+        
+                                                </div>
+                                                <div>                                           
+                                                    <div class="p-field-checkbox col-9 d-flex flex-row">
+                                                        <input type="checkbox"  value= "true"  [(ngModel)]="item.is_required" name="is_required" [ngModelOptions]="{standalone: true}"
+                                                        class="big-checkbox" />
+                                                      <label style="margin-left: 10px; font-size: 15px; " >¿Obligatoria?</label>
+                                                    </div>
+                                                    
+                                                </div>
+                                               
+                                                <ckeditor class="mt-4" [editor]="Editor" [(ngModel)]="item.question" name="question" [ngModelOptions]="{standalone: true}">
+                                                </ckeditor>
+        
+                                            </div>
+                                            <div class="alert alert-danger" role="alert" *ngIf="alerQuestion">
+                                                 Para poder agregar otra pregunta llena el campo antes
+                                              </div>
+                                                
+                                            <button class="btn btn-primary col-12 mt-3" (click)="newExtraQuestion()">Agregar nueva pregunta</button>
+            
+                                        </div>
+                                    </div>
+            
+            
+            
+                                </div>
+                                <div class="col-lg-6 mt-4">
+                                    <div class="row">
+                                        <div >
+                                            <h4 for="">
+                                                Cargos extras</h4>
+                                            <hr>
+                                            <div *ngFor="let item of extra_charges let i = index">
+                                                <div class="footerMensje">
+                                                    <div>
+                                                        <h3>Cargo extras {{i+1}}</h3>
+                                                    </div>
+                                                    <div>
+                                                        <h3 class="delet" (click)="deletExtracharges(i)">
+                                                            Elminar cargo
+                                                        </h3>
+                                                    </div>
+        
+                                                </div>
+                                           
+                                                <div>
+                                                    <label for="" class="col-sm-6 col-form-label">Nombre del
+                                                        Cargo</label>
+                                                    <div class=" control-label col-lg-10">
+                                                        <input type="text" class="form-control" [(ngModel)]="item.name" name="name" [ngModelOptions]="{standalone: true}">
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <label for="" class="col-3 col-form-label">Divisa*
+                                                        </label>
+                                                    <div class="control-label col-10">
+                                                        <select style="width: 100%;" class="form-control" [(ngModel)]="item.currency_id" name="currency_id" [ngModelOptions]="{standalone: true}">
+                                                            <option *ngFor="let a of currency" [value]="a.id">{{a.name}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                              
+                                                <div>
+                                                    <label for="" class="col-sm-6 col-form-label">Cantidad</label>
+                                                    <div class=" control-label col-lg-10">
+                                                        <input type="number" class="form-control" [(ngModel)]="item.price" name="price" [ngModelOptions]="{standalone: true}">
+                                                    </div>
+                                                </div>
+                                           
+                                           
+                                           
+                                            </div>  
+                                        </div>
+                                        <div class="alert alert-danger" role="alert" *ngIf="alercharges">
+                                            Para poder agregar otra pregunta llena el campo antes
+                                         </div>
+                                           
+                                       <button class="btn btn-primary col-12 mt-3" (click)="newExtracharges()">Agregar nuevo cargo</button>
+        
+                                    </div>
+            
+            
+            
+                                </div>
+            
+            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3 ">
+                    <div class="card p-5">
+
+
+
+                        <div class="btn-footer">
+                            <button class="btn btn-secondary btn-lg mt-3" (click)="canelar()"
+                                style="width: 90%;">Cancelar</button>
+                            <div class="mt-3">
+                                <button class="btn btn-info  btn-lg" (click)="prueba()" style="width: 90%;"
+                                    *ngIf="!spinner">Guardar</button>
+                                <div class="spinner-border" role="status" *ngIf="spinner">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <div *ngIf="display2">
+        <form [formGroup]="formFood">
+
+
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="card">
+                        <h1>Editar Camp</h1>
+                        <div class="card-body">
+                            <div class="container-footer-parents">
+                                <h4 class="ms-3">Datos Generales del Campamento</h4>
+                            </div>
+        
+                            <div class="mt-5">
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Nombre del
+                                        campamento*</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="" formControlName ="name" #name (input)="validateName()">
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Sede*
+                                    </label>
+                                    <div class="control-label col-sm-9">
+                                        <select style="width: 100%;" class="form-control" formControlName = "location_id" name="location_id" #location_id (change)="validateLocationId()">
+                                            <option *ngFor="let item of location" [value]="item.id">{{item.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Escuela*
+                                        </label>
+                                    <div class="control-label col-sm-9">
+                                        <select style="width: 100%;" class="form-control" formControlName ="school_id" name="school_id" #school_id (change)="validateSchoolId()">
+                                            <option *ngFor="let item of school" [value]="item.id">{{item.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Temporada*</label>
+                                    <div class="control-label col-sm-9">
+                                        <select style="width: 100%;" class="form-control" formControlName ="season_id" name="season_id" #season_id (change)="validateSeasonId()">
+                                            <option *ngFor="let item of temporada" [value]="item.id">{{item.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Link para
+                                        información adicional del acampador</label>
+                                    <div class="col-sm-9 mt-4">
+                                        <input type="text" class="form-control" id="" formControlName="url" #url>
+                                    </div>
+                                </div>
+        
+        
+                                <div class="row mb-4 mt-3">
+                                    <label for="" class="col-sm-3 col-form-label">Inicio del
+                                        Campamento</label>
+                                    <div class=" control-label col-sm-9">
+                                        <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd"  formControlName="start" #start (input)="validateStart()">
+                                    </div>
+                                </div>
+                                <div class="row mb-4 mt-3">
+                                    <label for="" class="col-sm-3 col-form-label">Final del
+                                        Campamento</label>
+                                    <div class=" control-label col-sm-9">
+                                        <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="end" #end (input)="validateEnd()">
+                                    </div>
+                                </div>
+                                <div class="row mb-4 mt-3">
+                                    <label for="" class="col-sm-3 col-form-label">Inicio de
+                                        inscripción</label>
+                                    <div class=" control-label col-sm-9">
+                                        <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="start_registration" #start_registration (input)="validateStartRegistration()">
+                                    </div>
+                                </div>
+                                <div class="row mb-4 mt-3">
+                                    <label for="" class="col-sm-3 col-form-label">Final de
+                                        inscripción</label>
+                                    <div class=" control-label col-sm-9">
+                                        <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" formControlName="end_registration" #end_registration (input)="validateEndRegistration()">
+                                    </div>
+                                </div>
+        
+                               
+                                <div class="row">
+                                   
+                                    <div class="row">
+                                        <div>
+                                            <div class="col-3">
+        
+                                            </div>
+                                            <div class="p-field-checkbox col-9 d-flex flex-row">
+                                                <input type="checkbox"  value= "true"  formControlName="active"
+                                                class="mb-2"/>
+                                              <label style="margin-left: 20px; " for="sf">Activo</label>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-3">
+        
+                                            </div>
+                                            <div class="p-field-checkbox col-9 d-flex flex-row">
+                                                <input type="checkbox" value="true" formControlName="registration" 
+                                                class="mb-2"/>
+                                            <label style="margin-left: 20px;" for="ny">Registro abierto</label>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-3">
+        
+                                            </div>
+                                              
+                                        <div class="p-field-checkbox col-9 d-flex flex-row">
+                                            <div class="p-field-checkbox">
+                                                <input type="checkbox" value="true" formControlName="general_camp" 
+                                                    class="mb-2"/>
+                                                <label style="margin-left: 20px;" for="ny">Campamento de verano</label>
+                                            </div>
+                                        </div>
+        
+                                        </div>
+                                       
+                                      
+                                    </div>
+        
+                                </div>
+        
+        
+        
+        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="card">
+            
+                            <div class="card-body">
+                                <div class="container-footer-parents">
+                                    <h4 class="ms-3">Datos Importantes</h4>
+                                </div>
+            
+                                <div class="mt-5">
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Monto del
+                                            seguro*</label>
+                                        <div class="col-sm-9">
+                                            <input type="number" class="form-control" id="" formControlName = "insurance" #insurance>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Punto de
+                                            reunion*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName="venue" #venue (input)="validateVenue()">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Fotos del
+                                            camp*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName="photo_url" #photo_url (input)="validatePhotoUrl()">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Contraseña del
+                                            camp*</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName="photo_password" #photo_password (input)="validatePhotoPassword()">
+                                        </div>
+                                    </div>
+            
+            
+                                </div>
+                            </div>
+            
+                        </div>
+                        <div class="card">
+            
+                            <div class="card-body">
+                                <div class="container-footer-parents">
+                                    <h4 class="ms-3">Precio y permisos </h4>
+                                </div>
+            
+                                <div class="mt-5">
+                                 
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Precio del
+                                            campamento*</label>
+                                        <div class="col-sm-9">
+                                            <input type="number" class="form-control" id="" formControlName="public_price" #public_price>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Divisa*
+                                            </label>
+                                        <div class="control-label col-sm-9">
+                                            <select style="width: 100%;" class="form-control" formControlName ="currency_id" name="currency_id" #currency_id>
+                                                <option *ngFor="let item of currency" [value]="item.id">{{item.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Recordatorio antes del camp:</label>
+                                        <div class="col-sm-9">
+                                            <input type="number" class="form-control" id="" formControlName="reminder_camp_days" #reminder_camp_days>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Recordatorio vigencia del descuento:</label>
+                                        <div class="col-sm-9">
+                                            <input type="number" class="form-control" id="" formControlName="reminder_discount_days" #reminder_discount_days>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <label for="" class="col-sm-3 col-form-label">Reporte medico:</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="" formControlName="medical_report" #medical_report>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="row">
+                                        <div class="row">
+                                            <div class="col-3">
+            
+                                            </div>
+                                        
+                                            <div class="p-field-checkbox col-9 d-flex flex-row">
+                                                <input type="checkbox" name="group1"  inputId="ny"
+                                                    class="mb-2" class="mb-2" value="true" formControlName = "show_paypal_button" #show_paypal_button>
+                                                <label style="margin-left: 20px;" for="ny"> Mostrar boton de paypal</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-3">
+            
+                                            </div>
+                                        
+                                            <div class="p-field-checkbox col-9 d-flex flex-row">
+                                                <input type="checkbox" name="group1"  inputId="ny"
+                                                    class="mb-2" class="mb-2" value="true" formControlName = "show_payment_order" #show_payment_order>
+                                                <label style="margin-left: 20px;" for="ny"> Habilitar orden de pago con referencia</label>
+                                            </div>
+                                        </div>
+            
+                                        <div class="row">
+                                            <div class="col-3">
+            
+                                            </div>
+                                            <div class="p-field-checkbox col-9 d-flex flex-row">
+                                                <input type="checkbox"
+                                                    inputId="sf" class="mb-2" value="true" formControlName="show_payment_parent" #show_payment_parent>
+                                                <label style="margin-left: 20px; " for="sf">Mostrar pagos a padres</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-3">
+            
+                                            </div>
+                                         
+                                            <div class="p-field-checkbox col-9 d-flex flex-row">
+                                                <input type="checkbox"
+                                                    inputId="xf" class="mb-2"  value="true" formControlName="show_rebate_parent"  #show_rebate_parent>
+                                                <label style="margin-left: 20px; " for="xf"> Mostrar descuentos a padres</label>
+                                            </div>
+                                        </div>
+                                      
+                                       
+                                        
+                                    </div>
+            
+                                </div>
+                            </div>
+            
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+            
+                            <div class="container-footer-parents">
+                                <h4 class="ms-3">Informacion extra </h4>
+                            </div>
+                            <div class="row">
+            
+                                <div class="col-lg-6 mt-4">
+                                    <div class="container">
+                                        <div class="col mb-6">
+                                            <h4 for="">Mensaje
+                                                especial*</h4>
+                                            <hr>
+                                            <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message"  >
+                                            </ckeditor>
+                                          
+                                        </div>
+                                    </div>
+            
+                                </div>
+                                <div class="col-lg-6 mt-4">
+                                    <div class="container">
+                                        <div class="col mb-6">
+                                            <h4 for="" class="display-7">Mensaje especial
+                                                para admin*</h4>
+                                            <hr>
+                                            <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message_admin" >
+                                            </ckeditor>
+                                            
+                                        </div>
+                                    </div>
+            
+                                </div>
+                                
+                               
+            
+            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3 ">
+                    <div class="card p-5">
+                        <div class="btn-footer">
+                            <button class="btn btn-secondary btn-lg mt-3" (click)="cancelarUpdate()"
+                                style="width: 90%;">Cancelar</button>
+                                <button class="btn btn-secondary btn-lg mt-3" (click)="deletModal()"
+                                style="width: 90%;">Eliminar</button>
+                            <div class="mt-3">
+                                <button class="btn btn-info  btn-lg" (click)="keepUpdate()" style="width: 90%;"
+                                    *ngIf="!spinner">Guardar</button>
+                                <div class="spinner-border" role="status" *ngIf="spinner">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="spinner-border text-primary" role="status" style="margin: 0 auto;" *ngIf="cargando">
+    <span class="sr-only">Loading...</span>
+</div>
+
+<p-dialog header="Title" [(visible)]="display3" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <ng-template pTemplate="header">
+       <h2>
+        Eliminar  Campamento
+       </h2> 
+    </ng-template>
+    <div class="col">
+       {{TextElimint}}
+        <div class="alert alert-danger" role="alert" *ngIf="statuAgrgado">
+            Se elimino correctamente
+          </div>
+
+          
+    </div>
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="this.display3 = false">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="delet()">Eliminar</button>
+    </ng-template>
+</p-dialog>
