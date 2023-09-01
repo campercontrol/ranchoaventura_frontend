@@ -18,6 +18,7 @@ export class AdmiParentComponent implements OnInit {
   display3: boolean = false;
   vacunas:any = [];
   resSearch:boolean = false;
+  cargando:boolean = false;
   @ViewChild("email") email: ElementRef;
   @ViewChild("password") password: ElementRef;
 
@@ -312,13 +313,13 @@ export class AdmiParentComponent implements OnInit {
     }
     console.log(a);
     if(this.formFood.valid){
-      this.camperSer.updateCamper(this.updateId,a).subscribe((res:any)=>{
+      this.camperSer.updateCamper(this.updateId,this.formFood.value).subscribe((res:any)=>{
         console.log(res);
         if(res.succes = 200){
           this.spinner = false;
           this.getCatalogos();
           this.statuAgrgado = true;
-          this.resteValu();
+          this.cancelarUpdate();
           setTimeout(() => {
             this.statuAgrgado = false;
             this.closeModal2();
@@ -332,13 +333,21 @@ export class AdmiParentComponent implements OnInit {
     });
 
     }else{
-      console.log('no se logro');
-      
-     
-     
+      this.spinner= false;
+      this.getcontact_email();
+      this.getcontact_home_phone();
+      this.getcontact_work_phone();
+      this.getcontact_cellphone();
+      this.getcontact_lastname_mother();
+      this.getcontact_lastname_father();
+      this.getcontact_name();
+      this.gettutor_work_phone();
+      this.gettutor_home_phone();
+      this.gettutor_cellphone();
+      this.gettutor_lastname_mother();
+      this.getTutor_lastname_father();
+      this. getTutor_name();       
     }
-   
-   
   }
 
   cancelarUpdate(){

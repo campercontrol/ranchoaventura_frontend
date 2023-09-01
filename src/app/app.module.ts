@@ -149,6 +149,7 @@ import { EscuelaComponent } from './component/catalogos/escuela/escuela.componen
 import { RedirigirComponent } from './redirigir/redirigir.component';
 import { AdmiParentComponent } from './component/admi-parent/admi-parent.component';
 import { AdmiuserComponent } from './component/admiuser/admiuser.component';
+import { AdmiUserComponent } from './component/admi-user/admi-user.component';
 
 
 
@@ -201,7 +202,8 @@ export function createTranslateLoader(http: HttpClient): any {
     EscuelaComponent,
     RedirigirComponent,
     AdmiParentComponent,
-    AdmiuserComponent, 
+    AdmiuserComponent,
+    AdmiUserComponent, 
        
   ],
   imports: [

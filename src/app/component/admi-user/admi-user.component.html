@@ -1,0 +1,272 @@
+<div *ngIf="!cargando">
+    <p-tabView *ngIf="table">
+        <p-tabPanel header="Usuarios">
+            <div>
+
+                <div class="card border border-info border-1">
+                    <div class="bg-info p-2">
+                        <h1 class="card-title text-white">Usuarios</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="container-btn mt-1 mb-3">
+                            <div>
+                                <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
+                                    <button type="button" class="btn btn-primary" (click)="showDialog()">Añadir Nuevo
+                                        usuario</button>
+
+                                </div>
+                            </div>
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Global Search" />
+                        </div>
+                        <div style="overflow: auto;">
+                            <p-table #dt [value]="listcatalogos" [rows]="5" [rowsPerPageOptions]="[5, 25, 50]"
+                                [globalFilterFields]="['email','lastname_father','lastname_mother','tutor_cellphone','contact_email','acronyms','tutor_home_phone','tutor_work_phone']"
+                                [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                                [showCurrentPageReport]="true" [paginator]="true">
+
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th pSortableColumn="email" style="min-width: 150px; text-align: center;">
+                                            Dirección de correo<p-sortIcon field="email"
+                                                style="font-size: 10px;"></p-sortIcon></th>
+                                        <th pSortableColumn="is_active" style="min-width: 50px;text-align: center;">
+                                            Activo<p-sortIcon field="lastname_father"></p-sortIcon></th>
+                                        <th pSortableColumn="is_superuser" style="min-width: 50px;text-align: center;">
+                                            Superusuario<p-sortIcon field="lastname_mother"></p-sortIcon></th>
+
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-customer>
+                                    <tr>
+                                        <td (click)="update(customer)" style="cursor:pointer;">
+                                            {{customer.email}}
+                                        </td>
+
+                                        <td style="text-align: center;">
+                                            <div *ngIf="customer.is_active"><i class="bx bx-check-circle"
+                                                    style="color: green;text-align: center;"></i></div>
+                                            <div *ngIf="!customer.is_active"><i class="dripicons-cross"
+                                                    style="color: red;text-align: center;"></i></div>
+
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <div *ngIf="customer.is_superuser"><i class="bx bx-check-circle"
+                                                    style="color: green;text-align: center;"></i></div>
+                                            <div *ngIf="!customer.is_superuser"><i class="dripicons-cross"
+                                                    style="color: red;text-align: center;"></i></div>
+                                        </td>
+
+
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+        </p-tabPanel>
+
+
+    </p-tabView>
+    <div *ngIf="!table && !display2">
+        <form [formGroup]="formFood">
+
+
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2>Añadir Usuarios</h2>
+
+                            <div class="mt-5">
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Correo Electronico*</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="" formControlName="email"
+                                            name="email" #tutor_name (input)=" getTutor_name()">
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Contraseña*</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id=""
+                                            formControlName="passw" (input)="getTutor_lastname_father()"
+                                            #tutor_lastname_father>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Rol</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-select" aria-label="Default select example"
+                                            formControlName="role_id" (change)="gettutor_lastname_mother()"
+                                            #tutor_lastname_mother>
+                                            <option *ngFor="let item of rol" [value]="item.id">{{item.name}}</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                                        formControlName="is_superuser" value=true>
+                                    <label class="form-check-label" for="inlineCheckbox1">Indica que este usuario tiene
+                                        todos los permisos sin asignárselos explícitamente.</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
+                                        formControlName="is_active" value=true>
+                                    <label class="form-check-label" for="inlineCheckbox2">Activo</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
+                                        formControlName="is_admin" value=true>
+                                    <label class="form-check-label" for="inlineCheckbox3">Administrador</label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3 col-sm-12">
+                    <div class="card p-5">
+
+
+
+                        <div class="btn-footer">
+                            <button class="btn btn-secondary btn-lg mt-3" (click)="canelar()"
+                                style="width: 90%;">Cancelar</button>
+                            <div class="mt-3">
+                                <button class="btn btn-info  btn-lg" (click)="prueba()" style="width: 90%;"
+                                    *ngIf="!spinner">Guardar</button>
+                                <div class="spinner-border" role="status" *ngIf="spinner">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <div *ngIf="display2">
+        <form [formGroup]="formFood2">
+
+
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2>Añadir Usuarios</h2>
+
+                            <div class="mt-5">
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Correo Electronico*</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="" formControlName="email"
+                                            name="email" #tutor_name (input)=" getTutor_nameU()">
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Contraseña*</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id=""
+                                            formControlName="hashed_pass" 
+                                             disabled="false">
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Rol</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-select" aria-label="Default select example"
+                                            formControlName="role_id" (change)="gettutor_lastname_motherU()"
+                                            #tutor_lastname_mother>
+                                            <option *ngFor="let item of rol" [value]="item.id">{{item.name}}</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                                        formControlName="is_superuser" value=true>
+                                    <label class="form-check-label" for="inlineCheckbox1">Indica que este usuario tiene
+                                        todos los permisos sin asignárselos explícitamente.</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
+                                        formControlName="is_active" value=true>
+                                    <label class="form-check-label" for="inlineCheckbox2">Activo</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
+                                        formControlName="is_admin" value=true>
+                                    <label class="form-check-label" for="inlineCheckbox3">Administrador</label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3 ">
+                    <div class="card p-5">
+
+
+
+                        <div class="btn-footer">
+                            <button class="btn btn-secondary btn-lg mt-3" (click)="cancelarUpdate()"
+                                style="width: 90%;">Cancelar</button>
+                                <button class="btn btn-secondary btn-lg mt-3" (click)="deletModal()"
+                                style="width: 90%;">Eliminar</button>
+                            <div class="mt-3">
+                                <button class="btn btn-info  btn-lg" (click)="keepUpdate()" style="width: 90%;"
+                                    *ngIf="!spinner">Guardar</button>
+                                <div class="spinner-border" role="status" *ngIf="spinner">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="spinner-border text-primary" role="status" style="margin: 0 auto;" *ngIf="cargando">
+    <span class="sr-only">Loading...</span>
+</div>
+
+<p-dialog header="Title" [(visible)]="display3" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <ng-template pTemplate="header">
+       <h2>
+        Eliminar  Camper
+       </h2> 
+    </ng-template>
+    <div class="col">
+       {{TextElimint}}
+        <div class="alert alert-danger" role="alert" *ngIf="statuAgrgado">
+            Se elimino correctamente
+          </div>
+
+          
+    </div>
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="this.display3 = false">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="delet()">Eliminar</button>
+    </ng-template>
+</p-dialog>

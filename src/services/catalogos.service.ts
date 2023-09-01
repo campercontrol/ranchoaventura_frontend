@@ -247,6 +247,30 @@ export class CatalogosService {
     deletParent(id){
       return this.http.delete('http://142.93.12.234:8000/delete_parent/'+id);
     }
+     // user admi
+
+     getUser(){
+      return this.http.get('http://142.93.12.234:8000/usuario/');
+
+     }
+     getUserF(){
+      return this.http.get('http://142.93.12.234:8000/usuario?is_active=false');
+
+     }
+    
+     postUser(info){
+      return this.http.post('http://142.93.12.234:8000/usuario/',info);
+     }
+     patchUser(a:any,id){
+      return this.http.patch('http://142.93.12.234:8000/usuario/'+id,a);
+    }
+    deletUser(id){
+      return this.http.delete('http://142.93.12.234:8000/delete_usuario/'+id);
+    }
+
+    getRol(){
+      return this.http.get('http://142.93.12.234:8000/rol?is_active=true');
+    }
   
   
 }

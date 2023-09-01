@@ -37,6 +37,7 @@ export class NuevoCampamentoComponent implements OnInit {
   extra_charges:any = [];
   alerQuestion = false;
   alercharges= false;
+  extra_discounts = [];
   fecha = new Date();
 
 
@@ -118,15 +119,22 @@ export class NuevoCampamentoComponent implements OnInit {
   }
 
   createCampPost(){
-    console.log(this.formCamp.value);
+   // console.log(this.formCamp.value);
     if(this.formCamp.valid){
       let a = {
-          camp:this.formCamp.value
+          "camp":this.formCamp.value,
+          "payment_accounts":this.payment_accounts,
+          "extra_question":this.extra_question,
+           "extra_charges":this.extra_charges,
+           "extra_discounts":this.extra_discounts,
       }
       if(this.payment_accounts.length==0){this.formCamp.patchValue({payment_accounts:[]})}
       if(this.extra_question.length==0){this.formCamp.patchValue({extra_question:[]})}
       if(this.extra_charges.length==0){this.formCamp.patchValue({extra_charges:[]})}
+      if(this.extra_charges.length==0){this.formCamp.patchValue({extra_discounts:[]})}
 
+
+console.log(a);
 
       this.createCamp.postCamp(a).subscribe((res:any)=>{
         console.log(res);
