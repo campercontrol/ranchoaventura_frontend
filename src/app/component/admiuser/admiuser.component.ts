@@ -65,12 +65,14 @@ export class AdmiuserComponent implements OnInit {
   date: Date = new Date();
   statuAgrgado = false;
   textos:any ={};
+  nameParent ="";
   licensed_medicines:any = [];
   pathological_background:any = [];
   pathological_background_fm:any = [];
   food_restrictions:any = [];
   blood_types:any = [];
   vaccines:any = [];
+  displayEdit:boolean= false;
   genders:any = [];
   grades:any = [];
   school:any = [];
@@ -133,7 +135,7 @@ export class AdmiuserComponent implements OnInit {
       contact_relation: ["",[Validators.required,Validators.minLength(3)]],
       contact_homephone: [0,[Validators.required,Validators.minLength(8)]],
       contact_cellphone: [0,[Validators.required,Validators.minLength(8)]],
-      record_id: [0,],
+      record_id: [0,[Validators.required]],
       parent_id: [0,[Validators.required,Validators.min(1)]],
       parent_name: [""],
       
@@ -166,6 +168,10 @@ export class AdmiuserComponent implements OnInit {
   showDialog() {
     this.infoCatalogos();
     this.resteValu();
+
+  }
+  showDialogSearch() {
+    this.displayEdit =!this.displayEdit;
 
   }
   showDialog2() {
@@ -228,6 +234,22 @@ export class AdmiuserComponent implements OnInit {
     this.table=true;
     this.display2= false
 
+  }
+  select(){
+    let a = this.parent.filter(item=>
+     item.tutor_id== this.formFood.get('parent_id').value 
+    )
+    console.log(this.formFood.get('parent_id').value);
+    
+    console.log(a);
+    
+    if(a.length>0){
+      console.log('se encontro');
+      
+      this.nameParent = a[0].tutor_name + a[0].tutor_lastname_father + a[0].tutor_lastname_mother; 
+      this.displayEdit = false;
+    }
+   
   }
 
   prueba1(){
