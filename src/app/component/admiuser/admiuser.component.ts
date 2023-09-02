@@ -414,9 +414,9 @@ export class AdmiuserComponent implements OnInit {
       console.log(res.tutor_name);
       
       this.item = res.data;
-      console.log(item,'padre info');
+      console.log(this.item,'padre info');
       
-      this.nameParent = item.tutor_name + item.tutor_lastname_father + item.tutor_lastname_mother
+      this.nameParent = this.item.tutor_name + this.item.tutor_lastname_father + this.item.tutor_lastname_mother
       console.log(this.nameParent);
       
   })
