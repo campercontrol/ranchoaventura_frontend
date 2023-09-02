@@ -782,17 +782,10 @@
                                 <label for=""
                                     class="col-sm-3 col-form-label">Buscar Padre o tutor</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control " id="" formControlName="parent_name" name="parent_name"  (input)="searchparten()">
+                                        <input type="text" class="form-control " id=""    [value]="nameParent" disabled="false" (input)="searchparten()">
+                                        <button type="button" class="btn btn-primary" (click)="showDialogSearchUp()" icon="pi pi-info-circle" label="Selecionar  Padre o Tutor">Selecionar  Padre o Tutor</button>
                                     </div>
-                            </div>
-                            <div class="row mb-4" *ngIf="resSearch">
-                                <label for=""
-                                    class="col-sm-3 col-form-label">Padre o tutor</label>
-                                    <div class="col-sm-9">
-                                        <select bindLabel="value" bindValue="id" formControlName="parent_id"  style="width: 100%;"   class=" form-control">
-                                            <option *ngFor="let item of parent" [value]="item.tutor_id" > {{item.tutor_name}}  {{item.tutor_lastname_father}}  {{item.tutor_lastname_mother}}</option>
-                                        </select>
-                                    </div>
+
                             </div>
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label">{{textos['lastname']}}</label>
@@ -1174,7 +1167,6 @@
                                     (input)="getother_allergies()"
                                      #other_allergies></textarea>
                                     <div class="alert alert-danger mt-2" role="alert" *ngIf="other_allergies.invalid">
-                                                                                 Campo requerido
                                       </div>
 
 
@@ -1451,6 +1443,39 @@
                     </div>
                 </div>
             </div>
+            <p-dialog header="Buscador" *ngIf="displayEditUpd" [(visible)]="displayEditUpd" position="right" modal="True" [style]="{width: '50vw'}">
+                <div class="row mb-4">
+                    <label for=""
+                        class="col-sm-3 col-form-label">Buscar Padre o tutor</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control " id="" formControlName="parent_name" name="parent_name"  (input)="searchpartenEdit()">
+                            <div class="alert alert-warning" role="alert" *ngIf="!resSearch">        
+                                Por favor Escriba los 3 primeros caracteres del nombre del padre o tutor para inciar la busqueda
+                             </div>
+                        </div>
+                </div>
+                <div class="alert alert-primary" role="alert" *ngIf="resSearch">
+                   
+                            Se encontro un total de {{parent.length}}
+             
+                    
+                  </div>
+                  
+                <div class="row mb-4" >
+                    <label for=""
+                        class="col-sm-3 col-form-label">Padre o tutor</label>
+                        <div class="col-sm-9">
+                            <select bindLabel="value" bindValue="id" formControlName="parent_id"  style="width: 100%;"   class=" form-control" >
+                                <option *ngIf="!resSearch">Por favor Agregue un nombre en el buscador para empezar</option>
+                                <option *ngIf="resSearch">Seleciona un Padre o Tutor</option>
+                                <option *ngFor="let items of parent" [value]="items.tutor_id" > {{items.tutor_name}}  {{items.tutor_lastname_father}}  {{items.tutor_lastname_mother}}</option>
+                            </select>
+                        </div>
+                </div>
+                <p-dialog-footer>
+                    <button class="btn btn-primary" (click)="select()">Guardar</button>
+                </p-dialog-footer>	
+            </p-dialog>
           
         </div>
 

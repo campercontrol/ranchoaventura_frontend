@@ -46,7 +46,9 @@ export class CamperService {
    getCamper(id:any):Observable<any>{
     return this.http.get('http://142.93.12.234:8000/camper_complete/'+id+'/es')
    }
-
+   getSearchParen(id:any):Observable<any>{
+    return this.http.get('http://142.93.12.234:8000/parent/'+id)
+   }
    updateCamper(id:any,info:{}){
     return this.http.patch('http://142.93.12.234:8000/camper/'+id,info)
 

@@ -20,6 +20,7 @@ export class AdmiuserComponent implements OnInit {
   vacunas:any = [];
   tabla= true;
   table= false;
+  item=[]
   resSearch:boolean = false;
   @ViewChild("name") name: ElementRef;
   @ViewChild("lastname_father") lastname_father: ElementRef;
@@ -79,6 +80,7 @@ export class AdmiuserComponent implements OnInit {
   parent:any = [];
   escuelas:any = [];
   photoSelectUp : string | ArrayBuffer;
+  displayEditUpd:boolean = false;
   idioma = 'esp';
   cat: any = {
     '0': 'ninguno',
@@ -172,6 +174,10 @@ export class AdmiuserComponent implements OnInit {
   }
   showDialogSearch() {
     this.displayEdit =!this.displayEdit;
+
+  }
+  showDialogSearchUp() {
+    this.displayEditUpd =!this.displayEditUpd;
 
   }
   showDialog2() {
@@ -365,6 +371,11 @@ export class AdmiuserComponent implements OnInit {
     this.school = res.school[0];
     this.vaccines = res.vaccines; 
     this.photoSelectUp = 'http://142.93.12.234:8000/'+res['camper'].photo;
+    this.camperSer.getSearchParen(res['camper'].parent_id).subscribe((res)=>{
+        this.item = res.data
+        this.nameParent = item.tutor_name + item.tutor_lastname_father + item.tutor_lastname_mother
+    })
+
     this.formFood.patchValue({
      
       name:res['camper'].name,
@@ -404,6 +415,7 @@ export class AdmiuserComponent implements OnInit {
       record_id:0,
       parent_id: res['camper'].parent_id,
     })
+    
     
    })
 
@@ -637,6 +649,25 @@ export class AdmiuserComponent implements OnInit {
         this.resSearch= true;
         
       },error=>{
+        console.log(error);
+        
+      })
+    }
+
+  }
+  searchpartenEdit(){
+    this.resSearch= false;
+    let a :any = this.formFood.get('parent_name').value
+    if( a.length>2){
+      this.catalogos.searchPerent(a).subscribe((res:any)=>{
+        this.parent = res.data;
+        console.log(this.parent);
+        this.resSearch= true;
+        let b = {'tutor_id':this.item[0].tutor_id,'tutor_name':this.item[0].tutor_name,'tutor_lastname_father':this.item[0].tutor_lastname_father,'tutor_lastname_mother':this.item[0].tutor_lastname_mother}
+        this.parent.push(b);
+      },error=>{
+        let b = {'tutor_id':this.item[0].tutor_id,'tutor_name':this.item[0].tutor_name,'tutor_lastname_father':this.item[0].tutor_lastname_father,'tutor_lastname_mother':this.item[0].tutor_lastname_mother}
+        this.parent.push(b);
         console.log(error);
         
       })
