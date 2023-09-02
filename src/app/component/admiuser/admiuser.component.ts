@@ -349,6 +349,7 @@ export class AdmiuserComponent implements OnInit {
 
   resteValu() {
     this.formFood.reset();
+    this.nameParent = "";
     this.formFood.patchValue({
       assigned_id: 0,
       order: 0,
@@ -667,10 +668,10 @@ export class AdmiuserComponent implements OnInit {
         this.parent = res.data;
         console.log(this.parent);
         this.resSearch= true;
-        let b = {'tutor_id':this.item.data.tutor_id,'tutor_name':this.item.data.tutor_name,'tutor_lastname_father':this.item.data.tutor_lastname_father,'tutor_lastname_mother':this.item.data.tutor_lastname_mother}
+        let b = {'tutor_id':this.item.data.tutor_id,'tutor_name':this.item.tutor_name,'tutor_lastname_father':this.item.data.tutor_lastname_father,'tutor_lastname_mother':this.item.data.tutor_lastname_mother}
         this.parent.push(b);
       },error=>{
-        let b = {'tutor_id':this.item.data.tutor_id,'tutor_name':this.item.data.tutor_name,'tutor_lastname_father':this.item.data.tutor_lastname_father,'tutor_lastname_mother':this.item.data.tutor_lastname_mother}
+        let b = {'tutor_id':this.item.data.tutor_id,'tutor_name':this.item.tutor_name,'tutor_lastname_father':this.item.data.tutor_lastname_father,'tutor_lastname_mother':this.item.data.tutor_lastname_mother}
         this.parent.push(b);
         console.log(error);
         
