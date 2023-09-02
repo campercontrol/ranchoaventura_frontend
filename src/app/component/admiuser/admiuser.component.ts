@@ -357,9 +357,7 @@ export class AdmiuserComponent implements OnInit {
   }
 
   update(item){
-    this.updateId = item.id;
-
-   
+    this.updateId = item.id; 
    this.camperSer.getCamper(item.id).subscribe((res:any)=>{
     this.blood_types = res.blood_types;
     this.food_restrictions = res.food_restrictions;
@@ -371,10 +369,7 @@ export class AdmiuserComponent implements OnInit {
     this.school = res.school[0];
     this.vaccines = res.vaccines; 
     this.photoSelectUp = 'http://142.93.12.234:8000/'+res['camper'].photo;
-    this.camperSer.getSearchParen(res['camper'].parent_id).subscribe((res)=>{
-        this.item = res.data
-        this.nameParent = item.tutor_name + item.tutor_lastname_father + item.tutor_lastname_mother
-    })
+   
 
     this.formFood.patchValue({
      
@@ -415,7 +410,12 @@ export class AdmiuserComponent implements OnInit {
       record_id:0,
       parent_id: res['camper'].parent_id,
     })
-    
+    this.camperSer.getSearchParen(res['camper'].parent_id).subscribe((res)=>{
+      console.log(res);
+      
+      this.item = res.data
+      this.nameParent = item.tutor_name + item.tutor_lastname_father + item.tutor_lastname_mother
+  })
     
    })
 
