@@ -411,10 +411,10 @@ export class AdmiuserComponent implements OnInit {
       parent_id: res['camper'].parent_id,
     })
     this.camperSer.getSearchParen(res['camper'].parent_id).subscribe((res)=>{
-      console.log(res);
+      console.log(res.tutor_name);
       
       this.item = res.data;
-      console.log(item.data,'padre info');
+      console.log(item,'padre info');
       
       this.nameParent = item.tutor_name + item.tutor_lastname_father + item.tutor_lastname_mother
       console.log(this.nameParent);
