@@ -254,6 +254,9 @@ export class AdmiuserComponent implements OnInit {
 
   prueba1(){
     this.spinner=true;
+    this.formFood.patchValue({
+      record_id:0
+    }) 
     if(this.formFood.valid){
       let a ={ 
         "camper":this.formFood.value,
