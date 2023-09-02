@@ -20,7 +20,7 @@ export class AdmiuserComponent implements OnInit {
   vacunas:any = [];
   tabla= true;
   table= false;
-  item=[]
+  item:any={}
   resSearch:boolean = false;
   @ViewChild("name") name: ElementRef;
   @ViewChild("lastname_father") lastname_father: ElementRef;
@@ -416,7 +416,7 @@ export class AdmiuserComponent implements OnInit {
       this.item = res.data;
       console.log(item,'padre info');
       
-      this.nameParent = item.tutor_name + item.tutor_lastname_father + item.tutor_lastname_mother
+      this.nameParent = item.data.tutor_name + item.data.tutor_lastname_father + item.data.tutor_lastname_mother
   })
     
    })
@@ -665,10 +665,10 @@ export class AdmiuserComponent implements OnInit {
         this.parent = res.data;
         console.log(this.parent);
         this.resSearch= true;
-        let b = {'tutor_id':this.item[0].tutor_id,'tutor_name':this.item[0].tutor_name,'tutor_lastname_father':this.item[0].tutor_lastname_father,'tutor_lastname_mother':this.item[0].tutor_lastname_mother}
+        let b = {'tutor_id':this.item.data.tutor_id,'tutor_name':this.item.data.tutor_name,'tutor_lastname_father':this.item.data.tutor_lastname_father,'tutor_lastname_mother':this.item.data.tutor_lastname_mother}
         this.parent.push(b);
       },error=>{
-        let b = {'tutor_id':this.item[0].tutor_id,'tutor_name':this.item[0].tutor_name,'tutor_lastname_father':this.item[0].tutor_lastname_father,'tutor_lastname_mother':this.item[0].tutor_lastname_mother}
+        let b = {'tutor_id':this.item.data.tutor_id,'tutor_name':this.item.data.tutor_name,'tutor_lastname_father':this.item.data.tutor_lastname_father,'tutor_lastname_mother':this.item.data.tutor_lastname_mother}
         this.parent.push(b);
         console.log(error);
         
