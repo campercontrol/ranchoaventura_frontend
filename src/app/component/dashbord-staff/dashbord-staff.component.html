@@ -61,14 +61,14 @@
                     </th>
                     <th pSortableColumn="birthday" class="camp">
                       <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
-                        Record
+                        Sede
                         <p-sortIcon field="birthday"></p-sortIcon>
                       </div>
                     </th>
                    
                     <th pSortableColumn="season_name">
                       <div class="flex justify-content-between align-items-center" style="width: 140px;">
-                      Sede
+                        Record
                         <p-sortIcon field="season_name"></p-sortIcon>
                       </div>
                     </th>
@@ -104,12 +104,12 @@
                           {{customer.location_name}}
                         </td>
                         <td> 
-                          <p-badge value="0" pTooltip="Total" tooltipPosition="top"></p-badge>
+                          <p-badge [value]="customer.records.campers_recod" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
                          
-                          <p-badge value="0" pTooltip="Camps Anterior" tooltipPosition="top"
+                          <p-badge [value]="customer.records.staff_record" pTooltip="Staff Apuntado" tooltipPosition="top"
                               severity="danger" severity="danger"></p-badge>
                               
-                          <p-badge value="0" pTooltip="Próximos camps" tooltipPosition="top"
+                          <p-badge [value]="customer.records.staff_available_record" pTooltip="Staff Confirmado" tooltipPosition="top"
                               severity="success" severity="success"></p-badge>
                         </td>
                         <td style="font-size: 12px;" class="container-contac">
@@ -199,7 +199,7 @@
                     </th>
                     <th pSortableColumn="birthday" class="camp">
                       <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
-                        Record
+                        Sede
                         <p-sortIcon field="birthday"></p-sortIcon>
                       </div>
                     </th>
@@ -207,7 +207,7 @@
                     
                     <th pSortableColumn="season_name">
                       <div class="flex justify-content-between align-items-center" style="width: 140px;">
-                      Sede
+                      Record
                         <p-sortIcon field="season_name"></p-sortIcon>
                       </div>
                     </th>
@@ -243,12 +243,12 @@
                       {{customer.location_name}}
                     </td>
                     <td> 
-                      <p-badge value="0" pTooltip="Total" tooltipPosition="top"></p-badge>
+                      <p-badge [value]="customer.records.campers_recod" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
                      
-                      <p-badge value="0" pTooltip="Camps Anterior" tooltipPosition="top"
+                      <p-badge [value]="customer.records.staff_record" pTooltip="Staff Apuntado" tooltipPosition="top"
                           severity="danger" severity="danger"></p-badge>
                           
-                      <p-badge value="0" pTooltip="Próximos camps" tooltipPosition="top"
+                      <p-badge [value]="customer.records.staff_available_record" pTooltip="Staff Confirmado" tooltipPosition="top"
                           severity="success" severity="success"></p-badge>
                     </td>
                     <td style="font-size: 12px;" class="container-contac">
@@ -324,14 +324,14 @@
                     </th>
                     <th pSortableColumn="birthday" class="camp">
                       <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
-                        Record
+                       Sede
                         <p-sortIcon field="birthday"></p-sortIcon>
                       </div>
                     </th>
                    
                     <th pSortableColumn="season_name">
                       <div class="flex justify-content-between align-items-center" style="width: 140px;">
-                      Sede
+                        Record 
                         <p-sortIcon field="season_name"></p-sortIcon>
                       </div>
                     </th>
@@ -363,15 +363,17 @@
                     <td>
                       {{customer.location_name}}
                     </td>
-                    <td> 
-                      <p-badge value="0" pTooltip="Total" tooltipPosition="top"></p-badge>
-                     
-                      <p-badge value="0" pTooltip="Camps Anterior" tooltipPosition="top"
-                          severity="danger" severity="danger"></p-badge>
-                          
-                      <p-badge value="0" pTooltip="Próximos camps" tooltipPosition="top"
-                          severity="success" severity="success"></p-badge>
-                    </td>
+                  
+                      <td> 
+                        <p-badge [value]="customer.records.campers_recod" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
+                       
+                        <p-badge [value]="customer.records.staff_record" pTooltip="Staff Apuntado" tooltipPosition="top"
+                            severity="danger" severity="danger"></p-badge>
+                            
+                        <p-badge [value]="customer.records.staff_available_record" pTooltip="Staff Confirmado" tooltipPosition="top"
+                            severity="success" severity="success"></p-badge>
+                      </td>
+                   
                     <td style="font-size: 12px;" class="container-contac">
     
                    <span> {{customer.camp_start.substring(0,10)}} </span> 

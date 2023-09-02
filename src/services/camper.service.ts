@@ -52,7 +52,7 @@ export class CamperService {
 
    }
    deletCamper(id:any){
-    return this.http.delete('http://142.93.12.234:8000/delete_school/'+id,{})
+    return this.http.delete('http://142.93.12.234:8000/delete_camper/'+id,{})
 
    }
 

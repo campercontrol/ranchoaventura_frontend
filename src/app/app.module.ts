@@ -215,6 +215,7 @@ export function createTranslateLoader(http: HttpClient): any {
     AvatarModule,
     DialogModule,
     CKEditorModule,
+    TooltipModule,
     AvatarGroupModule,
     EditorModule,
     NgbPaginationModule, NgbAlertModule,

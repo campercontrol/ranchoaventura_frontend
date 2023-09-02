@@ -18,6 +18,8 @@ export class AdmiuserComponent implements OnInit {
   display2: boolean = false;
   display3: boolean = false;
   vacunas:any = [];
+  tabla= true;
+  table= false;
   resSearch:boolean = false;
   @ViewChild("name") name: ElementRef;
   @ViewChild("lastname_father") lastname_father: ElementRef;
@@ -91,7 +93,8 @@ export class AdmiuserComponent implements OnInit {
   constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder,private camperSer: CamperService,private render :Renderer2) {
     this.textos  = traducciones['traduciones'][this.idioma]['formUserChildren'];
     console.log(this.textos);
-    this.infoCatalogos();    
+    this.infoCatalogos(); 
+    this.table=true;   
   }
 
   ngOnInit(): void {
@@ -139,8 +142,7 @@ export class AdmiuserComponent implements OnInit {
 
   infoCatalogos(){
     this.camperSer.getCatalogos().subscribe((res:any)=>{
-      //console.log(info.infToken);
-      
+      //console.log(info.infToken);     
       this.blood_types = res.blood_types;
       this.food_restrictions = res.food_restrictions;
       this.genders = res.genders;
@@ -153,12 +155,18 @@ export class AdmiuserComponent implements OnInit {
       this.getCatalogos()
       console.log(res);     
     })
+    this.table = false;
+  }
+  cancelarUpdate(){
+    this.table =true;
+    this.display2 =false;
   }
 
 
   showDialog() {
     this.infoCatalogos();
-    this.display = true;
+    this.resteValu();
+
   }
   showDialog2() {
     this.display2 = true;
@@ -174,6 +182,7 @@ export class AdmiuserComponent implements OnInit {
   }
   closeModal2() {
     this.display2 = false;
+    this.table= true;
     this.resteValu();
 
   }
@@ -186,7 +195,7 @@ export class AdmiuserComponent implements OnInit {
       });
       console.log(this.listcatalogos);
       
-     
+     // this.table=true;
     });
   }
 
@@ -214,6 +223,12 @@ export class AdmiuserComponent implements OnInit {
       this.getCatalogos();
       })  
   }
+  canelar(){
+    this.formFood.reset();
+    this.table=true;
+    this.display2= false
+
+  }
 
   prueba1(){
     this.spinner=true;
@@ -235,6 +250,7 @@ export class AdmiuserComponent implements OnInit {
             this.spinner=false; 
             this.getCatalogos();
             this.statuAgrgado = true;
+            this.canelar();
             this.resteValu();
             setTimeout(() => {
               this.statuAgrgado = false;
@@ -363,10 +379,11 @@ export class AdmiuserComponent implements OnInit {
       record_id:0,
       parent_id: res['camper'].parent_id,
     })
-    this.display2= true;
+    
    })
 
-  
+   this.table= false;
+   this.display2= true;
 
    
   
