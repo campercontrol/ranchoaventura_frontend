@@ -706,7 +706,7 @@
                         </div>
                     </div>
                 </div>
-                <p-dialog header="Buscador" [(visible)]="displayEdit" position="right" modal="True" [style]="{width: '50vw'}">
+                <p-dialog header="Buscador" *ngIf="displayEdit" [(visible)]="displayEdit" position="right" modal="True" [style]="{width: '50vw'}">
                     <div class="row mb-4">
                         <label for=""
                             class="col-sm-3 col-form-label">Buscar Padre o tutor</label>

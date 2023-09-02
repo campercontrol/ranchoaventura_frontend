@@ -135,7 +135,7 @@ export class AdmiuserComponent implements OnInit {
       contact_relation: ["",[Validators.required,Validators.minLength(3)]],
       contact_homephone: [0,[Validators.required,Validators.minLength(8)]],
       contact_cellphone: [0,[Validators.required,Validators.minLength(8)]],
-      record_id: [0,[Validators.required]],
+      record_id: [0,],
       parent_id: [0,[Validators.required,Validators.min(1)]],
       parent_name: [""],
       
