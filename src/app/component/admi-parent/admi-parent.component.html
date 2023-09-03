@@ -20,7 +20,7 @@
         <div style="overflow: auto;">
             <p-table #dt [value]="listcatalogos" [rows]="5"
             [rowsPerPageOptions]="[5, 25, 50]"
-            [globalFilterFields]="['name','lastname_father','lastname_mother','tutor_cellphone','contact_email','acronyms','tutor_home_phone','tutor_work_phone']"
+            [globalFilterFields]="['tutor_name','tutor_lastname_father','tutor_lastname_mother','tutor_cellphone','contact_email','contact_name']"
             [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [showCurrentPageReport]="true"
@@ -28,13 +28,13 @@
 
             <ng-template pTemplate="header">
                 <tr>
-                    <th pSortableColumn="name" style="min-width: 120px;">Nombre<p-sortIcon field="name"style="font-size: 10px;"></p-sortIcon></th>
-                    <th pSortableColumn="lastname_father" style="min-width: 120px;">Primer apellido<p-sortIcon field="lastname_father"></p-sortIcon></th>
-                    <th pSortableColumn="lastname_mother" style="min-width: 120px;">Segundo apellido<p-sortIcon field="lastname_mother"></p-sortIcon></th>
-                    <th pSortableColumn="school_id" style="min-width: 190px;">Telefono<p-sortIcon field="school_id"></p-sortIcon></th>
-                    <th pSortableColumn="updated_at" style="min-width: 190px;">Correo principal<p-sortIcon field="updated_at"></p-sortIcon></th>
+                    <th pSortableColumn="tutor_name" style="min-width: 120px;">Nombre<p-sortIcon field="tutor_name"style="font-size: 10px;"></p-sortIcon></th>
+                    <th pSortableColumn="tutor_lastname_father" style="min-width: 120px;">Primer apellido<p-sortIcon field="tutor_lastname_father"></p-sortIcon></th>
+                    <th pSortableColumn="tutor_lastname_mother" style="min-width: 120px;">Segundo apellido<p-sortIcon field="tutor_lastname_mother"></p-sortIcon></th>
+                    <th pSortableColumn="tutor_home_phone" style="min-width: 190px;">Telefono<p-sortIcon field="tutor_home_phone"></p-sortIcon></th>
+                    <th pSortableColumn="tutor_home_phone" style="min-width: 190px;">Correo principal<p-sortIcon field="updated_at"></p-sortIcon></th>
                     <th pSortableColumn="contact_name" style="min-width: 190px;">Email del contacto<p-sortIcon field="contact_name"></p-sortIcon></th>
-                    <th pSortableColumn="concta_email" style="min-width: 210px;">Acampador<p-sortIcon field="contact_name"></p-sortIcon></th>
+                    <th pSortableColumn="contact_name" style="min-width: 210px;">Acampador<p-sortIcon field="contact_name"></p-sortIcon></th>
                     <th style="width: 40px;"></th>               
                 </tr>
             </ng-template>
@@ -101,6 +101,16 @@
                        <h2>Añadir Titular de la cuenta</h2>
 
                         <div class="mt-5">
+                            <div class="row mb-4">
+                                <label for=""
+                                    class="col-sm-3 col-form-label">Buscar Padre o tutor</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control " id=""    [value]="nameParent" disabled="false" (input)="searchparten()">
+                                        <button type="button" class="btn btn-primary" (click)="showDialogSearch()" icon="pi pi-info-circle" label="Selecionar  Padre o Tutor">Selecionar  Padre o Tutor</button>
+                                    </div>
+
+
+                            </div>
                             <div class="row mb-4">
                                 <label for=""
                                     class="col-sm-3 col-form-label">Nombre(s)*</label>
@@ -216,6 +226,40 @@
                         </div>
                     </div>
                 </div>
+
+                <p-dialog header="Buscador" *ngIf="displayEdit" [(visible)]="displayEdit" position="right" modal="True" [style]="{width: '50vw'}">
+                    <div class="row mb-4">
+                        <label for=""
+                            class="col-sm-3 col-form-label">Buscar Padre o tutor</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control " id="" formControlName="parent_name" name="parent_name"  (input)="searchparten()">
+                                <div class="alert alert-warning" role="alert" *ngIf="!resSearch">        
+                                    Por favor Escriba los 3 primeros caracteres del nombre del padre o tutor para inciar la busqueda
+                                 </div>
+                            </div>
+                    </div>
+                    <div class="alert alert-primary" role="alert" *ngIf="resSearch">
+                       
+                                Se encontro un total de {{parent.length}}
+                 
+                        
+                      </div>
+                      
+                    <div class="row mb-4" >
+                        <label for=""
+                            class="col-sm-3 col-form-label">Padre o tutor</label>
+                            <div class="col-sm-9">
+                                <select bindLabel="value" bindValue="id" formControlName="user_id"  style="width: 100%;"   class=" form-control" >
+                                    <option *ngIf="!resSearch">Por favor Agregue un nombre en el buscador para empezar</option>
+                                    <option *ngIf="resSearch">Seleciona un Padre o Tutor</option>
+                                    <option *ngFor="let items of parent" [value]="items.user_id" > {{items.tutor_email}}</option>
+                                </select>
+                            </div>
+                    </div>
+                    <p-dialog-footer>
+                        <button class="btn btn-primary" (click)="select()">Guardar</button>
+                    </p-dialog-footer>	
+                </p-dialog>
            
         </div>
     </form>
@@ -230,6 +274,15 @@
                 <div class="card">
                     <div class="card-body">
                        <h2>Editar Titular de la cuenta</h2>
+                       <div class="row mb-4">
+                        <label for=""
+                            class="col-sm-3 col-form-label">Buscar Padre o tutor</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control " id=""    [value]="nameParent" disabled="false" (input)="searchparten()">
+                                <button type="button" class="btn btn-primary" (click)="showDialogSearchUp()" icon="pi pi-info-circle" label="Selecionar  Padre o Tutor">Selecionar  Padre o Tutor</button>
+                            </div>
+
+                    </div>
 
                         <div class="mt-5">
                             <div class="row mb-4">
@@ -347,6 +400,39 @@
                         </div>
                     </div>
                 </div>
+                <p-dialog header="Buscador" *ngIf="displayEditUpd" [(visible)]="displayEditUpd" position="right" modal="True" [style]="{width: '50vw'}">
+                    <div class="row mb-4">
+                        <label for=""
+                            class="col-sm-3 col-form-label">Buscar Padre o tutor</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control " id="" formControlName="parent_name" name="parent_name"  (input)="searchpartenEdit()">
+                                <div class="alert alert-warning" role="alert" *ngIf="!resSearch">        
+                                    Por favor Escriba los 3 primeros caracteres del nombre del padre o tutor para inciar la busqueda
+                                 </div>
+                            </div>
+                    </div>
+                    <div class="alert alert-primary" role="alert" *ngIf="resSearch">
+                       
+                                Se encontro un total de {{parent.length}}
+                 
+                        
+                      </div>
+                      
+                    <div class="row mb-4" >
+                        <label for=""
+                            class="col-sm-3 col-form-label">Padre o tutor</label>
+                            <div class="col-sm-9">
+                                <select bindLabel="value" bindValue="id" formControlName="user_id"  style="width: 100%;"   class=" form-control" >
+                                    <option *ngIf="!resSearch">Por favor Agregue un nombre en el buscador para empezar</option>
+                                    <option *ngIf="resSearch">Seleciona un Padre o Tutor</option>
+                                    <option *ngFor="let items of parent" [value]="items.tutor_id" > {{items.tutor_name}}  {{items.tutor_lastname_father}}  {{items.tutor_lastname_mother}}</option>
+                                </select>
+                            </div>
+                    </div>
+                    <p-dialog-footer>
+                        <button class="btn btn-primary" (click)="select()">Guardar</button>
+                    </p-dialog-footer>	
+                </p-dialog>
            
         </div>
     </form>

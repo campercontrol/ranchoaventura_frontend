@@ -220,6 +220,10 @@ export class CatalogosService {
     }
 
     searchPerent(id){
+      return this.http.get('http://142.93.12.234:8000/search/user/'+id);
+
+    }
+    searchUser(id){
       return this.http.get('http://142.93.12.234:8000/search/parent/'+id);
 
     }
@@ -241,7 +245,7 @@ export class CatalogosService {
      postParent(info){
       return this.http.post('http://142.93.12.234:8000/parent/',info);
      }
-     patchParent(a:any,id){
+     patchParent(id,a:any){
       return this.http.patch('http://142.93.12.234:8000/parent/'+id,a);
     }
     deletParent(id){

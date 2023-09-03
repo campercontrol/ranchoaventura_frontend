@@ -13,10 +13,14 @@ export class AdmiParentComponent implements OnInit {
   listcatalogos: any = [];
   selectCatalogos: any;
   items: any;
+  displayEdit: boolean=false;
+  nameParent="";
   display: boolean = false;
   display2: boolean = false;
   display3: boolean = false;
   vacunas:any = [];
+  item:any={}
+  displayEditUpd:boolean= false;
   resSearch:boolean = false;
   cargando:boolean = false;
   @ViewChild("email") email: ElementRef;
@@ -114,6 +118,7 @@ export class AdmiParentComponent implements OnInit {
                             Validators.pattern("^[0-9]*$"),
                             Validators.minLength(8), Validators.maxLength(10)]],
     user_id:                ["",[Validators.required,Validators.min(1)]],
+    parent_name:             [""],
       
     })
     this.getCatalogos();
@@ -123,7 +128,8 @@ export class AdmiParentComponent implements OnInit {
 
 
   showDialog() {
-   
+   this.nameParent="";
+   this.formFood.reset();
     this.table = false;
   }
   showDialog2() {
@@ -141,6 +147,29 @@ export class AdmiParentComponent implements OnInit {
   closeModal2() {
     this.display2 = false;
     this.resteValu();
+
+  }
+  showDialogSearchUp() {
+    this.displayEditUpd =!this.displayEditUpd;
+
+  }
+  searchpartenEdit(){
+    this.resSearch= false;
+    let a :any = this.formFood.get('parent_name').value
+    if( a.length>2){
+      this.catalogos.searchUser(a).subscribe((res:any)=>{
+        this.parent = res.data;
+        console.log(this.parent);
+        this.resSearch= true;
+        let b = {'user_id':this.item.user_id,'tutor_email':this.item.tutor_email}
+        this.parent.push(b);
+      },error=>{
+         let b = {'user_id':this.item.user_id,'tutor_email':this.item.tutor_email}
+        this.parent.push(b);
+        console.log(error);
+        
+      })
+    }
 
   }
 
@@ -255,7 +284,8 @@ export class AdmiParentComponent implements OnInit {
      this.updateId = item.id;
     this.display2= true;
     this.table= false;
-   this.catalogos.getParentU(item.id).subscribe((res:any)=>{
+    this.item={user_id:item.user_id,tutor_email:item.tutor_email}
+    this.catalogos.getParentU(item.id).subscribe((res:any)=>{
    
     this.formFood.patchValue({
      
@@ -275,6 +305,8 @@ export class AdmiParentComponent implements OnInit {
     contact_work_phone:     item.contact_work_phone,
     user_id:                item.user_id
     })
+
+    
    
    })
 
@@ -313,7 +345,7 @@ export class AdmiParentComponent implements OnInit {
     }
     console.log(a);
     if(this.formFood.valid){
-      this.camperSer.updateCamper(this.updateId,this.formFood.value).subscribe((res:any)=>{
+      this.catalogos.patchParent(this.updateId,this.formFood.value).subscribe((res:any)=>{
         console.log(res);
         if(res.succes = 200){
           this.spinner = false;
@@ -391,7 +423,7 @@ export class AdmiParentComponent implements OnInit {
     this.resSearch= false;
     let a :any = this.formFood.get('parent_name').value
     if( a.length>2){
-      this.catalogos.searchPerent(a).subscribe((res:any)=>{
+      this.catalogos.searchUser(a).subscribe((res:any)=>{
         this.parent = res.data;
         console.log(this.parent);
         this.resSearch= true;
@@ -470,6 +502,10 @@ export class AdmiParentComponent implements OnInit {
       this.contact_name.nativeElement.focus()
 
      }
+  }
+  showDialogSearch() {
+    this.displayEdit =!this.displayEdit;
+
   }
 
   getcontact_lastname_father(){
@@ -554,6 +590,22 @@ export class AdmiParentComponent implements OnInit {
 
      }
     
+  }
+  select(){
+    let a = this.parent.filter(item=>
+     item.user_id== this.formFood.get('user_id').value 
+    )
+    console.log(this.formFood.get('user_id').value);
+    
+    console.log(a);
+    
+    if(a.length>0){
+      console.log('se encontro');
+      
+      this.nameParent = a[0].tutor_email; 
+      this.displayEdit = false;
+    }
+   
   }
   
 
