@@ -23,4 +23,19 @@ export class PaymentsService {
    getPageIndi(id){
     return this.http.get('http://142.93.12.234:8000/payment/'+id,)
    }
+   deletPage(id){
+    return this.http.delete('http://142.93.12.234:8000/payment_method/'+id,{})
+   }
+   // admi pagos catalogos
+   getPagos(){
+
+    return this.http.get('http://142.93.12.234:8000/payment/')
+  }
+  gettransaction_type(){
+
+    return this.http.get('http://142.93.12.234:8000/payment_transaction_type/')
+  }
+
+
+
 }

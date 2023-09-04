@@ -10,12 +10,62 @@ import { CampsService } from 'src/services/camps.service';
   styleUrls: ['./campamento.component.scss']
 })
 export class CampamentoComponent implements OnInit {
+  textos= {
+    "esp":{
+      titulo:"Campamento:",
+      texto1:"Fecha:",
+      texto2:"Salida:",
+      texto3:"Regreso:",
+      texto4:" Punto de reunión:",
+      texto5:"Lugar del campamento:",
+      texto6:"Mas informacion:",
+      texto7:"Contraseña",
+      texto8:"Cobertura Póliza: ",
+      texto9:"Precio del camp: ",
+      texto10:"Fotos:",
+      texto11:"Detalle de pagos",
+      texto12:"Tu saldo actual es de:",
+      texto13:" Una vez realizado el pago envianos tu comprobante a pagos@campercontrol.com indicando nombre completo del acampador. Tu pago se verá reflejado en nuestro sistema en un lapso de 48 horas hábiles.",
+      texto14:"Favor de consultar el estado de los pagos con el colegio",
+      th:"Fecha",
+      th1:"Descripcion",
+       th2:"Cargo", 
+       th3:"Abono", 
+       th4:"Saldo",
+    },
+    "eng":{
+      titulo:"Camp :",
+      texto1:"Dates:",
+      texto2:"Exit:",
+      texto3:"Camp ends:",
+      texto4:"Meeting Point:",
+      texto5:"Location:",
+      texto6:"More info:",
+      texto7:"Contraseña: ",
+      texto8:"Coverage policy: ",
+      texto9:"Camp price: ",
+      texto10:"Camp photos",
+      texto11:"Payments detail",
+      texto12:"Current balance: ",
+      texto13:"Once the payment is made, send us your voucher to pagos@campercontrol.com indicating the full name of the participant.Your payment will be reflected in our system within 48 working hours.",
+      texto14:"Please check the status of payments with the school",
+      th:"Date",
+      th1:"Details",
+       th2:"Charge", 
+       th3:"Credit", 
+       th4:"Account balance",
 
+
+
+    }
+
+  }
   idCamper=0;
   idCamp=0;
   dataCamp:Camp;
   dataPagos:any={};
   nameCamp:any={};
+  idoma:string='esp'
   cargosExtras:any ;
   PreguntasExtras:any ;
   respuestPregunta:any="";

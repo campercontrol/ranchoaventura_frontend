@@ -14,6 +14,7 @@ import { ParentService } from 'src/services/parent.service';
   styleUrls: ['./perfil-camper.component.scss']
 })
 export class PerfilCamperComponent implements OnInit {
+  
   photo = "";
   events2: any[];
   events1: any[];

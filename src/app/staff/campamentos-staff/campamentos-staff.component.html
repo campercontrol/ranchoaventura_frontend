@@ -1,14 +1,128 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="cargando">
   <div class="row">
     <div class="col-12">
+      <div class="card border border-warning border-3">
+      
+        <div class="bg-warning p-2" (click)="headerInfo=!headerInfo" style="cursor: pointer;">
+          <h1 class="card-title text-white">{{infoCamp.name}}</h1>
+          
+        </div>
+        <div *ngIf="headerInfo">
+        <div class="conatiner-info-camp mt-3">
+          <div>
+            <p class="fw-bold">  Fechas: <i class="fas fa-calendar-alt"> </i> </p>
+          </div>
+          <div>
+            <p>  {{infoCamp.start.substring(0,10)}} - {{infoCamp.end.substring(0,10)}}</p>
+          </div>
+        </div>
+        <div class="conatiner-info-camp">
+          <div>
+            <p class="fw-bold"> Sede <i class="fas fa-map"> </i>:  </p>
+          </div>
+          <div>
+            <p>  {{infoCamp.location_id}} </p>
+          </div>
+        </div>
+
+        <div class="conatiner-info-camp ">
+          <div>
+            <p class="fw-bold"> Cobertura Póliza <i class="bx bx-plus-medical"> </i>:  </p>
+          </div>
+          <div>
+            <p>  {{infoCamp.insurance}} </p>
+          </div>
+        </div>
+
+        <div class="conatiner-info-camp">
+          <div>
+            <p class="fw-bold"> Salida <i class="bx bxs-time"></i> : </p>
+          </div>
+          <div>
+            <p>  {{infoCamp.start.substring(0,10)}} </p>
+          </div>
+        </div>
+        <div class="conatiner-info-camp ">
+          <div>
+            <p class="fw-bold"> Regreso <i class="bx bxs-time"> </i> : </p>
+          </div>
+          <div>
+            <p>  {{infoCamp.end.substring(0,10)}} </p>
+          </div>
+        </div>
+        <div class="conatiner-info-camp ">
+          <div>
+            <p class="fw-bold"> Punto de reunion <i class="fas fa-map-marked-alt"> </i> :</p>
+          </div>
+          <div>
+            <p>  {{infoCamp.venue}} </p>
+          </div>
+        </div>
+        <div class="conatiner-info-camp ">
+          <div>
+            <p class="fw-bold">Fotos del camp <i class="bx bxs-camera-plus"> </i>:  </p>
+          </div>
+          <div>
+            <p>  <a href="{{infoCamp.photo_url}}">Ver fotos</a> </p>
+          </div>
+        </div>
+        <div class="conatiner-info-camp ">
+          <div>
+            <p class="fw-bold">Contraseña: <i class="bx bx-key"> </i> : </p>
+          </div>
+          <div>
+            <p>{{infoCamp.photo_password}}</p>
+          </div>
+        </div>
+        <div class="conatiner-info-camp ">
+          <div>
+            <p class="fw-bold">Página del camp <i class="bx bx-world"> </i> : </p>
+          </div>
+          <div>
+            <p> {{infoCamp.url}}</p>
+          </div>
+        </div>
+        <div class="conatiner-info-camp ">
+          <div>
+            <p class="fw-bold">Mensaje especial <i class="bx bxs-message-alt"></i> : </p>
+          </div>
+          <div>
+            <p> {{infoCamp.special_message}}</p>
+          </div>
+        </div>
+        <div class="conatiner-info-camp ">
+          <div>
+            <p class="fw-bold">Precio Público <i class="far fa-money-bill-alt"> </i> : </p>
+          </div>
+          <div>
+            <p> {{infoCamp.public_price}}</p>
+          </div>
+        </div>
+        <div class="conatiner-info-camp ">
+          <div>
+            <p class="fw-bold">Mensaje para admin <i class="bx bxs-message-alt"> </i> : </p>
+          </div>
+          <div>
+            <p> {{infoCamp.special_message_admin}}</p>
+          </div>
+        </div>
+       
+        
+        
+        
+         
+      </div>
+    </div>
+      
+      
       <div class="card border border-info border-3">
       
-          <div class="bg-info p-2">
+          <div class="bg-info p-2" (click)="headerCampers=!headerCampers" style="cursor: pointer;">
             <h1 class="card-title text-white">Acampadores</h1>
   
           </div>
           
-          <div class="card-body">
+          <div class="card-body" *ngIf="headerCampers">
             <div>
               <div class="col text-end">
   
@@ -147,7 +261,7 @@
                    </td>
   
                   <td>
-                    <button class="btn btn-primary" class="btn btn-primary">ver acampador</button>
+                    <button class="btn btn-primary" class="btn btn-primary"  (click)="vercamper(customer.camper_id)">ver acampador</button>
                   </td>
   
   
@@ -163,11 +277,11 @@
       </div>
 
       <div class="card border border-success border-3">
-        <div class="bg-success p-2">
+        <div class="bg-success p-2" (click)="headerStaffConf=!headerStaffConf" style="cursor: pointer;">
           <h1 class="card-title text-white">Staff confirmado</h1>
 
         </div>
-        <div class="card-body">
+        <div class="card-body" *ngIf="headerStaffConf">
           <div>
             <div class="col text-end">
 
@@ -302,7 +416,7 @@
                 </td>
 
                 <td>
-                  <button class="btn btn-primary" class="btn btn-primary">ver staff</button>
+                  <button class="btn btn-primary" class="btn btn-primary"  (click)="verStaff(customer.staff_id)">ver staff</button>
                 </td>
 
 
@@ -319,11 +433,11 @@
         </div>
       </div>
       <div class="card border border-danger border-3">
-        <div class="bg-danger p-2">
+        <div class="bg-danger p-2"  (click)="headerStaffApun=!headerStaffApun" style="cursor: pointer;">
           <h1 class="card-title text-white">Staff apuntado</h1>
 
         </div>
-        <div class="card-body">
+        <div class="card-body" *ngIf="headerStaffApun">
           <div>
             <div class="col text-end">
 
@@ -452,7 +566,7 @@
                 </td>
 
                 <td>
-                  <button class="btn btn-primary" class="btn btn-primary">ver staff</button>
+                  <button class="btn btn-primary" class="btn btn-primary" (click)="verStaff(customer.staff_id)">ver staff</button>
                 </td>
 
 
@@ -472,6 +586,11 @@
 
 
     </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center"  *ngIf="!cargando">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
   </div>
 </div>
 
@@ -495,7 +614,9 @@
           <tr>
            
     
-           
+           <th>
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+           </th>
             <th pSortableColumn="Staff.name" class="camp">
               <div class="flex justify-content-between align-items-center" style=" width: 60%;">
                 Nombre
@@ -508,7 +629,10 @@
         </ng-template>
         <ng-template pTemplate="body" let-customer>
           <tr class="p-selectable-row">
-           
+           <td>
+            <p-tableCheckbox [value]="customer"></p-tableCheckbox>
+
+           </td>
             <td>
               {{customer.Staff.name}} {{customer.Staff.lastname_father}}  {{customer.Staff.lastname_mother}}
             </td>

@@ -69,7 +69,7 @@
             <ng-template pTemplate="body" let-customer>
                 <tr class="p-selectable-row">
     
-                    <td>
+                    <td (click)="reditCamps(customer.id)">
                         {{customer.name}}
                     </td>
                     <td>

@@ -151,6 +151,7 @@ import { AdmiParentComponent } from './component/admi-parent/admi-parent.compone
 import { AdmiuserComponent } from './component/admiuser/admiuser.component';
 import { AdmiUserComponent } from './component/admi-user/admi-user.component';
 import { AdmiCamperComponent } from './component/admi-camper/admi-camper.component';
+import { AdmiPagosComponent } from './component/admi-pagos/admi-pagos.component';
 
 
 
@@ -205,7 +206,8 @@ export function createTranslateLoader(http: HttpClient): any {
     AdmiParentComponent,
     AdmiuserComponent,
     AdmiUserComponent,
-    AdmiCamperComponent, 
+    AdmiCamperComponent,
+    AdmiPagosComponent, 
        
   ],
   imports: [

@@ -232,6 +232,14 @@ export class CatalogosService {
       return this.http.get('http://142.93.12.234:8000/camper/');
 
     }
+    serachCamper(id){
+      return this.http.get('http://142.93.12.234:8000/camper/'+id);
+
+    }
+    serachCamps(id){
+      return this.http.get('http://142.93.12.234:8000/camp/'+id);
+
+    }
     // parent admi
 
     getParent(){
