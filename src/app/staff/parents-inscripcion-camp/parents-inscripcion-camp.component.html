@@ -15,13 +15,13 @@
                             {{camper_band.past_camps}}
                         </div>
                         <div>
-                            <p>Camps Anteriores</p>
+                            <p>{{textos[idoma]["titulo"]}}  </p>
                         </div>
                     </div>
                     <div class="foto-perfil">
                         <img src="http://142.93.12.234:8000/{{camper_band.photo}}" class="avatar-lg rounded-circle" alt="">
                         <button class="btn-rounded btn btn-success mt-3 ">
-                            <a class="text-white" style="width: 100%;" [routerLink]="['../camper/'+id]" >Ver Perfil</a>
+                            <a class="text-white" style="width: 100%;" [routerLink]="['../camper/'+id]" >{{textos[idoma]["titulo15"]}}  </a>
                         </button>
                     </div>
 
@@ -31,7 +31,7 @@
                           {{camper_band.future_camps}}
                         </div>
                         <div>
-                            <p>Camps Proximo</p>
+                            <p>{{textos[idoma]["titulo1"]}}  </p>
                         </div>
 
                     </div>
@@ -48,7 +48,7 @@
 
         <div class="card border border-info border-1" >
               <div class="bg-info p-2">
-                <h1 class="card-title text-white">Campamentos Disponibles</h1>
+                <h1 class="card-title text-white">{{textos[idoma]["titulo3"]}}  </h1>
       
               </div>
               <div class=" scroll-y">
@@ -89,26 +89,26 @@
                       </th>
                       <th pSortableColumn="location_id" class="camp">
                         <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
-                          Sede
+                          {{textos[idoma]["titulo4"]}}  
                           <p-sortIcon field="location_id"></p-sortIcon>
                         </div>
                       </th>
                       <th pSortableColumn="start" class="record">
                         <div class="flex justify-content-between align-items-center" style="min-width: 70px; width: 140px;">
-                          Inicio
+                          {{textos[idoma]["titulo5"]}}  
                           <p-sortIcon field="start"></p-sortIcon>
                         </div>
                       </th>
                       <th pSortableColumn="end">
                         <div class="flex justify-content-between align-items-center" style="width: 140px;">
-                        Termino
+                          {{textos[idoma]["titulo6"]}}  
                           <p-sortIcon field="end"></p-sortIcon>
                         </div>
                       </th>
                    
                       <th pSortableColumn="public_price" style="width: 130px; min-width: 120px;">
                         <div class="flex justify-content-between align-items-center">
-                          Precio
+                          {{textos[idoma]["titulo7"]}}  
                           <p-sortIcon field="public_price"></p-sortIcon>
                         </div>
                       </th>
@@ -152,7 +152,7 @@
                    
       
                       <td>
-                        <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../camp-info/'+id+'/'+customer.camp_id]">ver campamento</button>
+                        <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../camp-info/'+id+'/'+customer.camp_id]">{{textos[idoma]["titulo8"]}}  </button>
 
                       </td>
       
@@ -174,7 +174,7 @@
         <div class="card border border-success border-1" *ngIf="subscribe_camps.length>0">
             
             <div class="bg-success p-2">
-                <h1 class="card-title text-white">Camps a los que asistiré </h1>
+                <h1 class="card-title text-white">{{textos[idoma]["titulo11"]}}  </h1>
       
               </div>
               <br>
@@ -190,13 +190,12 @@
                   <ng-template pTemplate="header">
                       <tr>
                           
-                          <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
-                          <th pSortableColumn="location_name">Sede <p-sortIcon field="sede"></p-sortIcon></th>
-                          <th pSortableColumn=" camp_end">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
-                          <th pSortableColumn="camp_start">Termino <p-sortIcon field="termino"></p-sortIcon></th>
-                          <th pSortableColumn="public_price">Precio <p-sortIcon field="precio"></p-sortIcon></th>
-                          <th pSortableColumn="public_price">Sede <p-sortIcon field="precio"></p-sortIcon></th>
-                          <th pSortableColumn="public_price">Saldo <p-sortIcon field="precio"></p-sortIcon></th>
+                          <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp_name" style="font-size: 10px;"></p-sortIcon></th>
+                          <th pSortableColumn="location_name">{{textos[idoma]["titulo4"]}}  <p-sortIcon field="location_name"></p-sortIcon></th>
+                          <th pSortableColumn=" camp_end">{{textos[idoma]["titulo5"]}}  <p-sortIcon field="camp_end"></p-sortIcon></th>
+                          <th pSortableColumn="camp_start">{{textos[idoma]["titulo6"]}}  <p-sortIcon field="camp_start"></p-sortIcon></th>
+                          <th pSortableColumn="public_price">{{textos[idoma]["titulo7"]}}  <p-sortIcon field="public_price"></p-sortIcon></th>
+                          <th pSortableColumn="camper_payment_balance">{{textos[idoma]["titulo12"]}}  <p-sortIcon field="camper_payment_balance"></p-sortIcon></th>
 
                           <th></th>
       
@@ -226,10 +225,7 @@
                              {{customer.public_price}}
             
                             </td>
-                            <td>
-                              {{customer.location_name}}
-             
-                             </td>
+                          
                              <td>
                               {{customer.camper_payment_balance}}
              
@@ -249,7 +245,7 @@
         <div class="card border border-secondary border-1"  *ngIf="available_school_camps.length>0">
             
             <div class="bg-secondary p-2">
-                <h1 class="card-title text-white">Campamentos Escolares Disponibles </h1>
+                <h1 class="card-title text-white">{{textos[idoma]["titulo9"]}}  </h1>
       
               </div>
               
@@ -284,11 +280,11 @@
                         <th>
                           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                          <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
-                          <th pSortableColumn="location_name">Sede <p-sortIcon field="sede"></p-sortIcon></th>
-                          <th pSortableColumn=" camp_end">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
-                          <th pSortableColumn="camp_start">Termino <p-sortIcon field="termino"></p-sortIcon></th>
-                          <th pSortableColumn="public_price">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+                          <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp_name" style="font-size: 10px;"></p-sortIcon></th>
+                          <th pSortableColumn="location_name">{{textos[idoma]["titulo4"]}}   <p-sortIcon field="location_name"></p-sortIcon></th>
+                          <th pSortableColumn="camp_start">{{textos[idoma]["titulo5"]}}   <p-sortIcon field="camp_start"></p-sortIcon></th>
+                          <th pSortableColumn="camp_end">{{textos[idoma]["titulo6"]}}   <p-sortIcon field="camp_end"></p-sortIcon></th>
+                          <th pSortableColumn="public_price">{{textos[idoma]["titulo7"]}}   <p-sortIcon field="precio"></p-sortIcon></th>
       
                           <th></th>
       
@@ -333,14 +329,11 @@
               </p-table>
             </div>
         </div>
-
-        
-
         <div class="card border border-info border-1" *ngIf="summer_school_camps.length>0">
             
           <div class="bg-info p-2">
-              <h1 class="card-title text-white">Campamentos de verano  Disponible</h1>
-    
+              <h1 class="card-title text-white">{{textos[idoma]["titulo10"]}}  </h1>
+
             </div>
             <div class="card-body">
               <div>
@@ -375,10 +368,10 @@
                         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                       </th>
                         <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
-                        <th pSortableColumn="location_name">Sede <p-sortIcon field="sede"></p-sortIcon></th>
-                        <th pSortableColumn=" camp_end">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
-                        <th pSortableColumn="camp_start">Termino <p-sortIcon field="termino"></p-sortIcon></th>
-                        <th pSortableColumn="public_price">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+                        <th pSortableColumn="location_name">{{textos[idoma]["titulo4"]}}  <p-sortIcon field="sede"></p-sortIcon></th>
+                        <th pSortableColumn=" camp_end">{{textos[idoma]["titulo5"]}}  <p-sortIcon field="inicio"></p-sortIcon></th>
+                        <th pSortableColumn="camp_start">{{textos[idoma]["titulo6"]}}  <p-sortIcon field="termino"></p-sortIcon></th>
+                        <th pSortableColumn="public_price">{{textos[idoma]["titulo7"]}}  <p-sortIcon field="precio"></p-sortIcon></th>
     
                         <th></th>
     
@@ -428,7 +421,7 @@
       <div class="card border border-secondary border-1"  *ngIf="passed_camps.length>0">
             
         <div class="bg-secondary p-2">
-            <h1 class="card-title text-white">Camps a los que asisti</h1>
+            <h1 class="card-title text-white">{{textos[idoma]["titulo13"]}} </h1>
   
           </div>
           <br>
@@ -445,10 +438,10 @@
                   <tr>
                       
                       <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
-                      <th pSortableColumn="location_name">Sede <p-sortIcon field="sede"></p-sortIcon></th>
-                      <th pSortableColumn=" camp_end">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
-                      <th pSortableColumn="camp_start">Termino <p-sortIcon field="termino"></p-sortIcon></th>
-                      <th pSortableColumn="public_price">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+                      <th pSortableColumn="location_name">{{textos[idoma]["titulo4"]}}  <p-sortIcon field="sede"></p-sortIcon></th>
+                      <th pSortableColumn=" camp_end">{{textos[idoma]["titulo5"]}}  <p-sortIcon field="inicio"></p-sortIcon></th>
+                      <th pSortableColumn="camp_start">{{textos[idoma]["titulo6"]}}  <p-sortIcon field="termino"></p-sortIcon></th>
+                      <th pSortableColumn="public_price">{{textos[idoma]["titulo7"]}}  <p-sortIcon field="precio"></p-sortIcon></th>
   
                       <th></th>
   
@@ -481,7 +474,7 @@
                      
         
                         <td>
-                          <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../camp-info/'+id+'/'+customer.camp_id]">ver campamento</button>
+                          <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../camp-info/'+id+'/'+customer.camp_id]">{{textos[idoma]["titulo8"]}} </button>
                         </td>
   
                   </tr>
@@ -492,7 +485,7 @@
     <div class="card border border-danger border-1" *ngIf="cancelled_camps.length>0">
         
         <div class="bg-danger p-2">
-            <h1 class="card-title text-white">Campamentos Cancelados </h1>
+            <h1 class="card-title text-white">{{textos[idoma]["titulo14"]}}</h1>
   
           </div>
           <br>
@@ -510,10 +503,10 @@
                   <tr>
                       
                       <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
-                      <th pSortableColumn="location_name">Sede <p-sortIcon field="sede"></p-sortIcon></th>
-                      <th pSortableColumn=" camp_end">Inicio <p-sortIcon field="inicio"></p-sortIcon></th>
-                      <th pSortableColumn="camp_start">Termino <p-sortIcon field="termino"></p-sortIcon></th>
-                      <th pSortableColumn="public_price">Precio <p-sortIcon field="precio"></p-sortIcon></th>
+                      <th pSortableColumn="location_name">{{textos[idoma]["titulo4"]}} <p-sortIcon field="sede"></p-sortIcon></th>
+                      <th pSortableColumn=" camp_end">{{textos[idoma]["titulo5"]}} <p-sortIcon field="inicio"></p-sortIcon></th>
+                      <th pSortableColumn="camp_start">{{textos[idoma]["titulo6"]}} <p-sortIcon field="termino"></p-sortIcon></th>
+                      <th pSortableColumn="public_price">{{textos[idoma]["titulo7"]}} <p-sortIcon field="precio"></p-sortIcon></th>
   
                       <th></th>
   
@@ -546,7 +539,7 @@
                      
         
                         <td>
-                          <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../../../parents/camp-info/'+id+'/'+customer.camp_id]">ver campamento</button>
+                          <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../../../parents/camp-info/'+id+'/'+customer.camp_id]">{{textos[idoma]["titulo8"]}}</button>
                         </td>
   
                   </tr>

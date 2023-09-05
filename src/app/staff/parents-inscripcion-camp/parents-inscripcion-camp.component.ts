@@ -15,7 +15,53 @@ export class ParentsInscripcionCampComponent implements OnInit {
   {camp:"Campamento de Verano",sede:"Los Potros",inicio:"2023-07-13 (1 mes, 1 semana)",termino:"2023-08-24",precio:25500,saldo:25000}];
 
     product: any;
+    textos:any={
+      "esp":{
+        "titulo":"Camps Anteriores",
+        "titulo1":"Camps Proximo",
+        "titulo3":"Campamentos Disponibles",
+        "titulo4":"Sede",
+        "titulo5":"Inicio",
+        "titulo6":"Termino",
+        "titulo7":"Precio",
+        "titulo8":"ver campamento",
+        "titulo9":"Campamentos Escolares Disponibles ",
+        "titulo10":"Campamentos de verano  Disponible",
+        "titulo11":"Campamentos a los que asistire",
+        "titulo12":"Saldo",
+        "titulo13":"Camps a los que asisti",
+        "titulo14":"Campamentos Cancelados ",
+        "titulo15":"ver perfil "
 
+
+
+      },
+      "eng":{
+        "titulo":"PREVIOUS CAMPS",
+        "titulo1":"FORTHCOMING CAMPS",
+        "titulo3":"camps available",
+        "titulo4":"Camp site",
+        "titulo5":"Starts",
+        "titulo6":"Ends",
+        "titulo7":"Account balance",
+        "titulo8":"see details",
+        "titulo9":"School Camps Available",
+        "titulo10":"Summer Camps Available",
+        "titulo11":"Camps that I will attend",
+        "titulo12":"Balance",
+        "titulo13":"Camps I attended",
+        "titulo14":"Canceled Camps",
+        "titulo15":"view profile "
+
+
+
+
+
+
+
+      }
+    }
+    idoma = "esp";
     selectedProducts: any[];
     camper_band:any = [];
     submitted: boolean;
