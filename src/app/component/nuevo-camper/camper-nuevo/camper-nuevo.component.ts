@@ -5,6 +5,7 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, Validators
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import traducciones  from 'src/assets/json/lengua.json';
+import { LangService } from 'src/services/lang.service';
 
 
 
@@ -81,7 +82,7 @@ export class CamperNuevoComponent implements OnInit {
 
   sexo:string[]=['Hombre','Mujer',"No binario"," Prefiero no decir"]
 
-  constructor(private catalogos: CamperService , private formGrup: FormBuilder, private router:Router,private render:Renderer2,private info: AuthenticationService) {
+  constructor(private catalogos: CamperService , private formGrup: FormBuilder, private router:Router,private render:Renderer2,private info: AuthenticationService,private lang:LangService) {
     
     
     this.textos  = traducciones['traduciones'][this.idioma]['formUserChildren'];
@@ -105,6 +106,12 @@ export class CamperNuevoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.lang.getLang().subscribe((res:any)=>{
+      this.idioma=res
+      console.log(this.idioma);
+      
+      this.textos  = traducciones['traduciones'][this.idioma]['formUserChildren'];
+    })
 
     this.formUser = this.formGrup.group({
       name:["",[Validators.required,Validators.minLength(2)]],
@@ -141,7 +148,7 @@ export class CamperNuevoComponent implements OnInit {
       contact_relation: ["",[Validators.required,Validators.minLength(3)]],
       contact_homephone: [0,[Validators.required,Validators.minLength(8)]],
       contact_cellphone: [0,[Validators.required,Validators.minLength(8)]],
-      record_id: [0,],
+      record_id: [0],
       parent_id: [this.info.infToken.profile_id,[Validators.required]],
       terms: ["",[Validators.required,Validators.requiredTrue]],
     })

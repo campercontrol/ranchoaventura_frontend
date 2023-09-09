@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CamperService } from 'src/services/camper.service';
 import { CampsService } from 'src/services/camps.service';
+import { LangService } from 'src/services/lang.service';
 
 
 @Component({
@@ -85,13 +86,18 @@ export class ParentsInscripcionCampComponent implements OnInit {
 
     
 
-  constructor(private camps: CampsService,private routesA:ActivatedRoute, private modalService:NgbModal, private info:CamperService) {
+  constructor(private camps: CampsService,private routesA:ActivatedRoute, private modalService:NgbModal, private info:CamperService,private lang:LangService) {
     this.routesA.params.subscribe((params)=>{
       this.id = params['id']
     })
    }
 
   ngOnInit(): void {
+    this.lang.getLang().subscribe((res:any)=>{
+      this.idoma=res
+      //console.log(this.idioma);
+      
+    })
     this.getCampsDIs();
 
   }
@@ -311,7 +317,7 @@ suscribeCamps(typeCamp:number){
     })
 
     this.getCampsDIs();
-  this.inscripcion = true;
+   this.inscripcion = true;
     this.centerModal();
 
     break;
@@ -340,6 +346,8 @@ suscribeCamps(typeCamp:number){
 
       break;
   }
+  this.getCampsDIs();
+
 }
 
 }

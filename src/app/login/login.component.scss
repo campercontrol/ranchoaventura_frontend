@@ -2,7 +2,7 @@
     background-image: url("../../assets/images/camp/login.jpg");
     background-repeat: no-repeat;
     background-position: center;
-    height: 100vh;
+    height: 99vh;
     width: 100%;
     background-size:cover ;
 
@@ -10,6 +10,8 @@
 body{
     background:#ffe259 ;
     background: linear-gradient(to right,#ffa751,#ffe259);
+    overflow-y: none;
+    overflow-x: none;
 }
 .bg{
     background-image: url("../../assets/images/camp/login.jpg");
@@ -19,6 +21,13 @@ body{
     width: 100%;
     background-size:cover ;
 }
+
+.prueba{
+    overflow: hidden;
+}
+
+
+
 
 @media screen and(max-width:780px){
     .imagen{

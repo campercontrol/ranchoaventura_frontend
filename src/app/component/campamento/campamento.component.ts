@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CamperService } from 'src/services/camper.service';
 import { CampsService } from 'src/services/camps.service';
+import { LangService } from 'src/services/lang.service';
 
 @Component({
   selector: 'app-campamento',
@@ -79,7 +80,7 @@ export class CampamentoComponent implements OnInit {
   cargando= false;
 
 
-  constructor(private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router,private render:Renderer2) { 
+  constructor(private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router,private render:Renderer2,private lang:LangService) { 
     this.routesA.params.subscribe((params)=>{
       this.idCamp = params['camp'];
     //  console.log(this.idCamp);
@@ -118,6 +119,12 @@ export class CampamentoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.lang.getLang().subscribe((res:any)=>{
+      this.idoma=res
+      console.log(this.idoma);
+      
+    })
+
   }
 
 

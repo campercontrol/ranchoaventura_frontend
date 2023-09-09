@@ -5,6 +5,7 @@ import { Options } from 'ng5-slider';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CamperService } from 'src/services/camper.service';
 import traducciones  from 'src/assets/json/lengua.json';
+import { LangService } from 'src/services/lang.service';
 
 
 @Component({
@@ -78,7 +79,7 @@ export class UpdateCamperComponent implements OnInit {
 
 
 
-  constructor(private catalogos: CamperService , private formGrup: FormBuilder, private router:Router,private routesA:ActivatedRoute,private render:Renderer2,private info: AuthenticationService) {
+  constructor(private catalogos: CamperService , private formGrup: FormBuilder, private router:Router,private routesA:ActivatedRoute,private render:Renderer2,private info: AuthenticationService,private lang:LangService) {
     this.routesA.params.subscribe((params)=>{
       this.id = params['id']
     })
@@ -101,6 +102,12 @@ export class UpdateCamperComponent implements OnInit {
   }
 
   ngOnInit(): void {
+      this.lang.getLang().subscribe((res:any)=>{
+        this.idioma=res
+        console.log(this.idioma);
+        
+        this.textos  = traducciones['traduciones'][this.idioma]['formUserChildren'];
+      })
 
     this.formUser = this.formGrup.group({
       name:["",[Validators.required]],

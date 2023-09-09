@@ -10,6 +10,7 @@ import { CamperService } from 'src/services/camper.service';
 import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import traducciones  from 'src/assets/json/lengua.json';
+import { LangService } from 'src/services/lang.service';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class RegisteredChildrenComponent implements OnInit {
   idioma = 'esp'
   textos = {}
   total:any ;
-  constructor(private modalService: NgbModal, private formBuilder: FormBuilder,private hijos:CamperService, private router:Router,private info: AuthenticationService) { 
+  constructor(private modalService: NgbModal, private formBuilder: FormBuilder,private hijos:CamperService, private router:Router,private info: AuthenticationService,private lang :LangService) { 
     this.hijos.getHijos(this.info.infToken.profile_id).subscribe(
       (res:any)=>{
         console.log(res);
@@ -49,6 +50,13 @@ export class RegisteredChildrenComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.lang.getLang().subscribe((res:any)=>{
+      this.idioma=res
+      console.log(this.idioma);
+      
+      this.textos  = traducciones['traduciones'][this.idioma]['dashboardParent'];
+    })
+
     this.selectValue = ['Photoshop', 'illustrator', 'Html', 'Css', 'Php', 'Java', 'Python'];
 
     this.breadCrumbItems = [{ label: 'Contacts' }, { label: 'Users Grid', active: true }];
