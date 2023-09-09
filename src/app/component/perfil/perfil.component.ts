@@ -3,6 +3,7 @@ import { ParentService } from '../../../services/parent.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
+import { LangService } from 'src/services/lang.service';
 
 @Component({
   selector: 'app-perfil',
@@ -28,15 +29,71 @@ export class PerfilComponent implements OnInit {
   @ViewChild("contact_email") contact_email: ElementRef;
   @ViewChild("confirmEmail") confirmEmail: ElementRef;
   spinner = false
+  idoma:string='eng'
+
+  textos= {
+    "esp":{
+      titulo:"Titular de la cuenta (PADRE, MADRE o TUTOR)",
+      texto1:"Ingresa la información del padre, madre o tutor titular de la cuenta.",
+      texto2:"Nombre(s)*",
+      texto3:"Apellido paterno*",
+      texto4:"Apellido materno",
+      texto5:"Teléfono móvil* ",
+      texto6:"Teléfono de casa*",
+      texto7:"Teléfono de oficina*",
+      texto8:"Segundo titular de la cuenta (PADRE, MADRE o SEGUNDO TUTOR)",
+      texto9:"No es el titular de la cuenta, pero es igual de importante ya que es a quien llamaremos en caso de no poder contactar al primer titular, tambien recibe los correos referentes a los campamentos.",
+      texto10:"Email*",
+      texto11:"Confirmar correo electrónico*",
+      texto12:"Acepto los términos y condiciones",
+      texto13:"términos y condiciones  ",
+      texto14:"Se enviará un correo electrónico de confirmación a tu correo, te pedimos que revises tu bandeja de",
+      textto15:"Correo no deseado",
+      texto16:"para asegurar que lo recibiste bien. Si no lo recibes,ponte en contacto con nosotros.",
+
+    
+    },
+    "eng":{
+      titulo:"Account's principal name (Mother / Father / 2nd Guardian)",
+      texto1:"Access data of the Father, mother or guardian",
+      texto2:"Name(s)*",
+      texto3:"Last name*",
+      texto4:"Second Last Name",
+      texto5:"Mobile Phone*",
+      texto6:"Home phone*",
+      texto7:"Office phone*",
+      texto8:" Cotitular (Mother / Father / 2nd Guardian)",
+      texto9:"Will not be the account principal, but is as important. We'll get in touch with this person in case we can't reach the account principal..",
+      texto10:"Email*",
+      texto11:"Reenter email*",
+      texto12:"I accept the terms and conditions.",
+      texto13:"Read the terms and conditions.",
+      texto14:"A confirmation email will be sent to your email, please check your",
+      texto15:"Spam",
+      texto16:"to make sure you get it . If you do not receive it, please contact us.",
 
 
 
 
 
-  constructor(private parent : ParentService, private formBuild:FormBuilder,private info: AuthenticationService,private render :Renderer2,private router: Router) { }
+
+
+
+    }
+
+  }
+
+
+
+
+
+  constructor(private parent : ParentService, private formBuild:FormBuilder,private info: AuthenticationService,private render :Renderer2,private router: Router,private lang:LangService) { }
 
   ngOnInit(): void {
-
+  this.lang.getLang().subscribe((res:any)=>{
+    this.idoma=res
+    
+  })
     this.formParent = this.formBuild.group({
       tutor_lastname_father:["",[Validators.required,Validators.minLength(2)]],
       tutor_cellphone:      ["",[Validators.required,
