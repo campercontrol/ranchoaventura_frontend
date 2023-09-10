@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { ConfigService } from 'src/app/core/services/config.service';
 import { EventService } from 'src/app/core/services/event.service';
+import { LangService } from 'src/services/lang.service';
 import { ParentService } from 'src/services/parent.service';
 
 @Component({
@@ -47,6 +48,95 @@ export class NewParentComponent implements OnInit {
   @ViewChild("contact_work_phone") contact_work_phone: ElementRef; 
   @ViewChild("contact_home_phone") contact_home_phone: ElementRef; 
   @ViewChild("contact_email") contact_email: ElementRef; 
+  idoma:string='eng'
+
+  textos= {
+    "esp":{
+      titulo:" Datos de acceso del Padre, Madre o Tutor titular de la cuenta",
+      texto1:"Ingresa la información del padre, madre o tutor titular de la cuenta.",
+      texto2:"Nombre(s)*",
+      texto3:"Apellido paterno*",
+      texto4:"Apellido materno",
+      texto5:"Teléfono móvil* ",
+      texto6:"Teléfono de casa*",
+      texto7:"Teléfono de oficina*",
+      texto8:"Segundo titular de la cuenta (PADRE, MADRE o SEGUNDO TUTOR)",
+      texto9:"No es el titular de la cuenta, pero es igual de importante ya que es a quien llamaremos en caso de no poder contactar al primer titular, tambien recibe los correos referentes a los campamentos.",
+      texto10:"Email*",
+      texto11:"Confirmar correo electrónico*",
+      texto12:"Acepto los términos y condiciones",
+      texto13:"términos y condiciones  ",
+      texto14:"Se enviará un correo electrónico de confirmación a tu correo, te pedimos que revises tu bandeja de",
+      textto15:"Correo no deseado",
+      texto16:"para asegurar que lo recibiste bien. Si no lo recibes,ponte en contacto con nosotros.",
+      text017:"Guardar",
+      text018:"Cancelar",
+
+
+    
+    },
+    "eng":{
+      titulo:"Account's principal name (Mother / Father / 2nd Guardian)",
+      texto1:"Access data of the Father, mother or guardian",
+      texto2:"Name(s)*",
+      texto3:"Last name*",
+      texto4:"Second Last Name",
+      texto5:"Mobile Phone*",
+      texto6:"Home phone*",
+      texto7:"Office phone*",
+      texto8:" Cotitular (Mother / Father / 2nd Guardian)",
+      texto9:"Will not be the account principal, but is as important. We'll get in touch with this person in case we can't reach the account principal..",
+      texto10:"Email*",
+      texto11:"Reenter email*",
+      texto12:"I accept the terms and conditions.",
+      texto13:"Read the terms and conditions.",
+      texto14:"A confirmation email will be sent to your email, please check your",
+      texto15:"Spam",
+      texto16:"to make sure you get it . If you do not receive it, please contact us.",
+      text017:"Save",
+      text018:"Cancel",
+
+
+
+
+
+
+
+
+    }
+
+  }
+
+  cabezeras= {
+    "esp":{
+      titulo:"Datos de acceso del Padre, Madre o Tutor titular de la cuenta",
+      texto1:"Información de acceso con la cual entrarás a Camper Control.",
+      texto2:"Correo electrónico*",
+      texto3:"Confirma correo electrónico*",
+      texto4:"Contraseña*",
+      texto5:"Confirma contraseña* ",
+      texto6:"Será el usuario de acceso a la cuenta.",
+      texto7:"El correo no coincide",
+      texto8:"Se usará para ingresar a Camper Control. Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra minuscula y un caracter especial los cuales pueden ser :@ $,!,?,&",
+     
+    
+    },
+    "eng":{
+      titulo:" Access data of the Father, mother or guardian",
+      texto1:"Access information with which you access the Camper Control. Make sure it is a valid email address, as we will send you referrals from the camps your child will attend.",
+      texto2:"Email*",
+      texto3:"Reenter email*",
+      texto4:"Password*",
+      texto5:"Confirm password* ",
+      texto6:"This will be the access user to the account.",
+      texto7:"The email does not match",
+      texto8:"It will be used to enter Camper Control. Minimum of 6 characters, 1 uppercase letter, 1 lowercase letter and a special character which can be :@ $,!,?,&",
+     
+    
+    }
+
+  }
+
 
 
 
@@ -59,10 +149,14 @@ export class NewParentComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   alertConfirCorre
 
-  constructor(private formBuild:FormBuilder,private parent: ParentService,private router :Router,private modalService: NgbModal,private configService: ConfigService, private eventService: EventService,private render :Renderer2,
+  constructor(private formBuild:FormBuilder,private parent: ParentService,private router :Router,private modalService: NgbModal,private configService: ConfigService, private eventService: EventService,private render :Renderer2,private  lang :LangService,
     private info :AuthenticationService) { }
   
   ngOnInit(): void {
+    this.lang.getLang().subscribe((res:any)=>{
+      this.idoma=res
+      
+    });
     this.breadCrumbItems = [{ label: 'UI Elements' }, { label: 'Modals', active: true }];
 
     this.formParent = this.formBuild.group({

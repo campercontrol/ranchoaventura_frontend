@@ -50,7 +50,8 @@ export class PerfilComponent implements OnInit {
       texto14:"Se enviará un correo electrónico de confirmación a tu correo, te pedimos que revises tu bandeja de",
       textto15:"Correo no deseado",
       texto16:"para asegurar que lo recibiste bien. Si no lo recibes,ponte en contacto con nosotros.",
-
+      text017:"Guardar",
+      text018:"Cancelar",
     
     },
     "eng":{
@@ -71,14 +72,8 @@ export class PerfilComponent implements OnInit {
       texto14:"A confirmation email will be sent to your email, please check your",
       texto15:"Spam",
       texto16:"to make sure you get it . If you do not receive it, please contact us.",
-
-
-
-
-
-
-
-
+      text017:"Save",
+      text018:"Cancel",
     }
 
   }

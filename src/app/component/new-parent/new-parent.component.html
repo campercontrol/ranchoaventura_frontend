@@ -16,25 +16,25 @@
                             <div class="card-body">
                                 <div class="container-footer-parents">
                                     <img src="assets/images/camp/papa-mama.png" class="avatar-lg" alt="madre y padres">
-                                    <h4 class="ms-3 mt-3">Datos de acceso del Padre, Madre o Tutor titular de la cuenta</h4>
-                                    <h5 class="mt-2">Información de acceso con la cual entrarás a Camper Control.
+                                    <h4 class="ms-3 mt-3">{{cabezeras[idoma]["titulo"]}}</h4>
+                                    <h5 class="mt-2">{{cabezeras[idoma]["texto1"]}}
                                     </h5>
                                 </div>
         
                                 <div class="mt-5">
                                     <div class="row mb-3">
-                                        <label for="" class="col-sm-3 col-form-label" >correo electrónico*</label>
+                                        <label for="" class="col-sm-3 col-form-label" >{{cabezeras[idoma]["texto2"]}}</label>
                                         <div class="col-sm-9">
                                             
                                             <input type="text" class="form-control" id="" formControlName="email" name="email"   (input)="getemail()" #email (focus)="alertcorreo =true" (focusout)="alertcorreo = false">
-                                            <p> <small style=" font-size: 14px; color: red;"> Será el usuario de acceso a la cuenta.</small></p>
+                                            <p> <small style=" font-size: 14px; color: red;"> {{cabezeras[idoma]["texto6"]}}</small></p>
                                             <div *ngIf="alertcorreo" class="alert alert-warning mt-2" role="alert">
                                                 Asegurate de que sea  una dirección de correo  válida, ya que te enviaremos mensajes referentes a los camps a los que asistiran tus hijo(a)s
                                               </div>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label for="" class="col-sm-3 col-form-label" >Confirma correo electrónico*</label>
+                                        <label for="" class="col-sm-3 col-form-label" >{{cabezeras[idoma]["texto3"]}}</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="" formControlName="confirmEmail"  name="confirmEmail" #emailConfir  (input)="getconfirmEmail()" (focus)="alertConfirCorre =true" (focusout)="alertConfirCorre = false">
                                             <div  class="alert alert-danger" *ngIf="confirmEmailAlert"><small style="color: red; font-size: 14px    ;" >El correo no coincide.</small></div>
@@ -44,15 +44,14 @@
                                         </div>
                                     </div>
                                     <div class="row mb-1">
-                                        <label for="" class="col-sm-3 col-form-label">Contraseña</label>
+                                        <label for="" class="col-sm-3 col-form-label">{{cabezeras[idoma]["texto4"]}}</label>
                                         <div class="col-sm-9">
                                             <input type="password" class="form-control" id="" formControlName="password"  name="password" #password (input)="getpassword()">
-                                            <div  class="alert alert-warning mt-1"> Se usará para ingresar a Camper Control. Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra minuscula y un caracter especial los cuales pueden ser :@
-                                        $,!,?,&</div>
+                                            <div  class="alert alert-warning mt-1">{{cabezeras[idoma]["texto8"]}}</div>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label for="" class="col-sm-3 col-form-label" >Confirma contraseña*</label>
+                                        <label for="" class="col-sm-3 col-form-label" >{{cabezeras[idoma]["texto5"]}}</label>
                                         <div class="col-sm-9">
                                             <input type="password" class="form-control" id="" formControlName="confirmPassword"  name="confirmPassword" #confirmPassword (input)="getconfirmPassword()">
                                             <div  class="alert alert-danger" *ngIf="confirmPaswordAlert"><small style="color: red; font-size: 14px    ;">Las contraseñas no coinciden.</small></div>
@@ -69,51 +68,46 @@
                             <div class="card-body">
                                 <div class="container-footer-parents">
                                     <img src="assets/images/camp/papa-mama.png" class="avatar-lg" alt="madre y padres">
-                                    <h4 class="ms-3 mt-3">Titular de la cuenta (PADRE, MADRE o TUTOR)</h4>
-                                    <h5 class="mt-2">Ingresa la información del padre, madre o tutor titular de la cuenta.
+                                    <h4 class="ms-3 mt-3">{{textos[idoma]["titulo"]}}</h4>
+                                    <h5 class="mt-2">{{textos[idoma]["texto1"]}}
                                     </h5>
                                 </div>
         
                                 <div class="mt-5">
                                     <div class="row mb-4">
                                         <label for=""
-                                            class="col-sm-3 col-form-label">Nombre(s)*</label>
+                                            class="col-sm-3 col-form-label">{{textos[idoma]["texto2"]}}</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="" formControlName="tutor_name" #tutor_name
                                             (input)=" getTutor_name()">
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label for="" class="col-sm-3 col-form-label" >Apellido
-                                            paterno*</label>
+                                        <label for="" class="col-sm-3 col-form-label" >{{textos[idoma]["texto3"]}}</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="" formControlName="tutor_lastname_father" (input)="getTutor_lastname_father()" #tutor_lastname_father>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label for="" class="col-sm-3 col-form-label">Apellido
-                                            materno</label>
+                                        <label for="" class="col-sm-3 col-form-label">{{textos[idoma]["texto4"]}}</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="" formControlName="tutor_lastname_mother" (input)="gettutor_lastname_mother()" #tutor_lastname_mother>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label for="" class="col-sm-3 col-form-label" >Teléfono
-                                            móvil*</label>
+                                        <label for="" class="col-sm-3 col-form-label" >{{textos[idoma]["texto5"]}}</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="" formControlName = "tutor_cellphone" #tutor_cellphone (input)="gettutor_cellphone()">
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label for="" class="col-sm-3 col-form-label">Teléfono de
-                                            casa*</label>
+                                        <label for="" class="col-sm-3 col-form-label">{{textos[idoma]["texto6"]}}</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="" formControlName = "tutor_home_phone" #tutor_home_phone (input)="gettutor_home_phone()" >
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label for="" class="col-sm-3 col-form-label">Teléfono de
-                                            oficina*</label>
+                                        <label for="" class="col-sm-3 col-form-label">{{textos[idoma]["texto7"]}}</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="" formControlName = "tutor_work_phone" #tutor_work_phone (input)="gettutor_work_phone()">
                                         </div>
@@ -130,12 +124,10 @@
                             <div class="card-body">
                                 <div class="container-footer-parents">
                                     <img src="assets/images/camp/papa-mama.png" class="avatar-lg" alt="madre y padres">
-                                    <h4 class="ms-3 mt-3">Segundo titular de la cuenta (PADRE, MADRE o SEGUNDO TUTOR)</h4>
+                                    <h4 class="ms-3 mt-3">{{textos[idoma]["texto8"]}}</h4>
                                 </div>
         
-                                <h5 class="mt-4">No es el titular de la cuenta, pero es igual de importante ya que es a quien
-                                    llamaremos en caso de no poder contactar al primer titular, tambien recibe los correos
-                                    referentes a los campamentos.
+                                <h5 class="mt-4">{{textos[idoma]["texto9"]}}
         
                                 </h5>
         
@@ -145,49 +137,44 @@
                                 <div class="mt-5">
                                     <div class="row mb-4">
                                         <label for=""
-                                            class="col-sm-3 col-form-label">Nombre(s)*</label>
+                                            class="col-sm-3 col-form-label">{{textos[idoma]["texto2"]}}</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="" formControlName = "contact_name" #contact_name (input)="getcontact_name()" >
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label for="" class="col-sm-3 col-form-label">Apellido
-                                            paterno*</label>
+                                        <label for="" class="col-sm-3 col-form-label">{{textos[idoma]["texto3"]}}</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="" formControlName = "contact_lastname_father" #contact_lastname_father  (input)="getcontact_lastname_father()">
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label for="" class="col-sm-3 col-form-label">Apellido
-                                            materno</label>
+                                        <label for="" class="col-sm-3 col-form-label">{{textos[idoma]["texto4"]}}</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id=""  formControlName = "contact_lastname_mother" #contact_lastname_mother (input)="getcontact_lastname_mother()" >
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label for="" class="col-sm-3 col-form-label">Teléfono
-                                            móvil*</label>
+                                        <label for="" class="col-sm-3 col-form-label">{{textos[idoma]["texto5"]}}</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id=""  formControlName = "contact_cellphone" (input)="getcontact_cellphone()" #contact_cellphone >
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label for="" class="col-sm-3 col-form-label">Teléfono de
-                                            oficina*</label>
+                                        <label for="" class="col-sm-3 col-form-label">{{textos[idoma]["texto7"]}}</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="" formControlName = "contact_work_phone" (input)="getcontact_work_phone()" #contact_work_phone >
                                         </div>
                                     </div>
                                     <div class="row mb-4">
-                                        <label for="" class="col-sm-3 col-form-label">Teléfono de
-                                            casa*</label>
+                                        <label for="" class="col-sm-3 col-form-label">T{{textos[idoma]["texto6"]}}</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="" formControlName ="contact_home_phone" (input)="getcontact_home_phone()" #contact_home_phone >
                                         </div>
                                     </div>
                                     <div class="row mb-4">
                                         <label for=""
-                                            class="col-sm-3 col-form-label">Correo electrónico*</label>
+                                            class="col-sm-3 col-form-label">{{textos[idoma]["texto10"]}}</label>
                                         <div class="col-sm-9">
                                             <input type="text" class="form-control" id="" formControlName="contact_email" #contact_email (input)="getcontact_email()">
                                         </div>
@@ -209,26 +196,22 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="terms" height="40px" formControlName = "terms"  >
                                         <label class="form-check-label fs-3 ms-3" for="terms">
-                                            Acepto los términos y condiciones
+                                            {{textos[idoma]["texto12"]}}
                                         </label>
                                         <label class="form-check-label fs-3 ms-3" for="terms">
                                             <a
-                                                href="https://demo.campercontrol.com/media/uploads/files/terminos-y-condiciones.pdf">Ver
-                                                términos y condiciones</a>
+                                                href="https://demo.campercontrol.com/media/uploads/files/terminos-y-condiciones.pdf">
+                                                {{textos[idoma]["texto13"]}}</a>
                                         </label>
         
                                     </div>
                                 </div>
-                                <p class="fs-5">Se enviará un correo electrónico de confirmación a tu correo, te pedimos que
-                                    revises tu bandeja
-                                    de <span> Correo no deseado </span> para asegurar que lo recibiste bien. Si no lo recibes,
-                                    ponte en contacto
-                                    con nosotros.</p>
+                                <p class="fs-5">{{textos[idoma]["texto14"]}} <span> {{textos[idoma]["texto15"]}}</span>{{textos[idoma]["texto16"]}}</p>
         
                                 <div class="btn-footer">
-                                    <button class="btn btn-secondary w-lg btn-lg" (click)="cancelar()">Cancelar</button>
+                                    <button class="btn btn-secondary w-lg btn-lg" (click)="cancelar()">{{textos[idoma]["texto17"]}}</button>
                                     <div >
-                                        <button class="btn btn-info w-lg btn-lg"  (click)="prueba()" *ngIf="!spinner">Guardar</button>
+                                        <button class="btn btn-info w-lg btn-lg"  (click)="prueba()" *ngIf="!spinner">{{textos[idoma]["texto16"]}}</button>
                                         <div class="spinner-border" role="status" *ngIf="spinner">
                                             <span class="visually-hidden">Loading...</span>
                                           </div>
