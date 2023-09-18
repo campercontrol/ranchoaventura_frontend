@@ -220,17 +220,20 @@ export class CatalogosService {
     }
 
     searchPerent(id){
-      return this.http.get('http://142.93.12.234:8000/search/user/'+id);
+      return this.http.get('http://142.93.12.234:8000/search/parent/'+id);
 
     }
     searchUser(id){
-      return this.http.get('http://142.93.12.234:8000/search/parent/'+id);
+      return this.http.get('http://142.93.12.234:8000/search/user/'+id);
 
     }
 
     getcampers(){
       return this.http.get('http://142.93.12.234:8000/camper/');
 
+    }
+    getCamperAdmi(){
+      return this.http.get('http://142.93.12.234:8000/admin/camper/');
     }
     serachCamper(id){
       return this.http.get('http://142.93.12.234:8000/camper/'+id);

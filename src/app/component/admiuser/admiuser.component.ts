@@ -200,13 +200,10 @@ export class AdmiuserComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.catalogos.getcampers().subscribe((res: any) => {
+    this.catalogos.getCamperAdmi().subscribe((res: any) => {
       this.listcatalogos = res.data;
-      this.listcatalogos.forEach((element:any) => {
-        element.school = this.schoolinf(element.school_id)
-      });
-      console.log(this.listcatalogos);
-      
+      console.log(res.data);
+         
      // this.table=true;
     });
   }
@@ -352,14 +349,15 @@ export class AdmiuserComponent implements OnInit {
     this.nameParent = "";
     this.formFood.patchValue({
       assigned_id: 0,
+      can_swim: 0,
       order: 0,
       created_at: this.date
     })
   }
 
   update(item){
-    this.updateId = item.id; 
-   this.camperSer.getCamper(item.id).subscribe((res:any)=>{
+    this.updateId = item.camper_id; 
+   this.camperSer.getCamper(item.camper_id).subscribe((res:any)=>{
     this.blood_types = res.blood_types;
     this.food_restrictions = res.food_restrictions;
     this.genders = res.genders;

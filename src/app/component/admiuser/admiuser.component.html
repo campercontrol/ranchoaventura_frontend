@@ -1532,7 +1532,7 @@
         <div style="overflow: auto;">
             <p-table #dt [value]="listcatalogos" [rows]="5"
             [rowsPerPageOptions]="[5, 25, 50]"
-            [globalFilterFields]="['name','lastname_father','lastname_mother','tutor_cellphone','contact_email','acronyms','tutor_home_phone','tutor_work_phone']"
+            [globalFilterFields]="['camper_name','camper_lastname_mother','camper_lastname_father']"
             [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [showCurrentPageReport]="true"
@@ -1540,13 +1540,13 @@
 
             <ng-template pTemplate="header">
                 <tr>
-                    <th pSortableColumn="name" style="min-width: 120px;">Nombre<p-sortIcon field="name"style="font-size: 10px;"></p-sortIcon></th>
-                    <th pSortableColumn="lastname_father" style="min-width: 120px;">Primer apellido<p-sortIcon field="lastname_father"></p-sortIcon></th>
-                    <th pSortableColumn="lastname_mother" style="min-width: 120px;">Segundo apellido<p-sortIcon field="lastname_mother"></p-sortIcon></th>
-                    <th pSortableColumn="school_id" style="min-width: 150px;">Escuela<p-sortIcon field="school_id"></p-sortIcon></th>
-                    <th pSortableColumn="updated_at" style="min-width: 140px;">Update<p-sortIcon field="updated_at"></p-sortIcon></th>
-                    <th pSortableColumn="contact_name" style="min-width: 130px;">Nombre contacto<p-sortIcon field="contact_name"></p-sortIcon></th>
-                    <th pSortableColumn="concta_email" style="min-width: 210px;">correo del parde<p-sortIcon field="contact_name"></p-sortIcon></th>
+                    <th pSortableColumn="camper_name" style="min-width: 120px;">Nombre<p-sortIcon field="camper_name"style="font-size: 10px;"></p-sortIcon></th>
+                    <th pSortableColumn="camper_lastname_father" style="min-width: 120px;">Primer apellido<p-sortIcon field="camper_lastname_father"></p-sortIcon></th>
+                    <th pSortableColumn="camper_lastname_mother" style="min-width: 120px;">Segundo apellido<p-sortIcon field="camper_lastname_mother"></p-sortIcon></th>
+                    <th pSortableColumn="school" style="min-width: 150px;">Escuela<p-sortIcon field="school"></p-sortIcon></th>
+                    <th pSortableColumn="updated" style="min-width: 140px;">Update<p-sortIcon field="updated_at"></p-sortIcon></th>
+                    <th pSortableColumn="tutor_fullname" style="min-width: 130px;">Nombre contacto<p-sortIcon field="tutor_fullname"></p-sortIcon></th>
+                    <th pSortableColumn="tutor_email" style="min-width: 210px;">correo del parde<p-sortIcon field="tutor_email"></p-sortIcon></th>
 
 
 
@@ -1557,25 +1557,25 @@
             <ng-template pTemplate="body" let-customer>
                 <tr>
                     <td (click)="update(customer)" style="cursor:pointer;">
-                        {{customer.name}}
+                        {{customer.camper_name}}
                     </td>
                     <td (click)="update(customer)" style="cursor:pointer;">
-                        {{customer.lastname_father}}
+                        {{customer.camper_lastname_father}}
                     </td>
                     <td (click)="update(customer)" style="cursor:pointer;">
-                        {{customer.lastname_mother}}
+                        {{customer.camper_lastname_mother}}
                     </td>
                     <td>
                         {{customer.school}}
                     </td>
                     <td>
-                        {{customer.updated_at.substring(0,10)}}
+                        {{customer.updated.substring(0,10)}}
                     </td>
                     <td>
-                        {{customer.contact_name}}
+                        {{customer.tutor_fullname}}
                     </td>
                     <td>
-                        {{customer.concta_email}}
+                        {{customer.tutor_email}}
                     </td>
                     <td>
                         <button class="btn btn-danger" (click)="deletModal(customer.name,customer.id)">Eliminar</button>
