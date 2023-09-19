@@ -197,7 +197,7 @@ export class CampamentoComponent implements OnInit {
     
       this.cargosExtras.forEach(element => {
           element.camper_id = this.idCamper
-          element.is_selected = true
+          
       });
     let res = {
       "extra_charges":this.cargosExtras
@@ -205,6 +205,7 @@ export class CampamentoComponent implements OnInit {
 
     this.camps.setPagos(res).subscribe((res:any)=>{
       console.log(res);
+      this.getQuestion()
       this.modalService.dismissAll()
       
     })

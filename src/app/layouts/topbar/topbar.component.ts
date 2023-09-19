@@ -30,6 +30,10 @@ export class TopbarComponent implements OnInit {
               public languageService: LanguageService,
               public translate: TranslateService,
               public _cookiesService: CookieService) {
+                lang.getLang().subscribe((res)=>{
+                  console.log('idioma',res[0]);
+                  
+                })
 
                
   }

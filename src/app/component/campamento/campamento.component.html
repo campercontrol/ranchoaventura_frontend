@@ -238,7 +238,7 @@
 			<div class="mb-3" *ngFor="let item of cargosExtras let index = index;">
 				<label for="dateOfBirth">{{item.extra_charge_name}}  </label>
         <br>
-        <input class="form-check-input" type="checkbox" [value]="item.extra_selected" id="flexCheckIndeterminate" [(ngModel)]="item.extra_selected" name="extra_selected">
+        <input class="form-check-input" type="checkbox" value="true" id="flexCheckIndeterminate" [(ngModel)]="cargosExtras[index].extra_selected" name="extra_selected">
      
         <label class="form-check-label" for="flexCheckIndeterminate">
           ${{item.extra_charge_price}}
