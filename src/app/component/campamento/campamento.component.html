@@ -206,8 +206,7 @@
 		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
 	</div>
 	<div class="modal-body">
-    <form>
-			<div class="mb-3" *ngFor="let item of PreguntasExtras">
+			<div class="mb-3" *ngFor="let item of PreguntasExtras; let a = index">
        
         <div >
           <label for="dateOfBirth">{{item.question}}</label>
@@ -215,7 +214,7 @@
             <input
               class="form-control"
               type="text"
-              [(ngModel)]="item.answer"
+              [(ngModel)]="PreguntasExtras[a].answer"
               name="answer"
             />
           </div>
@@ -223,7 +222,6 @@
         
 				
 			</div>
-		</form>
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-outline-dark" (click)="saveRes()">Save</button>
@@ -237,7 +235,6 @@
 		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
 	</div>
 	<div class="modal-body">
-    <form>
 			<div class="mb-3" *ngFor="let item of cargosExtras let index = index;">
 				<label for="dateOfBirth">{{item.extra_charge_name}}  </label>
         <br>
@@ -247,7 +244,6 @@
           ${{item.extra_charge_price}}
         </label>
 			</div>
-		</form>
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-outline-dark" (click)="saveChange()">Save</button>
