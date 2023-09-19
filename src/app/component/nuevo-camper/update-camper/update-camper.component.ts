@@ -112,7 +112,7 @@ export class UpdateCamperComponent implements OnInit {
     this.formUser = this.formGrup.group({
       name:["",[Validators.required]],
       lastname_father:["",[Validators.required]],
-      lastname_mother:["",[Validators.required]],
+      lastname_mother:[""],
       photo:["",],
       gender_id:[0,[Validators.required]],
       birthday:["",[Validators.required]],
@@ -121,7 +121,7 @@ export class UpdateCamperComponent implements OnInit {
       grade:[0,[Validators.required]],
       school_id:[0,[Validators.required]],
       school_other:["",],
-      email: ["",[Validators.required,Validators.email]],
+      email: [""],
       can_swim: [false],
       affliction: ["",[Validators.required]],
       blood_type: [0,[Validators.required]],

@@ -125,7 +125,7 @@ export class CamperNuevoComponent implements OnInit {
       grade:[0,[Validators.required,this.greaterThanZeroValidator()]],
       school_id:[0,[Validators.required,this.greaterThanZeroValidator()]],
       school_other:["",],
-      email: ["",],
+      email: [""],
       can_swim: [0],
       affliction: ["",[Validators.required]],
       blood_type: [0,[Validators.required,this.greaterThanZeroValidator()]],

@@ -69,8 +69,8 @@ export class NewParentComponent implements OnInit {
       texto14:"Se enviará un correo electrónico de confirmación a tu correo, te pedimos que revises tu bandeja de",
       textto15:"Correo no deseado",
       texto16:"para asegurar que lo recibiste bien. Si no lo recibes,ponte en contacto con nosotros.",
-      text017:"Guardar",
-      text018:"Cancelar",
+      texto17:"Guardar",
+      texto18:"Cancelar",
 
 
     
