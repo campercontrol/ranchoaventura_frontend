@@ -13,7 +13,7 @@ import jwt_decode from "jwt-decode";
 
 export class AuthenticationService {
 
-    loggedIn:boolean = true;
+    loggedIn:boolean = false;
     infToken!:any;
 
     constructor(private http: HttpClient,private router:Router ) {

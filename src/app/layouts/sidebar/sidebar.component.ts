@@ -69,6 +69,9 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
     this._activateMenuDropdown();
   }
   login(){
+    localStorage.removeItem('currentUser');
+    this.info.infToken= null;
+    this.info.loggedIn= false;
     this.router.navigate(['login'])
   }
 

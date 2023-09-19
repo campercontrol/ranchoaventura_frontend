@@ -21,7 +21,7 @@ export class TopbarComponent implements OnInit {
 
   element;
   cookieValue;
-  flagvalue;
+  flagvalue:any;
   countryName;
   valueset;
 
@@ -30,7 +30,11 @@ export class TopbarComponent implements OnInit {
               public languageService: LanguageService,
               public translate: TranslateService,
               public _cookiesService: CookieService) {
+
+               
   }
+
+  
 
   listLang = [
     {id:1, text: 'English', flag: 'assets/images/flags/us.jpg', lang: 'eng' },
@@ -45,8 +49,24 @@ export class TopbarComponent implements OnInit {
   ngOnInit() {
     this.openMobileMenu = false;
     this.element = document.documentElement;
+    this.lang.getLang().subscribe((res:any)=>{
+      console.log(res,'respuesta de idioma');
+      
+      let a:any = this.listLang.filter((item:any)=>{
+        return item.lang == res;
+      })
+      console.log(a,'ifnormacion');
+      
+      this.countryName = a[0].text;
+      this.flagvalue = a[0].flag;
+      this.cookieValue = a[0].lang;
+     // this._cookiesService.set('lang', lang);
+      
+    })
 
   }
+
+  
 
   setLanguage(text: string, lang: string, flag: string) {
     this.countryName = text;
