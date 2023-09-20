@@ -109,7 +109,7 @@ export class NewParentComponent implements OnInit {
       texto5:"Confirma contraseña* ",
       texto6:"Será el usuario de acceso a la cuenta.",
       texto7:"El correo no coincide",
-      texto8:"Se usará para ingresar a Camper Control. Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra minuscula y un caracter especial los cuales pueden ser :@ $,!,?,&",
+      texto8:"Se usará para ingresar a Camper Control. Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra minuscula y un caracter especial ",
      
     
     },
@@ -122,7 +122,7 @@ export class NewParentComponent implements OnInit {
       texto5:"Confirm password* ",
       texto6:"This will be the access user to the account.",
       texto7:"The email does not match",
-      texto8:"It will be used to enter Camper Control. Minimum of 6 characters, 1 uppercase letter, 1 lowercase letter and a special character which can be :@ $,!,?,&",  
+      texto8:"It will be used to enter Camper Control. Minimum of 6 characters, 1 uppercase letter, 1 lowercase letter and a special character ",  
     }
 
   }
@@ -181,7 +181,7 @@ export class NewParentComponent implements OnInit {
                             Validators.minLength(8), Validators.maxLength(10)]],
     terms:                   ['',[Validators.required,Validators.requiredTrue]],
     user_id:                 [0],
-     password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]],
+     password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,}$/)]],
     confirmPassword: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     confirmEmail: ['', [Validators.required,Validators.email]],

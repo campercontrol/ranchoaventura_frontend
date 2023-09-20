@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LangService {
-  lang$= new Subject<string>();
+  lang$=  new BehaviorSubject<string>("esp")
   lang= "esp";
 
   constructor(private http:HttpClient) {
