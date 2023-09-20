@@ -10,7 +10,7 @@ export class LangService {
   lang= "esp";
 
   constructor(private http:HttpClient) {
-
+    this.lang$.next(this.lang);
    }
 
   getLang(){

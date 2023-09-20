@@ -95,14 +95,6 @@ export class NewParentComponent implements OnInit {
       texto16:"to make sure you get it . If you do not receive it, please contact us.",
       text017:"Save",
       text018:"Cancel",
-
-
-
-
-
-
-
-
     }
 
   }
@@ -130,9 +122,7 @@ export class NewParentComponent implements OnInit {
       texto5:"Confirm password* ",
       texto6:"This will be the access user to the account.",
       texto7:"The email does not match",
-      texto8:"It will be used to enter Camper Control. Minimum of 6 characters, 1 uppercase letter, 1 lowercase letter and a special character which can be :@ $,!,?,&",
-     
-    
+      texto8:"It will be used to enter Camper Control. Minimum of 6 characters, 1 uppercase letter, 1 lowercase letter and a special character which can be :@ $,!,?,&",  
     }
 
   }
@@ -155,6 +145,8 @@ export class NewParentComponent implements OnInit {
   ngOnInit(): void {
     this.lang.getLang().subscribe((res:any)=>{
       this.idoma=res
+      console.log
+      (res)
       
     });
     this.breadCrumbItems = [{ label: 'UI Elements' }, { label: 'Modals', active: true }];
@@ -325,10 +317,6 @@ export class NewParentComponent implements OnInit {
     
   }
   
-
-  
- 
-
   equalsEmail(){
     if( this.correo == this.confirmarCorreo){
       this.estadoCorreo = true;
@@ -357,7 +345,6 @@ export class NewParentComponent implements OnInit {
     
      this.parent.setParent(a).subscribe(
       (res:any)=>{
-        console.log(res);
        // this.centerModal();
        this.info.login2(this.formParent.get('email').value,this.formParent.get('password').value).then((res:any)=>{
         console.log(res);
