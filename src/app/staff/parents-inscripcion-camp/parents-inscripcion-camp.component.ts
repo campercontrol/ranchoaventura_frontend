@@ -54,14 +54,9 @@ export class ParentsInscripcionCampComponent implements OnInit {
         "titulo14":"Canceled Camps",
         "titulo15":"view profile "
 
-
-
-
-
-
-
       }
     }
+    multipleInscr=false;
     idoma = "esp";
     selectedProducts: any[];
     camper_band:any = [];
@@ -80,6 +75,7 @@ export class ParentsInscripcionCampComponent implements OnInit {
     campsSchool:any [];
     inscripcion = true;
     typeSucribe = 0;
+    inscribirUnoSolo =0;
     @ViewChild('centerDataModal') content:ElementRef;
 
     
@@ -98,7 +94,13 @@ export class ParentsInscripcionCampComponent implements OnInit {
       //console.log(this.idioma);
       
     })
+    
     this.getCampsDIs();
+
+  }
+
+  prueba(){
+    console.log( this.multipleInscr);
 
   }
 
@@ -248,11 +250,18 @@ filterCampsSummer(){
     this.typeSucribe = 1;
 
   }
+}
+inscribirCampsUnico(id){
+  this.inscribirUnoSolo=id;
+  if(this.cancelled_camps.length<1&& this.subscribe_camps.length<1 && this.passed_camps.length <1 ){
+    this.suscribeCamps(4)
+   }else{
+    // alert('actualiza los datos de tu hijo')
+     this.inscripcion = false;
+     this.typeSucribe = 4;
  
-  
- 
+   }
 
- 
 }
 filterCamps(){
   if(this.cancelled_camps.length<1&& this.subscribe_camps.length<1 && this.passed_camps.length <1 ){
@@ -276,12 +285,9 @@ filterCampsScholl(){
     this.inscripcion = false;
     this.typeSucribe = 3;
 
-  }
- 
-
-
-  
+  }  
 }
+
 
 suscribeCamps(typeCamp:number){
   switch (typeCamp) {
@@ -336,6 +342,25 @@ suscribeCamps(typeCamp:number){
     })
     this.getCampsDIs();
     this.inscripcion = true;
+    this.centerModal();
+
+    break;
+    case 4:
+      //campamentos disponibles
+     
+        let a = {
+          status: 36,
+          payment_balance: 0,
+          camp_id: this.inscribirUnoSolo,
+          camper_id: this.id,
+  
+        }
+        console.log(a)
+        this.setCamp(a)
+  
+
+    this.getCampsDIs();
+   this.inscripcion = true;
     this.centerModal();
 
     break;

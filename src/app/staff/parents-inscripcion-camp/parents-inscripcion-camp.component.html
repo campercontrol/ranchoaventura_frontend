@@ -43,6 +43,29 @@
         </div>
     </div>
 
+    <div class="alert alert-primary" role="alert" *ngIf="idoma =='esp'">
+      <h4 class="alert-heading">Configuración de Inscripciones</h4>
+      <p>Si desea hacer inscripciones múltiples, cambie el estado del siguiente interruptor:</p>
+      <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="inscripcionesSwitch" value="true" [(ngModel)]="multipleInscr">
+        <label class="custom-control-label" for="inscripcionesSwitch">Habilitar Inscripciones Múltiples</label>
+      </div>
+      <hr>
+      <p class="mb-0">Haga clic en el interruptor para cambiar la configuración.</p>
+    </div>
+
+
+    <div class="alert alert-primary" role="alert" *ngIf="idoma =='eng'">
+      <h4 class="alert-heading">Registration Settings</h4>
+      <p>If you wish to enable multiple registrations, change the state of the following switch:</p>
+      <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="registrationsSwitch"  value="true" [(ngModel)]="multipleInscr">
+        <label class="custom-control-label" for="registrationsSwitch">Enable Multiple Registrations</label>
+      </div>
+      <hr>
+      <p class="mb-0">Click the switch to change the setting.</p>
+    </div>
+
     <!--campamentos a los que asisitire-->
     <div >
 
@@ -260,7 +283,7 @@
               <div class="container-btn">
                   <div class="d-inline-block" style="margin-right: 10px;">
                       <div> 
-                          <button class="btn btn-success" (click)="filterCampsScholl()" >Inscribir  a camp(s)</button>
+                          <button class="btn btn-success" (click)="filterCampsScholl()" *ngIf="multipleInscr">Inscribir  a camp(s)</button>
                     </div>
                   </div>
                
@@ -320,7 +343,9 @@
                          
             
                             <td>
-                              <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../camp-info/'+id+'/'+customer.camp_id]">ver campamento</button>
+                              <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../camp-info/'+id+'/'+customer.camp_id]" *ngIf="multipleInscr">ver campamento</button>
+                          
+                              <button class="btn btn-primary" class="btn btn-success" (click)="inscribirCampsUnico(customer.camp_id)" *ngIf="!multipleInscr">Inscribir a camp</button>
                             </td>
       
                       </tr>
@@ -344,7 +369,7 @@
               <div class="container-btn">
                   <div class="d-inline-block" style="margin-right: 10px;">
                       <div> 
-                          <button class="btn btn-success" (click)="filterCampsSummer()" >Inscribir  a camp(s)</button>
+                          <button class="btn btn-success" (click)="filterCampsSummer()" *ngIf="multipleInscr">Inscribir  a camp(s)</button>
                     </div>
                   </div>
                
@@ -406,7 +431,9 @@
                           </td>
 
                             <td>
-                              <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../camp-info/'+id+'/'+customer.camp_id]">ver campamento</button>
+                              <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../camp-info/'+id+'/'+customer.camp_id]" *ngIf="multipleInscr">ver campamento</button>
+                              <button class="btn btn-primary" class="btn btn-success" (click)="inscribirCampsUnico(customer.camp_id)" *ngIf="!multipleInscr">Inscribir a camp</button>
+
                             </td>
                          
                        
