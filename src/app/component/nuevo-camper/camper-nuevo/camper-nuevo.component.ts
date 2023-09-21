@@ -609,12 +609,10 @@ public fileLeave(event){
           console.log(res);
           if(res.succes = 200){
             this.spinner=false;
-           this.router.navigate(['dashboard']);
+           this.router.navigate(['dashboard/parents/inscription/'+res.camper_id]);
           }
           
       });
-      this.spinner=false;
-
     }else{
       this.spinner=false;
       this.getinsurance_company()

@@ -691,7 +691,7 @@
                     <div class="btn-footer">
                         <button class="btn btn-secondary w-lg btn-lg" (click)="cancelar()">Cancelar</button>
                         <div>
-                            <button class="btn btn-info w-lg btn-lg"  (click)="prueba1()" >Guardar</button>
+                            <button class="btn btn-info w-lg btn-lg"  (click)="prueba1()" *ngIf="!spinner">Guardar</button>
                             <div class="spinner-border" role="status" *ngIf="spinner">
                                 <span class="visually-hidden">Loading...</span>
                               </div>

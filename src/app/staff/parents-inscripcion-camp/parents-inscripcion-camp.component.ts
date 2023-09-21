@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CamperService } from 'src/services/camper.service';
 import { CampsService } from 'src/services/camps.service';
@@ -82,7 +82,7 @@ export class ParentsInscripcionCampComponent implements OnInit {
 
     
 
-  constructor(private camps: CampsService,private routesA:ActivatedRoute, private modalService:NgbModal, private info:CamperService,private lang:LangService) {
+  constructor(private camps: CampsService,private routesA:ActivatedRoute, private modalService:NgbModal, private info:CamperService,private lang:LangService, private routerNav:Router) {
     this.routesA.params.subscribe((params)=>{
       this.id = params['id']
     })
@@ -129,8 +129,7 @@ setCamp(a){
    },
    (error)=>{
      console.log(error)
-   }
-   )
+   })
 }
 getCampsDIs(){
  
@@ -290,6 +289,8 @@ filterCampsScholl(){
 
 
 suscribeCamps(typeCamp:number){
+  console.log(typeCamp,'sss');
+  
   switch (typeCamp) {
     //campamento de verano
     case 1:
@@ -346,22 +347,28 @@ suscribeCamps(typeCamp:number){
 
     break;
     case 4:
-      //campamentos disponibles
-     
+      //campamentos disponibles  
         let a = {
           status: 36,
           payment_balance: 0,
           camp_id: this.inscribirUnoSolo,
           camper_id: this.id,
-  
         }
-        console.log(a)
-        this.setCamp(a)
+        this.camps.setCamps(a).subscribe((res:any)=>{
+          console.log(res.camper_in_camp);    
+          this.centerModal();
+          this.routerNav.navigate(['dashboard/parents/camp-info/'+res.camper_in_camp.camper_id+'/'+res.camper_in_camp.camp_id])
+          console.log('holaaaaaaaaaa');
+          
+         },
+         (error)=>{
+           console.log(error)
+         })
   
 
     this.getCampsDIs();
    this.inscripcion = true;
-    this.centerModal();
+   
 
     break;
   
