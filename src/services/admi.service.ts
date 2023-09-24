@@ -26,6 +26,21 @@ export class AdmiService {
     return this.http.patch('http://142.93.12.234:8000/camper_comment/'+id,info)
   }
 
+  getTempletMasive(){
+    return this.http.get('http://142.93.12.234:8000/mailing/template/massive/')
+  }
+  getTempletSystem(){
+    return this.http.get('http://142.93.12.234:8000/mailing/template/system/')
+
+  }
+  createTemplate(data){
+    return this.http.post('http://142.93.12.234:8000/email_template/',data)
+
+
+  }
+
+
+
   deletComments(id){
     let b:any = []
     return  b;

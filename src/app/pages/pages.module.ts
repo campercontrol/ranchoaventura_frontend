@@ -47,6 +47,7 @@ import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from 'primeng/inputtext';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {OrderListModule} from 'primeng/orderlist';
+import { TableModule } from 'primeng/table';
 
 
 
@@ -106,6 +107,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     PanelModule,
     LightboxModule,
     FormsModule,
+    TableModule,
     DragDropModule,
     OrderListModule
     
