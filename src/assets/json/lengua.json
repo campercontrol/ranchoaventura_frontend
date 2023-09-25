@@ -90,7 +90,7 @@
             "Pathologicalhistory":"Antecedentes patológicos:",
             "CAMPER":"Acampador",
             "FAMILY":"Familia",
-            "Heartproblems*":"Problemas cardíacos*",
+            "Heartproblems":"Problemas cardíacos*",
             "Medicalcircumstances":"Circunstancias medicas que le impidan realizar actividades*",
             "Medicalcondition":"Enfermedades que padece*",
             "Ifhe/she":"En caso de NO padecer alguna enfermedad, teclea la palabra NINGUNA",

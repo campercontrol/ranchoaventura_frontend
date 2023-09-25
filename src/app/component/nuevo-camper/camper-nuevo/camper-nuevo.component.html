@@ -1,6 +1,9 @@
 <div class="container-fluid">
     <form [formGroup]="formUser">
         <div class="row">
+            <div class="alert alert-warning" role="alert">
+                Los  campos obligatorios son los que tienen *
+              </div>
 
             <div class="col-lg-12">
                 <div class="card">
@@ -154,7 +157,7 @@
 
                                 <div class="control-label col-sm-9">
                                     <div class="input-group mb-3">
-                                        <input class="form-control" type="number"  min="0" max="200" step="5" id="customRange3"   suffix="cm" formControlName="height" 
+                                        <input class="form-control" type="number"   max="200" step="5" id="customRange3"   suffix="cm" formControlName="height" 
                                         #height
                                         (input)="getheight()"
                                       />
@@ -170,7 +173,7 @@
                                 <div class="col-sm-9">
                                  
                                          <div class="input-group mb-3">
-                                            <input type="number" class="form-control" id=""  step="5" min="0" max="200"
+                                            <input type="number" class="form-control"   step="5" min="1" max="200"
                                             formControlName="weight" #weight
                                             (input)="getweight()"
                                            
@@ -192,9 +195,9 @@
     
                                         <div class="form-check form-check-inline" *ngFor="let item of vaccines;index as i">
                                             <input (click)="vaccinesValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions"
-                                                id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}"
+                                                id="{{item.id}}" value="{{item.is_active}}" id="{{item.id}}"
                                                 >
-                                            <label class="form-check-label" for="inlineRadio1">{{item.name}}</label>
+                                            <label class="form-check-label" for="{{item.id}}">{{item.name}}</label>
                                         </div>
     
     
@@ -231,6 +234,12 @@
                         </h4>
                     </div>
 
+                    <div class="alert-dismissible alert alert-secondary">
+                        <p style="text-align:justify;" for="">Marca las casillas de las enfermedades que haya
+                            padecido o padezca el camper en la columna camper. En caso de que un familiar haya
+                            padecido alguna de esas enfermedades marca en la columna de familiar</p>
+                    </div>
+
                     <h2 style="text-align:center ; margin-top: 30px;">{{textos['Pathologicalhistory']}}</h2>
                     <div class="mt-5">
                         <div class="contenedor-datos">
@@ -256,11 +265,7 @@
                                 </ng-container>
                             </div>
                         </div>
-                        <div class="alert-dismissible alert alert-secondary">
-                            <p style="text-align:justify;" for="">Marca las casillas de las enfermedades que haya
-                                padecido o padezca el camper en la columna camper. En caso de que un familiar haya
-                                padecido alguna de esas enfermedades marca en la columna de familiar</p>
-                        </div>
+                       
 
 
                         <div class="container-medico mt-5">
@@ -406,8 +411,8 @@
                             <div class="container-fluid flex-container">
                                
                                 <div class="form-check">
-                                    <input type="checkbox" class=" form-check-input" formControlName="doctor_precall">
-                                    <label for="" class="form-check-label"> ¿Te gustaría que el médico del campamento se ponga en contacto con
+                                    <input type="checkbox" id="medico" class=" form-check-input" formControlName="doctor_precall">
+                                    <label for="medico" class="form-check-label"> ¿Te gustaría que el médico del campamento se ponga en contacto con
                                         usted antes del campamento?</label>
                                 </div>
                             </div>
@@ -522,10 +527,10 @@
 
 
                                     <div class="form-check form-check-inline" *ngFor="let item of food_restrictions;index as i">
-                                        <input (click)="food_restrictionsValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions" [checked]="item.is_active"
-                                            id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}"
+                                        <input (click)="food_restrictionsValu(i)" class="form-check-input" type="checkbox" name="{{item.name}}" [checked]="item.is_active"
+                                            id="{{item.name}}" value="{{item.is_active}}" id="{{item.id}}"
                                             >
-                                        <label class="form-check-label" for="inlineRadio1">{{item.name}}</label>
+                                        <label class="form-check-label" for="{{item.name}}">{{item.name}}</label>
                                     </div>
 
 
@@ -679,7 +684,7 @@
                                 Acepto los términos y condiciones
                             </label>
                             <label class="form-check-label fs-3 ms-3" for="terms">
-                                <a
+                                <a  target="_blank"
                                     href="https://demo.campercontrol.com/media/uploads/files/terminos-y-condiciones.pdf">Ver
                                     términos y condiciones</a>
                             </label>

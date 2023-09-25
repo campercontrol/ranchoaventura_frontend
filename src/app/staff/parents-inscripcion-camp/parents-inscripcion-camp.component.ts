@@ -240,6 +240,11 @@ centerModal(centerDataModal: any = this.content) {
   
   this.modalService.open(centerDataModal, { centered: true });
 }
+closeModal(centerDataModal: any = this.content) {
+  console.log(this.centerModal);
+  
+  this.modalService.open(centerDataModal, { centered: false });
+}
 filterCampsSummer(){
   if(this.cancelled_camps.length<1&& this.subscribe_camps.length<1 && this.passed_camps.length <1 ){
    this.suscribeCamps(1)
@@ -357,8 +362,12 @@ suscribeCamps(typeCamp:number){
         this.camps.setCamps(a).subscribe((res:any)=>{
           console.log(res.camper_in_camp);    
           this.centerModal();
-          this.routerNav.navigate(['dashboard/parents/camp-info/'+res.camper_in_camp.camper_id+'/'+res.camper_in_camp.camp_id])
-          console.log('holaaaaaaaaaa');
+          setTimeout(() => {       
+            this.closeModal();
+            this.routerNav.navigate(['dashboard/parents/camp-info/'+res.camper_in_camp.camper_id+'/'+res.camper_in_camp.camp_id]);
+
+          }, 1000);
+          
           
          },
          (error)=>{

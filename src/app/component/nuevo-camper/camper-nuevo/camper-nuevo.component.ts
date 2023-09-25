@@ -120,8 +120,8 @@ export class CamperNuevoComponent implements OnInit {
       photo:["",[Validators.required,Validators.minLength(2)]],
       gender_id:[0,[Validators.required,this.greaterThanZeroValidator()]],
       birthday:["",[Validators.required]],
-      height:[0,[Validators.required,Validators.min(0.20)]],
-      weight:[0,[Validators.required,Validators.min(0.20)]],
+      height: [0, [Validators.required, this.validateNumberWithoutDecimal, Validators.min(1)]],
+      weight: [0, [Validators.required, this.validateNumberWithoutDecimal, Validators.min(1)]],
       grade:[0,[Validators.required,this.greaterThanZeroValidator()]],
       school_id:[0,[Validators.required,this.greaterThanZeroValidator()]],
       school_other:["",],
@@ -157,6 +157,19 @@ export class CamperNuevoComponent implements OnInit {
       terms: ["",[Validators.required,Validators.requiredTrue]],
     })
     
+  }
+  validateNumberWithoutDecimal(control: any) {
+    const value = control.value;
+    if (value === null || value === undefined) {
+      return null; // El control está vacío, no se aplica la validación
+    }
+    
+    // Verificar si el valor contiene un punto decimal
+    if (value.toString().includes('.')) {
+      return { hasDecimal: true }; // Devolver un error si contiene un punto decimal
+    }
+    
+    return null; // Si no contiene punto decimal, la validación es exitosa
   }
 
   getname(){

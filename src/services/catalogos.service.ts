@@ -247,7 +247,9 @@ export class CatalogosService {
 
     getParent(){
       return this.http.get('http://142.93.12.234:8000/parent/');
-
+     }
+     getParentAdmi(){
+      return this.http.get('http://142.93.12.234:8000/admin/parent/');
      }
      getParentU(id){
       return this.http.get('http://142.93.12.234:8000/parent/'+id);

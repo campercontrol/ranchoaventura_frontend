@@ -174,7 +174,7 @@ export class AdmiParentComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.catalogos.getParent().subscribe((res: any) => {
+    this.catalogos.getParentAdmi().subscribe((res: any) => {
       this.listcatalogos = res.data;
     
       console.log(this.listcatalogos);
@@ -254,13 +254,15 @@ export class AdmiParentComponent implements OnInit {
   }
 
   guardar() {
-    this.catalogos.postAlimentos(this.formFood.value).subscribe((res: any) => {
+    this.catalogos.patchParent(this.updateId,this.formFood.value).subscribe((res: any) => {
       this.getCatalogos();
       this.statuAgrgado = true;
       this.resteValu();
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal();
+        this.table=true;
+        this.display2= false
       }, 1000);
 
     }, error => {
@@ -284,26 +286,29 @@ export class AdmiParentComponent implements OnInit {
      this.updateId = item.id;
     this.display2= true;
     this.table= false;
-    this.item={user_id:item.user_id,tutor_email:item.tutor_email}
-    this.catalogos.getParentU(item.id).subscribe((res:any)=>{
+    this.item={user_id:item.user_id,tutor_email:item.tutor_email};
+    this.nameParent= item.tutor_name + item.tutor_lastname_mother + item.tutor_lastname_father;
+    this.catalogos.getParentU(item.tutor_id).subscribe((res:any)=>{
+   console.log(res);
    
     this.formFood.patchValue({
      
-      tutor_lastname_father:item.tutor_lastname_father,
-      tutor_cellphone:      item.tutor_cellphone,
-      tutor_home_phone:     item.tutor_home_phone,
-      contact_name:         item.contact_name,
+      tutor_lastname_father:res.data.tutor_lastname_father,
+      tutor_cellphone:      res.data.tutor_cellphone,
+      tutor_home_phone:     res.data.tutor_home_phone,
+      contact_name:         res.data.contact_name,
     
-    contact_lastname_mother:item.contact_lastname_mother,
-    contact_home_phone:     item.contact_home_phone, 
-    contact_email:          item.contact_email,
-    tutor_name :           item.tutor_name,
-    tutor_lastname_mother:  item.tutor_lastname_mother, 
-    tutor_work_phone:      item.tutor_work_phone,
-    contact_lastname_father:  item.contact_lastname_father, 
-    contact_cellphone:      item.contact_cellphone,
-    contact_work_phone:     item.contact_work_phone,
-    user_id:                item.user_id
+    contact_lastname_mother:res.data.contact_lastname_mother,
+    contact_home_phone:     res.data.contact_home_phone, 
+    contact_email:          res.data.contact_email,
+    tutor_name :           res.data.tutor_name,
+    tutor_lastname_mother:  res.data.tutor_lastname_mother, 
+    tutor_work_phone:      res.data.tutor_work_phone,
+    contact_lastname_father:  res.data.contact_lastname_father, 
+    contact_cellphone:      res.data.contact_cellphone,
+    contact_work_phone:     res.data.contact_work_phone,
+    user_id:                res.data.user_id,
+    parent_name:            name,
     })
 
     
