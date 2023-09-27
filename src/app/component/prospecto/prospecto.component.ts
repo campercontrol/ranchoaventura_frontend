@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CamperService } from 'src/services/camper.service';
 import { StaffService } from 'src/services/staff.service';
 
@@ -70,7 +71,7 @@ export class ProspectoComponent implements OnInit {
 
 
 
-  constructor(private catalogos: CamperService, private formGrup: FormBuilder, private router: Router,private staff: StaffService,private modalService: NgbModal,private render :Renderer2) { }
+  constructor(private catalogos: CamperService, private formGrup: FormBuilder, private router: Router,private staff: StaffService,private modalService: NgbModal,private render :Renderer2,private auth:AuthenticationService) { }
 
   ngOnInit(): void {
     this.formUser = this.formGrup.group({
@@ -189,18 +190,12 @@ export class ProspectoComponent implements OnInit {
     }
     if(this.formUser.valid){
       this.staff.prospectos(a).subscribe((res:any)=>{
-        console.log(res);
-        
-        this.spinner=false;
-        this.centerModal();
-        this.formUser.reset();
-        this.contrasena="";
-        this.correo="";
-        this.confirmarCorreo="";
-        this.confirmarContrasena=""
-        this.estadoCorreo=false;
-        this.estadoContrasena=false;
-        this.router.navigate(['/login']);
+       
+        this.auth.login(this.formUser.get('email').value,this.formUser.get('password').value).then((res:any)=>{
+          console.log(res);
+          
+        })
+       
 
       },error=>{
         this.erroA=true;

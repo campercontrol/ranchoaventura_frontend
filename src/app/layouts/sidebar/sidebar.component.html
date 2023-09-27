@@ -110,7 +110,7 @@
           </a>
 
           <a  class="side-nav-link-ref " routerLinkActive="active" 
-            (click)="admi = !admi">
+            (click)="admi = !admi" *ngIf="rol_id > 2">
             <div class="nav-d">
               <div>
                 <i class="bx bxs-school"></i>
@@ -123,7 +123,7 @@
             </div>
           </a>
         </li>
-        <li *ngIf="admi" style="margin-left: 10px;">
+        <li *ngIf="admi" style="margin-left: 10px;" >
           <a routerLink='admi/camper' class="side-nav-link-ref" routerLinkActive="active"
             *ngIf="admi">
 
