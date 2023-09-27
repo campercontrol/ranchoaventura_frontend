@@ -235,9 +235,7 @@ export class CampamentoComponent implements OnInit {
       link.setAttribute('download','ficha de pago');
       document.body.appendChild(link);
       link.click();
-
-     
-      
+ 
     })
   }
 

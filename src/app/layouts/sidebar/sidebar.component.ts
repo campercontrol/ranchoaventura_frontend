@@ -27,6 +27,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   paretn = true;
   staff= true;
   catalogos= false;
+  admi=false;
   rol_id = 0;
   rol = ''
 

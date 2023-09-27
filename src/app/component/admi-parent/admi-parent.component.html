@@ -1,5 +1,5 @@
 <p-tabView *ngIf="table">
-    <p-tabPanel header="Acampadores">
+    <p-tabPanel header="Titulares de cuenta">
         <div>
 
             <div class="card border border-info border-1">
@@ -391,7 +391,7 @@
                         <div class="btn-footer">
                             <button class="btn btn-secondary btn-lg mt-3" (click)="cancelarUpdate()" style="width: 90%;">Cancelar</button>
                             <div class="mt-3">
-                                <button class="btn btn-info  btn-lg"  (click)="prueba()" style="width: 90%;" *ngIf="!spinner">Guardar</button>
+                                <button class="btn btn-info  btn-lg"  (click)="keepUpdate()" style="width: 90%;" *ngIf="!spinner">Guardar</button>
                                 <div class="spinner-border" role="status" *ngIf="spinner">
                                     <span class="visually-hidden">Loading...</span>
                                   </div>

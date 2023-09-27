@@ -224,7 +224,59 @@ export class CampamentosStaffComponent implements OnInit {
 
   showMaximizableDialog() {
     this.displayMaximizable = true;
-}
+  }
+
+  pulserac11(){
+    this.capms.pulseras1x11(this.idCamp).subscribe((res:any)=>{
+      console.log(res);
+      const dataBinary = [];
+      dataBinary.push(res);
+      const filePath =  window.URL.createObjectURL(new Blob(dataBinary,{type: 'application/pdf'}));
+      const link = document.createElement('a');
+      link.href =filePath;
+      link.setAttribute('download','pulseras 1x11');
+      document.body.appendChild(link);
+      link.click();
+ 
+    })
+  }
+  pulseras8() {
+    this.capms.pulseras8hoja(this.idCamp).subscribe(
+      (res: any) => {
+        if (res instanceof Blob) {
+          const blob = new Blob([res], { type: 'application/pdf' });
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', 'pulsera 8');
+          document.body.appendChild(link);
+          link.click();
+          window.URL.revokeObjectURL(url);
+        } else {
+          console.error('La respuesta no es un Blob válido.');
+        }
+      },
+      (error) => {
+        console.error('Error en la solicitud HTTP:', error);
+      }
+    );
+  }
+  
+  pdfinfodecampers(){
+    this.capms.Pdfinfodecampers(this.idCamp).subscribe((res:any)=>{
+      console.log(res);
+      const dataBinary = [];
+      dataBinary.push(res);
+      const filePath =  window.URL.createObjectURL(new Blob(dataBinary,{type: 'application/pdf'}));
+      const link = document.createElement('a');
+      link.href =filePath;
+      let titulo ='Informacion acamapadores'+" " +this.idCamp;
+      link.setAttribute('download',titulo);
+      document.body.appendChild(link);
+      link.click();
+ 
+    })
+  }
 }
 
 export interface campss {

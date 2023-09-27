@@ -63,8 +63,6 @@
         </li>
         <li *ngIf="staff">
           
-
-
           <a routerLink='staff' class="side-nav-link-ref" routerLinkActive="active" *ngIf="rol_id > 1">
             <i class="bx bxs-spreadsheet"></i>
             <span>Mis Campamentos</span>
@@ -85,17 +83,19 @@
             <span>Lista de puntos de control</span>
 
           </a>
-          <a routerLink='staff/trainings-events' class="side-nav-link-ref"  *ngIf="rol_id > 2">
-            <i class="bx bxs-graduation"></i>
-            <span>Nueva capacitacion</span>
+          <a routerLink='staff/camps' class="side-nav-link-ref"  *ngIf="rol_id > 2">
+            <i class="bx bx-barcode"></i>
+            <span>Lista de campamentos</span>
 
           </a>
+       
+
           <a routerLink='staff/trainings-dashboard' class="side-nav-link-ref"  *ngIf="rol_id > 2">
             <i class="bx bxs-calendar-plus"></i>
             <span>Nuevo evento</span>
 
           </a>
-          <a  class="side-nav-link-ref " routerLinkActive="active" *ngIf="rol_id > 1"
+          <a  class="side-nav-link-ref " routerLinkActive="active" *ngIf="rol_id > 2"
             (click)="catalogos = !catalogos">
             <div class="nav-d">
               <div>
@@ -107,72 +107,47 @@
                 <small class="text-right"><i class="bx bx-caret-up " *ngIf="!catalogos"></i></small>
               </div>
             </div>
-           
+          </a>
 
-
-
+          <a  class="side-nav-link-ref " routerLinkActive="active" 
+            (click)="admi = !admi">
+            <div class="nav-d">
+              <div>
+                <i class="bx bxs-school"></i>
+                <span>Admi</span>
+              </div>
+              <div>
+                <small class="text-right"> <i class="bx bx-caret-down " *ngIf="admi"></i></small>
+                <small class="text-right"><i class="bx bx-caret-up " *ngIf="!admi"></i></small>
+              </div>
+            </div>
           </a>
         </li>
-        <li *ngIf="staff" style="margin-left: 10px;">
-          <a routerLink='catalogs/food-restriction' class="side-nav-link-ref" routerLinkActive="active"
-            *ngIf="catalogos">
+        <li *ngIf="admi" style="margin-left: 10px;">
+          <a routerLink='admi/camper' class="side-nav-link-ref" routerLinkActive="active"
+            *ngIf="admi">
 
-            <span> Alimentación especial</span>
-
-          </a>
-          <a routerLink='catalogs/pathological_background' class="side-nav-link-ref" routerLinkActive="active"
-            *ngIf="catalogos">
-
-            <span>Antecedentes patologicos</span>
+            <span>Camper</span>
 
           </a>
-          <a routerLink='catalogs/pathological_background_Family' class="side-nav-link-ref" routerLinkActive="active"
-            *ngIf="catalogos">
+          <a routerLink='admi/user' class="side-nav-link-ref" routerLinkActive="active"
+            *ngIf="admi">
 
-            <span>Antecedentes patologicos de la familia</span>
+            <span>Usuario</span>
 
           </a>
-          <a routerLink='catalogs/paymentaccounts' class="side-nav-link-ref" routerLinkActive="active"
-            *ngIf="catalogos">
+          <a routerLink='admi/parent' class="side-nav-link-ref" routerLinkActive="active"
+            *ngIf="admi">
 
-            <span>Cuentas bancarias </span>
+            <span>Titulares de cuenta</span>
+
           </a>
-          <a routerLink='catalogs/currency' class="side-nav-link-ref" routerLinkActive="active" *ngIf="catalogos">
+          <a routerLink='admi/camps' class="side-nav-link-ref" routerLinkActive="active"
+            *ngIf="admi">
 
-            <span>Divisas </span>
+            <span>Campamentos</span>
+
           </a>
-          <a routerLink='catalogs/payment/method' class="side-nav-link-ref" routerLinkActive="active" *ngIf="catalogos">
-
-            <span>Metodos de pago </span>
-          </a>
-          <a routerLink='catalogs/camp_extra_question' class="side-nav-link-ref" routerLinkActive="active" *ngIf="catalogos">
-
-            <span>Preguntas extras </span>
-          </a>
-          <a routerLink='catalogs/camp_extra_change' class="side-nav-link-ref" routerLinkActive="active" *ngIf="catalogos">
-
-            <span>Cargos extras </span>
-          </a>
-          <a routerLink='catalogs/licensedmedicine' class="side-nav-link-ref" routerLinkActive="active"
-            *ngIf="catalogos">
-
-            <span>Medicinas preautorizadas </span>
-          </a>
-
-          <a routerLink='catalogs/vaccines' class="side-nav-link-ref" routerLinkActive="active" *ngIf="catalogos">
-
-            <span>Vacunas</span>
-          </a>
-          <a routerLink='catalogs/staffroles' class="side-nav-link-ref" routerLinkActive="active" *ngIf="catalogos">
-
-            <span>Roles asignados para staff </span>
-          </a>
-          <a routerLink='catalogs/campercomment' class="side-nav-link-ref" routerLinkActive="active" *ngIf="catalogos">
-
-            <span>comentarios</span>
-          </a>
-
-
         </li>
         <li>
           <a (click)="login()" class="side-nav-link-ref" routerLinkActive="active" style="cursor: pointer;">

@@ -254,20 +254,38 @@ export class AdmiParentComponent implements OnInit {
   }
 
   guardar() {
-    this.catalogos.patchParent(this.updateId,this.formFood.value).subscribe((res: any) => {
-      this.getCatalogos();
-      this.statuAgrgado = true;
-      this.resteValu();
-      setTimeout(() => {
-        this.statuAgrgado = false;
-        this.closeModal();
-        this.table=true;
-        this.display2= false
-      }, 1000);
-
-    }, error => {
-      alert('No se pudo Agregar')
-    })
+    if(this.formFood.valid){
+      this.catalogos.patchParent(this.updateId,this.formFood.value).subscribe((res: any) => {
+        this.getCatalogos();
+        this.statuAgrgado = true;
+        this.resteValu();
+        setTimeout(() => {
+          this.statuAgrgado = false;
+          this.closeModal();
+          this.table=true;
+          this.display2= false
+        }, 1000);
+  
+      }, error => {
+        alert('No se pudo Agregar')
+      })
+    }else{
+      
+      this.getcontact_email();
+      this.getcontact_home_phone();
+      this.getcontact_work_phone();
+      this.getcontact_cellphone();
+      this.getcontact_lastname_mother();
+      this.getcontact_lastname_father();
+      this.getcontact_name();
+      this.gettutor_work_phone();
+      this.gettutor_home_phone();
+      this.gettutor_cellphone();
+      this.gettutor_lastname_mother();
+      this.getTutor_lastname_father();
+      this. getTutor_name();
+    }
+   
 
   }
 

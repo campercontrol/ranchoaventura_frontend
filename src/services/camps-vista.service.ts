@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -25,6 +25,22 @@ export class CampsVistaService {
   }
   asignarRolStaff(id,rolid,info){
     return this.http.post('http://142.93.12.234:8000/update/staff/role/'+id+'/'+rolid,info)
+  }
+
+  pulseras1x11(id:any ){
+    const headers = new HttpHeaders().set('Content-Type','application/json');
+
+    return this.http.get('http://142.93.12.234:8000/camp/bracelets/zt230/'+id,{headers,responseType: 'blob' as 'json'} );
+  }
+  pulseras8hoja(id:any){
+    const headers = new HttpHeaders().set('Content-Type','application/json');
+
+    return this.http.get('http://142.93.12.234:8000/camp/bracelets/'+id,{headers,responseType: 'blob' as 'json'} );
+  }
+
+  Pdfinfodecampers(id:any){
+    const headers = new HttpHeaders().set('Content-Type','application/json');
+    return this.http.get('http://142.93.12.234:8000/camp/bracelets/'+id,{headers,responseType: 'blob' as 'json'} );
   }
 
 

@@ -136,7 +136,7 @@
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
                     <button ngbDropdownItem>Acampadores</button>
                     <button ngbDropdownItem>Detalles de pagos</button>
-                    <button ngbDropdownItem>Info de campers</button>
+                    <button ngbDropdownItem (click)="pdfinfodecampers()">Info de campers</button>
                   </div>
                 </div>
                 <div ngbDropdown placement="top-end" class="d-inline-block">
@@ -151,8 +151,8 @@
                   <button type="button" class="btn btn-outline-primary" id="dropdownBasic2"
                     ngbDropdownToggle>Reportes</button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-                    <button ngbDropdownItem>1" x 11" (ZT-230)</button>
-                    <button ngbDropdownItem>8 x hoja</button>
+                    <button ngbDropdownItem (click)="pulserac11()">"1" x 11" (ZT-230)</button>
+                    <button ngbDropdownItem (click)="pulseras8()" >8 x hoja</button>
                   </div>
                 </div>
               </div>
