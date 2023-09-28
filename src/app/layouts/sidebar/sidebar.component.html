@@ -93,8 +93,14 @@
           <a routerLink='staff/trainings-dashboard' class="side-nav-link-ref"  *ngIf="rol_id > 2">
             <i class="bx bxs-calendar-plus"></i>
             <span>Nuevo evento</span>
-
           </a>
+
+          <a routerLink='payments' class="side-nav-link-ref"  *ngIf="rol_id > 2">
+            <i class="bx bxs-calendar-plus"></i>
+            <span> Pagos</span>
+          </a>
+
+
           <a  class="side-nav-link-ref " routerLinkActive="active" *ngIf="rol_id > 2"
             (click)="catalogos = !catalogos">
             <div class="nav-d">

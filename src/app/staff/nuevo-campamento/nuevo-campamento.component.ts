@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CreateCampsService } from 'src/services/create-camps.service';
 
@@ -50,7 +51,7 @@ export class NuevoCampamentoComponent implements OnInit {
 
 
 
-  constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2) {
+  constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private router:Router) {
  
     
    }
@@ -120,6 +121,7 @@ export class NuevoCampamentoComponent implements OnInit {
 
   createCampPost(){
    // console.log(this.formCamp.value);
+   this.spinner=true;
     if(this.formCamp.valid){
       let a = {
           "camp":this.formCamp.value,
@@ -141,6 +143,7 @@ console.log(a);
         this.extra_charges = [];
         this.extra_question= [];
         this.formCamp.reset;
+        this.router.navigate(['dashboard/staff/camps'])
         
       },error=>{
         console.log(error);
@@ -162,6 +165,8 @@ console.log(a);
       this.validateEnd();
       this.validateStart();
       this.validateName();
+      this.spinner=false;
+
 
     }
    
