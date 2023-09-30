@@ -111,6 +111,69 @@
               <div>
                 <small class="text-right"> <i class="bx bx-caret-down " *ngIf="catalogos"></i></small>
                 <small class="text-right"><i class="bx bx-caret-up " *ngIf="!catalogos"></i></small>
+
+                <li *ngIf="catalogos" style="margin-left: 10px;" >
+                  <a routerLink='catalogs/food-restriction' class="side-nav-link-ref" routerLinkActive="active"
+                    *ngIf="catalogos">
+        
+                    <span>Alimentacion especial</span>
+        
+                  </a>
+                  <a routerLink='catalogs/currency' class="side-nav-link-ref" routerLinkActive="active"
+                    *ngIf="catalogos">
+        
+                    <span>Tipo de cambio</span>
+        
+                  </a>
+                  <a routerLink='catalogs/pathological_background' class="side-nav-link-ref" routerLinkActive="active"
+                    *ngIf="catalogos">
+        
+                    <span>Antecedentes patologicos</span>
+        
+                  </a>
+                  <a routerLink='catalogs/pathological_background_Family' class="side-nav-link-ref" routerLinkActive="active"
+                    *ngIf="catalogos">  
+                    <span>Antecedentes patologicos familiares</span>    
+                  </a>
+                  <a routerLink='catalogs/pathological_background_Family' class="side-nav-link-ref" routerLinkActive="active"
+                  *ngIf="catalogos">  
+                  <span>Cuentas bancarias </span>    
+                   </a>
+
+                   <a routerLink='catalogs/licensedmedicine' class="side-nav-link-ref" routerLinkActive="active"
+                   *ngIf="catalogos">  
+                   <span>Medicamentos preaotorizados</span>    
+                    </a>
+
+                    <a routerLink='catalogs/vaccines' class="side-nav-link-ref" routerLinkActive="active"
+                    *ngIf="catalogos">  
+                    <span>Vacunas</span>    
+                     </a>
+                     <a routerLink='catalogs/staffroles' class="side-nav-link-ref" routerLinkActive="active"
+                     *ngIf="catalogos">  
+                     <span>Roles de staff</span>    
+                      </a>
+
+                      <a routerLink='catalogs/payment/method' class="side-nav-link-ref" routerLinkActive="active"
+                      *ngIf="catalogos">  
+                      <span>Metodos de pagos</span>    
+                       </a>
+
+                       <a routerLink='catalogs/camp_extra_question' class="side-nav-link-ref" routerLinkActive="active"
+                       *ngIf="catalogos">  
+                       <span>Preguntas extra</span>    
+                        </a>
+
+                        <a routerLink='catalogs/camp_extra_change' class="side-nav-link-ref" routerLinkActive="active"
+                        *ngIf="catalogos">  
+                        <span>cargos extra</span>    
+                         </a>
+
+                         <a routerLink='catalogs/school' class="side-nav-link-ref" routerLinkActive="active"
+                         *ngIf="catalogos">  
+                         <span>Escuelas</span>    
+                          </a>
+                </li>
               </div>
             </div>
           </a>
