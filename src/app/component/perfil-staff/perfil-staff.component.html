@@ -12,7 +12,7 @@
                 <section class="campamentos ">
                     <div class="Campementos_anteriores">
                         <div>
-                            0
+                            {{this.bandHitoryasitio}}
                         </div>
                         <div>
                             <p>Camps Anteriores</p>
@@ -26,7 +26,7 @@
 
                     <div class="Campamentos_proximo">
                         <div>
-                            4
+                            {{this.bandHitoryasistir}}
                         </div>
                         <div>
                             <p>Camps Proximo</p>
@@ -221,17 +221,20 @@
                 <div class="card">
                     <p-timeline [value]="historialCaps" align="left" styleClass="customized-timeline" class="margin-timile">
                         <ng-template pTemplate="marker" let-event>
-                            <div class="timilin-logo">
-                                <i class="fas fa-check"></i>
+                            <div class="timilin-logo" [ngClass]="{'cancell':event.type=='cancelled','suscribe':event.type=='subscribe','passed':event.type=='passed'}">
+                                <i *ngIf="event.type =='subscribe'" class="fas fa-check"></i>
+                                <i *ngIf="event.type =='cancelled'" class="far fa-times-circle"></i>
+                                <i *ngIf="event.type =='passed'" class="fas fa-check"></i>
+
                             </div>
                         </ng-template>
                         <ng-template pTemplate="content" let-event>
-                            <div class="contendor-timiline mt-3 p-1">
-                                <h3> {{event.camp_name}} <i class="fa fa-info-circle" (click)="link(event.camp_id)"></i></h3>
-                                <p class="badge bg-warning ms-1">Pendiente de Pago: {{event.camper_payment_balance}} MXN</p>
+                            <div class="contendor-timiline mt-3 p-1" [ngClass]="{'passed':event.type=='passed','suscribe':event.type=='subscribe'}">
+                                <h3 style="cursor: pointer;"> {{event.camp_name}} <i class="fa fa-info-circle" (click)="link(event.camp_id)"></i></h3>
                             </div>
-                            <div class="contenedor-p">
+                            <div class="contenedor-p" >
                                 <p class="icononos-s">{{event.camp_start.substring(0,10)}} - {{event.camp_end.substring(0,10)}}<i class="fas fa-calendar-alt"> </i></p>
+                                
                             </div>
                         </ng-template>
                     </p-timeline>

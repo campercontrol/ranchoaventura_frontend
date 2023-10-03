@@ -35,6 +35,9 @@ export class PerfilStaffComponent implements OnInit {
   comenarios: any = [];
   comment:any ="";
   historialCaps:any = [];
+  bandHitoryasistir:any;
+  bandHitoryasitio:any;
+
 
   constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private staff: StaffService,private parents : ParentService, private rou:Router,private catalogos: CatalogosService, private info:AuthenticationService,private router: Router) { }
 
@@ -89,6 +92,35 @@ export class PerfilStaffComponent implements OnInit {
   
       
     });
+
+    this.staff.getPerfilStaff(this.id).subscribe((res:any)=>{
+      console.log(res,'comentarioss');
+      this.comenarios= res.staff_comments;
+      this.bandHitoryasistir=res.staff_band.camp_attend
+      this.bandHitoryasitio=res.staff_band.camp_attended
+
+      let camps = res.staff_upcoming_camps;
+      camps.forEach((element:any) => {
+        element.type= 'subscribe';
+      });
+  
+      let campsPassed = res.staff_past_camps
+      campsPassed.forEach((element:any) => {
+        element.type= 'passed';
+      });
+      let b:any=[];
+      
+      b=b.concat(camps);     
+      b= b.concat(campsPassed);
+
+
+
+      this.historialCaps = b;
+      this.historialCaps.sort((x,y)=>{
+        x.camp_start - y.camp_start
+      })
+      
+    })
    
  
     
@@ -99,7 +131,7 @@ export class PerfilStaffComponent implements OnInit {
 
   }
   link(id){
-    this.rou.navigate(['parents/camp-info/1/'+id]);
+    this.rou.navigate(['dashboard/camp/'+id]);
 
   }
   linkPerfil(id = 1){
