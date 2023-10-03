@@ -204,6 +204,10 @@ export class PerfilCamperComponent implements OnInit {
 
     })
   }
+  update(){
+    this.rou.navigate(['dashboard/parents/update-camper/'+this.id])
+
+  }
 
   link(id){
     this.rou.navigate(['dashboard/parents/camp-info/'+this.id+'/'+id]);

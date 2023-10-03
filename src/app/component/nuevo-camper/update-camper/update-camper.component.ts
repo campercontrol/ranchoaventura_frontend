@@ -116,8 +116,8 @@ export class UpdateCamperComponent implements OnInit {
       photo:["",],
       gender_id:[0,[Validators.required]],
       birthday:["",[Validators.required]],
-      height:[0,[Validators.required]],
-      weight:[0,[Validators.required]],
+      height: [0, [Validators.required, this.validateNumberWithoutDecimal,Validators.pattern("^[0-9]*$"), Validators.min(1)]],
+      weight: [0, [Validators.required, this.validateNumberWithoutDecimal,Validators.pattern("^[0-9]*$"), Validators.min(1)]],
       grade:[0,[Validators.required]],
       school_id:[0,[Validators.required]],
       school_other:["",],
@@ -171,6 +171,19 @@ export class UpdateCamperComponent implements OnInit {
 
    }
     
+  }
+  validateNumberWithoutDecimal(control: any) {
+    const value = control.value;
+    if (value === null || value === undefined) {
+      return null; // El control está vacío, no se aplica la validación
+    }
+    
+    // Verificar si el valor contiene un punto decimal
+    if (value.toString().includes('.')) {
+      return { hasDecimal: true }; // Devolver un error si contiene un punto decimal
+    }
+    
+    return null; // Si no contiene punto decimal, la validación es exitosa
   }
 
   getlastname_father()  {

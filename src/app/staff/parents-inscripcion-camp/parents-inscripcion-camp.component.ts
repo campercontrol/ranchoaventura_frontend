@@ -241,9 +241,9 @@ centerModal(centerDataModal: any = this.content) {
   this.modalService.open(centerDataModal, { centered: true });
 }
 closeModal(centerDataModal: any = this.content) {
-  console.log(this.centerModal);
+ 
   
-  this.modalService.open(centerDataModal, { centered: false });
+  this.modalService.dismissAll(centerDataModal);
 }
 filterCampsSummer(){
   if(this.cancelled_camps.length<1&& this.subscribe_camps.length<1 && this.passed_camps.length <1 ){

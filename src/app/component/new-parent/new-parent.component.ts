@@ -199,19 +199,34 @@ export class NewParentComponent implements OnInit {
       const email = formGroup.controls[emailField];
       const confirmEmail = formGroup.controls[confirmEmailField];
   
+      // Verificar si la contraseña es válida
       if (password.value !== confirmPassword.value) {
         confirmPassword.setErrors({ passwordMismatch: true });
       } else {
         confirmPassword.setErrors(null);
       }
   
+      // Verificar si el email es válido
       if (email.value !== confirmEmail.value) {
         confirmEmail.setErrors({ emailMismatch: true });
       } else {
         confirmEmail.setErrors(null);
       }
+  
+      // Verificar si la contraseña es válida y establecer errores en confirmPassword si no lo es
+      if (password.invalid) {
+        confirmPassword.setErrors({ invalidPassword: true });
+      } else {
+        // Si la contraseña es válida, borra los errores relacionados con la contraseña en confirmPassword
+        if (confirmPassword.hasError('invalidPassword')) {
+          const errors = { ...confirmPassword.errors };
+          delete errors['invalidPassword'];
+          confirmPassword.setErrors(Object.keys(errors).length > 0 ? errors : null);
+        }
+      }
     };
   }
+  
 
   validarContrasena(){
     this.estadoContrasena = this.regex.test(this.contrasena)  

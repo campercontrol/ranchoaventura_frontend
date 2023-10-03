@@ -16,37 +16,37 @@
                         <div class="mt-5">
                             <div class="row mb-4">
                                 <label for=""
-                                    class="col-sm-3 col-form-label">{{textos['Name']}}</label>
-                                <div class="col-sm-9">
+                                    class="col-sm-12 col-form-label">{{textos['Name']}}</label>
+                                <div class="col-sm-12">
                                     <input type="text" class="form-control " id="" formControlName="name" name="name" #name (input)="getname()">
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">{{textos['lastname']}}</label>
+                                <label for="" class="col-sm-12 col-form-label">{{textos['lastname']}}</label>
                                    
-                                <div class="col-sm-9">
+                                <div class="col-sm-12">
                                     <input type="text" class="form-control" id=""
                                         formControlName="lastname_father" name="lastname_father" (input)="getlastname_father()" #lastname_father>
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">{{textos['motherslastname']}}</label>
-                                <div class="col-sm-9">
+                                <label for="" class="col-sm-12 col-form-label">{{textos['motherslastname']}}</label>
+                                <div class="col-sm-12">
                                     <input type="text" class="form-control" id=""
                                         formControlName="lastname_mother"  name="lastname_mother" #lastname_mother (input)="getlastname_mother()">
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">{{textos['email']}}</label>
-                                <div class="col-sm-9">
+                                <label for="" class="col-sm-12 col-form-label">{{textos['email']}}</label>
+                                <div class="col-sm-12">
                                     <input type="text" class="form-control" id=""
                                         formControlName="email"  name="email" #email (input)="getemail()">
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">{{textos['Gender']}}</label>
+                                <label for="" class="col-sm-12 col-form-label">{{textos['Gender']}}</label>
 
-                                <div class="col-sm-9">
+                                <div class="col-sm-12">
                                     <select bindLabel="value" bindValue="id" formControlName="gender_id"  style="width: 100%;" (change)="getgender_id()"  class=" form-control" #gender_id>
                                         <option *ngFor="let item of genders" [value]="item.id" > {{item.value}}</option>
                                     </select>
@@ -54,8 +54,8 @@
                             </div>
 
                             <div class="row mb-4 mt-3">
-                                <label for="" class="col-sm-3 col-form-label">{{textos['Birthdate']}}</label>
-                                <div class=" control-label col-sm-9">
+                                <label for="" class="col-sm-12 col-form-label">{{textos['Birthdate']}}</label>
+                                <div class=" control-label col-sm-12">
                                     
                                         <input type="date" class="form-control" placeholder="yyyy-mm-dd"
                                         formControlName="birthday" style="width: 100%;"  (input)="getbirthday()" #birthday>
@@ -105,8 +105,8 @@
                         </div>
                         <div class="mt-5">
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">{{textos['School']}}</label>
-                                <div class="control-label col-sm-9">
+                                <label for="" class="col-sm-12 col-form-label">{{textos['School']}}</label>
+                                <div class="control-label col-sm-12">
                                     <select name="school_id" id="school_id" formControlName="school_id" (change)="getschool_id()" class="form-control" #school_id>
                                         <option *ngFor="let item of school" [value]="item.id" >
                                             {{item.name}}
@@ -117,15 +117,15 @@
                                
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">{{textos['Otherschool']}}</label>
-                                <div class="col-sm-9">
+                                <label for="" class="col-sm-12 col-form-label">{{textos['Otherschool']}}</label>
+                                <div class="col-sm-12">
                                     <input type="text" class="form-control" id="" formControlName="school_other" (input)="getSchool_other()" #school_other>
                                 </div>
                                
                             </div>
                             <div class="row mb-4" >
-                                <label for="" class="col-sm-3 col-form-label">{{textos['Grade']}}</label>
-                                <div class="control-label col-sm-9">
+                                <label for="" class="col-sm-12 col-form-label">{{textos['Grade']}}</label>
+                                <div class="control-label col-sm-12">
                                   
 
                                     <select name="school_id" id="school_id" formControlName="grade" (change)="getgrade()" class="form-control" #grade>
@@ -152,12 +152,12 @@
                         </div>
                         <div class="mt-5">
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">{{textos['Height']}}</label>
+                                <label for="" class="col-sm-12 col-form-label">{{textos['Height']}}</label>
                                 
 
-                                <div class="control-label col-sm-9">
+                                <div class="control-label col-sm-12">
                                     <div class="input-group mb-3">
-                                        <input class="form-control" type="number"   max="200" step="5" id="customRange3"   suffix="cm" formControlName="height" 
+                                        <input class="form-control" type="text"   max="200" step="5" id="customRange3"   suffix="cm" formControlName="height" 
                                         #height
                                         (input)="getheight()"
                                       />
@@ -169,11 +169,11 @@
                                   </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">{{textos['Weight']}}</label>
-                                <div class="col-sm-9">
+                                <label for="" class="col-sm-12 col-form-label">{{textos['Weight']}}</label>
+                                <div class="col-sm-12">
                                  
                                          <div class="input-group mb-3">
-                                            <input type="number" class="form-control"   step="5" min="1" max="200"
+                                            <input type="text" class="form-control"   step="5" min="1" max="200"
                                             formControlName="weight" #weight
                                             (input)="getweight()"
                                            
@@ -205,8 +205,8 @@
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">{{textos['Bloodtype']}}</label>
-                                <div class="control-label col-sm-9">
+                                <label for="" class="col-sm-12 col-form-label">{{textos['Bloodtype']}}</label>
+                                <div class="control-label col-sm-12">
                                     <select name="school_id" id="school_id" formControlName="blood_type" (change)="getblood_type()" class="form-control" #blood_type>
                                         <option *ngFor="let item of blood_types" [value]="item.id" >
                                             {{item.value}}
@@ -576,9 +576,9 @@
 
                         <div class="mt-5">
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label"> {{textos['ContactName']}}
+                                <label for="" class="col-sm-12 col-form-label"> {{textos['ContactName']}}
                                 </label>
-                                <div class="col-sm-9">
+                                <div class="col-sm-12">
                                     <input type="text" class="form-control" id=""
                                     formControlName = "contact_name"  #contact_name (input)="getcontact_name()"
                                     >
@@ -586,24 +586,24 @@
                             </div>
 
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">  {{textos['Relationcamper']}} </label>
-                                <div class="col-sm-9">
+                                <label for="" class="col-sm-12 col-form-label">  {{textos['Relationcamper']}} </label>
+                                <div class="col-sm-12">
                                     <input type="text" class="form-control" id=""
                                     formControlName = "contact_relation" #contact_relation (input)="getcontact_relation()"
                                     >
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label"> {{textos['Mobilephone']}} </label>
-                                <div class="col-sm-9">
+                                <label for="" class="col-sm-12 col-form-label"> {{textos['Mobilephone']}} </label>
+                                <div class="col-sm-12">
                                     <input type="text" class="form-control" id=""
                                     formControlName = "contact_cellphone"  #contact_cellphone (input)="getcontact_cellphone()"
                                     >
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label"> {{textos['Homephone']}} </label>
-                                <div class="col-sm-9">
+                                <label for="" class="col-sm-12 col-form-label"> {{textos['Homephone']}} </label>
+                                <div class="col-sm-12">
                                     <input type="text" class="form-control" id="" formControlName ="contact_homephone"
                                     #contact_homephone (input)="getcontact_homephone()"
                                     >
@@ -633,9 +633,9 @@
                                 </div>
                             </div>
                             <div class="row mb-4 mt-3">
-                                <label for="" class="col-sm-3 col-form-label"> {{textos['InsuranceCompany']}}
+                                <label for="" class="col-sm-12 col-form-label"> {{textos['InsuranceCompany']}}
                                 </label>
-                                <div class="col-sm-9">
+                                <div class="col-sm-12">
 
                                 <input type="text" class="form-control" id="" formControlName="insurance_company"  #insurance_company (input)="getinsurance_company()">
                                   
@@ -643,16 +643,16 @@
                             </div>
 
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label"> {{textos['policynumber']}}</label>
-                                <div class="col-sm-9">
+                                <label for="" class="col-sm-12 col-form-label"> {{textos['policynumber']}}</label>
+                                <div class="col-sm-12">
                                     <input type="text" class="form-control" id="" formControlName = "insurance_number"
                                     (input)="getinsurance_number()" #insurance_number
                                     >
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">{{textos['SocialSecurity']}} </label>
-                                <div class="col-sm-9">
+                                <label for="" class="col-sm-12 col-form-label">{{textos['SocialSecurity']}} </label>
+                                <div class="col-sm-12">
                                     <input type="text" class="form-control" id="" formControlName="security_social_number" #security_social_number
                                     (input)="getsecurity_social_number()"
                                     >
