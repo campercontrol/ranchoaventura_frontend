@@ -14,8 +14,8 @@ export class CampsService {
 
 
 
-  setCamps(info:{},id){
-    return this.http.post('http://142.93.12.234:8000/camper/subscribe/camps/'+id,info)
+  setCamps(info:any,id){
+    return this.http.post('http://142.93.12.234:8000/camper/subscribe/camps/?camper_id='+id,info)
   }
 
   getPreguntas(idCamp:number,idCamper){

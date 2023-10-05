@@ -293,9 +293,23 @@ suscribeCamps(typeCamp:number){
       this.campsSummer.forEach((item)=>{
        b.push(item.camp_id)
     })
-    this.centerModal();
+
+    this.camps.setCamps(b,this.id).subscribe((res:any)=>{
+
+      console.log(res);    
+      this.centerModal();
+      setTimeout(() => {       
+        this.closeModal();
+        //this.routerNav.navigate(['dashboard/parents/camp-info/'+res.camper_in_camp.camper_id+'/'+res.camper_in_camp.camp_id]);
+
+      }, 1000);
+      
+      
+     },
+     (error)=>{
+       console.log(error)
+     })
     this.inscripcion = true;
-    this.getCampsDIs();
       break;
     case 2:
       //campamentos disponibles
@@ -304,10 +318,23 @@ suscribeCamps(typeCamp:number){
       this.selectedCustomers.forEach((item)=>{
         c.push(item.camp_id)
        })
+       this.camps.setCamps(c,this.id).subscribe((res:any)=>{
 
-    this.getCampsDIs();
-   this.inscripcion = true;
-    this.centerModal();
+        console.log(res);    
+        this.centerModal();
+        setTimeout(() => {       
+          this.closeModal();
+          //this.routerNav.navigate(['dashboard/parents/camp-info/'+res.camper_in_camp.camper_id+'/'+res.camper_in_camp.camp_id]);
+  
+        }, 1000);
+        
+        
+       },
+       (error)=>{
+         console.log(error)
+       })
+
+      this.inscripcion = true;
 
     break;
     case 3:
@@ -315,18 +342,32 @@ suscribeCamps(typeCamp:number){
       //campamentos por escuela
       this.campsSchool.forEach((item)=>{
         d.push(item.camp_id)
-
     })
-    this.getCampsDIs();
+
+    this.camps.setCamps(d,this.id).subscribe((res:any)=>{
+
+      console.log(res);    
+      this.centerModal();
+      setTimeout(() => {       
+        this.closeModal();
+        //this.routerNav.navigate(['dashboard/parents/camp-info/'+res.camper_in_camp.camper_id+'/'+res.camper_in_camp.camp_id]);
+
+      }, 1000);
+      
+      
+     },
+     (error)=>{
+       console.log(error)
+     })
     this.inscripcion = true;
-    this.centerModal();
 
     break;
     case 4:
       //campamentos disponibles  
         let a = [this.inscribirUnoSolo]       
         this.camps.setCamps(a,this.id).subscribe((res:any)=>{
-          console.log(res.camper_in_camp);    
+
+          console.log(res);    
           this.centerModal();
           setTimeout(() => {       
             this.closeModal();

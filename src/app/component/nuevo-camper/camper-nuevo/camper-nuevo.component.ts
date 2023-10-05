@@ -120,8 +120,8 @@ export class CamperNuevoComponent implements OnInit {
       photo:["",[Validators.required,Validators.minLength(2)]],
       gender_id:[0,[Validators.required,this.greaterThanZeroValidator()]],
       birthday:["",[Validators.required]],
-      height: [0, [Validators.required, this.validateNumberWithoutDecimal,Validators.pattern("^[0-9]*$"), Validators.min(1)]],
-      weight: [0, [Validators.required, this.validateNumberWithoutDecimal,Validators.pattern("^[0-9]*$"), Validators.min(1)]],
+      height: [0, [Validators.required, this.validateMaxHeight,Validators.pattern("^[0-9]*$"),this.validateNumberWithoutDecimal, Validators.min(1)]],
+      weight: [0, [Validators.required, this.validateMaxHeight,Validators.pattern("^[0-9]*$"),this.validateNumberWithoutDecimal, Validators.min(1)]],
       grade:[0,[Validators.required,this.greaterThanZeroValidator()]],
       school_id:[0,[Validators.required,this.greaterThanZeroValidator()]],
       school_other:["",],
@@ -170,6 +170,15 @@ export class CamperNuevoComponent implements OnInit {
     }
     
     return null; // Si no contiene punto decimal, la validación es exitosa
+  }
+
+  
+  validateMaxHeight(control) {
+    const maxHeight = 200;
+    if (control.value && parseInt(control.value) > maxHeight) {
+      return { 'maxHeightExceeded': true };
+    }
+    return null;
   }
 
   getname(){
