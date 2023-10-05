@@ -31,11 +31,28 @@ export class AdmiService {
   }
   getTempletSystem(){
     return this.http.get('http://142.93.12.234:8000/mailing/template/system/')
+  }
+  getCorreos(){
+    return this.http.get('http://142.93.12.234:8000/mailing/campaign/')
+  }
+
+  
+  createTemplate(data){
+    return this.http.post('http://142.93.12.234:8000/email/template/',data)
 
   }
-  createTemplate(data){
-    return this.http.post('http://142.93.12.234:8000/email_template/',data)
 
+  getPlantilla(idioma= 'es'){
+    return this.http.get('http://142.93.12.234:8000/get/mailing/template/'+idioma)
+
+  }
+
+  getPlantillSelect(id:any){
+    return this.http.get('http://142.93.12.234:8000/email/system/template/'+id)
+
+  }
+  getPlantillSelectMaisva(id:any){
+    return this.http.get('http://142.93.12.234:8000/email/massive/template/'+id)
 
   }
 

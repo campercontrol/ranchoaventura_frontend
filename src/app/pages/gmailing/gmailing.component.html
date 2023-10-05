@@ -10,6 +10,8 @@
                             class="fas fa-ad fas fa-envelope-open-text"></i> Templates</li>
                     <li class="list-group-item list-group-item-action" (click)="status('Plantillas del sistemas')"> <i
                             class="fas fa-ad fas fa-envelope-open-text"></i> Templates sistemas</li>
+                            <li class="list-group-item list-group-item-action" (click)="status('Correos enviados')"> <i
+                                class="fas fa-ad fas fa-envelope-open-text"></i> Correos enviados</li>
                 </ul>
 
             </div>
@@ -21,7 +23,7 @@
 
 
 
-            <div class="card border-top border-primary" >
+            <div class="card border-top border-primary" *ngIf="!editTemplate">
                 <h1 class="mt-4 container-fluid">{{Titulo}}</h1>
                 <div>
                     <div class="row">
@@ -59,7 +61,7 @@
                                                             </ng-template>
                                                             <ng-template pTemplate="body" let-customer>
                                                                 <tr>
-                                                                    <td>
+                                                                    <td (click)="selectUpadate(customer)">
                                                                         {{customer.title}}
                                                                     </td>
                                                                  
@@ -81,33 +83,37 @@
                     <hr>
                     <div class="mx-auto container">
                         <div class="row">
-                            <div class="col-lg-12">
-                                <label for="">Tipo de plantilla</label>
-                                <select name="" id="" [(ngModel)]="typetemplate" style="width: 100%;"
-                                class="form-select mt-2">
-                                <option value="1">Plantilla</option>
-                                <option value="2">Plantilla del sistema</option>
-                            </select>
-                            </div>
-                            <div class="col-lg-5 mt-4" *ngIf="typetemplate==1">
-                                <p>Tipo de Plantilla</p>
+                          
 
-                                <select name="" id="" [(ngModel)]="tipoTemplate" style="width: 100%;"
-                                    class="form-select mt-2">
-                                    <option value="1">Templates</option>
-                                      <option value="2">Templates del Sistemas</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-5  mt-4" *ngIf="typetemplate==2">
+                            <div class="col-lg-12  mt-4" >
                                 <p>Tipo de Template</p>
 
-                                <select name="" id="" [(ngModel)]="tipoTemplate" style="width: 100%;"
+                                <select name="" id="" [(ngModel)]="typetemplate" style="width: 100%;"
                                     class="form-select mt-2">
-                                    ¿ <option value="1">Templates</option>
-                                    <option value="2">Templates del Sistemas</option>
+                                    <option   value="1">Template </option>
+                                    <option   value="2">Template del sistema </option>
+
+
+                                    
                                 </select>
                             </div>
-                            <div class="col-lg-10 mt-4">
+                        
+                        </div>
+                    </div>
+                    <div class="mx-auto container">
+                        <div class="row">
+                          
+
+                            <div class="col-lg-12  mt-4" *ngIf="typetemplate==2">
+                                <p>Tipo de plantilla</p>
+
+                                <select name="" id="" [(ngModel)]="tipoTemplate" style="width: 100%;"
+                                    class="form-select mt-2">
+                                     <option  *ngFor="let item of tiposTemplates" [value]="item.id">{{item.value}}</option>
+                                    
+                                </select>
+                            </div>
+                            <div class="col-lg-12 mt-4">
                                 <input type="text" placeholder="Titulo" class="form-control"  [(ngModel)]="tituloTempalet">
                             </div>
                             
@@ -115,7 +121,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-4 col-10">
+                    <div class="mt-4 col-12">
                         <ckeditor [editor]="Editor" [(ngModel)]="template" >
                         </ckeditor>
 
@@ -130,7 +136,7 @@
 
 
                     <div class="btn-container">
-                        <button class="btn btn-primary" (click)="cretateTemplaet()">Guardar</button>
+                        <button class="btn btn-primary" style="width: 100%;" (click)="cretateTemplaet()">Guardar</button>
 
                     </div>
 
@@ -218,6 +224,78 @@
                     </div>
 
                 </div>
+            </div>
+
+            
+            <div class="card border-top border-primary" *ngIf="editTemplate">
+             
+
+                <div class="col" >
+                    <hr>
+                    <div class="mx-auto container">
+                        <div class="row">
+                          
+
+                            <div class="col-lg-12  mt-4" >
+                                <p>Tipo de Template</p>
+
+                                <select name="" id="" [(ngModel)]="typetemplate" style="width: 100%;"
+                                    class="form-select mt-2">
+                                    <option   value="1">Template </option>
+                                    <option   value="2">Template del sistema </option>
+
+
+                                    
+                                </select>
+                            </div>
+                        
+                        </div>
+                    </div>
+                    <form action="" [formGroup]="updateTemplate">
+                        <div class="mx-auto container">
+                            <div class="row">
+                              
+    
+                                <div class="col-lg-12  mt-4" *ngIf="typetemplate==2">
+                                    <p>Tipo de plantilla</p>
+    
+                                    <select name="" id=""  style="width: 100%;" formControlName="template_type"
+                                        class="form-select mt-2">
+                                         <option  *ngFor="let item of tiposTemplates" [value]="item.id">{{item.value}}</option>
+                                        
+                                    </select>
+                                </div>
+                                <div class="col-lg-12 mt-4">
+                                    <input type="text" placeholder="Titulo" class="form-control"  formControlName="title">
+                                </div>
+                                
+    
+                            </div>
+                        </div>
+    
+                        <div class="mt-4 col-12">
+                            <ckeditor [editor]="Editor"  formControlName="template" >
+                            </ckeditor>
+    
+                        </div>
+                    </form>
+                   
+                    <div class="alert alert-primary" role="alert" *ngIf="statusRes">
+                       Se agrego correctamente
+                    </div>
+
+                    <div class="alert alert-danger" role="alert" *ngIf="statuserror">
+                        No se pudo agregar correctamente
+                      </div>
+
+
+                    <div class="btn-container">
+                        <button class="btn btn-primary" style="width: 100%;" (click)="cretateTemplaet()">Guardar</button>
+
+                    </div>
+
+                </div>
+
             </div>
         </div>
 

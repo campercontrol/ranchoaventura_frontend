@@ -120,17 +120,7 @@ export class ParentsInscripcionCampComponent implements OnInit {
 
 
 
-setCamp(a){
 
-  this.camps.setCamps(a).subscribe((res:any)=>{
-    console.log(res);    
-    console.log(res.status);    
-
-   },
-   (error)=>{
-     console.log(error)
-   })
-}
 getCampsDIs(){
  
   this.info.getCapsT(this.id).subscribe((res:any)=>{
@@ -299,16 +289,9 @@ suscribeCamps(typeCamp:number){
   switch (typeCamp) {
     //campamento de verano
     case 1:
+      let b = [];
       this.campsSummer.forEach((item)=>{
-        let a = {
-          status: 36,
-          payment_balance: 0,
-          camp_id: item.camp_id,
-          camper_id: this.id,
-  
-        }
-        console.log(a)
-        this.setCamp(a)
+       b.push(item.camp_id)
     })
     this.centerModal();
     this.inscripcion = true;
@@ -316,17 +299,11 @@ suscribeCamps(typeCamp:number){
       break;
     case 2:
       //campamentos disponibles
+      let c = [];
+
       this.selectedCustomers.forEach((item)=>{
-        let a = {
-          status: 36,
-          payment_balance: 0,
-          camp_id: item.camp_id,
-          camper_id: this.id,
-  
-        }
-        console.log(a)
-        this.setCamp(a)
-    })
+        c.push(item.camp_id)
+       })
 
     this.getCampsDIs();
    this.inscripcion = true;
@@ -334,17 +311,11 @@ suscribeCamps(typeCamp:number){
 
     break;
     case 3:
+      let d = [];
       //campamentos por escuela
       this.campsSchool.forEach((item)=>{
-        let a = {
-          status: 36,
-          payment_balance: 0,
-          camp_id: item.camp_id,
-          camper_id: this.id,
-  
-        }
-        console.log(a)
-        this.setCamp(a)
+        d.push(item.camp_id)
+
     })
     this.getCampsDIs();
     this.inscripcion = true;
@@ -353,18 +324,13 @@ suscribeCamps(typeCamp:number){
     break;
     case 4:
       //campamentos disponibles  
-        let a = {
-          status: 36,
-          payment_balance: 0,
-          camp_id: this.inscribirUnoSolo,
-          camper_id: this.id,
-        }
-        this.camps.setCamps(a).subscribe((res:any)=>{
+        let a = [this.inscribirUnoSolo]       
+        this.camps.setCamps(a,this.id).subscribe((res:any)=>{
           console.log(res.camper_in_camp);    
           this.centerModal();
           setTimeout(() => {       
             this.closeModal();
-            this.routerNav.navigate(['dashboard/parents/camp-info/'+res.camper_in_camp.camper_id+'/'+res.camper_in_camp.camp_id]);
+            //this.routerNav.navigate(['dashboard/parents/camp-info/'+res.camper_in_camp.camper_id+'/'+res.camper_in_camp.camp_id]);
 
           }, 1000);
           
