@@ -75,7 +75,14 @@ export class ParentsInscripcionCampComponent implements OnInit {
     campsSchool:any [];
     inscripcion = true;
     typeSucribe = 0;
+    cargosExtr= false;
     inscribirUnoSolo =0;
+    extra_questions:any=[]
+    extra_charges:any=[]
+
+    preguntasCargosExtras:any ={
+   
+  }
     @ViewChild('centerDataModal') content:ElementRef;
 
     
@@ -295,16 +302,25 @@ suscribeCamps(typeCamp:number){
     })
 
     this.camps.setCamps(b,this.id).subscribe((res:any)=>{
+      console.log(res);
 
-      console.log(res);    
-      this.centerModal();
-      setTimeout(() => {       
+      if(res.status ==2){
+        this.extra_questions =res.extra_questions;
+        this.preguntasCargosExtras.extra_charges =res.extra_charges
+
+        this.inscripcion = false;
+        this.cargosExtr = true;
+      } else if(res.status ==1){
+        this.centerModal();
+      setTimeout(() => {    
+        this.getCampsDIs();   
         this.closeModal();
+        this.routerNav.navigate(['dashboard']);
+
         //this.routerNav.navigate(['dashboard/parents/camp-info/'+res.camper_in_camp.camper_id+'/'+res.camper_in_camp.camp_id]);
 
       }, 1000);
-      
-      
+      }
      },
      (error)=>{
        console.log(error)
@@ -319,15 +335,24 @@ suscribeCamps(typeCamp:number){
         c.push(item.camp_id)
        })
        this.camps.setCamps(c,this.id).subscribe((res:any)=>{
+        console.log(res);
 
-        console.log(res);    
-        this.centerModal();
-        setTimeout(() => {       
+        if(res.status ==2){
+          this.extra_questions =res.extra_questions;
+          this.preguntasCargosExtras.extra_charges =res.extra_charges
+          this.inscripcion = false;
+          this.cargosExtr = true;
+        } else if(res.status ==1){
+          this.centerModal();
+        setTimeout(() => {    
+          this.getCampsDIs();   
           this.closeModal();
+          this.routerNav.navigate(['dashboard']);
+
           //this.routerNav.navigate(['dashboard/parents/camp-info/'+res.camper_in_camp.camper_id+'/'+res.camper_in_camp.camp_id]);
   
         }, 1000);
-        
+        }
         
        },
        (error)=>{
@@ -345,16 +370,24 @@ suscribeCamps(typeCamp:number){
     })
 
     this.camps.setCamps(d,this.id).subscribe((res:any)=>{
+      console.log(res);
 
-      console.log(res);    
-      this.centerModal();
-      setTimeout(() => {       
+      if(res.status ==2){
+        this.extra_questions =res.extra_questions;
+        this.preguntasCargosExtras.extra_charges =res.extra_charges
+        this.inscripcion = false;
+        this.cargosExtr = true;
+      } else if(res.status ==1){
+        this.centerModal();
+      setTimeout(() => {    
+        this.getCampsDIs();   
         this.closeModal();
+        this.routerNav.navigate(['dashboard']);
+
         //this.routerNav.navigate(['dashboard/parents/camp-info/'+res.camper_in_camp.camper_id+'/'+res.camper_in_camp.camp_id]);
 
       }, 1000);
-      
-      
+      }
      },
      (error)=>{
        console.log(error)
@@ -366,14 +399,23 @@ suscribeCamps(typeCamp:number){
       //campamentos disponibles  
         let a = [this.inscribirUnoSolo]       
         this.camps.setCamps(a,this.id).subscribe((res:any)=>{
-
-          console.log(res);    
-          this.centerModal();
-          setTimeout(() => {       
+          console.log(res);
+          
+          if(res.status ==2){
+            this.extra_questions =res.extra_questions;
+            this.preguntasCargosExtras.extra_charges =res.extra_charges
+            this.inscripcion = false;
+            this.cargosExtr = true;
+          } else if(res.status ==1){
+            this.centerModal();
+          setTimeout(() => {    
+            this.getCampsDIs();   
             this.closeModal();
-            //this.routerNav.navigate(['dashboard/parents/camp-info/'+res.camper_in_camp.camper_id+'/'+res.camper_in_camp.camp_id]);
+            this.routerNav.navigate(['dashboard']);
 
           }, 1000);
+          }   
+          
           
           
          },
@@ -382,7 +424,6 @@ suscribeCamps(typeCamp:number){
          })
   
 
-    this.getCampsDIs();
    this.inscripcion = true;
    
 
@@ -396,6 +437,27 @@ suscribeCamps(typeCamp:number){
   }
   this.getCampsDIs();
 
+}
+
+enviarCargosPreguntas(){
+  console.log(this.preguntasCargosExtras);
+  let b:any ={
+    extra_answers:this.extra_questions,
+    extra_charges:this.extra_charges
+  }
+  console.log(b);
+  
+ this.camps.setCargosPregustas(this.id,b).subscribe((res:any)=>{
+  console.log(res);
+  if(res.status == 1){
+    this.inscripcion= true;
+    this.cargosExtr= false;
+    this.routerNav.navigate(['dashboard'])
+  }
+
+})
+  
+  
 }
 
 }

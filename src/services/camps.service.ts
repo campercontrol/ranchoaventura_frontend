@@ -18,6 +18,11 @@ export class CampsService {
     return this.http.post('http://142.93.12.234:8000/camper/subscribe/camps/?camper_id='+id,info)
   }
 
+  preguntasCargosExtras(info:any){
+    return this.http.post('http://142.93.12.234:8000//camper/extras/camp/',info)
+
+  }
+
   getPreguntas(idCamp:number,idCamper){
     return this.http.get('http://142.93.12.234:8000/extra_answers_camper/'+idCamp+"/"+idCamper)
 
@@ -49,5 +54,10 @@ export class CampsService {
   }
   getCamps() {
     return this.http.get('http://142.93.12.234:8000/camp/')
+ }
+
+ setCargosPregustas(id,a){
+  return this.http.post('http://142.93.12.234:8000/camper/extras/camp/?camper_id='+id,a)
+
  }
 }
