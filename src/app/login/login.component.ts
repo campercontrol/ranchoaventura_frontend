@@ -12,11 +12,15 @@ import { LoginService } from 'src/services/login.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  resetPass: FormGroup;
+
   submitted = false;
   error = '';
   returnUrl: string;
   passwordType= "password";
   errologin = false;
+  ressetPasword= true;
+  alertPass = false;
 
   // set the currenr year
   year: number = new Date().getFullYear();
@@ -30,6 +34,10 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ['hernandezcruzalbertoulises@gmail.com', [Validators.required, Validators.email]],
       password: ['11654252Aa@', [Validators.required]],
+    });
+
+    this.resetPass = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
     });
 
   }
@@ -52,6 +60,16 @@ export class LoginComponent implements OnInit {
     //  event.preventDefault();
       
     
+  }
+
+  resetPasword(){
+    this.authenticationService.recuperarContra(this.resetPass.value).subscribe((res:any)=>{
+      if(res.mensaje == "Se ha enviado un correo con instrucciones para la recuperacion de su contraseña"){
+        this.alertPass = true;
+
+      }
+
+    })
   }
   open(content) {
 		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
