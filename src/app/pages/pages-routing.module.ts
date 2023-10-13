@@ -114,7 +114,6 @@ const routes: Routes = [
 
   {path: 'mailing', component: GmailingComponent},
   {path: 'school/profile', component: PerfilEscuelaComponent },
-  {path: 'mailing', component: GmailingComponent},
   {path: 'shop', component: TienditaComponent},
 
   {path: 'staff/update',component:UpdateStaffComponent},

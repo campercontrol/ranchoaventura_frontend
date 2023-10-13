@@ -20,6 +20,7 @@ export class PerfilStaffComponent implements OnInit {
   providers: [];
   isCollapsed = true;
   id = 0;
+  typecoment:number = 1
   infoCamp: any = {};
   catalogoEsculea: any;
   catalogosGenero: any;
@@ -45,8 +46,9 @@ export class PerfilStaffComponent implements OnInit {
     this.routesA.params.subscribe((params) => {
       this.id = params['id'];
       if(!this.id){
-        this.id = this.info.infToken.profile_id;
+        console.log(this.info.infToken);
         
+        this.id = this.info.infToken.profile_id;
       }
     })
     this.getInfo()
@@ -142,17 +144,17 @@ export class PerfilStaffComponent implements OnInit {
     let a = {
       "comment": this.comment,
       "is_public": true,
-      "show_to": 1,
-      "user_id": this.info.infToken.profile_id,
-      "camp_id": 2,
-      "camper_id": this.id,     
+      "show_to": this.typecoment,
+      "user_id": this.info.infToken.user_id,
+      "staff_id": this.id,    
     }
-    this.parents.setComentarios(a).subscribe((res:any)=>{
+    this.staff.createComment(a).subscribe((res:any)=>{
       console.log(res.data);
       
       if(res.data){
         this.getInfo()
-        this.comment = ""
+        this.comment = "";
+        this.typecoment = 1
 
       }
     })

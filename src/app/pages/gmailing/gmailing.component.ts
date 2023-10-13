@@ -130,23 +130,33 @@ export class GmailingComponent implements OnInit {
       this.data.getTempletMasive().subscribe((res:any)=>{
         this.listaTemplates=res.data 
       })
+      this.editTemplate= false;
+
     }else if(a == 'Plantillas del sistemas'){
       this.Titulo='Plantillas del sistemas';
       this.data.getTempletSystem().subscribe((res:any)=>{
         this.listaTemplates=res.data 
       })
+      this.editTemplate= false;
+
     }else if(a== 'Nuevo Templates'){
       this.Titulo='Nuevo Templates';
+      this.editTemplate= false;
+
 
     }else if(a== 'Correos enviados'){
       this.data.getCorreos().subscribe((res:any)=>{
         this.listaTemplates=res.data 
       })
       this.Titulo='Correos enviados';
+      this.editTemplate= false;
+
 
     }
   else if(a== 'Correos enviados'){
     this.Titulo='Enviar Correo';
+    this.editTemplate= false;
+
 
   }
 

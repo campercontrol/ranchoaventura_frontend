@@ -180,14 +180,13 @@
                         <hr >
                         <!-- en este espacio es donde va el contenedor del chat-->
                         <div class="chat-espacio">
-                            <div>
+                            <div class="p-2">
                                 <div class="row mt-2"*ngFor="let item of comenarios">
                                     <div class="col-3">
-                                        <p class="Nombre-envidao">{{nombreCome}}(tutor)</p>
-                                        <p-avatar image="assets/images/camp/chat-padres.png" size="large"></p-avatar>
+                                        <p-avatar image="assets/images/camp/chat-padres.png"  size="large"></p-avatar>
                                     </div>
-                                    <div class="col-8" >
-                                        <p class="fecha-chat" style="text-align: right;"> {{item.created_at.substring(0,9)}}</p>
+                                    <div class="col-9" >
+                                        <p class="fecha-chat" style="text-align: right;"> {{item.created_at.substring(0,10)}}</p>
                                         <div class="col-12 mensaje">
                                             <p class="p-2">{{item.comment}}
                                             </p>
@@ -199,6 +198,17 @@
                             </div>
                             
                            
+
+                        </div>
+                        <div class="col">
+                            <label for="">Mostrar este comentario a</label>
+                            <select name="" id="" [(ngModel)]="typecoment">
+                                <option value=3>Admin</option>
+                                <option value=2>Coordinador</option>
+                                <option value=1>staff</option>
+
+
+                            </select>
 
                         </div>
                         <div class="col">
