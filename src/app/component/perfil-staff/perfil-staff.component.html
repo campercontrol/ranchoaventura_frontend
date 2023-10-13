@@ -180,18 +180,24 @@
                         <hr >
                         <!-- en este espacio es donde va el contenedor del chat-->
                         <div class="chat-espacio">
-                            <div class="p-2">
-                                <div class="row mt-2"*ngFor="let item of comenarios">
-                                    <div class="col-3">
-                                        <p-avatar image="assets/images/camp/chat-padres.png"  size="large"></p-avatar>
+                            <div class="p-1">
+                                <div class="mt-2"*ngFor="let item of comenarios">
+                                    <div *ngIf="item.show_to <= statusStaff">
+                                        <div class="row">
+                                            <div class="col-2 mt-4">
+                                                <img src="assets/images/camp/chat-padres.png" class="rounded-circle img-fluid" height="auto" width="100%"/>
+                                            </div>
+                                            <div class="col-10" >
+                                                <p class="fecha-chat" style="text-align: right;"> {{item.created_at.substring(0,10)}}</p>
+                                                <div class="col-12 mensaje">
+                                                    <p class="p-2">{{item.comment}}
+                                                    </p>
+                                            </div>
+                                            </div>
+                                        </div>
+                                       
                                     </div>
-                                    <div class="col-9" >
-                                        <p class="fecha-chat" style="text-align: right;"> {{item.created_at.substring(0,10)}}</p>
-                                        <div class="col-12 mensaje">
-                                            <p class="p-2">{{item.comment}}
-                                            </p>
-                                    </div>
-                                    </div>
+                                   
                                     
                                 </div>
                               
