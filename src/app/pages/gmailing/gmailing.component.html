@@ -83,7 +83,7 @@
                     <hr>
                     <div class="mx-auto container">
                         <div class="row">
-                          
+                            <h2>Editar Template</h2>
 
                             <div class="col-lg-12  mt-4" >
                                 <p>Tipo de Template</p>
@@ -258,7 +258,7 @@
             
             <div class="card border-top border-primary" *ngIf="editTemplate">
              
-
+                <h1 class="mt-3">Editar template</h1>
                 <div class="col" >
                     <hr>
                     <div class="mx-auto container">
@@ -310,16 +310,16 @@
                     </form>
                    
                     <div class="alert alert-primary" role="alert" *ngIf="statusRes">
-                       Se agrego correctamente
+                       Se actualizo correctamente
                     </div>
 
                     <div class="alert alert-danger" role="alert" *ngIf="statuserror">
-                        No se pudo agregar correctamente
+                        No se pudo actualizo correctamente
                       </div>
 
 
                     <div class="btn-container">
-                        <button class="btn btn-primary" style="width: 100%;" (click)="cretateTemplaet()">Guardar</button>
+                        <button class="btn btn-primary" style="width: 100%;" (click)="updateTemplaet()">Guardar</button>
 
                     </div>
 

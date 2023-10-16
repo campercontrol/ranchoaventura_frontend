@@ -57,6 +57,8 @@ export class GmailingComponent implements OnInit {
   listaTemplateAlmacenado:any =[];
   tituloTemplateAlmacenado:any = "";
   page=1;
+  edtitar=1;
+  idUpdate=0;;
 
 
 
@@ -306,6 +308,7 @@ export class GmailingComponent implements OnInit {
     this.editTemplate= true;
     if(this.Titulo ="Plantillas del sistemas"){
       this.typetemplate=2
+      this.idUpdate=item.id
       this.data.getPlantillSelect(item.id).subscribe((res:any)=>{
         let a = res.template
         this.updateTemplate.patchValue({
@@ -378,6 +381,26 @@ export class GmailingComponent implements OnInit {
   cambios(){
     this.botonDisiable= false;
 
+  }
+
+  updateTemplaet(){
+    
+    this.data.patchPlantilla(this.idUpdate,this.updateTemplate.value).subscribe((res:any)=>{
+         console.log(res);
+         if(res.mensaje =='Actualizado Correctamente'){
+          this.statusRes= true;
+          setTimeout(() => {
+            this.statusRes=false;
+            this.status('Plantillas')
+          }, 1000); 
+         }else{
+          this.statuserror= true;
+          setTimeout(() => {
+            this.statuserror=false;
+          }, 1000); 
+        }
+         
+    })
   }
 
 }

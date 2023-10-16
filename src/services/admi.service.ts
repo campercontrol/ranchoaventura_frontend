@@ -61,6 +61,11 @@ export class AdmiService {
 
   }
 
+  patchPlantilla(id:any,info){
+    return this.http.patch('http://142.93.12.234:8000/email/template/'+id,info)
+
+  }
+
 
 
   deletComments(id){
