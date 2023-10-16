@@ -7,6 +7,7 @@ import { AdvancedService } from './advanced.service';
 import { AdvancedSortableDirective, SortEvent } from './advanced-sortable.directive';
 import { CampsVistaService } from 'src/services/camps-vista.service';
 import { ActivatedRoute, Router, RouterEvent } from '@angular/router';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-campamentos-staff',
   templateUrl: './campamentos-staff.component.html',
@@ -28,7 +29,7 @@ export class CampamentosStaffComponent implements OnInit {
   listCampers:any= [];
   listStaffConfirm:any= [];
   listaStaff:any=[];
-  headerInfo:boolean=false;
+  headerInfo:boolean=true;
   headerCampers:boolean=true;
   headerStaffConf:boolean=true;
   headerStaffApun:boolean=true;
@@ -84,11 +85,13 @@ export class CampamentosStaffComponent implements OnInit {
   idCamp = 0;
   activityValues: number[] = [0, 100];
   items = [];
+  rol=0;
   
 
-  constructor(private capms:CampsVistaService,private router :ActivatedRoute,private routerN: Router) { 
+  constructor(private capms:CampsVistaService,private router :ActivatedRoute,private routerN: Router,private info : AuthenticationService) { 
   
-   
+    this.rol=this.info.infToken.role_id
+
   }
   cars = [{ Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },
   { Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },

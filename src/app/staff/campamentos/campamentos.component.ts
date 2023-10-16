@@ -44,6 +44,8 @@ cars=[{Nombre:"Campamento con agrupaciones",grado:"prueba2",inicio:"2020-11-10 "
 
   ngOnInit(): void {
      this.camps.getCamp().subscribe((res:any)=>{
+      console.log(res,'respuesta');
+      
       this.customer = res.data;
       console.log(this.customer);
       

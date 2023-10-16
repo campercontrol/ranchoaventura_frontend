@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../core/services/auth.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginService } from 'src/services/login.service';
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
   errologin = false;
   ressetPasword= true;
   alertPass = false;
+  spinner= true;
 
   // set the currenr year
   year: number = new Date().getFullYear();
@@ -45,17 +47,33 @@ export class LoginComponent implements OnInit {
 
   login(event:Event) {
     this.submitted = true;
-      this.authenticationService.login(this.f.email.value, this.f.password.value).then((res:any)=>{
+    this.spinner= false;
+      this.authenticationService.login(this.f.email.value, this.f.password.value).subscribe((user:any)=>{
         this.errologin = false;
         // console.log(res.type);
+         console.log(user);
+         console.log(user);
+         this.authenticationService.loggedIn = true;
+         localStorage.setItem('currentUser', JSON.stringify(user));
+         this.authenticationService.infToken = jwt_decode(user.access_token);
+         console.log(this.authenticationService.infToken.role_id);
          
+         if(this.authenticationService.infToken.role_id>1){
+           this.router.navigate(['dashboard/staff']);
+           console.log(this.authenticationService.infToken);
+
+         }else{
+           this.router.navigate(['dashboard']);
+           console.log(this.authenticationService.infToken);
+         }
+      
        
         
-      }).catch((error:any)=>{
-        //console.log(res);
-        throw new Error("oh, no!");
-
-      });
+      },error=>{
+        this.spinner = true;
+        console.log(error);
+        
+      })
         
     //  event.preventDefault();
       

@@ -28,15 +28,15 @@
             <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [responsive]="true" [value]="customer" 
             [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-            [globalFilterFields]="['name','public_price','end','start']">
+            [globalFilterFields]="['camp_name','camp_public_price','camp_start','camp_end','location_name']">
             
             <ng-template pTemplate="header">
                 <tr>
     
-                    <th pSortableColumn="name" class="camp">
+                    <th pSortableColumn="camp_name" class="camp">
                         <div class="flex justify-content-between align-items-center" style="min-width: 180px;">
                             Campamentos
-                            <p-sortIcon field="name"></p-sortIcon>
+                            <p-sortIcon field="camp_name"></p-sortIcon>
                         </div>
                     </th>
                     <th pSortableColumn="record.n" class="record">
@@ -45,30 +45,30 @@
                             <p-sortIcon field="record.n"></p-sortIcon>
                         </div>
                     </th>
-                    <th pSortableColumn="public_price">
+                    <th pSortableColumn="camp_public_price">
                         <div class="flex justify-content-between align-items-center" style="min-width: 170px;">
                             Precio Público
-                            <p-sortIcon field="public_price"></p-sortIcon>
+                            <p-sortIcon field="camp_public_price"></p-sortIcon>
     
     
                         </div>
                     </th>
-                    <th pSortableColumn="sede" style="min-width: 10rem">
+                    <th pSortableColumn="location_name" style="min-width: 10rem">
                         <div class="flex justify-content-between align-items-center">
                             Sede
-                            <p-sortIcon field="sede"></p-sortIcon>
+                            <p-sortIcon field="location_name"></p-sortIcon>
                         </div>
                     </th>
-                    <th pSortableColumn="start" style="min-width: 10rem" style="min-width: 170px;">
+                    <th pSortableColumn="camp_start" style="min-width: 10rem" style="min-width: 170px;">
                         <div class="flex justify-content-between align-items-center">
                             Inicia
-                            <p-sortIcon field="start"></p-sortIcon>
+                            <p-sortIcon field="camp_start"></p-sortIcon>
                         </div>
                     </th>
-                    <th pSortableColumn="end" style="min-width: 10rem" style="min-width: 170px;">
+                    <th pSortableColumn="camp_end" style="min-width: 10rem" style="min-width: 170px;">
                         <div class="flex justify-content-between align-items-center">
                             Termina
-                            <p-sortIcon field="end"></p-sortIcon>
+                            <p-sortIcon field="camp_end"></p-sortIcon>
                         </div>
                     </th>
                     <th pSortableColumn="status" style="min-width: 8rem">
@@ -81,32 +81,32 @@
                 <tr class="p-selectable-row">
     
                     <td (click)="reditCamps(customer.id)">
-                        {{customer.name}}
+                        {{customer.camp_name}}
                     </td>
                     <td>
-                        <p-badge value="4" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
-                        <p-badge value="2" pTooltip="Staff apuntados" tooltipPosition="top"
+                        <p-badge value=" {{customer.records.campers_recod}}" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
+                        <p-badge value=" {{customer.records.staff_available_record}}" pTooltip="Staff apuntados" tooltipPosition="top"
                             severity="info" severity="warning"></p-badge>
-                        <p-badge value="2" pTooltip="Staff confirmado" tooltipPosition="top"
+                        <p-badge value=" {{customer.records.staff_record}}" pTooltip="Staff confirmado" tooltipPosition="top"
                             severity="danger" severity="danger"></p-badge>
                     </td>
                     <td>
-                        {{customer.public_price}}  <small *ngIf="customer.show_payment_parent"><i class="bx bx-dollar-circle" pTooltip="Se muestra el precio a los padres" tooltipPosition="top"></i></small>
+                        {{customer.camp_public_price}}  <small *ngIf="customer.camp_show_payment_parent"><i class="bx bx-dollar-circle" pTooltip="Se muestra el precio a los padres" tooltipPosition="top"></i></small>
                     </td>
                     <td>
-                        {{customer.location_id}}
+                        {{customer.location_name}}
                     </td>
                   
                     <td>
-                        {{customer.start.substring(0,10)}}
+                        {{customer.camp_start.substring(0,10)}}
                     </td>
                     <td>
-                        {{customer.end.substring(0,10)}}
+                        {{customer.camp_end.substring(0,10)}}
                     </td>
     
                  
                     <td>
-                        <button class="btn btn-primary" class="btn btn-primary" (click)="reditCamps(customer.id)">ver campamento</button>
+                        <button class="btn btn-primary" class="btn btn-primary" (click)="reditCamps(customer.camp_id)">ver campamento</button>
                     </td>
     
                     

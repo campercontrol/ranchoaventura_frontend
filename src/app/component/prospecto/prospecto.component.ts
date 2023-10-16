@@ -5,6 +5,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CamperService } from 'src/services/camper.service';
 import { StaffService } from 'src/services/staff.service';
+import jwt_decode from "jwt-decode";
+
 
 @Component({
   selector: 'app-prospecto',
@@ -191,9 +193,22 @@ export class ProspectoComponent implements OnInit {
     if(this.formUser.valid){
       this.staff.prospectos(a).subscribe((res:any)=>{
        
-        this.auth.login(this.formUser.get('email').value,this.formUser.get('password').value).then((res:any)=>{
-          console.log(res);
+        this.auth.login(this.formUser.get('email').value,this.formUser.get('password').value).subscribe((user:any)=>{
+          console.log(user);
+          console.log(user);
+          this.auth.loggedIn = true;
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.auth.infToken = jwt_decode(user.access_token);
+          console.log(this.auth.infToken.role_id);
           
+          if(this.auth.infToken.role_id>1){
+            this.router.navigate(['dashboard/staff']);
+            console.log(this.auth.infToken);
+ 
+          }else{
+            this.router.navigate(['dashboard']);
+            console.log(this.auth.infToken);
+          }          
         })
        
 

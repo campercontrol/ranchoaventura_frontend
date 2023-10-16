@@ -29,9 +29,11 @@ export class DashbordStaffComponent implements OnInit {
   is_active = false;
   is_employee = false;
   alerts:boolean;
+  rol:any =0;
 
   constructor(private camps: CampsService, private staff:StaffService, private info : AuthenticationService,private router: Router) {
     this.getCamps();
+    this.rol=this.info.infToken.role_id
    }
 
   ngOnInit(): void {
@@ -88,6 +90,9 @@ export class DashbordStaffComponent implements OnInit {
   
   myPerfil(){
     this.router.navigate(['dashboard/staff/update'])
+  }
+  campsinfo(id){
+    this.router.navigate(['dashboard/camp/'+id])
   }
 
 }

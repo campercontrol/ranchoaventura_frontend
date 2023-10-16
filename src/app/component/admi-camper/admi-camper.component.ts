@@ -262,7 +262,6 @@ export class AdmiCamperComponent implements OnInit {
      this.updateId = item.id;
     this.display2= true;
     this.table= false;
-   
     this.formFood.patchValue({     
       name: item.name, //listo
       start: item.start, //listo

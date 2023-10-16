@@ -1,7 +1,7 @@
 <div class="container-fluid" *ngIf="cargando">
   <div class="row">
     <div class="col-12">
-      <div class="card border border-warning border-3">
+      <div class="card border border-warning border-3" >
       
         <div class="bg-warning p-2" (click)="headerInfo=!headerInfo" style="cursor: pointer;">
           <h1 class="card-title text-white">{{infoCamp.name}}</h1>
@@ -10,7 +10,7 @@
         <div *ngIf="headerInfo">
         <div class="conatiner-info-camp mt-3">
           <div>
-            <p class="fw-bold">  Fechas: <i class="fas fa-calendar-alt"> </i> </p>
+            <p class="fw-bold">  Fechas <i class="fas fa-calendar-alt"> : </i> </p>
           </div>
           <div>
             <p>  {{infoCamp.start.substring(0,10)}} - {{infoCamp.end.substring(0,10)}}</p>
@@ -18,7 +18,7 @@
         </div>
         <div class="conatiner-info-camp">
           <div>
-            <p class="fw-bold"> Sede <i class="fas fa-map"> </i>:  </p>
+            <p class="fw-bold"> Sede <i class="fas fa-map"> </i> :  </p>
           </div>
           <div>
             <p>  {{infoCamp.location_id}} </p>
@@ -27,7 +27,7 @@
 
         <div class="conatiner-info-camp ">
           <div>
-            <p class="fw-bold"> Cobertura Póliza <i class="bx bx-plus-medical"> </i>:  </p>
+            <p class="fw-bold"> Cobertura Póliza <i class="bx bx-plus-medical"> </i> :  </p>
           </div>
           <div>
             <p>  {{infoCamp.insurance}} </p>
@@ -115,7 +115,7 @@
     </div>
       
       
-      <div class="card border border-info border-3">
+      <div class="card border border-info border-3" *ngIf="rol>2">
       
           <div class="bg-info p-2" (click)="headerCampers=!headerCampers" style="cursor: pointer;">
             <h1 class="card-title text-white">Acampadores</h1>
@@ -276,7 +276,7 @@
         </div>
       </div>
 
-      <div class="card border border-success border-3">
+      <div class="card border border-success border-3" *ngIf="rol>2">
         <div class="bg-success p-2" (click)="headerStaffConf=!headerStaffConf" style="cursor: pointer;">
           <h1 class="card-title text-white">Staff confirmado</h1>
 
@@ -403,10 +403,10 @@
                 </td>
                 <td>
                  
-                  <p-badge [value]="customer.camper_total" pTooltip="Total" tooltipPosition="top"></p-badge>
-                  <p-badge [value]="customer.camper_attended" pTooltip="Camps anteriores" tooltipPosition="top" severity="danger"
+                  <p-badge [value]="customer.staff_total" pTooltip="Total" tooltipPosition="top"></p-badge>
+                  <p-badge [value]="customer.staff_attended" pTooltip="Camps anteriores" tooltipPosition="top" severity="danger"
                     severity="danger"></p-badge>
-                  <p-badge [value]="customer.camper_attend" pTooltip="Proximos camps" tooltipPosition="top"
+                  <p-badge [value]="customer.staff_attend" pTooltip="Proximos camps" tooltipPosition="top"
                     severity="success" severity="success"></p-badge>
 
 
@@ -432,7 +432,7 @@
 
         </div>
       </div>
-      <div class="card border border-danger border-3">
+      <div class="card border border-danger border-3" *ngIf="rol>2">
         <div class="bg-danger p-2"  (click)="headerStaffApun=!headerStaffApun" style="cursor: pointer;">
           <h1 class="card-title text-white">Staff apuntado</h1>
 
@@ -507,12 +507,7 @@
                     <p-sortIcon field="precio"></p-sortIcon>
                   </div>
                 </th>
-                <th pSortableColumn="sede" style="width: 120px">
-                  <div class="flex justify-content-between align-items-center">
-                    Fecha apuntada
-                    <p-sortIcon field="sede"></p-sortIcon>
-                  </div>
-                </th>
+               
                 <th pSortableColumn="record.n" class="record">
                   <div class="flex justify-content-between align-items-center" style="min-width: 70px; width: 90px;">
                     Record
@@ -553,17 +548,15 @@
                 </td>
                 <td>
                  
-                  <p-badge [value]="customer.camper_total" pTooltip="Total" tooltipPosition="top"></p-badge>
-                  <p-badge [value]="customer.camper_attended" pTooltip="Camps anteriores" tooltipPosition="top" severity="danger"
+                  <p-badge [value]="customer.staff_total" pTooltip="Total" tooltipPosition="top"></p-badge>
+                  <p-badge [value]="customer.staff_attend" pTooltip="Camps anteriores" tooltipPosition="top" severity="danger"
                     severity="danger"></p-badge>
-                  <p-badge [value]="customer.camper_attend" pTooltip="Proximos camps" tooltipPosition="top"
+                  <p-badge [value]="customer.staff_attended" pTooltip="Proximos camps" tooltipPosition="top"
                     severity="success" severity="success"></p-badge>
 
 
                 </td>
-                <td>
-                  {{customer.staff_role}}
-                </td>
+               
 
                 <td>
                   <button class="btn btn-primary" class="btn btn-primary" (click)="verStaff(customer.staff_id)">ver staff</button>

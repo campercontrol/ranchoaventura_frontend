@@ -45,7 +45,7 @@
                             {{customer.description}}
                         </td>
                         <td>
-                            {{customer.active}}
+                            <i class="bx bxs-calendar-check" *ngIf="customer.active" style="color: green;"></i> <i class="bx bxs-calendar-x" style="color: red;" *ngIf="!customer.active"></i>
                         </td>
                        
                      
@@ -98,7 +98,7 @@
 
             </div>
             <div class="row mb-4">
-                <label for="" class="col-sm-3 col-form-label">Imagen del Capacitacion</label>
+                <label for="" class="col-sm-12 col-form-label">Descripción</label>
                 <ckeditor class="mt-4" [editor]="Editor" data="" formControlName="description">
                 </ckeditor>
 
@@ -155,7 +155,7 @@
 
             </div>
             <div class="row mb-4">
-                <label for="" class="col-sm-3 col-form-label">Imagen del Capacitacion</label>
+                <label for="" class="col-sm-12 col-form-label">Descripción</label>
                 <ckeditor class="mt-4" [editor]="Editor" data="" formControlName="description">
                 </ckeditor>
 

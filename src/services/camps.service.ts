@@ -55,9 +55,22 @@ export class CampsService {
   getCamps() {
     return this.http.get('http://142.93.12.234:8000/camp/')
  }
+ getCampacitaciones() {
+  return this.http.get('http://142.93.12.234:8000/mailing/training/event/')
+}
 
  setCargosPregustas(id,a){
   return this.http.post('http://142.93.12.234:8000/camper/extras/camp/?camper_id='+id,a)
 
  }
+ getParticipantes(idcamp,camper,staff,escuela) {
+  return this.http.get('http://142.93.12.234:8000/mailing/send/campaign/camp/?camp_id='+idcamp+'&campers='+camper+'&staffs='+staff +'&school='+escuela)
+}
+getParticipantesCapacitaciones(id) {
+  return this.http.get('http://142.93.12.234:8000/mailing/send/campaign/training/?training_id='+id)
+}
+
+getParticipantesMultiplesCamps(info:any) {
+  return this.http.post('http://142.93.12.234:8000/mailing/send/campaign/camps/?campers=true&staffs=true&school=true',info)
+}
 }
