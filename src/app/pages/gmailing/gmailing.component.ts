@@ -42,6 +42,7 @@ export class GmailingComponent implements OnInit {
   destinatariosStaff:any=[];
   destinatariosEscuela:any=[];
   destinatariosCampers:any=[];
+  cargando:boolean=false;
 
 
   
@@ -267,16 +268,23 @@ export class GmailingComponent implements OnInit {
 
   status(a){
     if(a == 'Plantillas'){
+      this.cargando=true;
       this.Titulo='Plantillas';
       this.data.getTempletMasive().subscribe((res:any)=>{
-        this.listaTemplates=res.data 
+        this.listaTemplates=res.data ;
+        this.cargando=false;
+
       })
       this.editTemplate= false;
 
     }else if(a == 'Plantillas del sistemas'){
       this.Titulo='Plantillas del sistemas';
+      this.cargando=true;
+
       this.data.getTempletSystem().subscribe((res:any)=>{
         this.listaTemplates=res.data 
+        this.cargando=false;
+
       })
       this.editTemplate= false;
 
@@ -286,8 +294,12 @@ export class GmailingComponent implements OnInit {
 
 
     }else if(a== 'Correos enviados'){
+      this.cargando=true;
+
       this.data.getCorreos().subscribe((res:any)=>{
-        this.listaTemplates=res.data 
+        this.listaTemplates=res.data ;
+        this.cargando=false;
+
       })
       this.Titulo='Correos enviados';
       this.editTemplate= false;

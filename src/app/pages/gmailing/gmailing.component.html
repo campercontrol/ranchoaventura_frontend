@@ -6,11 +6,11 @@
                 <button class="btn btn-primary" (click)="status('Nuevo Templates')">Crear Templates</button>
 
                 <ul class="list-group  mt-3">
-                    <li class="list-group-item list-group-item-action" (click)="status('Plantillas')"> <i
+                    <li class="list-group-item list-group-item-action" (click)="status('Plantillas')" style="cursor: pointer;"> <i
                             class="fas fa-ad fas fa-envelope-open-text"></i> Templates</li>
-                    <li class="list-group-item list-group-item-action" (click)="status('Plantillas del sistemas')"> <i
+                    <li class="list-group-item list-group-item-action" (click)="status('Plantillas del sistemas')"  style="cursor: pointer;"> <i
                             class="fas fa-ad fas fa-envelope-open-text"></i> Templates sistemas</li>
-                            <li class="list-group-item list-group-item-action" (click)="status('Correos enviados')"> <i
+                            <li class="list-group-item list-group-item-action" (click)="status('Correos enviados')"  style="cursor: pointer;"> <i
                                 class="fas fa-ad fas fa-envelope-open-text"></i> Correos enviados</li>
                 </ul>
 
@@ -49,7 +49,8 @@
                                                             [(selection)]="selectCatalogos" [rowHover]="true"
                                                             dataKey="id"
                                                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                                                            [showCurrentPageReport]="true">
+                                                            [showCurrentPageReport]="true"
+                                                            *ngIf="!cargando">
 
                                                             <ng-template pTemplate="header">
                                                                 <tr>
@@ -59,15 +60,22 @@
                                                                
                                                                 </tr>
                                                             </ng-template>
-                                                            <ng-template pTemplate="body" let-customer>
-                                                                <tr>
-                                                                    <td (click)="selectUpadate(customer)">
+                                                            <ng-template pTemplate="body" let-customer  >
+                                                                <tr >
+                                                                    <td (click)="selectUpadate(customer)"  style="cursor: pointer;">
                                                                         {{customer.title}}
                                                                     </td>
                                                                  
                                                                 </tr>
+                                                              
                                                             </ng-template>
+                                                            
                                                         </p-table>
+                                                        <div class="d-flex justify-content-center" *ngIf="cargando">
+                                                            <div class="spinner-border" role="status">
+                                                              <span class="visually-hidden">Loading...</span>
+                                                            </div>
+                                                          </div>
                                                     </div>
                                                 </div>
                                             </div>
