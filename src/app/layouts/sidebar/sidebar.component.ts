@@ -29,7 +29,9 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   catalogos= false;
   admi=false;
   rol_id = 0;
-  rol = ''
+  rol = '';
+  user_admin = false;
+  user_coordinator= false;
 
   menuItems = [];
 
@@ -57,6 +59,8 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
     }else if(info.infToken.role_id == 2){
       this.paretn = false;
       this.staff = true;
+      this.user_admin = info.infToken.user_admin ;
+      this.user_coordinator= info.infToken.user_coordinator ;
     }
   }
 

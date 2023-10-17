@@ -115,7 +115,7 @@
     </div>
       
       
-      <div class="card border border-info border-3" *ngIf="rol>2">
+      <div class="card border border-info border-3" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">
       
           <div class="bg-info p-2" (click)="headerCampers=!headerCampers" style="cursor: pointer;">
             <h1 class="card-title text-white">Acampadores</h1>
@@ -276,7 +276,7 @@
         </div>
       </div>
 
-      <div class="card border border-success border-3" *ngIf="rol>2">
+      <div class="card border border-success border-3" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">
         <div class="bg-success p-2" (click)="headerStaffConf=!headerStaffConf" style="cursor: pointer;">
           <h1 class="card-title text-white">Staff confirmado</h1>
 
@@ -432,7 +432,7 @@
 
         </div>
       </div>
-      <div class="card border border-danger border-3" *ngIf="rol>2">
+      <div class="card border border-danger border-3" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">
         <div class="bg-danger p-2"  (click)="headerStaffApun=!headerStaffApun" style="cursor: pointer;">
           <h1 class="card-title text-white">Staff apuntado</h1>
 

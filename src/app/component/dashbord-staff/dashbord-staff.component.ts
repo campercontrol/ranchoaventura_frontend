@@ -30,10 +30,14 @@ export class DashbordStaffComponent implements OnInit {
   is_employee = false;
   alerts:boolean;
   rol:any =0;
+  user_coordinator=false
+  user_admin=false 
 
   constructor(private camps: CampsService, private staff:StaffService, private info : AuthenticationService,private router: Router) {
     this.getCamps();
-    this.rol=this.info.infToken.role_id
+    this.rol=this.info.infToken.role_id;
+    this.user_admin = info.infToken.user_admin ;
+    this.user_coordinator= info.infToken.user_coordinator ;
    }
 
   ngOnInit(): void {

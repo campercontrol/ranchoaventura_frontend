@@ -86,11 +86,16 @@ export class CampamentosStaffComponent implements OnInit {
   activityValues: number[] = [0, 100];
   items = [];
   rol=0;
+  user_admin=false 
+  user_coordinator=false
   
 
   constructor(private capms:CampsVistaService,private router :ActivatedRoute,private routerN: Router,private info : AuthenticationService) { 
   
     this.rol=this.info.infToken.role_id
+
+    this.user_admin = info.infToken.user_admin ;
+      this.user_coordinator= info.infToken.user_coordinator ;
 
   }
   cars = [{ Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },

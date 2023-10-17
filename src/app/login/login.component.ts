@@ -56,6 +56,8 @@ export class LoginComponent implements OnInit {
          this.authenticationService.loggedIn = true;
          localStorage.setItem('currentUser', JSON.stringify(user));
          this.authenticationService.infToken = jwt_decode(user.access_token);
+         console.log(this.authenticationService.infToken,'token transformado');
+         
          console.log(this.authenticationService.infToken.role_id);
          
          if(this.authenticationService.infToken.role_id>1){

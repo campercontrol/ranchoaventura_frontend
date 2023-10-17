@@ -73,35 +73,35 @@
             <span>Mi perfil</span>
 
           </a>
-          <a routerLink='staff/applicants' class="side-nav-link-ref" *ngIf="rol_id > 1">
+          <a routerLink='staff/applicants' class="side-nav-link-ref" *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true)">
             <i class="mdi  mdi-account-question"></i>
             <span>Prospectos</span>
 
           </a>
-          <a routerLink='staff/checkpoint' class="side-nav-link-ref"  *ngIf="rol_id > 1">
+          <a routerLink='staff/checkpoint' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true)">
             <i class="bx bx-barcode"></i>
             <span>Lista de puntos de control</span>
 
           </a>
-          <a routerLink='staff/camps' class="side-nav-link-ref"  *ngIf="rol_id > 1">
+          <a routerLink='staff/camps' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true)">
             <i class="bx bx-barcode"></i>
             <span>Lista de campamentos</span>
 
           </a>
        
 
-          <a routerLink='staff/trainings-dashboard' class="side-nav-link-ref"  *ngIf="rol_id > 1">
+          <a routerLink='staff/trainings-dashboard' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true)">
             <i class="bx bxs-calendar-plus"></i>
             <span>Nuevo evento</span>
           </a>
 
-          <a routerLink='payments' class="side-nav-link-ref"  *ngIf="rol_id > 1">
+          <a routerLink='payments' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true)">
             <i class="bx bxs-calendar-plus"></i>
             <span> Pagos</span>
           </a>
 
 <div>
-  <a  class="side-nav-link-ref " routerLinkActive="active" *ngIf="rol_id > 1"
+  <a  class="side-nav-link-ref " routerLinkActive="active"  *ngIf="rol_id ==2 && user_admin==true "
     (click)="catalogos = !catalogos">
     <div class="nav-d">
       <div>
@@ -184,7 +184,7 @@
           
 
           <a  class="side-nav-link-ref " routerLinkActive="active" 
-            (click)="admi = !admi" *ngIf="rol_id > 1">
+            (click)="admi = !admi" *ngIf="rol_id ==2 && user_admin==true ">
             <div class="nav-d">
               <div>
                 <i class="bx bxs-school"></i>
