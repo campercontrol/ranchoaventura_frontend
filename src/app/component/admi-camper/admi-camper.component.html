@@ -393,8 +393,9 @@
                                             <h4 for="">Mensaje
                                                 especial*</h4>
                                             <hr>
-                                            <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message"  >
-                                            </ckeditor>
+                                         
+                                            <input class="mt-4 form-control" type="text" formControlName="special_message" />
+
                                           
                                         </div>
                                     </div>
@@ -406,8 +407,8 @@
                                             <h4 for="" class="display-7">Mensaje especial
                                                 para admin*</h4>
                                             <hr>
-                                            <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message_admin" >
-                                            </ckeditor>
+                                            <input class="mt-4 form-control" type="text" formControlName="special_message_admin" />
+
                                             
                                         </div>
                                     </div>
@@ -440,8 +441,7 @@
                                                     
                                                 </div>
                                                
-                                                <ckeditor class="mt-4" [editor]="Editor" [(ngModel)]="item.question" name="question" [ngModelOptions]="{standalone: true}">
-                                                </ckeditor>
+                                                <input class="mt-4  form-control"  [(ngModel)]="item.question" name="question" [ngModelOptions]="{standalone: true}" />
         
                                             </div>
                                             <div class="alert alert-danger" role="alert" *ngIf="alerQuestion">
@@ -833,8 +833,7 @@
                                             <h4 for="">Mensaje
                                                 especial*</h4>
                                             <hr>
-                                            <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message"  >
-                                            </ckeditor>
+                                            <input class="mt-4 form-control " type="text" formControlName="special_message"  >
                                           
                                         </div>
                                     </div>
@@ -846,11 +845,112 @@
                                             <h4 for="" class="display-7">Mensaje especial
                                                 para admin*</h4>
                                             <hr>
-                                            <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message_admin" >
-                                            </ckeditor>
+                                            <input class="mt-4 form-control" type="text" formControlName="special_message_admin" />
+                                            
                                             
                                         </div>
                                     </div>
+            
+                                </div>
+                                <div class="col-lg-6 mt-4 ">
+                                    <div class="container">
+                                        <div class="col mb-6">
+                                            <h4 for="">
+                                                Preguntas Extras</h4>
+                                            <hr>
+                                            <div *ngFor="let item of extra_question let i = index">
+                                                <div class="footerMensje">
+                                                    <div>
+                                                        <h3>Preguntas extras {{i+1}}</h3>
+                                                    </div>
+                                                    <div>
+                                                        <h3 class="delet" (click)="deletExtraQuestion(i)">
+                                                            Elminar pregunta
+                                                        </h3>
+                                                    </div>
+        
+                                                </div>
+                                                <div>                                           
+                                                    <div class="p-field-checkbox col-9 d-flex flex-row">
+                                                        <input type="checkbox"  value= "true"  [(ngModel)]="item.is_required" name="is_required" [ngModelOptions]="{standalone: true}"
+                                                        class="big-checkbox" />
+                                                      <label style="margin-left: 10px; font-size: 15px; " >¿Obligatoria?</label>
+                                                    </div>
+                                                    
+                                                </div>
+                                               
+                                                <input class="mt-4  form-control"  [(ngModel)]="item.question" name="question" [ngModelOptions]="{standalone: true}" />
+                 
+        
+                                            </div>
+                                            <div class="alert alert-danger" role="alert" *ngIf="alerQuestion">
+                                                 Para poder agregar otra pregunta llena el campo antes
+                                              </div>
+                                                
+                                            <button class="btn btn-primary col-12 mt-3" (click)="newExtraQuestion()">Agregar nueva pregunta</button>
+            
+                                        </div>
+                                    </div>
+            
+            
+            
+                                </div>
+                                <div class="col-lg-6 mt-4">
+                                    <div class="row">
+                                        <div >
+                                            <h4 for="">
+                                                Cargos extras</h4>
+                                            <hr>
+                                            <div *ngFor="let item of extra_charges let i = index">
+                                                <div class="footerMensje">
+                                                    <div>
+                                                        <h3>Cargo extras {{i+1}}</h3>
+                                                    </div>
+                                                    <div>
+                                                        <h3 class="delet" (click)="deletExtracharges(i)">
+                                                            Elminar cargo
+                                                        </h3>
+                                                    </div>
+        
+                                                </div>
+                                           
+                                                <div>
+                                                    <label for="" class="col-sm-6 col-form-label">Nombre del
+                                                        Cargo</label>
+                                                    <div class=" control-label col-lg-10">
+                                                        <input type="text" class="form-control" [(ngModel)]="item.name" name="name" [ngModelOptions]="{standalone: true}">
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <label for="" class="col-3 col-form-label">Divisa*
+                                                        </label>
+                                                    <div class="control-label col-10">
+                                                        <select style="width: 100%;" class="form-control" [(ngModel)]="item.currency_id" name="currency_id" [ngModelOptions]="{standalone: true}">
+                                                            <option *ngFor="let a of currency" [value]="a.id">{{a.name}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                              
+                                                <div>
+                                                    <label for="" class="col-sm-6 col-form-label">Cantidad</label>
+                                                    <div class=" control-label col-lg-10">
+                                                        <input type="number" class="form-control" [(ngModel)]="item.price" name="price" [ngModelOptions]="{standalone: true}">
+                                                    </div>
+                                                </div>
+                                           
+                                           
+                                           
+                                            </div>  
+                                        </div>
+                                        <div class="alert alert-danger" role="alert" *ngIf="alercharges">
+                                            Para poder agregar otra pregunta llena el campo antes
+                                         </div>
+                                           
+                                       <button class="btn btn-primary col-12 mt-3" (click)="newExtracharges()">Agregar nuevo cargo</button>
+        
+                                    </div>
+            
+            
             
                                 </div>
                                 
@@ -867,8 +967,7 @@
                         <div class="btn-footer">
                             <button class="btn btn-secondary btn-lg mt-3" (click)="cancelarUpdate()"
                                 style="width: 90%;">Cancelar</button>
-                                <button class="btn btn-secondary btn-lg mt-3" (click)="deletModal()"
-                                style="width: 90%;">Eliminar</button>
+                                
                             <div class="mt-3">
                                 <button class="btn btn-info  btn-lg" (click)="keepUpdate()" style="width: 90%;"
                                     *ngIf="!spinner">Guardar</button>

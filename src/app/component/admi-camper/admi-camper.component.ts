@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CatalogosService } from 'src/services/catalogos.service';
 import { CreateCampsService } from 'src/services/create-camps.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { data } from 'jquery';
 
 
 @Component({
@@ -258,16 +259,20 @@ export class AdmiCamperComponent implements OnInit {
 
   }
 
-  update(item){
-     this.updateId = item.id;
+  update(id){
+     this.updateId = id.id;
     this.display2= true;
     this.table= false;
+    this.createCamp.getCampId(this.updateId).subscribe((res:any)=>{
+      let item = res.camp;
+      console.log(item.registration);
+      
     this.formFood.patchValue({     
       name: item.name, //listo
-      start: item.start, //listo
-      end:  item.end, //listo
-      start_registration: item.start_registration, //listo
-      end_registration:item.end_registration, //listo
+      start: this.fechaParse(item.start), //listo
+      end:  this.fechaParse(item.end), //listo
+      start_registration: this.fechaParse(item.start_registration), //listo
+      end_registration:this.fechaParse(item.end_registration), //listo
       registration: item.registration, //listo insurance
       url: item.url, //listo
       special_message: item.special_message,
@@ -295,12 +300,19 @@ export class AdmiCamperComponent implements OnInit {
       extra_question:item.extra_question,
       payment_accounts:item.payment_accounts
    })
-
+   this.extra_charges = res.extra_charges;
+   this.extra_question =res.extra_questions;
+    });
   
 
    
   
     
+  }
+
+  fechaParse(fechaDesdeBackend){
+    const fechaSinSegundos = fechaDesdeBackend.substring(0, 16); // Elimina segundos y milisegundos
+    return fechaSinSegundos;
   }
   getVaccinesValues(){
     console.log(this.vacunas);
@@ -319,32 +331,40 @@ export class AdmiCamperComponent implements OnInit {
 
   keepUpdate(){
     this.spinner=true;
-    this.getVaccinesValues();
-    
-    //console.log(a);
-    if(this.formFood.valid){
-      this.catalogos.patchCamps(this.formFood.value,this.updateId).subscribe((res:any)=>{
-        console.log(res);
-        if(res.succes = 200){
-          this.spinner = false;
-          this.getCatalogos();
-          this.statuAgrgado = true;
-          this.cancelarUpdate();
-          setTimeout(() => {
-            this.statuAgrgado = false;
-            this.closeModal2();
-          }, 1000);
-        }
-        
-    }, error => {
-      console.log(error);
-      this.spinner = false;
-      alert('No se pudo Editar')
-    });
+    if(this.formFood.valid){     
+      let a = {
+        "camp":this.formFood.value,
+        "payment_accounts":this.payment_accounts,
+        "extra_question":this.extra_question,
+         "extra_charges":this.extra_charges,
+         "extra_discounts":this.extra_discounts,
+    }
+  
 
-    }else{
+      this.createCamp.postCamp(a).subscribe((res:any)=>{
+          console.log(res);
+          if(res.succes = 200){
+            this.spinner=false; 
+            this.getCatalogos();
+            this.statuAgrgado = true;
+            this.extra_charges = [];
+            this.extra_question= [];
+            this.formFood.reset;
+            this.resteValu();
+           // this.table= true;
+            setTimeout(() => {
+              this.statuAgrgado = false;
+              this.table= true;
+              this.display2 = false;
+            }, 1000);    
+          }
+          
+      },error => {
+        alert('No se pudo Agregar')
+      });
       this.spinner=false;
 
+    }else{
       this.spinner= false;
       this.validateSeasonId();
       this.validateSchoolId();
@@ -361,12 +381,9 @@ export class AdmiCamperComponent implements OnInit {
       this.validateEnd();
       this.validateStart();
       this.validateName();
-      
-     
-     
+
     }
-   
-   
+
   }
 
   cancelarUpdate(){
@@ -374,6 +391,7 @@ export class AdmiCamperComponent implements OnInit {
    this.extra_charges = [];
    this.extra_question = [];
    this.display2 =false;
+   this.formFood.reset();
     
   }
   deletModal(){
