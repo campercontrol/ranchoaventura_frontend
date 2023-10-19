@@ -72,6 +72,10 @@ export class CamperNuevoComponent implements OnInit {
   @ViewChild("photo") photo: ElementRef;
   @ViewChild("school_other") school_other: ElementRef;
   @ViewChild("insurance_company") insurance_company: ElementRef;
+
+  @ViewChild("terms") terms: ElementRef;
+  @ViewChild("acept") acept: ElementRef;
+
   photoSatus = false;
   spinerPhot= true;
   textos ={};
@@ -568,6 +572,13 @@ export class CamperNuevoComponent implements OnInit {
    }
   }
   
+  getTerminos() {
+    if(! this.formUser.get('terms').valid){
+      this.render.addClass(this.acept.nativeElement,"text-danger");
+      this.render.addClass(this.terms.nativeElement,"text-danger");
+
+   }
+  }
  
   subiendo(event: any) {
     this.spinerPhot = false;
@@ -667,6 +678,7 @@ public fileLeave(event){
       this.getlastname_mother();
       this.getlastname_father();
       this.getname();
+      this.getTerminos();
      
     
      

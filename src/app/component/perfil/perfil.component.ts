@@ -364,4 +364,6 @@ export class PerfilComponent implements OnInit {
   //  this.validateFormField(this.contact_work_phone,'contact_work_phone');
   }
 
+  
+
 }

@@ -127,12 +127,6 @@ export class NewParentComponent implements OnInit {
 
   }
 
-
-
-
-
-
-
   correo:string = "";
   confirmarCorreo = "";
   estadoCorreo:boolean= false;
@@ -552,5 +546,7 @@ export class NewParentComponent implements OnInit {
     
     this.modalService.open(centerDataModal, { centered: true });
   }
+
+ 
 
 }

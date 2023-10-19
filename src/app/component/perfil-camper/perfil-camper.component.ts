@@ -84,19 +84,23 @@ export class PerfilCamperComponent implements OnInit {
       "comment": this.comment,
       "is_public": true,
       "show_to": 1,
-      "user_id": this.info.infToken.profile_id,
+      "user_id": this.info.infToken.user_id,
       "camp_id": 2,
-      "camper_id": this.id,     
+      "camper_id": Number(this.id),     
     }
-    this.parents.setComentarios(a).subscribe((res:any)=>{
-      console.log(res.data);
-      
-      if(res.data){
-        this.getInfo()
-        this.comment = ""
+    if(this.comment!=""){
+      this.parents.setComentarios(a).subscribe((res:any)=>{
+        console.log(res.data);
+        
+        if(res.data){
+          this.getInfo()
+          this.comment = ""
+  
+        }
+      })
 
-      }
-    })
+    }
+ 
 
   }
 

@@ -334,22 +334,31 @@
                         </h3>
 
                         <div action="" class="mt-5">
-                            <div class="contenedor-datos">
-
-
-                                <div class="titulos-datos-medicos">
-                                    <p *ngFor="let item of licensed_medicines; index as i">{{item.name}}</p>
-                                </div>
-                                <div class="input-datos-medicos" style="margin-top: 0px;">
-
-                                    <div *ngFor="let item of licensed_medicines; index as i" >
-                                        <input type="checkbox" style="margin-top:13px ;" (click)="licensed_medicinesValu(i)" value="{{item.is_active}}" 
-                                            id="{{item.id}}">
-                                        <br>
+                            <div class="row">
+                                <div class="col-3"></div>
+                                <div class="col-lx-6 col-md-6 col-sm-12 mb-2">
+                                    <div class="contenedor-datos">
+    
+    
+                                        <div class="titulos-datos-medicos mt-2">
+                                            <p *ngFor="let item of licensed_medicines; index as i">{{item.name}}</p>
+                                        </div>
+                                        <div class="input-datos-medicos" style="margin-top: 0px;">
+        
+                                            <div *ngFor="let item of licensed_medicines; index as i" >
+                                                <input type="checkbox" style="margin-top:13px ;" class="check" (click)="licensed_medicinesValu(i)" value="{{item.is_active}}" 
+                                                    id="{{item.id}}">
+                                                <br>
+                                            </div>
+                                        </div>
+        
                                     </div>
                                 </div>
-
                             </div>
+                            
+                               
+                         
+                           
 
                             <div class="alert alert-secondary">
                                 <p>Descuida que al final del campamento, te notificaríamos si tu hij@ tuvo algún
@@ -680,10 +689,10 @@
                     <div class="mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="terms" height="40px" formControlName = "terms"  >
-                            <label class="form-check-label fs-3 ms-3" for="terms">
+                            <label class="form-check-label fs-3 ms-3" for="terms" #acept>
                                 Acepto los términos y condiciones
                             </label>
-                            <label class="form-check-label fs-3 ms-3" for="terms">
+                            <label class="form-check-label fs-3 ms-3" for="terms" #terms>
                                 <a  target="_blank"
                                     href="https://demo.campercontrol.com/media/uploads/files/terminos-y-condiciones.pdf">Ver
                                     términos y condiciones</a>

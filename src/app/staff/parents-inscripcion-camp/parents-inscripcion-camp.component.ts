@@ -306,7 +306,10 @@ suscribeCamps(typeCamp:number){
 
       if(res.status ==2){
         this.extra_questions =res.extra_questions;
-        this.preguntasCargosExtras.extra_charges =res.extra_charges
+        this.extra_questions.forEach(element => {
+          element.camp_extra_question_question = this.parseHTMLContent(element.camp_extra_question_question)
+        });
+       this.extra_charges=res.extra_charges
 
         this.inscripcion = false;
         this.cargosExtr = true;
@@ -316,7 +319,6 @@ suscribeCamps(typeCamp:number){
         this.getCampsDIs();   
         this.closeModal();
         this.routerNav.navigate(['dashboard']);
-
         //this.routerNav.navigate(['dashboard/parents/camp-info/'+res.camper_in_camp.camper_id+'/'+res.camper_in_camp.camp_id]);
 
       }, 1000);
@@ -339,7 +341,10 @@ suscribeCamps(typeCamp:number){
 
         if(res.status ==2){
           this.extra_questions =res.extra_questions;
-          this.preguntasCargosExtras.extra_charges =res.extra_charges
+          this.extra_questions.forEach(element => {
+            element.camp_extra_question_question = this.parseHTMLContent(element.camp_extra_question_question)
+          });
+          this.extra_charges =res.extra_charges
           this.inscripcion = false;
           this.cargosExtr = true;
         } else if(res.status ==1){
@@ -374,7 +379,10 @@ suscribeCamps(typeCamp:number){
 
       if(res.status ==2){
         this.extra_questions =res.extra_questions;
-        this.preguntasCargosExtras.extra_charges =res.extra_charges
+        this.extra_questions.forEach(element => {
+          element.camp_extra_question_question = this.parseHTMLContent(element.camp_extra_question_question)
+        });
+        this.extra_charges =res.extra_charges
         this.inscripcion = false;
         this.cargosExtr = true;
       } else if(res.status ==1){
@@ -403,7 +411,10 @@ suscribeCamps(typeCamp:number){
           
           if(res.status ==2){
             this.extra_questions =res.extra_questions;
-            this.preguntasCargosExtras.extra_charges =res.extra_charges
+            this.extra_questions.forEach(element => {
+              element.camp_extra_question_question = this.parseHTMLContent(element.camp_extra_question_question)
+            });
+           this.extra_charges =res.extra_charges
             this.inscripcion = false;
             this.cargosExtr = true;
           } else if(res.status ==1){
@@ -441,6 +452,12 @@ suscribeCamps(typeCamp:number){
 
 enviarCargosPreguntas(){
   console.log(this.preguntasCargosExtras);
+  this.extra_charges.forEach(element => {
+    if(element.camp_extra_charge_is_selected == null){
+        element.camp_extra_charge_is_selected=false
+    }
+  });
+  
   let b:any ={
     extra_answers:this.extra_questions,
     extra_charges:this.extra_charges
@@ -458,6 +475,15 @@ enviarCargosPreguntas(){
 })
   
   
+}
+
+routerCamps(id){
+  this.routerNav.navigate(['dashboard/parents/camp-info/'+this.id+'/'+id])
+}
+
+parseHTMLContent(html: string): string {
+  const regex = /<[^>]*>/g;
+  return html.replace(regex, '');
 }
 
 }
