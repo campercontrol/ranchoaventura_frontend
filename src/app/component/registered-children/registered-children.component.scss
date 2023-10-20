@@ -1,6 +1,11 @@
 .camps{
-    width: 90%;
+    width: 50%;
     overflow: scroll;  
+    padding: 3px;  
+}
+.pagos{
+    width: auto;
+     
     padding: 3px;  
 }
 
@@ -9,7 +14,18 @@
 }
 .card-info{
     height: 150px;
-    overflow: auto;
+    overflow:auto ;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.center-ifno{
+    display: flex;
+    justify-content: center;
+    
+    
 }
 .bodyCamper{
     background-color: #34c38f;

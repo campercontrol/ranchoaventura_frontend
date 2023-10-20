@@ -45,19 +45,46 @@
                                     </div>
                                     <div class="row mb-1">
                                         <label for="" class="col-sm-12 col-form-label">{{cabezeras[idoma]["texto4"]}}</label>
+                                       
                                         <div class="col-sm-12">
-                                            <input type="password" class="form-control" id="" formControlName="password"  name="password" #password (input)="getpassword()">
+                                            <div class="input-group auth-pass-inputgroup">
+                                                <input [type]="passwordType" class="form-control" formControlName="password" name="password"
+                                                    placeholder="Enter password" aria-label="Password"
+                                                    aria-describedby="password-addon"
+                                                    #password (input)="getpassword()">
+    
+                                                <button class="btn btn-light " type="button" id="password-addon"><i
+                                                        class="mdi mdi-eye-outline" (click)="cambioTipo()"></i></button>
+    
+                                            </div>
                                             <div  class="alert alert-warning mt-1">{{cabezeras[idoma]["texto8"]}}</div>
+
                                         </div>
+                                        
+                                        <div  class="alert alert-danger" *ngIf="confirmPaswordAlert"><small style="color: red; font-size: 14px    ;">Las contraseñas no coinciden.</small></div>
+
                                     </div>
+                                   
                                     <div class="row mb-4">
-                                        <label for="" class="col-sm-12 col-form-label" >{{cabezeras[idoma]["texto5"]}}</label>
-                                        <div class="col-sm-12">
-                                            <input type="password" class="form-control" id="" formControlName="confirmPassword"  name="confirmPassword" #confirmPassword (input)="getconfirmPassword()">
+
+                                        <label for="userpassword">{{cabezeras[idoma]["texto5"]}}</label>
+                                        <div>
+                                            <div class="input-group auth-pass-inputgroup">
+                                                <input [type]="passwordType" class="form-control" formControlName="confirmPassword" name="confirmPassword"
+                                                    placeholder="Enter password" aria-label="Password"
+                                                    aria-describedby="password-addon"
+                                                    #confirmPassword (input)="getconfirmPassword()">
+    
+                                                <button class="btn btn-light " type="button" id="password-addon"><i
+                                                        class="mdi mdi-eye-outline" (click)="cambioTipo()"></i></button>
+    
+                                            </div>
                                             <div  class="alert alert-danger" *ngIf="confirmPaswordAlert"><small style="color: red; font-size: 14px    ;">Las contraseñas no coinciden.</small></div>
-        
+
                                         </div>
+                                       
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>

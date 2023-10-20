@@ -21,6 +21,8 @@ export class NewParentComponent implements OnInit {
   @ViewChild('centerDataModal') content:ElementRef;
   confiCon:boolean = false;
   confiEmai:boolean = false;
+  passwordType= "password";
+
    regex:  RegExp = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+~`|}{[\]:;?<,>.\/-]).{8,}$/;
    correoVal: RegExp =/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   contrasena:string=""
@@ -545,6 +547,16 @@ export class NewParentComponent implements OnInit {
     console.log(this.centerModal);
     
     this.modalService.open(centerDataModal, { centered: true });
+  }
+
+  cambioTipo(){
+    if(this.passwordType =='password'){
+      this.passwordType = 'text';
+      
+    }else{
+      this.passwordType = 'password';
+
+    }
   }
 
  

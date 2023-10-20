@@ -33,13 +33,13 @@
           <p class="text-muted">{{textos['subtitul2']}} {{data.camper.full_name}}</p>
           <p class="text-muted">${{data.camper_balance}}MXN</p>
           <p class="text-muted">{{textos['cardSubt']}}</p>
-          <div class="col-6 card-info" style="margin: 0 auto;">
-            <a href="javascript: void(0);" class="badge bg-primary font-size-11 m-1 camps"
+          <div class="col-12 card-info" style="margin: 0 auto; cursor: pointer;">
+            <div class="col-12 center-ifno"
               *ngFor="let a of data.camps"  (click)="redirect(a.camp_id,data.camper.id)">
-            {{a.camp_name}} : {{a.camper_payment_balance}}
-             
+           <p class=" font-size-15 camps">{{a.camp_name}} : <small class="badge bg-primary font-size-11 " >{{a.currency_symbol}} {{a.camper_payment_balance}} {{a.currency_acronyms}}</small>
+           </p> 
 
-          </a>
+          </div>
          
           <div style="margin: 0 auto;">
             <hr>
