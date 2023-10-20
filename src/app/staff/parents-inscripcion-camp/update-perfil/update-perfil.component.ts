@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Options } from 'ng5-slider';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
@@ -81,7 +81,7 @@ export class UpdatePerfilComponent implements OnInit {
 
 
 
-  constructor(private catalogos: CamperService , private formGrup: FormBuilder, private router:Router,private routesA:ActivatedRoute,private render:Renderer2,private info: AuthenticationService,private lang : LangService) {
+  constructor(private catalogos: CamperService , private formGrup: FormBuilder, private router:Router,private routesA:ActivatedRoute,private render:Renderer2,private info: AuthenticationService,private lang : LangService,) {
     this.routesA.params.subscribe((params)=>{
       this.id = params['id']
     })
@@ -112,42 +112,46 @@ export class UpdatePerfilComponent implements OnInit {
     })
 
     this.formUser = this.formGrup.group({
-      name:["",[Validators.required]],
-      lastname_father:["",[Validators.required]],
-      lastname_mother:[""],
-      photo:["",],
-      gender_id:[0,[Validators.required]],
+      name:["",[Validators.required,Validators.minLength(2)]],
+      lastname_father:["",[Validators.required,,Validators.minLength(2)]],
+      lastname_mother:["",],
+      photo:["",[Validators.required,Validators.minLength(2)]],
+      gender_id:[0,[Validators.required,this.greaterThanZeroValidator()]],
       birthday:["",[Validators.required]],
-      height:[0,[Validators.required]],
-      weight:[0,[Validators.required]],
-      grade:[0,[Validators.required]],
-      school_id:[0,[Validators.required]],
+      height: [0, [Validators.required, this.validateMaxHeight,Validators.pattern("^[0-9]*$"),this.validateNumberWithoutDecimal, Validators.min(1)]],
+      weight: [0, [Validators.required, this.validateMaxHeight,Validators.pattern("^[0-9]*$"),this.validateNumberWithoutDecimal, Validators.min(1)]],
+      grade:[0,[Validators.required,this.greaterThanZeroValidator()]],
+      school_id:[0,[Validators.required,this.greaterThanZeroValidator()]],
       school_other:["",],
       email: [""],
-      can_swim: [false],
+      can_swim: [0],
       affliction: ["",[Validators.required]],
-      blood_type: [0,[Validators.required]],
-      heart_problems: ["",[Validators.required]],
-      psicology_treatments: ["",[Validators.required]],
-      prevent_activities: ["",[Validators.required]],
-      drug_allergies: ["",[Validators.required]],
-      other_allergies: ["",[Validators.required]],
-      nocturnal_disorders: ["",[Validators.required]],
-      phobias: ["",[Validators.required]],
-      drugs: ["",[Validators.required]],
+      blood_type: [0,[Validators.required,this.greaterThanZeroValidator()]],
+      heart_problems: ["",[Validators.required,Validators.minLength(2)]],
+      psicology_treatments: ["",[Validators.required,Validators.minLength(2)]],
+      prevent_activities: ["",[Validators.required,Validators.minLength(2)]],
+      drug_allergies: ["",[Validators.required,Validators.minLength(2)]],
+      other_allergies: ["",[Validators.required,Validators.minLength(2)]],
+      nocturnal_disorders: ["",[Validators.required,Validators.minLength(2)]],
+      phobias: ["",[Validators.required,Validators.minLength(2)]],
+      drugs: ["",[Validators.required,Validators.minLength(2)]],
       doctor_precall: [false],
-      prohibited_foods: ["",[Validators.required]],
+      prohibited_foods: ["",[Validators.required,Validators.minLength(2)]],
       comments_admin: ["Ninguno"],
       insurance: [false],
       insurance_company: [""],
       insurance_number: [""],
       security_social_number: ["",],
-      contact_name: ["",[Validators.required]],
-      contact_relation: ["",[Validators.required]],
-      contact_homephone: ["",[Validators.required,Validators.minLength(8)]],
-      contact_cellphone: ["",[Validators.required,Validators.minLength(8)]],
-      record_id: [0,],
-      parent_id: [1,[Validators.required]],
+      contact_name: ["",[Validators.required,Validators.minLength(2)]],
+      contact_relation: ["",[Validators.required,Validators.minLength(3)]],
+      contact_homephone:  ["",[Validators.required,
+        Validators.pattern("^[0-9]*$"),
+        Validators.minLength(8), Validators.maxLength(10)]],
+      contact_cellphone:  ["",[Validators.required,
+        Validators.pattern("^[0-9]*$"),
+        Validators.minLength(8), Validators.maxLength(10)]],
+      record_id: [0],
+      parent_id: [this.info.infToken.profile_id,[Validators.required]],
       terms: ["",[Validators.required,Validators.requiredTrue]],
     });
 
@@ -169,6 +173,30 @@ export class UpdatePerfilComponent implements OnInit {
 
    }
     
+  }
+  
+  validateNumberWithoutDecimal(control: any) {
+    const value = control.value;
+    if (value === null || value === undefined) {
+      return null; // El control está vacío, no se aplica la validación
+    }
+  }
+
+  greaterThanZeroValidator() {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const value = control.value;
+      if (value === null || value === undefined || isNaN(value) || value <= 0) {
+        return { greaterThanZero: true };
+      }
+      return null;
+    };
+  }
+  validateMaxHeight(control) {
+    const maxHeight = 200;
+    if (control.value && parseInt(control.value) > maxHeight) {
+      return { 'maxHeightExceeded': true };
+    }
+    return null;
   }
 
   getlastname_father()  {
@@ -562,9 +590,6 @@ export class UpdatePerfilComponent implements OnInit {
             photo:res['camper'].photo,
             gender_id:res['camper'].gender_id,
             birthday:res['camper'].birthday,
-            height:res['camper'].height,
-            weight:res['camper'].weight,
-            grade:res['camper'].grade,
             school_id:res['camper'].school_id,
             school_other:res['camper'].school_other,
             email: res['camper'].email,

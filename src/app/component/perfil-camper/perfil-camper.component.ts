@@ -23,6 +23,7 @@ export class PerfilCamperComponent implements OnInit {
   isCollapsed = true;
   id = 0;
   infoCamp: any = {};
+  deuda = 0;
   catalogoEsculea: any;
   catalogosGenero: any;
   catalogosGrados: any;
@@ -49,34 +50,7 @@ export class PerfilCamperComponent implements OnInit {
   ngOnInit(): void {
     this.primengConfig.ripple = true;
 
-    this.events1 = [
-      {
-        status: "Campamento con comentario del admin",
-        date: " 28/Nov/2023 - 30/Nov/2023",
-
-      },
-      {
-        status: "Evento con preguntas extras ",
-        date: "21/Nov/2023 - 22/Nov/2023 (2 días)",
-        icon: PrimeIcons.COG,
-        color: "#673AB7"
-      },
-      {
-        status: "Campamento con cargos extras y puntos de control prueba de campamenot grande",
-        date: " 10/Nov/2023 - 12/Nov/2023 (3 días)",
-        costo: "20000",
-        icon: PrimeIcons.ENVELOPE,
-        color: "#FF9800"
-      },
-      {
-        status: "Campamento de Verano",
-        date: " 13/Jul/2023 - 24/Ago/2023 (1 mes, 1 semana)",
-        icon: PrimeIcons.CHECK,
-        color: "#607D8B"
-      }
-    ];
-
-    this.events2 = ["2020", "2021", "2022", "2023"];
+   
   }
 
   comentario() {
@@ -172,7 +146,8 @@ export class PerfilCamperComponent implements OnInit {
       this.emailTuto = res.user_email
       console.log(this.parent);
       this.catalogosGrados = res.camper_info.grades;
-      this.infoCamp = res.camper_info.camper
+      this.infoCamp = res.camper_info.camper;
+      this.deuda =  res.camper_total_amount;
       this.infoCamp.birthdayA = this.calculateAge(this.infoCamp.birthday);
       console.log(this.catalogosGenero);
 
