@@ -6,6 +6,8 @@ import { CamperService } from 'src/services/camper.service';
 import { CatalogosService } from 'src/services/catalogos.service';
 import { ParentService } from 'src/services/parent.service';
 import { StaffService } from 'src/services/staff.service';
+import { differenceInCalendarMonths, format } from 'date-fns';
+
 
 @Component({
   selector: 'app-perfil-staff',
@@ -59,20 +61,22 @@ export class PerfilStaffComponent implements OnInit {
  
 
 
-  calculateAge(birthday: any) {
-    console.log(birthday);
+  calculateAge(birthday: any): string {
+    console.log(birthday,'eddddd');
+    
+    const hoy = new Date();
+    const cumpleanos = new Date(birthday);
 
-    var hoy = new Date();
-    var cumpleanos = new Date(birthday);
-    var edad = hoy.getFullYear() - cumpleanos.getFullYear();
-    var m = hoy.getMonth() - cumpleanos.getMonth();
+    const years = differenceInCalendarMonths(hoy, cumpleanos) / 12;
+    const months = differenceInCalendarMonths(hoy, cumpleanos) % 12;
 
-    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
-      edad--;
+    if (years < 1) {
+      return `${months} meses`;
+    } else {
+      return `${Math.floor(years)} años y ${months} meses`;
     }
-
-    return edad;
   }
+  
   // doctor_precall varibles
   getInfo(){
 

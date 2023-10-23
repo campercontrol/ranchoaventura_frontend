@@ -23,6 +23,9 @@ export class CreateCampsService {
   postCamp(a:any){
     return this.http.post('http://142.93.12.234:8000/camp/',a);
   }
+  patchCamp(id,a:any){
+    return this.http.patch('http://142.93.12.234:8000/camp/'+id,a);
+  }
   getCamp( ){
     return this.http.get('http://142.93.12.234:8000/active_camp/');
   }

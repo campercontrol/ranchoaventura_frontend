@@ -104,7 +104,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-customer>
                   <tr class="p-selectable-row">
-                      <td >
+                      <td  style=" cursor:pointer;" (click)="campsinfo(customer.camp_id)">
                           {{customer.camp_name}}
                         </td>
                         <td>
@@ -252,7 +252,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-customer>
                   <tr class="p-selectable-row">         
-                    <td >
+                    <td  (click)="campsinfo(customer.camp_id)" style="cursor: pointer;">
                       {{customer.camp_name}}
                     </td>
                     <td>
@@ -384,7 +384,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-customer>
                   <tr class="p-selectable-row">
-                    <td >
+                    <td  (click)="campsinfo(customer.camp_id)" style="cursor: pointer;" >
                       {{customer.camp_name}}
                     </td>
                     <td>

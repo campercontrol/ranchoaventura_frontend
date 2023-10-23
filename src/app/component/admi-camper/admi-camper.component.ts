@@ -341,7 +341,7 @@ export class AdmiCamperComponent implements OnInit {
     }
   
 
-      this.createCamp.postCamp(a).subscribe((res:any)=>{
+      this.createCamp.patchCamp(this.updateId,a).subscribe((res:any)=>{
           console.log(res);
           if(res.succes = 200){
             this.spinner=false; 

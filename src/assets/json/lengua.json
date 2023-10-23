@@ -2,7 +2,7 @@
     "traduciones":{
     "eng":{
         "dashboardParent":{
-            "subtitel":"You have a total pending payment of $",
+            "subtitel":"You have a total pending payment of ",
             "cardSubt":"Registered to the following camps:",
             "cardBotton":"View available camps",
             "subtitul2":"Pending payment of",
@@ -61,7 +61,7 @@
     },
     "esp":{
         "dashboardParent":{
-            "subtitel":"Tienes un saldo total pendiente de pago por $",
+            "subtitel":"Tienes un saldo total pendiente de pago por ",
             "cardSubt":"Asistirá a los siguientes camps:",
             "cardBotton":"Presiona AQUI, para inscribirte algun campamento",
             "subtitul2":"Saldo pendiente",

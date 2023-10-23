@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CamperService } from 'src/services/camper.service';
 import { CampsService } from 'src/services/camps.service';
 import { LangService } from 'src/services/lang.service';
+import { differenceInCalendarMonths, format } from 'date-fns';
 
 
 @Component({
@@ -208,20 +209,22 @@ getCampsDIs(){
   })
 }
 
-calculateAge(birthday: any) {
-  console.log(birthday);
+calculateAge(birthday: any): string {
+  console.log(birthday,'eddddd');
+  
+  const hoy = new Date();
+  const cumpleanos = new Date(birthday);
 
-  var hoy = new Date();
-  var cumpleanos = new Date(birthday);
-  var edad = hoy.getFullYear() - cumpleanos.getFullYear();
-  var m = hoy.getMonth() - cumpleanos.getMonth();
+  const years = differenceInCalendarMonths(hoy, cumpleanos) / 12;
+  const months = differenceInCalendarMonths(hoy, cumpleanos) % 12;
 
-  if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
-    edad--;
+  if (years < 1) {
+    return `${months} meses`;
+  } else {
+    return `${Math.floor(years)} años y ${months} meses`;
   }
-
-  return edad;
 }
+
 
   createId(): string {
     let id = '';
