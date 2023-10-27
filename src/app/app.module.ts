@@ -152,6 +152,7 @@ import { AdmiuserComponent } from './component/admiuser/admiuser.component';
 import { AdmiUserComponent } from './component/admi-user/admi-user.component';
 import { AdmiCamperComponent } from './component/admi-camper/admi-camper.component';
 import { AdmiPagosComponent } from './component/admi-pagos/admi-pagos.component';
+import { ResetPaswordComponent } from './component/reset-pasword/reset-pasword.component';
 
 
 
@@ -207,7 +208,8 @@ export function createTranslateLoader(http: HttpClient): any {
     AdmiuserComponent,
     AdmiUserComponent,
     AdmiCamperComponent,
-    AdmiPagosComponent, 
+    AdmiPagosComponent,
+    ResetPaswordComponent, 
        
   ],
   imports: [

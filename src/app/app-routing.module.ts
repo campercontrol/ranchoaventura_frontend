@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { NewParentComponent } from './component/new-parent/new-parent.component';
 import { ProspectoComponent } from './component/prospecto/prospecto.component';
 import { RedirigirComponent } from './redirigir/redirigir.component';
+import { ResetPaswordComponent } from './component/reset-pasword/reset-pasword.component';
 
 const routes: Routes = [
  // { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
@@ -18,6 +19,8 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'prospects',component:ProspectoComponent},
   {path:'Singup',component:NewParentComponent},
+  {path:'reset/password',component:ResetPaswordComponent},
+
   { path: 'dashboard', component: LayoutComponent, loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)},
   { path: 'pages', loadChildren: () => import('./extrapages/extrapages.module').then(m => m.ExtrapagesModule),  },
  // { path: 'crypto-ico-landing', component: CyptolandingComponent },
