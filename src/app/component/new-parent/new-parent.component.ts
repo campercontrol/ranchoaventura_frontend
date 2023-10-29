@@ -136,7 +136,9 @@ export class NewParentComponent implements OnInit {
   alertConfirCorre
 
   constructor(private formBuild:FormBuilder,private parent: ParentService,private router :Router,private modalService: NgbModal,private configService: ConfigService, private eventService: EventService,private render :Renderer2,private  lang :LangService,
-    private info :AuthenticationService) { }
+    private info :AuthenticationService) {
+
+     }
   
   ngOnInit(): void {
     this.lang.getLang().subscribe((res:any)=>{

@@ -219,7 +219,7 @@
                             <div  class="col-lg-12 mt-3 form-grup">
                                 <label for="">Nombre interno del correo:</label>
 
-                                <input type="text" name="" class="form-control" id="" ngModel placeholder="Asunto">
+                                <input type="text" name="" class="form-control" id="" [(ngModel)]="tituloTemplateAlmacenado" placeholder="Asunto">
 
                             </div>
                             <div  class="col-lg-12 mt-3 form-grup">
@@ -233,7 +233,7 @@
                             <div  class="col-lg-12 mt-3 form-grup">
                                 <label for="">Asunto :</label>
 
-                                <input type="text" name="" class="form-control" id="" [(ngModel)]="tituloTemplateAlmacenado" placeholder="Asunto">
+                                <input type="text" name="" class="form-control" id="" [(ngModel)]="asuntoTemplateAlmacenado" placeholder="Asunto">
 
                             </div>
 
@@ -256,7 +256,7 @@
                         <button class="btn btn-primary" (click)="atras()">Atras</button>
                         <button class="btn btn-primary" (click)="prueba()">Descartar</button>
                        
-                        <button class="btn btn-primary">Enviar</button>
+                        <button class="btn btn-primary" (click)="createEmail()">Enviar</button>
 
                     </div>
 
@@ -355,7 +355,7 @@
           placeholder="Global Search" />
         </div>
         <div class=" scroll-y">
-        <p-table #dt [(selection)]="selectdestinatariosCampers" dataKey="Staff.id"  [rowHover]="true" [rows]="10" [value]="destinatariosCampers"
+        <p-table #dt [(selection)]="selectdestinatariosCampers"   [rowHover]="true" [rows]="10" [value]="destinatariosCampers"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
         [globalFilterFields]="['tutor_full_name','tutor_email']">
@@ -414,7 +414,7 @@
           placeholder="Global Search" />
         </div>
         <div class=" scroll-y">
-        <p-table #dt [(selection)]="selectdestinatariosStaff" dataKey="staff_id"  [rowHover]="true" [rows]="10" [value]="destinatariosStaff"
+        <p-table #dt [(selection)]="selectdestinatariosStaff"   [rowHover]="true" [rows]="10" [value]="destinatariosStaff"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
         [globalFilterFields]="['staff_full_name','staff_email']">

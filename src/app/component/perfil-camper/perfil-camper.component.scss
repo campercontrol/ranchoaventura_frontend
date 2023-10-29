@@ -135,7 +135,12 @@ label{
         font-size: 14px;
     }
 }
-
+.div-error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
 @media (max-width: 750px) {
     .campamentos{

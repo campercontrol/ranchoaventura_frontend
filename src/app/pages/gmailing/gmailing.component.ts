@@ -57,6 +57,8 @@ export class GmailingComponent implements OnInit {
   templateAlmacenado:any;
   listaTemplateAlmacenado:any =[];
   tituloTemplateAlmacenado:any = "";
+  asuntoTemplateAlmacenado:any = "";
+
   page=1;
   edtitar=1;
   idUpdate=0;;
@@ -113,9 +115,16 @@ export class GmailingComponent implements OnInit {
      this.selectdestinatariosEscuela=this.destinatariosEscuela;
     }
 
-
     this.selectdestinatariosStaff= res.staffs
-    this.destinatariosStaff= res.staffs
+    this.selectdestinatariosStaff.forEach((camps:any)=>{
+      camps.id = camps.id;
+
+   });
+   this.destinatariosStaff= res.staffs;
+   this.destinatariosStaff.forEach((camps:any)=>{
+    camps.id = camps.staff_id;
+
+ });
 
     this.botonDisiable=true
 
@@ -148,7 +157,15 @@ export class GmailingComponent implements OnInit {
 
 
     this.selectdestinatariosStaff= res.staffs
-    this.destinatariosStaff= res.staffs
+    this.selectdestinatariosStaff.forEach((camps:any)=>{
+      camps.id = camps.id;
+
+   });
+   this.destinatariosStaff= res.staffs;
+   this.destinatariosStaff.forEach((camps:any)=>{
+    camps.id = camps.staff_id;
+
+ });
     this.botonDisiable=true
 
    })
@@ -170,7 +187,18 @@ export class GmailingComponent implements OnInit {
      console.log(res,'capacitaciones');
      this.listaTemplateAlmacenado= res.massive_templates
      this.selectdestinatariosStaff= res.staffs
-     this.destinatariosStaff= res.staffs
+     this.selectdestinatariosStaff.forEach((camps:any)=>{
+        camps.staff_full_name = camps.name;
+        camps.id = camps.id;
+        camps.staff_email = camps.email;
+
+     });
+     this.destinatariosStaff= res.staffs;
+     this.destinatariosStaff.forEach((camps:any)=>{
+      camps.staff_full_name = camps.name;
+      camps.id = camps.id;
+
+   });
      this.botonDisiable=true;
     })
  
@@ -413,6 +441,145 @@ export class GmailingComponent implements OnInit {
         }
          
     })
+  }
+
+  templateInfor(id:any){
+   let b = this.listaTemplateAlmacenado.filter((ote:any)=>{
+      return  ote.id == id;
+    })
+
+    return b[0]
+  }
+
+  createEmail(){
+    let template:any =  this.templateInfor(this.templateAlmacenado)
+    let a = {}
+    let  schools_id = []
+        this.selectdestinatariosEscuela.forEach(element => {
+            schools_id.push(element.school_id)
+        });
+        let  staffs_id = []
+        this.selectdestinatariosStaff.forEach(element => {
+            schools_id.push(element.id)
+        });
+        let  campers_id = []
+
+        this.selectdestinatariosCampers.forEach(element => {
+          schools_id.push(element.camper_id)
+      });
+        let camp_id = [];
+        this.listCamp.forEach(element => {
+          schools_id.push(element.id)
+      });
+      console.log(this.tipoTemplate);
+      
+    switch (Number(this.tipoTemplate)) {
+      case 1:
+      
+       a = {
+          "campaign": {
+           
+            "name": this.tituloTemplateAlmacenado,
+            "camp_parents": true,
+            "camp_staff": true,
+            "camp_school": true,
+            "active_time": "1",
+            "send": true,
+            "camp_id": this.campamento,
+            "send_type_id": 80,
+            "template_id": template.id,
+          },
+          "campers_id":campers_id,
+          "staffs_id": staffs_id,
+          "schools_id": schools_id,
+          "template_title": template.title,
+          "template_body": this.template
+        }
+
+        console.log(a);
+        this.campInfo.createEmail(a).subscribe((res:any)=>{
+          console.log(res);
+          if(res==1){
+            alert('Se enviaron los correos correctamente');
+            this.page=1;
+            this.status('Correos enviados')
+
+          }
+          
+        });
+        
+        break;
+      case 2:
+       
+        this.selectdestinatariosCampers.forEach(element => {
+          schools_id.push(element.camper_id)
+      });
+       a = {
+          "campaign": {
+           
+            "name": this.tituloTemplateAlmacenado,
+            "camp_parents": false,
+            "camp_staff": true,
+            "camp_school": false,
+            "active_time": "1",
+            "send": true,
+            "send_type_id": 81,
+            "template_id": template.id,
+          },
+          "campers_id":[],
+          "staffs_id": staffs_id,
+          "schools_id": [],
+          "template_title": template.title,
+          "template_body": this.template
+        }
+        console.log(a);
+        this.campInfo.createEmail(a).subscribe((res:any)=>{
+          console.log(res);
+          if(res==1){
+            alert('Se enviaron los correos correctamente');
+            this.page=1;
+            this.selectUpadate('Correos enviados')
+
+          }
+        });
+        
+        break;
+      case 3:
+        a = {
+          "campaign": {
+           
+            "name": this.tituloTemplateAlmacenado,
+            "camp_parents": true,
+            "camp_staff": true,
+            "camp_school": true,
+            "active_time": "1",
+            "send": true,
+            "send_type_id": 82,
+            "template_id": template.id,
+          },
+          "campers_id":campers_id,
+          "staffs_id": staffs_id,
+          "schools_id": schools_id,
+          "template_title": template.title,
+          "camp_id": camp_id,
+
+          "template_body": this.template
+        }
+        console.log(a);
+        this.campInfo.createEmail(a).subscribe((res:any)=>{
+          console.log(res);
+          if(res==1){
+            alert('Se enviaron los correos correctamente');
+            this.page=1;
+            this.selectUpadate('Correos enviados')
+
+          }
+        });
+        break;
+      default:
+        console.log('Opción no reconocida');
+        break;
+    }
   }
 
 }

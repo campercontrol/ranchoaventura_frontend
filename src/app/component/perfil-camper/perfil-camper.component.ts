@@ -41,6 +41,7 @@ export class PerfilCamperComponent implements OnInit {
   comment:any ="";
   historialCaps:any = [];
   camperband:any = [];
+  error:boolean = false;
 
   constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private hijos: CamperService,private parents : ParentService, private rou:Router,private info: AuthenticationService) {
     this.routesA.params.subscribe((params) => {
@@ -105,7 +106,7 @@ export class PerfilCamperComponent implements OnInit {
     this.hijos.getPerfil(this.id).subscribe((res: any) => {
       console.log(res,'hola');
       let b = [];
-
+      this.error=false
       let camps = res.camper_subscribe_camps
       camps.forEach(element => {
         element.type= 'subscribe';
@@ -188,6 +189,8 @@ export class PerfilCamperComponent implements OnInit {
 
 
 
+    },error=>{
+      this.error= true
     })
   }
   update(){

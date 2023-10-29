@@ -103,9 +103,11 @@ export class CamperNuevoComponent implements OnInit {
       this.pathological_background_fm = res.pathological_background_fm;
       this.school = res.school;
       this.vaccines = res.vaccines;
+      this.getInfo();
 
       console.log(res);     
     })
+
 
   }
 
@@ -184,6 +186,14 @@ export class CamperNuevoComponent implements OnInit {
     }
     return null;
   }
+  getInfo(){
+ 
+    this.name.nativeElement.focus()
+
+  
+    
+  }
+
 
   getname(){
     if( this.formUser.get('name').valid){
