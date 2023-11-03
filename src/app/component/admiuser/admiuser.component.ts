@@ -367,7 +367,7 @@ export class AdmiuserComponent implements OnInit {
     this.pathological_background_fm = res.pathological_background_fm;
     this.school = res.school[0];
     this.vaccines = res.vaccines; 
-    this.photoSelectUp = 'http://64.227.16.165:8000//'+res['camper'].photo;
+    this.photoSelectUp = 'http://64.227.16.165:8000/'+res['camper'].photo;
    
 
     this.formFood.patchValue({
