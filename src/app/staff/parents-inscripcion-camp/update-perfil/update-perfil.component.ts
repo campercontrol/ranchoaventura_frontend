@@ -578,7 +578,7 @@ export class UpdatePerfilComponent implements OnInit {
     this.catalogos.getCamper(this.id).subscribe(
       (res:any)=>{
         console.log('respuestas',res);
-         this.photoSelect = 'http://142.93.12.234:8000/'+res['camper'].photo,
+         this.photoSelect = 'http://64.227.16.165:8000//'+res['camper'].photo,
 
           this.formUser.patchValue({
            
