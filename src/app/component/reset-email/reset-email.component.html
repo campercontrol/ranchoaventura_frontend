@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="col-xl-4 col-sm-12 col-md-7" style="background-color: white;">
+       
+       
+            <div class=" p-4">
+                <div class="w-100">
+
+                    <div class=" h-100">
+                        <div class="">
+                            <a routerLink="/" class="d-block auth-logo">
+                                <img src="../../assets/images/camp/logoCamper.png" alt="" height="100px"
+                                    class="auth-logo-dark" style="margin: 0 auto;">
+                                <img src="../../assets/assets/images/camp/logoCamper.png" alt="" height="100px"
+                                    class="auth-logo-light">
+                            </a>
+                        </div>
+                        <div>
+                            <h2 class="text-primary">Cambio de email para login
+
+                            </h2>
+
+                            <p class="mt-2">
+                                Los correos llegaran a tu nuevo email. Para iniciar sesion deberas hacerlo con tu nuevo email
+                            </p>
+
+                        </div>
+                        <div class="mt-3">
+                            
+
+                            <div class="alert alert-primary mt-2" role="alert" *ngIf="alertPass">
+                               El correo se ha cambiado correctamente, lo proxima vez que inicie sesion podra usar su nueva correo                          </div>
+                            <form [formGroup]="resetPass"  class="mt-5 mb-5">
+
+                                <div>
+                                    <label for="email">Nuevo email para login : </label>
+                                    <input type="email" class="form-control" id="email" formControlName="email"
+                                        placeholder="Enter email">
+
+
+                                </div>
+                                <div>
+                                    <label for="email">Confirma tu nuevo email para login :  </label>
+                                    <input type="email" class="form-control" id="email" formControlName="email_confirm"
+                                        placeholder="Enter email">
+
+                                </div>
+
+
+                                <div class="mt-3 d-grid">
+                                    <button class="btn btn-primary btn-block" type="button"
+                                        (click)="resetPasword()">Cambiar contraseña</button>
+                                </div>
+
+                            </form>
+
+                            
+                            <div class="mt-5">
+                                <div class=" d-grid"> <button class="btn btn-danger" (click)="routerInfo()">Iniciar
+                                    Sesión</button> </div>
+
+                            </div>
+
+                           
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+    </div>
+</div>

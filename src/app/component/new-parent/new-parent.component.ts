@@ -25,7 +25,29 @@ export class NewParentComponent implements OnInit {
 
    regex:  RegExp = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+~`|}{[\]:;?<,>.\/-]).{8,}$/;
    correoVal: RegExp =/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  contrasena:string=""
+  contrasena:string="";
+  paisesLatinoamerica:any = [
+    { id: 1, nombre: 'Argentina', abreviacion: 'ARG', lada: '+54' },
+    { id: 2, nombre: 'Bolivia', abreviacion: 'BOL', lada: '+591' },
+    { id: 3, nombre: 'Brasil', abreviacion: 'BRA', lada: '+55' },
+    { id: 4, nombre: 'Chile', abreviacion: 'CHL', lada: '+56' },
+    { id: 5, nombre: 'Colombia', abreviacion: 'COL', lada: '+57' },
+    { id: 6, nombre: 'Costa Rica', abreviacion: 'CRI', lada: '+506' },
+    { id: 7, nombre: 'Cuba', abreviacion: 'CUB', lada: '+53' },
+    { id: 8, nombre: 'Ecuador', abreviacion: 'ECU', lada: '+593' },
+    { id: 9, nombre: 'El Salvador', abreviacion: 'SLV', lada: '+503' },
+    { id: 10, nombre: 'Guatemala', abreviacion: 'GTM', lada: '+502' },
+    { id: 11, nombre: 'Honduras', abreviacion: 'HND', lada: '+504' },
+    { id: 12, nombre: 'México', abreviacion: 'MEX', lada: '+52' },
+    { id: 13, nombre: 'Nicaragua', abreviacion: 'NIC', lada: '+505' },
+    { id: 14, nombre: 'Panamá', abreviacion: 'PAN', lada: '+507' },
+    { id: 15, nombre: 'Paraguay', abreviacion: 'PRY', lada: '+595' },
+    { id: 16, nombre: 'Perú', abreviacion: 'PER', lada: '+51' },
+    { id: 17, nombre: 'República Dominicana', abreviacion: 'DOM', lada: '+1' },
+    { id: 18, nombre: 'Uruguay', abreviacion: 'URY', lada: '+598' },
+    { id: 19, nombre: 'Venezuela', abreviacion: 'VEN', lada: '+58' },
+    { id: 20, nombre: 'Estados Unidos', abreviacion: 'USA', lada: '+1' }
+  ];
   confirmarContrasena:string = "";
   confirmEmailAlert= false;
   confirmEmailAlertInstruc= false;
@@ -158,8 +180,10 @@ export class NewParentComponent implements OnInit {
                               Validators.pattern("^[0-9]*$"),
                               Validators.minLength(8), Validators.maxLength(10)]],
       contact_name:         ["",[Validators.required,Validators.minLength(1)]],
+      contact_lastname_mother:[""],
+
     
-    contact_lastname_mother:[""],
+      country:['+52'],
     contact_home_phone:     ["",[Validators.required,
                             Validators.pattern("^[0-9]*$"),
                             Validators.minLength(8), Validators.maxLength(10)]], 
@@ -342,6 +366,13 @@ export class NewParentComponent implements OnInit {
   prueba(){
     this.spinner= true;
     if(this.formParent.valid){
+      this.formParent.patchValue({
+        tutor_cellphone:  this.formParent.get('country').value +this.formParent.get('tutor_cellphone').value,
+        tutor_home_phone:  this.formParent.get('country').value +this.formParent.get('tutor_home_phone').value,
+        tutor_work_phone:  this.formParent.get('country').value +this.formParent.get('tutor_home_phone').value
+
+
+      })
       let a = { 
         user:{
           email:this.formParent.get('email').value,

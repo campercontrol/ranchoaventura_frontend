@@ -153,6 +153,8 @@ import { AdmiUserComponent } from './component/admi-user/admi-user.component';
 import { AdmiCamperComponent } from './component/admi-camper/admi-camper.component';
 import { AdmiPagosComponent } from './component/admi-pagos/admi-pagos.component';
 import { ResetPaswordComponent } from './component/reset-pasword/reset-pasword.component';
+import { ResetEmailComponent } from './component/reset-email/reset-email.component';
+import { UpdatePerfilComponent } from './component/campamento/update-perfil/update-perfil.component';
 
 
 
@@ -209,7 +211,9 @@ export function createTranslateLoader(http: HttpClient): any {
     AdmiUserComponent,
     AdmiCamperComponent,
     AdmiPagosComponent,
-    ResetPaswordComponent, 
+    ResetPaswordComponent,
+    ResetEmailComponent,
+    UpdatePerfilComponent, 
        
   ],
   imports: [

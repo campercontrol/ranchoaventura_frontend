@@ -4,7 +4,7 @@
   </div>
 </div>
 
-<div class="container-fluid" *ngIf="cargando">
+<div class="container-fluid" *ngIf="cargando && !cargosExtr">
   <div class="row">
     <div class="col-lg-12">
       <div class="card" *ngIf="statusInscri">
@@ -186,6 +186,8 @@
             <div class="container-btn">
               <button class="btn  btn-info p-2" style="height:60px;" (click)="incio()">Inicio</button>
               <button class="btn  btn-secondary p-2" style="height:60px;" (click)="perfil()">Perfil acampador</button>
+              <button class="btn  btn-success p-2" style="height:60px;" (click)="inscribirCamps()">Inscribir</button>
+
               <button class="btn  btn-success p-2" style="height:60px;"(click)="open(content)" *ngIf="statusInscri">ver respuestas</button>
               <button class="btn  btn-info p-2" style="height:60px;" (click)="open(content2)" *ngIf="statusInscri">servicios adicionales</button>
               <button class="btn  btn-danger p-2" style="height:60px;" (click)="deletCamp()" *ngIf="statusInscri">cancelar inscripcion</button>
@@ -196,6 +198,14 @@
     </div>
   </div>
 </div>
+
+
+
+
+<app-update-perfil  *ngIf="cargando && cargosExtr"  [typeSucribe]="typeSucribe" (inscribirCamps)="suscribeCamps($event)">
+
+</app-update-perfil>
+
 
 
 

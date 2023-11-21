@@ -121,23 +121,55 @@
                                             <input type="text" class="form-control" id="" formControlName="tutor_lastname_mother" (input)="gettutor_lastname_mother()" #tutor_lastname_mother>
                                         </div>
                                     </div>
+                                    
                                     <div class="row mb-4">
-                                        <label for="" class="col-sm-12 col-form-label" >{{textos[idoma]["texto5"]}}</label>
-                                        <div class="col-sm-12">
-                                            <input type="text" class="form-control" id="" formControlName = "tutor_cellphone" #tutor_cellphone (input)="gettutor_cellphone()">
+                                        <label for="tutor_cellphone" class="col-sm-12 col-form-label">{{textos[idoma]["texto5"]}}</label>
+                                        <div class="col-sm-12 ">
+                                          <div class="row">
+                                            <div class=" col-4">
+                                              <select class="form-select" id="country" formControlName="country" >
+                                                <option *ngFor="let pais of paisesLatinoamerica" [value]="pais.lada">{{ pais.nombre }}</option>
+                                              </select>
+                                            </div>
+                                            <div class="col-8">
+                                                <input type="text" class="form-control" id="tutor_cellphone" formControlName="tutor_cellphone" (input)="gettutor_cellphone()">
+
+                                            </div>
+                                          </div>
                                         </div>
-                                    </div>
+                                      </div>
                                     <div class="row mb-4">
                                         <label for="" class="col-sm-12 col-form-label">{{textos[idoma]["texto6"]}}</label>
-                                        <div class="col-sm-12">
-                                            <input type="text" class="form-control" id="" formControlName = "tutor_home_phone" #tutor_home_phone (input)="gettutor_home_phone()" >
+                                        <div class="row">
+                                            <div class=" col-4">
+                                                <select class="form-select" id="country" formControlName="country" >
+                                                  <option *ngFor="let pais of paisesLatinoamerica" [value]="pais.lada">{{ pais.nombre }}</option>
+                                                </select>
+                                              </div>
+                                              <div class="col-8">
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" id="" formControlName = "tutor_home_phone" #tutor_home_phone (input)="gettutor_home_phone()" >
+                                                </div>
+                                              </div>
                                         </div>
+                                       
                                     </div>
                                     <div class="row mb-4">
                                         <label for="" class="col-sm-12 col-form-label">{{textos[idoma]["texto7"]}}</label>
+
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <select class="form-select" id="country" formControlName="country" >
+                                                    <option *ngFor="let pais of paisesLatinoamerica" [value]="pais.lada">{{ pais.nombre }}</option>
+                                                  </select>
+                                            </div>
+                                            <div class="col-8">
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control" id="" formControlName = "tutor_work_phone" #tutor_work_phone (input)="gettutor_work_phone()">
                                         </div>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
         
                                 </div>

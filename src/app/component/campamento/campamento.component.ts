@@ -63,8 +63,11 @@ export class CampamentoComponent implements OnInit {
   }
   idCamper=0;
   idCamp=0;
+  cargosExtr= false;
   dataCamp:Camp;
   dataPagos:any={};
+  extra_questions:any=[];
+  extra_charges:any=[];
   nameCamp:any={};
   idoma:string='esp'
   cargosExtras:any ;
@@ -75,12 +78,13 @@ export class CampamentoComponent implements OnInit {
   pagos:boolean=false;
   statusInscri:boolean=false;
   location= "";
+  typeSucribe:number = 0;
   balance = 0;
   @ViewChild('baucher') baucher  :ElementRef;
   cargando= false;
 
 
-  constructor(private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router,private render:Renderer2,private lang:LangService) { 
+  constructor(private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router,private render:Renderer2,private lang:LangService,private routerNav:Router) { 
     this.routesA.params.subscribe((params)=>{
       this.idCamp = params['camp'];
     //  console.log(this.idCamp);
@@ -146,8 +150,11 @@ export class CampamentoComponent implements OnInit {
   }
   getQuestion(){
     this.camps.getPreguntas(Number(this.idCamp),Number(this.idCamper)).subscribe((res:any)=>{
-     // console.log(res,'preguntas');
+      console.log(res,'preguntas');
        this.PreguntasExtras = res.data;
+       this.PreguntasExtras.forEach((element:any) => {
+            element.question= this.parseHTMLContent(element.question)
+       });
 
     
        console.log(this.PreguntasExtras,'preguntas');
@@ -163,6 +170,11 @@ export class CampamentoComponent implements OnInit {
        
      })
   }
+
+  inscribirCamps(){
+    this.cargosExtr= true;
+    this.typeSucribe=1;
+  }
   incio(){
     this.router.navigate(['dashboard'])
   }
@@ -174,20 +186,16 @@ export class CampamentoComponent implements OnInit {
     this.PreguntasExtras.forEach(element => {
         let a = {
           
-            "id": element.id,
-            "question": element.question,
-            "is_required": true,
-            "camper_id": this.idCamper,
-            "answer": element.answer
+            "camp_extra_answer_answer": element.answer,
+            "camp_extra_question_id": element.id,
+           
           
         }
         b = b.concat(a);
     });
    
-    let question = {
-      extra_answers:b
-    }
-      this.camps.setPreguntas(question).subscribe((res:any)=>{
+   
+    this.camps.extras({"extra_charges":[],extra_answers:b},this.idCamper).subscribe((res:any)=>{
         console.log(res);
         this.getQuestion();
         
@@ -196,14 +204,17 @@ export class CampamentoComponent implements OnInit {
   saveChange(){
     
       this.cargosExtras.forEach(element => {
-          element.camper_id = this.idCamper
+          element.camper_id = this.idCamper;
+          element.camp_extra_charge_id= element.extra_charge_id
+          element.camp_extra_charge_is_selected= element.extra_selected
+
           
       });
     let res = {
       "extra_charges":this.cargosExtras
     }
 
-    this.camps.setPagos(res).subscribe((res:any)=>{
+    this.camps.extras({"extra_charges":this.cargosExtras,extra_answers:[]},this.idCamper).subscribe((res:any)=>{
       console.log(res);
       this.getQuestion()
       this.modalService.dismissAll()
@@ -237,6 +248,37 @@ export class CampamentoComponent implements OnInit {
       link.click();
  
     })
+  }
+
+  suscribeCamps(id:any){
+    if(id >0){
+      let a = [this.idCamp]       
+      this.camps.setCamps(a,this.idCamper).subscribe((res:any)=>{
+        console.log(res);
+        
+        if(res.status ==2){
+          this.routerNav.navigate(['dashboard/parents/camp-info/'+this.idCamper+'/'+this.idCamp]);
+
+        } else if(res.status ==1){
+          this.routerNav.navigate(['dashboard/parents/camp-info/'+this.idCamper+'/'+this.idCamp]);
+  
+        }   
+        
+        
+        
+       },
+       (error)=>{
+         console.log(error)
+       })
+    }else{
+      this.cargosExtr= false;
+    }
+   
+  }
+
+  parseHTMLContent(html: string): string {
+    const regex = /<[^>]*>/g;
+    return html.replace(regex, '');
   }
 
 }

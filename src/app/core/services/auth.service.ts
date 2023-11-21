@@ -79,6 +79,10 @@ export class AuthenticationService {
       return  this.http.post("http://142.93.12.234:8000/usuario/change_password/"+email,a)
  
      }
+     cambiarEmail(email,a){
+      return  this.http.post("http://142.93.12.234:8000/usuario/change_email/"+email,a)
+ 
+     }
    
 }
 
