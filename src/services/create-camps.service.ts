@@ -9,27 +9,27 @@ export class CreateCampsService {
   constructor(private http:HttpClient) { }
 
   getSede(){
-    return this.http.get('http://142.93.12.234:8000/location');
+    return this.http.get('http://64.227.16.165:8000/location');
   }
   getTemporada(){
-    return this.http.get('http://142.93.12.234:8000/season');
+    return this.http.get('http://64.227.16.165:8000/season');
   }
   gerSchool(){
-    return this.http.get('http://142.93.12.234:8000/school');
+    return this.http.get('http://64.227.16.165:8000/school');
   }
   getcurrency(){
-    return this.http.get('http://142.93.12.234:8000/currency');
+    return this.http.get('http://64.227.16.165:8000/currency');
   }
   postCamp(a:any){
-    return this.http.post('http://142.93.12.234:8000/camp/',a);
+    return this.http.post('http://64.227.16.165:8000/camp/',a);
   }
   patchCamp(id,a:any){
-    return this.http.patch('http://142.93.12.234:8000/camp/'+id,a);
+    return this.http.patch('http://64.227.16.165:8000/camp/'+id,a);
   }
   getCamp( ){
-    return this.http.get('http://142.93.12.234:8000/active_camp/');
+    return this.http.get('http://64.227.16.165:8000/active_camp/');
   }
   getCampId( id:any){
-    return this.http.get('http://142.93.12.234:8000/camp/'+id);
+    return this.http.get('http://64.227.16.165:8000/camp/'+id);
   }
 }

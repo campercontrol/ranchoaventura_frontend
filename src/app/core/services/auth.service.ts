@@ -25,7 +25,7 @@ export class AuthenticationService {
    
     resetContrasena(a){
         return new Promise((resolve,reject)=>{
-            this.http.post('http://142.93.12.234:8000/usuario/reset_password',a).subscribe((res:any)=>{
+            this.http.post('http://64.227.16.165:8000/usuario/reset_password',a).subscribe((res:any)=>{
               resolve = res;
             },error=>{
               reject = error;
@@ -36,11 +36,11 @@ export class AuthenticationService {
     
      login(email: string, password: string) {
         
-    return this.http.post("http://142.93.12.234:8000/token?username=" +email+ "&password="+password +"&lang=es",{ })
+    return this.http.post("http://64.227.16.165:8000/token?username=" +email+ "&password="+password +"&lang=es",{ })
     }
     login2(email: string, password: string) {
       return new Promise((resolve,reject)=>{
-           this.http.post("http://142.93.12.234:8000/token?username=" +email+ "&password="+password +"&lang=es",{ })
+           this.http.post("http://64.227.16.165:8000/token?username=" +email+ "&password="+password +"&lang=es",{ })
           .subscribe((user:any) => {
               console.log(user);
               this.loggedIn = true;
@@ -71,12 +71,12 @@ export class AuthenticationService {
     }
 
     recuperarContra(a){
-     return  this.http.post("http://142.93.12.234:8000/usuario/reset_password",a)
+     return  this.http.post("http://64.227.16.165:8000/usuario/reset_password",a)
 
     }
 
     cambiarContrasena(email,a){
-      return  this.http.post("http://142.93.12.234:8000/usuario/change_password/"+email,a)
+      return  this.http.post("http://64.227.16.165:8000/usuario/change_password/"+email,a)
  
      }
      cambiarEmail(email,a){

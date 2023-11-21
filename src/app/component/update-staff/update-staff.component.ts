@@ -136,7 +136,7 @@ export class UpdateStaffComponent implements OnInit {
       this.food_restrictions = res.food_restrictions;
       this.blood_types = res.blood_types;
       let staff = res.staff
-        this.photoSelect = 'http://142.93.12.234:8000/'+staff.photo;
+        this.photoSelect = 'http://64.227.16.165:8000/'+staff.photo;
         console.log(this.photoSelect);
         
         this.formUser.patchValue({
