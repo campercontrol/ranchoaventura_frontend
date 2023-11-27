@@ -155,13 +155,23 @@
                     <button ngbDropdownItem (click)="pulseras8()" >8 x hoja</button>
                   </div>
                 </div>
+                <div ngbDropdown placement="top-end" class="d-inline-block"  style="margin-right: 10px;">
+                  <button type="button" class="btn btn-success" id="dropdownBasic2"
+                    ngbDropdownToggle>Modulos</button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                    <button ngbDropdownItem>Punto de control</button>
+                    <button ngbDropdownItem>Medicos</button>
+                    <button ngbDropdownItem>Ingresos</button>
+  
+                  </div>
+                </div>
               </div>
               <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
                 placeholder="Global Search" />
             </div>
             <div class=" scroll-y">
-            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="listCampers" 
-              [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"  [value]="listCampers" 
+              [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" 
               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
               [globalFilterFields]="['camper_full_name','camper_birthday','tutor_full_name','second_tutor_full_name']">
   
@@ -226,8 +236,8 @@
                   <td>
                     <p-avatar [image]="'http://142.93.12.234:8000/'+customer.photo_url" shape="circle" size="large"></p-avatar>
                   </td>
-                  <td>
-                    {{customer.camper_full_name}}
+                  <td (click)="vercamper(customer.camper_id)">
+                    {{customer.camper_full_name}} <small *ngIf="cumpleanosEnRango(customer.camper_birthday)">🎂</small>
                   </td>
                   <td>
   
@@ -246,10 +256,12 @@
                    
   
                   </td>
-                  <td>
-                   {{ customer.camper_total_balance}}
-                    
-  
+                  <td (click)="linkPagos(customer.camper_id)">
+                   {{ customer.camper_total_balance | currency}}
+                    <br>
+                    <p-tag value="Pagado" severity="success"  [rounded]="true" *ngIf=" customer.camper_total_balance==0"></p-tag>
+                    <p-tag value="Pendiente" severity="warning"  [rounded]="true" *ngIf=" customer.camper_total_balance!=0"></p-tag>
+
                   </td>
                   <td>
                    {{customer.tutor_full_name}} <br>
@@ -316,7 +328,7 @@
 
           <div class="scroll-y">
             <p-table #dt [(selection)]="selectedCustomers" dataKey="staff_id"  [rowHover]="true" [rows]="10" [value]="listStaffConfirm"
-            [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+            [showCurrentPageReport]="true"  [loading]="loading"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0" dataKey="staff_id"
             [globalFilterFields]="['name','country.name','representative.name','status']">
 
@@ -461,6 +473,7 @@
                 <button type="button" class="btn btn-danger" (click)="displayMaximizable2= !displayMaximizable2">seleciona staff</button>
                 
               </div>
+              
             </div>
             <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
               placeholder="Global Search" />

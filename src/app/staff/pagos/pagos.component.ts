@@ -56,8 +56,10 @@ export class PagosComponent implements OnInit {
       this.idCamp = params['idCamp'];
       this.idCamper = params['idCamper'];
       if(this.idCamper>0 || this.idCamp>0){
+        console.log('si entro');
+        
         this.pages.getpage(this.idCamp,this.idCamper).subscribe((res)=>{
-          console.log(res);
+          console.log(res,'informacion');
           
           this.info = res;
           this.camperIncamp = true;
@@ -68,6 +70,8 @@ export class PagosComponent implements OnInit {
         })
       }else{
         this.camperIncamp = false;
+        console.log('no se encomtro');
+        
       }
     
     })

@@ -129,7 +129,12 @@ export class CampamentosStaffComponent implements OnInit {
       this.listCampers = res.campers;
       this.listStaffConfirm = res.staff_confirmed;
       this.staffApuntado = res.staff_volunteer;
+
+      this.infoCamp.special_message=this.parseHTMLContent(this.infoCamp.special_message);
+      this.infoCamp.special_message_admin=this.parseHTMLContent(this.infoCamp.special_message_admin);
+
       this.cargando= true;
+
       
     })
     this.capms.getListaSatff().subscribe((res:any)=>{
@@ -138,6 +143,11 @@ export class CampamentosStaffComponent implements OnInit {
       this.listaStaff = res.data;
     })
 
+  }
+
+  parseHTMLContent(html: any): string {
+    const regex = /<[^>]*>/g;
+    return html.replace(regex, '');
   }
 
   agregarStaffNoApuntado(){
@@ -284,6 +294,20 @@ export class CampamentosStaffComponent implements OnInit {
       link.click();
  
     })
+  }
+
+  cumpleanosEnRango( cumpleanos: any): boolean {
+    let fechaInicio =  new Date(this.infoCamp.start);
+    let fechaFin =  new Date(this.infoCamp.end);
+    cumpleanos = new Date(cumpleanos);
+
+    // Verificar si el cumpleaños del asistente está dentro del rango del evento
+    return cumpleanos >= fechaInicio && cumpleanos <= fechaFin;
+  }
+  linkPagos(idCamp){
+    if(this.user_admin==true || this.user_coordinator==true){
+        this.routerN.navigate(['dashboard/payments/'+idCamp +'/'+this.idCamp])
+    }
   }
 }
 

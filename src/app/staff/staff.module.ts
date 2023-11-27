@@ -55,7 +55,7 @@ import { ListaProspectosComponent } from './lista-prospectos/lista-prospectos.co
 import { CardCapacitacionesComponent } from './card-capacitaciones/card-capacitaciones.component';
 import { FormModule } from '../pages/form/form.module';
 import { UpdatePerfilComponent } from './parents-inscripcion-camp/update-perfil/update-perfil.component';
-
+import { TagModule } from 'primeng/tag';
 
 
 
@@ -116,6 +116,7 @@ import { UpdatePerfilComponent } from './parents-inscripcion-camp/update-perfil/
     ReactiveFormsModule,
     BadgeModule,
     AvatarModule,
+    TagModule,
     RatingModule,
     AvatarGroupModule,
     SplitButtonModule,

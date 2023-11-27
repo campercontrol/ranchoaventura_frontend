@@ -11,7 +11,7 @@ export class PaymentsService {
    }
 
    getpage(idCamp,idCamper,id=0){
-    return this.http.get('http://142.93.12.234:8000/payment/page/camper/'+idCamper+'/'+idCamp+'/'+id)
+    return this.http.get('http://142.93.12.234:8000/payment/page/camper/'+idCamp+'/'+idCamper+'/'+id)
    }
    // crear pago
    setpage(info){
