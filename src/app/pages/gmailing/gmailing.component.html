@@ -144,8 +144,10 @@
 
 
                     <div class="btn-container">
-                        <button class="btn btn-primary" style="width: 100%;" (click)="cretateTemplaet()">Guardar</button>
-
+                        <button class="btn btn-primary" style="width: 100%;" (click)="cretateTemplaet()" *ngIf="!showSpiner">Guardar</button>
+                        <div class="spinner-border" role="status" *ngIf="showSpiner">
+                            
+                          </div>
                     </div>
 
                 </div>
@@ -163,7 +165,7 @@
                                     <option value="1">Participante de un solo campamente </option>
                                     <option value="2">Participante de una capacitacion</option>
                                     <option value="3">Participante de Varios Campamentos</option>
-                                    <option value="4">Gente que haya tenido actividad ultimamente </option>
+                                    <option value="4">Prospectos de una temporada </option>
                                 </select>
                             </div>
                             <div *ngIf="tipoTemplate == 1" >
@@ -179,6 +181,17 @@
                                     <ng-select name="" id="" [(ngModel)]="publicoSelecionado" style="width: 100%;" (change)="selectDestino()"
                                         class="mt-2" [multiple]="true">
                                         <ng-option *ngFor="let obj of publico" [value]="obj.value">{{obj.publico}}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div *ngIf="tipoTemplate == 4" >
+                                
+                                <div  class="col-lg-12 mt-2">
+                                    <p>Seleciona temporada</p>
+                                    <ng-select name="" id="" [(ngModel)]="selectTemporada" style="width: 100%;" (change)="selectProspectos()"
+                                        class="mt-2" >
+                                        <ng-option *ngFor="let obj of temporada" [value]="obj.id">{{obj.name}}
                                         </ng-option>
                                     </ng-select>
                                 </div>
@@ -327,7 +340,9 @@
 
 
                     <div class="btn-container">
-                        <button class="btn btn-primary" style="width: 100%;" (click)="updateTemplaet()">Guardar</button>
+                        <button class="btn btn-primary" style="width: 100%;" (click)="updateTemplaet()" *ngIf="!showSpiner">Guardar</button>
+                        <div class="spinner-border" role="status" *ngIf="showSpiner">
+                          </div>
 
                     </div>
 

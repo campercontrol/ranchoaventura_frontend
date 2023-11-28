@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { AdmiService } from 'src/services/admi.service';
+import { CamperService } from 'src/services/camper.service';
 import { CampsService } from 'src/services/camps.service';
 
 
@@ -43,6 +44,7 @@ export class GmailingComponent implements OnInit {
   destinatariosEscuela:any=[];
   destinatariosCampers:any=[];
   cargando:boolean=false;
+  showSpiner:boolean= false;
 
 
   
@@ -51,6 +53,7 @@ export class GmailingComponent implements OnInit {
   selectdestinatariosCampers:any=[];
   listCamp:any = [];
   selectCapacitacion;
+  selectTemporada;
   botonDisiable:boolean=false
 
 
@@ -61,11 +64,12 @@ export class GmailingComponent implements OnInit {
 
   page=1;
   edtitar=1;
-  idUpdate=0;;
+  idUpdate=0;
+  temporada:any = []
 
 
 
-  constructor(private data:AdmiService,private formbBuilder:FormBuilder,private campInfo:CampsService) { 
+  constructor(private data:AdmiService,private formbBuilder:FormBuilder,private campInfo:CampsService,private temporadas:CamperService) { 
     this.data.getTempletMasive().subscribe((res:any)=>{
     this.listaTemplates=res.data 
   })
@@ -74,6 +78,11 @@ export class GmailingComponent implements OnInit {
   })
   this.campInfo.getCamps().subscribe((res:any)=>{
     this.listaCampamentos = res.data;
+    console.log(res,'ñista de campamentos');
+    
+  })
+  this.temporadas.getTemporadas().subscribe((res:any)=>{
+    this.temporada = res.data;
     console.log(res,'ñista de campamentos');
     
   })
@@ -173,7 +182,7 @@ export class GmailingComponent implements OnInit {
   }
 
   selectCapacitaciones(){
-    this.botonDisiable=false
+    this.botonDisiable=false;
 
     this.destinatariosStaff=[];
     this.destinatariosEscuela=[];
@@ -183,8 +192,8 @@ export class GmailingComponent implements OnInit {
     this.selectdestinatariosEscuela=[];
     this.selectdestinatariosCampers=[];  
 
-    this.campInfo.getParticipantesCapacitaciones(this.selectCapacitacion).subscribe((res:any)=>{
-     console.log(res,'capacitaciones');
+    this.campInfo.getParticipantesCapacitaciones(this.selectTemporada).subscribe((res:any)=>{
+     console.log(res,'temprada');
      this.listaTemplateAlmacenado= res.massive_templates
      this.selectdestinatariosStaff= res.staffs
      this.selectdestinatariosStaff.forEach((camps:any)=>{
@@ -200,6 +209,38 @@ export class GmailingComponent implements OnInit {
 
    });
      this.botonDisiable=true;
+    })
+ 
+   }
+
+   selectProspectos(){
+    this.botonDisiable=false;
+
+    this.destinatariosStaff=[];
+    this.destinatariosEscuela=[];
+    this.destinatariosCampers=[];
+  
+    this.selectdestinatariosStaff=[];
+    this.selectdestinatariosEscuela=[];
+    this.selectdestinatariosCampers=[];  
+
+    this.campInfo.getProspectos(this.selectTemporada).subscribe((res:any)=>{
+      this.botonDisiable=true;
+
+     this.listaTemplateAlmacenado= res.massive_templates
+     this.selectdestinatariosStaff= res.staffs
+     this.selectdestinatariosStaff.forEach((camps:any)=>{
+        camps.staff_full_name = camps.staff_fullname;
+        camps.id = camps.id;
+        camps.staff_email = camps.staff_email;
+
+     });
+     this.destinatariosStaff= res.staffs;
+     this.destinatariosStaff.forEach((camps:any)=>{
+      camps.staff_full_name = camps.name;
+      camps.id = camps.id;
+
+   });
     })
  
    }
@@ -262,6 +303,7 @@ export class GmailingComponent implements OnInit {
     
   }
   cretateTemplaet(){
+    this.showSpiner=true;
     let templateTipo =0;
     if(this.typetemplate== 1){
       templateTipo=41
@@ -281,6 +323,8 @@ export class GmailingComponent implements OnInit {
             this.tituloTempalet="";
             this.template="";
             console.log(res);
+            this.showSpiner=false;
+
             setTimeout(() => {
               this.statusRes=false;
               this.status('Plantillas')
@@ -424,11 +468,13 @@ export class GmailingComponent implements OnInit {
   }
 
   updateTemplaet(){
-    
+    this.showSpiner=true;
     this.data.patchPlantilla(this.idUpdate,this.updateTemplate.value).subscribe((res:any)=>{
          console.log(res);
          if(res.mensaje =='Actualizado Correctamente'){
           this.statusRes= true;
+          this.showSpiner=false;
+
           setTimeout(() => {
             this.statusRes=false;
             this.status('Plantillas')
@@ -460,12 +506,12 @@ export class GmailingComponent implements OnInit {
         });
         let  staffs_id = []
         this.selectdestinatariosStaff.forEach(element => {
-            schools_id.push(element.id)
+          staffs_id.push(element.id)
         });
         let  campers_id = []
 
         this.selectdestinatariosCampers.forEach(element => {
-          schools_id.push(element.camper_id)
+          campers_id.push(element.camper_id)
       });
         let camp_id = [];
         this.listCamp.forEach(element => {
@@ -502,7 +548,7 @@ export class GmailingComponent implements OnInit {
           if(res==1){
             alert('Se enviaron los correos correctamente');
             this.page=1;
-            this.status('Correos enviados')
+            this.status('Plantillas del sistemas')
 
           }
           
@@ -538,7 +584,7 @@ export class GmailingComponent implements OnInit {
           if(res==1){
             alert('Se enviaron los correos correctamente');
             this.page=1;
-            this.selectUpadate('Correos enviados')
+            this.selectUpadate('Plantillas del sistemas')
 
           }
         });
@@ -571,10 +617,45 @@ export class GmailingComponent implements OnInit {
           if(res==1){
             alert('Se enviaron los correos correctamente');
             this.page=1;
-            this.selectUpadate('Correos enviados')
+            this.selectUpadate('Plantillas del sistemas')
 
           }
         });
+        break;
+        case 4:
+       
+        this.selectdestinatariosCampers.forEach(element => {
+          schools_id.push(element.camper_id)
+      });
+       a = {
+          "campaign": {
+           
+            "name": this.tituloTemplateAlmacenado,
+            "camp_parents": false,
+            "camp_staff": true,
+            "camp_school": false,
+            "active_time": "1",
+            "send": true,
+            "send_type_id": 83,
+            "template_id": template.id,
+          },
+          "campers_id":campers_id,
+          "staffs_id": staffs_id,
+          "schools_id": schools_id,
+          "template_title": template.title,
+          "template_body": this.template
+        }
+        console.log(a);
+        this.campInfo.createEmail(a).subscribe((res:any)=>{
+          console.log(res);
+          if(res==1){
+            alert('Se enviaron los correos correctamente');
+            this.page=1;
+            this.selectUpadate('Plantillas del sistemas')
+
+          }
+        });
+        
         break;
       default:
         console.log('Opción no reconocida');

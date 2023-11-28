@@ -76,6 +76,9 @@ export class CampsService {
 getParticipantesCapacitaciones(id) {
   return this.http.get('http://142.93.12.234:8000/mailing/send/campaign/training/?training_id='+id)
 }
+getProspectos(id) {
+  return this.http.get('http://142.93.12.234:8000/mailing/send/campaign/candidates/?season_id='+id)
+}
 
 getParticipantesMultiplesCamps(info:any) {
   return this.http.post('http://142.93.12.234:8000/mailing/send/campaign/camps/?campers=true&staffs=true&school=true',info)
