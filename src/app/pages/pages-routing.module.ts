@@ -62,6 +62,8 @@ import { AdmiParentComponent } from '../component/admi-parent/admi-parent.compon
 import { AdmiUserComponent } from '../component/admi-user/admi-user.component';
 import { AdmiCamperComponent } from '../component/admi-camper/admi-camper.component';
 import { AdmiPagosComponent } from '../component/admi-pagos/admi-pagos.component';
+import { SearchParentComponent } from '../component/search-parent/search-parent.component';
+import { EventosCapacitacionesComponent } from '../component/eventos-capacitaciones/eventos-capacitaciones.component';
 
 const routes: Routes = [
   
@@ -92,6 +94,10 @@ const routes: Routes = [
   { path: 'admi/user', component: AdmiUserComponent },// admi a acamapdores
   { path: 'admi/camps', component: AdmiCamperComponent },// admi a camps
   { path: 'admi/paymants', component: AdmiPagosComponent },// admi a camps
+  { path: 'admi/search', component: SearchParentComponent },// admi a camps
+  { path: 'admi/events', component: EventosCapacitacionesComponent },// admi a camps
+
+
 
 
 

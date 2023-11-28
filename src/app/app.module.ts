@@ -155,6 +155,8 @@ import { AdmiPagosComponent } from './component/admi-pagos/admi-pagos.component'
 import { ResetPaswordComponent } from './component/reset-pasword/reset-pasword.component';
 import { ResetEmailComponent } from './component/reset-email/reset-email.component';
 import { UpdatePerfilComponent } from './component/campamento/update-perfil/update-perfil.component';
+import { SearchParentComponent } from './component/search-parent/search-parent.component';
+import { EventosCapacitacionesComponent } from './component/eventos-capacitaciones/eventos-capacitaciones.component';
 
 
 
@@ -213,7 +215,9 @@ export function createTranslateLoader(http: HttpClient): any {
     AdmiPagosComponent,
     ResetPaswordComponent,
     ResetEmailComponent,
-    UpdatePerfilComponent, 
+    UpdatePerfilComponent,
+    SearchParentComponent,
+    EventosCapacitacionesComponent, 
        
   ],
   imports: [
