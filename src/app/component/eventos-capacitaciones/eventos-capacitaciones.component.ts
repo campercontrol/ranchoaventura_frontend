@@ -2,15 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CamperService } from 'src/services/camper.service';
-
+import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-create-training',
-  templateUrl: './create-training.component.html',
-  styleUrls: ['./create-training.component.scss']
+  selector: 'app-eventos-capacitaciones',
+  templateUrl: './eventos-capacitaciones.component.html',
+  styleUrls: ['./eventos-capacitaciones.component.scss'],
+  providers:[DatePipe]
 })
-export class CreateTrainingComponent implements OnInit {
+export class EventosCapacitacionesComponent implements OnInit {
   capacitaciones: any = [];
+  eventos: any = [];
+  temporada:any = [];
   selectCapcitacion: any;
   items: any;
   display: boolean = false;
@@ -31,12 +34,13 @@ export class CreateTrainingComponent implements OnInit {
   date :Date =new Date()
 
   public addTrainingForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required]],
-    photo: ['', [Validators.required]],
-    description: ['', [Validators.required, Validators.min(0)]],
-    url: ['', [Validators.required, Validators.min(0)]],
-    active: [true, [Validators.required]],
-    created_at: [this.date]
+    "start": [""],
+    "end":  [""],
+    "location":  [""],
+    "open_enrollment": [true],
+    "active": [true],
+    "season_id": [1],
+    "training_id": [1],
   })
 
 
@@ -53,10 +57,18 @@ export class CreateTrainingComponent implements OnInit {
   }
 
   onSave () : void {
-    this.catalogos.postTraining(this.addTrainingForm.value).subscribe((res) => {
-      console.log(res);
-      
+    console.log(this.addTrainingForm.value)
+    this.catalogos.postEventos(this.addTrainingForm.value).subscribe((res) => {
       this.addTrainingForm.reset();
+      this.addTrainingForm.patchValue({
+        "start": "",
+        "end":  "",
+        "location":  "",
+        "open_enrollment": true,
+        "active": true,
+        "season_id": 1,
+        "training_id": 1,
+      })
       this.getTrainig()
       this.closeModal();
       },error=>{
@@ -69,22 +81,40 @@ export class CreateTrainingComponent implements OnInit {
   public Editor = ClassicEditor;
 
 
-  constructor(private fb: FormBuilder, private catalogos: CamperService) { }
+  constructor(private fb: FormBuilder, private catalogos: CamperService,private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Forms' }, { label: 'Form Editor', active: true }];
     this.getTrainig();
   }
   getTrainig(){
+    this.catalogos.getTemporadas().subscribe((res:any)=>{
+      this.temporada = res.data;
+      console.log(this.eventos);  
+    })
     this.catalogos.getTraining().subscribe((res:any)=>{
       this.capacitaciones = res.data;
-      this.capacitaciones.forEach((element:any) => {
-        element.description = this.parseHTMLContent(element.description )
-        
-      });
-      console.log(this.capacitaciones);
-      
+      console.log(this.capacitaciones);  
     })
+    this.catalogos.getEventos().subscribe((res:any)=>{
+      this.eventos = res.data;
+      console.log(this.eventos);  
+    })
+    
+  }
+
+
+  searchCap(id){
+    let a = this.capacitaciones.filter((res:any)=>{
+      return res.id == id
+    })
+    return a[0].name
+  }
+  searchTemp(id){
+    let a = this.temporada.filter((res:any)=>{
+      return res.id == id
+    })
+    return a[0].name
   }
 
   
@@ -94,12 +124,16 @@ export class CreateTrainingComponent implements OnInit {
     this.showDialog2();
     this.updateId = item.id;
     this.addTrainingForm.patchValue({
-      id:this.updateId,
-      name: item.name,
-      photo: item.photo,
-      description:item.description,
-      url: item.url,
-      active:item.active,
+      "start":     this.datePipe.transform(item.start, 'yyyy-MM-dd HH:mm:ss')
+      ,
+      "end":      this.datePipe.transform(item.end, 'yyyy-MM-dd HH:mm:ss')
+      ,
+      "location":  item.location,
+      "open_enrollment":item.open_enrollment,
+      "active": item.active,
+      "season_id": item.season_id,
+      "training_id": item.training_id,
+      "id":this.updateId
 
     })
   
@@ -107,6 +141,19 @@ export class CreateTrainingComponent implements OnInit {
   }
   showDialog() {
     this.display = true;
+  }
+  reset(){
+    this.display = true;
+
+    this.addTrainingForm.patchValue({
+      "start": "",
+      "end":  "",
+      "location":  "",
+      "open_enrollment": true,
+      "active": true,
+      "season_id": 1,
+      "training_id": 1,
+    })
   }
   showDialog2() {
     this.display2 = true;
@@ -130,7 +177,7 @@ export class CreateTrainingComponent implements OnInit {
   }
 
   keepUpdate(){
-    this.catalogos.updateTraining(this.addTrainingForm.value,this.updateId).subscribe((res: any) => {
+    this.catalogos.updateTrainingEvent(this.addTrainingForm.value,this.updateId).subscribe((res: any) => {
      console.log(res);
       this.getTrainig();
       this.statuAgrgado = true;

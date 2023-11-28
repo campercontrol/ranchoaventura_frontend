@@ -1,0 +1,91 @@
+<p-tabView >
+    <p-tabPanel header="Titulares de cuenta">
+        <div>
+
+            <div class="card border border-info border-1">
+                <div class="bg-info p-2">
+                    <h1 class="card-title text-white">Buscador de padres</h1>
+                </div>
+                <div class="card-body">
+                <div class="container-btn mt-1 mb-3">
+                    
+                   
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Ingresa el nombre o correo del padre" aria-label="Ingresa tu búsqueda" aria-describedby="button-addon2" [(ngModel)]="search" >
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button" id="button-addon2" (click)="searchparten()">Buscar</button>
+                    </div>
+                  </div>
+        <div style="overflow: auto;">
+            <p-table #dt [value]="listcatalogos" [rows]="5"
+            [rowsPerPageOptions]="[5, 25, 50]"
+            [globalFilterFields]="['tutor_name','tutor_lastname_father','tutor_lastname_mother','tutor_cellphone','contact_email','contact_name']"
+             [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true"
+            [paginator]="true">
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="tutor_name" style="min-width: 120px;">Nombre<p-sortIcon field="tutor_name"style="font-size: 10px;"></p-sortIcon></th>
+                    <th pSortableColumn="tutor_lastname_father" style="min-width: 120px;">Primer apellido<p-sortIcon field="tutor_lastname_father"></p-sortIcon></th>
+                    <th pSortableColumn="tutor_lastname_mother" style="min-width: 120px;">Segundo apellido<p-sortIcon field="tutor_lastname_mother"></p-sortIcon></th>
+                    <th pSortableColumn="tutor_home_phone" style="min-width: 190px;">Telefono<p-sortIcon field="tutor_home_phone"></p-sortIcon></th>
+                    <th pSortableColumn="tutor_email" style="min-width: 190px;">Correo principal<p-sortIcon field="tutor_email"></p-sortIcon></th>
+                    <th pSortableColumn="second_tutor_email" style="min-width: 190px;">Email del contacto<p-sortIcon field="second_tutor_email"></p-sortIcon></th>
+                    <th pSortableColumn="contact_name" style="min-width: 210px;">Acampador<p-sortIcon field="contact_name"></p-sortIcon></th>
+                    <th style="width: 40px;"></th>               
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-customer>
+                <tr>
+                    <td  style="cursor:pointer;" class="infoCamper">
+                        {{customer.tutor_name}}
+                    </td>
+                    <td  style="cursor:pointer;">
+                        {{customer.tutor_lastname_father}}
+                    </td>
+                    <td  style="cursor:pointer;">
+                        {{customer.tutor_lastname_mother}}
+                    </td>
+                    <td>
+                        {{customer.tutor_home_phone}}
+                        <br>
+                        {{customer.tutor_work_phone}}
+                        <br>
+                        {{customer.tutor_work_phone}}
+
+
+                    </td>
+                    <td>
+                        {{customer.tutor_email}}
+                    </td>
+                    <td>
+                        {{customer.second_tutor_email}}
+                    </td>
+                    <td>
+                        <div *ngFor="let camper of customer.campers" class="mt-3 infoCamper" (click)="vercamper(camper.id)" style="cursor: pointer;">
+{{camper.full_name}}                        </div>
+                    </td>
+                  
+                 
+                </tr>
+            </ng-template>
+
+        </p-table>
+        </div>
+                
+            </div>
+            </div>
+        
+        
+        
+        
+        
+        </div>
+        
+    </p-tabPanel>
+    
+  
+</p-tabView>
