@@ -155,19 +155,32 @@
                     <button ngbDropdownItem (click)="pulseras8()" >8 x hoja</button>
                   </div>
                 </div>
-                <div ngbDropdown placement="top-end" class="d-inline-block"  style="margin-right: 10px;">
-                  <button type="button" class="btn btn-success" id="dropdownBasic2"
-                    ngbDropdownToggle>Modulos</button>
-                  <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-                    <button ngbDropdownItem>Punto de control</button>
-                    <button ngbDropdownItem>Medicos</button>
-                    <button ngbDropdownItem>Ingresos</button>
-  
-                  </div>
-                </div>
+               
               </div>
-              <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+             
+                <div>
+
+                  <div ngbDropdown placement="top-end" class="d-inline-block"  style="margin-right: 10px;">
+                    <button type="button" class="btn btn-success" id="dropdownBasic2"
+                      ngbDropdownToggle>Modulos</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                        <button ngbDropdownItem>Punto de control</button>
+                        <button ngbDropdownItem>Medicos</button>
+                        <button ngbDropdownItem>Ingresos</button>
+      
+                      </div>
+                   
+                  </div>
+                 
+                </div>
+            </div>
+
+            <div class="container mt-3">
+              <div class="centre-derecha">
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
                 placeholder="Global Search" />
+              </div>
+             
             </div>
             <div class=" scroll-y">
             <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"  [value]="listCampers" 
@@ -237,7 +250,7 @@
                     <p-avatar [image]="'http://142.93.12.234:8000/'+customer.photo_url" shape="circle" size="large"></p-avatar>
                   </td>
                   <td (click)="vercamper(customer.camper_id)">
-                    {{customer.camper_full_name}} <small *ngIf="cumpleanosEnRango(customer.camper_birthday)">🎂</small>
+                    {{customer.camper_full_name}}  <i class="bx bx-conversation" style="color: rgb(147, 147, 224);" *ngIf="customer.camper_comments>0" pTooltip="{{customer.camper_commentss}}"></i> <i class="bx bx-plus-medical"  style="color: rgb(228, 32, 26);"  pTooltip="Solicita llamada" *ngIf="customer.camper_doctor_precall== true"></i>
                   </td>
                   <td>
   
@@ -251,7 +264,7 @@
                   </td>
                   <td>
   
-                    {{customer.camper_birthday}}
+                    {{customer.camper_birthday}}<i class="bx bx-cake" *ngIf="cumpleanosEnRango(customer.camper_birthday)"></i>
                     <br>
                    
   
