@@ -157,6 +157,8 @@ import { ResetEmailComponent } from './component/reset-email/reset-email.compone
 import { UpdatePerfilComponent } from './component/campamento/update-perfil/update-perfil.component';
 import { SearchParentComponent } from './component/search-parent/search-parent.component';
 import { EventosCapacitacionesComponent } from './component/eventos-capacitaciones/eventos-capacitaciones.component';
+import { ListEventsComponent } from './component/list-events/list-events.component';
+import { TrofeosComponent } from './component/trofeos/trofeos.component';
 
 
 
@@ -217,7 +219,9 @@ export function createTranslateLoader(http: HttpClient): any {
     ResetEmailComponent,
     UpdatePerfilComponent,
     SearchParentComponent,
-    EventosCapacitacionesComponent, 
+    EventosCapacitacionesComponent,
+    ListEventsComponent,
+    TrofeosComponent, 
        
   ],
   imports: [

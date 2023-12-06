@@ -13,6 +13,10 @@
                             <button type="button" class="btn btn-primary" (click)="showDialog()">Añadir Titular de cuenta</button>
         
                         </div>
+                        <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
+                            <button type="button" class="btn btn-primary" (click)="buscador=!buscador;">Buscador</button>
+        
+                        </div>
                     </div>
                     <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
                         placeholder="Global Search" />
@@ -436,3 +440,8 @@
         </div>
     </form>
 </div>
+
+
+<p-dialog header="Title" [(visible)]="buscador" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '90vw'}">
+    <app-search-parent  (eventoAlPadre)="manejarEventoDesdeHijo($event)"></app-search-parent>
+</p-dialog>

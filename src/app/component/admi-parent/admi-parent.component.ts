@@ -9,7 +9,7 @@ import { CatalogosService } from 'src/services/catalogos.service';
   styleUrls: ['./admi-parent.component.scss']
 })
 export class AdmiParentComponent implements OnInit {
-
+  buscador:boolean=false;
   listcatalogos: any = [];
   selectCatalogos: any;
   items: any;
@@ -125,7 +125,12 @@ export class AdmiParentComponent implements OnInit {
   }
 
  
+  manejarEventoDesdeHijo(event:any){
+    this.update(event);
+    this.buscador=!this.buscador;
 
+    
+  }
 
   showDialog() {
    this.nameParent="";
@@ -138,6 +143,10 @@ export class AdmiParentComponent implements OnInit {
   closeModal() {
     this.display = false;
 
+  }
+
+  emitirEvento(item){
+    this.update(item)
   }
 
   closeModal3() {

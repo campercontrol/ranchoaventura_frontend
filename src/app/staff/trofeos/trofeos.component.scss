@@ -1,53 +1,134 @@
+.campamentos{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content:space-around;
+}
+
+.container-info{
+  display: flex;
+  justify-content:space-between;
+}
+.titulo-info{
+  display: flex;
+  justify-content: flex-start;
+ max-width:200px;
+}
+.container-btn{
+  display: flex;
+  justify-content: space-between;
+}
+
+.Campementos_anteriores{
+  text-align: center;
+}
+.Campamentos_proximo{
+  text-align: center;
+}
+.foto-perfil{
+  position: relative;
+  top: -70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.container-info-camping{
+  display: flex;
+ 
+}
 th{
-    font-size: 14px;
-    text-align: center;
+  font-size: 14px;
 }
 td{
-    font-size: 14px;
-    text-align: center;
+  font-size: 14px;
 }
-.body-table-search{
-    display: flex;
-    justify-content: left;
+.back-color{
+  background-color: rgb(161, 161, 161);
 }
 
-.center-form{
+@media (max-width: 750px) {
+  .campamentos{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+  }
+  .foto-perfil{  
+      position: static;
 
+  }
+  .campamentos-header{
+      height: 400px;
+  }
 }
-.file-select {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .file-select::before {
-    background-color: #5678EF;
-    color: white;
+
+.campamentos{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content:space-around;
+}
+
+.container-info{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content:space-around;
+}
+.titulo-info{
+  display: flex;
+  justify-content: flex-start;
+ max-width:200px;
+}
+
+.Campementos_anteriores{
+  text-align: center;
+}
+.Campamentos_proximo{
+  text-align: center;
+}
+.foto-perfil{
+  position: relative;
+  top: -70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.container-info-camping{
+  display: flex;
+ 
+}
+th{
+  font-size: 14px;
+}
+td{
+  font-size: 14px;
+}
+.back-color{
+  background-color: rgb(161, 161, 161);
+}
+
+@media (max-width: 750px) {
+  .campamentos{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 3px;
-    content: 'Seleccionar'; /* testo por defecto */
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    flex-direction: column;
   }
-  
-  .file-select input[type="file"] {
-    opacity: 0;
-    width: 200px;
-    height: 32px;
-    display: inline-block;
+  .foto-perfil{  
+      position: static;
+
   }
-  
-  #src-file1::before {
-    content: 'Seleccionar Archivo 1';
+  .campamentos-header{
+      height: 400px;
   }
-  
-  #src-file2::before {
-    content: 'Seleccionar Archivo 2';
-  }
+}
+
+.infoCamper{
+  cursor: pointer;
+  text-decoration: underline;
+  color: rgb(33, 45, 223);
+  font-weight: 700;
+}

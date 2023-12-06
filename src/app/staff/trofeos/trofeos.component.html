@@ -1,100 +1,215 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="card border border-info border-3">
-                <div class="bg-info p-4">
-                    <h4 class="card-title text-white">Lista de Trofeos</h4>
-                </div>
-                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                    placeholder="Global Search" />
-                <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
-                    [value]="customer" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
-                    [loading]="loading" [paginator]="true"
-                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-                    [globalFilterFields]="['name','country.name','representative.name','status']">
-
-                    <ng-template pTemplate="header">
-                        <tr>
-
-                            <th pSortableColumn="name" class="camp">
-                                <div class="flex justify-content-between align-items-center" style="min-width: 80px;">
-                                    Foto
-                                </div>
-                            </th>
-                            <th pSortableColumn="name" class="camp">
-                                <div class="flex justify-content-between align-items-center" style="min-width: 200px;">
-                                    Nombre
-                                    <p-sortIcon field="name"></p-sortIcon>
-
-                                </div>
-                            </th>
-                            <th pSortableColumn="name" class="camp">
-                                <div class="flex justify-content-between align-items-center" style="min-width: 340px;">
-                                    Descripcion
-                                    <p-sortIcon field="name"></p-sortIcon>
-                                </div>
-                            </th>
-                            <th pSortableColumn="record.n" class="record">
-                                <div class="flex justify-content-between align-items-center" style="min-width: 100px;">
-                                    Tipo
-                                    <p-sortIcon field="record.n"></p-sortIcon>
-                                </div>
-                            </th>
-                            <th pSortableColumn="precio">
-                                <div class="flex justify-content-between align-items-center" style="min-width: 60px;">
-                                    Activo
 
 
-                                </div>
-                            </th>
-                            <th pSortableColumn="status" style="min-width: 100px">
-                                <div class="flex justify-content-between align-items-center">
 
-                                </div>
-                            </th>
+<div>
 
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-customer>
-                        <tr class="p-selectable-row">
-
-                            <td>
-                                <p-avatar image="../../../assets/images/users/avatar-2.jpg" shape="circle"
-                                    size="large"></p-avatar>
-                            </td>
-                            <td>
-                                {{customer.name}}
-                            </td>
-                            <td>
-                                actividades de integración, uno a uno y detonadores de conversación
-                            </td>
-                            <td>
-                                Reconocimiento
-                            </td>
-                            <td>
-                                <i class="fas fa-check"></i>
-                            </td>
-                            <td>
-                                <button class="btn btn-primary" class="btn btn-primary" style="width: 100px;"
-                                    (click)="extraLarge(exlargeModal)">Lista</button>
-                                <br>
-                                <button class="btn btn-primary" class="btn btn-primary mt-2"
-                                    style="width: 100px;">Asignar</button>
-                                <br>
-                                <button class="btn btn-primary" class="btn btn-primary mt-2"
-                                    style="width: 100px;" (click)="extraLarge(modalEditar)">Editor</button>
-
-                            </td>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="emptymessage">
-
-                    </ng-template>
-                </p-table>
-            </div>
+    <div class="card border border-info border-1">
+        <div class="bg-info p-2">
+            <h1 class="card-title text-white">Trofeos</h1>
         </div>
-    </div>
+        <div class="card-body">
+        <div class="container-btn mt-1 mb-3">
+            <div>
+                <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
+                    <button type="button" class="btn btn-primary" (click)="addTrofeo=!addTrofeo">Añadir trofeo </button>
+
+                </div>
+       
+            </div>
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                placeholder="Global Search" />
+        </div>
+<div style="overflow: auto;">
+    <p-table #dt [value]="listaTrofeos" [rows]="5"
+    [rowsPerPageOptions]="[5, 25, 50]"
+    [globalFilterFields]="['name','description','tutor_lastname_mother','tutor_cellphone','contact_email','contact_name']"
+    [rowHover]="true" dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+    [paginator]="true">
+
+    <ng-template pTemplate="header">
+        <tr>
+
+            <th pSortableColumn="name" class="camp">
+                <div class="flex justify-content-between align-items-center" style="min-width: 80px;">
+                    Foto
+                </div>
+            </th>
+            <th pSortableColumn="name" class="camp">
+                <div class="flex justify-content-between align-items-center" style="min-width: 200px;">
+                    Nombre
+                    <p-sortIcon field="name"></p-sortIcon>
+
+                </div>
+            </th>
+            <th pSortableColumn="description" class="camp">
+                <div class="flex justify-content-between align-items-center" style="min-width: 340px;">
+                    Descripcion
+                    <p-sortIcon field="description"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="record.n" class="trophy_type">
+                <div class="flex justify-content-between align-items-center" style="min-width: 100px;">
+                    Tipo
+                    <p-sortIcon field="trophy_type"></p-sortIcon>
+                </div>
+            </th>
+            <th pSortableColumn="active">
+                <div class="flex justify-content-between align-items-center" style="min-width: 60px;">
+                    Activo
+
+
+                </div>
+            </th>
+            <th pSortableColumn="status" style="min-width: 100px">
+                <div class="flex justify-content-between align-items-center">
+
+                </div>
+            </th>
+            <th>
+
+            </th>
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-customer>
+        <tr class="p-selectable-row">
+
+            <td (click)="select(customer)">
+                <p-avatar image="http://142.93.12.234:8000/{{customer.photo}}" shape="circle"
+                    size="large"></p-avatar>
+            </td>
+            <td  (click)="select(customer)">
+                {{customer.name}}
+            </td>
+            <td>
+                {{customer.description}}
+            </td>
+            <td>
+                {{tipo(customer.trophy_type)}}
+            </td>
+            <td>
+                <i class="bx bxs-calendar-check" *ngIf="customer.active" style="color: green;"></i> <i class="bx bxs-calendar-x" style="color: red;" *ngIf="!customer.active"></i>
+            </td>
+            <td>
+                <button class="btn btn-primary" class="btn btn-primary" style="width: 100px;"
+                    (click)="extraLarge(exlargeModal)">Lista</button>
+                <br>
+                <button class="btn btn-primary" class="btn btn-primary mt-2"
+                    style="width: 100px;">Asignar</button>
+                <br>
+                <button class="btn btn-primary" class="btn btn-primary mt-2"
+                    style="width: 100px;"  (click)="select(customer)">Editor</button>
+
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+
+    </ng-template>
+
+</p-table>
 </div>
+        
+    </div>
+    </div>
+
+
+
+
+
+</div>
+
+<p-dialog header="Añadir trofeo" [(visible)]="addTrofeo" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '70vw'}">
+    <div class="container">
+        <div class="center-form">
+            <form [formGroup]="addTrofeos" class="col-10 mx-auto">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Titulo</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="name">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Descripción</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="description">
+                  </div>
+                  <label for="">Tipo de trofeo</label>
+                  <select class="form-select" aria-label="Default select example" formControlName="trophy_type">
+                    <option value="0">Reconocimiento</option>
+                    <option value="1">Certificación</option>
+                  </select>
+                  <br>
+                  <br>
+                  <div class="mb-3">
+                    <label for="">Imagen</label>
+
+                    <div class="col-sm-12">
+                        <input type="file" class="form-control" id="" (change)="subiendo($event)" accept="image/jpeg">
+                    </div>
+                  </div>
+                 
+                 
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked formControlName="active">
+                    <label class="form-check-label" for="flexSwitchCheckChecked">Activo</label>
+                </div>
+                  
+                  <br>
+                 
+                  <button type="submit" class="btn btn-primary" (click)="onSave()">Guardar</button>
+            </form>
+
+        </div>
+       
+
+    </div>
+
+</p-dialog>
+
+<p-dialog header="Editar trofeo" [(visible)]="editTrofeo" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '70vw'}">
+    <div class="container">
+        <div class="center-form">
+            <form [formGroup]="editformTrofeos" class="col-10 mx-auto">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Titulo</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="name">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Descripción</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="description">
+                  </div>
+                  <label for="">Tipo de trofeo</label>
+                  <select class="form-select" aria-label="Default select example" formControlName="trophy_type">
+                    <option value="0">Reconocimiento</option>
+                    <option value="1">Certificación</option>
+                  </select>
+                  <br>
+                  <br>
+                  <div class="mb-3">
+                    <label for="">Imagen</label>
+
+                    <div class="col-sm-12">
+                        <input type="file" class="form-control" id="" (change)="subiendoUpdate($event)" accept="image/jpeg">
+                    </div>
+                  </div>
+                 
+                 
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked formControlName="active">
+                    <label class="form-check-label" for="flexSwitchCheckChecked">Activo</label>
+                </div>
+                  
+                  <br>
+                 
+                  <button type="submit" class="btn btn-primary" (click)="update()">Guardar</button>
+            </form>
+
+        </div>
+       
+
+    </div>
+
+</p-dialog>
 
 <ng-template #exlargeModal let-modal>
     <div class="modal-header">
@@ -157,7 +272,7 @@
             </div>
            
             <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
-                    [value]="customer" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+                    [value]="listaTrofeos" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
                     [loading]="loading" [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
                     [globalFilterFields]="['name','country.name','representative.name','status']">
@@ -230,57 +345,4 @@
         </div>
 
     </div>
-</ng-template>
-<ng-template  #modalEditar let-modal>
-    <div class="modal-header">
-        <h1>Datos del trofeo </h1>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Close click')">
-            
-
-        </button>
-      
-    </div>
-    <div class="container">
-        <div class="center-form">
-            <form action="" class="col-10">
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Titulo</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Descripción</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
-                  <label for="">Tipo de trofeo</label>
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>Tipo de trofeo</option>
-                    <option value="1">Reconocimiento</option>
-                    <option value="2">Certificación</option>
-                  </select>
-                  <br>
-                  <br>
-                  <div class="mb-3">
-                    <div class="file-select" id="src-file1" >
-                        <input type="file" name="src-file1" aria-label="Archivo">
-                      </div>
-                  </div>
-                 
-                 
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      Activo
-                    </label>
-                  </div>
-                  
-                  <br>
-                 
-                  <button type="submit" class="btn btn-primary">Guardar</button>
-            </form>
-
-        </div>
-       
-
-    </div>
-
 </ng-template>

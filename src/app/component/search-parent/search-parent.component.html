@@ -40,13 +40,13 @@
             </ng-template>
             <ng-template pTemplate="body" let-customer>
                 <tr>
-                    <td  style="cursor:pointer;" class="infoCamper">
+                    <td  style="cursor:pointer;" class="infoCamper" (click)="udpate(customer)">
                         {{customer.tutor_name}}
                     </td>
-                    <td  style="cursor:pointer;">
+                    <td  style="cursor:pointer;" (click)="udpate(customer)">
                         {{customer.tutor_lastname_father}}
                     </td>
-                    <td  style="cursor:pointer;">
+                    <td  style="cursor:pointer;" (click)="udpate(customer)">
                         {{customer.tutor_lastname_mother}}
                     </td>
                     <td>

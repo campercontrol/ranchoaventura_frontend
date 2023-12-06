@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CamperService } from 'src/services/camper.service';
+import { TrofeosService } from 'src/services/trofeos.service';
 
 
 @Component({
@@ -12,29 +15,21 @@ export class TrofeosComponent implements OnInit {
   representatives: any[];
   modalVista :boolean= true;
   modalEditar :boolean= true;
-
+  addTrofeo:boolean=false;
   statuses: any[];
   loading: boolean = false;
+  editTrofeo:boolean=false;
+  date :Date =new Date();
+  idselect:any=0;
+
 
   activityValues: number[] = [0, 100];
   items = []
+  listaTrofeos:any=[]
 
-  cars = [{ Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },
-  { Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },
-  { Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },
-  { Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },
-  { Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },
-  ]
-  customer = [{ name: "Alberto Ulises Hernandez Cruz", record: { correo: "demo@campercontrol.com", tel: "5556576877", cel: "564545545676" }, precio: 5500, sede: "Los Potros", inicio: "2023-11-28", termina: "2023-11-28", estado: "Pagado", cumple: true }
-    , { name: "Arueba de Nombre", record: { n: 12, b: 2, d: 3 }, precio: 2500, sede: "Los Potros", inicio: "2023-11-28", termina: "2023-11-28", estado: "Pagado", cumple: false },
-  { name: "Lrueba de Nombre", record: { n: 12, b: 2, d: 3 }, precio: 5500, sede: "aLos Potros", inicio: "2023-11-28", termina: "2023-11-28", estado: "Pagado", cumple: true }]
-
-  trofeos = [{ name: "Alberto Ulises Hernandez Cruz", record: { correo: "demo@campercontrol.com", tel: "5556576877", cel: "564545545676" }, fecha: "16 de Junio de 1995	" }
-  , { name: "Arueba de Nombre", record: { correo: "demo@campercontrol.com", tel: "5556576877", cel: "564545545676" }, fecha: "16 de Junio de 1995	" },
-{ name: "Lrueba de Nombre",  record: { correo: "demo@campercontrol.com", tel: "5556576877", cel: "564545545676" }, fecha: "16 de Junio de 1995	"}]
-
-
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal,private fb: FormBuilder, private catalogos: CamperService,private trofeosService:TrofeosService) {
+    this.getTrofeos();
+   }
 
   ngOnInit(): void {
   }
@@ -44,6 +39,110 @@ export class TrofeosComponent implements OnInit {
  }
  openModal(content: any) {
   this.modalService.open(content);
+}
+
+
+public addTrofeos: FormGroup = this.fb.group({
+  name: ['', [Validators.required]],
+  photo: ['', [Validators.required]],
+  description: ['', [Validators.required, Validators.minLength(0)]],
+  trophy_type: [1, [Validators.required, Validators.min(0)]],
+  active: [true, [Validators.required]],
+  created_at: [this.date]
+})
+
+public editformTrofeos: FormGroup = this.fb.group({
+  name: ['', [Validators.required]],
+  photo: ['', [Validators.required]],
+  description: ['', [Validators.required, Validators.minLength(0)]],
+  trophy_type: [1, [Validators.required, Validators.min(0)]],
+  active: [true, [Validators.required]],
+  created_at: [this.date]
+})
+
+subiendo(event: any) {
+  const archivo = event.target.files[0];
+  console.log(archivo);
+  
+  const formulario = new FormData();
+  formulario.append('file', archivo)
+  this.catalogos.setPhoto(formulario).subscribe((res: any) => {
+    console.log(res.path);
+    this.addTrofeos.patchValue({
+      photo: res.path
+    })
+  })
+}
+
+subiendoUpdate(event: any) {
+  const archivo = event.target.files[0];
+  console.log(archivo);
+  
+  const formulario = new FormData();
+  formulario.append('file', archivo)
+  this.catalogos.setPhoto(formulario).subscribe((res: any) => {
+    console.log(res.path);
+    this.editformTrofeos.patchValue({
+      photo: res.path
+    })
+  })
+}
+
+onSave () : void {
+  this.trofeosService.setTrofeos(this.addTrofeos.value).subscribe((res) => {
+    console.log(res);
+    
+    this.addTrofeos.reset();
+    this.addTrofeos.patchValue({
+      trophy_type:1
+    })
+    this.addTrofeo= false;
+    this.getTrofeos();
+    },error=>{
+      console.log(error);
+      
+    });
+}
+
+getTrofeos(){
+this.trofeosService.getTrofeos().subscribe((res:any)=>{
+  this.listaTrofeos=res.data;
+})
+}
+
+tipo(id){
+  const data:any =[{id:0,name:'Reconocimiento'},{id:1,name:'Certificado'}]
+  let b :any =data.filter((item)=>{
+    return item.id == id
+  })
+  return b[0].name
+}
+
+select(item){
+  this.idselect=item.id;
+  this.editformTrofeos.patchValue({
+    name:item.name,
+    photo:item.photo,
+    description:item.description,
+    trophy_type:item.trophy_type,
+    active:item.active,
+  })
+  this.editTrofeo=!this.editTrofeo;
+}
+update(){
+  this.trofeosService.editarTrofeos(this.editformTrofeos.value,this.idselect).subscribe((res) => {
+    console.log(res);
+    
+    this.editformTrofeos.reset();
+    this.addTrofeos.patchValue({
+      trophy_type:1
+    })
+    this.editTrofeo= false;
+    this.getTrofeos();
+    },error=>{
+      console.log(error);
+      
+    });
 }
 
 /**
