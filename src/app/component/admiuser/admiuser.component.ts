@@ -17,6 +17,7 @@ export class AdmiuserComponent implements OnInit {
   display: boolean = false;
   display2: boolean = false;
   display3: boolean = false;
+  search:any="";
   vacunas:any = [];
   tabla= true;
   table= false;
@@ -78,7 +79,9 @@ export class AdmiuserComponent implements OnInit {
   grades:any = [];
   school:any = [];
   parent:any = [];
+  buscador:boolean=false;
   escuelas:any = [];
+  listBuscador:any=[];
   photoSelectUp : string | ArrayBuffer;
   displayEditUpd:boolean = false;
   idioma = 'esp';
@@ -425,6 +428,81 @@ export class AdmiuserComponent implements OnInit {
    this.table= false;
    this.display2= true;
 
+   
+  
+    
+  }
+
+  updateSeacrh(item){
+    this.updateId = item.camper_id; 
+   this.camperSer.getCamper(item.camper_id).subscribe((res:any)=>{
+    this.blood_types = res.blood_types;
+    this.food_restrictions = res.food_restrictions;
+    this.genders = res.genders;
+    this.grades = res.grades;
+    this.licensed_medicines = res.licensed_medicines;
+    this.pathological_background = res.pathological_background;
+    this.pathological_background_fm = res.pathological_background_fm;
+    this.school = res.school[0];
+    this.vaccines = res.vaccines; 
+    this.photoSelectUp = 'http://142.93.12.234:8000/'+res['camper'].photo;
+   
+
+    this.formFood.patchValue({
+     
+      name:res['camper'].name,
+      lastname_father:res['camper'].lastname_father,
+      lastname_mother:res['camper'].lastname_mother,
+      photo:res['camper'].photo,
+      gender_id:res['camper'].gender_id,
+      birthday:res['camper'].birthday,
+      height:res['camper'].height,
+      weight:res['camper'].weight,
+      grade:res['camper'].grade,
+      school_id:res['camper'].school_id,
+      school_other:res['camper'].school_other,
+      email: res['camper'].email,
+      can_swim: res['camper'].can_swim,
+      affliction: res['camper'].affliction,
+      blood_type: res['camper'].blood_type,
+      heart_problems: res['camper'].heart_problems,
+      psicology_treatments: res['camper'].psicology_treatments,
+      prevent_activities: res['camper'].prevent_activities,
+      drug_allergies: res['camper'].drug_allergies,
+      other_allergies: res['camper'].other_allergies,
+      nocturnal_disorders: res['camper'].nocturnal_disorders,
+      phobias: res['camper'].phobias,
+      drugs:res['camper'].drugs,
+      doctor_precall: res['camper'].doctor_precall,
+      prohibited_foods: res['camper'].prohibited_foods,
+      comments_admin: res['camper'].comments_admin,
+      insurance: res['camper'].insurance,
+      insurance_company: res['camper'].insurance_company,
+      insurance_number: res['camper'].insurance_number,
+      security_social_number: res['camper'].security_social_number,
+      contact_name:res['camper'].contact_name,
+      contact_relation: res['camper'].contact_relation,
+      contact_homephone: res['camper'].contact_homephone,
+      contact_cellphone: res['camper'].contact_cellphone,
+      record_id:0,
+      parent_id: res['camper'].parent_id,
+    })
+    this.camperSer.getSearchParen(res['camper'].parent_id).subscribe((res)=>{
+      console.log(res.tutor_name);
+      
+      this.item = res.data;
+      console.log(this.item,'padre info');
+      
+      this.nameParent = this.item.tutor_name + this.item.tutor_lastname_father + this.item.tutor_lastname_mother
+      console.log(this.nameParent);
+      
+  })
+    
+   })
+
+   this.table= false;
+   this.display2= true;
+   this.buscador=!this.buscador;
    
   
     
@@ -1031,6 +1109,16 @@ export class AdmiuserComponent implements OnInit {
     }
   }
 
+  searchUser(){
+    this.catalogos.searchCamper(this.search).subscribe((res:any)=>{
+      this.listBuscador = res.data;
+      
+      
+    },error=>{
+      console.log(error);
+      
+    })
+  }
   
 
 }

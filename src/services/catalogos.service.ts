@@ -223,6 +223,10 @@ export class CatalogosService {
       return this.http.get('http://142.93.12.234:8000/search/parent/'+id);
 
     }
+    searchCamper(id){
+      return this.http.get('http://142.93.12.234:8000/search/camper/'+id);
+
+    }
     searchUser(id){
       return this.http.get('http://142.93.12.234:8000/search/user/'+id);
 

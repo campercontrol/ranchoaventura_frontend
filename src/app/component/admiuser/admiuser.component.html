@@ -1520,9 +1520,14 @@
                 </div>
                 <div class="card-body">
                 <div class="container-btn mt-1 mb-3">
-                    <div>
+                    <div class="btn-footer">
                         <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
                             <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar nuevo Acampador</button>
+        
+                        </div>
+
+                        <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
+                            <button type="button" class="btn btn-primary" (click)="buscador=!buscador">Buscador</button>
         
                         </div>
                     </div>
@@ -1603,6 +1608,74 @@
 
 
 
+
+
+<p-dialog header="Buscador" [(visible)]="buscador" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '90vw'}">
+  
+    <div class="container">
+        <div class="col-10 mx-auto">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Ingresa el nombre o correo del padre" aria-label="Ingresa tu búsqueda" aria-describedby="button-addon2" [(ngModel)]="search" >
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="button" id="button-addon2" (click)="searchUser()">Buscar</button>
+                </div>
+              </div>
+            <p-table #dt [value]="listBuscador" [rows]="5"
+            [rowsPerPageOptions]="[5, 25, 50]"
+            [globalFilterFields]="['camper_name','camper_lastname_mother','camper_lastname_father']"
+            [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true"
+            [paginator]="true">
+        
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="camper_name" style="min-width: 120px;">Nombre<p-sortIcon field="camper_name"style="font-size: 10px;"></p-sortIcon></th>
+                    <th pSortableColumn="camper_lastname_father" style="min-width: 120px;">Primer apellido<p-sortIcon field="camper_lastname_father"></p-sortIcon></th>
+                    <th pSortableColumn="camper_lastname_mother" style="min-width: 120px;">Segundo apellido<p-sortIcon field="camper_lastname_mother"></p-sortIcon></th>
+                    <th pSortableColumn="school" style="min-width: 150px;">Escuela<p-sortIcon field="school"></p-sortIcon></th>
+                    <th pSortableColumn="updated" style="min-width: 140px;">Update<p-sortIcon field="updated_at"></p-sortIcon></th>
+                    <th pSortableColumn="tutor_fullname" style="min-width: 130px;">Nombre contacto<p-sortIcon field="tutor_fullname"></p-sortIcon></th>
+                    <th pSortableColumn="tutor_email" style="min-width: 210px;">correo del parde<p-sortIcon field="tutor_email"></p-sortIcon></th>
+        
+        
+        
+                 
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-customer>
+                <tr>
+                    <td (click)="updateSeacrh(customer)" style="cursor:pointer;">
+                        {{customer.camper_name}}
+                    </td>
+                    <td (click)="updateSeacrh(customer)" style="cursor:pointer;">
+                        {{customer.camper_lastname_father}}
+                    </td>
+                    <td (click)="updateSeacrh(customer)" style="cursor:pointer;">
+                        {{customer.camper_lastname_mother}}
+                    </td>
+                    <td>
+                        {{customer.school}}
+                    </td>
+                    <td>
+                        {{customer.updated.substring(0,10)}}
+                    </td>
+                    <td>
+                        {{customer.tutor_fullname}}
+                    </td>
+                    <td>
+                        {{customer.tutor_email}}
+                    </td>
+                  
+                 
+                </tr>
+            </ng-template>
+        
+        </p-table>
+        </div>
+    </div>
+   
+</p-dialog>
 
 
 
