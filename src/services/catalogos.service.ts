@@ -252,6 +252,9 @@ export class CatalogosService {
     getParent(){
       return this.http.get('http://142.93.12.234:8000/parent/');
      }
+     getStaff(){
+      return this.http.get('http://142.93.12.234:8000/staff/');
+     }
      getParentAdmi(){
       return this.http.get('http://142.93.12.234:8000/admin/parent/');
      }

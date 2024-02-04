@@ -1,19 +1,22 @@
-<article class="card">
-    <img
-      class="card__background"
-      src="https://i.imgur.com/QYWAcXk.jpeg"
-      alt="Photo of Cartagena's cathedral at the background and some colonial style houses"
-      width="1920"
-      height="2193"
-    />
-    <div class="card__content | flow">
-      <div class="card__content--container | flow">
-        <h2 class="card__title">Colombia</h2>
-        <p class="card__description">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in
-          labore laudantium deserunt fugiat numquam.
-        </p>
+
+
+  <div class="contenedor-img">
+    <article class="card" *ngFor="let item of capacitaciones">
+      <img
+        class="card__background"
+        [src]="'http://142.93.12.234:8000/'+item.photo"
+        alt="Photo of Cartagena's cathedral at the background and some colonial style houses"
+        width="auto"
+        height="auto"
+      />
+      <div class="card__content | flow">
+        <div class="card__content--container | flow">
+          <h2 class="card__title">{{item.name}}</h2>
+          <p class="card__description">
+          {{item.description}}
+          </p>
+        </div>
+        <button class="card__button">Inscribirse</button>
       </div>
-      <button class="card__button">Read more</button>
-    </div>
-  </article>
+    </article>
+  </div>

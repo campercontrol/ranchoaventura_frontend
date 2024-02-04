@@ -65,6 +65,7 @@ import { AdmiPagosComponent } from '../component/admi-pagos/admi-pagos.component
 import { SearchParentComponent } from '../component/search-parent/search-parent.component';
 import { EventosCapacitacionesComponent } from '../component/eventos-capacitaciones/eventos-capacitaciones.component';
 import { ListEventsComponent } from '../component/list-events/list-events.component';
+import { AdminStaffComponent } from '../component/admin-staff/admin-staff.component';
 
 const routes: Routes = [
   
@@ -97,6 +98,8 @@ const routes: Routes = [
   { path: 'admi/paymants', component: AdmiPagosComponent },// admi a camps
   { path: 'admi/search', component: SearchParentComponent },// admi a camps
   { path: 'admi/events', component: EventosCapacitacionesComponent },// admi a camps
+  { path: 'admi/staff', component: AdminStaffComponent },// admi a camps
+
 
   { path: 'staff/events', component: ListEventsComponent },// admi a camps
   { path: 'trofeos', component: TrofeosComponent },// admi a camps
@@ -120,8 +123,8 @@ const routes: Routes = [
   //
 
   {path: 'grouping/camp', component: AgregarAgrupacionComponent},
-  {path: 'medical/care', component: MedicoComponent},
-  {path: 'medical/camp-medical', component: TablaMedicalComponent},
+  {path: 'medical/care/:campId/:camperid', component: MedicoComponent},
+  {path: 'medical/camp-medical/:id', component: TablaMedicalComponent},
 
   {path: 'mailing', component: GmailingComponent},
   {path: 'school/profile', component: PerfilEscuelaComponent },

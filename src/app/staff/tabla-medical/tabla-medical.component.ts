@@ -1,4 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MedicalService } from 'src/services/medical.service';
 
 @Component({
   selector: 'app-tabla-medical',
@@ -20,8 +22,23 @@ export class TablaMedicalComponent implements OnInit {
 
     activityValues: number[] = [0, 100];
     op: any;
+    idCamp=0;
+    campers:any =[];
+    staffs:any =[];
 
-  constructor() { }
+
+  constructor(private routesA:ActivatedRoute,private medical:MedicalService,private routers:Router) {
+    this.routesA.params.subscribe((params) => {
+      this.idCamp = params['id'];})
+      console.log(this.idCamp);
+      
+      this.medical.getMedicalCamps(this.idCamp).subscribe((res:any)=>{
+        console.log(res);
+        this.campers = res.campers;
+        this.staffs = res.staffs
+        
+      })
+   }
   cars=[{Nombre:"Campamento con agrupaciones nuevas agrpaciones de campamento",grado:"prueba2",inicio:"2020-11-10 ",termina:"2020-11-10 " },
   {Nombre:"Campamento con agrupaciones", grado:"prueba2",inicio:"2020-11-10 ",termina:"2020-11-10 "   },
   {Nombre:"Campamento con agrupaciones", grado:"prueba2",inicio:"2020-11-10 ",termina:"2020-11-10 "   },
@@ -42,7 +59,14 @@ export class TablaMedicalComponent implements OnInit {
   }
   showMaximizableDialog() {
     this.displayMaximizable = true;
-}
+  }
+  navegate(id){
+    this.routers.navigate(['/dashboard/medical/care/'+this.idCamp+'/'+id]);
+
+  }
+
+ 
+
  
 
 }

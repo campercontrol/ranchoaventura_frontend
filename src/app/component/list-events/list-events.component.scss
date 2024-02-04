@@ -54,6 +54,7 @@ p {
 /* CARD COMPONENT */
 
 .card {
+  color: white;
   display: grid;
   place-items: center;
   width: 80vw;
@@ -82,12 +83,13 @@ p {
   justify-content: space-between;
   align-self: flex-end;
   height: 55%;
+  width: 100%;
   padding: 12% 1.25rem 1.875rem;
   background: linear-gradient(
     180deg,
-    hsla(0, 0%, 0%, 0) 0%,
-    hsla(0, 0%, 0%, 0.3) 10%,
-    hsl(0, 0%, 0%) 100%
+    hsla(145, 43%, 55%, 0) 0%,
+    hsla(145, 100%, 37%, 0.3) 10%,
+    hsl(150, 100%, 35%) 100%
   );
 }
 
@@ -192,6 +194,14 @@ p {
     transform-origin: left;
     transition: opacity 500ms ease-in, transform 500ms ease-in;
     transition-delay: 500ms;
+  }
+
+  .contenedor-img{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
   }
 }
 

@@ -159,6 +159,9 @@ import { SearchParentComponent } from './component/search-parent/search-parent.c
 import { EventosCapacitacionesComponent } from './component/eventos-capacitaciones/eventos-capacitaciones.component';
 import { ListEventsComponent } from './component/list-events/list-events.component';
 import { TrofeosComponent } from './component/trofeos/trofeos.component';
+import { AdminStaffComponent } from './component/admin-staff/admin-staff.component';
+import { AdminEditStaffComponent } from './component/admin-staff/admin-edit-staff/admin-edit-staff.component';
+import { AdminStaffCreateComponent } from './component/admin-staff/admin-staff-create/admin-staff-create.component';
 
 
 
@@ -221,7 +224,10 @@ export function createTranslateLoader(http: HttpClient): any {
     SearchParentComponent,
     EventosCapacitacionesComponent,
     ListEventsComponent,
-    TrofeosComponent, 
+    TrofeosComponent,
+    AdminStaffComponent,
+    AdminEditStaffComponent,
+    AdminStaffCreateComponent, 
        
   ],
   imports: [

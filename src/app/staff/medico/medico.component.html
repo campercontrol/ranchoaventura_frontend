@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="!cargando">
     <div class="row">
         <div class="mb-4 col-12 d-flex justify-content-center justify-content-lg-end align-items-lg-center">
             <div class="d-flex flex-column d-sm-block med-button-container">
@@ -26,35 +26,38 @@
                             <dl>
                                 <div class="my-2">
                                     <dt>Nombre: </dt>
-                                    <dd>Alberto</dd>
+                                    <dd>{{infoCamper.camper.name}} {{infoCamper.camper.lastname_father}} {{infoCamper.camper.lastname_mother}}</dd>
                                 </div>
                                 <div class="my-2">
                                     <dt>Peso: </dt>
-                                    <dd>122 kg</dd>
+                                    <dd>{{infoCamper.camper.weight}}kg</dd>
                                 </div>
                                 <div class="my-2">
                                     <dt>Altura: </dt>
-                                    <dd>173cm</dd>
+                                    <dd>{{infoCamper.camper.height}}cm</dd>
                                 </div>
                                 <div class="my-2">
                                     <dt>Enfermedades: </dt>
-                                    <dd>Ninguna</dd>
-                                </div>
+                                    <dd>{{infoCamper.camper.affliction}}</dd>
+                                                                  </div>
                                 <div class="my-2">
                                     <dt>Tipo de sangre: </dt>
-                                    <dd>B+</dd>
+                                    <dd>{{InfoBlood(infoCamper.camper.blood_type)}}</dd>
                                 </div>
                                 <div class="my-2">
                                     <dt>Problemas cardiácos: </dt>
-                                    <dd>No</dd>
+                                    <dd>{{infoCamper.camper.heart_problems}}</dd>
                                 </div>
                                 <div class="my-2">
                                     <dt>Tratamientos psicológicos: </dt>
-                                    <dd>No</dd>
+                                    <dd>{{infoCamper.camper.psicology_treatments}}</dd>
                                 </div>
                                 <div class="my-2">
                                     <dt>Vacunas: </dt>
-                                    <dd>No</dd>
+                                        <dd *ngIf="this.infoCamper.vaccinesT!=''">{{this.infoCamper.vaccinesT}}</dd>
+                                        <dd *ngIf="this.infoCamper.vaccinesT==''">Ninguno</dd>
+
+
                                 </div>
                                 <div class="my-2">
                                     <dt>Lesiones anteriores: </dt>
@@ -70,15 +73,15 @@
                             <dl>
                                 <div class="my-2">
                                     <dt>Alergias: </dt>
-                                    <dd>No</dd>
+                                    <dd>de {{infoCamper.camper.name}}</dd>
                                 </div>
                                 <div class="my-2">
                                     <dt>Medicamentos: </dt>
-                                    <dd>Ninguna</dd>
+                                    <dd>{{infoCamper.camper.drug_allergies}}</dd>
                                 </div>
                                 <div class="my-2">
                                     <dt>Otras: </dt>
-                                    <dd>No</dd>
+                                    <dd>{{infoCamper.camper.other_allergies}}</dd>
                                 </div>
                             </dl>
                         </div>
@@ -90,15 +93,16 @@
                             <dl>
                                 <div class="my-2">
                                     <dt>Alimentación: </dt>
-                                    <dd>...</dd>
+                                    <dd>de {{infoCamper.camper.name}}</dd>
+
                                 </div>
                                 <div class="my-2">
                                     <dt>Alimentación especial: </dt>
-                                    <dd>Ninguna dieta especial</dd>
-                                </div>
+                                    <dd *ngIf="this.infoCamper.food_restrictionsT!=''">{{this.infoCamper.food_restrictionsT}}</dd>
+                                    <dd *ngIf="this.infoCamper.food_restrictionsT==''">Ninguno</dd>                                </div>
                                 <div class="my-2">
                                     <dt>Alimentación prohibida: </dt>
-                                    <dd>Ninguno</dd>
+                                    <dd>{{infoCamper.camper.prohibited_foods}}</dd>
                                 </div>
                             </dl>
                         </div>
@@ -112,24 +116,26 @@
                             <dl>
                                 <div class="my-2">
                                     <dt>Medicamentos: </dt>
-                                    <dd>No</dd>
+                                    <dd>de {{infoCamper.camper.name}}</dd>
                                 </div>
                                 <div class="my-2">
                                     <dt>Medicamentos que toma: </dt>
-                                    <dd>Ninguno</dd>
+                                    <dd>{{infoCamper.camper.drugs}}</dd>
                                 </div>
                                 <div class="my-2">
                                     <dt>Medicamentos autorizados: </dt>
-                                    <dd>Ningún medicamento autorizado</dd>
+                                    <dd *ngIf="this.infoCamper.licensed_medicines!=''">{{this.infoCamper.licensed_medicinesT}}</dd>
+                                    <dd *ngIf="this.infoCamper.licensed_medicines==''">Ninguno</dd> 
+                                   
                                 </div>
                                 <div class="my-2">
                                     <dt>Antecedentes camper: </dt>
-                                    <dd>Ningún antecedente médico</dd>
-                                </div>
+                                    <dd *ngIf="this.infoCamper.licensed_medicines!=''">{{this.infoCamper.licensed_medicinesT}}</dd>
+                                    <dd *ngIf="this.infoCamper.licensed_medicines==''">Ninguno</dd>                                 </div>
                                 <div class="my-2">
                                     <dt>Antecedentes familiares: </dt>
-                                    <dd>Ningún antecedente medico familiar</dd>
-                                </div>
+                                    <dd *ngIf="this.infoCamper.licensed_medicines!=''">{{this.infoCamper.licensed_medicinesT}}</dd>
+                                    <dd *ngIf="this.infoCamper.licensed_medicines==''">Ninguno</dd>                                 </div>
                             </dl>
                         </div>
                     </div>
@@ -140,19 +146,19 @@
                             <dl>
                                 <div class="my-2">
                                     <dt>Nombre completo: </dt>
-                                    <dd>Renata camper control</dd>
+                                    <dd>{{infoParent.tutor_name}}</dd>
                                 </div>
                                 <div class="my-2">
                                     <dt>Teléfono celular: </dt>
-                                    <dd>55123456</dd>
+                                    <dd>{{infoParent.tutor_cellphone}}</dd>
                                 </div>
                                 <div class="my-2">
                                     <dt>Teléfono de casa: </dt>
-                                    <dd>55123456</dd>
+                                    <dd>{{infoParent.tutor_home_phone}}</dd>
                                 </div>
                                 <div class="my-2">
                                     <dt>Teléfono de trabajo: </dt>
-                                    <dd>55123456</dd>
+                                    <dd>{{infoParent.tutor_work_phone}}</dd>
                                 </div>
                             </dl>
                         </div>
@@ -164,19 +170,19 @@
                             <dl>
                                 <div class="my-2">
                                     <dt>Nombre completo: </dt>
-                                    <dd>Renata camper control</dd>
+                                    <dd>{{infoParent.contact_name}} {{infoParent.contact_lastname_father}}  {{infoParent.contact_lastname_mother}}</dd>
                                 </div>
                                 <div class="my-2">
                                     <dt>Teléfono celular: </dt>
-                                    <dd>55123456</dd>
+                                    <dd>{{infoParent.contact_cellphone}}</dd>
                                 </div>
                                 <div class="my-2">
                                     <dt>Teléfono de casa: </dt>
-                                    <dd>55123456</dd>
+                                    <dd>{{infoParent.contact_home_phone}}</dd>
                                 </div>
                                 <div class="my-2">
                                     <dt>Teléfono de trabajo: </dt>
-                                    <dd>55123456</dd>
+                                    <dd>{{infoParent.contact_work_phone}}</dd>
                                 </div>
                             </dl>
                         </div>
@@ -189,19 +195,19 @@
                                 <dl>
                                     <div class="my-2">
                                         <dt>Nombre completo: </dt>
-                                        <dd>Alberto</dd>
+                                        <td>{{infoParent.contact_name}}</td>
                                     </div>
                                     <div class="my-2">
                                         <dt>Parentesco: </dt>
-                                        <dd>Lider</dd>
+                                        <td>Lider</td>
                                     </div>
                                     <div class="my-2">
                                         <dt>Télefono celular: </dt>
-                                        <dd>55123456</dd>
+                                        <td>55123456</td>
                                     </div>
                                     <div class="my-2">
                                         <dt>Télefono de casa: </dt>
-                                        <dd>55123456</dd>
+                                        <td>55123456</td>
                                     </div>
                                 </dl>
                             </div>
@@ -392,3 +398,8 @@
     
 
 </div>
+
+<div class="alert alert-warning d-flex align-items-center" role="alert" *ngIf="cargando">
+    <div class="spinner-border mr-2" role="status"></div>
+    <div>Permitanos, estamos cargando la información</div>
+  </div>

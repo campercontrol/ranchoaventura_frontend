@@ -16,7 +16,7 @@
         </div>
 
         <div class="scroll-y">
-            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="customer"
+            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="campers"
                 [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
                 [globalFilterFields]="['name','country.name','representative.name','status']">
@@ -36,10 +36,16 @@
                                 <p-sortIcon field="name"></p-sortIcon>
                             </div>
                         </th>
-                        <th pSortableColumn="precio">
+                        <th pSortableColumn="tutor_fullname">
                             <div class="flex justify-content-between align-items-center" style="width: 100px;">
                                 Tutor 1
-                                <p-sortIcon field="precio"></p-sortIcon>
+                                <p-sortIcon field="tutor_fullname"></p-sortIcon>
+                            </div>
+                        </th>
+                        <th pSortableColumn="second_tutor_full_name">
+                            <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                                Tutor 2
+                                <p-sortIcon field="second_tutor_full_name"></p-sortIcon>
                             </div>
                         </th>
                         <th pSortableColumn="precio">
@@ -48,35 +54,42 @@
                                 <p-sortIcon field="precio"></p-sortIcon>
                             </div>
                         </th>
+                        <th style="min-width: 140px;">
 
-
-
-
-
-
-                        <th pSortableColumn="precio">
-                            <div class="flex justify-content-between align-items-center" style="width: 80px;">
-                            </div>
                         </th>
+
+
+
+
+
+
+                      
 
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-customer>
                     <tr class="p-selectable-row">
 
-                        <td>
-                            <p-avatar image="../../../assets/images/users/avatar-2.jpg" shape="circle"
+                        <td (click)="navegate(customer.camper_id)">
+                            <p-avatar image="http://142.93.12.234:8000/{{customer.camper_photo}}" shape="circle"
                                 size="large"></p-avatar>
                         </td>
-                        <td>
-                            {{customer.name}}
+                        <td (click)="navegate(customer.camper_id)">
+                            sssss
                         </td>
-
-
                         <td>
-                            Renata Camper Control <br>
-                            renata@campercontrol.com <br>
-                            55123456 </td>
+                           {{customer.tutor_fullname}}<br>
+                           {{customer.tutor_email}} <br>
+                           {{customer.tutor_cellphone}} 
+                        </td>
+                        <td>
+                            {{customer.second_tutor_full_name}}<br>
+                            {{customer.second_tutor_email}} <br>
+                            {{customer.second_tutor_cellphone}}
+                         </td>
+                        
+                              
+
                         <td>
                             <p-avatar image="../../../assets/images/medical/No urgencia.png" pBadge value="2"
                                 [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px'}"
@@ -108,7 +121,7 @@
 
 
                         <td>
-                            <button class="btn btn-primary" class="btn btn-primary">ver perfil</button>
+                            <button class="btn btn-primary" style="width: 100%;" class="btn btn-primary" (click)="navegate(customer.camper_id)">ver perfil</button>
                         </td>
 
 

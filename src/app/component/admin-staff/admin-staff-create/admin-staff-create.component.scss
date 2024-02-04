@@ -1,0 +1,70 @@
+.container-footer-parents{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.foto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedor-datos{
+    display: flex;
+    justify-content: space-between;
+}
+.contenedor-datos-vac{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.container-genero{
+    display: flex;
+    flex-direction:column ;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+.titulos-datos-medicos{
+    display: flex;
+    flex-direction: column;
+}
+.input-datos-medicos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.container-medico{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flex-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    align-items: center;
+}
+
+.btn-footer{
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container-footer-parents{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mn{
+    margin-top: -110px;
+}

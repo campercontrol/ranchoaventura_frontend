@@ -1,0 +1,111 @@
+<div *ngIf="!cargando">
+    <p-tabView *ngIf="table">
+        <p-tabPanel header="Staff">
+            <div>
+
+                <div class="card border border-info border-1">
+                    <div class="bg-info p-2">
+                        <h1 class="card-title text-white">Staff</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="container-btn mt-1 mb-3">
+                            <div>
+                                <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
+                                    <button type="button" class="btn btn-primary" (click)="showDialog()">Añadir Pago</button>
+
+                                </div>
+                            </div>
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Global Search" />
+                        </div>
+                        <div style="overflow: auto;">
+                            <p-table #dt [value]="listcatalogos" [rows]="5" [rowsPerPageOptions]="[5, 25, 50]"
+                                [globalFilterFields]="['Staff.name','Staff.facebook','payment_date','payment_amount','tipoMovimiento','metodosPago']"
+                                [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
+                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                                [showCurrentPageReport]="true" [paginator]="true">
+
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th pSortableColumn="Staff.name" style="min-width: 190px; text-align: center;">
+                                            Nombre <p-sortIcon field="Staff.name"
+                                                style="font-size: 10px;"></p-sortIcon></th>
+                                        <th pSortableColumn="Staff.facebook" style="min-width: 150px;text-align: center;">
+                                            facebook<p-sortIcon field="Staff.facebook"></p-sortIcon></th>
+                                        <th pSortableColumn="Staff.birthday" style="min-width: 150px;text-align: center;">
+                                            Fecha de nacimiento<p-sortIcon field="Staff.birthday"></p-sortIcon></th>
+                                            <th pSortableColumn="Staff.bio" style="min-width: 150px;text-align: center;">
+                                                Bio<p-sortIcon field="Staff.bio"></p-sortIcon></th>
+                                             
+                                                    <th pSortableColumn="email" style="min-width: 110px;text-align: center;">
+                                                        Email<p-sortIcon field="email"></p-sortIcon></th>
+                                                        <th pSortableColumn="tipoMovimiento" style="min-width: 60px;text-align: center;">
+                                                            Contactos<p-sortIcon field="tipoMovimiento"></p-sortIcon></th>
+                                                      
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-customer>
+                                    <tr>
+                                        <td (click)="update(customer)" style="cursor:pointer; text-align: center;">
+                                           {{customer.Staff.name}}
+                                        </td>
+                                        <td style="font-size: 12px; font-size: 12px;">
+                                            {{customer.Staff.facebook}}
+
+                                        </td>
+                                        <td style="font-size: 12px; font-size: 12px;">
+                                            {{customer.Staff.birthday}} 
+                                        </td>
+                                        
+                                        <td style="text-align: center; font-size: 12px;">
+                                            {{customer.Staff.bio}}
+
+                                        </td>
+                                        <td style="text-align: center; font-size: 12px;" >
+                                            {{customer.email}}
+                                        </td>
+                                     
+
+                                        <td style="text-align: center;">
+                                            
+                                            {{customer.Staff.cellphone}}
+                                            <br>
+                                            {{customer.Staff.home_phone}}
+
+
+                                        </td>
+                                     
+
+
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+        </p-tabPanel>
+
+
+    </p-tabView>
+    <div *ngIf="!table && !display2">
+
+        <app-admin-staff-create></app-admin-staff-create>
+    </div>
+
+    <div *ngIf="display2">
+    </div>
+</div>
+
+<div class="spinner-border text-primary" role="status" style="margin: 0 auto;" *ngIf="cargando">
+    <span class="sr-only">Loading...</span>
+</div>
+
