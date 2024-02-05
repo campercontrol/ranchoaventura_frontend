@@ -41,6 +41,16 @@ export class MedicoComponent implements OnInit {
         this.infoCamper.food_restrictions.forEach(element => {
           this.infoCamper.food_restrictions= this.infoCamper.food_restrictionsT + element.name+ ','+" " ;
         });
+
+        this.infoCamper.pathological_backgroundT=""
+        this.infoCamper.pathological_background.forEach(element => {
+          this.infoCamper.food_restrictions= this.infoCamper.pathological_backgroundT + element.name+ ','+" " ;
+        });
+
+        this.infoCamper.pathological_background_fmT=""
+        this.infoCamper.pathological_background_fm.forEach(element => {
+          this.infoCamper.food_restrictions= this.infoCamper.pathological_background_fmT + element.name+ ','+" " ;
+        });
         this.cargando = false;
 
 

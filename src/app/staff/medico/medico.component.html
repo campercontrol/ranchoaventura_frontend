@@ -130,12 +130,12 @@
                                 </div>
                                 <div class="my-2">
                                     <dt>Antecedentes camper: </dt>
-                                    <dd *ngIf="this.infoCamper.licensed_medicines!=''">{{this.infoCamper.licensed_medicinesT}}</dd>
-                                    <dd *ngIf="this.infoCamper.licensed_medicines==''">Ninguno</dd>                                 </div>
+                                    <dd *ngIf="this.infoCamper.pathological_backgroundT!=''">{{this.infoCamper.pathological_backgroundT}}</dd>
+                                    <dd *ngIf="this.infoCamper.pathological_backgroundT==''">Ninguno</dd>                                 </div>
                                 <div class="my-2">
                                     <dt>Antecedentes familiares: </dt>
-                                    <dd *ngIf="this.infoCamper.licensed_medicines!=''">{{this.infoCamper.licensed_medicinesT}}</dd>
-                                    <dd *ngIf="this.infoCamper.licensed_medicines==''">Ninguno</dd>                                 </div>
+                                    <dd *ngIf="this.infoCamper.pathological_background_fmT!=''">{{this.infoCamper.licensed_medicinesT}}</dd>
+                                    <dd *ngIf="this.infoCamper.pathological_background_fmT==''">Ninguno</dd>                                 </div>
                             </dl>
                         </div>
                     </div>
@@ -195,19 +195,19 @@
                                 <dl>
                                     <div class="my-2">
                                         <dt>Nombre completo: </dt>
-                                        <td>{{infoParent.contact_name}}</td>
+                                        <dd>{{infoCamper.camper.contact_name}}</dd>
                                     </div>
                                     <div class="my-2">
                                         <dt>Parentesco: </dt>
-                                        <td>Lider</td>
+                                        <dd>{{infoCamper.camper.contact_relation}}</dd>
                                     </div>
                                     <div class="my-2">
                                         <dt>Télefono celular: </dt>
-                                        <td>55123456</td>
+                                        <dd>{{infoCamper.camper.contact_cellphone}}</dd>
                                     </div>
                                     <div class="my-2">
                                         <dt>Télefono de casa: </dt>
-                                        <td>55123456</td>
+                                        <dd>{{infoCamper.camper.contact_homephone}}</dd>
                                     </div>
                                 </dl>
                             </div>
@@ -251,7 +251,7 @@
         <div class="container-consultas p-2 rounded mb-2 bg-primary ">
             <div>
                 <h5 class="text-white">
-                    Consulta y el pro que fue -- fecha y hora de
+                    Consulta y el por que fue -- fecha y hora de
                 </h5>
             </div>
             <div>

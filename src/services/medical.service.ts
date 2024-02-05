@@ -16,4 +16,8 @@ export class MedicalService {
     return this.http.get('http://142.93.12.234:8000/medical/camp/'+campId+'/camper/'+camperId);
     
   }
+  nuevaConsulta(data){
+    return this.http.post("http://142.93.12.234:8000/medical/camper/visit/",data);
+
+  }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { MedicalService } from 'src/services/medical.service';
 
 @Component({
   selector: 'app-nueva-consulta',
@@ -7,7 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NuevaConsultaComponent implements OnInit {
 
-  constructor() { }
+  campId:any =0;
+  camperid:any =0;
+  infoParent:any ={}
+  infoCamper:any ={}
+  cargando:boolean = true;
+  bloodytype:any = []
+
+
+  constructor(private routesA:ActivatedRoute,private medical:MedicalService) {
+    this.routesA.params.subscribe((params) => {
+      this.camperid = params['camperid'];
+      this.campId = params['campId'];
+    })
+  }
 
   ngOnInit(): void {
   }
