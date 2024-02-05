@@ -109,7 +109,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FormsModule,
     TableModule,
     DragDropModule,
-    OrderListModule
+    OrderListModule,
+    FormsModule
     
   ],
 })

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MedicalService } from 'src/services/medical.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class MedicoComponent implements OnInit {
   bloodytype:any = []
 
 
-  constructor(private routesA:ActivatedRoute,private medical:MedicalService) {
+  constructor(private routesA:ActivatedRoute,private medical:MedicalService,private router:Router) {
     this.routesA.params.subscribe((params) => {
       this.camperid = params['camperid'];
       this.campId = params['campId'];
@@ -68,6 +68,9 @@ export class MedicoComponent implements OnInit {
 
   }
 
+  redireccion(){
+    this.router.navigate(['/dashboard/medical/add_consultation/'+this.campId+'/'+this.camperid]);
+  }
   InfoBlood(id){
     console.log(id);
     

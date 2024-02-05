@@ -56,6 +56,7 @@ import { CardCapacitacionesComponent } from './card-capacitaciones/card-capacita
 import { FormModule } from '../pages/form/form.module';
 import { UpdatePerfilComponent } from './parents-inscripcion-camp/update-perfil/update-perfil.component';
 import { TagModule } from 'primeng/tag';
+import { NuevaConsultaComponent } from '../pages/medical/nueva-consulta/nueva-consulta.component';
 
 
 
@@ -72,6 +73,7 @@ import { TagModule } from 'primeng/tag';
     NuevoCampamentoComponent,
     CampamentosStaffComponent,
     GroupingComponent,
+    NuevaConsultaComponent,
     MedicoComponent,
     AgregarAgrupacionComponent,
     CampamentosNuevosComponent,

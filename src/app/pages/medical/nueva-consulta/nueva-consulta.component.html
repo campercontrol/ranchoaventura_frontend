@@ -1,12 +1,13 @@
+<div id="top"></div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12">
+        <div class="col-10 mx-auto">
             <div class="card  border-top border-danger">
                 <div class="card-body">
 
                     <div class="container-footer-parents">
                         <div class="row justify-content-lg-center justify-content-sm-center">
-                            <div class="col-lg-2 col-sm-2">
+                            <div class="col-lg-2 col-sm-4">
                                 <img src="assets/images/camp/datos-medico.png" class="avatar-lg" 
                             alt="madre y padres">
                             </div>
@@ -16,61 +17,71 @@
                         </div>
                     </div>
                     <hr>
-                    <form>
+                    <form [formGroup]="formConsult" class="mt-2 p-3">
+                      <div class="row mb-3">
+                        <div class="col-sm-12 ">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck1"  value="true" formControlName="send_in_email" >
+                            <label class="form-check-label" for="gridCheck1">
+                                Enviar consulta a padres
+                            </label>
+                          </div>
+                        </div>
+                      </div>
                         <div class="row mb-3">
-                          <label for="inputEmail3" class="col-sm-2 col-form-label">Nombre del doctor*</label>
-                          <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail3">
+                          <label for="inputEmail3" class="col-sm-12 col-form-label">Nombre del doctor*</label>
+                          <div class="col-sm-12">
+                            <input type="email" class="form-control" id="inputEmail3" formControlName="doctor"  [ngClass]="{'is-invalid': formConsult.get('doctor').invalid && formConsult.get('doctor').touched}">
                           </div>
                         </div>
                         <div class="row mb-3">
-                          <label for="inputPassword3" class="col-sm-2 col-form-label">Fecha de atención*</label>
-                          <div class="col-sm-10">
-                            <input type="date" class="form-control" id="inputPassword3">
+                          <label for="inputPassword3" class="col-sm-12 col-form-label">Fecha de atención*</label>
+                          <div class="col-sm-12">
+                            <input type="date" class="form-control" id="inputPassword3" formControlName="attention_date"  [ngClass]="{'is-invalid': formConsult.get('attention_date').invalid && formConsult.get('attention_date').touched}">
                           </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Hora de atención*</label>
-                            <div class="col-sm-10">
-                              <input type="time" class="form-control" id="inputPassword3">
+                            <label for="inputPassword3" class="col-sm-12 col-form-label">Hora de atención*</label>
+                            <div class="col-sm-12">
+                              <input type="time" class="form-control" id="inputPassword3" formControlName="attention_time" [ngClass]="{'is-invalid': formConsult.get('attention_time').invalid && formConsult.get('attention_time').touched}">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Diagnostico*</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="inputPassword3">
+                            <label for="inputPassword3" class="col-sm-12 col-form-label">Diagnostico*</label>
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" id="inputPassword3" formControlName="diagnostic" [ngClass]="{'is-invalid': formConsult.get('diagnostic').invalid && formConsult.get('diagnostic').touched}">
                             </div>
                         </div>
                         <fieldset class="row mb-3">
-                            <legend class="col-form-label col-sm-2 pt-0">Tipo de consulta</legend>
-                            <div class="col-sm-10">
+                            <legend class="col-form-label col-sm-4 pt-0">Tipo de consulta</legend>
+                            <div class="col-sm-12">
                               <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                                <label class="form-check-label" for="gridRadios1">
+                                <input class="form-check-input" type="radio" name="triage" id="gridRadios1ba" value=1  formControlName="triage">
+                                <label class="form-check-label" for="gridRadios1ba">
                                     No urgencia
                                 </label>
                               </div>
                               <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                                <label class="form-check-label" for="gridRadios2">
+                                <input class="form-check-input" type="radio" name="triage" id="gridRadios2b" value=2 formControlName="triage">
+                                <label class="form-check-label" for="gridRadios2b">
                                     Urgencia menor
                                 </label>
                               </div>
                               <div class="form-check disabled">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
-                                <label class="form-check-label" for="gridRadios3">
+                                <input class="form-check-input" type="radio" name="triage" id="gridRadios3a" value=3 formControlName="triage">
+                                <label class="form-check-label" for="gridRadios3a">
                                     Urgencia
                                 </label>
                               </div>
                               <div class="form-check disabled">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
-                                <label class="form-check-label" for="gridRadios3">
+                                <input class="form-check-input" type="radio" name="triage" id="gridRadios3q" value=4 formControlName="triage">
+                                <label class="form-check-label" for="gridRadios3q">
                                     Emergencia
                                 </label>
                               </div>
                               <div class="form-check disabled">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
-                                <label class="form-check-label" for="gridRadios3">
+                                <input class="form-check-input" type="radio" name="triage" id="gridRadios3w" value=5 formControlName="triage">
+                                <label class="form-check-label" for="gridRadios3w">
                                     Reanimacion
                                 </label>
                               </div>
@@ -78,98 +89,93 @@
                           </fieldset>
 
                         <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Descripción basica para personal no medico*</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="inputPassword3" class="col-sm-12 col-form-label">Descripción basica para personal no medico*</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" placeholder="" id="" style="height: 100px" formControlName="description" [ngClass]="{'is-invalid': formConsult.get('description').invalid && formConsult.get('description').touched}"></textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Descripción del evento en palabras del camper*</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="inputPassword3" class="col-sm-12 col-form-label">Descripción del evento en palabras del camper*</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" placeholder="" id="" style="height: 100px" formControlName="event_description" [ngClass]="{'is-invalid': formConsult.get('event_description').invalid && formConsult.get('event_description').touched}"></textarea>
                             </div>
                         </div>
                         <fieldset class="row mb-3">
-                            <legend class="col-form-label col-sm-2 pt-0">¿Quien autorizó el medicamento?*</legend>
-                            <div class="col-sm-10">
+                            <legend class="col-form-label col-sm-4 pt-0">¿Quien autorizó el medicamento?*</legend>
+                            <div class="col-sm-12">
                               <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                <input class="form-check-input" type="radio" name="medication_authorization" id="gridRadios1s" value=1  formControlName="medication_authorization" >
                                 <label class="form-check-label" for="gridRadios1">
                                     Preautorización en sistema de registro
                                 </label>
                               </div>
                               <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                                <label class="form-check-label" for="gridRadios2">
+                                <input class="form-check-input" type="radio" name="medication_authorization" id="gridRadios2s" value=2 formControlName="medication_authorization" >
+                                <label class="form-check-label" for="gridRadios2s">
                                     Se contacta a tutores
                                 </label>
                               </div>
                               <div class="form-check disabled">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
-                                <label class="form-check-label" for="gridRadios3">
+                                <input class="form-check-input" type="radio" name="medication_authorization" id="gridRadios3s" value=3 formControlName="medication_authorization" >
+                                <label class="form-check-label" for="gridRadios3s">
                                     Por parte de la Escuela / Maestras
                                 </label>
                               </div>
                               <div class="form-check disabled">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
-                                <label class="form-check-label" for="gridRadios3">
+                                <input class="form-check-input" type="radio" name="medication_authorization" id="gridRadios4s" value=4 formControlName="medication_authorization">
+                                <label class="form-check-label" for="gridRadios4s">
                                     Por parte de [[empresa]] (In Loco Parentis)
                                 </label>
                               </div>
                               <div class="form-check disabled">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
-                                <label class="form-check-label" for="gridRadios3">
+                                <input class="form-check-input" type="radio" name="medication_authorization" id="gridRadios5s" value=5 formControlName="medication_authorization">
+                                <label class="form-check-label" for="gridRadios5s">
                                     No se administraron medicamentos
                                 </label>
                               </div>
                             </div>
                           </fieldset>
                           <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Tratamiento*</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="inputPassword3" class="col-sm-12 col-form-label">Tratamiento*</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" placeholder="" id="" style="height: 100px" formControlName="administered_medications" [ngClass]="{'is-invalid': formConsult.get('administered_medications').invalid && formConsult.get('administered_medications').touched}"></textarea>
                             </div>
                           </div>
                           <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Restricciones o medidas dentro del campamento*</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="inputPassword3" class="col-sm-12 col-form-label">Restricciones o medidas dentro del campamento*</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" placeholder="" id="" style="height: 100px" formControlName="camp_restriction" [ngClass]="{'is-invalid': formConsult.get('camp_restriction').invalid && formConsult.get('camp_restriction').touched}"></textarea>
                             </div>
                           </div>
                           <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Recomendaciones para seguimiento posterior al campamento*</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="inputPassword3" class="col-sm-12 col-form-label">Recomendaciones para seguimiento posterior al campamento*</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" placeholder="" id="" style="height: 100px" formControlName="medical_monitoring" [ngClass]="{'is-invalid': formConsult.get('medical_monitoring').invalid && formConsult.get('medical_monitoring').touched}"></textarea>
                             </div>
                           </div>
                           <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Comentario de la consulta</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="inputPassword3" class="col-sm-12 col-form-label">Comentario de la consulta</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" placeholder="" id="" style="height: 100px" formControlName="medical_comment" [ngClass]="{'is-invalid': formConsult.get('medical_comment').invalid && formConsult.get('medical_comment').touched}"></textarea>
                             </div>
                           </div>
                           <br>
-                          <div class="row mb-3">
-                            <div class="col-sm-10 offset-sm-2">
-                              <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck1">
-                                <label class="form-check-label" for="gridCheck1">
-                                    Enviar consulta a padres
-                                </label>
-                              </div>
-                            </div>
-                          </div>
+                          
                           
                           <div class="row mb-3">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Comentario solo para medicos y staff</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="inputPassword3" class="col-sm-12 col-form-label">Comentario solo para medicos y staff</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" placeholder="" id="" style="height: 100px" formControlName="comment" [ngClass]="{'is-invalid': formConsult.get('comment').invalid && formConsult.get('comment').touched}"></textarea>
                             </div>
                           </div>
 
                         
-                        
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <div class="col-10 mx-auto">
+                          <button type="submit" class="btn btn-primary " style="width: 100%;" (click)="crearConsulta()" *ngIf="!showSpinner">Guardar</button>
+                          <div class="spinner-border text-primary" role="status" *ngIf="showSpinner">
+                            <span class="visually-hidden">Cargando...</span>
+                          </div>
+                        </div>
                       </form>
                 </div>
 
