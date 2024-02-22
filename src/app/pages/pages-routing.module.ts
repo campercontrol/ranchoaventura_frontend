@@ -66,6 +66,7 @@ import { SearchParentComponent } from '../component/search-parent/search-parent.
 import { EventosCapacitacionesComponent } from '../component/eventos-capacitaciones/eventos-capacitaciones.component';
 import { ListEventsComponent } from '../component/list-events/list-events.component';
 import { AdminStaffComponent } from '../component/admin-staff/admin-staff.component';
+import { AdminTipoAgrupacionesComponent } from '../staff/admin-tipo-agrupaciones/admin-tipo-agrupaciones.component';
 
 const routes: Routes = [
   
@@ -98,6 +99,8 @@ const routes: Routes = [
   { path: 'admi/search', component: SearchParentComponent },// admi a camps
   { path: 'admi/events', component: EventosCapacitacionesComponent },// admi a camps
   { path: 'admi/staff', component: AdminStaffComponent },// admi a camps
+  { path: 'admi/grouping/type', component: AdminTipoAgrupacionesComponent },// admi a camps
+
 
 
   { path: 'staff/events', component: ListEventsComponent },// admi a camps

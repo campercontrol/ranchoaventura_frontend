@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild  } from '@angular/core';
+import { Component, ElementRef, OnInit, Output, Renderer2, ViewChild,EventEmitter   } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CatalogosService } from 'src/services/catalogos.service';
 import { CreateCampsService } from 'src/services/create-camps.service';
@@ -69,6 +69,8 @@ export class AdminStaffCreateComponent implements OnInit {
   @ViewChild("emailConfir") emailConfir: ElementRef;
   @ViewChild("confirmPassword") confirmPassword: ElementRef;
   @ViewChild("facebook") facebook: ElementRef;
+  @Output() eventoAlPadre = new EventEmitter<any>();
+
   filetemp:any ={};
   cvSatus= false;
 
@@ -196,8 +198,7 @@ export class AdminStaffCreateComponent implements OnInit {
     if(this.formUser.valid){
       this.staff.prospectos(a).subscribe((res:any)=>{
         console.log(res);
-        
-
+        this.eventoAlPadre.emit(1);
       },error=>{
         this.erroA=true;
         this.spinner=false;
@@ -231,6 +232,11 @@ export class AdminStaffCreateComponent implements OnInit {
   
     
    
+  }
+
+  cancelar(){
+    this.eventoAlPadre.emit(0);
+
   }
 
   centerModal(centerDataModal: any = this.content) {

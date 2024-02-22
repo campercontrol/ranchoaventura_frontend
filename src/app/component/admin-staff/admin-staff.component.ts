@@ -103,23 +103,42 @@ export class AdminStaffComponent implements OnInit {
   selectedCities: string[] = [];
   
   constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private catalogos:CatalogosService,private paymants:PaymentsService) {  
-   this.info()
   }
 
-  info(){
-    this.catalogos.getStaff().subscribe((res:any)=>{
-      console.log(res.data,'respuesta');
-      
-      this.listcatalogos==res.data;
-      console.log(this.listcatalogos);
-      
-      this.cargando =!this.cargando;
-    })
+  info() {
+    this.cargando = true; // Set loading state to true before fetching data
+  
+    this.catalogos.getStaff().subscribe((staffResponse: any) => {
+      console.log(staffResponse.data, 'respuesta staff');
+      this.listcatalogos = staffResponse.data;
+      this.listcatalogos.forEach(element => {
+        element.tipo = "Staff"
+      });
+  
+      this.catalogos.getProspectos().subscribe((prospectResponse: any) => {
+        let b = prospectResponse.data;
+        console.log(b);
+        
+         b.forEach((prospect:any) => {
+          prospect.tipo ="Prospecto"
+         });
+        this.listcatalogos = [...prospectResponse.data, ...this.listcatalogos]; // Concatenate arrays correctly
+        this.cargando = false; // Set loading state to false after both requests are complete
+      }, (error: any) => {
+        console.error('Error fetching prospectos:', error);
+        this.cargando = false; // Set loading state to false even if an error occurs
+      });
+    }, (error: any) => {
+      console.error('Error fetching staff:', error);
+      this.cargando = false; // Set loading state to false even if an error occurs
+    });
   }
+  
 
   ngOnInit(): void {
     
-   
+    this.info()
+
 
   }
   showDialog() {
@@ -338,22 +357,11 @@ export class AdminStaffComponent implements OnInit {
   }
 
   update(item){
-     this.updateId = item.id;
+     this.updateId = item["Staff"].id;
     this.display2= true;
     this.table= false;
    
-    this.formFood.patchValue({     
-      "paid":item.paid,
-      "payment_amount":item.payment_amount,
-      "payment_date": item.payment_date,
-      "txn_number": item.txn_number,
-      "camp_id": item.camp_id,
-      "camper_id":item.camper_id,
-      "currency_id": item.currency_id,
-      "parent_id":item.parent_id,
-      "payment_method_id": item.payment_method_id,
-      "txn_type_id":  item.txn_type_id
-   })
+   
 
   
 
@@ -448,6 +456,23 @@ export class AdminStaffComponent implements OnInit {
       this.render.removeClass(elementRef.nativeElement, "is-valid");
       this.render.addClass(elementRef.nativeElement, "is-invalid");
       elementRef.nativeElement.focus();
+    }
+  }
+
+  manejarEvento(event){
+    console.log(event);
+    
+    if(event == 1){
+      this.info();
+      this.table = true;
+      this.display2= false;
+      
+
+
+    }else if (event == 0){
+      this.table= true;
+      this.display2= false;
+
     }
   }
 

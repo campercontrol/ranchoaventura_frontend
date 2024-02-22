@@ -1,1 +1,502 @@
-<p>admin-edit-staff works!</p>
+<div class="container-fluid">
+    <form [formGroup]="formUser">
+        <div class="row">
+
+            <div class="col-lg-12">
+               
+                <div class="card">
+
+                    <div class="card-body" id="cv">
+                        <div class="container-footer-parents">
+                            <img src="../../../assets/images/camp/datosdeacceso.png" class="avatar-lg"
+                                alt="madre y padres">
+                            <h4 class="ms-3"> Datos de acceso del staff</h4>
+                        </div>
+                        <div class="mt-5">
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Nombre(s)*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName="name" name="name"
+                                        (input)="validateName()" #name>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Apellido
+                                    paterno*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName="lastname_father"
+                                        name="lastname_father" (input)="validatelastname_father()" #lastname_father>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Apellido
+                                    materno</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName="lastname_mother"
+                                        name="lastname_mother" #lastname_mother>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Curp*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName="curp"
+                                        name="lastname_mother" (input)="validatecurp()" #curp>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Rfc*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName="rfc"
+                                        name="rfc" (input)="validatelastRFC()" #rfc>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row mb-4 mt-3">
+                                <label for="" class="col-sm-3 col-form-label">Fecha de
+                                    nacimiento*</label>
+                                <div class=" control-label col-sm-9">
+
+                                    <input type="date" class="form-control" placeholder="yyyy-mm-dd"
+                                        formControlName="birthday" (input)="validatebirthday()" #birthday>
+
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="foto mt-4">
+                                <div class="container-footer-parents">
+                                    <img [src]="photoSelect || 'assets/images/camp/perfil-camper.png'" class="avatar-lg"
+                                        alt="madre y padres">
+
+                                </div>
+
+                                <div class="mt-3 foto" id="photo">
+                                    <label for="">Foto de Perfil</label>
+                                    <input type="file" accept="image/jpeg" (change)="subiendo($event)">
+
+
+                                    <label class="mt-2">La foto es obligatoria ,nos ayuda a identificar a
+                                        los campers,
+                                        recomendamos subas una foto reciente y de poco peso, máximo 3Mb debe
+                                        ser formato jpg</label>
+
+                                </div>
+                                <div class="alert alert-danger" role="alert" *ngIf="!photoSatus">
+                                    Aun no has seleciona una imagen Recuerda tiene que ser un imagen TIPO
+                                    JPG
+                                </div>
+
+                                <div class="alert alert-secondary" role="alert" *ngIf="photoSatus">
+                                    Se Agrego corectamente
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row mb-4 mt-4">
+                            <label for="" class="col-sm-3 col-form-label">Biografía*</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="" formControlName="bio" name="bio"
+                                    (input)="validatebio()" #bio>
+                            </div>
+                        </div>
+                        <div class="row mb-4 mt-4" id="cv">
+                            <label for="" class="col-sm-3 col-form-label">CV</label>
+                            <div class="col-sm-9">
+                                <input type="file" accept="image/pdf" (change)="subiendoPdf($event)">
+
+                                <div class="alert alert-danger" role="alert" *ngIf="!cvSatus">
+                                    Aun no has agregado tu cv
+                                </div>
+
+                                <div class="alert alert-secondary" role="alert" *ngIf="cvSatus">
+                                    Se Agrego corectamente
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class=col-lg-12>
+                <div class="card p-5">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="container-footer-parents">
+                                <img src="assets/images/camp/prospectostaff.png" class="avatar-lg" alt="madre y padres">
+                                <h4 class="ms-3 mt-3">Información de Contacto</h4>
+
+                            </div>
+
+                            <div class="mt-5">
+
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Teléfono
+                                        móvil*</label>
+                                    <div class="col-sm-9">
+                                        <input type="txt" class="form-control" id="" formControlName="cellphone" name="cellphone"
+                                            (input)="validatecellphone()" #cellphone>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Teléfono de
+                                        casa*</label>
+                                    <div class="col-sm-9">
+                                        <input type="txt" class="form-control" id="" formControlName="home_phone" name="home_phone"
+                                            (input)="validatehome_phone()" #home_phone>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Facebook*</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="" formControlName="facebook" name="facebook"
+                                            (input)="validateFace()" #facebook>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="container-footer-parents">
+                            <img src="assets/images/camp/datos-medico.png" class="avatar-lg" alt="madre y padres">
+                            <h4 class="ms-3">Datos Médicos Generales</h4>
+                        </div>
+                        <div class="mt-5">
+                           
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Tipo de
+                                    sangre*</label>
+                                <div class="control-label col-sm-9">
+                                    <select name="school_id" id="school_id" formControlName="blood_type" (change)="getblood_type()" class="form-control" name="blood_type" #blood_type>
+                                        <option *ngFor="let item of blood_types" [value]="item.id" >
+                                            {{item.value}}
+                                        </option>
+                                    </select>
+                                   
+
+                                    <small>En caso de no conocer el tipo de sangre, escribe NO RECUERDO
+                                    </small>
+                                </div>
+                            </div>
+                            <!--  tipode  sangre el de abrriba-->
+                            
+                            <div class="row mb-4">
+
+                                <label for="" class="col-sm-6 col-form-label">
+                                    Vacuna que
+                                    tiene:</label>
+                                <div class="container-genero">
+                                    <div class="mb-3">
+    
+    
+                                        <div class="form-check form-check-inline" *ngFor="let item of vaccines;index as i">
+                                            <input (click)="vaccinesValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions"
+                                                id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}"
+                                                >
+                                            <label class="form-check-label" for="inlineRadio1">{{item.name}}</label>
+                                        </div>
+    
+    
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- vacuna-->
+
+
+                            <div class="container-medico mt-5">
+                                <h3>Enfermedades que padece*</h3>
+                                <textarea
+                                    placeholder="En caso de NO padecer alguna enfermedad, teclea la palabra NINGUNO"
+                                    name="" id="" cols="90" rows="10"
+                                    formControlName = "affliction"
+                                    class="form-control"
+                                    name="affliction"
+                                    (input)="getaffliction()"
+                                     #affliction></textarea>
+                            </div>
+                            <div class="container-medico mt-5" placement="top"
+                            ngbTooltip="Si no requiere de tratamiento médico, teclea la palabra NINGUNO">
+                            <h3>Alergias a medicamentos*</h3>
+                            <textarea
+                                placeholder="En caso de que el acampador no sea alérgico a algún medicamento, teclea la palabra NINGUNO"
+                                id="" cols="90" rows="10"
+                                formControlName = "drug_allergies"
+                                name="drug_allergies"
+                                class="form-control"
+                                (input)="getdrug_allergies()"
+                                 #drug_allergies></textarea>
+                                
+
+                            </div>
+                            <div class="container-medico mt-5" placement="top"
+                            ngbTooltip="Si no requiere de tratamiento médico, teclea la palabra NINGUNO">
+                            <h3>Otras Alergias*</h3>
+                            <textarea
+                                placeholder="En caso de que el acampador no sea alérgico, teclea la palabra NINGUNA"
+                                name="other_allergies" id="" cols="90" rows="10"
+                                formControlName = "other_allergies"
+                                class="form-control"
+                                (input)="getother_allergies()"
+                                 #other_allergies></textarea>
+                                <div class="alert alert-danger mt-2" role="alert" *ngIf="other_allergies.invalid">
+                                                                             Campo requerido
+                                  </div>
+
+
+                            </div>
+                            <div class="container-medico mt-5">
+                                <h3>Alteraciones nocturnas*</h3>
+                                <textarea
+                                    placeholder="En caso de que el acampador no padezca de alteraciones nocturnas, teclea la palabra NINGUNA"
+                                    name="nocturnal_disorders" id="" cols="90" rows="10"
+                                    formControlName="nocturnal_disorders"
+                                    class="form-control"
+                                    (input)="getnocturnal_disorders()"
+                                     #nocturnal_disorders></textarea>
+                                 
+
+                            </div>
+                            <div class="container-medico mt-5">
+                                <h3>Fobias o miedos*</h3>
+                                <textarea
+                                    placeholder="En caso de que el acampador no padezca de fobias, teclea la palabra NINGUNO"
+                                    name="phobias" id="" cols="90" rows="10"
+                                    formControlName="phobias"
+                                    class="form-control"
+                                    (input)="getphobias()"
+                                     #phobias></textarea>
+                                   
+
+                            </div>
+                            <div class="container-medico mt-5" placement="top"
+                            ngbTooltip="Si no requiere de tratamiento médico, teclea la palabra NINGUNO">
+                            <h3>Durante el camp, ¿Estará tomando algún medicamento?*</h3>
+                            <textarea
+                                placeholder="Especificar dosis y horarios para la toma de medicamentos en tal caso de no necitar poner NINGUNO"
+                                name="drugs" id="" cols="90" rows="10"
+                                formControlName = "drugs"
+                                class="form-control"
+                                (input)="getdrugs()"
+                                 #drugs></textarea>
+                                <div class="alert alert-danger mt-2" role="alert" *ngIf="drugs.invalid">
+                                                                             Campo requerido
+                                  </div>
+
+                        </div>
+
+                           
+                        </div>
+                    </div>
+
+                   
+
+
+                </div>
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="container-footer-parents">
+                            <img src="assets/images/camp/chef.png" class="avatar-lg" alt="madre y padres">
+                            <h4 class="ms-3"> Alimentación
+                            </h4>
+                        </div>
+
+
+                        <div class="mt-5">
+                            <label for="" class="col-sm-6 col-form-label">
+                                Alimentación:</label>
+                            <div class="container-genero">
+                                <div class="mb-3">
+
+
+                                    <div class="form-check form-check-inline" *ngFor="let item of food_restrictions;index as i">
+                                        <input (click)="food_restrictionsValu(i)" class="form-check-input" type="checkbox" name="sss" [checked]="item.is_active"
+                                            id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}"
+                                            >
+                                        <label class="form-check-label" for="inlineRadio1">{{item.name}}</label>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="container-medico mt-5">
+                                <h3>Comida prohibida*</h3>
+                                <textarea
+                                    placeholder="En caso de que el acampador pueda comer cualquier tipo de comida, teclea la palabra NINGUNA"
+                                    name="prohibited_foods" id="" cols="90" rows="10"
+                                    formControlName ="prohibited_foods"
+                                    class="form-control"
+                                    (input)="getprohibited_foods()"
+                                     #prohibited_foods></textarea>
+
+                                    <div class="alert alert-danger mt-2" role="alert" *ngIf="prohibited_foods.invalid">
+                                                                                 Campo requerido
+                                      </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                 <div class="card">
+
+                    <div class="card-body">
+                        <div class="container-footer-parents">
+                            <img src="assets/images/camp/bombero.png" class="avatar-lg" alt="madre y padres">
+                            <h4 class="ms-3"> Contacto de emergencia
+                            </h4>
+                        </div>
+
+                        <div class="alert alert-success mt-3">
+                            En caso de emergencia y NO PODER CONTACTAR A LOS PADRES, registra los datos de una tercera
+                            persona.
+                        </div>
+
+
+                        <div class="mt-5">
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label"> Nombre de
+                                    contacto*
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id=""  name="staff_contact_name"
+                                    formControlName = "staff_contact_name"  #contact_name (input)="getcontact_name()"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label"> Parentesco de
+                                    contacto* </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" name="staff_contact_relation"
+                                    formControlName = "staff_contact_relation" #contact_relation (input)="getcontact_relation()"
+                                    >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Teléfono movil
+                                    de
+                                    contacto* </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" name="staff_contact_cellphone"
+                                    formControlName = "staff_contact_cellphone"  #contact_cellphone (input)="getcontact_cellphone()"
+                                    >
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label for="" class="col-sm-3 col-form-label">Teléfono de casa
+                                    de
+                                    contacto*</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="" formControlName ="staff_contact_homephone" name="staff_contact_homephone"
+                                    #contact_homephone (input)="getcontact_homephone()"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <div>
+                    <div class="card col-12">
+                        <div>
+                            <div class="mb-3 p-5">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="terms" height="40px"
+                                        formControlName="terms">
+                                    <label class="form-check-label fs-3 ms-3" for="terms">
+                                        Acepto los términos y condiciones
+                                    </label>
+                                    <label class="form-check-label fs-3 ms-3" for="terms">
+                                        <a
+                                            href="https://demo.campercontrol.com/media/uploads/files/terminos-y-condiciones.pdf">Ver
+                                            términos y condiciones</a>
+                                    </label>
+
+                                </div>
+                               
+                                <div class="btn-footer mt-5">
+                                    <button class="btn btn-secondary w-lg btn-lg" (click)="cancelar()"
+                                    >Cancelar</button>
+                                    <div class="btn-footer">
+                                        <div>
+                                            <button class="btn btn-info w-lg btn-lg" 
+                                                *ngIf="!spinner" (click)="prueba1()">Guardar</button>
+                                            <div class="spinner-border" role="status" *ngIf="spinner">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </form>
+</div>
+<ng-template #centerDataModal let-modal>
+    <div class="modal-header">
+
+    </div>
+    <div class="modal-body">
+        <div class="text-center mb-4">
+            <div class="avatar-md mx-auto mb-4">
+                <div class="avatar-title bg-light rounded-circle text-success h1">
+                    <i class="mdi mdi-account-multiple-check"></i>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-xl-10">
+                    <h4 class="text-success">Ya estas Registrado Felicidades !</h4>
+                    <h4 class="text-success">Por favor REVISE su correo se envio un link para activar su
+                        cuenta !</h4>
+                    <p class="text-muted font-size-14 mb-4">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

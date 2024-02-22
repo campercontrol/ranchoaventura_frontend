@@ -11,7 +11,7 @@
                         <div class="container-btn mt-1 mb-3">
                             <div>
                                 <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
-                                    <button type="button" class="btn btn-primary" (click)="showDialog()">Añadir Pago</button>
+                                    <button type="button" class="btn btn-primary" (click)="showDialog()">Añadir Staff</button>
 
                                 </div>
                             </div>
@@ -20,8 +20,8 @@
                         </div>
                         <div style="overflow: auto;">
                             <p-table #dt [value]="listcatalogos" [rows]="5" [rowsPerPageOptions]="[5, 25, 50]"
-                                [globalFilterFields]="['Staff.name','Staff.facebook','payment_date','payment_amount','tipoMovimiento','metodosPago']"
-                                [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
+                                [globalFilterFields]="['Staff.name','Staff.facebook','email','Staff.bio','Staff.cellphone','Staff.home_phone']"
+                                 [rowHover]="true" dataKey="id"
                                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                                 [showCurrentPageReport]="true" [paginator]="true">
 
@@ -30,6 +30,9 @@
                                         <th pSortableColumn="Staff.name" style="min-width: 190px; text-align: center;">
                                             Nombre <p-sortIcon field="Staff.name"
                                                 style="font-size: 10px;"></p-sortIcon></th>
+                                                <th pSortableColumn="tipo" style="min-width: 190px; text-align: center;">
+                                                    Tipo <p-sortIcon field="name"
+                                                        style="font-size: 10px;"></p-sortIcon></th>
                                         <th pSortableColumn="Staff.facebook" style="min-width: 150px;text-align: center;">
                                             facebook<p-sortIcon field="Staff.facebook"></p-sortIcon></th>
                                         <th pSortableColumn="Staff.birthday" style="min-width: 150px;text-align: center;">
@@ -45,10 +48,13 @@
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-customer>
-                                    <tr>
-                                        <td (click)="update(customer)" style="cursor:pointer; text-align: center;">
+                                    <tr (click)="update(customer)">
+                                        <td  style="cursor:pointer; text-align: center;">
                                            {{customer.Staff.name}}
                                         </td>
+                                        <td  style="cursor:pointer; text-align: center;">
+                                            {{customer.tipo}}
+                                         </td>
                                         <td style="font-size: 12px; font-size: 12px;">
                                             {{customer.Staff.facebook}}
 
@@ -98,10 +104,11 @@
     </p-tabView>
     <div *ngIf="!table && !display2">
 
-        <app-admin-staff-create></app-admin-staff-create>
+        <app-admin-staff-create  (eventoAlPadre)="manejarEvento($event)"></app-admin-staff-create>
     </div>
 
     <div *ngIf="display2">
+        <app-admin-edit-staff [updateId]="updateId"  (eventoAlPadre)="manejarEvento($event)"></app-admin-edit-staff>
     </div>
 </div>
 
