@@ -35,7 +35,7 @@ export class MedicoComponent implements OnInit {
         });
         this.infoCamper.licensed_medicinesT=""
         this.infoCamper.licensed_medicines.forEach(element => {
-          this.infoCamper.licensed_medicines= this.infoCamper.licensed_medicinesT + element.name+ ','+" " ;
+          this.infoCamper.licensed_medicinesT= this.infoCamper.licensed_medicinesT + element.name+ ','+" " ;
         });
         this.infoCamper.food_restrictionsT=""
         this.infoCamper.food_restrictions.forEach(element => {

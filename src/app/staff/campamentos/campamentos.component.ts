@@ -11,6 +11,7 @@ import { AdvancedService } from './advanced.service';
 import { AdvancedSortableDirective,SortEvent } from './advanced-sortable.directive';
 import { CreateCampsService } from 'src/services/create-camps.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-campamentos',
@@ -32,9 +33,13 @@ export class CampamentosComponent implements OnInit {
   loading: boolean = false;
 
   activityValues: number[] = [0, 100];
-  customer:any =[]
+  customer:any =[];
+  rol_id = 0
 
-constructor(private camps: CreateCampsService,private router :Router) { }
+constructor(private camps: CreateCampsService,private router :Router, private token:AuthenticationService) {
+  this.rol_id =token.infToken.role_id; 
+
+ }
 cars=[{Nombre:"Campamento con agrupaciones",grado:"prueba2",inicio:"2020-11-10 ",termina:"2020-11-10 " },
 {Nombre:"Campamento con agrupaciones", grado:"prueba2",inicio:"2020-11-10 ",termina:"2020-11-10 "   },
 {Nombre:"Campamento con agrupaciones", grado:"prueba2",inicio:"2020-11-10 ",termina:"2020-11-10 "   },
@@ -53,7 +58,14 @@ cars=[{Nombre:"Campamento con agrupaciones",grado:"prueba2",inicio:"2020-11-10 "
   }
 
   reditCamps(id){
-    this.router.navigate(['dashboard/camp/'+id])
+    if(this.rol_id==3){
+      this.router.navigate(['dashboard/medical/camp-medical/'+id])
+
+    }else{
+      this.router.navigate(['dashboard/camp/'+id])
+
+    }
+    
   }
 }
 
