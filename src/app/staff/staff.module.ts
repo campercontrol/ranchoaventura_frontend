@@ -58,6 +58,7 @@ import { UpdatePerfilComponent } from './parents-inscripcion-camp/update-perfil/
 import { TagModule } from 'primeng/tag';
 import { NuevaConsultaComponent } from '../pages/medical/nueva-consulta/nueva-consulta.component';
 import { AdminTipoAgrupacionesComponent } from './admin-tipo-agrupaciones/admin-tipo-agrupaciones.component';
+import { GroupingAdmiComponent } from './grouping-admi/grouping-admi.component';
 
 
 
@@ -95,6 +96,7 @@ import { AdminTipoAgrupacionesComponent } from './admin-tipo-agrupaciones/admin-
     CardCapacitacionesComponent,
     UpdatePerfilComponent,
     AdminTipoAgrupacionesComponent,
+    GroupingAdmiComponent,
     
   ],
   imports: [

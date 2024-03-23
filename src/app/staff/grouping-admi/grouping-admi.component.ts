@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AdmiService } from 'src/services/admi.service';
 import { CampsService } from 'src/services/camps.service';
 import { CatalogosService } from 'src/services/catalogos.service';
-import { AdmitipoAgrupacionesService } from './tipo-agrupacion.service';
+import { AdminService } from './admin.service';
+
 
 @Component({
-  selector: 'app-admin-tipo-agrupaciones',
-  templateUrl: './admin-tipo-agrupaciones.component.html',
-  styleUrls: ['./admin-tipo-agrupaciones.component.scss']
+  selector: 'app-grouping-admi',
+  templateUrl: './grouping-admi.component.html',
+  styleUrls: ['./grouping-admi.component.scss']
 })
-export class AdminTipoAgrupacionesComponent implements OnInit {
+export class GroupingAdmiComponent implements OnInit {
+
 
   listcatalogos: any = [];
   selectCatalogos: any;
@@ -33,12 +36,16 @@ export class AdminTipoAgrupacionesComponent implements OnInit {
  campsArray :any = [];
   breadCrumbItems: Array<{}>;
   selectedCities: string[] = [];
-  constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder,private camps: AdmitipoAgrupacionesService) {
+  constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder,private camps: AdminService) {
   }
 
   ngOnInit(): void {
     this.formFood = this._FormBuild.group({
       name: ['', Validators.required],
+      grouping_type_id: ['', Validators.required],
+      is_active: [true, Validators.required]
+
+
       
     })
 
@@ -90,7 +97,9 @@ export class AdminTipoAgrupacionesComponent implements OnInit {
     this.formFood.reset();
     this.formFood.patchValue({
       name: "",
-     
+      is_active:true,
+      grouping_type_id:0,
+
     })
   }
 
@@ -101,6 +110,8 @@ export class AdminTipoAgrupacionesComponent implements OnInit {
     this.updateId = item.id;
     this.formFood.patchValue({
       name: item.name,
+      is_active:item.is_active,
+      grouping_type_id:item.grouping_type_id,
      
 
     })
@@ -148,5 +159,6 @@ export class AdminTipoAgrupacionesComponent implements OnInit {
     })
   }
   
+
 
 }

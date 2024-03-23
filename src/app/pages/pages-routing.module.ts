@@ -67,6 +67,7 @@ import { EventosCapacitacionesComponent } from '../component/eventos-capacitacio
 import { ListEventsComponent } from '../component/list-events/list-events.component';
 import { AdminStaffComponent } from '../component/admin-staff/admin-staff.component';
 import { AdminTipoAgrupacionesComponent } from '../staff/admin-tipo-agrupaciones/admin-tipo-agrupaciones.component';
+import { GroupingAdmiComponent } from '../staff/grouping-admi/grouping-admi.component';
 
 const routes: Routes = [
   
@@ -80,9 +81,6 @@ const routes: Routes = [
 
 
   { path: 'camps/camp_add', component: NuevoCampamentoComponent },
-
-
-
   { path: 'parents/update-camper/:id', component: UpdateCamperComponent },
   { path: 'parents/camper/:id', component: PerfilCamperComponent },
   { path: 'parents/inscription/:id', component: ParentsInscripcionCampComponent },
@@ -100,6 +98,8 @@ const routes: Routes = [
   { path: 'admi/events', component: EventosCapacitacionesComponent },// admi a camps
   { path: 'admi/staff', component: AdminStaffComponent },// admi a camps
   { path: 'admi/grouping/type', component: AdminTipoAgrupacionesComponent },// admi a camps
+  { path: 'admi/grouping', component: GroupingAdmiComponent },// admi a camps
+
 
 
 
