@@ -18,7 +18,6 @@
             <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
                 placeholder="Global Search" />
         </div>
-
         <p-table #dt [value]="listcatalogos" [rows]="10"
             [globalFilterFields]="['name']"
             [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"

@@ -14,6 +14,9 @@ export class AdminService {
   postAgrupaciones(data:any){
     return this.http.post('http://142.93.12.234:8000/groupings/',data)
   }
+  typgetAgrupaciones(){
+    return this.http.get('http://142.93.12.234:8000/grouping_types/')
+  }
 
   updateAgrupaciones(info:any,id){
     return this.http.patch('http://142.93.12.234:8000/groupings/'+id,info)

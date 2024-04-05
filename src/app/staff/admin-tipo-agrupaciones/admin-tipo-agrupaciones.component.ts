@@ -34,6 +34,10 @@ export class AdminTipoAgrupacionesComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   selectedCities: string[] = [];
   constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder,private camps: AdmitipoAgrupacionesService) {
+    this.camps.getAgrupaciones().subscribe((res:any)=>{
+      
+      this.listcatalogos = res
+    })
   }
 
   ngOnInit(): void {
@@ -42,9 +46,7 @@ export class AdminTipoAgrupacionesComponent implements OnInit {
       
     })
 
-    this.camps.getAgrupaciones().subscribe((res:any)=>{
-      this.campsArray = res.data
-    })
+ 
   }
 
 
@@ -74,6 +76,10 @@ export class AdminTipoAgrupacionesComponent implements OnInit {
   guardar() {
     this.camps.postAgrupaciones(this.formFood.value).subscribe((res: any) => {
       this.statuAgrgado = true;
+      this.camps.getAgrupaciones().subscribe((res:any)=>{
+      
+        this.listcatalogos = res
+      })
       this.resteValu();
       setTimeout(() => {
         this.statuAgrgado = false;
@@ -114,6 +120,10 @@ export class AdminTipoAgrupacionesComponent implements OnInit {
      
       this.statuAgrgado = true;
       this.resteValu();
+      this.camps.getAgrupaciones().subscribe((res:any)=>{
+      
+        this.listcatalogos = res
+      })
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal2();
@@ -135,9 +145,13 @@ export class AdminTipoAgrupacionesComponent implements OnInit {
   }
 
   delet(){
-    this.catalogos.deletcamp_extra_charge(this.idDalete).subscribe((res: any) => {
+    this.camps.deletGruping(this.idDalete).subscribe((res: any) => {
       this.statuAgrgado = true;
       this.resteValu();
+      this.camps.getAgrupaciones().subscribe((res:any)=>{
+      
+        this.listcatalogos = res
+      })
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal3();

@@ -36,7 +36,17 @@ export class GroupingAdmiComponent implements OnInit {
  campsArray :any = [];
   breadCrumbItems: Array<{}>;
   selectedCities: string[] = [];
+  listTypeAgrrup:any =[]
   constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder,private camps: AdminService) {
+    this.camps.getAgrupaciones().subscribe((res:any)=>{
+      console.log(res);
+      
+      this.listcatalogos = res
+    })
+
+    this.camps.typgetAgrupaciones().subscribe((res:any)=>{
+      this.listTypeAgrrup =res
+    })
   }
 
   ngOnInit(): void {
@@ -49,9 +59,7 @@ export class GroupingAdmiComponent implements OnInit {
       
     })
 
-    this.camps.getAgrupaciones().subscribe((res:any)=>{
-      this.campsArray = res.data
-    })
+ 
   }
 
 
@@ -146,7 +154,7 @@ export class GroupingAdmiComponent implements OnInit {
   }
 
   delet(){
-    this.catalogos.deletcamp_extra_charge(this.idDalete).subscribe((res: any) => {
+    this.camps.deletGruping(this.idDalete).subscribe((res: any) => {
       this.statuAgrgado = true;
       this.resteValu();
       setTimeout(() => {

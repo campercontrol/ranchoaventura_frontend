@@ -2,30 +2,84 @@
   <div class="row">
     <div class="col-12">
       <div class="card border border-info border-3">
-        <div class="bg-info p-4">
-          <h4 class="card-title text-white">Lista de agrupaciones</h4>
+        <div class="bg-info p-2">
+          <h4 class="card-title text-white">Acampadores</h4>
 
         </div>
         <div class="p-3">
-          <div class="d-sm-flex justify-content-sm-between align-items-sm-center mb-sm-4">
-            <div class="">
-              <div id="tickets-table_filter" class="dataTables_filter d-flex align-items-center">
-                  <label for="searchTerm" class="mb-0 me-2">Buscar: </label>
-                    <input type="text" name="searchTerm" class="form-control form-control-sm"
-                      aria-controls="tickets-table" (keyup)="updateFilter($event)" id="searchTerm">
-              </div>
-            </div>
-            <div class="text-end mt-2 mt-sm-0">
-              <div class="my-4 my-sm-1">
-                <button class="btn btn-success d-inline-flex align-items-center" (click)="openModal(content)"><i class="bx bxs-plus-circle me-1"></i>Nueva Agrupación
-                </button>
-              </div>
-            </div>
 
+
+
+          <div class="container-btn mt-1 mb-3" >
+              <div class="m-2">
+                <button class="btn btn-success " (click)="openModal(content)"><i
+                  class="bx bxs-plus-circle me-1"></i>Nueva Agrupación
+              </button>
+              </div>
+
+              <div class="m-2">
+                <button class="btn btn-success " (click)="display3 = !display3"><i
+                  class="bx bxs-plus-circle me-1"></i>ASIGNAR ACAMPADORES A AGRUPACIÓN
+
+              </button>
+              </div>
+              
+               
+          
           </div>
-          <ngx-datatable class="material expandable" [columns]="columns" [columnMode]="ColumnMode.force" [headerHeight]="50"
-            [footerHeight]="50" rowHeight="auto" [limit]="2" [rows]="rows">
-          </ngx-datatable>
+
+          <p-table #dt [value]="listCampers" [rows]="10" [globalFilterFields]="['name']" [rowHover]="true"
+            dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true">
+
+            <ng-template pTemplate="header">
+              <tr>
+                <th pSortableColumn="name">Acampador<p-sortIcon field="name" style="font-size: 10px;"></p-sortIcon></th>
+        
+                <th pSortableColumn="grouping_type_id">Fecha de Nacimiento<p-sortIcon field="is_active"
+                    style="font-size: 10px;"></p-sortIcon></th>
+                <th pSortableColumn="grouping_type_id">Sexo<p-sortIcon field="is_active"
+                    style="font-size: 10px;"></p-sortIcon></th>
+                <th pSortableColumn="grouping_type_id">Grado escolar<p-sortIcon field="is_active"
+                    style="font-size: 10px;"></p-sortIcon></th>
+                <th pSortableColumn="grouping_type_id">Agrpaciones<p-sortIcon field="is_active"
+                    style="font-size: 10px;"></p-sortIcon></th>
+
+                <th style="width: 40px;"></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-customer>
+              <tr>
+                <td>
+                  {{customer.name}}
+                </td>
+                <td>
+                  {{customer.birthday}}
+                </td>
+              
+
+
+                <td>
+                  {{customer.gender}}
+
+                </td>
+                <td>
+                  {{customer.gender}}
+
+                </td>
+                <td >
+                  <p *ngIf="customer.groupings == null"></p>
+
+                  <ng-container *ngIf="customer.groupings != null">
+                    <p *ngFor="let item of customer.groupings"> {{ item }} </p>
+                  </ng-container>                  
+
+                </td>
+
+              </tr>
+            </ng-template>
+
+          </p-table>
         </div>
       </div>
     </div>
@@ -36,43 +90,124 @@
 
 <ng-template #content role="document" let-modal>
   <div class="modal-header">
-    <h5 class="modal-title mt-0">Nueva Agrupación</h5>
+    <h5 class="modal-title mt-0">Agregar agrupación</h5>
     <button type="button" class="btn-close" aria-hidden="true" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
-    <form (ngSubmit)="saveUser()">
+    <div >
       <div class="row">
         <div class="col-12">
-          <div class="mb-3">
-            <label class="control-label" for="agrupacion">Agrupación</label>
-            <input class="form-control" placeholder="Nombre de la Agrupacion" type="text" name="agrupacion"
-              formControlName="agrupacion" [ngClass]="{'is-invalid': submitted}" />
 
-          </div>
           <div class="mb-3">
-            <label class="control-label">Tipo</label>
-            <ng-select [items]="['Autobús','Cabaña','Equipo','Transporte']">
+            <label class="control-label">Agrupación</label>
+            <ng-select [items]="grupos"
+            bindLabel="nameComplet" 
+            bindValue="id"
+            [(ngModel)]="selectGrupos">
             </ng-select>
           </div>
+
+         
           <div class="mb-3">
             <label class="control-label" for="capacidad">Capacidad Máxima</label>
             <input class="form-control" placeholder=0 type="number" name="capacidad" id="capacidad"
-              formControlName="capacidad" [ngClass]="{'is-invalid': submitted}" />
+            [(ngModel)]="capMax" >
 
           </div>
-          <div class="mb-3">
-            <input class="form-check-input" type="checkbox" value="" id="tipo">
-            <label class="form-check-label ms-2" for="tipo">
-              Activo
-            </label>
 
-          </div>
 
         </div>
       </div>
-      <button type="submit" class="btn btn-success" id="btn-save-event">
+      <button type="submit" class="btn btn-success" id="btn-save-event" (click)="createGroup()">
         Guardar
       </button>
-    </form>
+    </div>
   </div>
 </ng-template>
+
+
+<p-dialog header="Title" [(visible)]="display3" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '98vw'}"  [modal]="true">
+  <ng-template pTemplate="header">
+     <h2>
+      Asignar agrupación  
+     </h2> 
+  </ng-template>
+  <div class="col">
+    <div class="col-10 mx-auto">
+      <form action="">
+        <div class="row mb-4">
+          <label for="" class="col-sm-12 col-form-label">Agrupación</label>
+          <div class="col-sm-12">
+              <ng-select   [items]="listGruposImscritos"
+              bindLabel="nameCample" 
+              bindValue="id"
+              (change)="changeGrups($event)" >
+                 
+              </ng-select>
+          </div>         
+      </div>
+      
+     
+      </form>
+
+      <p-table #dt [value]="listcatalogos" [rows]="10" [globalFilterFields]="['name']" [rowHover]="true"
+      dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"  [(selection)]="selectCatalogos"  [rowsPerPageOptions]="[10,25,50]" [paginator]="true">
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+           </th>
+          <th pSortableColumn="name">Acampador<p-sortIcon field="name" style="font-size: 10px;"></p-sortIcon></th>
+          
+          <th pSortableColumn="grouping_type_id">Fecha de Nacimiento<p-sortIcon field="is_active"
+            style="font-size: 10px;"></p-sortIcon></th>
+        <th pSortableColumn="grouping_type_id">Sexo<p-sortIcon field="is_active"
+            style="font-size: 10px;"></p-sortIcon></th>
+        <th pSortableColumn="grouping_type_id">Grado escolar<p-sortIcon field="is_active"
+            style="font-size: 10px;"></p-sortIcon></th>
+       
+
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-customer>
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="customer"></p-tableCheckbox>
+
+           </td>
+          <td>
+            {{customer.name}}
+          </td>
+          
+          <td>
+            {{customer.birthday}}
+          </td>
+        
+
+
+          <td>
+            {{customer.gender}}
+
+          </td>
+          <td>
+            {{customer.gender}}
+
+          </td>
+
+        </tr>
+      </ng-template>
+
+    </p-table>
+
+    </div>
+   
+
+        
+  </div>
+  <ng-template pTemplate="footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="this.display3 = false">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="saveGrouping()">Guardar</button>
+  </ng-template>
+</p-dialog>

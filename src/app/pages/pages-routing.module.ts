@@ -86,7 +86,7 @@ const routes: Routes = [
   { path: 'parents/inscription/:id', component: ParentsInscripcionCampComponent },
   { path: 'staff/camps', component: CampamentosComponent },// vista de lista de camps
   { path: 'camp/:id', component: CampamentosStaffComponent }, // vista del campamento
-  { path: 'staff/grouping', component: GroupingComponent}, 
+  { path: 'staff/grouping/:id', component: GroupingComponent}, 
 //  { path: 'parents/new-user',component:NewParentComponent},
   { path: 'admi/temp', component: TemporadaComponent },
   { path: 'admi/camper', component: AdmiuserComponent },// admi a acamapdores
@@ -124,7 +124,7 @@ const routes: Routes = [
 
   //
 
-  {path: 'grouping/camp', component: AgregarAgrupacionComponent},
+  //{path: 'grouping/camp', component: AgregarAgrupacionComponent},
   {path: 'medical/care/:campId/:camperid', component: MedicoComponent},
   {path: 'medical/camp-medical/:id', component: TablaMedicalComponent},
   { path: 'medical/add_consultation/:campId/:camperid',component:NuevaConsultaComponent},
