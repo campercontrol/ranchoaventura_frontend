@@ -309,6 +309,10 @@ export class CampamentosStaffComponent implements OnInit {
         this.routerN.navigate(['dashboard/payments/'+idCamp +'/'+this.idCamp])
     }
   }
+  Agrupaciones(){
+        this.routerN.navigate(['dashboard/staff/grouping/'+this.idCamp])
+    
+  }
 }
 
 export interface campss {
