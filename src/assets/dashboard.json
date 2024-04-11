@@ -108,7 +108,7 @@
   }],
 
   "cryptoWalletBalance": [{
-    "text": "Available Balance",
+    "text": "Available Balances",
     "amount": "$ 6134.39",
     "subamount": "+ 0.0012.23 ( 0.2 % )",
     "income": "$ 2632.46",
