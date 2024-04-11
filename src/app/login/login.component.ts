@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
            console.log(this.authenticationService.infToken);
 
          }else{
-           this.router.navigate(['dashboard']);
+           this.router.navigate(['dashboard/parents']);
            console.log(this.authenticationService.infToken);
          }
       

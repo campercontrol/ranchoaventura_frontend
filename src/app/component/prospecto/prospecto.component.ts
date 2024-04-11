@@ -206,7 +206,7 @@ export class ProspectoComponent implements OnInit {
             console.log(this.auth.infToken);
  
           }else{
-            this.router.navigate(['dashboard']);
+            this.router.navigate(['dashboard/parents']);
             console.log(this.auth.infToken);
           }          
         })
