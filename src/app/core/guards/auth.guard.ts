@@ -4,6 +4,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { AuthenticationService } from '../services/auth.service';
 
 import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -12,9 +13,65 @@ export class AuthGuard implements CanActivate {
         private authenticationService: AuthenticationService,
     ) { }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
        if(this.authenticationService.loggedIn){
-            return true;
+                    // Obtener el tipo de usuario desde la autenticación
+        const userType = this.authenticationService.infToken.role_id;
+        const user_admin = this.authenticationService.infToken.user_admin;
+        const user_coordinator = this.authenticationService.infToken.user_coordinator;
+       // Verificar el tipo de usuario y permitir el acceso según las reglas definidas
+        switch (userType) {
+            case 1: //parent
+                // Permitir acceso a las rutas que comienzan con 'parents'
+                if (state.url.includes('/parents')) {
+                    return true;
+                }
+                break;
+            case 2: //staff
+                if(user_admin){
+                    return true;
+                }
+                if(user_coordinator){
+                    //Permitir acceso a todo menos administrador, catalogos
+                    if (state.url.includes('/catalogs') || state.url.includes('/admi') ) {
+ 
+
+                        return false;
+                    }
+                    return true;
+                }
+
+                if(!user_admin && !user_coordinator){
+                    // Solo puede entrar a listado de campamentos, medical y staff
+                    if (state.url.includes('/camp') || state.url.includes('/medical') || state.url.includes('/staff')) {
+                        return true;
+                    }
+                    // Permitir acceso a las rutas que comienzan con 'camp' o 'camp' o 'medical' lo que es lo mismo que staff
+                    // no puede entrar a mailing, catalogos, administrador
+                    return false;
+                }
+
+                break;
+            case 3:
+                return false;
+                break;
+            case 4: //coordinator
+                // Permitir acceso a las rutas que comienzan con 'camp' o 'medical'
+                // if (state.url.includes('/camp') || state.url.includes('/medical')) {
+                //     return true;
+                // }
+                return false;
+                break;
+            case 5: //medical
+                // Permitir acceso a las rutas que comienzan con 'medical'
+                if (state.url.includes('/medical') || state.url.includes('camps')) { //listado de campamentos y medical
+                    return true;
+                }
+                return false;
+                break;
+            default:
+                break;
+        }
        }else{
         this.router.navigate(['login'])
       
