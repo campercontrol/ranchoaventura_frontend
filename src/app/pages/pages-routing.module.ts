@@ -68,104 +68,105 @@ import { ListEventsComponent } from '../component/list-events/list-events.compon
 import { AdminStaffComponent } from '../component/admin-staff/admin-staff.component';
 import { AdminTipoAgrupacionesComponent } from '../staff/admin-tipo-agrupaciones/admin-tipo-agrupaciones.component';
 import { GroupingAdmiComponent } from '../staff/grouping-admi/grouping-admi.component';
+import { AuthGuard } from '../core/guards/auth.guard';
 
 const routes: Routes = [
   
-  { path: '', component: RegisteredChildrenComponent },
-  { path: 'parents/my-profile', component: PerfilComponent },
-  { path: 'parents/registered-children', component: RegisteredChildrenComponent },
-  { path: 'parents/new-camper', component: CamperNuevoComponent },
-  { path: 'parents/camp-info/:camper/:camp', component: CampamentoComponent },
-  { path: 'parents/inscription/camp-info/:camper/:camp', component: CampamentoComponent },
-  { path: 'parents/inscription/camper/:id', component: PerfilCamperComponent },
+  { path: '', component: RegisteredChildrenComponent, canActivate: [AuthGuard] },
+  { path: 'parents/my-profile', component: PerfilComponent, canActivate: [AuthGuard] },
+  { path: 'parents/registered-children', component: RegisteredChildrenComponent, canActivate: [AuthGuard] },
+  { path: 'parents/new-camper', component: CamperNuevoComponent, canActivate: [AuthGuard] },
+  { path: 'parents/camp-info/:camper/:camp', component: CampamentoComponent, canActivate: [AuthGuard] },
+  { path: 'parents/inscription/camp-info/:camper/:camp', component: CampamentoComponent, canActivate: [AuthGuard] },
+  { path: 'parents/inscription/camper/:id', component: PerfilCamperComponent, canActivate: [AuthGuard] },
 
 
-  { path: 'camps/camp_add', component: NuevoCampamentoComponent },
-  { path: 'parents/update-camper/:id', component: UpdateCamperComponent },
-  { path: 'parents/camper/:id', component: PerfilCamperComponent },
-  { path: 'parents/inscription/:id', component: ParentsInscripcionCampComponent },
-  { path: 'staff/camps', component: CampamentosComponent },// vista de lista de camps
-  { path: 'camp/:id', component: CampamentosStaffComponent }, // vista del campamento
+  { path: 'camps/camp_add', component: NuevoCampamentoComponent, canActivate: [AuthGuard] },
+  { path: 'parents/update-camper/:id', component: UpdateCamperComponent, canActivate: [AuthGuard] },
+  { path: 'parents/camper/:id', component: PerfilCamperComponent, canActivate: [AuthGuard] },
+  { path: 'parents/inscription/:id', component: ParentsInscripcionCampComponent, canActivate: [AuthGuard] },
+  { path: 'staff/camps', component: CampamentosComponent, canActivate: [AuthGuard] },// vista de lista de camps
+  { path: 'camp/:id', component: CampamentosStaffComponent, canActivate: [AuthGuard] }, // vista del campamento
   { path: 'staff/grouping/:id', component: GroupingComponent}, 
 //  { path: 'parents/new-user',component:NewParentComponent},
-  { path: 'admi/temp', component: TemporadaComponent },
-  { path: 'admi/camper', component: AdmiuserComponent },// admi a acamapdores
-  { path: 'admi/parent', component: AdmiParentComponent },// admi a acamapdores
-  { path: 'admi/user', component: AdmiUserComponent },// admi a acamapdores
-  { path: 'admi/camps', component: AdmiCamperComponent },// admi a camps
-  { path: 'admi/paymants', component: AdmiPagosComponent },// admi a camps
-  { path: 'admi/search', component: SearchParentComponent },// admi a camps
-  { path: 'admi/events', component: EventosCapacitacionesComponent },// admi a camps
-  { path: 'admi/staff', component: AdminStaffComponent },// admi a camps
-  { path: 'admi/grouping/type', component: AdminTipoAgrupacionesComponent },// admi a camps
-  { path: 'admi/grouping', component: GroupingAdmiComponent },// admi a camps
+  { path: 'admi/temp', component: TemporadaComponent, canActivate: [AuthGuard] },
+  { path: 'admi/camper', component: AdmiuserComponent, canActivate: [AuthGuard] },// admi a acamapdores
+  { path: 'admi/parent', component: AdmiParentComponent, canActivate: [AuthGuard] },// admi a acamapdores
+  { path: 'admi/user', component: AdmiUserComponent, canActivate: [AuthGuard] },// admi a acamapdores
+  { path: 'admi/camps', component: AdmiCamperComponent, canActivate: [AuthGuard] },// admi a camps
+  { path: 'admi/paymants', component: AdmiPagosComponent, canActivate: [AuthGuard] },// admi a camps
+  { path: 'admi/search', component: SearchParentComponent, canActivate: [AuthGuard] },// admi a camps
+  { path: 'admi/events', component: EventosCapacitacionesComponent, canActivate: [AuthGuard] },// admi a camps
+  { path: 'admi/staff', component: AdminStaffComponent, canActivate: [AuthGuard] },// admi a camps
+  { path: 'admi/grouping/type', component: AdminTipoAgrupacionesComponent, canActivate: [AuthGuard] },// admi a camps
+  { path: 'admi/grouping', component: GroupingAdmiComponent, canActivate: [AuthGuard] },// admi a camps
 
 
 
 
-  { path: 'staff/events', component: ListEventsComponent },// admi a camps
-  { path: 'trofeos', component: TrofeosComponent },// admi a camps
-
-
-
-
-
+  { path: 'staff/events', component: ListEventsComponent, canActivate: [AuthGuard] },// admi a camps
+  { path: 'trofeos', component: TrofeosComponent, canActivate: [AuthGuard] },// admi a camps
 
 
 
 
 
-  {path: 'staff/trophies',component:TrofeosComponent},
-  {path: 'staff/perfil/:id',component:PerfilStaffComponent},
-  {path: 'staff/perfil',component:PerfilStaffComponent},
+
+
+
+
+
+  {path: 'staff/trophies',component:TrofeosComponent, canActivate: [AuthGuard] },
+  {path: 'staff/perfil/:id',component:PerfilStaffComponent, canActivate: [AuthGuard] },
+  {path: 'staff/perfil',component:PerfilStaffComponent, canActivate: [AuthGuard] },
   // pagos
-  {path: 'payments/:idCamp/:idCamper', component: PagosComponent},
-  {path: 'payments', component: PagosComponent},
+  {path: 'payments/:idCamp/:idCamper', component: PagosComponent, canActivate: [AuthGuard] },
+  {path: 'payments', component: PagosComponent, canActivate: [AuthGuard] },
 
   //
 
-  //{path: 'grouping/camp', component: AgregarAgrupacionComponent},
-  {path: 'medical/care/:campId/:camperid', component: MedicoComponent},
-  {path: 'medical/camp-medical/:id', component: TablaMedicalComponent},
-  { path: 'medical/add_consultation/:campId/:camperid',component:NuevaConsultaComponent},
+  //{path: 'grouping/camp', component: AgregarAgrupacionComponent, canActivate: [AuthGuard] },
+  {path: 'medical/care/:campId/:camperid', component: MedicoComponent, canActivate: [AuthGuard] },
+  {path: 'medical/camp-medical/:id', component: TablaMedicalComponent, canActivate: [AuthGuard] },
+  { path: 'medical/add_consultation/:campId/:camperid',component:NuevaConsultaComponent, canActivate: [AuthGuard] },
 
 
-  {path: 'mailing', component: GmailingComponent},
-  {path: 'school/profile', component: PerfilEscuelaComponent },
-  {path: 'shop', component: TienditaComponent},
+  {path: 'mailing', component: GmailingComponent, canActivate: [AuthGuard] },
+  {path: 'school/profile', component: PerfilEscuelaComponent, canActivate: [AuthGuard] },
+  {path: 'shop', component: TienditaComponent, canActivate: [AuthGuard] },
 
-  {path: 'staff/update',component:UpdateStaffComponent},
+  {path: 'staff/update',component:UpdateStaffComponent, canActivate: [AuthGuard] },
 
 
 
-  {path: 'staff/trainings',component:CapacitacionesComponent},
-  {path: 'staff/trainings-events',component:TrainingEventComponent},
-  {path: 'staff/training',component:CapacitacionesEventoComponent},
-  {path: 'staff/trainings-dashboard',component:CreateTrainingComponent},
-  {path: 'staff/trainings-card', component: ListaCapacitacionesComponent},
+  {path: 'staff/trainings',component:CapacitacionesComponent, canActivate: [AuthGuard] },
+  {path: 'staff/trainings-events',component:TrainingEventComponent, canActivate: [AuthGuard] },
+  {path: 'staff/training',component:CapacitacionesEventoComponent, canActivate: [AuthGuard] },
+  {path: 'staff/trainings-dashboard',component:CreateTrainingComponent, canActivate: [AuthGuard] },
+  {path: 'staff/trainings-card', component: ListaCapacitacionesComponent, canActivate: [AuthGuard] },
 
-  {path: 'staff/applicants',component:ListaProspectosComponent},
-  {path: 'staff',component:DashbordStaffComponent},
-  {path: 'staff/checkpoint',component:ListaPuntosControlComponent},
+  {path: 'staff/applicants',component:ListaProspectosComponent, canActivate: [AuthGuard] },
+  {path: 'staff',component:DashbordStaffComponent, canActivate: [AuthGuard] },
+  {path: 'staff/checkpoint',component:ListaPuntosControlComponent, canActivate: [AuthGuard] },
   
 //Catalogos
-{path: 'catalogs/food-restriction',component:AlimentacionComponent},
-{path: 'catalogs/currency',component:CurrencyComponent},
-{path: 'catalogs/pathological_background',component:PathologicalBackgroundComponent},
-{path: 'catalogs/pathological_background_Family',component:PathologicalBackgroundFamilyComponent},
-{path: 'catalogs/paymentaccounts',component:PaymentaccountsComponent},
-{path: 'catalogs/licensedmedicine',component:LicensedmedicineComponent},
-{path: 'catalogs/vaccines',component:VaccinesComponent},
-{path: 'catalogs/staffroles',component:StaffrolesComponent},
-{path: 'catalogs/payment/method',component:MetodosPagosComponent},
-{path: 'catalogs/camp_extra_question',component:PreguntasExtrasComponent},
-{path: 'catalogs/camp_extra_change',component:CargosExtrasComponent},
-{path: 'catalogs/school',component:EscuelaComponent},
+{path: 'catalogs/food-restriction',component:AlimentacionComponent, canActivate: [AuthGuard] },
+{path: 'catalogs/currency',component:CurrencyComponent, canActivate: [AuthGuard] },
+{path: 'catalogs/pathological_background',component:PathologicalBackgroundComponent, canActivate: [AuthGuard] },
+{path: 'catalogs/pathological_background_Family',component:PathologicalBackgroundFamilyComponent, canActivate: [AuthGuard] },
+{path: 'catalogs/paymentaccounts',component:PaymentaccountsComponent, canActivate: [AuthGuard] },
+{path: 'catalogs/licensedmedicine',component:LicensedmedicineComponent, canActivate: [AuthGuard] },
+{path: 'catalogs/vaccines',component:VaccinesComponent, canActivate: [AuthGuard] },
+{path: 'catalogs/staffroles',component:StaffrolesComponent, canActivate: [AuthGuard] },
+{path: 'catalogs/payment/method',component:MetodosPagosComponent, canActivate: [AuthGuard] },
+{path: 'catalogs/camp_extra_question',component:PreguntasExtrasComponent, canActivate: [AuthGuard] },
+{path: 'catalogs/camp_extra_change',component:CargosExtrasComponent, canActivate: [AuthGuard] },
+{path: 'catalogs/school',component:EscuelaComponent, canActivate: [AuthGuard] },
 
 
 
 //campers
-{path: 'catalogs/campercomment',component:CampercommentComponent},
+{path: 'catalogs/campercomment',component:CampercommentComponent, canActivate: [AuthGuard] },
 
 
 
@@ -176,41 +177,41 @@ const routes: Routes = [
 
 
 
-  {path: 'staff/checkpoint/:id',component:PuntoControlComponent},
-  {path: 'staff/camps',component: MisCampamentosComponent},
-  //{path:'staff/register', component:ProspectoComponent},
+  {path: 'staff/checkpoint/:id',component:PuntoControlComponent, canActivate: [AuthGuard] },
+  {path: 'staff/camps',component: MisCampamentosComponent, canActivate: [AuthGuard] },
+  //{path:'staff/register', component:ProspectoComponent, canActivate: [AuthGuard] },
   
 
 
 
 
 
-  {path: 'school/new', component: CampamentosNuevosComponent},
-  {path: 'school/laste', component: CampamentosAnterioresComponent},
-  {path: 'school/camp', component: TablaCampersEscuelasComponent},
-  {path: 'school/perfil', component: PerfilEscuelaComponent},
+  {path: 'school/new', component: CampamentosNuevosComponent, canActivate: [AuthGuard] },
+  {path: 'school/laste', component: CampamentosAnterioresComponent, canActivate: [AuthGuard] },
+  {path: 'school/camp', component: TablaCampersEscuelasComponent, canActivate: [AuthGuard] },
+  {path: 'school/perfil', component: PerfilEscuelaComponent, canActivate: [AuthGuard] },
 
   
 
-  { path: 'calendar', component: CalendarComponent },
-  { path: 'chat', component: ChatComponent },
-  { path: 'filemanager', component: FilemanagerComponent },
-  { path: 'dashboards', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule) },
-  { path: 'ecommerce', loadChildren: () => import('./ecommerce/ecommerce.module').then(m => m.EcommerceModule) },
-  { path: 'crypto', loadChildren: () => import('./crypto/crypto.module').then(m => m.CryptoModule) },
-  { path: 'email', loadChildren: () => import('./email/email.module').then(m => m.EmailModule) },
-  { path: 'invoices', loadChildren: () => import('./invoices/invoices.module').then(m => m.InvoicesModule) },
-  { path: 'projects', loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule) },
-  { path: 'tasks', loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksModule) },
-  { path: 'contacts', loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule) },
-  { path: 'blog', loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule) },
-  { path: 'pages', loadChildren: () => import('./utility/utility.module').then(m => m.UtilityModule) },
-  { path: 'ui', loadChildren: () => import('./ui/ui.module').then(m => m.UiModule) },
-  { path: 'form', loadChildren: () => import('./form/form.module').then(m => m.FormModule) },
-  { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
-  { path: 'icons', loadChildren: () => import('./icons/icons.module').then(m => m.IconsModule) },
-  { path: 'charts', loadChildren: () => import('./chart/chart.module').then(m => m.ChartModule) },
-  { path: 'maps', loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule) }
+  { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
+  { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
+  { path: 'filemanager', component: FilemanagerComponent, canActivate: [AuthGuard] },
+  { path: 'dashboards', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule), canActivate: [AuthGuard] },
+  { path: 'ecommerce', loadChildren: () => import('./ecommerce/ecommerce.module').then(m => m.EcommerceModule), canActivate: [AuthGuard] },
+  { path: 'crypto', loadChildren: () => import('./crypto/crypto.module').then(m => m.CryptoModule), canActivate: [AuthGuard] },
+  { path: 'email', loadChildren: () => import('./email/email.module').then(m => m.EmailModule), canActivate: [AuthGuard] },
+  { path: 'invoices', loadChildren: () => import('./invoices/invoices.module').then(m => m.InvoicesModule), canActivate: [AuthGuard] },
+  { path: 'projects', loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule), canActivate: [AuthGuard] },
+  { path: 'tasks', loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksModule), canActivate: [AuthGuard] },
+  { path: 'contacts', loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule), canActivate: [AuthGuard] },
+  { path: 'blog', loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule), canActivate: [AuthGuard] },
+  { path: 'pages', loadChildren: () => import('./utility/utility.module').then(m => m.UtilityModule), canActivate: [AuthGuard] },
+  { path: 'ui', loadChildren: () => import('./ui/ui.module').then(m => m.UiModule), canActivate: [AuthGuard] },
+  { path: 'form', loadChildren: () => import('./form/form.module').then(m => m.FormModule), canActivate: [AuthGuard] },
+  { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule), canActivate: [AuthGuard] },
+  { path: 'icons', loadChildren: () => import('./icons/icons.module').then(m => m.IconsModule), canActivate: [AuthGuard] },
+  { path: 'charts', loadChildren: () => import('./chart/chart.module').then(m => m.ChartModule), canActivate: [AuthGuard] },
+  { path: 'maps', loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule), canActivate: [AuthGuard]}
 ];
 
 @NgModule({
