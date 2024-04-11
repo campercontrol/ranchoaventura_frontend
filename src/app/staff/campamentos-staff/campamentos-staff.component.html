@@ -164,9 +164,8 @@
                     <button type="button" class="btn btn-success" id="dropdownBasic2"
                       ngbDropdownToggle>Modulos</button>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-                        <button ngbDropdownItem>Punto de control</button>
-                        <button ngbDropdownItem>Medicos</button>
-                        <button ngbDropdownItem>Ingresos</button>
+                        <button ngbDropdownItem (click)="puntosControl()">Punto de control</button>
+                        <button ngbDropdownItem (click)="medicos()">Medicos</button>
                         <button ngbDropdownItem (click)="Agrupaciones()">Agrupaciones</button>
 
       

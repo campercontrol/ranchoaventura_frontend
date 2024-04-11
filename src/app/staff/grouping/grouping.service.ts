@@ -22,8 +22,8 @@ export class GroupingService {
     return this.http.get('http://142.93.12.234:8000/groupings/' + id +'/available_campers')
 
   }
-  campersInscritos(id,data){
-    return this.http.post('http://142.93.12.234:8000/grouping_campers/assign/?grouping_camp_id='+id,data)
+  campersInscritos(data){
+    return this.http.post('http://142.93.12.234:8000/grouping_campers',data)
 
   }
 }

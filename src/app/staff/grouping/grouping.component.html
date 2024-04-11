@@ -36,13 +36,13 @@
               <tr>
                 <th pSortableColumn="name">Acampador<p-sortIcon field="name" style="font-size: 10px;"></p-sortIcon></th>
         
-                <th pSortableColumn="grouping_type_id">Fecha de Nacimiento<p-sortIcon field="is_active"
+                <th pSortableColumn="birthday">Fecha de Nacimiento<p-sortIcon field="birthday"
                     style="font-size: 10px;"></p-sortIcon></th>
-                <th pSortableColumn="grouping_type_id">Sexo<p-sortIcon field="is_active"
+                <th pSortableColumn="gender">Sexo<p-sortIcon field="gender"
                     style="font-size: 10px;"></p-sortIcon></th>
-                <th pSortableColumn="grouping_type_id">Grado escolar<p-sortIcon field="is_active"
+                <th pSortableColumn="grade">Grado escolar<p-sortIcon field="grade"
                     style="font-size: 10px;"></p-sortIcon></th>
-                <th pSortableColumn="grouping_type_id">Agrpaciones<p-sortIcon field="is_active"
+                <th pSortableColumn="groupings">Agrpaciones<p-sortIcon field="groupings"
                     style="font-size: 10px;"></p-sortIcon></th>
 
                 <th style="width: 40px;"></th>
@@ -161,11 +161,11 @@
            </th>
           <th pSortableColumn="name">Acampador<p-sortIcon field="name" style="font-size: 10px;"></p-sortIcon></th>
           
-          <th pSortableColumn="grouping_type_id">Fecha de Nacimiento<p-sortIcon field="is_active"
+          <th pSortableColumn="birthday">Fecha de Nacimiento<p-sortIcon field="birthday"
             style="font-size: 10px;"></p-sortIcon></th>
-        <th pSortableColumn="grouping_type_id">Sexo<p-sortIcon field="is_active"
+        <th pSortableColumn="gender">Sexo<p-sortIcon field="gender"
             style="font-size: 10px;"></p-sortIcon></th>
-        <th pSortableColumn="grouping_type_id">Grado escolar<p-sortIcon field="is_active"
+        <th pSortableColumn="grade">Grado escolar<p-sortIcon field="grade"
             style="font-size: 10px;"></p-sortIcon></th>
        
 
@@ -208,6 +208,8 @@
   </div>
   <ng-template pTemplate="footer">
       <button type="button" class="btn btn-outline-secondary" (click)="this.display3 = false">Cancel</button>
-      <button type="button" class="btn btn-primary" (click)="saveGrouping()">Guardar</button>
+      <button type="button" class="btn btn-primary" (click)="saveGrouping()" *ngIf="!spinner">Guardar</button>
+      <div class="spinner-border text-primary" role="status" *ngIf="spinner" >
+      </div>
   </ng-template>
 </p-dialog>

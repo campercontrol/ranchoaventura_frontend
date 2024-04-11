@@ -24,6 +24,7 @@ export class GroupingComponent  {
   
   breadCrumbItems: Array<{}>;
   listcatalogos:any ;
+  spinner = false;
   modalVista :boolean= true;
   userGridData:any=[];
   selected;
@@ -75,6 +76,9 @@ export class GroupingComponent  {
       this.grouping.getCamper(this.idCamp).subscribe((res:any)=>{
         console.log(res);
         this.listCampers = res.data;
+        this.listCampers.forEach((item:any)=>{
+          item.groupings = this.resetGroupingU(item.groupings)
+        })
       })
   })
    }
@@ -145,6 +149,13 @@ export class GroupingComponent  {
         item.nameCample =  item.type + " | " + item.grouping;
       })
     })
+    this.grouping.getCamper(this.idCamp).subscribe((res:any)=>{
+      console.log(res);
+      this.listCampers = res.data;
+      this.listCampers.forEach((item:any)=>{
+        item.groupings = this.resetGroupingU(item.groupings)
+      })
+    })
   }
 
 
@@ -163,7 +174,7 @@ export class GroupingComponent  {
 
   changeGrups(id:any){
     console.log(id);
-    this.selecType = id.grouping_id
+    this.selecType = id.id
     
       this.grouping.getCampersInscritos(id.id).subscribe((res:any)=>{
         console.log(res);
@@ -174,12 +185,13 @@ export class GroupingComponent  {
   saveGrouping(){
     console.log(this.selectCatalogos);
     let b = [];
+    this.spinner = true;
     this.selectCatalogos.forEach((element:any)=>{
-      b.push(element.id)
+      b.push({"camper_id":element.id,"grouping_camp_id":this.selecType})
     })
 
-    this.grouping.campersInscritos(this.selecType,b).subscribe((res:any)=>{
-      console.log(res);
+    this.grouping.campersInscritos(b).subscribe((res:any)=>{
+      console.log(res,'se isncribio correctamenta');
       this.listTypeAgrup.getAgrupaciones().pipe(
         switchMap((res: any) => {
           this.tipoAgrupacion = res;
@@ -194,9 +206,20 @@ export class GroupingComponent  {
          element.nameComplet =  element.nameTipo  + " | " + element.name
         });
         this.getGruposInscritos();
+        this.spinner = false;
+        this.display3 = false
+
       });
     })
     
+  }
+
+  resetGroupingU(data){
+    if (data === null) {
+      return null;
+    } else {
+      return data.split(',');
+    }
   }
 
 }

@@ -311,8 +311,13 @@ export class CampamentosStaffComponent implements OnInit {
   }
   Agrupaciones(){
         this.routerN.navigate(['dashboard/staff/grouping/'+this.idCamp])
-    
   }
+  medicos(){
+    this.routerN.navigate(['dashboard/medical/camp-medical/'+this.idCamp])
+}
+puntosControl(){
+  this.routerN.navigate(['dashboard/staff/checkpoint/'+this.idCamp])
+}
 }
 
 export interface campss {
