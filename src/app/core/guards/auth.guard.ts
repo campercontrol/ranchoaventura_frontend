@@ -43,7 +43,7 @@ export class AuthGuard implements CanActivate {
 
                 if(!user_admin && !user_coordinator){
                     // Solo puede entrar a listado de campamentos, medical y staff
-                    if (state.url.includes('/camp') || state.url.includes('/medical') || state.url.includes('/staff')) {
+                    if (state.url.includes('/camp') || state.url.includes('/medical') || state.url.includes('/staff')|| state.url.includes('/mailing')) {
                         return true;
                     }
                     // Permitir acceso a las rutas que comienzan con 'camp' o 'camp' o 'medical' lo que es lo mismo que staff

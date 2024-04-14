@@ -59,6 +59,7 @@ import { TagModule } from 'primeng/tag';
 import { NuevaConsultaComponent } from '../pages/medical/nueva-consulta/nueva-consulta.component';
 import { AdminTipoAgrupacionesComponent } from './admin-tipo-agrupaciones/admin-tipo-agrupaciones.component';
 import { GroupingAdmiComponent } from './grouping-admi/grouping-admi.component';
+import { ListadoStaffComponent } from './listado-staff/listado-staff.component';
 
 
 
@@ -89,6 +90,7 @@ import { GroupingAdmiComponent } from './grouping-admi/grouping-admi.component';
     CapacitacionesComponent,
     CapacitacionesEventoComponent,
     ListaCapacitacionesComponent,
+    ListadoStaffComponent,
     PuntoControlComponent,
     MisCampamentosComponent,
     ListaStaffComponent,

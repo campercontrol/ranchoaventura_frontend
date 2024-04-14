@@ -26,18 +26,7 @@ export class ListaPuntosControlComponent implements OnInit {
 
     checkPoint.getListaCheckpoint().subscribe((res:any)=>{
       console.log(res.data);
-      let a = res.data;
-       a.forEach(element => {
-        this.ids.push(element.camp_id)
-      });
-      
-      this.camps = this.eliminarValoresRepetidos(this.ids);  
-      this.camps.forEach((element:any)=>{
-        checkPoint.getInfoCamp(element).subscribe((res:any)=>{
-          this.listaChcek.push(res.data)
-
-        })
-      })    
+      this.listaChcek= res.data; 
     })
     console.log(this.listaChcek);
     

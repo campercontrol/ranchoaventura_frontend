@@ -69,6 +69,8 @@ import { AdminStaffComponent } from '../component/admin-staff/admin-staff.compon
 import { AdminTipoAgrupacionesComponent } from '../staff/admin-tipo-agrupaciones/admin-tipo-agrupaciones.component';
 import { GroupingAdmiComponent } from '../staff/grouping-admi/grouping-admi.component';
 import { AuthGuard } from '../core/guards/auth.guard';
+import { ListadoStaffComponent } from '../staff/listado-staff/listado-staff.component';
+import { ListadoCampersComponent } from '../staff/listado-campers/listado-campers.component';
 
 const routes: Routes = [
   
@@ -88,6 +90,9 @@ const routes: Routes = [
   { path: 'parents/camper/:id', component: PerfilCamperComponent, canActivate: [AuthGuard] },
   { path: 'parents/inscription/:id', component: ParentsInscripcionCampComponent, canActivate: [AuthGuard] },
   { path: 'staff/camps', component: CampamentosComponent, canActivate: [AuthGuard] },// vista de lista de camps
+  { path: 'staff/employees', component: ListadoStaffComponent   },// vista de lista de camps
+  { path: 'staff/campers', component: ListadoCampersComponent  },// vista de lista de camps
+
   { path: 'camp/:id', component: CampamentosStaffComponent, canActivate: [AuthGuard] }, // vista del campamento
   { path: 'staff/grouping/:id', component: GroupingComponent}, 
 //  { path: 'parents/new-user',component:NewParentComponent},
@@ -107,6 +112,7 @@ const routes: Routes = [
 
 
   { path: 'staff/events', component: ListEventsComponent, canActivate: [AuthGuard] },// admi a camps
+  
   { path: 'trofeos', component: TrofeosComponent, canActivate: [AuthGuard] },// admi a camps
 
 

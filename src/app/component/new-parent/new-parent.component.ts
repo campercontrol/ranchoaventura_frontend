@@ -451,7 +451,7 @@ export class NewParentComponent implements OnInit {
   }
   gettutor_cellphone(){
     if( this.formParent.get('tutor_cellphone').valid){
-      this.render.removeClass(this.tutor_cellphone.nativeElement,"is-invalid");
+        this.render.removeClass(this.tutor_cellphone.nativeElement,"is-invalid");
         this.render.addClass(this.tutor_cellphone.nativeElement,"is-valid");
      }else{
       this.render.removeClass(this.tutor_cellphone.nativeElement,"is-valid");

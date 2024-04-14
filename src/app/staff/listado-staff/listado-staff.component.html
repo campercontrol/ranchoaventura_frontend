@@ -1,0 +1,97 @@
+<div *ngIf="!cargando">
+  <p-tabView *ngIf="table">
+      <p-tabPanel header="Staff">
+          <div>
+
+              <div class="card border border-info border-1">
+                  <div class="bg-info p-2">
+                      <h1 class="card-title text-white">Listado staff</h1>
+                  </div>
+                  <div class="card-body">
+                      
+                      <div style="overflow: auto;">
+                          <p-table #dt [value]="listcatalogos" [rows]="5" [rowsPerPageOptions]="[5, 25, 50]"
+                              [globalFilterFields]="['Staff.name','Staff.facebook','email','Staff.bio','Staff.cellphone','Staff.home_phone']"
+                               [rowHover]="true" dataKey="id"
+                              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                              [showCurrentPageReport]="true" [paginator]="true">
+
+                              <ng-template pTemplate="header">
+                                  <tr>
+                                      <th pSortableColumn="Staff.name" style="min-width: 190px; text-align: center;">
+                                          Nombre <p-sortIcon field="Staff.name"
+                                              style="font-size: 10px;"></p-sortIcon></th>
+                                          
+                                      <th pSortableColumn="Staff.birthday" style="min-width: 150px;text-align: center;">
+                                          Fecha de nacimiento<p-sortIcon field="Staff.birthday"></p-sortIcon></th>
+                                      
+                                           
+                                                  <th pSortableColumn="email" style="min-width: 110px;text-align: center;">
+                                                      Email<p-sortIcon field="email"></p-sortIcon></th>
+                                                      <th pSortableColumn="tipoMovimiento" style="min-width: 60px;text-align: center;">
+                                                          Contactos<p-sortIcon field="tipoMovimiento"></p-sortIcon></th>
+                                                          <th pSortableColumn="tipoMovimiento" style="min-width: 60px;text-align: center;">
+                                                            Temporada<p-sortIcon field="tipoMovimiento"></p-sortIcon></th>
+                                                    
+                                  </tr>
+                              </ng-template>
+                              <ng-template pTemplate="body" let-customer>
+                                  <tr>
+                                      <td  style="cursor:pointer; text-align: center;">
+                                         {{customer.Staff.name}}
+                                      </td>
+
+                                      <td style="font-size: 12px; font-size: 12px;">
+                                          {{customer.Staff.birthday}} 
+                                      </td>
+                                      
+                                  
+                                      <td style="text-align: center; font-size: 12px;" >
+                                          {{customer.email}}
+                                      </td>
+                                   
+
+                                      <td style="text-align: center;">
+                                          
+                                       <i class="mdi mdi-cellphone" ></i>   {{customer.Staff.cellphone}}
+                                          <br>
+                                       <i class="dripicons-phone"></i>   {{customer.Staff.home_phone}}
+
+
+                                      </td>
+                                      <td style="text-align: center;">
+                                          
+                                        {{customer.season_name}}
+                                       
+
+
+                                    </td>
+                                 
+                                   
+
+
+                                  </tr>
+                              </ng-template>
+
+                          </p-table>
+                      </div>
+
+                  </div>
+              </div>
+
+
+
+
+
+          </div>
+
+      </p-tabPanel>
+
+
+  </p-tabView>
+
+</div>
+
+<div class="spinner-border text-primary" role="status" style="margin: 0 auto;" *ngIf="cargando">
+  <span class="sr-only">Loading...</span>
+</div>

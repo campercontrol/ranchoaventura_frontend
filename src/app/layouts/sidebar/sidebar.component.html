@@ -88,6 +88,16 @@
             <span>Lista de campamentos</span>
 
           </a>
+          <a routerLink='staff/camps' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true) || rol_id == 3 ">
+            <i class="bx bx-barcode"></i>
+            <span>Staff</span>
+
+          </a>
+          <a routerLink='staff/camps' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true) || rol_id == 3 ">
+            <i class="bx bx-barcode"></i>
+            <span>Campers</span>
+
+          </a>
        
 
           <a routerLink='staff/trainings-dashboard' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true)">
