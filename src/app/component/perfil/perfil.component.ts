@@ -161,8 +161,10 @@ export class PerfilComponent implements OnInit {
     this.spinner = true;
     if(this.formParent.valid){
       this.parent.partnPatch(this.info.infToken.profile_id, this.formParent.value).subscribe((arg:any) =>{
+        console.log(arg);
+        
         this.spinner = true;
-        this.router.navigate(['dashboard'])
+        this.router.navigate(['dashboard/parent'])
       });
     }else{
       this.spinner = false;
