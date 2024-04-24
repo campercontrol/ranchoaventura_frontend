@@ -14,7 +14,8 @@ export class AuthGuard implements CanActivate {
     ) { }
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-       if(this.authenticationService.loggedIn){
+      this.authenticationService.logaot();
+        if(this.authenticationService.loggedIn){
                     // Obtener el tipo de usuario desde la autenticación
         const userType = this.authenticationService.infToken.role_id;
         const user_admin = this.authenticationService.infToken.user_admin;

@@ -139,7 +139,7 @@ const routes: Routes = [
   { path: 'medical/add_consultation/:campId/:camperid',component:NuevaConsultaComponent, canActivate: [AuthGuard] },
 
 
-  {path: 'mailing', component: GmailingComponent, canActivate: [AuthGuard] },
+  {path: 'mailing', component: GmailingComponent },
   {path: 'school/profile', component: PerfilEscuelaComponent, canActivate: [AuthGuard] },
   {path: 'shop', component: TienditaComponent, canActivate: [AuthGuard] },
 

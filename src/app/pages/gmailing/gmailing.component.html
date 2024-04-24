@@ -55,7 +55,7 @@
                                                             <ng-template pTemplate="header">
                                                                 <tr>
                                                                     <th pSortableColumn="name">Nombre<p-sortIcon
-                                                                            field="name"
+                                                                            field="title"
                                                                             style="font-size: 10px;"></p-sortIcon></th>
                                                                
                                                                 </tr>
@@ -63,7 +63,7 @@
                                                             <ng-template pTemplate="body" let-customer  >
                                                                 <tr >
                                                                     <td (click)="selectUpadate(customer)"  style="cursor: pointer;">
-                                                                        {{customer.name}}
+                                                                        {{customer.title}}
                                                                     </td>
                                                                  
                                                                 </tr>

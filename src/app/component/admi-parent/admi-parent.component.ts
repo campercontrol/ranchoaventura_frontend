@@ -222,7 +222,8 @@ export class AdmiParentComponent implements OnInit {
     if(this.formFood.valid){     
       this.catalogos.postParent(this.formFood.value).subscribe((res:any)=>{
           console.log(res);
-          if(res.succes = 200){
+          if(res.succes == 200){
+
             this.spinner=false; 
             this.getCatalogos();
             this.statuAgrgado = true;
@@ -379,7 +380,8 @@ export class AdmiParentComponent implements OnInit {
     if(this.formFood.valid){
       this.catalogos.patchParent(this.updateId,this.formFood.value).subscribe((res:any)=>{
         console.log(res);
-        if(res.succes = 200){
+        if(res.succes == 200){
+
           this.spinner = false;
           this.getCatalogos();
           this.statuAgrgado = true;

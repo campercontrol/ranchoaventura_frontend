@@ -83,7 +83,7 @@ export class ProspectoComponent implements OnInit {
       confirmEmail: ['', [Validators.required,Validators.email]],
       name: ["", [Validators.required]],
       lastname_father: ["", [Validators.required]],
-      lastname_mother: ["",],
+      lastname_mother: [""],
       photo: ["",[Validators.required]],
       birthday: ["",[Validators.required]], //fecha de nacimiento
       curp: ["",[Validators.required]],
@@ -92,7 +92,8 @@ export class ProspectoComponent implements OnInit {
       home_phone: ["", [Validators.required,Validators.pattern("^[0-9]*$"), Validators.minLength(8)]],
       cellphone: ["", [Validators.required, Validators.pattern("^[0-9]*$"),Validators.minLength(8)]],
       cv: ["", [Validators.required]],
-      gender_id:[0],
+      gender_id:[4],
+      season_id:[0],
 
       login_id:[0],
       coordinator:[false],
@@ -197,8 +198,9 @@ export class ProspectoComponent implements OnInit {
           console.log(user);
           console.log(user);
           this.auth.loggedIn = true;
-          localStorage.setItem('currentUser', JSON.stringify(user));
           this.auth.infToken = jwt_decode(user.access_token);
+
+          localStorage.setItem('currentUser', JSON.stringify(this.auth.infToken));
           console.log(this.auth.infToken.role_id);
           
           if(this.auth.infToken.role_id>1){
