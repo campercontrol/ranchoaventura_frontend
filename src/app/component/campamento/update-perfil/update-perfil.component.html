@@ -191,7 +191,7 @@
     
     
                                         <div class="form-check form-check-inline" *ngFor="let item of vaccines;index as i">
-                                            <input (click)="vaccinesValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions"
+                                            <input (click)="vaccinesValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions"  [checked]="item.is_active"
                                                 id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}"
                                                 >
                                             <label class="form-check-label" for="inlineRadio1">{{item.name}}</label>
@@ -241,7 +241,7 @@
                             <div class="input-datos-medicos">
                                 <p style="margin-top:2px ;">{{textos['CAMPER']}}</p>
                                 <ng-container  *ngFor="let item of pathological_background;index as i">
-                                    <input (click)="pathological_backgroundValu(i)" type="checkbox" style="margin-top:10px ;" value="{{item.is_active}}"
+                                    <input (click)="pathological_backgroundValu(i)" type="checkbox" style="margin-top:10px ;" value="{{item.is_active}}"  [checked]="item.is_active" 
                                         id="{{item.id}}">
                                     <br>
 
@@ -250,7 +250,7 @@
                             <div class="input-datos-medicos">
                                 <p style="margin-top:2px ;">{{textos['FAMILY']}}</p>
                                 <ng-container  *ngFor="let item of pathological_background_fm;index as i">
-                                    <input (click)="pathological_background_fmValu(i)" type="checkbox" style="margin-top:10px ;" value="{{item.is_active}}"
+                                    <input (click)="pathological_background_fmValu(i)" type="checkbox" style="margin-top:10px ;" value="{{item.is_active}}"   [checked]="item.is_active" 
                                         id="{{item.id}}">
                                     <br>
                                 </ng-container>
@@ -338,7 +338,7 @@
                                 <div class="input-datos-medicos" style="margin-top: 0px;">
 
                                     <div *ngFor="let item of licensed_medicines; index as i" >
-                                        <input type="checkbox" style="margin-top:13px ;" (click)="licensed_medicinesValu(i)" value="{{item.is_active}}" 
+                                        <input type="checkbox" style="margin-top:13px ;" (click)="licensed_medicinesValu(i)" value="{{item.is_active}}"   [checked]="item.is_active" 
                                             id="{{item.id}}">
                                         <br>
                                     </div>

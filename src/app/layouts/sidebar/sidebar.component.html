@@ -88,16 +88,12 @@
             <span>Lista de campamentos</span>
 
           </a>
-          <a routerLink='staff/camps' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true) || rol_id == 3 ">
+          <a routerLink='staff/employees' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true) || rol_id == 3 ">
             <i class="bx bx-barcode"></i>
             <span>Staff</span>
 
           </a>
-          <a routerLink='staff/camps' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true) || rol_id == 3 ">
-            <i class="bx bx-barcode"></i>
-            <span>Campers</span>
-
-          </a>
+         
        
 
           <a routerLink='staff/trainings-dashboard' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true)">
@@ -150,7 +146,7 @@
       *ngIf="catalogos">  
       <span>Antecedentes patologicos familiares</span>    
     </a>
-    <a routerLink='catalogs/pathological_background_Family' class="side-nav-link-ref" routerLinkActive="active"
+    <a routerLink='catalogs/paymentaccounts' class="side-nav-link-ref" routerLinkActive="active"
     *ngIf="catalogos">  
     <span>Cuentas bancarias </span>    
      </a>
@@ -194,7 +190,7 @@
           
 
           <a  class="side-nav-link-ref " routerLinkActive="active" 
-            (click)="admi = !admi" *ngIf="rol_id ==2 && user_admin== false ">
+            (click)="admi = !admi" *ngIf="rol_id ==2 && user_admin== true ">
             <div class="nav-d">
               <div>
                 <i class="bx bxs-school"></i>
@@ -232,6 +228,38 @@
             <span>Campamentos</span>
 
           </a>
+          <a routerLink='admi/temp' class="side-nav-link-ref" routerLinkActive="active"
+          *ngIf="admi">
+
+          <span>Temporadas</span>
+
+        </a>
+       
+      <a routerLink='admi/events' class="side-nav-link-ref" routerLinkActive="active"
+      *ngIf="admi">
+
+      <span>Eventos</span>
+
+    </a>
+    <a routerLink='admi/staff' class="side-nav-link-ref" routerLinkActive="active"
+      *ngIf="admi">
+
+      <span>Staff</span>
+
+    </a>
+    <a routerLink='admi/grouping/type' class="side-nav-link-ref" routerLinkActive="active"
+    *ngIf="admi">
+
+    <span>Tipos grupos</span>
+
+  </a>
+
+  <a routerLink='admi/grouping' class="side-nav-link-ref" routerLinkActive="active"
+  *ngIf="admi">
+
+  <span>Grupos</span>
+
+</a>
         </li>
         <li>
           <a (click)="logout()" class="side-nav-link-ref" routerLinkActive="active" style="cursor: pointer;">

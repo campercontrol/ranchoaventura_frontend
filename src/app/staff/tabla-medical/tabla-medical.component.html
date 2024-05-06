@@ -153,7 +153,7 @@
         <div >
             <div class="scroll-y">
                 <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
-                    [value]="customer" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+                    [value]="staffs" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
                     [loading]="loading" [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
                     [globalFilterFields]="['name','country.name','representative.name','status']">
@@ -207,14 +207,14 @@
                                     size="large"></p-avatar>
                             </td>
                             <td>
-                                {{customer.name}}
+                                {{customer.staff_full_name}}
                             </td>
 
 
                             <td>
-                                Renata Camper Control <br>
-                                renata@campercontrol.com <br>
-                                55123456 </td>
+                              
+                               {{customer.staff_email}}<br>
+                                {{customer.staff_contact_cellphone}} </td>
                             <td>
                             </td>
                             <td>

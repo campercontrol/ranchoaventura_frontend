@@ -22,6 +22,11 @@ label{
 .contenedor-datos{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+.contenedor-datos input{
+    height: 23px;
+
 }
 .contenedor-datos-vac{
     display: flex;

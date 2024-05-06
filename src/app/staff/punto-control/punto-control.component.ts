@@ -91,13 +91,15 @@ export class PuntoControlComponent implements OnInit {
 
   }
   crearCheck() {
+    console.log(this.chekpoint.value)
     this.check.postchekpoint(this.chekpoint.value).subscribe(
       (res: any) => {
         this.chekpoint.reset()
         this.letrero = true;
         this.getColumnas();
         this.chekpoint.patchValue({
-          camp_id: this.id
+          camp_id: this.id,
+          order:0
         });
         setTimeout(() => {
           this.letrero = false;

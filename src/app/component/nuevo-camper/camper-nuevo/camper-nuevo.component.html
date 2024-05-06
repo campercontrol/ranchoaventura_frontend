@@ -250,7 +250,7 @@
                             <div class="input-datos-medicos">
                                 <p style="margin-top:2px ;">{{textos['CAMPER']}}</p>
                                 <ng-container  *ngFor="let item of pathological_background;index as i">
-                                    <input (click)="pathological_backgroundValu(i)" type="checkbox" style="margin-top:10px ;" value="{{item.is_active}}"
+                                    <input (click)="pathological_backgroundValu(i)" type="checkbox"  value="{{item.is_active}}"
                                         id="{{item.id}}">
                                     <br>
 
@@ -259,7 +259,7 @@
                             <div class="input-datos-medicos">
                                 <p style="margin-top:2px ;">{{textos['FAMILY']}}</p>
                                 <ng-container  *ngFor="let item of pathological_background_fm;index as i">
-                                    <input (click)="pathological_background_fmValu(i)" type="checkbox" style="margin-top:10px ;" value="{{item.is_active}}"
+                                    <input (click)="pathological_background_fmValu(i)" type="checkbox" value="{{item.is_active}}"
                                         id="{{item.id}}">
                                     <br>
                                 </ng-container>
