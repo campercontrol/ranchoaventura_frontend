@@ -158,7 +158,6 @@ export class CamperNuevoComponent implements OnInit {
       contact_cellphone:  ["",[Validators.required,
         Validators.pattern("^[0-9]*$"),
         Validators.minLength(8), Validators.maxLength(10)]],
-      record_id: [0],
       parent_id: [this.info.infToken.profile_id,[Validators.required]],
       terms: ["",[Validators.required,Validators.requiredTrue]],
     })
