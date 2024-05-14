@@ -17,6 +17,7 @@ export class TrainingEventComponent implements OnInit {
   display2: boolean = false;
   display3: boolean = false;
   text: any;
+  showButton:boolean = false;
   statuAgrgado = false;
   TextElimint="";
   idDalete=0;
@@ -48,10 +49,12 @@ export class TrainingEventComponent implements OnInit {
  
 
   onSave () : void {
+    this.showButton = true;
     console.log(this.addTrainingForm.value)
     this.catalogos.postTrainingPost(this.addTrainingForm.value).subscribe((res) => {
       console.log(res);
-      
+      this.showButton = false;
+
       this.addTrainingForm.reset();
       this.closeModal();
       this.getTrainig()
@@ -177,11 +180,15 @@ export class TrainingEventComponent implements OnInit {
   }
 
   keepUpdate(){
+    this.showButton = true;
+
     this.catalogos.updateTrainingEvent(this.addTrainingForm.value,this.updateId).subscribe((res: any) => {
      console.log(res);
       this.getTrainig();
       this.statuAgrgado = true;
       this.resteValu();
+      this.showButton = true;
+
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal2();

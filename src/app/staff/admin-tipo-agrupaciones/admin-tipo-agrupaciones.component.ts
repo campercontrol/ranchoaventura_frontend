@@ -24,6 +24,7 @@ export class AdminTipoAgrupacionesComponent implements OnInit {
   formFood: FormGroup;
   date: Date = new Date();
   statuAgrgado = false;
+  showButtons = false;
   cat: any = {
     '0': 'ninguno',
     '1': 'Staff',
@@ -74,10 +75,13 @@ export class AdminTipoAgrupacionesComponent implements OnInit {
   
 
   guardar() {
+    this.showButtons = true;
     this.camps.postAgrupaciones(this.formFood.value).subscribe((res: any) => {
-      this.statuAgrgado = true;
+      this.statuAgrgado = false;
+      this.showButtons = false;
+
       this.camps.getAgrupaciones().subscribe((res:any)=>{
-      
+
         this.listcatalogos = res
       })
       this.resteValu();
@@ -115,9 +119,12 @@ export class AdminTipoAgrupacionesComponent implements OnInit {
   }
 
   keepUpdate(){
+    this.showButtons = true;
+
     this.camps.updateAgrupaciones(this.formFood.value,this.updateId).subscribe((res: any) => {
      console.log(res);
-     
+     this.showButtons = false;
+
       this.statuAgrgado = true;
       this.resteValu();
       this.camps.getAgrupaciones().subscribe((res:any)=>{
@@ -145,8 +152,12 @@ export class AdminTipoAgrupacionesComponent implements OnInit {
   }
 
   delet(){
+    this.showButtons = true;
+
     this.camps.deletGruping(this.idDalete).subscribe((res: any) => {
       this.statuAgrgado = true;
+      this.showButtons = false;
+
       this.resteValu();
       this.camps.getAgrupaciones().subscribe((res:any)=>{
       

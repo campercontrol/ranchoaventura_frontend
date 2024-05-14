@@ -115,7 +115,7 @@ export class UpdateStaffComponent implements OnInit {
       facebook: ["", [Validators.required]],
       home_phone: ["", [Validators.required,Validators.pattern("^[0-9]*$"), Validators.minLength(8)]],
       cellphone: ["", [Validators.required, Validators.pattern("^[0-9]*$"),Validators.minLength(8)]],
-      cv: ["", [Validators.required]],
+      cv: [""],
       gender_id:[0],
       employee:[true],
 

@@ -2,15 +2,15 @@
 
     <div class="card border border-info border-1">
         <div class="bg-info p-2">
-            <h1 class="card-title text-white">Lista de capacitaciones</h1>
+            <h1 class="card-title text-white">Lista de eventos</h1>
         </div>
         <div class="card-body">
             <div class="container-btn mt-1 mb-3">
                 <div>
                     <div ngbDropdown placement="top-end" class="d-inline-block d-flex flex-column gap-2 flex-md-row"
                         style="margin-right: 10px;">
-                        <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar nueva
-                            capacitacion</button>
+                        <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar Evento
+                            </button>
 
                     </div>
                 </div>
@@ -27,11 +27,11 @@
                 <ng-template pTemplate="header">
                     <tr>
                      
-                        <th pSortableColumn="name">Nombre de la capacitacion <p-sortIcon field="camp"
+                        <th pSortableColumn="name">Nombre del evento <p-sortIcon field="camp"
                                 style="font-size: 10px;"></p-sortIcon></th>
                         <th pSortableColumn="description">Descripcion <p-sortIcon field="sede"></p-sortIcon></th>
                         <th pSortableColumn=" camp_end">Activo <p-sortIcon field="Activo"></p-sortIcon></th>
-
+                            <th></th>
 
                     </tr>
                 </ng-template>
@@ -56,7 +56,7 @@
     
                         </td>
                         <td>
-                            <button class="btn btn-danger" (click)="deletModal(customer.name,customer.id)">Eliminar</button>
+                          <!--   <button class="btn btn-danger" (click)="deletModal(customer.name,customer.id)">Eliminar</button> -->
                         </td>
 
                     </tr>
@@ -83,14 +83,14 @@
         <form [formGroup]="addTrainingForm" (ngSubmit)="onSave()">
 
             <div class="row mb-4">
-                <label for="" class="col-sm-3 col-form-label">Nueva Capacitacion</label>
+                <label for="" class="col-sm-12 col-form-label">Nueva Capacitacion</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="" formControlName="name">
                 </div>
 
             </div>
             <div class="row mb-4">
-                <label for="" class="col-sm-3 col-form-label">Imagen de la
+                <label for="" class="col-sm-12 col-form-label">Imagen de la
                     capacitacion</label>
                 <div class="col-sm-9">
                     <input type="file" class="form-control" id="" (change)="subiendo($event)" accept="image/jpeg">
@@ -104,7 +104,7 @@
 
             </div>
             <div class="row mb-4">
-                <label for="" class="col-sm-3 col-form-label">URL</label>
+                <label for="" class="col-sm-12 col-form-label">URL</label>
                 <div class="col-sm-9">
                     <input type="url" class="form-control" id=""
                         formControlName="url">
@@ -116,9 +116,7 @@
                 <label class="form-check-label" for="flexSwitchCheckChecked">Activo</label>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary">
-                Guardar
-                </button>
+               
             </div>
 
 
@@ -126,28 +124,31 @@
     </div>
 
     <ng-template pTemplate="footer">
+        <button type="submit" class="btn btn-primary">
+            Guardar
+            </button>
     </ng-template>
 </p-dialog>
 
 
-<p-dialog header="Title" [(visible)]="display2" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+<p-dialog header="Title" [(visible)]="display2" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '60vw'}">
     <ng-template pTemplate="header">
         <h2>
-            Agregar nueva capacitacion
+            Editar  capacitacion
         </h2>
     </ng-template>
     <div class="col">
         <form [formGroup]="addTrainingForm" (ngSubmit)="onSave()">
 
             <div class="row mb-4">
-                <label for="" class="col-sm-3 col-form-label">Nueva Capacitacion</label>
+                <label for="" class="col-sm-12 col-form-label">Nueva Capacitacion</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="" formControlName="name">
                 </div>
 
             </div>
             <div class="row mb-4">
-                <label for="" class="col-sm-3 col-form-label">Imagen de la
+                <label for="" class="col-sm-12 col-form-label">Imagen de la
                     capacitacion</label>
                 <div class="col-sm-9">
                     <input type="file" class="form-control" id="" (change)="subiendo($event)">
@@ -161,7 +162,7 @@
 
             </div>
             <div class="row mb-4">
-                <label for="" class="col-sm-3 col-form-label">URL</label>
+                <label for="" class="col-sm-12 col-form-label">URL</label>
                 <div class="col-sm-9">
                     <input type="url" class="form-control" id=""
                         formControlName="url">
@@ -179,7 +180,7 @@
     </div>
     <ng-template pTemplate="footer">
         <button type="button" class="btn btn-outline-secondary" (click)="closeModal2()">Cancel</button>
-        <button type="button" class="btn btn-danger" (click)="keepUpdate()">Guardar</button>
+        <button type="button" class="btn btn-danger" (click)="keepUpdate()">Guardar</button>  
     </ng-template>
 </p-dialog>
 

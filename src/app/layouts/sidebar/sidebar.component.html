@@ -93,6 +93,11 @@
             <span>Staff</span>
 
           </a>
+          <a routerLink='mailing' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true) || rol_id == 3 ">
+            <i class="bx bx-barcode"></i>
+            <span>Mails</span>
+
+          </a>
          
        
 

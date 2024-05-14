@@ -167,6 +167,22 @@ export class GroupingComponent  {
     }
     this.grouping.createGroup(a).subscribe((res:any)=>{
       this.modalService.dismissAll(this.content);
+
+      this.listTypeAgrup.getAgrupaciones().pipe(
+        switchMap((res: any) => {
+          this.tipoAgrupacion = res;
+          return this.listGrouping.getAgrupaciones();
+        })
+      ).subscribe((res: any) => {
+        this.grupos   = res;
+        console.log(this.grupos,'grupos');
+        this.grupos = this.grupos.filter(item => item.is_active === true);
+        this.grupos.forEach(element => {
+         element.nameTipo = this.filterType( element.grouping_type_id );
+         element.nameComplet =  element.nameTipo  + " | " + element.name
+        });
+        this.getGruposInscritos();
+      });
       this.selectGrupos ="0";
       this.capMax = 0;
     })

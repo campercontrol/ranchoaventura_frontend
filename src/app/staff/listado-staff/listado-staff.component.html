@@ -8,8 +8,16 @@
                       <h1 class="card-title text-white">Listado staff</h1>
                   </div>
                   <div class="card-body">
+                    
+                       
+                        
                       
-                      <div style="overflow: auto;">
+                      <div >
+                        <div class="mt-2 mb-2">
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                            placeholder="Global Search" />
+                    
+                        </div>
                           <p-table #dt [value]="listcatalogos" [rows]="5" [rowsPerPageOptions]="[5, 25, 50]"
                               [globalFilterFields]="['Staff.name','Staff.facebook','email','Staff.bio','Staff.cellphone','Staff.home_phone']"
                                [rowHover]="true" dataKey="id"
