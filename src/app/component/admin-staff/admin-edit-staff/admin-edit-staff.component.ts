@@ -117,7 +117,7 @@ export class AdminEditStaffComponent implements OnInit {
       home_phone: ["", [Validators.required,Validators.pattern("^[0-9]*$"), Validators.minLength(8)]],
       cellphone: ["", [Validators.required, Validators.pattern("^[0-9]*$"),Validators.minLength(8)]],
       cv: ["", [Validators.required]],
-      gender_id:[0],
+      gender_id:[1],
       employee:[true],
 
       
