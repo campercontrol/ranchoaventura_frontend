@@ -88,7 +88,7 @@
                             </ng-template>
                             <ng-template pTemplate="body" let-customer>
                                 <tr class="p-selectable-row">
-                                    <td>
+                                    <td (click)="hypervinculo(customer.camper.camper_id)">
                                        {{customer.camper.camper_id}}
                                     </td>
 

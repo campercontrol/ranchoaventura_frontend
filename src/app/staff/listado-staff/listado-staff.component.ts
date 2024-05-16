@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogosService } from 'src/services/catalogos.service';
 import { CreateCampsService } from 'src/services/create-camps.service';
 import { PaymentsService } from 'src/services/payments.service';
@@ -85,7 +86,7 @@ export class ListadoStaffComponent implements OnInit {
   selectedCities: string[] = [];
   
 
-  constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private catalogos:CatalogosService,private paymants:PaymentsService) {  
+  constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private catalogos:CatalogosService,private paymants:PaymentsService,private routerAc :Router) {  
   }
   ngOnInit(): void {
     
@@ -122,7 +123,9 @@ export class ListadoStaffComponent implements OnInit {
     });
   }
   
-
+hypervinculo(id:any){
+  this.routerAc.navigate(['dashboard/staff/perfil/'+id])
+}
   
 
 }

@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CampsService } from 'src/services/camps.service';
 import { ChekpointService } from 'src/services/chekpoint.service';
 
@@ -51,7 +51,7 @@ export class PuntoControlComponent implements OnInit {
   mensajeActivo = false;
 
 
-  constructor(private check: ChekpointService, private FormGroup: FormBuilder, private routesA: ActivatedRoute, private camps: CampsService) {
+  constructor(private check: ChekpointService, private FormGroup: FormBuilder, private routesA: ActivatedRoute, private camps: CampsService,private router: Router) {
     this.routesA.params.subscribe((params) => {
       this.id = params['id']
     })
@@ -245,5 +245,8 @@ export class PuntoControlComponent implements OnInit {
 
     return b;
 
+  }
+  hypervinculo(id:any){
+      this.router.navigate(['dashboard/parents/camper/'+id])
   }
 }
