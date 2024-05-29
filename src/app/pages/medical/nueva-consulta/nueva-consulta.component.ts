@@ -44,7 +44,7 @@ export class NuevaConsultaComponent implements OnInit {
       "already_sent": true,
       "camp_id": this.campId,
       "camper_id": this.camperid,
-      "initial_visit_id": 1,
+      "initial_visit_id": null,
     })
 
   }

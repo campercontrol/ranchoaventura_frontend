@@ -12,7 +12,6 @@
             <div>
                 <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
                     <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar nueva Temporada</button>
-                    <button type="button" class="btn btn-danger">Eliminar Temporada</button>
 
                 </div>
             </div>
@@ -21,52 +20,43 @@
         </div>
 
         <p-table #dt [value]="capacitaciones" [rows]="10"
-            [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
+            [globalFilterFields]="['name','current','camp_start','camp_end','public_price']"
             [(selection)]="selectCapcitacion" [rowHover]="true" dataKey="id"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [showCurrentPageReport]="true">
 
             <ng-template pTemplate="header">
                 <tr>
-                    <th>
-                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                    </th>
-                    <th pSortableColumn="camp_name">Nombre  <p-sortIcon field="camp"
+                   
+                    <th pSortableColumn="name">Nombre  <p-sortIcon field="name"
                             style="font-size: 10px;"></p-sortIcon></th>
-                    <th pSortableColumn=" camp_end">Activo <p-sortIcon field="inicio"></p-sortIcon></th>
-
-
+                    <th pSortableColumn=" current">Activo <p-sortIcon field="current"></p-sortIcon></th>
+                        <th></th>
+                        <th></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-customer>
                 <tr>
+                    
                     <td>
-                        <p-tableCheckbox [value]="customer"></p-tableCheckbox>
+                        {{customer.name}}
                     </td>
                     <td>
-                        {{customer.camp_name}}
+
+                        <i class="bx bxs-calendar-check" *ngIf="customer.current" style="color: green;"></i> <i
+                            class="bx bxs-calendar-x" style="color: red;" *ngIf="!customer.current"></i>
+
                     </td>
+                
+                    
                     <td>
-                        {{customer.location_name}}
-                    </td>
-                 
-                    <td>
-
-
-                        {{customer.camp_start}}
+                        <button class="btn btn-warning" (click)="update(customer)">Editar</button>
 
                     </td>
-                    <td>
-                        {{customer.public_price}}
-
+               <td>
+                        <button class="btn btn-danger"
+                            (click)="deletModal(customer.name,customer.id)">Eliminar</button>
                     </td>
-
-
-                    <td>
-                        <button class="btn btn-primary" class="btn btn-primary"
-                            [routerLink]="['../camp-info/1/'+customer.camper_id]">ver campamento</button>
-                    </td>
-
                 </tr>
             </ng-template>
 
@@ -80,30 +70,103 @@
 
 </div>
 
-<p-dialog header="Title" [(visible)]="display" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+<p-dialog header="Title" [(visible)]="display" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+    [style]="{width: '50vw'}">
     <ng-template pTemplate="header">
-       <h2>
-        Agregar nueva Temporada
-       </h2> 
+        <h2>
+            Agregar nueva evento
+        </h2>
     </ng-template>
     <div class="col">
-        
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Nombre</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" >
-            </div>
-           
-        </div>
-       
-        
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-            <label class="form-check-label" for="flexSwitchCheckChecked">Activo</label>
-          </div>
+        <form [formGroup]="addTrainingForm" (ngSubmit)="onSave()">
 
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input input type="text" class="form-control" id="" formControlName="name">
+                </div>
+
+            </div>
           
+           
+           
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="current" checked
+                    formControlName="current">
+                <label class="form-check-label" for="current">Activo</label>
+            </div>
+            
+        </form>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <div class="button">
+            <button type="submit" class="btn btn-primary p-3" (click)="onSave()" *ngIf="!showButton">
+                Guardar
+            </button>
+            <div class="spinner-border text-primary" role="status" *ngIf="showButton">
+                
+              </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+<p-dialog header="Title" [(visible)]="display2" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+    [style]="{width: '50vw'}">
+    <ng-template pTemplate="header">
+        <h2>
+            Editar Evento
+        </h2>
+    </ng-template>
+    <div class="col">
+        <form [formGroup]="addTrainingForm" (ngSubmit)="onSave()">
+
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input input type="text" class="form-control" id="" formControlName="name">
+                </div>
+
+            </div>
+          
+           
+           
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="current" checked
+                    formControlName="current">
+                <label class="form-check-label" for="current">Activo</label>
+            </div>
+
+
+        </form>
     </div>
     <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="closeModal2()">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="keepUpdate()" *ngIf="!showButton">Guardar</button>
+        <div class="spinner-border text-primary" role="status" *ngIf="showButton">
+                
+        </div>
+    </ng-template>
+</p-dialog>
+
+<p-dialog header="Title" [(visible)]="display3" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+    [style]="{width: '50vw'}">
+    <ng-template pTemplate="header">
+        <h2>
+            Eliminar divisa
+        </h2>
+    </ng-template>
+    <div class="col">
+        {{TextElimint}}
+        <div class="alert alert-danger" role="alert" *ngIf="statuAgrgado">
+            Se elimino correctamente
+        </div>
+
+
+    </div>
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="this.display3 = false">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="delet()">Guardar</button>
     </ng-template>
 </p-dialog>

@@ -537,9 +537,11 @@ export class GmailingComponent implements OnInit {
           },
           "campers_id":campers_id,
           "staffs_id": staffs_id,
-          "schools_id": schools_id,
+          "schools_id": [],
           "template_title": template.title,
-          "template_body": this.template
+          "template_body": this.template,
+          "camps_id":[]
+
         }
 
         console.log(a);

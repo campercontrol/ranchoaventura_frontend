@@ -32,4 +32,9 @@ export class CreateCampsService {
   getCampId( id:any){
     return this.http.get('http://142.93.12.234:8000/camp/'+id);
   }
+
+
+  get_temporada(){
+    return this.http.get('http://142.93.12.234:8000/season/');
+  }
 }

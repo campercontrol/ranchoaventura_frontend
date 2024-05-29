@@ -104,7 +104,7 @@ export class PagosComponent implements OnInit {
       txn_number: ["",[Validators.required,Validators.minLength(2)]],
       camp_id: [this.idCamp],
       camper_id: [this.idCamper],
-      currency_id:[1],
+      currency_id:[2],
       parent_id:[this.parent_id],
       payment_method_id:[0,[Validators.required,Validators.min(1)]],
       txn_type_id:[0,[Validators.required,Validators.min(1)]],

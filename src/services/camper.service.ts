@@ -124,6 +124,20 @@ export class CamperService {
    }
 
 
+   get_temporada(){
+    return this.http.get('http://142.93.12.234:8000/season/');
+  }
+  post_temporada(data){
+    return this.http.post('http://142.93.12.234:8000/season/',data);
+  }
+  patch_temp(data,id){
+    return this.http.patch('http://142.93.12.234:8000/season/'+id,data);
+  }
+
+  delet_temp(id){
+    return this.http.delete('http://142.93.12.234:8000/delete/season/'+id);
+  }
+  
   
 
 }

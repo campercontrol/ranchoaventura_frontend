@@ -91,30 +91,25 @@
                               
 
                         <td>
-                            <p-avatar image="../../../assets/images/medical/No urgencia.png" pBadge value="2"
+                            
+                            <p-avatar *ngIf="customer.no_urgencia.length>0" image="../../../assets/images/medical/No urgencia.png" pBadge value="2"
                                 [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px'}"
                                 (click)="valores(customer)" (click)="op.toggle($event)"></p-avatar>
-                            <p-avatar image="../../../assets/images/medical/Emergencia.png" pBadge value="1"
+                            <p-avatar *ngIf="customer.emergencia.length>0" image="../../../assets/images/medical/Emergencia.png" pBadge value="1"
                                 [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px'}"
                                 (click)="op.toggle($event)"></p-avatar>
-                            <p-avatar image="../../../assets/images/medical/Reanimacion.png" pBadge value="3"
+                            <p-avatar *ngIf="customer.reanimacion.length>0" image="../../../assets/images/medical/Reanimacion.png" pBadge value="3"
                                 [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px'}"
                                 (click)="op.toggle($event)"></p-avatar>
-                            <p-avatar image="../../../assets/images/medical/Urgencia menor.png"
+                            <p-avatar *ngIf="customer.urgencia.length>0" image="../../../assets/images/medical/Urgencia menor.png"
                                 [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 5px'}"
                                 (click)="op.toggle($event)"></p-avatar>
-                            <p-avatar image="../../../assets/images/medical/Urgencia.png" pBadge value="0"
-                                [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px'}"
-                               (click)="valores(customer)" (click)="op.toggle($event) "></p-avatar>
-                            <p-avatar image="../../../assets/images/medical/Reanimacion.png" pBadge value="3"
-                                [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px'}"
-                                (click)="op.toggle($event)"></p-avatar>
-                            <p-avatar image="../../../assets/images/medical/Urgencia menor.png"
-                                [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 5px'}"
-                                (click)="op.toggle($event)"></p-avatar>
-                            <p-avatar image="../../../assets/images/medical/Urgencia.png" pBadge value="0"
-                                [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px'}"
-                                (click)="op.toggle($event)"></p-avatar>
+                                <p-avatar *ngIf="customer.urgencia_menor.length>0" image="../../../assets/images/medical/Urgencia.png"
+                                    [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 5px'}"
+                                    (click)="op.toggle($event)"></p-avatar>
+                          
+                    
+     
 
                         </td>
 

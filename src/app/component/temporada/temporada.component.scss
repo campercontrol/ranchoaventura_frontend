@@ -1,0 +1,373 @@
+.container-footer-parents{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.foto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedor-datos{
+    display: flex;
+    justify-content: space-between;
+}
+.contenedor-datos-vac{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.container-genero{
+    display: flex;
+    flex-direction:column ;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+.titulos-datos-medicos{
+    display: flex;
+    flex-direction: column;
+}
+.input-datos-medicos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.container-medico{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flex-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    align-items: center;
+}
+
+.btn-footer{
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container-footer-parents{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.text_area_invalid{
+    border:  solid 1px red;
+}
+.text_area_valid{
+    border:  solid 1px rgb(82, 206, 82);
+}
+.slider {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:500px;
+    height:60px;
+    padding:30px;
+    padding-left: 40px;
+    background:#fcfcfc;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    box-shadow:0px 15px 40px #7E6D5766;
+   }
+   .slider p {
+    font-size:26px;
+    font-weight:600;
+    font-family: Open Sans;
+    padding-left:30px;
+    color:#7E6D57;
+   }
+   .slider input[type=”range”] {
+    -webkit-appearance:none !important;
+    width:420px;
+    height:2px;
+    background:#7E6D57;
+    border:none;
+    outline:none;
+   }
+   .slider input[type=”range”]::-webkit-slider-thumb {
+    -webkit-appearance:none !important;
+    width:30px;
+    height:30px;
+    background:#fcfcfc;
+    border:2px solid #7E6D57;
+    border-radius:50%;
+    cursor:pointer;
+   }
+   .slider input[type=”range”]::-webkit-slider-thumb:hover {
+    background:#7E6D57;
+   }
+   
+   .campamentos{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content:space-around;
+}
+
+.container-info{
+    display: flex;
+    justify-content:space-between;
+}
+.titulo-info{
+    display: flex;
+    justify-content: flex-start;
+   max-width:200px;
+}
+.container-btn{
+    display: flex;
+    justify-content: space-between;
+}
+
+.Campementos_anteriores{
+    text-align: center;
+}
+.Campamentos_proximo{
+    text-align: center;
+}
+.foto-perfil{
+    position: relative;
+    top: -70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.container-info-camping{
+    display: flex;
+   
+}
+th{
+    font-size: 14px;
+}
+td{
+    font-size: 14px;
+}
+.back-color{
+    background-color: rgb(161, 161, 161);
+}
+
+@media (max-width: 750px) {
+    .campamentos{
+      display: flex;
+      flex-direction: column;
+    }
+    .foto-perfil{  
+        position: static;
+
+    }
+    .campamentos-header{
+        height: 400px;
+    }
+  }
+
+  .campamentos{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content:space-around;
+}
+
+.container-info{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content:space-around;
+}
+.titulo-info{
+    display: flex;
+    justify-content: flex-start;
+   max-width:200px;
+}
+
+.Campementos_anteriores{
+    text-align: center;
+}
+.Campamentos_proximo{
+    text-align: center;
+}
+.foto-perfil{
+    position: relative;
+    top: -70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.container-info-camping{
+    display: flex;
+   
+}
+th{
+    font-size: 14px;
+}
+td{
+    font-size: 14px;
+}
+.back-color{
+    background-color: rgb(161, 161, 161);
+}
+.campamentos{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content:space-around;
+}
+.btn-footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-info{
+    display: flex;
+    justify-content:space-between;
+}
+.titulo-info{
+    display: flex;
+    justify-content: flex-start;
+   max-width:200px;
+}
+.container-btn{
+    display: flex;
+    justify-content: space-between;
+}
+
+.Campementos_anteriores{
+    text-align: center;
+}
+.Campamentos_proximo{
+    text-align: center;
+}
+.foto-perfil{
+    position: relative;
+    top: -70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.container-info-camping{
+    display: flex;
+   
+}
+th{
+    font-size: 14px;
+}
+td{
+    font-size: 14px;
+}
+.back-color{
+    background-color: rgb(161, 161, 161);
+}
+
+@media (max-width: 750px) {
+    .campamentos{
+      display: flex;
+      flex-direction: column;
+    }
+    .foto-perfil{  
+        position: static;
+
+    }
+    .campamentos-header{
+        height: 400px;
+    }
+  }
+
+  .campamentos{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content:space-around;
+}
+
+.container-info{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content:space-around;
+}
+.titulo-info{
+    display: flex;
+    justify-content: flex-start;
+   max-width:200px;
+}
+
+.Campementos_anteriores{
+    text-align: center;
+}
+.Campamentos_proximo{
+    text-align: center;
+}
+.foto-perfil{
+    position: relative;
+    top: -70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.container-info-camping{
+    display: flex;
+   
+}
+th{
+    font-size: 14px;
+}
+td{
+    font-size: 14px;
+}
+.back-color{
+    background-color: rgb(161, 161, 161);
+}
+
+@media (max-width: 750px) {
+    .campamentos{
+      display: flex;
+      flex-direction: column;
+    }
+    .foto-perfil{  
+        position: static;
+
+    }
+    .campamentos-header{
+        height: 400px;
+    }
+  }
+
+@media (max-width: 750px) {
+    .campamentos{
+      display: flex;
+      flex-direction: column;
+    }
+    .foto-perfil{  
+        position: static;
+
+    }
+    .campamentos-header{
+        height: 400px;
+    }
+  }

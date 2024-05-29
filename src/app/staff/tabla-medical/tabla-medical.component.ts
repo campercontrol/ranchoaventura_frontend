@@ -36,6 +36,34 @@ export class TablaMedicalComponent implements OnInit {
       this.medical.getMedicalCamps(this.idCamp).subscribe((res:any)=>{
         console.log(res);
         this.campers = res.campers;
+       
+        this.campers.forEach((item: any) => {
+          // Inicializar las categorías dentro de cada item
+          item.urgencia_menor = [];
+          item.no_urgencia = [];
+          item.urgencia = [];
+          item.emergencia = [];
+          item.reanimacion = [];
+        
+          // Iterar sobre las consultas dentro de cada item
+          item.medical_triages.forEach((consulta: any) => {
+            // Clasificar cada consulta en la categoría correspondiente
+            if (consulta.value === "Urgencia menor") {
+              item.urgencia_menor.push(consulta);
+            } else if (consulta.value === "No urgencia") {
+              item.no_urgencia.push(consulta);
+            } else if (consulta.value === "Urgencia") {
+              item.urgencia.push(consulta);
+            } else if (consulta.value === "Emergencia") {
+              item.emergencia.push(consulta);
+            } else if (consulta.value === "Reanimación") {
+              item.reanimacion.push(consulta);
+            }
+          });
+        });
+        
+        console.log(this.campers);
+        
         this.staffs = res.staffs
         
       })

@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CampsService } from 'src/services/camps.service';
@@ -46,9 +46,13 @@ export class PuntoControlComponent implements OnInit {
   idCamper = 0;
   numeroColumnas = 0;
   namePunto: any;
+  nameCamper: any;
+
   mensajeerror: boolean = false;
   cuadroMensaje = false;
   mensajeActivo = false;
+  @ViewChild('miInput') miInput: ElementRef;
+
 
 
   constructor(private check: ChekpointService, private FormGroup: FormBuilder, private routesA: ActivatedRoute, private camps: CampsService,private router: Router) {
@@ -117,6 +121,7 @@ export class PuntoControlComponent implements OnInit {
   showDialog2(item) {
     this.visibleCreate = true;
     this.idCheck = item.id;
+
     this.namePunto = item.name
   }
 
@@ -151,22 +156,32 @@ export class PuntoControlComponent implements OnInit {
     }
     this.check.inscribir(a).subscribe((res: any) => {
       this.estatusUpdate = false;
+      this.  nameCamper = this.customer.find((data:any)=>{
+        return data.camper.camper_id == this.inscribirPunto;
+      })
+      console.log(this.nameCamper);
+      
+      this.  nameCamper = this.nameCamper.camper.camper_name +" "+ this.nameCamper.camper.camper_lastname_father + " " + this.nameCamper.camper.camper_lastname_mother
+
 
       this.getColumnas();
       console.log(res);
       this.cuadroMensaje = true;
-      this.mensajeActivo = true;
+      this.inscribirPunto = 0;
+
 
       setTimeout(() => {
         this.cuadroMensaje = false
-        this.mensajeActivo = false;
-      }, 1000);
+        this.miInput.nativeElement.focus();
+
+      }, 5000);
     }, error => {
       console.log(error);
       this.estatusUpdate = false;
-      this.cuadroMensaje = true;
+      this.cuadroMensaje = false;
       this.mensajeerror = true;
       setTimeout(() => {
+        
         this.cuadroMensaje = false
         this.mensajeerror = false;
 

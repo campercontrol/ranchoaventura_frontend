@@ -164,18 +164,19 @@
                     <label for="inputPassword" >Inscribir a punto de control:</label>
 
                
-                    <input type="number" class="form-control" id="inputPassword" [(ngModel)]="inscribirPunto">
+                    <input type="number" #miInput  class="form-control" id="inputPassword" [(ngModel)]="inscribirPunto"  (keyup.enter)="Inscribe()">
 
                 </div>
             </div>
             <div class="col-3 " style="margin-top: 30px;">
-                <button class="btn btn-primary m" style="width: 90%;" (click)="Inscribe()" (keyup.enter)="Inscribe()">Agregar</button>
-            </div>
+                <form (submit)="Inscribe()">
+                    <button type="submit" class="btn btn-primary m" style="width: 90%;">Agregar</button>
+                  </form>            </div>
         </div>
 
         <div *ngIf="cuadroMensaje">
             <div class="alert alert-primary" role="alert" *ngIf="mensajeActivo">
-                Se agrego correctamente 
+                Se agrego correctamente  {{this.nameCamper}}
               </div>
 
               <div class="alert alert-danger" role="alert" *ngIf="mensajeerror">

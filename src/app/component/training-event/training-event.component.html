@@ -67,11 +67,11 @@
                             <button class="btn btn-warning" (click)="update(customer)">Editar</button>
 
                         </td>
-        <!--                <td>
+                      <td>
                             <button class="btn btn-danger"
                                 (click)="deletModal(customer.name,customer.id)">Eliminar</button>
                         </td>
-                    -->
+                    
                     </tr>
                 </ng-template>
 
@@ -235,7 +235,7 @@
     </div>
     <ng-template pTemplate="footer">
         <button type="button" class="btn btn-outline-secondary" (click)="closeModal2()">Cancel</button>
-        <button type="button" class="btn btn-danger" (click)="keepUpdate()" *ngIf="showButton">Eliminar</button>
+        <button type="button" class="btn btn-danger" (click)="keepUpdate()" *ngIf="!showButton">Eliminar</button>
         <div class="spinner-border text-primary" role="status" *ngIf="showButton">
                 
         </div>
