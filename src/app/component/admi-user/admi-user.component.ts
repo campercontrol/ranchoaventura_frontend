@@ -231,7 +231,7 @@ export class AdmiUserComponent implements OnInit {
    
     this.formFood2.patchValue({     
       "email":item.email,
-        "hashed_pass": item.hashed_pass,
+        "hashed_pass": "",
         "role_id":item.role_id,
         "is_coordinator":item.is_coordinator,
         "is_admin": item.is_admin,
@@ -265,9 +265,26 @@ export class AdmiUserComponent implements OnInit {
     this.spinner=true;
     this.getVaccinesValues();
     
-    //console.log(a);
-    if(this.formFood2.valid){
-      this.catalogos.patchUser(this.formFood2.value,this.updateId).subscribe((res:any)=>{
+   
+      
+      let form:any ={
+        "email": this.formFood2.get('email').value,
+
+        "role_id": this.formFood2.get('role_id').value,
+        "is_coordinator": this.formFood2.get('is_coordinator').value,
+        "is_admin": this.formFood2.get('is_admin').value,
+        "is_employee": this.formFood2.get('is_employee').value,
+        "is_superuser": this.formFood2.get('is_superuser').value,
+        "is_active": this.formFood2.get('is_active').value
+      } 
+
+      console.log(this.formFood2.value);
+
+
+      let b =this.formFood2.get('hashed_pass').value;
+      b = b.trim()
+      b.length > 0 ?  form.hashed_pass = this.formFood2.get('hashed_pass').value:"";
+      this.catalogos.patchUser(form,this.updateId).subscribe((res:any)=>{
         console.log(res);
         if(res.succes = 200){
           this.spinner = false;
@@ -286,15 +303,7 @@ export class AdmiUserComponent implements OnInit {
       alert('No se pudo Agregar')
     });
 
-    }else{
-      this.spinner=false;
-
-      console.log('no se logro');
-      
-     
-     
-    }
-   
+    
    
   }
 
