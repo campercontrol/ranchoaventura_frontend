@@ -170,6 +170,8 @@ export class VaccinesComponent implements OnInit {
     console.log(this.idDalete,'ss');
     
     this.catalogos.deleVaccine(this.idDalete).subscribe((res: any) => {
+      if(res.detail.status != 1){
+
       this.statuAgrgado = true;
       this.resteValu();
       this.getCatalogos();
@@ -177,7 +179,10 @@ export class VaccinesComponent implements OnInit {
         this.statuAgrgado = false;
         this.closeModal3();
       }, 1000);
+    }else{
+      alert('No se pudo Eliminar esta en uso')
 
+    }
     }, error => {
       alert('No se pudo Eliminar')
     })

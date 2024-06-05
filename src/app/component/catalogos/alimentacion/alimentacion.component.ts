@@ -160,6 +160,8 @@ export class AlimentacionComponent implements OnInit {
 
   delet(){
     this.catalogos.delerAlimentos(this.idDalete).subscribe((res: any) => {
+      if(res.detail.status != 1){
+
       this.statuAgrgado = true;
       this.resteValu();
       this.getCatalogos();
@@ -167,9 +169,12 @@ export class AlimentacionComponent implements OnInit {
         this.statuAgrgado = false;
         this.closeModal3();
       }, 1000);
+    }else{
+      alert('No se pudo Eliminar debido a que esta en uso')
 
+    }
     }, error => {
-      alert('No se pudo Agregar')
+      alert('No se pudo Eliminar')
     })
   }
   getSeverity(status: string) {

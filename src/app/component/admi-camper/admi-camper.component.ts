@@ -403,6 +403,8 @@ export class AdmiCamperComponent implements OnInit {
 
   delet(){
     this.catalogos.deletCamps(this.idDalete).subscribe((res: any) => {
+      if(res.detail.status != 1){
+
       this.statuAgrgado = true;
       this.getCatalogos();
       setTimeout(() => {
@@ -410,7 +412,10 @@ export class AdmiCamperComponent implements OnInit {
         this.closeModal3();
         this.cancelarUpdate
       }, 500);
+    }else{
+      alert('No se pudo eliminar debido a que esta en uso')
 
+    }
     }, error => {
       alert('No se pudo Eliminar')
     })

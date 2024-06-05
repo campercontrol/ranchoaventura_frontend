@@ -172,13 +172,20 @@ export class CampercommentComponent implements OnInit {
 
   delet(){
     this.catalogos.deletComments(this.idDalete).subscribe((res: any) => {
-      this.statuAgrgado = true;
+      if(res.detail.status != 1){
+
+        this.statuAgrgado = true;
       this.resteValu();
       this.getCatalogos();
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal3();
       }, 1000);
+      }else{
+        alert('No se pudo eliminar debido a que esta isncrito a campamentos')
+
+      }
+      
 
     }, error => {
       alert('No se pudo Agregar')

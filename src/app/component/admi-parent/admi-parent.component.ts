@@ -430,6 +430,8 @@ export class AdmiParentComponent implements OnInit {
 
   delet(){
     this.camperSer.deletCamper(this.idDalete).subscribe((res: any) => {
+      if(res.detail.status != 1){
+
       this.statuAgrgado = true;
       this.resteValu();
       this.getCatalogos();
@@ -437,9 +439,13 @@ export class AdmiParentComponent implements OnInit {
         this.statuAgrgado = false;
         this.closeModal3();
       }, 1000);
+    }else{
+      alert('No se pudo Eliminar debido que esta en uso')
+
+    }
 
     }, error => {
-      alert('No se pudo Agregar')
+      alert('No se pudo Eliminar')
     })
   }
   getSeverity(status: string) {

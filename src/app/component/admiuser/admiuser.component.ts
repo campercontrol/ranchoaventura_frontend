@@ -117,7 +117,7 @@ export class AdmiuserComponent implements OnInit {
       grade: [0, [Validators.required, this.greaterThanZeroValidator()]],
       school_id: [0, [Validators.required, this.greaterThanZeroValidator()]],
       school_other: [""],
-      email: ["", [Validators.email]],
+      email: [""],
       can_swim: [0],
       affliction: ["", [Validators.required]],
       blood_type: [0, [Validators.required, this.greaterThanZeroValidator()]],
@@ -605,6 +605,8 @@ export class AdmiuserComponent implements OnInit {
 
   delet(){
     this.camperSer.deletCamper(this.idDalete).subscribe((res: any) => {
+      if(res.detail.status != 1){
+
       this.statuAgrgado = true;
       this.resteValu();
       this.getCatalogos();
@@ -612,9 +614,12 @@ export class AdmiuserComponent implements OnInit {
         this.statuAgrgado = false;
         this.closeModal3();
       }, 1000);
+    }else{
+      alert('No se pudo Eliminar debido a que esta en uso')
 
+    }
     }, error => {
-      alert('No se pudo Agregar')
+      alert('No se pudo Eliminar')
     })
   }
   getSeverity(status: string) {

@@ -147,6 +147,8 @@ export class PreguntasExtrasComponent implements OnInit {
 
   delet(){
     this.catalogos.deletcamp_extra_question(this.idDalete).subscribe((res: any) => {
+      if(res.detail.status != 1){
+
       this.statuAgrgado = true;
       this.resteValu();
       this.getCatalogos();
@@ -154,9 +156,12 @@ export class PreguntasExtrasComponent implements OnInit {
         this.statuAgrgado = false;
         this.closeModal3();
       }, 1000);
+    }else{
+      alert('No se pudo eliminar esta en uso')
 
+    }
     }, error => {
-      alert('No se pudo Agregar')
+      alert('No se pudo eliminar')
     })
   }
   

@@ -142,6 +142,8 @@ export class MetodosPagosComponent implements OnInit {
 
   delet(){
     this.catalogos.deletpayment_method(this.idDalete).subscribe((res: any) => {
+      if(res.detail.status != 1){
+
       this.statuAgrgado = true;
       this.resteValu();
       this.getCatalogos();
@@ -149,7 +151,9 @@ export class MetodosPagosComponent implements OnInit {
         this.statuAgrgado = false;
         this.closeModal3();
       }, 1000);
-
+    }else{
+      alert('No se pudo Agregar esta en uso')
+    }
     }, error => {
       alert('No se pudo Agregar')
     })

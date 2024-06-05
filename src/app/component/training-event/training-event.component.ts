@@ -214,8 +214,8 @@ export class TrainingEventComponent implements OnInit {
       this.statuAgrgado = true;
       this.resteValu();
       this.getTrainig();
-      if(res.status == null){
-      alert('No se pudo Eliminar por favor intentelo mas tarde')
+      if(res.detail.status != 1){
+        alert('No se pudo Eliminar por favor intentelo mas tarde')
     }else{
       setTimeout(() => {
         this.statuAgrgado = false;

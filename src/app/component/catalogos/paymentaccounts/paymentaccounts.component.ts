@@ -157,6 +157,8 @@ export class PaymentaccountsComponent implements OnInit {
     console.log(this.idDalete,'ss');
     
     this.catalogos.delepaymentaccounts(this.idDalete).subscribe((res: any) => {
+      if(res.detail.status != 1){
+
       this.statuAgrgado = true;
       this.resteValu();
       this.getCatalogos();
@@ -164,7 +166,10 @@ export class PaymentaccountsComponent implements OnInit {
         this.statuAgrgado = false;
         this.closeModal3();
       }, 1000);
+    }else{
+      alert('No se pudo Eliminar debido que esta en uso')
 
+    }
     }, error => {
       alert('No se pudo Eliminar')
     })

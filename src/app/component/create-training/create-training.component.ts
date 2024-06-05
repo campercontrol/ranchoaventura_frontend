@@ -157,10 +157,12 @@ export class CreateTrainingComponent implements OnInit {
 
   delet(){
     this.catalogos.deletTraining(this.idDalete).subscribe((res: any) => {
+      
       this.statuAgrgado = true;
       this.resteValu();
       this.getTrainig();
-      if(res.data == null){
+
+      if(res.detail.status != 1){
       alert('No se pudo Eliminar por favor intentelo mas tarde')
     }else{
       setTimeout(() => {

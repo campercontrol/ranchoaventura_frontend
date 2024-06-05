@@ -147,6 +147,8 @@ export class StaffrolesComponent implements OnInit {
 
   delet(){
     this.catalogos.deleStaffroles(this.idDalete).subscribe((res: any) => {
+      if(res.detail.status != 1){
+
       this.statuAgrgado = true;
       this.resteValu();
       this.getCatalogos();
@@ -154,7 +156,10 @@ export class StaffrolesComponent implements OnInit {
         this.statuAgrgado = false;
         this.closeModal3();
       }, 1000);
+    }else{
+      alert('No se pudo Eliminar esta en uso')
 
+    }
     }, error => {
       alert('No se pudo Eliminar')
     })
