@@ -44,6 +44,9 @@
                                                             Activo<p-sortIcon field="active"></p-sortIcon></th>
                                                         <th pSortableColumn="registration" style="min-width: 50px;text-align: center;">
                                                             Registro Abierto<p-sortIcon field="registration"></p-sortIcon></th>
+                                                            <td>
+
+                                                            </td>
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-customer>
@@ -80,6 +83,9 @@
                                                     style="color: green;text-align: center;"></i></div>
                                             <div *ngIf="!customer.registration"><i class="dripicons-cross"
                                                     style="color: red;text-align: center;"></i></div>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-warning" (click)="update(customer)">editar</button>
                                         </td>
 
 
@@ -311,18 +317,8 @@
                                             <input type="number" class="form-control" id="" formControlName="reminder_camp_days" #reminder_camp_days>
                                         </div>
                                     </div>
-                                    <div class="row mb-4">
-                                        <label for="" class="col-sm-3 col-form-label">Recordatorio vigencia del descuento:</label>
-                                        <div class="col-sm-9">
-                                            <input type="number" class="form-control" id="" formControlName="reminder_discount_days" #reminder_discount_days>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <label for="" class="col-sm-3 col-form-label">Reporte medico:</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="" formControlName="medical_report" #medical_report>
-                                        </div>
-                                    </div>
+
+                                   
                                    
                                     <div class="row">
                                         <div class="row">
@@ -751,18 +747,8 @@
                                             <input type="number" class="form-control" id="" formControlName="reminder_camp_days" #reminder_camp_days>
                                         </div>
                                     </div>
-                                    <div class="row mb-4">
-                                        <label for="" class="col-sm-3 col-form-label">Recordatorio vigencia del descuento:</label>
-                                        <div class="col-sm-9">
-                                            <input type="number" class="form-control" id="" formControlName="reminder_discount_days" #reminder_discount_days>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <label for="" class="col-sm-3 col-form-label">Reporte medico:</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="" formControlName="medical_report" #medical_report>
-                                        </div>
-                                    </div>
+
+                            
                                    
                                     <div class="row">
                                         <div class="row">

@@ -244,7 +244,7 @@ export class UpdateStaffComponent implements OnInit {
         console.log(res);
         
         
-    
+        this.centerModal( )
        
 
       },error=>{

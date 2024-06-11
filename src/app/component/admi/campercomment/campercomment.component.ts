@@ -172,7 +172,7 @@ export class CampercommentComponent implements OnInit {
 
   delet(){
     this.catalogos.deletComments(this.idDalete).subscribe((res: any) => {
-      if(res.detail.status != 1){
+      if(res.detail.status == 1){
 
         this.statuAgrgado = true;
       this.resteValu();

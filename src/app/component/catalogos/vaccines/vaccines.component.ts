@@ -170,7 +170,7 @@ export class VaccinesComponent implements OnInit {
     console.log(this.idDalete,'ss');
     
     this.catalogos.deleVaccine(this.idDalete).subscribe((res: any) => {
-      if(res.detail.status != 1){
+      if(res.detail.status == 1){
 
       this.statuAgrgado = true;
       this.resteValu();

@@ -295,7 +295,7 @@ export class EscuelaComponent implements OnInit {
     console.log(this.idDalete,'aaa');
     
     this.catalogos.deleteSchool(this.idDalete).subscribe((res: any) => {
-      if(res.detail.status != 1){
+      if(res.detail.status == 1){
 
       this.statuAgrgado = true;
       this.resteValu();

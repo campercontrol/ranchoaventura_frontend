@@ -147,7 +147,7 @@ export class CurrencyComponent implements OnInit {
 
   delet(){
     this.catalogos.delecurrency(this.idDalete).subscribe((res: any) => {
-      if(res.detail.status != 1){
+      if(res.detail.status == 1){
 
       this.statuAgrgado = true;
       this.resteValu();

@@ -162,7 +162,7 @@ export class CreateTrainingComponent implements OnInit {
       this.resteValu();
       this.getTrainig();
 
-      if(res.detail.status != 1){
+      if(res.detail.status == 1){
       alert('No se pudo Eliminar por favor intentelo mas tarde')
     }else{
       setTimeout(() => {

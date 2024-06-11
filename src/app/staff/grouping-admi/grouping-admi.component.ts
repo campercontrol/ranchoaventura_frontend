@@ -155,7 +155,7 @@ export class GroupingAdmiComponent implements OnInit {
 
   delet(){
     this.camps.deletGruping(this.idDalete).subscribe((res: any) => {
-      if(res.detail.status != 1){
+      if(res.detail.status == 1){
 
       this.statuAgrgado = true;
       this.resteValu();

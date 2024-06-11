@@ -167,7 +167,7 @@ export class PathologicalBackgroundFamilyComponent implements OnInit {
     console.log(this.idDalete,'ss');
     
     this.catalogos.delePathological_backgroundFamily(this.idDalete).subscribe((res: any) => {
-      if(res.detail.status != 1){
+      if(res.detail.status == 1){
 
       this.statuAgrgado = true;
       this.resteValu();

@@ -84,17 +84,8 @@
             <span>Prospectos</span>
 
           </a>
-          <a routerLink='staff/checkpoint' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true)">
-            <i class="bx bx-barcode"></i>
-            <span>Lista de puntos de control</span>
 
-          </a>
-          <a routerLink='admi/events' class="side-nav-link-ref" routerLinkActive="active"
-      *ngIf="admi">
-
-      <span>Capacitanciones</span>
-
-    </a>
+       
         
          
           <a routerLink='mailing' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true) || rol_id == 3 ">
@@ -102,11 +93,7 @@
             <span>Mails</span>
 
           </a>
-          <a routerLink='staff/perfil' class="side-nav-link-ref" routerLinkActive="active" *ngIf="rol_id > 1">
-            <i class="dripicons-user"></i>
-            <span>Mi perfil</span>
-
-          </a>
+        
        
 
           
@@ -140,7 +127,7 @@
     <a routerLink='catalogs/currency' class="side-nav-link-ref" routerLinkActive="active"
       *ngIf="catalogos">
 
-      <span>Tipo de cambio</span>
+      <span>Divisas</span>
 
     </a>
     <a routerLink='catalogs/pathological_background' class="side-nav-link-ref" routerLinkActive="active"
@@ -159,7 +146,7 @@
      </a>
 
      <a routerLink='staff/trainings-dashboard' class="side-nav-link-ref"   *ngIf="catalogos">
-      <span>Nuevo evento</span>
+      <span>Tipo de capacitaciòn</span>
     </a>
 
      <a routerLink='catalogs/licensedmedicine' class="side-nav-link-ref" routerLinkActive="active"
@@ -268,6 +255,18 @@
 </a>
         </li>
         <li>
+
+          <a routerLink='admi/events' class="side-nav-link-ref" routerLinkActive="active"
+          *ngIf="admi">
+          <i class="mdi  mdi-account-question"></i>
+          <span>Capacitanciones</span>
+    
+        </a>
+          <a routerLink='staff/perfil' class="side-nav-link-ref" routerLinkActive="active" *ngIf="rol_id > 1">
+            <i class="dripicons-user"></i>
+            <span>Mi perfil</span>
+
+          </a>
           <a (click)="logout()" class="side-nav-link-ref" routerLinkActive="active" style="cursor: pointer;">
             <i class="bx bx-undo"></i>
             <span>Salir</span>

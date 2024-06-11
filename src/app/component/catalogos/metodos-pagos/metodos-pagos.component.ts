@@ -142,7 +142,7 @@ export class MetodosPagosComponent implements OnInit {
 
   delet(){
     this.catalogos.deletpayment_method(this.idDalete).subscribe((res: any) => {
-      if(res.detail.status != 1){
+      if(res.detail.status == 1){
 
       this.statuAgrgado = true;
       this.resteValu();

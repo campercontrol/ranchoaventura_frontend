@@ -154,7 +154,7 @@ export class CargosExtrasComponent implements OnInit {
 
   delet(){
     this.catalogos.deletcamp_extra_charge(this.idDalete).subscribe((res: any) => {
-      if(res.detail.status != 1){
+      if(res.detail.status == 1){
 
       this.statuAgrgado = true;
       this.resteValu();

@@ -435,7 +435,7 @@ export class AdminStaffComponent implements OnInit {
 
   delet(){
     this.catalogos.deletCamps(this.idDalete).subscribe((res: any) => {
-      if(res.detail.status != 1){
+      if(res.detail.status == 1){
 
       this.statuAgrgado = true;
       this.getCatalogos();

@@ -430,7 +430,7 @@ export class AdmiParentComponent implements OnInit {
 
   delet(){
     this.camperSer.deletCamper(this.idDalete).subscribe((res: any) => {
-      if(res.detail.status != 1){
+      if(res.detail.status == 1){
 
       this.statuAgrgado = true;
       this.resteValu();

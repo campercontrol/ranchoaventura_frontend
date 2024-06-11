@@ -47,7 +47,7 @@
                                         <div class="input-group auth-pass-inputgroup">
                                             <input [type]="passwordType" class="form-control" formControlName="password"
                                                 placeholder="Enter password" aria-label="Password"
-                                                aria-describedby="password-addon">
+                                                aria-describedby="password-addon" (keydown.enter)="login($event)" >
                                             <button class="btn btn-light " type="button" id="password-addon"><i
                                                     class="mdi mdi-eye-outline" (click)="cambioTipo()"></i></button>
 

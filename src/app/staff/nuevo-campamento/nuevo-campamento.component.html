@@ -204,18 +204,8 @@
                                 <input type="number" class="form-control" id="" formControlName="reminder_camp_days" #reminder_camp_days>
                             </div>
                         </div>
-                        <div class="row mb-4">
-                            <label for="" class="col-sm-3 col-form-label">Recordatorio vigencia del descuento:</label>
-                            <div class="col-sm-9">
-                                <input type="number" class="form-control" id="" formControlName="reminder_discount_days" #reminder_discount_days>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <label for="" class="col-sm-3 col-form-label">Reporte medico:</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="" formControlName="medical_report" #medical_report>
-                            </div>
-                        </div>
+
+                     
                        
                         <div class="row">
                             <div class="row">
@@ -287,8 +277,8 @@
                                     <h4 for="">Mensaje
                                         especial*</h4>
                                     <hr>
-                                    <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message"  >
-                                    </ckeditor>
+                                    <input  class="form-control"  formControlName="special_message"  />
+                                   
                                   
                                 </div>
                             </div>
@@ -300,8 +290,8 @@
                                     <h4 for="" class="display-7">Mensaje especial
                                         para admin*</h4>
                                     <hr>
-                                    <ckeditor class="mt-4" [editor]="Editor" formControlName="special_message_admin" >
-                                    </ckeditor>
+                                    <input class="form-control"  formControlName="special_message_admin" />
+                                  
                                     
                                 </div>
                             </div>
@@ -413,7 +403,7 @@
                     </div>
                 </div>
             </div>
-            <div class="btn-footer">
+            <div class="btn-footer ">
                 <button class="btn btn-secondary w-lg btn-lg">Cancelar</button>
                 <div>
                     <button class="btn btn-info w-lg btn-lg" (click)="createCampPost()"  *ngIf="!spinner">Guardar</button>

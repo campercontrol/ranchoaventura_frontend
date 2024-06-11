@@ -160,7 +160,7 @@ export class AlimentacionComponent implements OnInit {
 
   delet(){
     this.catalogos.delerAlimentos(this.idDalete).subscribe((res: any) => {
-      if(res.detail.status != 1){
+      if(res.detail.status == 1){
 
       this.statuAgrgado = true;
       this.resteValu();

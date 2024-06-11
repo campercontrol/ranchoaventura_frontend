@@ -157,7 +157,7 @@ export class PaymentaccountsComponent implements OnInit {
     console.log(this.idDalete,'ss');
     
     this.catalogos.delepaymentaccounts(this.idDalete).subscribe((res: any) => {
-      if(res.detail.status != 1){
+      if(res.detail.status == 1){
 
       this.statuAgrgado = true;
       this.resteValu();

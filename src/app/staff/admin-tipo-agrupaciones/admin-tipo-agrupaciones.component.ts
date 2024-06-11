@@ -155,7 +155,7 @@ export class AdminTipoAgrupacionesComponent implements OnInit {
     this.showButtons = true;
 
     this.camps.deletGruping(this.idDalete).subscribe((res: any) => {
-      if(res.detail.status != 1){
+      if(res.detail.status == 1){
 
       this.statuAgrgado = true;
       this.showButtons = false;

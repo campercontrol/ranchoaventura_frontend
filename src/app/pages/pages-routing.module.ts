@@ -155,7 +155,7 @@ const routes: Routes = [
 
   {path: 'staff/applicants',component:ListaProspectosComponent, canActivate: [AuthGuard] },
   {path: 'staff',component:DashbordStaffComponent, canActivate: [AuthGuard] },
-  {path: 'staff/checkpoint',component:ListaPuntosControlComponent, canActivate: [AuthGuard] },
+ // {path: 'staff/checkpoint',component:ListaPuntosControlComponent, canActivate: [AuthGuard] },
   
 //Catalogos
 {path: 'catalogs/food-restriction',component:AlimentacionComponent, canActivate: [AuthGuard] },
