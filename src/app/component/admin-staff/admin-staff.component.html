@@ -48,7 +48,7 @@
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-customer>
-                                    <tr (click)="update(customer)">
+                                    <tr (click)="perfil(customer)">
                                         <td  style="cursor:pointer; text-align: center;">
                                            {{customer.Staff.name}}
                                         </td>
@@ -79,6 +79,9 @@
                                             {{customer.Staff.home_phone}}
 
 
+                                        </td>
+                                        <td>
+                                            <button class=" btn btn-warning"  (click)="update(customer)">Editar</button>
                                         </td>
                                      
 

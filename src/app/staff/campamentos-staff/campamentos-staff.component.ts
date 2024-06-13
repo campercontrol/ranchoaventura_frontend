@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -8,6 +8,8 @@ import { AdvancedSortableDirective, SortEvent } from './advanced-sortable.direct
 import { CampsVistaService } from 'src/services/camps-vista.service';
 import { ActivatedRoute, Router, RouterEvent } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
+import { CreateCampsService } from 'src/services/create-camps.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-campamentos-staff',
   templateUrl: './campamentos-staff.component.html',
@@ -27,12 +29,18 @@ export class CampamentosStaffComponent implements OnInit {
   loading: boolean = false;
   displayMaximizable: boolean;
   listCampers:any= [];
+  spinner:boolean = false;
   listStaffConfirm:any= [];
   listaStaff:any=[];
   headerInfo:boolean=true;
   headerCampers:boolean=true;
   headerStaffConf:boolean=true;
   headerStaffApun:boolean=true;
+  extra_discounts:any=[]
+  alerQuestion = false;
+  showTable:boolean =false;
+
+
 
 
 
@@ -88,14 +96,63 @@ export class CampamentosStaffComponent implements OnInit {
   rol=0;
   user_admin=false 
   user_coordinator=false
+  formFood: FormGroup;
+
+  @ViewChild("name") name: ElementRef;
+  @ViewChild("start") start: ElementRef;
+  @ViewChild("end") end: ElementRef;
+  @ViewChild("start_registration") start_registration: ElementRef;
+  @ViewChild("end_registration") end_registration: ElementRef;
+  @ViewChild("special_message") special_message: ElementRef;
+  @ViewChild("special_message_admin") special_message_admin: ElementRef;
+  @ViewChild("venue") venue: ElementRef;
+  @ViewChild("photo_url") photo_url: ElementRef;
+  @ViewChild("photo_password") photo_password: ElementRef;
+  @ViewChild("currency_id") currency_id: ElementRef;
+  @ViewChild("location_id") location_id: ElementRef;
+  @ViewChild("school_id") school_id: ElementRef;
+  @ViewChild("season_id") season_id: ElementRef;
+  @ViewChild("insurance") insurance: ElementRef;
+  @ViewChild("public_price") public_price: ElementRef;
+  location:any = [];
+  temporada:any = [];
+  school:any = [];
+  currency:any = [];
+  extra_question : any = [];
+  extra_charges:any = [];
+  payment_accounts:any = [];
+  fecha = new Date();
+  alercharges= false;
+
+
   
 
-  constructor(private capms:CampsVistaService,private router :ActivatedRoute,private routerN: Router,private info : AuthenticationService) { 
+  constructor(private capms:CampsVistaService,private router :ActivatedRoute,private routerN: Router,private info : AuthenticationService, private createCamp: CreateCampsService,private formGrup: FormBuilder,private render :Renderer2) { 
   
     this.rol=this.info.infToken.role_id
 
     this.user_admin = info.infToken.user_admin ;
       this.user_coordinator= info.infToken.user_coordinator ;
+      this.createCamp.getSede().subscribe((res:any)=>{
+        this.location = res.data;
+        //console.log(this.location);
+  
+       });
+       this.createCamp.getTemporada().subscribe((res:any)=>{
+        this.temporada = res.data;
+        //console.log(this.location);
+  
+       });
+       this.createCamp.getcurrency().subscribe((res:any)=>{
+        this.currency = res.data;
+        //console.log(this.location);
+  
+       });
+       this.createCamp.gerSchool().subscribe((res:any)=>{
+        this.school = res.data;
+        //console.log(this.location);
+  
+       });
 
   }
   cars = [{ Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },
@@ -110,6 +167,41 @@ export class CampamentosStaffComponent implements OnInit {
 
   ngOnInit(): void {
     this.getInof();
+    this.formFood = this.formGrup.group({
+      name: ["",[Validators.required,Validators.minLength(2)]], //listo
+      start: ["",[Validators.required]], //listo
+      end:  ["",[Validators.required]], //listo
+      start_registration: ["",[Validators.required]], //listo
+      end_registration:["",[Validators.required]], //listo
+      registration: [true], //listo insurance
+      url: [""], //listo
+      special_message: ["",[Validators.required]],
+      special_message_admin: ["",[Validators.required]],
+      public_price:  [0,[Validators.required]], // listo 
+      show_payment_parent:  [true], //listo
+      show_rebate_parent:  [true],//listo
+      show_paypal_button:  [true],// listo
+      show_payment_order:  [true],
+      reminder_camp_days:  [15],//listo
+      reminder_discount_days:  [0],//listo
+      insurance:  [0,[Validators.required]], // listo
+      venue:  ["",[Validators.required]], // listo 
+      photo_url:  ["",[Validators.required]], // listo
+      photo_password:  ["",[Validators.required]], // listo
+      medical_report:  ["  "],//listo
+      occupancy_camp:  [0], // cupo de campamentos faltante
+      active:  [true], //listo
+      general_camp:  [true], //listo
+      currency_id: [0,[Validators.required,Validators.min(1)]],// listo
+      location_id:  [0,[Validators.required,Validators.min(1)]], //listo
+      school_id:  [0,[Validators.required,Validators.min(1)]], // listo
+      season_id:  [0,[Validators.required,Validators.min(1)]], // listo
+      created_at: [this.fecha],
+      extra_charges: [this.extra_charges],
+      extra_question:[ this.extra_question],
+      payment_accounts:[this.payment_accounts]
+      
+    })
 
   }
 
@@ -318,6 +410,252 @@ export class CampamentosStaffComponent implements OnInit {
 puntosControl(){
   this.routerN.navigate(['dashboard/staff/checkpoint/'+this.idCamp])
 }
+
+update(){
+  this.cargando = false;
+ this.createCamp.getCampId(this.idCamp).subscribe((res:any)=>{
+   let item = res.camp;
+   this.showTable =  true;
+   this.cargando = true;
+
+   console.log(item.registration);
+   
+ this.formFood.patchValue({     
+   name: item.name, //listo
+   start: this.fechaParse(item.start), //listo
+   end:  this.fechaParse(item.end), //listo
+   start_registration: this.fechaParse(item.start_registration), //listo
+   end_registration:this.fechaParse(item.end_registration), //listo
+   registration: item.registration, //listo insurance
+   url: item.url, //listo
+   special_message: item.special_message,
+   special_message_admin:item.special_message_admin,
+   public_price:  item.public_price, // listo 
+   show_payment_parent:  item.show_payment_parent, //listo
+   show_rebate_parent:  item.show_rebate_parent,//listo
+   show_paypal_button:  item.show_paypal_button,// listo
+   show_payment_order:  item.show_payment_order,
+   reminder_camp_days:  item.reminder_camp_days,//listo
+   reminder_discount_days:  item.reminder_discount_days,//listo
+   insurance:  item.insurance, // listo
+   venue: item.venue, // listo 
+   photo_url: item.photo_url, // listo
+   photo_password:  item.photo_password, // listo
+   medical_report:  item.medical_report,//listo
+   occupancy_camp:  item.occupancy_camp, // cupo de campamentos faltante
+   active: item.active, //listo
+   general_camp: item.general_camp, //listo
+   currency_id: item.currency_id,// listo
+   location_id:  item.location_id, //listo
+   school_id: item.school_id, // listo
+   season_id:  item.season_id, // listo
+   extra_charges:item.extra_charges,
+   extra_question:item.extra_question,
+   payment_accounts:item.payment_accounts
+})
+this.extra_charges = res.extra_charges;
+this.extra_question =res.extra_questions;
+ });
+
+
+
+
+ 
+}
+
+fechaParse(fechaDesdeBackend){
+ const fechaSinSegundos = fechaDesdeBackend.substring(0, 16); // Elimina segundos y milisegundos
+ return fechaSinSegundos;
+}
+
+
+keepUpdate(){
+ if(this.formFood.valid){    
+  this.spinner = true; 
+   let a = {
+     "camp":this.formFood.value,
+     "payment_accounts":this.payment_accounts,
+     "extra_question":this.extra_question,
+      "extra_charges":this.extra_charges,
+      "extra_discounts":this.extra_discounts,
+ }
+
+
+   this.createCamp.patchCamp(this.idCamp,a).subscribe((res:any)=>{
+       console.log(res);
+       if(res.succes = 200){
+        window.location.reload();
+        this.spinner = false; 
+
+
+       }
+       
+   },error => {
+     alert('No se pudo Agregar')
+   });
+
+ }else{
+  this.spinner = false; 
+
+   this.validateSeasonId();
+   this.validateSchoolId();
+   this.validateLocationId();
+   this.validateCurrencyId();
+   this.validatePhotoPassword();
+   this.validatePhotoUrl();
+   this.validateVenue();
+   
+   this.validateinsurance()
+   this.validatepublic_price()
+   this.validateEndRegistration();
+   this.validateStartRegistration();
+   this.validateEnd();
+   this.validateStart();
+   this.validateName();
+
+ }
+
+}
+
+validateFormField(elementRef: any,name): void {
+  if (this.formFood.get(name).valid) {
+    this.render.removeClass(elementRef.nativeElement, "is-invalid");
+    this.render.addClass(elementRef.nativeElement, "is-valid");
+  } else {
+    this.render.removeClass(elementRef.nativeElement, "is-valid");
+    this.render.addClass(elementRef.nativeElement, "is-invalid");
+    elementRef.nativeElement.focus();
+  }
+}
+
+validateName(): void {
+  this.validateFormField(this.name,'name');
+}
+
+validateStart(): void {
+  this.validateFormField(this.start,'start');
+}
+
+validateEnd(): void {
+  this.validateFormField(this.end,'end');
+}
+
+validateStartRegistration(): void {
+  this.validateFormField(this.start_registration,'start_registration');
+}
+
+validateEndRegistration(): void {
+  this.validateFormField(this.end_registration,'end_registration');
+}
+
+
+
+validateVenue(): void {
+  this.validateFormField(this.venue,'venue');
+}
+validateinsurance(): void {
+  this.validateFormField(this.insurance,'insurance');
+}
+validatepublic_price(): void {
+  this.validateFormField(this.public_price,'public_price');
+}
+
+validatePhotoUrl(): void {
+  this.validateFormField(this.photo_url,'photo_url');
+}
+
+validatePhotoPassword(): void {
+  this.validateFormField(this.photo_password,'photo_password');
+}
+
+validateCurrencyId(): void {
+  this.validateFormField(this.currency_id,'currency_id');
+}
+
+validateLocationId(): void {
+  this.validateFormField(this.location_id,'location_id');
+}
+
+validateSchoolId(): void {
+  this.validateFormField(this.school_id,'school_id');
+}
+
+validateSeasonId(): void {
+  this.validateFormField(this.season_id,'season_id');
+}
+newExtraQuestion(){
+  let a = this.extra_question.length;
+  if(this.extra_question.length>0){
+    let b =this.extra_question[a-1].question
+    if( b.length>0){
+      let a = {
+        "question": "",
+        "is_required": false,
+        "created_at":this.fecha
+
+      }
+      this.extra_question.push(a);
+      this.alerQuestion = false;
+    }else{
+      this.alerQuestion = true;
+    }
+  }else{
+    let a = {
+      "question": "",
+      "is_required": false,
+      "created_at":this.fecha
+
+    }
+    this.extra_question.push(a);
+    this.alerQuestion = false
+  }
+ 
+}
+deletExtraQuestion(i){
+  this.extra_question.splice(i);
+
+}
+
+newExtracharges(){
+  let a = this.extra_charges.length;
+  if(this.extra_charges.length>0){
+    let b =this.extra_charges[a-1].name;
+    if( b.length>0){
+      let a = {
+        "name": "",
+        "price": 0,
+        "currency_id": 0,
+        "created_at":this.fecha
+
+      }
+      this.extra_charges.push(a);
+      this.alercharges = false;
+    }else{
+      this.alercharges = true;
+    }
+  }else{
+    let a = {
+      "name": "",
+      "price": 0,
+      "currency_id": 0,
+      "created_at":this.fecha
+    }
+    this.extra_charges.push(a);
+    this.alercharges = false
+  }
+ 
+}
+deletExtracharges(i){
+  this.extra_charges.splice(i);
+
+}
+
+
+
+
+
+ 
+
 }
 
 export interface campss {

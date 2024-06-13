@@ -45,7 +45,7 @@
                         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                       </th>
   
-                  <th pSortableColumn="lastname_father" class="camp">
+                  <th pSortableColumn="lastname_father" class="camp" >
                     <div class="flex justify-content-between align-items-center" style="width: 250px;">
                       Nombre
                       <p-sortIcon field="lastname_father"></p-sortIcon>
@@ -91,7 +91,7 @@
                         <p-tableCheckbox [value]="customer"  ></p-tableCheckbox>
                       </td>
                  
-                  <td >
+                  <td (click)=" infostaff(customer.id)" >
                     {{customer.name}} {{customer.lastname_father}} {{customer.lastname_mother}}
                   </td>
                   <td> 

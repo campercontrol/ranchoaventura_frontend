@@ -5,6 +5,7 @@ import { CreateCampsService } from 'src/services/create-camps.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { PaymentsService } from 'src/services/payments.service';
 import { concatMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin-staff',
   templateUrl: './admin-staff.component.html',
@@ -102,7 +103,7 @@ export class AdminStaffComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   selectedCities: string[] = [];
   
-  constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private catalogos:CatalogosService,private paymants:PaymentsService) {  
+  constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private catalogos:CatalogosService,private paymants:PaymentsService,private router:Router) {  
   }
 
   info() {
@@ -180,6 +181,10 @@ export class AdminStaffComponent implements OnInit {
   closeModal2() {
     this.display2 = false;
     this.resteValu();
+
+  }
+  perfil(customer){
+    this.router.navigate(['dashboard/staff/perfil/'+customer.Staff.id]);
 
   }
   

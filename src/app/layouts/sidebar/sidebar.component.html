@@ -168,10 +168,7 @@
         <span>Metodos de pagos</span>    
          </a>
 
-         <a routerLink='catalogs/camp_extra_question' class="side-nav-link-ref" routerLinkActive="active"
-         *ngIf="catalogos">  
-         <span>Preguntas extra</span>    
-          </a>
+        
 
           <a routerLink='catalogs/camp_extra_change' class="side-nav-link-ref" routerLinkActive="active"
           *ngIf="catalogos">  
@@ -220,6 +217,13 @@
             <span>Titulares de cuenta</span>
 
           </a>
+
+            <a routerLink='admi/events' class="side-nav-link-ref" routerLinkActive="active"
+            *ngIf="admi">
+            <span>Capacitanciones</span>
+      
+          </a>
+          
           <a routerLink='admi/camps' class="side-nav-link-ref" routerLinkActive="active"
             *ngIf="admi">
 
@@ -254,14 +258,8 @@
 
 </a>
         </li>
-        <li>
 
-          <a routerLink='admi/events' class="side-nav-link-ref" routerLinkActive="active"
-          *ngIf="admi">
-          <i class="mdi  mdi-account-question"></i>
-          <span>Capacitanciones</span>
-    
-        </a>
+      <li>
           <a routerLink='staff/perfil' class="side-nav-link-ref" routerLinkActive="active" *ngIf="rol_id > 1">
             <i class="dripicons-user"></i>
             <span>Mi perfil</span>

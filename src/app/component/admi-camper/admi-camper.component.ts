@@ -29,6 +29,8 @@ export class AdmiCamperComponent implements OnInit {
   photoSatus = false;
   spinerPhot= true;
   table:boolean=true;
+  showTable:boolean =false
+  
 
   location:any = [];
   temporada:any = [];

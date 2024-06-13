@@ -167,7 +167,7 @@ const routes: Routes = [
 {path: 'catalogs/vaccines',component:VaccinesComponent, canActivate: [AuthGuard] },
 {path: 'catalogs/staffroles',component:StaffrolesComponent, canActivate: [AuthGuard] },
 {path: 'catalogs/payment/method',component:MetodosPagosComponent, canActivate: [AuthGuard] },
-{path: 'catalogs/camp_extra_question',component:PreguntasExtrasComponent, canActivate: [AuthGuard] },
+//{path: 'catalogs/camp_extra_question',component:PreguntasExtrasComponent, canActivate: [AuthGuard] },
 {path: 'catalogs/camp_extra_change',component:CargosExtrasComponent, canActivate: [AuthGuard] },
 {path: 'catalogs/school',component:EscuelaComponent, canActivate: [AuthGuard] },
 

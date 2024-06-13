@@ -193,25 +193,14 @@ export class ProspectoComponent implements OnInit {
     }
     if(this.formUser.valid){
       this.staff.prospectos(a).subscribe((res:any)=>{
-       
-        this.auth.login(this.formUser.get('email').value,this.formUser.get('password').value).subscribe((user:any)=>{
-          console.log(user);
-          console.log(user);
-          this.auth.loggedIn = true;
-          this.auth.infToken = jwt_decode(user.access_token);
+        if(res.data){
 
-          localStorage.setItem('currentUser', JSON.stringify(this.auth.infToken));
-          console.log(this.auth.infToken.role_id);
-          
-          if(this.auth.infToken.role_id>1){
-            this.router.navigate(['dashboard/staff']);
-            console.log(this.auth.infToken);
- 
-          }else{
-            this.router.navigate(['dashboard/parents']);
-            console.log(this.auth.infToken);
-          }          
-        })
+          alert('se creo correctamente tu cuenta');
+          this.router.navigate(['login']);
+
+        }
+       
+      
        
 
       },error=>{

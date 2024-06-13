@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CamperService } from 'src/services/camper.service';
 import { ParentService } from 'src/services/parent.service';
 import { differenceInCalendarMonths, format } from 'date-fns';
+import { StaffService } from 'src/services/staff.service';
 
 
 
@@ -42,8 +43,10 @@ export class PerfilCamperComponent implements OnInit {
   historialCaps:any = [];
   camperband:any = [];
   error:boolean = false;
+  typecoment:number = 1
 
-  constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private hijos: CamperService,private parents : ParentService, private rou:Router,private info: AuthenticationService) {
+
+  constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private hijos: CamperService,private parents : ParentService, private rou:Router,private info: AuthenticationService,private staff: StaffService) {
     this.routesA.params.subscribe((params) => {
       this.id = params['id'];
     })
@@ -52,19 +55,39 @@ export class PerfilCamperComponent implements OnInit {
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
+    console.log(this.info.infToken,'datos del token');
+    
 
    
   }
 
   comentario() {
-    let a = {
-      "comment": this.comment,
-      "is_public": true,
-      "show_to": 1,
-      "user_id": this.info.infToken.user_id,
-      "camp_id": 2,
-      "camper_id": Number(this.id),     
-    }
+    let a :any={}
+      if(this.info.infToken.role_id== 1){
+        a = {
+          "comment": this.comment,
+          "is_public": true,
+          "show_to": 1,
+          "user_id": this.info.infToken.user_id,
+          "camp_id": 2,
+          "camper_id": Number(this.id),   
+          "role_id": this.info.infToken.role_id  
+        }
+      }else{
+        a = {
+          "comment": this.comment,
+          "is_public": true,
+          "show_to": 1,
+          "user_id": this.info.infToken.user_id,
+          "camp_id": null,
+          "camper_id": Number(this.id),    
+          "role_id": this.info.infToken.role_id  
+ 
+        }
+      }
+
+  
+    
     if(this.comment!=""){
       this.parents.setComentarios(a).subscribe((res:any)=>{
         console.log(res.data);
@@ -81,6 +104,7 @@ export class PerfilCamperComponent implements OnInit {
 
   }
 
+  
 
   calculateAge(birthday: any): string {
     console.log(birthday,'eddddd');

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StaffService } from 'src/services/staff.service';
 
@@ -21,7 +22,7 @@ export class ListaProspectosComponent implements OnInit {
   id= 0;
   cargando:boolean=false;
   prospectosArray:any=[]
-  constructor(private prospectos: StaffService,private modalService: NgbModal) {
+  constructor(private prospectos: StaffService,private modalService: NgbModal, private router:Router) {
 
    }
 
@@ -55,6 +56,11 @@ export class ListaProspectosComponent implements OnInit {
 		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' })
 	
 	}
+
+  infostaff(id){
+    this.router.navigate(['dashboard/staff/perfil/'+id]);
+
+  }
 
   getProspecto(){
     let a:any = []

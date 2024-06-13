@@ -243,8 +243,8 @@ export class UpdateStaffComponent implements OnInit {
         this.spinner = false;
         console.log(res);
         
-        
-        this.centerModal( )
+        this.router.navigate(['dashboard/staff'])
+       
        
 
       },error=>{
