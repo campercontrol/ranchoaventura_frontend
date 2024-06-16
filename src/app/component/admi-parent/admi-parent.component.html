@@ -33,8 +33,7 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th pSortableColumn="tutor_name" style="min-width: 120px;">Nombre<p-sortIcon field="tutor_name"style="font-size: 10px;"></p-sortIcon></th>
-                    <th pSortableColumn="tutor_lastname_father" style="min-width: 120px;">Primer apellido<p-sortIcon field="tutor_lastname_father"></p-sortIcon></th>
-                    <th pSortableColumn="tutor_lastname_mother" style="min-width: 120px;">Segundo apellido<p-sortIcon field="tutor_lastname_mother"></p-sortIcon></th>
+
                     <th pSortableColumn="tutor_home_phone" style="min-width: 190px;">Telefono<p-sortIcon field="tutor_home_phone"></p-sortIcon></th>
                     <th pSortableColumn="tutor_email" style="min-width: 190px;">Correo principal<p-sortIcon field="tutor_email"></p-sortIcon></th>
                     <th pSortableColumn="second_tutor_email" style="min-width: 190px;">Email del contacto<p-sortIcon field="second_tutor_email"></p-sortIcon></th>
@@ -45,14 +44,9 @@
             <ng-template pTemplate="body" let-customer>
                 <tr>
                     <td (click)="update(customer)" style="cursor:pointer;" class="infoCamper">
-                        {{customer.tutor_name}}
+                        {{customer.tutor_name}} {{customer.tutor_lastname_father}}  {{customer.tutor_lastname_mother}}
                     </td>
-                    <td (click)="update(customer)" style="cursor:pointer;">
-                        {{customer.tutor_lastname_father}}
-                    </td>
-                    <td (click)="update(customer)" style="cursor:pointer;">
-                        {{customer.tutor_lastname_mother}}
-                    </td>
+
                     <td>
                         {{customer.tutor_home_phone}}
                         <br>

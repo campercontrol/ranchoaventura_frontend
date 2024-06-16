@@ -257,7 +257,7 @@ filterCampsSummer(){
 }
 inscribirCampsUnico(id){
   this.inscribirUnoSolo=id;
-  if(this.cancelled_camps.length<1&& this.subscribe_camps.length<1 && this.passed_camps.length <1 ){
+  if(this.cancelled_camps.length== 0 && this.subscribe_camps.length ==0 && this.passed_camps.length ==0 ){
     this.suscribeCamps(4)
    }else{
     // alert('actualiza los datos de tu hijo')

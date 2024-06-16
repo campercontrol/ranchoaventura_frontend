@@ -37,8 +37,7 @@
                                             facebook<p-sortIcon field="Staff.facebook"></p-sortIcon></th>
                                         <th pSortableColumn="Staff.birthday" style="min-width: 150px;text-align: center;">
                                             Fecha de nacimiento<p-sortIcon field="Staff.birthday"></p-sortIcon></th>
-                                            <th pSortableColumn="Staff.bio" style="min-width: 150px;text-align: center;">
-                                                Bio<p-sortIcon field="Staff.bio"></p-sortIcon></th>
+                                            
                                              
                                                     <th pSortableColumn="email" style="min-width: 110px;text-align: center;">
                                                         Email<p-sortIcon field="email"></p-sortIcon></th>
@@ -50,7 +49,7 @@
                                 <ng-template pTemplate="body" let-customer>
                                     <tr (click)="perfil(customer)">
                                         <td  style="cursor:pointer; text-align: center;">
-                                           {{customer.Staff.name}}
+                                           {{customer.Staff.name}} {{customer.Staff.lastname_father}}  {{customer.Staff.lastname_mother}}
                                         </td>
                                         <td  style="cursor:pointer; text-align: center;">
                                             {{customer.tipo}}
@@ -63,10 +62,7 @@
                                             {{customer.Staff.birthday}} 
                                         </td>
                                         
-                                        <td style="text-align: center; font-size: 12px;">
-                                            {{customer.Staff.bio}}
-
-                                        </td>
+                                      
                                         <td style="text-align: center; font-size: 12px;" >
                                             {{customer.email}}
                                         </td>

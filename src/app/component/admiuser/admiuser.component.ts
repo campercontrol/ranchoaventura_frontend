@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { CatalogosService } from 'src/services/catalogos.service';
 import traducciones  from 'src/assets/json/lengua.json';
 import { CamperService } from 'src/services/camper.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -97,7 +98,7 @@ export class AdmiuserComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   selectedCities: string[] = [];
   
-  constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder,private camperSer: CamperService,private render :Renderer2) {
+  constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder,private camperSer: CamperService,private render :Renderer2,private router :Router) {
     this.textos  = traducciones['traduciones'][this.idioma]['formUserChildren'];
     console.log(this.textos);
     this.infoCatalogos(); 
@@ -431,6 +432,13 @@ export class AdmiuserComponent implements OnInit {
    
   
     
+  }
+
+  routerLink(item){
+
+
+    this.router.navigate(['dashboard/parents/camper/'+item.camper_id])
+
   }
 
   updateSeacrh(item){

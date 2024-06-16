@@ -1537,7 +1537,7 @@
         <div style="overflow: auto;">
             <p-table #dt [value]="listcatalogos" [rows]="5"
             [rowsPerPageOptions]="[5, 25, 50]"
-            [globalFilterFields]="['camper_name','camper_lastname_mother','camper_lastname_father']"
+            [globalFilterFields]="['camper_name','camper_lastname_mother','camper_lastname_father','school','tutor_fullname','tutor_email']"
             [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [showCurrentPageReport]="true"
@@ -1546,30 +1546,23 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th pSortableColumn="camper_name" style="min-width: 120px;">Nombre<p-sortIcon field="camper_name"style="font-size: 10px;"></p-sortIcon></th>
-                    <th pSortableColumn="camper_lastname_father" style="min-width: 120px;">Primer apellido<p-sortIcon field="camper_lastname_father"></p-sortIcon></th>
-                    <th pSortableColumn="camper_lastname_mother" style="min-width: 120px;">Segundo apellido<p-sortIcon field="camper_lastname_mother"></p-sortIcon></th>
                     <th pSortableColumn="school" style="min-width: 150px;">Escuela<p-sortIcon field="school"></p-sortIcon></th>
                     <th pSortableColumn="updated" style="min-width: 140px;">Update<p-sortIcon field="updated_at"></p-sortIcon></th>
                     <th pSortableColumn="tutor_fullname" style="min-width: 130px;">Nombre contacto<p-sortIcon field="tutor_fullname"></p-sortIcon></th>
                     <th pSortableColumn="tutor_email" style="min-width: 210px;">correo del parde<p-sortIcon field="tutor_email"></p-sortIcon></th>
 
 
-
+                    <th style="width: 40px;"></th>
                     <th style="width: 40px;"></th>
                  
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-customer>
                 <tr>
-                    <td (click)="update(customer)" style="cursor:pointer;">
-                        {{customer.camper_name}}
+                    <td (click)="routerLink(customer)" style="cursor:pointer;">
+                        {{customer.camper_name}} {{customer.camper_lastname_father}}     {{customer.camper_lastname_mother}}
                     </td>
-                    <td (click)="update(customer)" style="cursor:pointer;">
-                        {{customer.camper_lastname_father}}
-                    </td>
-                    <td (click)="update(customer)" style="cursor:pointer;">
-                        {{customer.camper_lastname_mother}}
-                    </td>
+                 
                     <td>
                         {{customer.school}}
                     </td>
@@ -1581,6 +1574,9 @@
                     </td>
                     <td>
                         {{customer.tutor_email}}
+                    </td>
+                    <td>
+                        <button class="btn btn-warning" (click)="update(customer)">Editar</button>
                     </td>
                     <td>
                         <button class="btn btn-danger" (click)="deletModal(customer.camper_name,customer.camper_id)">Eliminar</button>
@@ -1631,8 +1627,7 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th pSortableColumn="camper_name" style="min-width: 120px;">Nombre<p-sortIcon field="camper_name"style="font-size: 10px;"></p-sortIcon></th>
-                    <th pSortableColumn="camper_lastname_father" style="min-width: 120px;">Primer apellido<p-sortIcon field="camper_lastname_father"></p-sortIcon></th>
-                    <th pSortableColumn="camper_lastname_mother" style="min-width: 120px;">Segundo apellido<p-sortIcon field="camper_lastname_mother"></p-sortIcon></th>
+
                     <th pSortableColumn="school" style="min-width: 150px;">Escuela<p-sortIcon field="school"></p-sortIcon></th>
                     <th pSortableColumn="updated" style="min-width: 140px;">Update<p-sortIcon field="updated_at"></p-sortIcon></th>
                     <th pSortableColumn="tutor_fullname" style="min-width: 130px;">Nombre contacto<p-sortIcon field="tutor_fullname"></p-sortIcon></th>
@@ -1646,14 +1641,9 @@
             <ng-template pTemplate="body" let-customer>
                 <tr>
                     <td (click)="updateSeacrh(customer)" style="cursor:pointer;">
-                        {{customer.camper_name}}
+                        {{customer.camper_name}} {{customer.camper_lastname_father}}     {{customer.camper_lastname_mother}}
                     </td>
-                    <td (click)="updateSeacrh(customer)" style="cursor:pointer;">
-                        {{customer.camper_lastname_father}}
-                    </td>
-                    <td (click)="updateSeacrh(customer)" style="cursor:pointer;">
-                        {{customer.camper_lastname_mother}}
-                    </td>
+                  
                     <td>
                         {{customer.school}}
                     </td>
