@@ -155,6 +155,15 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label">Cuenta bancaria</label>
+                                    <div class="control-label col-sm-9">
+
+                                    <ng-select [items]="Catpaymanacout" [multiple]="true"   bindLabel="name" formControlName ="payment_accounts" 
+                                      ></ng-select>
+                                    </div>
+
+                                  </div>
                                 <div class="row mb-4">
                                     <label for="" class="col-sm-3 col-form-label">Link para
                                         información adicional del acampador</label>
@@ -205,6 +214,16 @@
                                                 <input type="checkbox"  value= "true"  formControlName="active"
                                                 class="mb-2"/>
                                               <label style="margin-left: 20px; " for="sf">Activo</label>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-3">
+        
+                                            </div>
+                                            <div class="p-field-checkbox col-9 d-flex flex-row">
+                                                <input type="checkbox" value="true" formControlName="show_paypal_button" 
+                                                class="mb-2"/>
+                                            <label style="margin-left: 20px;" for="ny">Pagos atra vez de mercado pago</label>
                                             </div>
                                         </div>
                                         <div>
@@ -579,12 +598,21 @@
                                 </div>
                                 <div class="row mb-4">
                                     <label for="" class="col-sm-3 col-form-label">Temporada*</label>
-                                    <div class="control-label col-sm-9">
+                                    <div class="col-sm-3 col-form-label">
                                         <select style="width: 100%;" class="form-control" formControlName ="season_id" name="season_id" #season_id (change)="validateSeasonId()">
                                             <option *ngFor="let item of temporada" [value]="item.id">{{item.name}}</option>
                                         </select>
                                     </div>
                                 </div>
+                                <div class="row mb-3">
+                                    <label class="control-label">Cuenta bancaria</label>
+                                    <div class="control-label col-sm-9">
+
+                                    <ng-select [items]="Catpaymanacout" [multiple]="true"   bindLabel="name" formControlName ="payment_accounts" 
+                                      ></ng-select>
+                                    </div>
+
+                                 </div>
                                 <div class="row mb-4">
                                     <label for="" class="col-sm-3 col-form-label">Link para
                                         información adicional del acampador</label>
@@ -636,7 +664,19 @@
                                                 class="mb-2"/>
                                               <label style="margin-left: 20px; " for="sf">Activo</label>
                                             </div>
+                                            
                                         </div>
+                                        <div>
+                                            <div class="col-3">
+        
+                                            </div>
+                                            <div class="p-field-checkbox col-9 d-flex flex-row">
+                                                <input type="checkbox" value="true" formControlName="show_paypal_button" 
+                                                class="mb-2"/>
+                                            <label style="margin-left: 20px;" for="ny">Pagos atra vez de mercado pago</label>
+                                            </div>
+                                        </div>
+                                        
                                         <div>
                                             <div class="col-3">
         

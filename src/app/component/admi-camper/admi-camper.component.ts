@@ -59,6 +59,7 @@ export class AdmiCamperComponent implements OnInit {
   alercharges= false;
   extra_discounts = [];
   fecha = new Date();
+  Catpaymanacout:any =[];
   
   idDalete =0;
   updateId= 0;
@@ -78,6 +79,9 @@ export class AdmiCamperComponent implements OnInit {
   genders:any = [];
   grades:any = [];
   parent:any = [];
+  paymanacout:any = [];
+  selected:any = [];
+
   escuelas:any = [];
   photoSelectUp : string | ArrayBuffer;
   idioma = 'esp';
@@ -95,7 +99,7 @@ export class AdmiCamperComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   selectedCities: string[] = [];
   
-  constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private catalogos:CatalogosService) {  
+  constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private catalogos:CatalogosService,) {  
     this.createCamp.getSede().subscribe((res:any)=>{
       this.location = res.data;
       //console.log(this.location);
@@ -151,7 +155,7 @@ export class AdmiCamperComponent implements OnInit {
       created_at: [this.fecha],
       extra_charges: [this.extra_charges],
       extra_question:[ this.extra_question],
-      payment_accounts:[this.payment_accounts]
+      payment_accounts:[[],]
       
     })
    
@@ -189,12 +193,29 @@ export class AdmiCamperComponent implements OnInit {
       
     });
 
+
+    this.catalogos.getpaymentaccounts().subscribe((res: any) => {
+      this.Catpaymanacout = res.data;
+      this.Catpaymanacout.map((item: any) => {
+        item.assigned_id = this.cat[item.assigned_id.toString()];
+      })
+      console.log(this.paymanacout);
+    });
+   
+    
+  
+
+  
+
    
   }
 
   prueba(){
     this.spinner=true;
-    if(this.formFood.valid){     
+    if(this.formFood.valid){  
+      let pay = this.formFood.get('payment_accounts').value;
+     //this.payment_accounts = pay;
+
       let a = {
         "camp":this.formFood.value,
         "payment_accounts":this.payment_accounts,
