@@ -48,6 +48,12 @@
                                 <input type="text" class="form-control" id="" formControlName="url" #url>
                             </div>
                         </div>
+                        <div class="row mb-4">
+                            <label for="" class="col-sm-3 col-form-label">Recordatorio fecha limite de pago:</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="" formControlName="reminder_discount_days" #reminder_discount_days>
+                            </div>
+                        </div>
 
 
                         <div class="row mb-4 mt-3">
@@ -277,7 +283,9 @@
                                     <h4 for="">Mensaje
                                         especial*</h4>
                                     <hr>
-                                    <input  class="form-control"  formControlName="special_message"  />
+                                    <ckeditor class="mt-4" [editor]="Editor"  class="form-control"  formControlName="special_message"  ></ckeditor>
+
+                                    
                                    
                                   
                                 </div>
@@ -290,7 +298,7 @@
                                     <h4 for="" class="display-7">Mensaje especial
                                         para admin*</h4>
                                     <hr>
-                                    <input class="form-control"  formControlName="special_message_admin" />
+                                    <ckeditor class="mt-4" [editor]="Editor"  formControlName="special_message_admin" > </ckeditor>
                                   
                                     
                                 </div>

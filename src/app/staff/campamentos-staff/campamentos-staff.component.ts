@@ -10,6 +10,9 @@ import { ActivatedRoute, Router, RouterEvent } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CreateCampsService } from 'src/services/create-camps.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CatalogosService } from 'src/services/catalogos.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 @Component({
   selector: 'app-campamentos-staff',
   templateUrl: './campamentos-staff.component.html',
@@ -39,6 +42,8 @@ export class CampamentosStaffComponent implements OnInit {
   extra_discounts:any=[]
   alerQuestion = false;
   showTable:boolean =false;
+  Catpaymanacout:any =[];
+
 
 
 
@@ -123,13 +128,18 @@ export class CampamentosStaffComponent implements OnInit {
   payment_accounts:any = [];
   fecha = new Date();
   alercharges= false;
+  public Editor = ClassicEditor;
 
 
   
 
-  constructor(private capms:CampsVistaService,private router :ActivatedRoute,private routerN: Router,private info : AuthenticationService, private createCamp: CreateCampsService,private formGrup: FormBuilder,private render :Renderer2) { 
+  constructor(private capms:CampsVistaService,private router :ActivatedRoute,private routerN: Router,private info : AuthenticationService, private createCamp: CreateCampsService,private formGrup: FormBuilder,private render :Renderer2,private catalogos:CatalogosService) { 
   
     this.rol=this.info.infToken.role_id
+    this.catalogos.getpaymentaccounts().subscribe((res: any) => {
+      this.Catpaymanacout = res.data;
+   
+    });
 
     this.user_admin = info.infToken.user_admin ;
       this.user_coordinator= info.infToken.user_coordinator ;

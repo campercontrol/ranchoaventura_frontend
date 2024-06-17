@@ -138,7 +138,7 @@ export class AdmiCamperComponent implements OnInit {
       show_rebate_parent:  [true],//listo
       show_paypal_button:  [true],// listo
       show_payment_order:  [true],
-      reminder_camp_days:  [15],//listo
+      reminder_camp_days:  [15],//listo fecha limite de pago
       reminder_discount_days:  [0],//listo
       insurance:  [0,[Validators.required]], // listo
       venue:  ["",[Validators.required]], // listo 
@@ -196,9 +196,7 @@ export class AdmiCamperComponent implements OnInit {
 
     this.catalogos.getpaymentaccounts().subscribe((res: any) => {
       this.Catpaymanacout = res.data;
-      this.Catpaymanacout.map((item: any) => {
-        item.assigned_id = this.cat[item.assigned_id.toString()];
-      })
+   
       console.log(this.paymanacout);
     });
    
