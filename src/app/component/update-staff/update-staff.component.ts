@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CamperService } from 'src/services/camper.service';
@@ -82,10 +82,17 @@ export class UpdateStaffComponent implements OnInit {
   cvSatus= true;
 
   photoSatus = true;
+  id:any;
 
 
 
-  constructor(private catalogos: CamperService, private formGrup: FormBuilder, private router: Router,private staff: StaffService,private modalService: NgbModal,private render :Renderer2, private info : AuthenticationService) { }
+  constructor(private catalogos: CamperService, private formGrup: FormBuilder, private router: Router,private staff: StaffService,private modalService: NgbModal,private render :Renderer2, private info : AuthenticationService,private  actRoruter:ActivatedRoute) { 
+    this.actRoruter.params.subscribe((params)=>{
+      this.id = params['id'];
+      console.log(this.id,'log id');
+      
+    })
+  }
 
   ngOnInit(): void {
     this.formUser = this.formGrup.group({
@@ -129,50 +136,96 @@ export class UpdateStaffComponent implements OnInit {
 
   getPerfil(){
     
-    
-    this.staff.infoPerfil(this.info.infToken.profile_id).subscribe((res:any)=>{
-      console.log(res);
-      this.vaccines = res.vaccines;
-      this.food_restrictions = res.food_restrictions;
-      this.blood_types = res.blood_types;
-      let staff = res.staff
-        this.photoSelect = 'http://142.93.12.234:8000/'+staff.photo;
-        console.log(this.photoSelect);
-        
-        this.formUser.patchValue({
-          other_allergies: staff.other_allergies,
-          staff_contact_cellphone:staff.staff_contact_cellphone,
-          nocturnal_disorders: staff.nocturnal_disorders,
-     
-          phobias:staff.phobias,
-          drugs:staff.drugs,
-       
-          affliction:staff.affliction,
-          prohibited_foods:staff.prohibited_foods,
-          staff_contact_name: staff.staff_contact_name,
-         // por detras se parseas  
-          blood_type:staff.blood_type,// sangre 
-          staff_contact_relation: staff.staff_contact_relation,
-          drug_allergies: staff.drug_allergies,
-          staff_contact_homephone:staff.staff_contact_homephone, 
-          name: staff.name,
-          rfc: staff.rfc,
-          lastname_father:staff.lastname_father,
-          lastname_mother: staff.lastname_mother,
-          photo: staff.photo,
-          birthday: staff.birthday,//fecha de nacimiento
-          curp:staff.curp,
-          bio: staff.bio,// biografia
-          facebook: staff.facebook,
-          home_phone:staff.home_phone,
-          cellphone:staff.cellphone,
-          cv:staff.cv,
-          gender_id:staff.gender_id,
-          employee:staff.employee,        
+    if(this.id ==undefined){
+      this.staff.infoPerfil(this.info.infToken.profile_id).subscribe((res:any)=>{
+        console.log(res);
+        this.vaccines = res.vaccines;
+        this.food_restrictions = res.food_restrictions;
+        this.blood_types = res.blood_types;
+        let staff = res.staff
+          this.photoSelect = 'http://142.93.12.234:8000/'+staff.photo;
+          console.log(this.photoSelect);
           
-
-        })
-    })
+          this.formUser.patchValue({
+            other_allergies: staff.other_allergies,
+            staff_contact_cellphone:staff.staff_contact_cellphone,
+            nocturnal_disorders: staff.nocturnal_disorders,
+       
+            phobias:staff.phobias,
+            drugs:staff.drugs,
+         
+            affliction:staff.affliction,
+            prohibited_foods:staff.prohibited_foods,
+            staff_contact_name: staff.staff_contact_name,
+           // por detras se parseas  
+            blood_type:staff.blood_type,// sangre 
+            staff_contact_relation: staff.staff_contact_relation,
+            drug_allergies: staff.drug_allergies,
+            staff_contact_homephone:staff.staff_contact_homephone, 
+            name: staff.name,
+            rfc: staff.rfc,
+            lastname_father:staff.lastname_father,
+            lastname_mother: staff.lastname_mother,
+            photo: staff.photo,
+            birthday: staff.birthday,//fecha de nacimiento
+            curp:staff.curp,
+            bio: staff.bio,// biografia
+            facebook: staff.facebook,
+            home_phone:staff.home_phone,
+            cellphone:staff.cellphone,
+            cv:staff.cv,
+            gender_id:staff.gender_id,
+            employee:staff.employee,        
+            
+  
+          })
+      })
+    }else{
+      this.staff.infoPerfil(this.id).subscribe((res:any)=>{
+        console.log(res);
+        this.vaccines = res.vaccines;
+        this.food_restrictions = res.food_restrictions;
+        this.blood_types = res.blood_types;
+        let staff = res.staff
+          this.photoSelect = 'http://142.93.12.234:8000/'+staff.photo;
+          console.log(this.photoSelect);
+          
+          this.formUser.patchValue({
+            other_allergies: staff.other_allergies,
+            staff_contact_cellphone:staff.staff_contact_cellphone,
+            nocturnal_disorders: staff.nocturnal_disorders,
+       
+            phobias:staff.phobias,
+            drugs:staff.drugs,
+         
+            affliction:staff.affliction,
+            prohibited_foods:staff.prohibited_foods,
+            staff_contact_name: staff.staff_contact_name,
+           // por detras se parseas  
+            blood_type:staff.blood_type,// sangre 
+            staff_contact_relation: staff.staff_contact_relation,
+            drug_allergies: staff.drug_allergies,
+            staff_contact_homephone:staff.staff_contact_homephone, 
+            name: staff.name,
+            rfc: staff.rfc,
+            lastname_father:staff.lastname_father,
+            lastname_mother: staff.lastname_mother,
+            photo: staff.photo,
+            birthday: staff.birthday,//fecha de nacimiento
+            curp:staff.curp,
+            bio: staff.bio,// biografia
+            facebook: staff.facebook,
+            home_phone:staff.home_phone,
+            cellphone:staff.cellphone,
+            cv:staff.cv,
+            gender_id:staff.gender_id,
+            employee:staff.employee,        
+            
+  
+          })
+      })
+    }
+    
    
   }
 
@@ -232,31 +285,125 @@ export class UpdateStaffComponent implements OnInit {
     this.spinner=true;
   
    // console.log(this.formUser.value);
-    let a = {
-      "staff":this.formUser.value,
-      "vaccines":this.vaccines,
-      "food_restrictions":this.food_restrictions
-      
-    }
-    if(this.formUser.valid){
-      this.staff.editStaff(a,this.info.infToken.profile_id).subscribe((res:any)=>{
-        this.spinner = false;
-        console.log(res);
+    
+    if(this.id ==undefined){
+      let a = {
+        "staff":this.formUser.value,
+        "vaccines":this.vaccines,
+        "food_restrictions":this.food_restrictions
         
-        this.router.navigate(['dashboard/staff'])
-       
-       
-
-      },error=>{
-        this.erroA=true;
-        this.spinner=false;
-
-        setTimeout(() => {
-          this.erroA=false;
+      }
+      if(this.formUser.valid){
+        this.staff.editStaff(a,this.info.infToken.profile_id).subscribe((res:any)=>{
+          this.spinner = false;
+          console.log(res);
           
-        }, 10000);
-      })
-
+          this.router.navigate(['dashboard/staff'])
+         
+         
+  
+        },error=>{
+          this.erroA=true;
+          this.spinner=false;
+  
+          setTimeout(() => {
+            this.erroA=false;
+            
+          }, 10000);
+        })
+  
+      }else{
+        this.spinner=false;
+        console.log(this.formUser.validator);
+        
+        this.getcontact_homephone();
+        this.getcontact_cellphone();
+        this.getcontact_relation();
+        this.getcontact_name();
+        this.getprohibited_foods();
+        this.getdrugs();
+        this.getphobias();
+        this.getnocturnal_disorders();
+        this.getother_allergies();
+        this.getdrug_allergies();
+        this.getaffliction();
+        this.getblood_type();
+        this.validateFace();
+        this.validatecellphone();
+        this.validatehome_phone();
+        this.getCv();
+        this.validatebio();
+        this.getphoto();
+        this.validatebirthday();
+        this.validatelastRFC();
+        this.validatecurp();
+        this.validatelastname_mother();
+        this.validatelastname_father();
+        this.validateName();
+       
+     
+  
+      }
+    
+    }else{
+      if(this.formUser.valid){
+      let a = {
+        "staff":this.formUser.value,
+        "vaccines":this.vaccines,
+        "food_restrictions":this.food_restrictions
+        
+      }
+      if(this.id){
+        this.staff.editStaff(a,this.id).subscribe((res:any)=>{
+          this.spinner = false;
+          console.log(res);
+          
+          this.centerModal()
+         
+         
+  
+        },error=>{
+          this.erroA=true;
+          this.spinner=false;
+  
+          setTimeout(() => {
+            this.erroA=false;
+            
+          }, 10000);
+        })
+  
+      }else{
+        this.spinner=false;
+        console.log(this.formUser.validator);
+        
+        this.getcontact_homephone();
+        this.getcontact_cellphone();
+        this.getcontact_relation();
+        this.getcontact_name();
+        this.getprohibited_foods();
+        this.getdrugs();
+        this.getphobias();
+        this.getnocturnal_disorders();
+        this.getother_allergies();
+        this.getdrug_allergies();
+        this.getaffliction();
+        this.getblood_type();
+        this.validateFace();
+        this.validatecellphone();
+        this.validatehome_phone();
+        this.getCv();
+        this.validatebio();
+        this.getphoto();
+        this.validatebirthday();
+        this.validatelastRFC();
+        this.validatecurp();
+        this.validatelastname_mother();
+        this.validatelastname_father();
+        this.validateName();
+       
+     
+  
+      }
     }else{
       this.spinner=false;
       console.log(this.formUser.validator);
@@ -286,9 +433,10 @@ export class UpdateStaffComponent implements OnInit {
       this.validatelastname_father();
       this.validateName();
      
-   
+      }
 
     }
+    
     
   
     

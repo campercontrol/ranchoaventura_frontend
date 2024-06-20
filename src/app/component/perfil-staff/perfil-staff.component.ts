@@ -135,7 +135,7 @@ export class PerfilStaffComponent implements OnInit {
     
   }
   update(){
-    this.router.navigate(['dashboard/staff/update'])
+    this.router.navigate(['dashboard/staff/update/'+this.id])
 
   }
   link(id){

@@ -9,27 +9,20 @@
                   </div>
                   <div class="card-body">
                     
-                       
+                    <div class="mt-2 mb-2">
+                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        placeholder="Global Search" />
+                
+                    </div>
                         
                       
                       <div >
-                        <div class="mt-2 mb-2">
-                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                            placeholder="Global Search" />
-                    
-                        </div>
+                        
                           <p-table #dt [value]="listcatalogos" [rows]="5" [rowsPerPageOptions]="[5, 25, 50]"
-                              [globalFilterFields]="['Staff.name
-                              Staff.lastname_father,
-                              Staff.lastname_mother,
-                              Staff.birthday,
-                              customer.email,
-                              Staff.cellphone,
-                              Staff.home_phone,
-                              season_name']"
+                          [globalFilterFields]="['Staff.name','Staff.facebook','email','Staff.bio','Staff.cellphone','Staff.home_phone']"
                                [rowHover]="true" dataKey="id"
                               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                              [showCurrentPageReport]="true" [paginator]="true">
+                              [paginator]="true">
 
                               <ng-template pTemplate="header">
                                   <tr>

@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CatalogosService } from 'src/services/catalogos.service';
 import { CreateCampsService } from 'src/services/create-camps.service';
 
 @Component({
@@ -40,6 +41,7 @@ export class NuevoCampamentoComponent implements OnInit {
   alercharges= false;
   extra_discounts = [];
   fecha = new Date();
+  Catpaymanacout:any = []
 
 
 
@@ -51,7 +53,8 @@ export class NuevoCampamentoComponent implements OnInit {
 
 
 
-  constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private router:Router) {
+
+  constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private router:Router, private catalogo :CatalogosService) {
  
     
    }
@@ -62,6 +65,11 @@ export class NuevoCampamentoComponent implements OnInit {
 
  public Editor = ClassicEditor;
   ngOnInit(): void {
+     this.catalogo.getpaymentaccounts().subscribe((res: any) => {
+      this.Catpaymanacout = res.data;
+   
+    });
+
        
     this.createCamp.getSede().subscribe((res:any)=>{
       this.location = res.data;

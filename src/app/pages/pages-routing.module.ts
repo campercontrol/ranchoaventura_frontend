@@ -144,6 +144,8 @@ const routes: Routes = [
   {path: 'shop', component: TienditaComponent, canActivate: [AuthGuard] },
 
   {path: 'staff/update',component:UpdateStaffComponent, canActivate: [AuthGuard] },
+  {path: 'staff/update/:id',component:UpdateStaffComponent, canActivate: [AuthGuard] },
+
 
 
 
