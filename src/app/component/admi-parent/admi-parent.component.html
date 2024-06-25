@@ -24,7 +24,7 @@
         <div style="overflow: auto;">
             <p-table #dt [value]="listcatalogos" [rows]="5"
             [rowsPerPageOptions]="[5, 25, 50]"
-            [globalFilterFields]="['tutor_name','tutor_lastname_father','tutor_lastname_mother','tutor_cellphone','contact_email','contact_name']"
+            [globalFilterFields]="['tutor_name','tutor_lastname_father','tutor_lastname_mother','tutor_cellphone','contact_email','contact_name','tutor_id']"
             [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [showCurrentPageReport]="true"
@@ -64,7 +64,7 @@
                     </td>
                     <td>
                         <div *ngFor="let camper of customer.campers" class="mt-3 infoCamper">
-{{camper.full_name}}                        </div>
+                        <a routerLink="/dashboard/admi/camper/{{camper.id}}">{{camper.full_name}}  </a>                      </div>
                     </td>
                   
                  

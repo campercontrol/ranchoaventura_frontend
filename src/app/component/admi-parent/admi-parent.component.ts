@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Table } from 'primeng/table';
 import { CamperService } from 'src/services/camper.service';
 import { CatalogosService } from 'src/services/catalogos.service';
 
@@ -68,6 +70,8 @@ export class AdmiParentComponent implements OnInit {
   school:any = [];
   parent:any = [];
   escuelas:any = [];
+  @ViewChild('dt') dt: Table;
+
   photoSelectUp : string | ArrayBuffer;
   idioma = 'esp';
   cat: any = {
@@ -81,8 +85,9 @@ export class AdmiParentComponent implements OnInit {
   }
   breadCrumbItems: Array<{}>;
   selectedCities: string[] = [];
+  id:any ;
   
-  constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder,private camperSer: CamperService,private render :Renderer2) {
+  constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder,private camperSer: CamperService,private render :Renderer2,private routerAct:ActivatedRoute) {
   //  this.textos  = traducciones['traduciones'][this.idioma]['formUserChildren'];
     console.log(this.textos);
      
@@ -121,7 +126,13 @@ export class AdmiParentComponent implements OnInit {
     parent_name:             [""],
       
     })
-    this.getCatalogos();
+
+    this.routerAct.params.subscribe((params) => {
+      this.id = params['id'];
+      this.getCatalogos();
+
+    })
+    
   }
 
  
@@ -187,9 +198,16 @@ export class AdmiParentComponent implements OnInit {
       this.listcatalogos = res.data;
     
       console.log(this.listcatalogos);
-      
+      this.executeSearch();
      
     });
+  }
+
+  executeSearch() {
+    if (this.id !=undefined) {
+      this.dt.filterGlobal(this.id, 'contains'); // Limpia cualquier filtro global anterior
+     
+    } 
   }
 
   schoolinf(id) {

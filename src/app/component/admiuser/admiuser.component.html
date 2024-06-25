@@ -1537,7 +1537,7 @@
         <div style="overflow: auto;">
             <p-table #dt [value]="listcatalogos" [rows]="5"
             [rowsPerPageOptions]="[5, 25, 50]"
-            [globalFilterFields]="['camper_name','camper_lastname_mother','camper_lastname_father','school','tutor_fullname','tutor_email']"
+            [globalFilterFields]="['camper_name','camper_lastname_mother','camper_lastname_father','school','tutor_fullname','tutor_email','camper_id']"
             [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [showCurrentPageReport]="true"
@@ -1570,10 +1570,10 @@
                         {{customer.updated.substring(0,10)}}
                     </td>
                     <td>
-                        {{customer.tutor_fullname}}
+                       <a routerLink="/dashboard/admi/parent/{{customer.tutor_id}}">{{customer.tutor_fullname}}</a> 
                     </td>
                     <td>
-                        {{customer.tutor_email}}
+                         <a routerLink="/dashboard/admi/parent/{{customer.tutor_id}}"> {{customer.tutor_email}} </a> 
                     </td>
                     <td>
                         <button class="btn btn-warning" (click)="update(customer)">Editar</button>

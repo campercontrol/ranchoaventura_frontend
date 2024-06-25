@@ -178,11 +178,20 @@
                                     </div>
                                 </div>
                                 <div class="row mb-4">
-                                    <label for="" class="col-sm-3 col-form-label">Recordatorio fecha limite de pago:</label>
-                                    <div class="col-sm-9">
-                                        <input type="number" class="form-control" id="" formControlName="reminder_discount_days" #reminder_discount_days>
+                                    <label for="" class="col-sm-3 col-form-label">Fecha limite de pago:</label>
+                                    <div class=" control-label col-sm-9">
+                                        <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" >
                                     </div>
                                 </div>
+                                <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label">Tipo de pago</label>
+                                    <div class="control-label col-sm-9">
+
+                                    <ng-select [items]="tipoPago" bindValue="id"(change)="onChange($event)"   bindLabel="name" 
+                                      ></ng-select>
+                                    </div>
+
+                                 </div>
         
         
                                 <div class="row mb-4 mt-3">
@@ -622,6 +631,16 @@
                                     <div class="control-label col-sm-9">
 
                                     <ng-select [items]="Catpaymanacout" [multiple]="true"   bindLabel="name" formControlName ="payment_accounts" 
+                                      ></ng-select>
+                                    </div>
+
+                                 </div>
+
+                                 <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label">Tipo de pago</label>
+                                    <div class="control-label col-sm-9">
+
+                                    <ng-select [items]="tipoPago" bindValue="id"(change)="onChange($event)"   bindLabel="name" 
                                       ></ng-select>
                                     </div>
 

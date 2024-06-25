@@ -43,7 +43,8 @@ export class PerfilCamperComponent implements OnInit {
   historialCaps:any = [];
   camperband:any = [];
   error:boolean = false;
-  typecoment:number = 1
+  typecoment:number = 1;
+  userPermis:any
 
 
   constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private hijos: CamperService,private parents : ParentService, private rou:Router,private info: AuthenticationService,private staff: StaffService) {
@@ -57,7 +58,7 @@ export class PerfilCamperComponent implements OnInit {
     this.primengConfig.ripple = true;
     console.log(this.info.infToken,'datos del token');
     
-
+this.userPermis = this.info
    
   }
 

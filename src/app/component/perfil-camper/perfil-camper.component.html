@@ -176,7 +176,9 @@
                                 </div>
     
                                 <div class="container-fluid" style="margin-left: 20px;">
-                                    <p>{{nombreTutor}}</p>
+                                    <p *ngIf=" userPermis.infToken.user_admin != true">{{nombreTutor}}</p>
+                                    <p *ngIf="userPermis.infToken.role_id == 2 || userPermis.infToken.user_admin == true"> <a routerLink="/dashboard/admi/parent/{{parent.id}}">{{nombreTutor}} </a></p>
+
     
                                     <p> <i class="bx bxs-envelope"></i>  {{emailTuto}}</p>
                                     <p> <i class="bx bxl-whatsapp"></i>  {{parent.tutor_cellphone}}</p>

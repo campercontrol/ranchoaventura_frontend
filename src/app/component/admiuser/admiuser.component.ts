@@ -3,7 +3,8 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { CatalogosService } from 'src/services/catalogos.service';
 import traducciones  from 'src/assets/json/lengua.json';
 import { CamperService } from 'src/services/camper.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Table } from 'primeng/table';
 
 
 @Component({
@@ -86,6 +87,9 @@ export class AdmiuserComponent implements OnInit {
   photoSelectUp : string | ArrayBuffer;
   displayEditUpd:boolean = false;
   idioma = 'esp';
+  @ViewChild('dt') dt: Table;
+
+  id:any;
   cat: any = {
     '0': 'ninguno',
     '1': 'Staff',
@@ -98,11 +102,17 @@ export class AdmiuserComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   selectedCities: string[] = [];
   
-  constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder,private camperSer: CamperService,private render :Renderer2,private router :Router) {
+  constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder,private camperSer: CamperService,private render :Renderer2,private router :Router,private routerAct:ActivatedRoute) {
     this.textos  = traducciones['traduciones'][this.idioma]['formUserChildren'];
     console.log(this.textos);
-    this.infoCatalogos(); 
+    this.routerAct.params.subscribe((params) => {
+      this.id = params['id'];
+      this.infoCatalogos(); 
+
+    })
     this.table=true;   
+
+
   }
 
   ngOnInit(): void {
@@ -207,9 +217,18 @@ export class AdmiuserComponent implements OnInit {
     this.catalogos.getCamperAdmi().subscribe((res: any) => {
       this.listcatalogos = res.data;
       console.log(res.data);
+      this.executeSearch()
          
      // this.table=true;
     });
+  }
+
+
+  executeSearch() {
+    if (this.id !=undefined) {
+      this.dt.filterGlobal(this.id, 'contains'); // Limpia cualquier filtro global anterior
+     
+    } 
   }
 
   schoolinf(id) {

@@ -81,6 +81,7 @@ export class AdmiCamperComponent implements OnInit {
   parent:any = [];
   paymanacout:any = [];
   selected:any = [];
+  tipoPago =[{'name':'Mercado pago','id':1},{'name':'Mercado pago','id':1},{'name':'Pago en escuela','id':2},,{'name':'Ficha de pago','id':3}]
 
   escuelas:any = [];
   photoSelectUp : string | ArrayBuffer;
@@ -147,7 +148,7 @@ export class AdmiCamperComponent implements OnInit {
       medical_report:  ["  "],//listo
       occupancy_camp:  [0], // cupo de campamentos faltante
       active:  [true], //listo
-      general_camp:  [true], //listo
+      general_camp:  [false], //listo
       currency_id: [0,[Validators.required,Validators.min(1)]],// listo
       location_id:  [0,[Validators.required,Validators.min(1)]], //listo
       school_id:  [0,[Validators.required,Validators.min(1)]], // listo
@@ -334,6 +335,32 @@ export class AdmiCamperComponent implements OnInit {
   fechaParse(fechaDesdeBackend){
     const fechaSinSegundos = fechaDesdeBackend.substring(0, 16); // Elimina segundos y milisegundos
     return fechaSinSegundos;
+  }
+
+  onChange(event:any){
+      if(event.id == 1){
+        this.formFood.patchValue({
+          show_paypal_button: true,
+          show_payment_order:false,
+          show_payment_parent:true,
+          show_rebate_parent:true
+        })
+      }else if(event.id == 2){
+        this.formFood.patchValue({
+          show_paypal_button: false,
+          show_payment_order:false,
+          show_payment_parent:false,
+          show_rebate_parent:false
+        })
+
+      }else if(event.id == 3){
+        this.formFood.patchValue({
+          show_paypal_button: false,
+          show_payment_order:false,
+          show_payment_parent:true,
+          show_rebate_parent:true
+        })
+      }
   }
   getVaccinesValues(){
     console.log(this.vacunas);

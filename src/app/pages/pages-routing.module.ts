@@ -98,7 +98,11 @@ const routes: Routes = [
 //  { path: 'parents/new-user',component:NewParentComponent},
   { path: 'admi/temp', component: TemporadaComponent, canActivate: [AuthGuard] },
   { path: 'admi/camper', component: AdmiuserComponent, canActivate: [AuthGuard] },// admi a acamapdores
+  { path: 'admi/camper/:id', component: AdmiuserComponent, canActivate: [AuthGuard] },// admi a acamapdores
+
   { path: 'admi/parent', component: AdmiParentComponent, canActivate: [AuthGuard] },// admi a acamapdores
+  { path: 'admi/parent/:id', component: AdmiParentComponent, canActivate: [AuthGuard] },// admi a acamapdores
+
   { path: 'admi/user', component: AdmiUserComponent, canActivate: [AuthGuard] },// admi a acamapdores
   { path: 'admi/camps', component: AdmiCamperComponent, canActivate: [AuthGuard] },// admi a camps
  // { path: 'admi/paymants', component: AdmiPagosComponent, canActivate: [AuthGuard] },// admi a camps
