@@ -13,6 +13,9 @@ export class GroupingService {
   createGroup(data){
     return this.http.post('http://142.93.12.234:8000/grouping_camps',data)
   }
+  editraCapcidadMaxima(id,data){
+    return this.http.put('http://142.93.12.234:8000/grouping_camps/'+id,data)
+  }
 
   getGruposInscritos(id){
     return this.http.get('http://142.93.12.234:8000/camps/'+id+'/groupings')

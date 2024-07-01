@@ -81,7 +81,7 @@ export class AdmiCamperComponent implements OnInit {
   parent:any = [];
   paymanacout:any = [];
   selected:any = [];
-  tipoPago =[{'name':'Mercado pago','id':1},{'name':'Mercado pago','id':1},{'name':'Pago en escuela','id':2},,{'name':'Ficha de pago','id':3}]
+  tipoPago =[{'name':'Mercado pago','id':1},{'name':'Pago en escuela','id':2},{'name':'Ficha de pago','id':3}]
 
   escuelas:any = [];
   photoSelectUp : string | ArrayBuffer;

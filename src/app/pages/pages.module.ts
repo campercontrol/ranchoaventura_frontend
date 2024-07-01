@@ -48,6 +48,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {OrderListModule} from 'primeng/orderlist';
 import { TableModule } from 'primeng/table';
+import { TabViewModule } from 'primeng/tabview';
+
 
 
 
@@ -90,6 +92,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     BlogModule,
     UtilityModule,
     UiModule,
+    TabViewModule,
     FormModule,
     TablesModule,
     IconsModule,

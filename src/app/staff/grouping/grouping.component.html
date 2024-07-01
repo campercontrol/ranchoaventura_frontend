@@ -16,6 +16,11 @@
                   class="bx bxs-plus-circle me-1"></i>Nueva Agrupación
               </button>
               </div>
+              <div class="m-2">
+                <button class="btn btn-success " (click)="display4 =true"><i
+                  class="bx bxs-plus-circle me-1"></i>Editar Agrupación
+              </button>
+              </div>
 
               <div class="m-2">
                 <button class="btn btn-success " (click)="display3 = !display3"><i
@@ -212,4 +217,45 @@
       <div class="spinner-border text-primary" role="status" *ngIf="spinner" >
       </div>
   </ng-template>
+</p-dialog>
+
+<p-dialog header="Editar Capacidad de agrupaciòn" [(visible)]="display4" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '98vw'}"  [modal]="true">
+  <div class="modal-header">
+    <h5 class="modal-title mt-0">Editar capacidad</h5>
+  </div>
+  <div class="modal-body">
+    <div >
+      <div class="row">
+        <div class="col-12">
+
+          <div class="col-sm-12">
+            <ng-select   [items]="listGruposImscritos"
+            bindLabel="nameCample" 
+            bindValue="id"
+            (change)="EditchangeGrups($event)" >
+               
+            </ng-select>
+        </div>   
+
+         
+          <div class="mb-3">
+            <label class="control-label" for="capacidad">Capacidad Máxima</label>
+            <input class="form-control" placeholder=0 type="number" name="capacidad" id="capacidad"
+            [(ngModel)]="capEdit" >
+
+          </div>
+
+          
+        </div>
+      
+      </div>
+     
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="this.display4 = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="saveEdite()" *ngIf="!spinner">Guardar</button>
+    <div class="spinner-border text-primary" role="status" *ngIf="spinner" >
+    </div>
+</ng-template>
 </p-dialog>

@@ -70,8 +70,8 @@ export class CampsService {
   return this.http.post('http://142.93.12.234:8000/camper/extras/camp/?camper_id='+id,a)
 
  }
- getParticipantes(idcamp,camper,staff,escuela) {
-  return this.http.get('http://142.93.12.234:8000/mailing/send/campaign/camp/?camp_id='+idcamp+'&campers='+camper+'&staffs='+staff +'&school='+escuela)
+ getParticipantes(camper,staff,escuela,d) {
+  return this.http.post('http://142.93.12.234:8000/mailing/send/campaign/camps/?campers='+camper+'&staffs='+staff +'&school='+escuela,d)
 }
 getParticipantesCapacitaciones(id) {
   return this.http.get('http://142.93.12.234:8000/mailing/send/campaign/training/?training_id='+id)

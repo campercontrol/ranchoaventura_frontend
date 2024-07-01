@@ -21,6 +21,8 @@ export class GroupingComponent  {
   datos= [{agrupación:"Camping",tipo:"Autobús", editar:'<a class=" btn btn-success">Editar</a>'}, {agrupación:"Camping2",tipo:"Autobús", editar:'<a class=" btn btn-success">Editar</a>'}]
   rows = [];
   temp = [];
+
+  display4= false;
   
   breadCrumbItems: Array<{}>;
   listcatalogos:any ;
@@ -38,6 +40,9 @@ export class GroupingComponent  {
   grupos:any =[];
   selectGrupos = "";
   capMax = 0;
+  capEdit = 0;
+  edintGroup:any;
+
   // Select2 Dropdown
   selectValue: string[];
   selecType:any =0;
@@ -146,7 +151,7 @@ export class GroupingComponent  {
     this.grouping.getGruposInscritos(this.idCamp).subscribe((res:any)=>{
       this.listGruposImscritos = res.data;
       this.listGruposImscritos.forEach((item:any)=>{
-        item.nameCample =  item.type + " | " + item.grouping;
+        item.nameCample =  item.type + " | " + item.grouping; + item.capacity
       })
     })
     this.grouping.getCamper(this.idCamp).subscribe((res:any)=>{
@@ -197,6 +202,48 @@ export class GroupingComponent  {
         this.listcatalogos = res;
         
       })
+  }
+  EditchangeGrups(id:any){
+    console.log(id);
+    
+    this.edintGroup = id;
+    this.edintGroup.maximum_capacity = this.capEdit;
+
+    const capEdit2 :any= id.capacity;
+
+    let valorDespuesDeSlash: any = capEdit2.split('/')[1];
+    valorDespuesDeSlash  = Number(valorDespuesDeSlash);
+    this.capEdit = valorDespuesDeSlash;
+    this.edintGroup.maximum_capacity = this.capEdit;
+
+  }
+  saveEdite (){
+    this.edintGroup.maximum_capacity =this.capEdit
+    this.edintGroup.camp_id = this.idCamp;
+    this.spinner = true;
+    this.grouping.editraCapcidadMaxima(this.edintGroup.id,this.edintGroup).subscribe((res:any)=>{
+     
+
+      this.listTypeAgrup.getAgrupaciones().pipe(
+        switchMap((res: any) => {
+          this.tipoAgrupacion = res;
+          this.spinner = false;
+            this.display4 = false
+          return this.listGrouping.getAgrupaciones();
+        })
+      ).subscribe((res: any) => {
+        this.grupos   = res;
+        console.log(this.grupos,'grupos');
+        this.grupos = this.grupos.filter(item => item.is_active === true);
+        this.grupos.forEach(element => {
+         element.nameTipo = this.filterType( element.grouping_type_id );
+         element.nameComplet =  element.nameTipo  + " | " + element.name
+        });
+        this.getGruposInscritos();
+      });
+      this.selectGrupos ="0";
+      this.capMax = 0;
+    })
   }
   saveGrouping(){
     console.log(this.selectCatalogos);

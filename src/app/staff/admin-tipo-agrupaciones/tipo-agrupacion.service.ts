@@ -17,7 +17,7 @@ export class AdmitipoAgrupacionesService {
   }
 
   updateAgrupaciones(info:any,id){
-    return this.http.patch('http://142.93.12.234:8000/grouping_types/'+id,info)
+    return this.http.put('http://142.93.12.234:8000/grouping_types/'+id,info)
   }
 
   deletGruping(id){

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { campss } from 'src/app/staff/campamentos-staff/campamentos-staff.component';
 import { AdmiService } from 'src/services/admi.service';
 import { CamperService } from 'src/services/camper.service';
 import { CampsService } from 'src/services/camps.service';
@@ -36,6 +37,7 @@ export class GmailingComponent implements OnInit {
   editTemplate:any = false;
   updateTemplate:FormGroup;
   date = new Date();
+  cargandoMailing = false;
   listaCampamentos;
   listaCapacitaciones;
 
@@ -45,6 +47,7 @@ export class GmailingComponent implements OnInit {
   destinatariosCampers:any=[];
   cargando:boolean=false;
   showSpiner:boolean= false;
+  dataResGmail:any ;
 
 
   
@@ -112,28 +115,25 @@ export class GmailingComponent implements OnInit {
     else if(element =='2'){staff=true;}
     else if(element =='3'){escuela=true;}
    });
+   let b = [this.campamento]
 
-   this.campInfo.getParticipantes(this.campamento,campers,staff,escuela).subscribe((res:any)=>{
+   this.campInfo.getParticipantes(campers,staff,escuela,b).subscribe((res:any)=>{
     console.log(res);
     this.listaTemplateAlmacenado= res.massive_templates
-
-    this.selectdestinatariosCampers= res.campers
-    this.destinatariosCampers= res.campers
-    if(res.school){
-      this.destinatariosEscuela.push( res.school);
+    this.dataResGmail = res.camps;
+    this.selectdestinatariosCampers= res.camps[0].camp.campers;
+    this.destinatariosCampers= res.camps[0].camp.campers;
+    
+    
+     this.destinatariosEscuela.push(res.camps[0].camp.school);
      this.selectdestinatariosEscuela=this.destinatariosEscuela;
-    }
+    
 
-    this.selectdestinatariosStaff= res.staffs
-    this.selectdestinatariosStaff.forEach((camps:any)=>{
-      camps.id = camps.id;
-
-   });
-   this.destinatariosStaff= res.staffs;
-   this.destinatariosStaff.forEach((camps:any)=>{
-    camps.id = camps.staff_id;
-
- });
+    this.selectdestinatariosStaff= res.camps[0].camp.staff;
+ 
+   this.destinatariosStaff= res.camps[0].camp.staff;
+      console.log('informacion staff',res.camps[0].camp.staff);
+      
 
     this.botonDisiable=true
 
@@ -153,28 +153,23 @@ export class GmailingComponent implements OnInit {
 
 
    this.campInfo.getParticipantesMultiplesCamps(this.listCamp).subscribe((res:any)=>{
-    console.log(res,'camps multiples');
+    this.dataResGmail = res.camps
     this.listaTemplateAlmacenado= res.massive_templates
-    this.selectdestinatariosCampers= res.campers
-    this.destinatariosCampers= res.campers
-    if(res.school){
-     this.destinatariosEscuela.push( res.school);
-     this.selectdestinatariosEscuela=this.destinatariosEscuela;
+    this.dataResGmail.forEach((data:any)=>{
+      data.camp.campers.forEach((element:any)=>{
+        element .campers_id= element.id
+       })
+        data.camp.camperSelect = data.camp.campers;
+        data.camp.staffSelect = data.camp.staff;
+        data.camp.schollSelect = []
+        data.camp.schollSelect.push(data.camp.school);
+        data.camp.schollList =  data.camp.schollSelect
+       
 
-    }
-    
+        
+    })
+    console.log(this.dataResGmail,'camps multiples');
 
-
-    this.selectdestinatariosStaff= res.staffs
-    this.selectdestinatariosStaff.forEach((camps:any)=>{
-      camps.id = camps.id;
-
-   });
-   this.destinatariosStaff= res.staffs;
-   this.destinatariosStaff.forEach((camps:any)=>{
-    camps.id = camps.staff_id;
-
- });
     this.botonDisiable=true
 
    })
@@ -501,57 +496,75 @@ export class GmailingComponent implements OnInit {
     let template:any =  this.templateInfor(this.templateAlmacenado)
     let a = {}
     let  schools_id = []
-        this.selectdestinatariosEscuela.forEach(element => {
-            schools_id.push(element.school_id)
-        });
-        let  staffs_id = []
-        this.selectdestinatariosStaff.forEach(element => {
-          staffs_id.push(element.id)
-        });
-        let  campers_id = []
+    let campers_id
+    let staffs_id
 
-        this.selectdestinatariosCampers.forEach(element => {
-          campers_id.push(element.camper_id)
-      });
-        let camp_id = [];
-        this.listCamp.forEach(element => {
-          schools_id.push(element.id)
-      });
-      console.log(this.tipoTemplate);
+    this.botonDisiable=false
+    let escuela=false;
+    let staff=false;
+    let campers=false;
+  
+ 
+    this.selectdestinatariosCampers.forEach((element:any)=>{
+      element .campers_id= element.id
+})
+
       
     switch (Number(this.tipoTemplate)) {
       case 1:
-      
+        this.cargandoMailing = true;
+        this.publicoSelecionado.forEach(element => {
+          if(element =='1'){campers=true;}
+          else if(element =='2'){staff=true;}
+          else if(element =='3'){escuela=true;}
+         });
+        console.log(this.dataResGmail);
+        
+        this.dataResGmail[0].camp.campers = this.selectdestinatariosCampers
+        this.dataResGmail[0].camp.staff = this.selectdestinatariosStaff
+        this.dataResGmail[0].camp.school= this.selectdestinatariosEscuela[0]
+
+
        a = {
           "campaign": {
            
             "name": this.tituloTemplateAlmacenado,
-            "camp_parents": true,
-            "camp_staff": true,
-            "camp_school": true,
+            "template_title": this.tituloTemplateAlmacenado,
+
+            "camp_parents": campers,
+            "camp_staff": staff,
+            "camp_school": escuela,
             "active_time": "1",
             "send": true,
             "camp_id": this.campamento,
-            "send_type_id": 80,
+            "send_type_id": 82,
             "template_id": template.id,
           },
-          "campers_id":campers_id,
-          "staffs_id": staffs_id,
-          "schools_id": [],
-          "template_title": template.title,
-          "template_body": this.template,
-          "camps_id":[]
+
+          "camps":
+            
+              this.dataResGmail,
+              "template_title": "tituloTemplateAlmacenado",
+              "email_subject": "string"
+            
+          
+         
 
         }
 
         console.log(a);
         this.campInfo.createEmail(a).subscribe((res:any)=>{
+
           console.log(res);
-          if(res==1){
+          if(res.status==1){
             alert('Se enviaron los correos correctamente');
             this.page=1;
             this.status('Plantillas del sistemas')
+            this.cargandoMailing = false;
 
+
+          }else{
+            alert('Al parecer ocurrio un error por favor intentelo despues')
           }
           
         });
@@ -593,33 +606,57 @@ export class GmailingComponent implements OnInit {
         
         break;
       case 3:
-        a = {
-          "campaign": {
-           
-            "name": this.tituloTemplateAlmacenado,
-            "camp_parents": true,
-            "camp_staff": true,
-            "camp_school": true,
-            "active_time": "1",
-            "send": true,
-            "send_type_id": 82,
-            "template_id": template.id,
-          },
-          "campers_id":campers_id,
-          "staffs_id": staffs_id,
-          "schools_id": schools_id,
-          "template_title": template.title,
-          "camp_id": camp_id,
+        this.cargandoMailing = true;
 
-          "template_body": this.template
-        }
+        this.dataResGmail.forEach((data:any)=>{
+       
+            data.camp.campers =  data.camp.camperSelect ;
+            data.camp.staff = data.camp.staffSelect ;
+            data.camp.schollSelect = data.camp.schollList ;
+           
+    
+            
+        })
+      a = {
+        "campaign": {
+         
+          "name": this.tituloTemplateAlmacenado,
+          "template_title": this.tituloTemplateAlmacenado,
+
+          "camp_parents": campers,
+          "camp_staff": staff,
+          "camp_school": escuela,
+          "active_time": "1",
+          "send": true,
+          "camp_id": this.campamento,
+          "send_type_id": 82,
+          "template_id": template.id,
+        },
+
+        "camps":
+          
+            this.dataResGmail,
+            "template_title": "tituloTemplateAlmacenado",
+            "email_subject": "string"
+          
+        
+       
+
+      }
+
         console.log(a);
         this.campInfo.createEmail(a).subscribe((res:any)=>{
           console.log(res);
-          if(res==1){
+          this.cargandoMailing = false;
+
+          if(res.status==1){
             alert('Se enviaron los correos correctamente');
             this.page=1;
-            this.selectUpadate('Plantillas del sistemas')
+            this.status('Plantillas del sistemas')
+
+
+          }else{
+            alert('Al parecer ocurrio un error por favor intentelo despues')
 
           }
         });
@@ -666,3 +703,50 @@ export class GmailingComponent implements OnInit {
   }
 
 }
+export interface resmailingget{
+  massive_templates:  any,
+  camps : Camp[]
+
+
+}
+
+// Interface para un camper
+export interface Camper {
+  id: number;
+  camper_full_name: string;
+  tutor_full_name: string;
+  second_tutor_full_name: string;
+  second_tutor_email: string;
+  tutor_email: string;
+}
+
+// Interface para un miembro del staff
+export interface Staff {
+  staff_id: number;
+  staff_photo: string;
+  staff_full_name: string;
+  staff_birthday: string; // Fecha en formato YYYY-MM-DD
+  staff_cellphone: string;
+  staff_email: string;
+  staff_attend: number;
+  staff_attended: number;
+  staff_total: number;
+  staff_role: string;
+}
+
+// Interface para la escuela
+export interface School {
+  school_id: number;
+  name: string;
+  email: string;
+}
+
+// Interface para un campamento
+export interface Camp {
+  name: string;
+  id: number;
+  campers: Camper[];
+  staff: Staff[];
+  school: School;
+}
+

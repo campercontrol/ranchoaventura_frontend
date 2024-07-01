@@ -112,6 +112,18 @@ td{
     background-color: rgb(161, 161, 161);
 }
 
+.fixed-column {
+    position: fixed;
+    top: 100px; /* Ajusta este valor según sea necesario */
+    right: 10px; /* Ajusta este valor según sea necesario */
+    width: calc(20% - 10px); /* Ajusta el ancho para que se adapte a la pantalla */
+}
+
+.col-lg-9 {
+    margin-right: 25%; /* Ajusta este valor según el ancho de .fixed-column */
+}
+
+
 
 @media (max-width: 750px) {
     .campamentos{
