@@ -94,7 +94,7 @@ const routes: Routes = [
   { path: 'staff/campers', component: ListadoCampersComponent  },// vista de lista de camps
 
   { path: 'camp/:id', component: CampamentosStaffComponent, canActivate: [AuthGuard] }, // vista del campamento
-  { path: 'staff/grouping/:id', component: GroupingComponent}, 
+  { path: 'staff/grouping/:id', component: GroupingComponent, canActivate: [AuthGuard] }, 
 //  { path: 'parents/new-user',component:NewParentComponent},
   { path: 'admi/temp', component: TemporadaComponent, canActivate: [AuthGuard] },
   { path: 'admi/camper', component: AdmiuserComponent, canActivate: [AuthGuard] },// admi a acamapdores

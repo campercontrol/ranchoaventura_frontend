@@ -35,6 +35,9 @@ export class AdmiService {
   getCorreos(){
     return this.http.get('http://142.93.12.234:8000/mailing/campaign/')
   }
+  getCorreosInfo(id){
+    return this.http.get('http://142.93.12.234:8000/mailing/campaign_info/'+id)
+  }
 
   
   createTemplate(data){

@@ -195,7 +195,7 @@ export class CampamentoComponent implements OnInit {
     });
    
    
-    this.camps.extras({"extra_charges":[],extra_answers:b},this.idCamper).subscribe((res:any)=>{
+    this.camps.extras({"extra_charges":[],extra_answers:b},this.idCamper,this.idCamp).subscribe((res:any)=>{
         console.log(res);
         this.getQuestion();
         
@@ -214,7 +214,7 @@ export class CampamentoComponent implements OnInit {
       "extra_charges":this.cargosExtras
     }
 
-    this.camps.extras({"extra_charges":this.cargosExtras,extra_answers:[]},this.idCamper).subscribe((res:any)=>{
+    this.camps.extras({"extra_charges":this.cargosExtras,extra_answers:[]},this.idCamper,this.idCamp).subscribe((res:any)=>{
       console.log(res);
       this.getQuestion()
       this.modalService.dismissAll()

@@ -173,9 +173,9 @@ this.userPermis = this.info
       this.catalogosComida = this.catalogosComida.filter(item => item.is_active == true);
       console.log(this.vacunas);
       this.parent = res.parent;
-      this.nombreTutor = this.parent.tutor_name + " " + this.parent.tutor_lastname_father + "" + this.parent.tutor_lastname_mother;
+      this.nombreTutor = this.parent.tutor_name + " " + this.parent.tutor_lastname_father + " " + this.parent.tutor_lastname_mother;
       this.nombreCome = this.parent.tutor_name;
-      this.nombreTutorSecundario = this.parent.contact_name + " " + this.parent.contact_lastname_father + "" + this.parent.contact_lastname_mother
+      this.nombreTutorSecundario = this.parent.contact_name + " " + this.parent.contact_lastname_father + " " + this.parent.contact_lastname_mother
       this.emailTuto = res.user_email
       console.log(this.parent);
       this.catalogosGrados = res.camper_info.grades;

@@ -25,7 +25,7 @@ export class AuthenticationService {
    
     resetContrasena(a){
         return new Promise((resolve,reject)=>{
-            this.http.post('http://142.93.12.234:8000/usuario/reset_password',a).subscribe((res:any)=>{
+            this.http.post('http://142.93.12.234:8000/user/send_mail_password_reset',a).subscribe((res:any)=>{
               resolve = res;
             },error=>{
               reject = error;
@@ -67,7 +67,7 @@ export class AuthenticationService {
     }
 
     recuperarContra(a){
-     return  this.http.post("http://142.93.12.234:8000/usuario/reset_password",a)
+     return  this.http.post("http://142.93.12.234:8000/user/send_mail_password_reset",a)
 
     }
 

@@ -1,12 +1,8 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnChanges, ElementRef, ViewChild, Input } from '@angular/core';
 import MetisMenu from 'metismenujs/dist/metismenujs';
 import { EventService } from '../../core/services/event.service';
 import { Router, NavigationEnd } from '@angular/router';
-
 import { HttpClient } from '@angular/common/http';
-
-import { MENU } from './menu';
-import { MenuItem } from './menu.model';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 
@@ -16,31 +12,30 @@ import { AuthenticationService } from 'src/app/core/services/auth.service';
   styleUrls: ['./sidebar.component.scss']
 })
 
-/**
- * Sidebar component
- */
 export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('componentRef') scrollRef;
   @Input() isCondensed = false;
-  menu: any;
-  data: any;
-  paretn = true;
-  staff= true;
-  catalogos= false;
-  admi=false;
-  rol_id = 0;
-  rol = '';
-  user_admin = false;
-  user_coordinator= false;
-
-  menuItems = [];
-
   @ViewChild('sideMenu') sideMenu: ElementRef;
 
-  constructor(private eventService: EventService, private router: Router, public translate: TranslateService, private http: HttpClient,private info: AuthenticationService ) {
-  
-    if(this.info.infToken){
-      this.rol_id =info.infToken.role_id; 
+  paretn = true;
+  staff = true;
+  catalogos = false;
+  admi = false;
+  rol_id = 0;
+  user_admin = false;
+  user_coordinator = false;
+  menu: any;
+  menuItems = [];
+
+  constructor(
+    private eventService: EventService,
+    private router: Router,
+    public translate: TranslateService,
+    private http: HttpClient,
+    private info: AuthenticationService
+  ) {
+    if (this.info.infToken) {
+      this.rol_id = this.info.infToken.role_id;
     }
 
     router.events.forEach((event) => {
@@ -49,18 +44,18 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
         this._scrollElement();
       }
     });
-    if(!info.infToken){
+
+    if (!this.info.infToken) {
       this.paretn = false;
       this.staff = false;
-    }
-    else if(info.infToken.role_id == 1){
+    } else if (this.info.infToken.role_id == 1) {
       this.paretn = true;
       this.staff = false;
-    }else if(info.infToken.role_id == 2){
+    } else if (this.info.infToken.role_id == 2) {
       this.paretn = false;
       this.staff = true;
-      this.user_admin = info.infToken.user_admin ;
-      this.user_coordinator= info.infToken.user_coordinator ;
+      this.user_admin = this.info.infToken.user_admin;
+      this.user_coordinator = this.info.infToken.user_coordinator;
     }
   }
 
@@ -70,44 +65,53 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngAfterViewInit() {
+    this.initializeMetisMenu();
+  }
+
+  ngOnChanges() {
+    this.initializeMetisMenu();
+  }
+
+  initializeMetisMenu() {
+    if (this.menu) {
+      this.menu.dispose();
+    }
     this.menu = new MetisMenu(this.sideMenu.nativeElement);
     this._activateMenuDropdown();
   }
-  logout(){
+
+  logout() {
     localStorage.removeItem('currentUser');
-    this.info.infToken= null;
-    this.info.loggedIn= false;
-    this.router.navigate(['login'])
+    this.info.infToken = null;
+    this.info.loggedIn = false;
+    this.router.navigate(['login']);
   }
 
   toggleMenu(event) {
     event.currentTarget.nextElementSibling.classList.toggle('mm-show');
   }
 
-  ngOnChanges() {
-    if (!this.isCondensed && this.sideMenu || this.isCondensed) {
-      setTimeout(() => {
-        this.menu = new MetisMenu(this.sideMenu.nativeElement);
-      });
-    } else if (this.menu) {
-      this.menu.dispose();
-    }
+  toggleCatalogos() {
+    this.catalogos = !this.catalogos;
+    this.initializeMetisMenu();
   }
+
+  toggleAdmi() {
+    this.admi = !this.admi;
+    this.initializeMetisMenu();
+  }
+
   _scrollElement() {
     setTimeout(() => {
       if (document.getElementsByClassName("mm-active").length > 0) {
         const currentPosition = document.getElementsByClassName("mm-active")[0]['offsetTop'];
         if (currentPosition > 500)
-        if(this.scrollRef.SimpleBar !== null)
-          this.scrollRef.SimpleBar.getScrollElement().scrollTop =
-            currentPosition + 300;
+          if (this.scrollRef.SimpleBar !== null)
+            this.scrollRef.SimpleBar.getScrollElement().scrollTop = currentPosition + 300;
       }
     }, 300);
   }
 
-  /**
-   * remove active and mm-active class
-   */
   _removeAllClass(className) {
     const els = document.getElementsByClassName(className);
     while (els[0]) {
@@ -115,20 +119,16 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
 
-  /**
-   * Activate the parent dropdown
-   */
   _activateMenuDropdown() {
     this._removeAllClass('mm-active');
     this._removeAllClass('mm-show');
     const links = document.getElementsByClassName('side-nav-link-ref');
     let menuItemEl = null;
-    // tslint:disable-next-line: prefer-for-of
     const paths = [];
     for (let i = 0; i < links.length; i++) {
       paths.push(links[i]['pathname']);
     }
-    var itemIndex = paths.indexOf(window.location.pathname);
+    const itemIndex = paths.indexOf(window.location.pathname);
     if (itemIndex === -1) {
       const strIndex = window.location.pathname.lastIndexOf('/');
       const item = window.location.pathname.substr(0, strIndex).toString();
@@ -165,23 +165,11 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
         }
       }
     }
+  }
+
+  initialize() {
 
   }
 
-  /**
-   * Initialize
-   */
-  initialize(): void {
-    this.menuItems = MENU;
-    console.log(this.menuItems);
-    
-  }
-
-  /**
-   * Returns true or false if given menu item has child or not
-   * @param item menuItem
-   */
-  hasItems(item: MenuItem) {
-    return item.subItems !== undefined ? item.subItems.length > 0 : false;
-  }
+  
 }

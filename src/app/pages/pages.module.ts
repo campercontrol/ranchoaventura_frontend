@@ -50,7 +50,7 @@ import {OrderListModule} from 'primeng/orderlist';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 
-
+import { TagModule } from 'primeng/tag';
 
 
 
@@ -113,7 +113,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     TableModule,
     DragDropModule,
     OrderListModule,
-    FormsModule
+    FormsModule,
+    TagModule
     
   ],
 })

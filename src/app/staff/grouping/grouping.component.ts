@@ -151,7 +151,7 @@ export class GroupingComponent  {
     this.grouping.getGruposInscritos(this.idCamp).subscribe((res:any)=>{
       this.listGruposImscritos = res.data;
       this.listGruposImscritos.forEach((item:any)=>{
-        item.nameCample =  item.type + " | " + item.grouping; + item.capacity
+        item.nameCample =  item.type + " | " + item.capacity; 
       })
     })
     this.grouping.getCamper(this.idCamp).subscribe((res:any)=>{

@@ -31,19 +31,24 @@
                             <div class="card" *ngIf="Titulo !='Nuevo Templates' &&  Titulo != 'Enviar Correo'">
                                 <div class="card-body">
                                     <div class="row mb-2">
-
+                                   
                                         <div>
                                             <div class="card border border-info border-1" >
                                                 <div class="bg-info p-2">
                                                 </div>
-                                                <div class="card-body">
+                                                <div class="card-body" >
                                                     <div class="container-btn mt-1 mb-3">
 
                                                       
                                                     </div>
-                                                    <div style="overflow: auto;">
-                                                        <p-table #dt [value]="listaTemplates" [rows]="10"
-                                                            [globalFilterFields]="['title','name','email','contact_second_email','contact_third_name','acronyms']"
+                                                    <div style="overflow: auto;"  >
+                                                      <div class="container-btn mt-1 mb-3">
+                                                     
+                                                        <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                                            placeholder="Global Search" />
+                                                    </div>
+                                                        <p-table #dt1 [value]="listaTemplates" [rows]="10"
+                                                            [globalFilterFields]="['title','name']"
                                                             [(selection)]="selectCatalogos" [rowHover]="true"
                                                             dataKey="id"
                                                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -52,7 +57,7 @@
 
                                                             <ng-template pTemplate="header">
                                                                 <tr>
-                                                                    <th pSortableColumn="name">Nombre<p-sortIcon
+                                                                    <th pSortableColumn="created_at" >Nombre<p-sortIcon
                                                                             field="title"
                                                                             style="font-size: 10px;"></p-sortIcon></th>
                                                                
@@ -60,9 +65,12 @@
                                                             </ng-template>
                                                             <ng-template pTemplate="body" let-customer  >
                                                                 <tr >
-                                                                    <td (click)="selectUpadate(customer)"  style="cursor: pointer;">
+                                                                    <td (click)="selectUpadate(customer)"  style="cursor: pointer;" *ngIf="Titulo != 'Correos enviados'">
                                                                         {{customer.title}}
                                                                     </td>
+                                                                    <td (click)="infoGmgail(customer.id)"  style="cursor: pointer;" *ngIf="Titulo == 'Correos enviados'">
+                                                                      {{customer.name}}
+                                                                  </td>
                                                                  
                                                                 </tr>
                                                               
@@ -128,7 +136,7 @@
                     </div>
 
                     <div class="mt-4 col-12">
-                        <ckeditor [editor]="Editor" [(ngModel)]="template" >
+                        <ckeditor [editor]="Editor" [(ngModel)]="template"  >
                         </ckeditor>
 
                     </div>
@@ -160,7 +168,7 @@
 
                                 <select name="" id="" [(ngModel)]="tipoTemplate" style="width: 100%;"
                                     class="form-select mt-2" (change)="cambios()">
-                                    <option value="1">Participante de un solo campamente </option>
+                                    <option value="1">Participante de un solo Campamento </option>
                                   <!-- <option value="2">Participante de una capacitacion</option> -->  
                                     <option value="3">Participante de Varios Campamentos</option>
                                    <!-- <option value="4">Prospectos de una temporada </option> --> 
@@ -250,7 +258,7 @@
 
 
                         </div>
-                        <ckeditor [editor]="Editor" [(ngModel)]="template" >
+                        <ckeditor [editor]="editor" [(ngModel)]="template" >
                         </ckeditor>
 
                     </div>
@@ -276,6 +284,8 @@
 
                 </div>
             </div>
+
+         
 
             
             <div class="card border-top border-primary" *ngIf="editTemplate">
@@ -725,6 +735,75 @@
         </p-tabView>
     </div>
   
+    
+     
+</p-dialog>
+
+
+
+
+<p-dialog header="Elige a tus destinatarios" [(visible)]="infoEmail" [modal]="true" [style]="{width: '90%'}" [maximizable]="true" [baseZIndex]="10000" *ngIf="infoEmail"
+    [draggable]="false" [resizable]="false">
+    <div class="spinner-border text-primary" role="status" *ngIf="showSpinnerGmail">
+      <span class="sr-only">...</span>
+    </div>
+
+    <div *ngIf="!showSpinnerGmail">
+      <div class="col" >
+        <hr>
+        <div class="mx-auto container">
+            <div class="row">
+                <form action="" >
+                  <div class="mx-auto container">
+                      <div class="row">
+                        
+
+                          <div class="col-lg-12  mt-4" >
+                              <h3>Nombre del campamento enviado: {{dataGmailifno.campaign.title}}</h3>
+
+                          
+                          </div>
+                          <hr>
+                          <h4 class="mt-3">Listado de campamentos:</h4>
+                          <div  style="display: flex; flex-wrap: wrap; gap: 10px;" class="mb-2">
+                           
+                            <div *ngFor="let item of dataGmailifno.camps">
+                              <p-tag  >{{item.name}}</p-tag>
+
+                            </div>
+
+
+                          </div>
+                          <hr>
+
+                          <h4 class="mt-3">Listado de campers:</h4>
+                          <div  style="display: flex; flex-wrap: wrap; gap: 10px;">
+                           
+                            <div *ngFor="let item of dataGmailifno.campers">
+                              <p-tag  >{{item.camper_name}}</p-tag>
+
+                            </div>
+
+
+                          </div>
+                        
+                          
+
+                      </div>
+                  </div>
+
+                  <div class="mt-4 col-12">
+                      <ckeditor [editor]="Editor"  [data]="dataGmailifno.campaign.template" >
+                      </ckeditor>
+
+                  </div>
+              </form>
+            
+            </div>
+        </div>
+   
+    </div>
+    </div>
     
      
 </p-dialog>

@@ -8,274 +8,216 @@
       <!-- {{menuItems}} -->
       <ng-container>
         <li class="menu-title">Menú</li>
-      
-     
-        <li *ngIf="paretn">
-          <a routerLink='../dashboard/parents' class="side-nav-link-ref" routerLinkActive="active">
-            <i class="dripicons-user-id"></i>
-            <span> Mis hijos registrados</span>
 
+        <li *ngIf="paretn">
+          <a routerLink="../dashboard/parents" class="side-nav-link-ref" routerLinkActive="active">
+            <i class="dripicons-user-id"></i>
+            <span>Mis hijos registrados</span>
           </a>
 
-          <a routerLink='parents/my-profile' class="side-nav-link-ref" routerLinkActive="active">
+          <a routerLink="parents/my-profile" class="side-nav-link-ref" routerLinkActive="active">
             <i class="dripicons-user"></i>
             <span>Mi perfil</span>
-
           </a>
-          <a routerLink='parents/new-camper' class="side-nav-link-ref" routerLinkActive="active">
+
+          <a routerLink="parents/new-camper" class="side-nav-link-ref" routerLinkActive="active">
             <i class="bx bx-user-plus"></i>
             <span>Nuevo acampador</span>
-
           </a>
-          <a href="https://demo.campercontrol.com/media/uploads/files/contacto.pdf" target="_blank"
-            class="side-nav-link-ref" routerLinkActive="active">
+
+          <a href="https://demo.campercontrol.com/media/uploads/files/contacto.pdf" target="_blank" class="side-nav-link-ref" routerLinkActive="active">
             <i class="bx bx-question-mark"></i>
             <span>Frecuentes</span>
-
           </a>
-          <a href="https://demo.campercontrol.com/media/uploads/files/contacto.pdf" target="_blank"
-            class="side-nav-link-ref" routerLinkActive="active">
+
+          <a href="https://demo.campercontrol.com/media/uploads/files/contacto.pdf" target="_blank" class="side-nav-link-ref" routerLinkActive="active">
             <i class="dripicons-phone"></i>
-            <span>contacto</span>
-
+            <span>Contacto</span>
           </a>
-          <a href="https://demo.campercontrol.com/media/uploads/files/contacto.pdf" target="_blank"
-            class="side-nav-link-ref" routerLinkActive="active">
+
+          <a href="https://demo.campercontrol.com/media/uploads/files/contacto.pdf" target="_blank" class="side-nav-link-ref" routerLinkActive="active">
             <i class="mdi mdi-book-education"></i>
             <span>Reglamento</span>
-
           </a>
-          <a href="https://demo.campercontrol.com/media/uploads/files/contacto.pdf" target="_blank"
-            class="side-nav-link-ref" routerLinkActive="active">
+
+          <a href="https://demo.campercontrol.com/media/uploads/files/contacto.pdf" target="_blank" class="side-nav-link-ref" routerLinkActive="active">
             <i class="mdi mdi-book-lock-outline"></i>
-            <span>Acuerdo de participacion</span>
-
+            <span>Acuerdo de participación</span>
           </a>
-          <a href="https://demo.campercontrol.com/media/uploads/files/contacto.pdf" target="_blank"
-            class="side-nav-link-ref" routerLinkActive="active">
+
+          <a href="https://demo.campercontrol.com/media/uploads/files/contacto.pdf" target="_blank" class="side-nav-link-ref" routerLinkActive="active">
             <i class="mdi mdi-lock-open-check-outline"></i>
             <span>Aviso de privacidad</span>
-
           </a>
-
-
-
         </li>
+
         <li *ngIf="staff">
-          
-          <a routerLink='staff' class="side-nav-link-ref" routerLinkActive="active" *ngIf="rol_id > 1">
+          <a routerLink="staff" class="side-nav-link-ref" routerLinkActive="active" *ngIf="rol_id > 1">
             <i class="bx bxs-spreadsheet"></i>
             <span>Mis Campamentos</span>
-
           </a>
-          <a routerLink='staff/camps' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true) || rol_id == 3 ">
+
+          <a routerLink="staff/camps" class="side-nav-link-ref" *ngIf="rol_id == 2 && (user_admin == true || user_coordinator == true) || rol_id == 3">
             <i class="bx bx-barcode"></i>
             <span>Lista de campamentos</span>
-
           </a>
-          <a routerLink='staff/employees' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true) || rol_id == 3 ">
+
+          <a routerLink="staff/employees" class="side-nav-link-ref" *ngIf="rol_id == 2 && (user_admin == true || user_coordinator == true) || rol_id == 3">
             <i class="bx bx-barcode"></i>
             <span>Staff</span>
-
           </a>
-        
-          <a routerLink='staff/applicants' class="side-nav-link-ref" *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true)">
-            <i class="mdi  mdi-account-question"></i>
+
+          <a routerLink="staff/applicants" class="side-nav-link-ref" *ngIf="rol_id == 2 && (user_admin == true || user_coordinator == true)">
+            <i class="mdi mdi-account-question"></i>
             <span>Prospectos</span>
-
           </a>
 
-       
-        
-         
-          <a routerLink='mailing' class="side-nav-link-ref"   *ngIf="rol_id ==2 && (user_admin==true || user_coordinator==true) || rol_id == 3 ">
+          <a routerLink="mailing" class="side-nav-link-ref" *ngIf="rol_id == 2 && (user_admin == true || user_coordinator == true) || rol_id == 3">
             <i class="bx bx-barcode"></i>
             <span>Mails</span>
-
           </a>
-        
-       
-
-          
-
-         
-
-<div>
-  <a  class="side-nav-link-ref " routerLinkActive="active"  *ngIf="rol_id ==2 && user_admin==true "
-    (click)="catalogos = !catalogos">
-    <div class="nav-d">
-      <div>
-        <i class="bx bxs-spreadsheet"></i>
-        <span>Catalogos</span>
-      </div>
-      <div>
-        <small class="text-right"> <i class="bx bx-caret-down " *ngIf="catalogos"></i></small>
-        <small class="text-right"><i class="bx bx-caret-up " *ngIf="!catalogos"></i></small>
-
-      
-      </div>
-     
-    </div>
-  </a>
-  <li *ngIf="catalogos" style="margin-left: 10px;" >
-    <a routerLink='catalogs/food-restriction' class="side-nav-link-ref" routerLinkActive="active"
-      *ngIf="catalogos">
-
-      <span>Alimentacion especial</span>
-
-    </a>
-    <a routerLink='catalogs/currency' class="side-nav-link-ref" routerLinkActive="active"
-      *ngIf="catalogos">
-
-      <span>Divisas</span>
-
-    </a>
-    <a routerLink='catalogs/pathological_background' class="side-nav-link-ref" routerLinkActive="active"
-      *ngIf="catalogos">
-
-      <span>Antecedentes patologicos</span>
-
-    </a>
-    <a routerLink='catalogs/pathological_background_Family' class="side-nav-link-ref" routerLinkActive="active"
-      *ngIf="catalogos">  
-      <span>Antecedentes patologicos familiares</span>    
-    </a>
-    <a routerLink='catalogs/paymentaccounts' class="side-nav-link-ref" routerLinkActive="active"
-    *ngIf="catalogos">  
-    <span>Cuentas bancarias </span>    
-     </a>
-
-     <a routerLink='staff/trainings-dashboard' class="side-nav-link-ref"   *ngIf="catalogos">
-      <span>Tipo de capacitaciòn</span>
-    </a>
-
-     <a routerLink='catalogs/licensedmedicine' class="side-nav-link-ref" routerLinkActive="active"
-     *ngIf="catalogos">  
-     <span>Medicamentos preaotorizados</span>    
-      </a>
-
-      <a routerLink='catalogs/vaccines' class="side-nav-link-ref" routerLinkActive="active"
-      *ngIf="catalogos">  
-      <span>Vacunas</span>    
-       </a>
-       <a routerLink='catalogs/staffroles' class="side-nav-link-ref" routerLinkActive="active"
-       *ngIf="catalogos">  
-       <span>Roles de staff</span>    
-        </a>
-
-        <a routerLink='catalogs/payment/method' class="side-nav-link-ref" routerLinkActive="active"
-        *ngIf="catalogos">  
-        <span>Metodos de pagos</span>    
-         </a>
-
-        
-
-          <a routerLink='catalogs/camp_extra_change' class="side-nav-link-ref" routerLinkActive="active"
-          *ngIf="catalogos">  
-          <span>cargos extra</span>    
-           </a>
-
-           <a routerLink='catalogs/school' class="side-nav-link-ref" routerLinkActive="active"
-           *ngIf="catalogos">  
-           <span>Escuelas</span>    
-            </a>
-  </li>
-</div>
-        
-          
-
-          <a  class="side-nav-link-ref " routerLinkActive="active" 
-            (click)="admi = !admi" *ngIf="rol_id ==2 && user_admin== true ">
+          <a class="side-nav-link-ref" class="side-nav-link-ref"  routerLinkActive="active" (click)="admi = !admi" *ngIf="rol_id == 2 && user_admin == true">
             <div class="nav-d">
               <div>
                 <i class="bx bxs-school"></i>
                 <span>Admi</span>
               </div>
               <div>
-                <small class="text-right"> <i class="bx bx-caret-down " *ngIf="admi"></i></small>
-                <small class="text-right"><i class="bx bx-caret-up " *ngIf="!admi"></i></small>
+                <small class="text-right">
+                  <i class="bx bx-caret-down" *ngIf="admi"></i>
+                  <i class="bx bx-caret-up" *ngIf="!admi"></i>
+                </small>
               </div>
             </div>
           </a>
-        </li>
-        <li *ngIf="admi" style="margin-left: 10px;" >
-          <a routerLink='admi/camper' class="side-nav-link-ref" routerLinkActive="active"
-            *ngIf="admi">
-
-            <span>Camper</span>
-
+          <a class="side-nav-link-ref" routerLinkActive="active" *ngIf="rol_id == 2 && user_admin == true" (click)="catalogos = !catalogos">
+            <div class="nav-d">
+              <div>
+                <i class="bx bxs-spreadsheet"></i>
+                <span>Catalogos</span>
+              </div>
+              <div>
+                <small class="text-right">
+                  <i class="bx bx-caret-down" *ngIf="catalogos"></i>
+                  <i class="bx bx-caret-up" *ngIf="!catalogos"></i>
+                </small>
+              </div>
+            </div>
           </a>
-          <a routerLink='admi/user' class="side-nav-link-ref" routerLinkActive="active"
-            *ngIf="admi">
-
-            <span>Usuario</span>
-
-          </a>
-          <a routerLink='admi/parent' class="side-nav-link-ref" routerLinkActive="active"
-            *ngIf="admi">
-
-            <span>Titulares de cuenta</span>
-
-          </a>
-
-            <a routerLink='admi/events' class="side-nav-link-ref" routerLinkActive="active"
-            *ngIf="admi">
-            <span>Capacitanciones</span>
-      
-          </a>
+          <div>
           
-          <a routerLink='admi/camps' class="side-nav-link-ref" routerLinkActive="active"
-            *ngIf="admi">
 
-            <span>Campamentos</span>
+         
 
-          </a>
-          <a routerLink='admi/temp' class="side-nav-link-ref" routerLinkActive="active"
-          *ngIf="admi">
+            <li *ngIf="catalogos" style="margin-left: 10px;">
+              <a routerLink="catalogs/food-restriction" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Alimentación especial</span>
+              </a>
 
-          <span>Temporadas</span>
+              <a routerLink="catalogs/currency" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Divisas</span>
+              </a>
 
-        </a>
+              <a routerLink="catalogs/pathological_background" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Antecedentes patológicos</span>
+              </a>
+
+              <a routerLink="catalogs/pathological_background_Family" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Antecedentes patológicos familiares</span>
+              </a>
+
+              <a routerLink="catalogs/paymentaccounts" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Cuentas bancarias</span>
+              </a>
+
+              <a routerLink="staff/trainings-dashboard" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Tipo de capacitación</span>
+              </a>
+
+              <a routerLink="catalogs/licensedmedicine" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Medicamentos preautorizados</span>
+              </a>
+
+              <a routerLink="catalogs/vaccines" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Vacunas</span>
+              </a>
+
+              <a routerLink="catalogs/staffroles" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Roles de staff</span>
+              </a>
+
+              <a routerLink="catalogs/payment/method" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Métodos de pago</span>
+              </a>
+
+              <a routerLink="catalogs/camp_extra_change" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Cargos extra</span>
+              </a>
+
+              <a routerLink="catalogs/school" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Escuelas</span>
+              </a>
+            </li>
+          </div>
+
        
-      
-    <a routerLink='admi/staff' class="side-nav-link-ref" routerLinkActive="active"
-      *ngIf="admi">
 
-      <span>Staff</span>
+          <li *ngIf="admi" style="margin-left: 10px;">
+            <a routerLink="admi/camper" class="side-nav-link-ref" routerLinkActive="active">
+              <span>Camper</span>
+            </a>
 
-    </a>
-    <a routerLink='admi/grouping/type' class="side-nav-link-ref" routerLinkActive="active"
-    *ngIf="admi">
+            <a routerLink="admi/user" class="side-nav-link-ref" routerLinkActive="active">
+              <span>Usuario</span>
+            </a>
 
-    <span>Tipos grupos</span>
+            <a routerLink="admi/parent" class="side-nav-link-ref" routerLinkActive="active">
+              <span>Titulares de cuenta</span>
+            </a>
 
-  </a>
+            <a routerLink="admi/events" class="side-nav-link-ref" routerLinkActive="active">
+              <span>Capacitaciones</span>
+            </a>
 
-  <a routerLink='admi/grouping' class="side-nav-link-ref" routerLinkActive="active"
-  *ngIf="admi">
+            <a routerLink="admi/camps" class="side-nav-link-ref" routerLinkActive="active">
+              <span>Campamentos</span>
+            </a>
 
-  <span>Grupos</span>
+            <a routerLink="admi/temp" class="side-nav-link-ref" routerLinkActive="active">
+              <span>Temporadas</span>
+            </a>
 
-</a>
-        </li>
+            <a routerLink="admi/staff" class="side-nav-link-ref" routerLinkActive="active">
+              <span>Staff</span>
+            </a>
 
-      <li>
-          <a routerLink='staff/perfil' class="side-nav-link-ref" routerLinkActive="active" *ngIf="rol_id > 1">
-            <i class="dripicons-user"></i>
-            <span>Mi perfil</span>
+            <a routerLink="admi/grouping/type" class="side-nav-link-ref" routerLinkActive="active">
+              <span>Tipos de grupos</span>
+            </a>
 
-          </a>
-          <a (click)="logout()" class="side-nav-link-ref" routerLinkActive="active" style="cursor: pointer;">
-            <i class="bx bx-undo"></i>
-            <span>Salir</span>
-          </a>
-        </li>
+            <a routerLink="admi/grouping" class="side-nav-link-ref" routerLinkActive="active">
+              <span>Grupos</span>
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="staff/perfil" class="side-nav-link-ref" routerLinkActive="active" *ngIf="rol_id > 1">
+              <i class="dripicons-user"></i>
+              <span>Mi perfil</span>
+            </a>
+
+            <a (click)="logout()" class="side-nav-link-ref" routerLinkActive="active" style="cursor: pointer;">
+              <i class="bx bx-undo"></i>
+              <span>Salir</span>
+            </a>
+          </li>
+       
       </ng-container>
     </ul>
   </div>
 </ng-template>
-<!-- Sidebar -->
 
+<!-- Sidebar -->
 <div class="vertical-menu">
   <ngx-simplebar class="h-100" #componentRef>
     <div *ngIf="!isCondensed">
@@ -286,4 +228,5 @@
     </div>
   </ngx-simplebar>
 </div>
+
 <!-- Left Sidebar End -->

@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
 
   resetPasword(){
     this.authenticationService.recuperarContra(this.resetPass.value).subscribe((res:any)=>{
-      if(res.mensaje == "Se ha enviado un correo con instrucciones para la recuperacion de su contraseña"){
+      if(res.detail.status == 1){
         this.alertPass = true;
 
       }

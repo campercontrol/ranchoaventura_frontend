@@ -55,8 +55,10 @@ export class AdmiCamperComponent implements OnInit {
 
   extra_question : any = [];
   extra_charges:any = [];
+  fecha_pago:any = [];
   alerQuestion = false;
   alercharges= false;
+  alertPago =false
   extra_discounts = [];
   fecha = new Date();
   Catpaymanacout:any =[];
@@ -599,6 +601,39 @@ export class AdmiCamperComponent implements OnInit {
   }
   deletExtracharges(i){
     this.extra_charges.splice(i);
+
+  }
+
+
+  newFechaPago(){
+    let a = this.extra_charges.length;
+    if(this.extra_charges.length>0){
+      let b =this.extra_charges[a-1].name;
+      if( b.length>0){
+        let a = {
+          "name": "",
+          "price": 0,
+          "created_at":this.fecha
+
+        }
+        this.fecha_pago.push(a);
+        this.alertPago = false;
+      }else{
+        this.alertPago = true;
+      }
+    }else{
+      let a = {
+        "name": "",
+        "price": 0,
+        "created_at":this.fecha
+      }
+      this.fecha_pago.push(a);
+      this.alertPago = false
+    }
+   
+  }
+  deletFechaPago(i){
+    this.fecha_pago.splice(i);
 
   }
   

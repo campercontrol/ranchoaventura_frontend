@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { error } from 'console';
+import { Table } from 'primeng/table';
 import { campss } from 'src/app/staff/campamentos-staff/campamentos-staff.component';
 import { AdmiService } from 'src/services/admi.service';
 import { CamperService } from 'src/services/camper.service';
@@ -16,7 +18,12 @@ export class GmailingComponent implements OnInit {
 
 
   public Editor = ClassicEditor;
+  public editorConfig = {
+    toolbar: ['bold', 'italic', 'underline', 'strikeThrough', 'blockQuote', 'undo', 'redo']
+  };
+  
   term:any
+  editor = ClassicEditor;
   transactions:any=[];
   Titulo: string = "Plantillas"
   tipoTemplate:number;
@@ -48,6 +55,8 @@ export class GmailingComponent implements OnInit {
   cargando:boolean=false;
   showSpiner:boolean= false;
   dataResGmail:any ;
+  dataGmailifno :any ;
+  @ViewChild('dt1') dt1: Table;
 
 
   
@@ -57,7 +66,9 @@ export class GmailingComponent implements OnInit {
   listCamp:any = [];
   selectCapacitacion;
   selectTemporada;
-  botonDisiable:boolean=false
+  botonDisiable:boolean=false;
+  infoEmail:boolean = false;
+  showSpinnerGmail= false;
 
 
   templateAlmacenado:any;
@@ -358,19 +369,22 @@ export class GmailingComponent implements OnInit {
     }else if(a== 'Nuevo Templates'){
       this.Titulo='Nuevo Templates';
       this.editTemplate= false;
-
+       this.template = '';
 
     }else if(a== 'Correos enviados'){
       this.cargando=true;
 
       this.data.getCorreos().subscribe((res:any)=>{
         this.listaTemplates=res.data ;
+        this.listaTemplates.sort((a, b) => {
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        });
         this.cargando=false;
-
+        this.Titulo='Correos enviados';
+        this.editTemplate= false;
+  
       })
-      this.Titulo='Correos enviados';
-      this.editTemplate= false;
-
+   
 
     }
   else if(a== 'Correos enviados'){
@@ -405,7 +419,7 @@ export class GmailingComponent implements OnInit {
         let a = res.data
         this.updateTemplate.patchValue({
           "id": a.id,
-          "template_type": a.template_type,
+          "template_type": 41,
           "title": a.title,
           "template":a.template,
           "order":a.order,
@@ -416,7 +430,7 @@ export class GmailingComponent implements OnInit {
       this.typetemplate = 1
       this.data.getPlantillSelectMaisva(item.id).subscribe((res:any)=>{
         let a = res.data;
-        console.log(res);
+        console.log(res,'mailngs');
         
         this.updateTemplate.patchValue({
           "id": a.id,
@@ -438,7 +452,7 @@ export class GmailingComponent implements OnInit {
     })
      this.data.getPlantillSelectMaisva(a[0].id).subscribe((res:any)=>{
         let b = res.data
-        this.tituloTemplateAlmacenado =b.template_type;
+        
         this.template =b.template;
         console.log(b);
 
@@ -453,7 +467,7 @@ export class GmailingComponent implements OnInit {
   }
   atras(){
     if(this.page>0){
-      this.botonDisiable=false
+      this.botonDisiable=true;
         this.page=1
     }
   }
@@ -464,6 +478,8 @@ export class GmailingComponent implements OnInit {
 
   updateTemplaet(){
     this.showSpiner=true;
+    console.log(this.updateTemplate.value);
+    
     this.data.patchPlantilla(this.idUpdate,this.updateTemplate.value).subscribe((res:any)=>{
          console.log(res);
          if(res.mensaje =='Actualizado Correctamente'){
@@ -481,6 +497,9 @@ export class GmailingComponent implements OnInit {
           }, 1000); 
         }
          
+    },error=>{
+      this.showSpiner=true;
+alert('No se pudo actualizar')
     })
   }
 
@@ -700,6 +719,33 @@ export class GmailingComponent implements OnInit {
         console.log('Opción no reconocida');
         break;
     }
+  }
+  infoGmgail(id){
+    this.infoEmail = true;
+      console.log('entrando');
+      
+    this.showSpinnerGmail =!this.showSpinnerGmail;
+    
+    this.data.getCorreosInfo(id).subscribe((res:any)=>{
+      this.dataGmailifno= res;
+      this.showSpinnerGmail =!this.showSpinnerGmail;
+
+ 
+    })
+  }
+
+
+  onReady(editor: any) {
+    editor.model.document.on('change:data', () => {
+      const selection = editor.model.document.selection;
+      if (selection.hasAttribute('bold')) {
+        const range = selection.getFirstRange();
+        const nativeRange = editor.editing.view.domConverter.viewRangeToDom(range);
+        const nativeSelection = window.getSelection();
+        nativeSelection.removeAllRanges();
+        nativeSelection.addRange(nativeRange);
+      }
+    });
   }
 
 }
