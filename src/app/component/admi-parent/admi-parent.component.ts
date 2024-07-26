@@ -194,14 +194,71 @@ export class AdmiParentComponent implements OnInit {
   }
 
   getCatalogos() {
+    
+
+    if (this.id ==undefined) {
+      this.catalogos.getParentAdmi().subscribe((res: any) => {
+        this.listcatalogos = res.data;
+      
+        console.log(this.listcatalogos);
+       
+      });     
+    } else{
+      console.log('update---',this.id);
+      
+      this.updateInfo({id:this.id})
+
+    }
+  }
+
+  updateInfo(item){
+    this.resteValu()
+    this.display2= true;
+    this.table= false;
+ 
+    this.catalogos.getParentU(item.id).subscribe((res:any)=>{
+   console.log(res);
+   this.item={user_id:res.data.user_id,tutor_email:res.data.tutor_email};
+   this.nameParent= res.data.tutor_name + res.data.tutor_lastname_mother + res.data.tutor_lastname_father;
+   this.updateId = res.data.id;
+
+    this.formFood.patchValue({
+     
+      tutor_lastname_father:res.data.tutor_lastname_father,
+      tutor_cellphone:      res.data.tutor_cellphone,
+      tutor_home_phone:     res.data.tutor_home_phone,
+      contact_name:         res.data.contact_name,
+    
+    contact_lastname_mother:res.data.contact_lastname_mother,
+    contact_home_phone:     res.data.contact_home_phone, 
+    contact_email:          res.data.contact_email,
+    tutor_name :           res.data.tutor_name,
+    tutor_lastname_mother:  res.data.tutor_lastname_mother, 
+    tutor_work_phone:      res.data.tutor_work_phone,
+    contact_lastname_father:  res.data.contact_lastname_father, 
+    contact_cellphone:      res.data.contact_cellphone,
+    contact_work_phone:     res.data.contact_work_phone,
+    user_id:                res.data.user_id,
+    parent_name:            name,
+    })
+
     this.catalogos.getParentAdmi().subscribe((res: any) => {
       this.listcatalogos = res.data;
     
       console.log(this.listcatalogos);
-      this.executeSearch();
      
-    });
+    });   
+   
+   })
+
+  
+
+   
+  
+    
   }
+
+      
 
   executeSearch() {
     if (this.id !=undefined) {
@@ -223,17 +280,7 @@ export class AdmiParentComponent implements OnInit {
 
 
 
-  guardarOrder(){
-    let a = []
-    this.listcatalogos.forEach((element,index) => {
-      a.push({id:element.id,order:index})     
-    });
-    this.catalogos.order(1,a).subscribe((res: any) => {
-      console.log(res);
-      
-      this.getCatalogos();
-      })  
-  }
+  
 
   prueba(){
     this.spinner=true;

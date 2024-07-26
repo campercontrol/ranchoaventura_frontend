@@ -1560,7 +1560,7 @@
             <ng-template pTemplate="body" let-customer>
                 <tr>
                     <td (click)="routerLink(customer)" style="cursor:pointer;">
-                        {{customer.camper_name}} {{customer.camper_lastname_father}}     {{customer.camper_lastname_mother}}
+                       <a routerLink="/dashboard/admi/camper/{{customer.camper_id}}"> {{customer.camper_name}} {{customer.camper_lastname_father}}     {{customer.camper_lastname_mother}} </a> 
                     </td>
                  
                     <td>

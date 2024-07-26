@@ -1,0 +1,45 @@
+<div class="container-d" style="display: flex; justify-content: center; align-items: center;">
+    <div class="col-xl-4 col-sm-12 col-md-7 mx-auto" style="background-color: white;">
+       
+       
+            <div class=" p-4">
+                <div class="w-100">
+
+                    <div class=" h-100 text-center">
+                        <div class="">
+                            <a routerLink="/" class="d-block auth-logo">
+                                <img src="../../assets/images/camp/logoCamper.png" alt="" height="100px"
+                                    class="auth-logo-dark" style="margin: 0 auto;">
+                                <img src="../../assets/assets/images/camp/logoCamper.png" alt="" height="100px"
+                                    class="auth-logo-light">
+                            </a>
+                        </div>
+                       
+                        <h1>¡Casi terminamos!</h1>
+
+                        <h2 class="mt-4">Por favor, espere mientras validamos su información para activar su cuenta de staff.</h2>
+
+                        <div class="spinner-border text-primary" role="status" *ngIf="spinner">
+                            
+                          </div>
+                        
+                        <div class="alert alert-primary mt-5" role="alert" *ngIf="alertPass">
+                          ¡Su cuenta ha sido activada correctamente!
+                        </div>
+                        <div class="alert alert-warning mt-5" role="alert" *ngIf="alertPassError">
+                            Al parecer no se pudo activar su cuenta. Por favor, comuníquese con soporte.
+                          </div>
+                        
+                        <p class="mt-4">Gracias por su paciencia. En breve podrá acceder a todas las funcionalidades administrativas de nuestra plataforma. Si tiene alguna duda o necesita asistencia, no dude en contactarnos.</p>
+                        
+
+                           
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+    </div>

@@ -1,5 +1,5 @@
-<div class="container-d">
-    <div class="col-xl-4 col-sm-12 col-md-7" style="background-color: white;">
+<div class="container-d" style="display: flex; justify-content: center; align-items: center;">
+    <div class="col-xl-4 col-sm-12 col-md-7 mx-auto" style="background-color: white;">
        
        
             <div class=" p-4">
@@ -30,23 +30,21 @@
                                 <div>
                                     <label for="email">Nueva Contraseña :  </label>
                                     <input type="email" class="form-control" id="email" formControlName="password"
-                                        placeholder="Enter email">
+                                        placeholder="">
                                         <div  class="alert alert-warning mt-1">Se usará para ingresar a Camper Control. Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra minuscula y un caracter especial </div>
 
 
                                 </div>
-                                <div>
-                                    <label for="email">Confirmacíon de contraseña:  </label>
-                                    <input type="email" class="form-control" id="email" formControlName="password_confirm"
-                                        placeholder="Enter email">
+                               
 
-                                </div>
-
-
-                                <div class="mt-3 d-grid">
+                                <div class="mt-3 d-grid" *ngIf="!spinner">
                                     <button class="btn btn-primary btn-block" type="button"
                                         (click)="resetPasword()">Cambiar contraseña</button>
                                 </div>
+
+                                <div class="spinner-border" role="status" *ngIf="spinner">
+                                 
+                                  </div>
 
                             </form>
 

@@ -18,6 +18,18 @@
                 </div>         
             </div>
             <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Email </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="email" name="email" (input)="getEmail()" #email>
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">contraseña </label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="password" name="password" >
+                </div>         
+            </div>
+            <div class="row mb-4">
                 <label for="" class="col-sm-3 col-form-label">Pagina web</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="" formControlName="url" name="url" #url  (input)="getUrl()">
@@ -64,12 +76,7 @@
                     <input type="text" class="form-control" id="" formControlName="cellphone" name="cellphone" (input)="getCellphone()" #cellphone>
                 </div>         
             </div>
-            <div class="row mb-4">
-                <label for="" class="col-sm-3 col-form-label">Email contacto 1:</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" id="" formControlName="email" name="email" (input)="getEmail()" #email>
-                </div>         
-            </div>
+        
             <div class="row mb-4">
                 <label for="" class="col-sm-3 col-form-label">Nombre Contacto 2</label>
                 <div class="col-sm-9">
@@ -147,6 +154,12 @@
             </div>         
         </div>
         <div class="row mb-4">
+            <label for="" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="" formControlName="email" name="email" (input)="getEmail()" #email>
+            </div>         
+        </div>
+        <div class="row mb-4">
             <label for="" class="col-sm-3 col-form-label">Pagina web</label>
             <div class="col-sm-9">
                 <input type="text" class="form-control" id="" formControlName="url" name="url" #url  (input)="getUrl()">
@@ -193,12 +206,7 @@
                 <input type="text" class="form-control" id="" formControlName="cellphone" name="cellphone" (input)="getCellphone()" #cellphone>
             </div>         
         </div>
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Email contacto 1:</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" formControlName="email" name="email" (input)="getEmail()" #email>
-            </div>         
-        </div>
+       
         <div class="row mb-4">
             <label for="" class="col-sm-3 col-form-label">Nombre Contacto 2</label>
             <div class="col-sm-9">

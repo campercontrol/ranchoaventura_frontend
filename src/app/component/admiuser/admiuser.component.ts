@@ -214,13 +214,26 @@ export class AdmiuserComponent implements OnInit {
   }
 
   getCatalogos() {
-    this.catalogos.getCamperAdmi().subscribe((res: any) => {
-      this.listcatalogos = res.data;
-      console.log(res.data);
-      this.executeSearch()
-         
-     // this.table=true;
-    });
+    if(this.id == undefined){
+
+      this.catalogos.getCamperAdmi().subscribe((res: any) => {
+        this.listcatalogos = res.data;
+        console.log(res.data);
+       
+           
+       // this.table=true;
+      });
+    }else{
+      this.update({camper_id:this.id})
+      this.catalogos.getCamperAdmi().subscribe((res: any) => {
+        this.listcatalogos = res.data;
+        console.log(res.data);
+       
+           
+       // this.table=true;
+      });
+    }
+ 
   }
 
 

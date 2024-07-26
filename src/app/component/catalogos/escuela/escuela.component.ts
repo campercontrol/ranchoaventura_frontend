@@ -74,12 +74,14 @@ export class EscuelaComponent implements OnInit {
   ngOnInit(): void {
     this.formFood = this._FormBuild.group({
   name:  ['', [Validators.required,Validators.minLength(2)]],
+  password:  ['', [Validators.required,Validators.minLength(2)]],
+  email:  ['', [Validators.required,Validators.email]],
+
   address:[''],
   url: [''],
   contact: [''],
   phone: [''],
   cellphone: [''],
-  email: ['' ],
   contact_second_name: ['' ],
   contact_second_phone: ['' ],
   contact_second_cellphone:['' ],

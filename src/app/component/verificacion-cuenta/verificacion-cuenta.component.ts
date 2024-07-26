@@ -4,22 +4,44 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 
 @Component({
-  selector: 'app-reset-pasword',
-  templateUrl: './reset-pasword.component.html',
-  styleUrls: ['./reset-pasword.component.scss']
+  selector: 'app-verificacion-cuenta',
+  templateUrl: './verificacion-cuenta.component.html',
+  styleUrls: ['./verificacion-cuenta.component.scss']
 })
-export class ResetPaswordComponent implements OnInit {
+export class VerificacionCuentaComponent implements OnInit {
+
   resetPass:FormGroup ;
   alertPass:boolean= false;
   token:any = "";
   email:string="";
-  spinner = false;
+  spinner = true;
+  alertPassError = false;
 
   constructor(private formBuilder: FormBuilder, private data: AuthenticationService,private router:Router,private route: ActivatedRoute) { 
     console.log(this.data.infToken);
     this.route.queryParams.subscribe(params => {
       this.email = params['email'];
-      this.token = params['token'];
+      this.token = params['t'];
+      this.data.validarCuenta(this.token).subscribe((res:any)=>{
+        console.log(res);
+        
+        if(res.detail=="The account was successfully verified"){
+          this.spinner = false;
+  
+          this.alertPass=true;
+  
+        }else{
+          alert('Al parecer no se pudo activar su cuenta. Por favor, comuníquese con soporte.');
+        }
+        
+  
+        
+  
+      }, error=>{
+        this.spinner = false;
+        this.alertPassError = true;
+
+      })
     });
 
     
@@ -35,7 +57,7 @@ export class ResetPaswordComponent implements OnInit {
 
   resetPasword(){
     this.spinner = true;
-    this.data.restPassword(this.token,this.resetPass.value).subscribe((res:any)=>{
+    this.data.validarCuenta(this.token).subscribe((res:any)=>{
       console.log(res);
       if(res.detail.status == 1){
         this.spinner = false;
@@ -82,5 +104,6 @@ export class ResetPaswordComponent implements OnInit {
       }
     };
   }
+
 
 }

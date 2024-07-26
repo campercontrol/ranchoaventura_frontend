@@ -104,9 +104,9 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-customer>
                   <tr class="p-selectable-row">
-                      <td  style=" cursor:pointer;" (click)="campsinfo(customer.camp_id)">
-                          {{customer.camp_name}}
-                        </td>
+                      <td  style=" cursor:pointer;" >
+                        <a routerLink="/dashboard/camp/{{customer.camp_id}}"> {{customer.camp_name}}</a> 
+                      </td>
                         <td>
                           {{customer.location_name}}
                         </td>
@@ -252,8 +252,8 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-customer>
                   <tr class="p-selectable-row">         
-                    <td  (click)="campsinfo(customer.camp_id)" style="cursor: pointer;">
-                      {{customer.camp_name}}
+                    <td  style="cursor: pointer;">
+                    <a routerLink="/dashboard/camp/{{customer.camp_id}}"> {{customer.camp_name}}</a> 
                     </td>
                     <td>
                       {{customer.location_name}}
@@ -376,6 +376,7 @@
                         <p-sortIcon field="public_price"></p-sortIcon>
                       </div>
                     </th>
+                    <th></th>
     
                    
                    
@@ -384,8 +385,8 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-customer>
                   <tr class="p-selectable-row">
-                    <td  (click)="campsinfo(customer.camp_id)" style="cursor: pointer;" >
-                      {{customer.camp_name}}
+                    <td  style="cursor: pointer;" >
+                      <a routerLink="/dashboard/camp/{{customer.camp_id}}"></a>{{customer.camp_name}}
                     </td>
                     <td>
                       {{customer.location_name}}
@@ -416,9 +417,8 @@
     
                     </td> 
                     <td>
-                      <button class="btn btn-primary" (click)="campsinfo(customer.camp_id)">
-                          Ver camp
-                      </button>
+                    
+                        <button class="btn btn-danger" (click)="cancelar(customer.staff_in_camp_id)">Cancelar mi participacion</button>
                     </td>
                   </tr>
                 </ng-template>

@@ -69,6 +69,14 @@ export class AdmiUserComponent implements OnInit {
   idioma = 'esp';
   cargando =true;
   rol:any=[];
+  tablaPadres=[];
+  tablaescuelas=[];
+  data =[];
+  tablastaff=[];
+  displayColumns: string[] = [];
+
+  columns: string[] = [];
+
   cat: any = {
     '0': 'ninguno',
     '1': 'Staff',
@@ -225,6 +233,7 @@ export class AdmiUserComponent implements OnInit {
   }
 
   update(item){
+    this.cargando=true
      this.updateId = item.id;
     this.display2= true;
     this.table= false;
@@ -239,13 +248,41 @@ export class AdmiUserComponent implements OnInit {
         "is_superuser": item.is_superuser,
         "is_active": item.is_active,
    })
+   this.data=[]
+   this.columns=[]
 
-  
-
+      this.catalogos.getinfodelet(item.id).subscribe((res: any) => {
+    console.log(res);
+    this.cargando = false;
    
+
+    if (res.role_id == 1) { 
+      this.data = res.campers;
+      this.columns = ['camper_fullname', 'camps'];
+      this.displayColumns = ['Hijos', 'Campamentos'];
+    } else if (res.role_id == 2) {
+      this.data = res.staff_in_camp;
+      this.columns = ['name', 'id'];
+      this.displayColumns = ['Campamentos Apuntados', 'ID'];
+    } else if (res.role_id == 3) {
+      this.data = res.school_camps;
+      this.columns = ['name'];
+      this.displayColumns = ['Campamentos'];
+    }
+  }, error => {
+    this.cargando = false;
+    alert('No se pudo Agregar');
+  });
+}
+
+// Métodos para manejar datos anidados si es necesario
+getCampsSummary(camps: any[]): string {
+  return camps.map(camp => camp.name).join(', ');
+}
+
+ 
+
   
-    
-  }
   getVaccinesValues(){
     console.log(this.vacunas);
     
@@ -322,6 +359,8 @@ export class AdmiUserComponent implements OnInit {
   delet(){
     this.catalogos.deletUser(this.idDalete).subscribe((res: any) => {
       this.statuAgrgado = true;
+      this.cargando= true;
+      this.canelar();
       this.getCatalogos();
       setTimeout(() => {
         this.statuAgrgado = false;

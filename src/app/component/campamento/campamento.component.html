@@ -40,7 +40,7 @@
                     <tr *ngFor="let item of dataPagos">
                     
                       <td>{{item.id}}</td>
-                      <td>{{item.created_at.substring(0,10)}}</td>
+                      <td>{{item.payment_date.substring(0,10)}}</td>
                       <td>{{item.txn_number}}</td>
                       <td>
                         <div *ngIf="item.payment_amount>=0">
