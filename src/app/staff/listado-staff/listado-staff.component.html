@@ -48,7 +48,8 @@
                               <ng-template pTemplate="body" let-customer>
                                   <tr>
                                       <td  style="cursor:pointer; text-align: center;">
-                                         {{customer.Staff.name}} {{customer.Staff.lastname_father}} {{customer.Staff.lastname_mother}}
+                                        <a routerLink="/dashboard/staff/perfil/{{customer.Staff.id}}">  {{customer.Staff.name}} {{customer.Staff.lastname_father}} {{customer.Staff.lastname_mother}}</a>
+                                        
                                       </td>
 
                                       <td style="text-align: center;font-size: 12px; font-size: 12px;">

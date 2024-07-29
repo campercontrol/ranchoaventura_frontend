@@ -90,7 +90,47 @@
               </div>
             </div>
           </a>
-          <a class="side-nav-link-ref" routerLinkActive="active" *ngIf="rol_id == 2 && user_admin == true" (click)="catalogos = !catalogos">
+          <div>
+            <li *ngIf="admi" style="margin-left: 10px;">
+              <a routerLink="admi/camper" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Camper</span>
+              </a>
+  
+              <a routerLink="admi/user" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Usuario</span>
+              </a>
+  
+              <a routerLink="admi/parent" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Titulares de cuenta</span>
+              </a>
+  
+              <a routerLink="admi/events" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Capacitaciones</span>
+              </a>
+  
+              <a routerLink="admi/camps" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Campamentos</span>
+              </a>
+  
+              <a routerLink="admi/temp" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Temporadas</span>
+              </a>
+  
+              <a routerLink="admi/staff" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Staff</span>
+              </a>
+  
+              <a routerLink="admi/grouping/type" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Tipos de grupos</span>
+              </a>
+  
+              <a routerLink="admi/grouping" class="side-nav-link-ref" routerLinkActive="active">
+                <span>Grupos</span>
+              </a>
+            </li>
+          </div>
+        
+          <a class="side-nav-link-ref" routerLinkActive="active" *ngIf="rol_id == 2 && user_admin == true" (click)="catalogos = !catalogos" >
             <div class="nav-d">
               <div>
                 <i class="bx bxs-spreadsheet"></i>
@@ -162,43 +202,7 @@
 
        
 
-          <li *ngIf="admi" style="margin-left: 10px;">
-            <a routerLink="admi/camper" class="side-nav-link-ref" routerLinkActive="active">
-              <span>Camper</span>
-            </a>
-
-            <a routerLink="admi/user" class="side-nav-link-ref" routerLinkActive="active">
-              <span>Usuario</span>
-            </a>
-
-            <a routerLink="admi/parent" class="side-nav-link-ref" routerLinkActive="active">
-              <span>Titulares de cuenta</span>
-            </a>
-
-            <a routerLink="admi/events" class="side-nav-link-ref" routerLinkActive="active">
-              <span>Capacitaciones</span>
-            </a>
-
-            <a routerLink="admi/camps" class="side-nav-link-ref" routerLinkActive="active">
-              <span>Campamentos</span>
-            </a>
-
-            <a routerLink="admi/temp" class="side-nav-link-ref" routerLinkActive="active">
-              <span>Temporadas</span>
-            </a>
-
-            <a routerLink="admi/staff" class="side-nav-link-ref" routerLinkActive="active">
-              <span>Staff</span>
-            </a>
-
-            <a routerLink="admi/grouping/type" class="side-nav-link-ref" routerLinkActive="active">
-              <span>Tipos de grupos</span>
-            </a>
-
-            <a routerLink="admi/grouping" class="side-nav-link-ref" routerLinkActive="active">
-              <span>Grupos</span>
-            </a>
-          </li>
+       
 
           <li>
             <a routerLink="staff/perfil" class="side-nav-link-ref" routerLinkActive="active" *ngIf="rol_id > 1">

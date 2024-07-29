@@ -81,7 +81,7 @@
                 <tr class="p-selectable-row">
     
                     <td (click)="reditCamps(customer.camp_id)">
-                        {{customer.camp_name}}
+                        <a routerLink="/dashboard/camp/{{customer.camp_id}}"> {{customer.camp_name}}</a> 
                     </td>
                     <td>
                         <p-badge value=" {{customer.records.campers_recod}}" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
@@ -106,7 +106,9 @@
     
                  
                     <td>
-                        <button class="btn btn-primary" class="btn btn-primary" (click)="reditCamps(customer.camp_id)">ver campamento</button>
+                        <a class="btn btn-primary" class="btn btn-primary" routerLink="/dashboard/camp/{{customer.camp_id}}" routerLinkActive="router-link-active" *ngIf="this.rol_id!=3" >ver campamento</a>
+                        <a class="btn btn-primary" class="btn btn-primary" routerLink="/dashboard/medical/camp-medical/{{customer.camp_id}}" routerLinkActive="router-link-active"  *ngIf="this.rol_id==3" >ver campamento</a>
+
                     </td>
     
                     

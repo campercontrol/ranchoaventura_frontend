@@ -299,6 +299,12 @@ export class CatalogosService {
     getRol(){
       return this.http.get('http://142.93.12.234:8000/rol?is_active=true');
     }
+
+    getinfodelet(id){
+      return this.http.get('http://142.93.12.234:8000/user_delete_info?user_id='+id);
+
+
+    }
   
     // admi camper
     getCamps( ){

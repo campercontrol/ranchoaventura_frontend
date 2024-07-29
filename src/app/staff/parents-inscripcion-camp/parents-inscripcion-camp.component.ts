@@ -307,16 +307,17 @@ suscribeCamps(typeCamp:number){
     this.camps.setCamps(b,this.id).subscribe((res:any)=>{
       console.log(res);
 
-      if(res.status ==2){
-        this.extra_questions =res.extra_questions;
+      if (res.status == 2) {
+        this.extra_questions = res.extra_questions;
         this.extra_questions.forEach(element => {
-          element.camp_extra_question_question = this.parseHTMLContent(element.camp_extra_question_question)
+            if (element.camp_extra_question_question) {
+                element.camp_extra_question_question = this.parseHTMLContent(element.camp_extra_question_question);
+            }
         });
-       this.extra_charges=res.extra_charges
-
+        this.extra_charges = res.extra_charges;
         this.inscripcion = false;
         this.cargosExtr = true;
-      } else if(res.status ==1){
+    }else if(res.status ==1){
         this.centerModal();
       setTimeout(() => {    
         this.getCampsDIs();   
@@ -342,15 +343,17 @@ suscribeCamps(typeCamp:number){
        this.camps.setCamps(c,this.id).subscribe((res:any)=>{
         console.log(res);
 
-        if(res.status ==2){
-          this.extra_questions =res.extra_questions;
+        if (res.status == 2) {
+          this.extra_questions = res.extra_questions;
           this.extra_questions.forEach(element => {
-            element.camp_extra_question_question = this.parseHTMLContent(element.camp_extra_question_question)
+              if (element.camp_extra_question_question) {
+                  element.camp_extra_question_question = this.parseHTMLContent(element.camp_extra_question_question);
+              }
           });
-          this.extra_charges =res.extra_charges
+          this.extra_charges = res.extra_charges;
           this.inscripcion = false;
           this.cargosExtr = true;
-        } else if(res.status ==1){
+      }else if(res.status ==1){
           this.centerModal();
         setTimeout(() => {    
           this.getCampsDIs();   
@@ -380,15 +383,17 @@ suscribeCamps(typeCamp:number){
     this.camps.setCamps(d,this.id).subscribe((res:any)=>{
       console.log(res);
 
-      if(res.status ==2){
-        this.extra_questions =res.extra_questions;
+      if (res.status == 2) {
+        this.extra_questions = res.extra_questions;
         this.extra_questions.forEach(element => {
-          element.camp_extra_question_question = this.parseHTMLContent(element.camp_extra_question_question)
+            if (element.camp_extra_question_question) {
+                element.camp_extra_question_question = this.parseHTMLContent(element.camp_extra_question_question);
+            }
         });
-        this.extra_charges =res.extra_charges
+        this.extra_charges = res.extra_charges;
         this.inscripcion = false;
         this.cargosExtr = true;
-      } else if(res.status ==1){
+    } else if(res.status ==1){
         this.centerModal();
       setTimeout(() => {    
         this.getCampsDIs();   
@@ -412,15 +417,17 @@ suscribeCamps(typeCamp:number){
         this.camps.setCamps(a,this.id).subscribe((res:any)=>{
           console.log(res);
           
-          if(res.status ==2){
-            this.extra_questions =res.extra_questions;
+          if (res.status == 2) {
+            this.extra_questions = res.extra_questions;
             this.extra_questions.forEach(element => {
-              element.camp_extra_question_question = this.parseHTMLContent(element.camp_extra_question_question)
+                if (element.camp_extra_question_question) {
+                    element.camp_extra_question_question = this.parseHTMLContent(element.camp_extra_question_question);
+                }
             });
-           this.extra_charges =res.extra_charges
+            this.extra_charges = res.extra_charges;
             this.inscripcion = false;
             this.cargosExtr = true;
-          } else if(res.status ==1){
+        }else if(res.status ==1){
             this.centerModal();
           setTimeout(() => {    
             this.getCampsDIs();   
@@ -484,9 +491,11 @@ routerCamps(id){
   this.routerNav.navigate(['dashboard/parents/camp-info/'+this.id+'/'+id])
 }
 
-parseHTMLContent(html: string): string {
-  const regex = /<[^>]*>/g;
-  return html.replace(regex, '');
+parseHTMLContent(content: string): string {
+  if (!content) {
+      return '';
+  }
+  return content.replace(/somePattern/g, 'replacement'); // Ajusta la lógica de reemplazo según tus necesidades
 }
 
 }

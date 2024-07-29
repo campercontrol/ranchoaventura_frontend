@@ -92,7 +92,9 @@
                       </td>
                  
                   <td (click)=" infostaff(customer.id)" >
-                    {{customer.name}} {{customer.lastname_father}} {{customer.lastname_mother}}
+                    <a routerLink="/dashboard/staff/perfil/{{customer.id}}">  {{customer.name}} {{customer.lastname_father}} {{customer.lastname_mother}}</a>
+
+                   
                   </td>
                   <td> 
                     {{customer.birthday}}

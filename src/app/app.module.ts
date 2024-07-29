@@ -162,6 +162,9 @@ import { TrofeosComponent } from './component/trofeos/trofeos.component';
 import { AdminStaffComponent } from './component/admin-staff/admin-staff.component';
 import { AdminEditStaffComponent } from './component/admin-staff/admin-edit-staff/admin-edit-staff.component';
 import { AdminStaffCreateComponent } from './component/admin-staff/admin-staff-create/admin-staff-create.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { VerificacionCuentaComponent } from './component/verificacion-cuenta/verificacion-cuenta.component';
+import { LocacionComponent } from './component/locacion/locacion.component';
 
 
 
@@ -227,7 +230,10 @@ export function createTranslateLoader(http: HttpClient): any {
     TrofeosComponent,
     AdminStaffComponent,
     AdminEditStaffComponent,
-    AdminStaffCreateComponent, 
+    AdminStaffCreateComponent,
+    ResetPasswordComponent,
+    VerificacionCuentaComponent,
+    LocacionComponent, 
        
   ],
   imports: [

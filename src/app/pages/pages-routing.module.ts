@@ -71,6 +71,7 @@ import { GroupingAdmiComponent } from '../staff/grouping-admi/grouping-admi.comp
 import { AuthGuard } from '../core/guards/auth.guard';
 import { ListadoStaffComponent } from '../staff/listado-staff/listado-staff.component';
 import { ListadoCampersComponent } from '../staff/listado-campers/listado-campers.component';
+import { LocacionComponent } from '../component/locacion/locacion.component';
 
 const routes: Routes = [
   
@@ -176,6 +177,7 @@ const routes: Routes = [
 //{path: 'catalogs/camp_extra_question',component:PreguntasExtrasComponent, canActivate: [AuthGuard] },
 {path: 'catalogs/camp_extra_change',component:CargosExtrasComponent, canActivate: [AuthGuard] },
 {path: 'catalogs/school',component:EscuelaComponent, canActivate: [AuthGuard] },
+{path: 'catalogs/lococion',component:LocacionComponent, canActivate: [AuthGuard] },
 
 
 
