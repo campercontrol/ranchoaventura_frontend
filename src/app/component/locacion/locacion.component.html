@@ -1,0 +1,240 @@
+<p-dialog header="Title" [(visible)]="display" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}" *ngIf="display">
+    <ng-template pTemplate="header">
+       <h2>
+        Agregar locación
+       </h2> 
+    </ng-template>
+    <div class="col">
+        <form action="" [formGroup]="formFood">
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="name" name="name" #name (input)="getName()">
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Teléfono</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="phone" name="phone" (input)="getPhone()" #phone>
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="email" name="email" (input)="getEmail()" #email>
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Contacto</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="contact" name="contact" (input)="getContact()" #contact>
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Dirección</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="address" name="address" #address (input)="getAddress()">
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Página web</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="url" name="url" #url (input)="getUrl()">
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <div class="col-3"></div>
+                <div class="form-check col-3">
+                    <input class="form-check-input" type="checkbox" formControlName="active" name="active" id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">Activo</label>
+                </div>
+            </div>
+        </form>
+        <div class="alert alert-primary" role="alert" *ngIf="statuAgrgado">
+            Se agregó correctamente
+        </div>
+    </div>
+    
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="guardar()" >Guardar</button>
+    </ng-template>
+</p-dialog>
+<p-dialog header="Title" [(visible)]="display2" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}" *ngIf="display2">
+    <ng-template pTemplate="header">
+       <h2>
+        Editar  Escuela
+       </h2>
+      
+    </ng-template>
+    <form action="" [formGroup]="formFood">
+        <div class="row mb-4">
+            <label for="" class="col-sm-3 col-form-label">Nombre</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="" formControlName="name" name="name" #name (input)="getName()">
+            </div>         
+        </div>
+        <div class="row mb-4">
+            <label for="" class="col-sm-3 col-form-label">Teléfono</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="" formControlName="phone" name="phone" (input)="getPhone()" #phone>
+            </div>         
+        </div>
+        <div class="row mb-4">
+            <label for="" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="" formControlName="email" name="email" (input)="getEmail()" #email>
+            </div>         
+        </div>
+        <div class="row mb-4">
+            <label for="" class="col-sm-3 col-form-label">Contacto</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="" formControlName="contact" name="contact" (input)="getContact()" #contact>
+            </div>         
+        </div>
+        <div class="row mb-4">
+            <label for="" class="col-sm-3 col-form-label">Dirección</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="" formControlName="address" name="address" #address (input)="getAddress()">
+            </div>         
+        </div>
+        <div class="row mb-4">
+            <label for="" class="col-sm-3 col-form-label">Página web</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="" formControlName="url" name="url" #url (input)="getUrl()">
+            </div>         
+        </div>
+        <div class="row mb-4">
+            <div class="col-3"></div>
+            <div class="form-check col-3">
+                <input class="form-check-input" type="checkbox" formControlName="active" name="active" id="flexRadioDefault2">
+                <label class="form-check-label" for="flexRadioDefault2">Activo</label>
+            </div>
+        </div>
+        <div class="alert alert-primary" role="alert" *ngIf="statuAgrgado">
+            Se actualizo correctamente
+        </div>
+    </form>
+   
+
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="closeModal2()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="keepUpdate()">Guardar</button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog header="Title" [(visible)]="display3" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <ng-template pTemplate="header">
+       <h2>
+        Eliminar  locación
+       </h2> 
+    </ng-template>
+    <div class="col">
+       {{TextElimint}}
+        <div class="alert alert-danger" role="alert" *ngIf="statuAgrgado">
+            Se elimino correctamente
+          </div>
+
+          
+    </div>
+    <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="this.display3 = false">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="delet()">Eliminar</button>
+    </ng-template>
+</p-dialog>
+<p-tabView>
+    <p-tabPanel header="Escuelas">
+        <div>
+
+            <div class="card border border-info border-1">
+                <div class="bg-info p-2">
+                    <h1 class="card-title text-white">Lista de Escuela</h1>
+                </div>
+                <div class="card-body">
+                <div class="container-btn mt-1 mb-3">
+                    <div>
+                        <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
+                            <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar nueva escuela</button>
+        
+                        </div>
+                    </div>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        placeholder="Global Search" />
+                </div>
+        <div style="overflow: auto;">
+            <p-table #dt [value]="listcatalogos" [rows]="10"
+            [globalFilterFields]="['name','address','email','phone','contact','url']"
+            [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true">
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="name">Nombre<p-sortIcon field="name"
+                            style="font-size: 10px;"></p-sortIcon></th>
+                    <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
+                    <th pSortableColumn="address">direccion <p-sortIcon field="address"></p-sortIcon></th>
+                    <th pSortableColumn="active">Activo <p-sortIcon field="active"></p-sortIcon></th>
+                    <th pSortableColumn="phone">Celular <p-sortIcon field="phone"></p-sortIcon></th>
+                    <th pSortableColumn="contact">Contacto <p-sortIcon field="contact"></p-sortIcon></th>
+                    <th pSortableColumn="url">Url<p-sortIcon field="url"></p-sortIcon></th>
+
+
+
+                    <th style="width: 40px;"></th>
+                    <th style="width: 40px;"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-customer>
+                <tr>
+                    <td>
+                        {{customer.name}}
+                    </td>
+                    <td>
+                        {{customer.email}}
+                    </td>
+                    <td>
+                        {{customer.address}}
+                    </td>
+                   
+                    <td>
+                        <i class="bx bxs-calendar-check" *ngIf="customer.active" style="color: green;"></i> <i class="bx bxs-calendar-x" style="color: red;" *ngIf="!customer.active"></i>
+                    </td>
+                    <td>
+                        {{customer.phone}}
+                    </td>
+                    <td>
+                        {{customer.contact}}
+                    </td>
+                    <td>
+                        {{customer.url}}
+                    </td>
+                   
+                   
+                    <td>
+                        <button class="btn btn-warning" (click)="update(customer)">Editar</button>
+
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" (click)="deletModal(customer.name,customer.id)">Eliminar</button>
+                    </td>
+                 
+                </tr>
+            </ng-template>
+
+        </p-table>
+        </div>
+                
+            </div>
+            </div>
+        
+        
+        
+        
+        
+        </div>
+        
+    </p-tabPanel>
+    
+  
+</p-tabView>
