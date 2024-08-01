@@ -131,6 +131,7 @@ export class NuevoCampamentoComponent implements OnInit {
    // console.log(this.formCamp.value);
    this.spinner=true;
     if(this.formCamp.valid){
+    this.payment_accounts=  this.formCamp.get('payment_accounts').value;
       let a = {
           "camp":this.formCamp.value,
           "payment_accounts":this.payment_accounts,
@@ -138,6 +139,10 @@ export class NuevoCampamentoComponent implements OnInit {
            "extra_charges":this.extra_charges,
            "extra_discounts":this.extra_discounts,
       }
+      delete a.camp.payment_accounts;
+      delete a.camp.extra_question;
+      delete a.camp.extra_charges;
+
       if(this.payment_accounts.length==0){this.formCamp.patchValue({payment_accounts:[]})}
       if(this.extra_question.length==0){this.formCamp.patchValue({extra_question:[]})}
       if(this.extra_charges.length==0){this.formCamp.patchValue({extra_charges:[]})}

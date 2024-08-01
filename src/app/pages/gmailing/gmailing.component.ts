@@ -7,6 +7,7 @@ import { campss } from 'src/app/staff/campamentos-staff/campamentos-staff.compon
 import { AdmiService } from 'src/services/admi.service';
 import { CamperService } from 'src/services/camper.service';
 import { CampsService } from 'src/services/camps.service';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
 @Component({
@@ -18,9 +19,25 @@ export class GmailingComponent implements OnInit {
 
 
   public Editor = ClassicEditor;
-  public editorConfig = {
-    toolbar: ['bold', 'italic', 'underline', 'strikeThrough', 'blockQuote', 'undo', 'redo']
-  };
+  public editorConfig:any = {
+    toolbar: [
+      'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'undo', 'redo', 'imageUpload'
+    ],
+   
+    ckfinder: {
+      uploadUrl: null // Deshabilitar la carga de imágenes
+    },
+    // Configuración adicional para insertar imágenes por URL
+    image: {
+      toolbar: [
+        'imageTextAlternative', 'imageStyle:full', 'imageStyle:side','insertImage'
+      ],
+      // Añadir soporte para URLs si es necesario
+      styles: [
+        'full', 'side'
+      ]
+    }
+  };  
   
   term:any
   editor = ClassicEditor;
@@ -30,6 +47,7 @@ export class GmailingComponent implements OnInit {
   tipoPlantilla:number;
   typetemplate:number=1;
   tituloTempalet:string="";
+  showDelet=false;
   template:string="";
   destinatario : number;
   capacitacion:any;
@@ -56,6 +74,10 @@ export class GmailingComponent implements OnInit {
   showSpiner:boolean= false;
   dataResGmail:any ;
   dataGmailifno :any ;
+  deletid=0;
+  nombredelet=0;
+  spinnerDelet= false;
+
   @ViewChild('dt1') dt1: Table;
 
 
@@ -746,6 +768,30 @@ alert('No se pudo actualizar')
         nativeSelection.addRange(nativeRange);
       }
     });
+  }
+
+  deletPlantilla(id:any){
+    this.showDelet= true;
+    this.deletid = id
+
+
+  }
+  selectdelet(){
+    this.spinnerDelet = true;
+    this.data.delet(this.deletid).subscribe((res:any)=>{
+        if(res.status.status== true){
+          this.spinnerDelet = false;
+          window.location.reload();
+
+
+        }else{
+          this.spinnerDelet = false;
+          this.showDelet= false;
+
+          alert('no se pudo eliminar')
+        }
+
+    })
   }
 
 }

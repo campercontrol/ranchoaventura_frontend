@@ -69,6 +69,11 @@ export class AdmiService {
 
   }
 
+  delet(id:any){
+    return this.http.delete('http://142.93.12.234:8000/delete_email_template/'+id)
+
+  }
+
 
 
   deletComments(id){

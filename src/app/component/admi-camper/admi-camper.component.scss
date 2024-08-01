@@ -145,3 +145,13 @@ td{
     color: rgb(33, 45, 223);
     font-weight: 700;
   }
+
+  .footerMensje{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.delet{
+    color: red;
+    cursor: pointer;
+}

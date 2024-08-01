@@ -104,7 +104,6 @@ export class LocacionComponent implements OnInit {
   }
   closeModal2() {
     this.display2 = false;
-    this.resteValu();
 
   }
 
@@ -302,28 +301,9 @@ export class LocacionComponent implements OnInit {
     }
   }
 
-  resetInfo(elementRef: any, name) {
-    this.render.removeClass(elementRef.nativeElement, "is-invalid");
-    this.render.removeClass(elementRef.nativeElement, "is-valid");
-  }
+  
   resetInput() {
-    this.getContact_third_emailR();
-    this.getContact_third_cellphoneR();
-    this.getContact_third_phoneR();
-    this.getContact_third_nameR();
-
-    this.getContact_second_emailR();
-    this.getContact_second_cellphoneR();
-    this.getContact_second_phoneR();
-    this.getContact_second_nameR();
-
-    this.getEmailR();
-    this.getCellphoneR();
-    this.getPhoneR();
-    this.getContactR();
-    this.getUrlR();
-    this.getAddressR();
-    this.getNameR();
+ 
   }
 
   getName() {
@@ -373,50 +353,5 @@ export class LocacionComponent implements OnInit {
   }
 
 
-  getNameR() {
-    this.resetInfo(this.name, 'name')
-  }
-  getUrlR() {
-    this.resetInfo(this.url, 'url')
-  }
-  getAddressR() {
-    this.resetInfo(this.address, 'address')
-  }
-  getContactR() {
-    this.resetInfo(this.contact, 'contact')
-  }
-  getPhoneR() {
-    this.resetInfo(this.phone, 'phone')
-  }
-  getCellphoneR() {
-    this.resetInfo(this.cellphone, 'cellphone')
-  }
-  getEmailR() {
-    this.resetInfo(this.email, 'email')
-  }
-  getContact_second_nameR() {
-    this.resetInfo(this.contact_second_name, 'contact_second_name')
-  }
-  getContact_second_phoneR() {
-    this.resetInfo(this.contact_second_phone, 'contact_second_phone')
-  }
-  getContact_second_cellphoneR() {
-    this.resetInfo(this.contact_second_cellphone, 'contact_second_cellphone')
-  }
-  getContact_second_emailR() {
-    this.resetInfo(this.contact_second_email, 'contact_second_email')
-  }
-  getContact_third_nameR() {
-    this.resetInfo(this.contact_third_name, 'contact_third_name')
-  }
-  getContact_third_phoneR() {
-    this.resetInfo(this.contact_third_phone, 'contact_third_phone')
-  }
-  getContact_third_cellphoneR() {
-    this.resetInfo(this.contact_third_cellphone, 'contact_third_cellphone')
-  }
-  getContact_third_emailR() {
-    this.resetInfo(this.contact_third_email, 'contact_third_email')
-  }
-
+ 
 }

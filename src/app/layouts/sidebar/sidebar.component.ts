@@ -5,13 +5,13 @@ import { Router, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-
 export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('componentRef') scrollRef;
   @Input() isCondensed = false;
@@ -34,29 +34,27 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
     private http: HttpClient,
     private info: AuthenticationService
   ) {
-    if (this.info.infToken) {
+    // Recuperar el token del localStorage y decodificarlo
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      this.info.infToken = jwt_decode(currentUser);
       this.rol_id = this.info.infToken.role_id;
+      this.info.loggedIn = true;
+    } else {
+      this.info.infToken = null;
+      this.info.loggedIn = false;
     }
 
+    // Configurar la visibilidad de las secciones basadas en el rol del usuario
+    this.configureRoleBasedVisibility();
+
+    // Subscribirse a eventos de navegación para activar el menú dropdown
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this._activateMenuDropdown();
         this._scrollElement();
       }
     });
-
-    if (!this.info.infToken) {
-      this.paretn = false;
-      this.staff = false;
-    } else if (this.info.infToken.role_id == 1) {
-      this.paretn = true;
-      this.staff = false;
-    } else if (this.info.infToken.role_id == 2) {
-      this.paretn = false;
-      this.staff = true;
-      this.user_admin = this.info.infToken.user_admin;
-      this.user_coordinator = this.info.infToken.user_coordinator;
-    }
   }
 
   ngOnInit() {
@@ -105,9 +103,11 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
     setTimeout(() => {
       if (document.getElementsByClassName("mm-active").length > 0) {
         const currentPosition = document.getElementsByClassName("mm-active")[0]['offsetTop'];
-        if (currentPosition > 500)
-          if (this.scrollRef.SimpleBar !== null)
+        if (currentPosition > 500) {
+          if (this.scrollRef.SimpleBar !== null) {
             this.scrollRef.SimpleBar.getScrollElement().scrollTop = currentPosition + 300;
+          }
+        }
       }
     }, 300);
   }
@@ -168,8 +168,22 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   initialize() {
-
+    // Configurar la visibilidad de las secciones basadas en el rol del usuario
+    this.configureRoleBasedVisibility();
   }
 
-  
+  configureRoleBasedVisibility() {
+    if (!this.info.infToken) {
+      this.paretn = false;
+      this.staff = false;
+    } else if (this.info.infToken.role_id == 1) {
+      this.paretn = true;
+      this.staff = false;
+    } else if (this.info.infToken.role_id == 2) {
+      this.paretn = false;
+      this.staff = true;
+      this.user_admin = this.info.infToken.user_admin;
+      this.user_coordinator = this.info.infToken.user_coordinator;
+    }
+  }
 }

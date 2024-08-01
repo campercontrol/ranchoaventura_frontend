@@ -60,8 +60,11 @@
                                                                     <th pSortableColumn="created_at" >Nombre<p-sortIcon
                                                                             field="title"
                                                                             style="font-size: 10px;"></p-sortIcon></th>
-                                                               
+                                                                            <th *ngIf="Titulo != 'Correos enviados'">
+
+                                                                            </th>
                                                                 </tr>
+                                                               
                                                             </ng-template>
                                                             <ng-template pTemplate="body" let-customer  >
                                                                 <tr >
@@ -70,6 +73,10 @@
                                                                     </td>
                                                                     <td (click)="infoGmgail(customer.id)"  style="cursor: pointer;" *ngIf="Titulo == 'Correos enviados'">
                                                                       {{customer.name}} - {{customer.title}}
+                                                                  </td>
+
+                                                                  <td *ngIf="Titulo != 'Correos enviados'" >
+                                                                    <i class="pi pi-times text-center" style="color:red" (click)="deletPlantilla(customer.id)"></i>
                                                                   </td>
                                                                  
                                                                 </tr>
@@ -136,7 +143,7 @@
                     </div>
 
                     <div class="mt-4 col-12">
-                        <ckeditor [editor]="Editor" [(ngModel)]="template"  >
+                        <ckeditor [editor]="Editor" [(ngModel)]="template" [config]="editorConfig" >
                         </ckeditor>
 
                     </div>
@@ -258,7 +265,7 @@
 
 
                         </div>
-                        <ckeditor [editor]="editor" [(ngModel)]="template" >
+                        <ckeditor [editor]="editor" [(ngModel)]="template"  [config]="editorConfig" >
                         </ckeditor>
 
                     </div>
@@ -335,7 +342,7 @@
                         </div>
     
                         <div class="mt-4 col-12">
-                            <ckeditor [editor]="Editor"  formControlName="template" >
+                            <ckeditor [editor]="Editor"  formControlName="template" [config]="editorConfig" >
                             </ckeditor>
     
                         </div>
@@ -806,4 +813,21 @@
     </div>
     
      
+</p-dialog>
+
+
+
+
+
+<p-dialog header="Confirmar" [(visible)]="showDelet" [modal]="true" [style]="{width: '90%'}" [maximizable]="true" [baseZIndex]="10000" *ngIf="showDelet">
+  <div>
+    <h3 class="text-center">¿Estás seguro que quieres eliminar?</h3>
+  </div>
+  
+  <ng-template pTemplate="footer">
+    <button *ngIf="!spinnerDelet" class="btn btn-primary" (click)="selectdelet()">Guardar</button>
+    <div *ngIf="spinnerDelet" class="spinner-border text-primary" role="status">
+      <!-- Contenido del spinner -->
+    </div>
+  </ng-template>
 </p-dialog>

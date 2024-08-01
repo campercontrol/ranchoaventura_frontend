@@ -219,12 +219,14 @@ export class AdmiCamperComponent implements OnInit {
 
       let a = {
         "camp":this.formFood.value,
-        "payment_accounts":this.payment_accounts,
+        "payment_accounts":pay,
         "extra_question":this.extra_question,
          "extra_charges":this.extra_charges,
          "extra_discounts":this.extra_discounts,
     }
-  
+    delete a.camp.payment_accounts;
+    delete a.camp.extra_question;
+    delete a.camp.extra_charges;
 
       this.createCamp.postCamp(a).subscribe((res:any)=>{
           console.log(res);
@@ -322,10 +324,11 @@ export class AdmiCamperComponent implements OnInit {
       season_id:  item.season_id, // listo
       extra_charges:item.extra_charges,
       extra_question:item.extra_question,
-      payment_accounts:item.payment_accounts
+      payment_accounts:res.camp.payment_accounts
    })
    this.extra_charges = res.extra_charges;
    this.extra_question =res.extra_questions;
+   
     });
   
 
