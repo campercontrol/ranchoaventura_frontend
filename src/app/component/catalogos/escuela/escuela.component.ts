@@ -75,7 +75,9 @@ export class EscuelaComponent implements OnInit {
     this.formFood = this._FormBuild.group({
   name:  ['', [Validators.required,Validators.minLength(2)]],
   password:  ['', [Validators.required,Validators.minLength(2)]],
-  email:  ['', [Validators.required,Validators.email]],
+  login_email:  [''],
+
+  contact_first_email:  [''],
 
   address:[''],
   url: [''],
@@ -132,15 +134,23 @@ export class EscuelaComponent implements OnInit {
     if(this.formFood.valid){
       this.catalogos.postSchool(this.formFood.value).subscribe((res: any) => {
         console.log(res);
+        if(res.detail.status ==1){
+          this.getCatalogos();
+          this.statuAgrgado = true;
+          this.resteValu();
+          this.resetInput();
+          setTimeout(() => {
+            this.statuAgrgado = false;
+            this.closeModal();
+          }, 1000);
+
+        }else{
+          alert('No se pudo Agregar')
+
+
+        }
         
-        this.getCatalogos();
-        this.statuAgrgado = true;
-        this.resteValu();
-        this.resetInput();
-        setTimeout(() => {
-          this.statuAgrgado = false;
-          this.closeModal();
-        }, 1000);
+       
   
       }, error => {
         alert('No se pudo Agregar')
@@ -201,21 +211,22 @@ export class EscuelaComponent implements OnInit {
     this.formFood.patchValue({
       name: item.name,
       address:item.address,
-  url: item.url,
-  contact: item.contact,
-  phone: item.phone,
-  cellphone: item.cellphone,
-  email: item.email,
-  contact_second_name:item.contact_second_name,
-  contact_second_phone:item.contact_second_phone,
-  contact_second_cellphone: item.contact_second_cellphone,
-  contact_second_email:item.contact_second_email,
-  contact_third_name: item.contact_third_name,
-  contact_third_phone:item.contact_third_phone,
-  contact_third_cellphone: item.contact_third_cellphone,
-  contact_third_email: item.contact_third_email,
-  verify: item.verify,
-  active: item.active
+      url: item.url,
+      contact: item.contact,
+      phone: item.phone,
+      cellphone: item.cellphone,
+      email: item.email,
+      contact_first_email:item.email,
+      contact_second_name:item.contact_second_name,
+      contact_second_phone:item.contact_second_phone,
+      contact_second_cellphone: item.contact_second_cellphone,
+      contact_second_email:item.contact_second_email,
+      contact_third_name: item.contact_third_name,
+      contact_third_phone:item.contact_third_phone,
+      contact_third_cellphone: item.contact_third_cellphone,
+      contact_third_email: item.contact_third_email,
+      verify: item.verify,
+      active: item.active
 
     })
   this.cargarValidadores();

@@ -7,6 +7,7 @@ import { CamperService } from 'src/services/camper.service';
 import { ParentService } from 'src/services/parent.service';
 import { differenceInCalendarMonths, format } from 'date-fns';
 import { StaffService } from 'src/services/staff.service';
+import { LangService } from 'src/services/lang.service';
 
 
 
@@ -44,10 +45,127 @@ export class PerfilCamperComponent implements OnInit {
   camperband:any = [];
   error:boolean = false;
   typecoment:number = 1;
-  userPermis:any
+  userPermis:any;
+  translations = 
+    {
+      "eng": {
+          "HEADER.PAST_CAMPS": "Past Camps",
+          "HEADER.UPCOMING_CAMPS": "Upcoming Camps",
+          "HEADER.INSCRIBE_TO_CAMPS": "Inscribe to Camps",
+          "ALERT.PENDING_PAYMENTS": "Pending Payments",
+          "ALERT.TOTAL_BALANCE": "Total Balance",
+          "PROFILE.CAMPER_PROFILE": "Camper Profile",
+          "PROFILE.EDIT": "Edit",
+          "PROFILE.CAMPER": "Camper",
+          "PROFILE.NAME": "Name",
+          "PROFILE.DATE_OF_BIRTH": "Date of Birth",
+          "PROFILE.AGE": "Age",
+          "PROFILE.GENDER": "Gender",
+          "PROFILE.EMAIL": "Email",
+          "PROFILE.EDUCATION": "Education",
+          "PROFILE.SCHOOL": "School",
+          "PROFILE.GRADE": "Grade",
+          "PROFILE.SKILLS": "Skills",
+          "PROFILE.CAN_SWIM": "Can Swim",
+          "PROFILE.PREVENT_ACTIVITIES": "Prevent Activities",
+          "PROFILE.MEDICAL_INFO": "Medical Information",
+          "PROFILE.REQUIRES_MEDICAL_INSTRUCTIONS": "Requires Medical Instructions",
+          "PROFILE.WEIGHT": "Weight",
+          "PROFILE.HEIGHT": "Height",
+          "PROFILE.BLOOD_TYPE": "Blood Type",
+          "PROFILE.VACCINES": "Vaccines",
+          "PROFILE.AFFLICTION": "Affliction",
+          "PROFILE.HEART_PROBLEMS": "Heart Problems",
+          "PROFILE.DRUG_ALLERGIES": "Drug Allergies",
+          "PROFILE.OTHER_ALLERGIES": "Other Allergies",
+          "PROFILE.NOCTURNAL_DISORDERS": "Nocturnal Disorders",
+          "PROFILE.MEDICATION": "Medication",
+          "PROFILE.INSURANCE": "Insurance",
+          "PROFILE.HAS_INSURANCE": "Has Insurance",
+          "PROFILE.SOCIAL_SECURITY_NUMBER": "Social Security Number",
+          "PROFILE.POLICY_NUMBER": "Policy Number",
+          "PROFILE.NUTRITION": "Nutrition",
+          "PROFILE.PROHIBITED_FOODS": "Prohibited Foods",
+          "PROFILE.FOOD": "Food",
+          "PROFILE.PRIMARY_TUTOR": "Primary Tutor",
+          "PROFILE.TUTOR_NAME": "Name",
+          "PROFILE.TUTOR_PHONE": "Phone",
+          "PROFILE.TUTOR_EMAIL": "Email",
+          "PROFILE.TUTOR_RELATED": "Relation",
+          "PROFILE.SECONDARY_TUTOR": "Secondary Tutor",
+          "PROFILE.SECONDARY_TUTOR_NAME": "Name",
+          "PROFILE.SECONDARY_TUTOR_PHONE": "Phone",
+          "PROFILE.SECONDARY_TUTOR_EMAIL": "Email",
+          "PROFILE.SECONDARY_TUTOR_RELATED": "Relation",
+          "PROFILE.EMERGENCY_CONTACTS": "Emergency Contacts",
+          "PROFILE.CONTACT_NAME": "Name",
+          "PROFILE.CONTACT_PHONE": "Phone",
+          "PROFILE.CONTACT_EMAIL": "Email",
+          "PROFILE.CONTACT_RELATION": "Relation"
+      },
+      "esp": {
+          "HEADER.PAST_CAMPS": "Campamentos Anteriores",
+          "HEADER.UPCOMING_CAMPS": "Campamentos Próximos",
+          "HEADER.INSCRIBE_TO_CAMPS": "Inscribirse a Campamentos",
+          "ALERT.PENDING_PAYMENTS": "Pagos Pendientes",
+          "ALERT.TOTAL_BALANCE": "Saldo Total",
+          "PROFILE.CAMPER_PROFILE": "Perfil del Campista",
+          "PROFILE.EDIT": "Editar",
+          "PROFILE.CAMPER": "Campista",
+          "PROFILE.NAME": "Nombre",
+          "PROFILE.DATE_OF_BIRTH": "Fecha de Nacimiento",
+          "PROFILE.AGE": "Edad",
+          "PROFILE.GENDER": "Género",
+          "PROFILE.EMAIL": "Correo Electrónico",
+          "PROFILE.EDUCATION": "Educación",
+          "PROFILE.SCHOOL": "Escuela",
+          "PROFILE.GRADE": "Grado",
+          "PROFILE.SKILLS": "Habilidades",
+          "PROFILE.CAN_SWIM": "Puede Nadar",
+          "PROFILE.PREVENT_ACTIVITIES": "Actividades a Evitar",
+          "PROFILE.MEDICAL_INFO": "Información Médica",
+          "PROFILE.REQUIRES_MEDICAL_INSTRUCTIONS": "Requiere Instrucciones Médicas",
+          "PROFILE.WEIGHT": "Peso",
+          "PROFILE.HEIGHT": "Altura",
+          "PROFILE.BLOOD_TYPE": "Tipo de Sangre",
+          "PROFILE.VACCINES": "Vacunas",
+          "PROFILE.AFFLICTION": "Afección",
+          "PROFILE.HEART_PROBLEMS": "Problemas Cardíacos",
+          "PROFILE.DRUG_ALLERGIES": "Alergias a Medicamentos",
+          "PROFILE.OTHER_ALLERGIES": "Otras Alergias",
+          "PROFILE.NOCTURNAL_DISORDERS": "Trastornos Nocturnos",
+          "PROFILE.MEDICATION": "Medicación",
+          "PROFILE.INSURANCE": "Seguro",
+          "PROFILE.HAS_INSURANCE": "Tiene Seguro",
+          "PROFILE.SOCIAL_SECURITY_NUMBER": "Número de Seguridad Social",
+          "PROFILE.POLICY_NUMBER": "Número de Póliza",
+          "PROFILE.NUTRITION": "Nutrición",
+          "PROFILE.PROHIBITED_FOODS": "Alimentos Prohibidos",
+          "PROFILE.FOOD": "Comida",
+          "PROFILE.PRIMARY_TUTOR": "Tutor Primario",
+          "PROFILE.TUTOR_NAME": "Nombre",
+          "PROFILE.TUTOR_PHONE": "Teléfono",
+          "PROFILE.TUTOR_EMAIL": "Correo Electrónico",
+          "PROFILE.TUTOR_RELATED": "Relación",
+          "PROFILE.SECONDARY_TUTOR": "Tutor Secundario",
+          "PROFILE.SECONDARY_TUTOR_NAME": "Nombre",
+          "PROFILE.SECONDARY_TUTOR_PHONE": "Teléfono",
+          "PROFILE.SECONDARY_TUTOR_EMAIL": "Correo Electrónico",
+          "PROFILE.SECONDARY_TUTOR_RELATED": "Relación",
+          "PROFILE.EMERGENCY_CONTACTS": "Contactos de Emergencia",
+          "PROFILE.CONTACT_NAME": "Nombre",
+          "PROFILE.CONTACT_PHONE": "Teléfono",
+          "PROFILE.CONTACT_EMAIL": "Correo Electrónico",
+          "PROFILE.CONTACT_RELATION": "Relación"
+      }
+  
+  
+  };
+  idioma:string;
 
 
-  constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private hijos: CamperService,private parents : ParentService, private rou:Router,private info: AuthenticationService,private staff: StaffService) {
+
+  constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private hijos: CamperService,private parents : ParentService, private rou:Router,private info: AuthenticationService,private staff: StaffService,private lang:LangService) {
     this.routesA.params.subscribe((params) => {
       this.id = params['id'];
     })
@@ -58,10 +176,17 @@ export class PerfilCamperComponent implements OnInit {
     this.primengConfig.ripple = true;
     console.log(this.info.infToken,'datos del token');
     
-this.userPermis = this.info
-   
+    this.userPermis = this.info
+    this.lang.getLang().subscribe((res:any)=>{
+      this.idioma=res
+      console.log(this.idioma);
+      
+    })
   }
 
+  getTranslation(key: string): string {
+    return this.translations[this.idioma || 'esp'][key] || key;
+  }
   comentario() {
     let a :any={}
       if(this.info.infToken.role_id== 1){

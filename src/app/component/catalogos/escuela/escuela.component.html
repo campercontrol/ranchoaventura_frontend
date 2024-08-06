@@ -20,7 +20,7 @@
             <div class="row mb-4">
                 <label for="" class="col-sm-3 col-form-label">Email </label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="" formControlName="email" name="email" (input)="getEmail()" #email>
+                    <input type="text" class="form-control" id="" formControlName="login_email" name="email" (input)="getEmail()" #email>
                 </div>         
             </div>
             <div class="row mb-4">
@@ -65,6 +65,12 @@
                 </div>         
             </div>
             <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Email contacto 1:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="contact_first_email" name="contact_first_email"  (input)="getContact_second_email()" #contact_second_email>
+                </div>         
+            </div>
+            <div class="row mb-4">
                 <label for="" class="col-sm-3 col-form-label">Teléfono contacto 1:</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="" formControlName="phone" name="phone" (input)="getPhone()" #phone>
@@ -95,6 +101,7 @@
                     <input type="text" class="form-control" id="" formControlName="contact_second_cellphone" name="contact_second_cellphone" (input)="getContact_second_cellphone()" #contact_second_cellphone>
                 </div>         
             </div>
+           
             <div class="row mb-4">
                 <label for="" class="col-sm-3 col-form-label">Email contacto 2:</label>
                 <div class="col-sm-9">
@@ -146,118 +153,127 @@
        </h2>
       
     </ng-template>
-    <form action="" [formGroup]="formFood">
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Nombre de la escuela</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" formControlName="name" name="name" #name (input)="getName()">
-            </div>         
-        </div>
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Email</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" formControlName="email" name="email" (input)="getEmail()" #email>
-            </div>         
-        </div>
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Pagina web</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" formControlName="url" name="url" #url  (input)="getUrl()">
-            </div>         
-        </div>
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Direccion</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" formControlName="address" name="address"  #address (input)="getAddress()">
-            </div>         
-        </div>
-        <div class="row mb-4">
-            <div class="col-3">
-                
+    <div class="col">
+        <form action="" [formGroup]="formFood">
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Nombre de la escuela</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="name" name="name" #name (input)="getName()">
+                </div>         
             </div>
-            <div class="form-check col-3">
-                <input class="form-check-input" type="checkbox"  formControlName="active" name="active" id="flexRadioDefault2" >
-                <label class="form-check-label" for="flexRadioDefault2">
-                    active
-                </label>
-              </div>
-              <div class="form-check col-3">
-                <input class="form-check-input" type="checkbox" formControlName="verify" name="verify" id="flexRadioDefault3"  >
-                <label class="form-check-label" for="flexRadioDefault3">
-                    verify
-                </label>
-              </div>     
-        </div>
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Nombre Contacto 1</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" formControlName="contact" name="contact" (input)="getContact()" #contact>
-            </div>         
-        </div>
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Teléfono contacto 1:</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" formControlName="phone" name="phone" (input)="getPhone()" #phone>
-            </div>         
-        </div>
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Celular contacto 1:</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" formControlName="cellphone" name="cellphone" (input)="getCellphone()" #cellphone>
-            </div>         
-        </div>
-       
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Nombre Contacto 2</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" formControlName="contact_second_name" name="contact_second_name" (input)="getContact_second_name()" #contact_second_name>
-            </div>         
-        </div>
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Teléfono contacto 2:</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" formControlName="contact_second_phone" name="contact_second_phone" (input)="getContact_second_phone()" #contact_second_phone>
-            </div>         
-        </div>
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Celular contacto 2:</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" formControlName="contact_second_cellphone" name="contact_second_cellphone" (input)="getContact_second_cellphone()" #contact_second_cellphone>
-            </div>         
-        </div>
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Email contacto 2:</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" formControlName="contact_second_email" name="contact_second_email"  (input)="getContact_second_email()" #contact_second_email>
-            </div>         
-        </div>
+         
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Pagina web</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="url" name="url" #url  (input)="getUrl()">
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Direccion</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="address" name="address"  #address (input)="getAddress()">
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <div class="col-3">
+                    
+                </div>
+                <div class="form-check col-3">
+                    <input class="form-check-input" type="checkbox"  formControlName="active" name="active" id="flexRadioDefault2" >
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        active
+                    </label>
+                  </div>
+                  <div class="form-check col-3">
+                    <input class="form-check-input" type="checkbox" formControlName="verify" name="verify" id="flexRadioDefault3"  >
+                    <label class="form-check-label" for="flexRadioDefault3">
+                        verify
+                    </label>
+                  </div>     
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Nombre Contacto 1</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="contact" name="contact" (input)="getContact()" #contact>
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Email contacto 1:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="contact_first_email" name="contact_first_email"  (input)="getContact_second_email()" #contact_second_email>
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Teléfono contacto 1:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="phone" name="phone" (input)="getPhone()" #phone>
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Celular contacto 1:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="cellphone" name="cellphone" (input)="getCellphone()" #cellphone>
+                </div>         
+            </div>
+        
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Nombre Contacto 2</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="contact_second_name" name="contact_second_name" (input)="getContact_second_name()" #contact_second_name>
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Teléfono contacto 2:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="contact_second_phone" name="contact_second_phone" (input)="getContact_second_phone()" #contact_second_phone>
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Celular contacto 2:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="contact_second_cellphone" name="contact_second_cellphone" (input)="getContact_second_cellphone()" #contact_second_cellphone>
+                </div>         
+            </div>
+           
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Email contacto 2:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="contact_second_email" name="contact_second_email"  (input)="getContact_second_email()" #contact_second_email>
+                </div>         
+            </div>
 
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Nombre Contacto 3:</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" formControlName="contact_third_name" name="contact_third_name"  (input)="getContact_third_name()" #contact_third_name>
-            </div>         
-        </div>
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Teléfono contacto 3:</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" formControlName="contact_third_phone" name="contact_third_phone" (input)="getContact_third_phone()" #contact_third_phone>
-            </div>         
-        </div>
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Celular contacto 3:</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" formControlName="contact_third_cellphone" name="contact_third_cellphone" (input)="getContact_third_cellphone()" #contact_third_cellphone>
-            </div>         
-        </div>
-        <div class="row mb-4">
-            <label for="" class="col-sm-3 col-form-label">Email contacto 3:</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="" formControlName="contact_third_email" name="contact_third_email" (input)="getContact_third_email()" #contact_third_email>
-            </div>         
-        </div>
-       
-    </form> 
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Nombre Contacto 3:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="contact_third_name" name="contact_third_name"  (input)="getContact_third_name()" #contact_third_name>
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Teléfono contacto 3:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="contact_third_phone" name="contact_third_phone" (input)="getContact_third_phone()" #contact_third_phone>
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Celular contacto 3:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="contact_third_cellphone" name="contact_third_cellphone" (input)="getContact_third_cellphone()" #contact_third_cellphone>
+                </div>         
+            </div>
+            <div class="row mb-4">
+                <label for="" class="col-sm-3 col-form-label">Email contacto 3:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="" formControlName="contact_third_email" name="contact_third_email" (input)="getContact_third_email()" #contact_third_email>
+                </div>         
+            </div>
+           
+        </form>
+        <div class="alert alert-primary" role="alert" *ngIf="statuAgrgado">
+            Se Agrego correctamente
+          </div>
+
+          
+    </div>
    
 
     <ng-template pTemplate="footer">
