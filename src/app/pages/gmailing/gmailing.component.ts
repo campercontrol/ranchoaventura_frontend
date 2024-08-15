@@ -580,6 +580,7 @@ alert('No se pudo actualizar')
             "camp_id": this.campamento,
             "send_type_id": 82,
             "template_id": template.id,
+            "template_body": this.template
           },
 
           "camps":
@@ -600,6 +601,8 @@ alert('No se pudo actualizar')
           if(res.status==1){
             alert('Se enviaron los correos correctamente');
             this.page=1;
+            this.template ="";
+
             this.status('Plantillas del sistemas')
             this.cargandoMailing = false;
 
@@ -632,14 +635,17 @@ alert('No se pudo actualizar')
           "staffs_id": staffs_id,
           "schools_id": [],
           "template_title": template.title,
-          "template_body": this.template
-        }
+          "template_body": this.template        }
         console.log(a);
         this.campInfo.createEmail(a).subscribe((res:any)=>{
           console.log(res);
           if(res==1){
             alert('Se enviaron los correos correctamente');
+            this.template ="";
             this.page=1;
+            this.template ="";
+            this.asuntoTemplateAlmacenado ="";
+            this.tituloTemplateAlmacenado="";
             this.selectUpadate('Plantillas del sistemas')
 
           }
@@ -672,6 +678,7 @@ alert('No se pudo actualizar')
           "camp_id": this.campamento,
           "send_type_id": 82,
           "template_id": template.id,
+          "template_body": this.template
         },
 
         "camps":
@@ -693,6 +700,10 @@ alert('No se pudo actualizar')
           if(res.status==1){
             alert('Se enviaron los correos correctamente');
             this.page=1;
+            this.template ="";
+            this.asuntoTemplateAlmacenado ="";
+            this.tituloTemplateAlmacenado="";
+
             this.status('Plantillas del sistemas')
 
 
@@ -731,6 +742,9 @@ alert('No se pudo actualizar')
           if(res==1){
             alert('Se enviaron los correos correctamente');
             this.page=1;
+            this.template ="";
+            this.asuntoTemplateAlmacenado ="";
+            this.tituloTemplateAlmacenado="";
             this.selectUpadate('Plantillas del sistemas')
 
           }
