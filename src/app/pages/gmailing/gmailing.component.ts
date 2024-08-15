@@ -23,7 +23,7 @@ export class GmailingComponent implements OnInit {
     toolbar: [
       'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'undo', 'redo', 'imageUpload'
     ],
-   
+
     ckfinder: {
       uploadUrl: null // Deshabilitar la carga de imágenes
     },
@@ -37,8 +37,8 @@ export class GmailingComponent implements OnInit {
         'full', 'side'
       ]
     }
-  };  
-  
+  };
+
   term:any
   editor = ClassicEditor;
   transactions:any=[];
@@ -81,7 +81,7 @@ export class GmailingComponent implements OnInit {
   @ViewChild('dt1') dt1: Table;
 
 
-  
+
   selectdestinatariosStaff:any=[];
   selectdestinatariosEscuela:any=[];
   selectdestinatariosCampers:any=[];
@@ -105,9 +105,9 @@ export class GmailingComponent implements OnInit {
 
 
 
-  constructor(private data:AdmiService,private formbBuilder:FormBuilder,private campInfo:CampsService,private temporadas:CamperService) { 
+  constructor(private data:AdmiService,private formbBuilder:FormBuilder,private campInfo:CampsService,private temporadas:CamperService) {
     this.data.getTempletMasive().subscribe((res:any)=>{
-    this.listaTemplates=res.data 
+    this.listaTemplates=res.data
   })
   this.data.getPlantilla().subscribe((res:any)=>{
     this.tiposTemplates = res.data
@@ -115,23 +115,23 @@ export class GmailingComponent implements OnInit {
   this.campInfo.getCamps().subscribe((res:any)=>{
     this.listaCampamentos = res.data;
     console.log(res,'ñista de campamentos');
-    
+
   })
   this.temporadas.getTemporadas().subscribe((res:any)=>{
     this.temporada = res.data;
     console.log(res,'ñista de campamentos');
-    
+
   })
 
   this.campInfo.getCampacitaciones().subscribe((res:any)=>{
     this.listaCapacitaciones = res.data;
     console.log(res,'ñista de campamentos');
-    
+
   })
 
   }
 
-  selectDestino(){ 
+  selectDestino(){
     this.botonDisiable=false
     let escuela=false;
     let staff=false;
@@ -139,7 +139,7 @@ export class GmailingComponent implements OnInit {
     this.destinatariosStaff=[];
     this.destinatariosEscuela=[];
     this.destinatariosCampers=[];
-  
+
     this.selectdestinatariosStaff=[];
     this.selectdestinatariosEscuela=[];
     this.selectdestinatariosCampers=[];
@@ -156,21 +156,21 @@ export class GmailingComponent implements OnInit {
     this.dataResGmail = res.camps;
     this.selectdestinatariosCampers= res.camps[0].camp.campers;
     this.destinatariosCampers= res.camps[0].camp.campers;
-    
-    
+
+
      this.destinatariosEscuela.push(res.camps[0].camp.school);
      this.selectdestinatariosEscuela=this.destinatariosEscuela;
-    
+
 
     this.selectdestinatariosStaff= res.camps[0].camp.staff;
- 
+
    this.destinatariosStaff= res.camps[0].camp.staff;
       console.log('informacion staff',res.camps[0].camp.staff);
-      
+
 
     this.botonDisiable=true
 
-    
+
    })
 
   }
@@ -197,9 +197,9 @@ export class GmailingComponent implements OnInit {
         data.camp.schollSelect = []
         data.camp.schollSelect.push(data.camp.school);
         data.camp.schollList =  data.camp.schollSelect
-       
 
-        
+
+
     })
     console.log(this.dataResGmail,'camps multiples');
 
@@ -215,10 +215,10 @@ export class GmailingComponent implements OnInit {
     this.destinatariosStaff=[];
     this.destinatariosEscuela=[];
     this.destinatariosCampers=[];
-  
+
     this.selectdestinatariosStaff=[];
     this.selectdestinatariosEscuela=[];
-    this.selectdestinatariosCampers=[];  
+    this.selectdestinatariosCampers=[];
 
     this.campInfo.getParticipantesCapacitaciones(this.selectTemporada).subscribe((res:any)=>{
      console.log(res,'temprada');
@@ -238,7 +238,7 @@ export class GmailingComponent implements OnInit {
    });
      this.botonDisiable=true;
     })
- 
+
    }
 
    selectProspectos(){
@@ -247,10 +247,10 @@ export class GmailingComponent implements OnInit {
     this.destinatariosStaff=[];
     this.destinatariosEscuela=[];
     this.destinatariosCampers=[];
-  
+
     this.selectdestinatariosStaff=[];
     this.selectdestinatariosEscuela=[];
-    this.selectdestinatariosCampers=[];  
+    this.selectdestinatariosCampers=[];
 
     this.campInfo.getProspectos(this.selectTemporada).subscribe((res:any)=>{
       this.botonDisiable=true;
@@ -270,7 +270,7 @@ export class GmailingComponent implements OnInit {
 
    });
     })
- 
+
    }
 
    refresh(){
@@ -278,7 +278,7 @@ export class GmailingComponent implements OnInit {
       this.selectDestino();
     }
    }
-   
+
 
 
 
@@ -290,22 +290,22 @@ export class GmailingComponent implements OnInit {
       {
         id: '#SK2540',
         name: 'Campamento numero 4',
-       
+
       },
       {
         id: '#SK2541',
         name: 'Jamal Burnett',
-        
+
       },
       {
         id: '#SK2542',
         name: 'Prueba de campamento',
-        
+
       },
       {
         id: '#SK2543',
         name: 'Campamento numero 2',
-        
+
       },
       {
         id: '#SK2544',
@@ -314,7 +314,7 @@ export class GmailingComponent implements OnInit {
       {
         id: '#SK2545',
         name: 'Mensaje para padres',
-       
+
       },
     ];
     this.updateTemplate = this.formbBuilder.group({
@@ -328,7 +328,7 @@ export class GmailingComponent implements OnInit {
   }
    prueba(){
     console.log(this.template);
-    
+
   }
   cretateTemplaet(){
     this.showSpiner=true;
@@ -343,7 +343,7 @@ export class GmailingComponent implements OnInit {
       "title": this.tituloTempalet,
       "template": this.template,
       "order": 1,
-    
+
     }
     this.data.createTemplate(a).subscribe((res:any)=>{
           if(res.data){
@@ -356,12 +356,12 @@ export class GmailingComponent implements OnInit {
             setTimeout(() => {
               this.statusRes=false;
               this.status('Plantillas')
-            }, 1000);  
+            }, 1000);
           }else{
             this.statuserror= true;
             setTimeout(() => {
               this.statuserror=false;
-            }, 1000); 
+            }, 1000);
           }
     })
   }
@@ -382,7 +382,7 @@ export class GmailingComponent implements OnInit {
       this.cargando=true;
 
       this.data.getTempletSystem().subscribe((res:any)=>{
-        this.listaTemplates=res.data 
+        this.listaTemplates=res.data
         this.cargando=false;
 
       })
@@ -404,9 +404,9 @@ export class GmailingComponent implements OnInit {
         this.cargando=false;
         this.Titulo='Correos enviados';
         this.editTemplate= false;
-  
+
       })
-   
+
 
     }
   else if(a== 'Correos enviados'){
@@ -453,7 +453,7 @@ export class GmailingComponent implements OnInit {
       this.data.getPlantillSelectMaisva(item.id).subscribe((res:any)=>{
         let a = res.data;
         console.log(res,'mailngs');
-        
+
         this.updateTemplate.patchValue({
           "id": a.id,
           "template_type": a.template_type,
@@ -464,8 +464,8 @@ export class GmailingComponent implements OnInit {
         })
       })
     }
-   
-    
+
+
   }
 
   selectTemplate(){
@@ -474,12 +474,12 @@ export class GmailingComponent implements OnInit {
     })
      this.data.getPlantillSelectMaisva(a[0].id).subscribe((res:any)=>{
         let b = res.data
-        
+
         this.template =b.template;
         console.log(b);
 
       })
-    
+
   }
 
   seguiente(){
@@ -501,7 +501,7 @@ export class GmailingComponent implements OnInit {
   updateTemplaet(){
     this.showSpiner=true;
     console.log(this.updateTemplate.value);
-    
+
     this.data.patchPlantilla(this.idUpdate,this.updateTemplate.value).subscribe((res:any)=>{
          console.log(res);
          if(res.mensaje =='Actualizado Correctamente'){
@@ -511,14 +511,14 @@ export class GmailingComponent implements OnInit {
           setTimeout(() => {
             this.statusRes=false;
             this.status('Plantillas')
-          }, 1000); 
+          }, 1000);
          }else{
           this.statuserror= true;
           setTimeout(() => {
             this.statuserror=false;
-          }, 1000); 
+          }, 1000);
         }
-         
+
     },error=>{
       this.showSpiner=true;
 alert('No se pudo actualizar')
@@ -544,13 +544,13 @@ alert('No se pudo actualizar')
     let escuela=false;
     let staff=false;
     let campers=false;
-  
- 
+
+
     this.selectdestinatariosCampers.forEach((element:any)=>{
       element .campers_id= element.id
 })
 
-      
+
     switch (Number(this.tipoTemplate)) {
       case 1:
         this.cargandoMailing = true;
@@ -560,7 +560,7 @@ alert('No se pudo actualizar')
           else if(element =='3'){escuela=true;}
          });
         console.log(this.dataResGmail);
-        
+
         this.dataResGmail[0].camp.campers = this.selectdestinatariosCampers
         this.dataResGmail[0].camp.staff = this.selectdestinatariosStaff
         this.dataResGmail[0].camp.school= this.selectdestinatariosEscuela[0]
@@ -568,7 +568,7 @@ alert('No se pudo actualizar')
 
        a = {
           "campaign": {
-           
+
             "name": this.tituloTemplateAlmacenado,
             "template_title": this.tituloTemplateAlmacenado,
 
@@ -583,13 +583,13 @@ alert('No se pudo actualizar')
           },
 
           "camps":
-            
+
               this.dataResGmail,
               "template_title": "tituloTemplateAlmacenado",
               "email_subject": "string"
-            
-          
-         
+
+
+
 
         }
 
@@ -607,18 +607,18 @@ alert('No se pudo actualizar')
           }else{
             alert('Al parecer ocurrio un error por favor intentelo despues')
           }
-          
+
         });
-        
+
         break;
       case 2:
-       
+
         this.selectdestinatariosCampers.forEach(element => {
           schools_id.push(element.camper_id)
       });
        a = {
           "campaign": {
-           
+
             "name": this.tituloTemplateAlmacenado,
             "camp_parents": false,
             "camp_staff": true,
@@ -644,23 +644,23 @@ alert('No se pudo actualizar')
 
           }
         });
-        
+
         break;
       case 3:
         this.cargandoMailing = true;
 
         this.dataResGmail.forEach((data:any)=>{
-       
+
             data.camp.campers =  data.camp.camperSelect ;
             data.camp.staff = data.camp.staffSelect ;
             data.camp.schollSelect = data.camp.schollList ;
-           
-    
-            
+
+
+
         })
       a = {
         "campaign": {
-         
+
           "name": this.tituloTemplateAlmacenado,
           "template_title": this.tituloTemplateAlmacenado,
 
@@ -675,13 +675,13 @@ alert('No se pudo actualizar')
         },
 
         "camps":
-          
+
             this.dataResGmail,
             "template_title": "tituloTemplateAlmacenado",
             "email_subject": "string"
-          
-        
-       
+
+
+
 
       }
 
@@ -703,13 +703,13 @@ alert('No se pudo actualizar')
         });
         break;
         case 4:
-       
+
         this.selectdestinatariosCampers.forEach(element => {
           schools_id.push(element.camper_id)
       });
        a = {
           "campaign": {
-           
+
             "name": this.tituloTemplateAlmacenado,
             "camp_parents": false,
             "camp_staff": true,
@@ -735,7 +735,7 @@ alert('No se pudo actualizar')
 
           }
         });
-        
+
         break;
       default:
         console.log('Opción no reconocida');
@@ -745,27 +745,53 @@ alert('No se pudo actualizar')
   infoGmgail(id){
     this.infoEmail = true;
       console.log('entrando');
-      
+
     this.showSpinnerGmail =!this.showSpinnerGmail;
-    
+
     this.data.getCorreosInfo(id).subscribe((res:any)=>{
       this.dataGmailifno= res;
       this.showSpinnerGmail =!this.showSpinnerGmail;
 
- 
+
     })
   }
 
 
   onReady(editor: any) {
-    editor.model.document.on('change:data', () => {
-      const selection = editor.model.document.selection;
-      if (selection.hasAttribute('bold')) {
-        const range = selection.getFirstRange();
-        const nativeRange = editor.editing.view.domConverter.viewRangeToDom(range);
-        const nativeSelection = window.getSelection();
-        nativeSelection.removeAllRanges();
-        nativeSelection.addRange(nativeRange);
+    // editor.model.document.on('change:data', () => {
+    //   const selection = editor.model.document.selection;
+    //   if (selection.hasAttribute('bold')) {
+    //     const range = selection.getFirstRange();
+    //     const nativeRange = editor.editing.view.domConverter.viewRangeToDom(range);
+    //     const nativeSelection = window.getSelection();
+    //     nativeSelection.removeAllRanges();
+    //     nativeSelection.addRange(nativeRange);
+    //   }
+    // });
+    editor.plugins.get('Clipboard').on('inputTransformation', (evt, data) => {
+      const pastedData = data.content.getChild(0)?.data;
+
+      // Patrón general para cualquier URL
+      const urlPattern = /(https?:\/\/[^\s]+)/i;
+
+      if (pastedData && urlPattern.test(pastedData)) {
+        const imageUrl = pastedData.match(urlPattern)[0];
+
+        // Intentar cargar la imagen
+        const img = new Image();
+        img.src = imageUrl;
+        img.onload = () => {
+          // Si la imagen se carga correctamente, insertar en CKEditor
+          editor.model.change(writer => {
+            const imageElement = writer.createElement('image', {
+              src: imageUrl
+            });
+            editor.model.insertContent(imageElement);
+          });
+          this.replaceText(pastedData, '', editor);
+          evt.stop(); // Detener el evento para evitar que la URL se pegue como texto
+        };
+        // Si falla, simplemente no hacemos nada y la URL se pegará como texto
       }
     });
   }
@@ -793,6 +819,35 @@ alert('No se pudo actualizar')
 
     })
   }
+
+ // Método para reemplazar texto en el editor
+ replaceText(oldText: string, newText: string, editor:any) {
+
+  editor.model.change(writer => {
+    // Recorrer todo el contenido del editor
+    const root = editor.model.document.getRoot();
+    const range = writer.createRangeIn(root);
+
+    for (const item of range.getItems()) {
+
+      console.log(item);
+      console.log(item.data);
+
+      if ( item.data && item.data.includes(oldText)) {
+        // Encontrar la posición del texto a reemplazar
+        const start = item.data.indexOf(oldText);
+        console.log(start);
+        const end = start + oldText.length;
+        console.log(end);
+        //edit the text on item data
+        const text = item.data.replace(oldText, newText);
+        // Reemplazar el texto
+        writer.remove(item, true);
+      }
+
+    }
+  });
+}
 
 }
 export interface resmailingget{

@@ -31,7 +31,7 @@
                             <div class="card" *ngIf="Titulo !='Nuevo Templates' &&  Titulo != 'Enviar Correo'">
                                 <div class="card-body">
                                     <div class="row mb-2">
-                                   
+
                                         <div>
                                             <div class="card border border-info border-1" >
                                                 <div class="bg-info p-2">
@@ -39,11 +39,11 @@
                                                 <div class="card-body" >
                                                     <div class="container-btn mt-1 mb-3">
 
-                                                      
+
                                                     </div>
                                                     <div style="overflow: auto;"  >
                                                       <div class="container-btn mt-1 mb-3">
-                                                     
+
                                                         <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
                                                             placeholder="Global Search" />
                                                     </div>
@@ -64,7 +64,7 @@
 
                                                                             </th>
                                                                 </tr>
-                                                               
+
                                                             </ng-template>
                                                             <ng-template pTemplate="body" let-customer  >
                                                                 <tr >
@@ -78,11 +78,11 @@
                                                                   <td *ngIf="Titulo != 'Correos enviados'" >
                                                                     <i class="pi pi-times text-center" style="color:red" (click)="deletPlantilla(customer.id)"></i>
                                                                   </td>
-                                                                 
+
                                                                 </tr>
-                                                              
+
                                                             </ng-template>
-                                                            
+
                                                         </p-table>
                                                         <div class="d-flex justify-content-center" *ngIf="cargando">
                                                             <div class="spinner-border" role="status">
@@ -115,15 +115,15 @@
                                     <option   value="2">Template del sistema </option>
 
 
-                                    
+
                                 </select>
                             </div>
-                        
+
                         </div>
                     </div>
                     <div class="mx-auto container">
                         <div class="row">
-                          
+
 
                             <div class="col-lg-12  mt-4" *ngIf="typetemplate==2">
                                 <p>Tipo de plantilla</p>
@@ -131,19 +131,19 @@
                                 <select name="" id="" [(ngModel)]="tipoTemplate" style="width: 100%;"
                                     class="form-select mt-2">
                                      <option  *ngFor="let item of tiposTemplates" [value]="item.id">{{item.value}}</option>
-                                    
+
                                 </select>
                             </div>
                             <div class="col-lg-12 mt-4">
                                 <input type="text" placeholder="Titulo" class="form-control"  [(ngModel)]="tituloTempalet">
                             </div>
-                            
+
 
                         </div>
                     </div>
 
                     <div class="mt-4 col-12">
-                        <ckeditor [editor]="Editor" [(ngModel)]="template" [config]="editorConfig" >
+                        <ckeditor [editor]="Editor" [(ngModel)]="template" [config]="editorConfig" (ready)="onReady($event)" >
                         </ckeditor>
 
                     </div>
@@ -159,7 +159,7 @@
                     <div class="btn-container">
                         <button class="btn btn-primary" style="width: 100%;" (click)="cretateTemplaet()" *ngIf="!showSpiner">Guardar</button>
                         <div class="spinner-border" role="status" *ngIf="showSpiner">
-                            
+
                           </div>
                     </div>
 
@@ -176,9 +176,9 @@
                                 <select name="" id="" [(ngModel)]="tipoTemplate" style="width: 100%;"
                                     class="form-select mt-2" (change)="cambios()">
                                     <option value="1">Participante de un solo Campamento </option>
-                                  <!-- <option value="2">Participante de una capacitacion</option> -->  
+                                  <!-- <option value="2">Participante de una capacitacion</option> -->
                                     <option value="3">Participante de Varios Campamentos</option>
-                                   <!-- <option value="4">Prospectos de una temporada </option> --> 
+                                   <!-- <option value="4">Prospectos de una temporada </option> -->
                                 </select>
                             </div>
                             <div *ngIf="tipoTemplate == 1" >
@@ -199,7 +199,7 @@
                                 </div>
                             </div>
                             <div *ngIf="tipoTemplate == 4" >
-                                
+
                                 <div  class="col-lg-12 mt-2">
                                     <p>Seleciona temporada</p>
                                     <ng-select name="" id="" [(ngModel)]="selectTemporada" style="width: 100%;" (change)="selectProspectos()"
@@ -229,17 +229,17 @@
                                 </ng-select>
                                 </div>
                             </div>
-                           
 
 
-                           
+
+
 
 
                         </div>
                     </div>
 
                     <div class="mt-4" *ngIf="page==2">
-                         
+
                         <div class="col-lg-12 mt-3 form-grup">
                             <button class="btn btn-primary" (click)="displayMaximizable = true" style="margin: 0 auto; width: 100%;">Elegir destinatarios</button>
                             <div  class="col-lg-12 mt-3 form-grup">
@@ -265,7 +265,7 @@
 
 
                         </div>
-                        <ckeditor [editor]="editor" [(ngModel)]="template"  [config]="editorConfig" >
+                        <ckeditor [editor]="editor" [(ngModel)]="template"  [config]="editorConfig" (ready)="onReady($event)" >
                         </ckeditor>
 
                     </div>
@@ -292,17 +292,17 @@
                 </div>
             </div>
 
-         
 
-            
+
+
             <div class="card border-top border-primary" *ngIf="editTemplate">
-             
+
                 <h1 class="mt-3">Editar template</h1>
                 <div class="col" >
                     <hr>
                     <div class="mx-auto container">
                         <div class="row">
-                          
+
 
                             <div class="col-lg-12  mt-4" >
                                 <p>Tipo de Template</p>
@@ -313,41 +313,41 @@
                                     <option   value="2">Template del sistema </option>
 
 
-                                    
+
                                 </select>
                             </div>
-                        
+
                         </div>
                     </div>
                     <form action="" [formGroup]="updateTemplate">
                         <div class="mx-auto container">
                             <div class="row">
-                              
-    
+
+
                                 <div class="col-lg-12  mt-4" *ngIf="typetemplate==2">
                                     <p>Tipo de plantilla</p>
-    
+
                                     <select name="" id=""  style="width: 100%;" formControlName="template_type"
                                         class="form-select mt-2">
                                          <option  *ngFor="let item of tiposTemplates" [value]="item.id">{{item.value}}</option>
-                                        
+
                                     </select>
                                 </div>
                                 <div class="col-lg-12 mt-4">
                                     <input type="text" placeholder="Titulo" class="form-control"  formControlName="title">
                                 </div>
-                                
-    
+
+
                             </div>
                         </div>
-    
+
                         <div class="mt-4 col-12">
-                            <ckeditor [editor]="Editor"  formControlName="template" [config]="editorConfig" >
+                            <ckeditor [editor]="Editor"  formControlName="template" [config]="editorConfig" (ready)="onReady($event)">
                             </ckeditor>
-    
+
                         </div>
                     </form>
-                   
+
                     <div class="alert alert-primary" role="alert" *ngIf="statusRes">
                        Se actualizo correctamente
                     </div>
@@ -380,7 +380,7 @@
 
 <p-dialog header="Elige a tus destinatarios" [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '90%'}" [maximizable]="true" [baseZIndex]="10000" *ngIf="displayMaximizable"
     [draggable]="false" [resizable]="false">
-    
+
     <div class="mt-3" *ngIf="tipoTemplate != 3">
         <h3 class="text-right">Campers</h3>
       <div class="col-12">
@@ -393,11 +393,11 @@
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
         [globalFilterFields]="['tutor_full_name','tutor_email']">
-    
+
         <ng-template pTemplate="header">
           <tr>
-           
-    
+
+
            <th>
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
            </th>
@@ -406,7 +406,7 @@
                 Nombre
                 <p-sortIcon field="tutor_full_name"></p-sortIcon>
               </div>
-             
+
             </th>
             <th>
                 <div class="flex justify-content-between align-items-center" style=" width: 60%;">
@@ -414,8 +414,8 @@
                     <p-sortIcon field="tutor_email"></p-sortIcon>
                   </div>
             </th>
-            
-    
+
+
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-customer>
@@ -433,7 +433,7 @@
           </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">
-    
+
         </ng-template>
       </p-table>
       </div>
@@ -452,11 +452,11 @@
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
         [globalFilterFields]="['staff_full_name','staff_email']">
-    
+
         <ng-template pTemplate="header">
           <tr>
-           
-    
+
+
            <th>
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
            </th>
@@ -465,7 +465,7 @@
                 Nombre
                 <p-sortIcon field="staff_full_name"></p-sortIcon>
               </div>
-             
+
             </th>
             <th>
                 <div class="flex justify-content-between align-items-center" style=" width: 60%;">
@@ -473,8 +473,8 @@
                     <p-sortIcon field="staff_email"></p-sortIcon>
                   </div>
             </th>
-            
-    
+
+
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-customer>
@@ -492,7 +492,7 @@
           </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">
-    
+
         </ng-template>
       </p-table>
       </div>
@@ -511,11 +511,11 @@
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
         [globalFilterFields]="['school_email','school']">
-    
+
         <ng-template pTemplate="header">
           <tr>
-           
-    
+
+
            <th>
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
            </th>
@@ -524,7 +524,7 @@
                 Nombre
                 <p-sortIcon field="school"></p-sortIcon>
               </div>
-             
+
             </th>
             <th>
                 <div class="flex justify-content-between align-items-center" style=" width: 60%;">
@@ -532,8 +532,8 @@
                     <p-sortIcon field="school_email"></p-sortIcon>
                   </div>
             </th>
-            
-    
+
+
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-customer>
@@ -551,14 +551,14 @@
           </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">
-    
+
         </ng-template>
       </p-table>
       </div>
       </div>
     </div>
     <div *ngIf="tipoTemplate == 3">
-      
+
 
         <p-tabView>
             <p-tabPanel [header]="item.camp.name" *ngFor="let item of dataResGmail; let i = index" [selected]="i == 0">
@@ -574,11 +574,11 @@
                     [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
                     [globalFilterFields]="['tutor_full_name','tutor_email']">
-                
+
                     <ng-template pTemplate="header">
                       <tr>
-                       
-                
+
+
                        <th>
                         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                        </th>
@@ -587,7 +587,7 @@
                             Nombre
                             <p-sortIcon field="tutor_full_name"></p-sortIcon>
                           </div>
-                         
+
                         </th>
                         <th>
                             <div class="flex justify-content-between align-items-center" style=" width: 60%;">
@@ -595,15 +595,15 @@
                                 <p-sortIcon field="tutor_email"></p-sortIcon>
                               </div>
                         </th>
-                        
-                
+
+
                       </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-customer>
                       <tr class="p-selectable-row">
                        <td>
                         <p-tableCheckbox [value]="customer"></p-tableCheckbox>
-            
+
                        </td>
                         <td>
                           {{customer.camper_full_name}}
@@ -614,13 +614,13 @@
                       </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
-                
+
                     </ng-template>
                   </p-table>
                   </div>
                   </div>
                 </div>
-            
+
                 <div class=" mt-3" >
                     <h3 class="text-right">Staff</h3>
                   <div class="col-12">
@@ -633,11 +633,11 @@
                     [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
                     [globalFilterFields]="['staff_full_name','staff_email']">
-                
+
                     <ng-template pTemplate="header">
                       <tr>
-                       
-                
+
+
                        <th>
                         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                        </th>
@@ -646,7 +646,7 @@
                             Nombre
                             <p-sortIcon field="staff_full_name"></p-sortIcon>
                           </div>
-                         
+
                         </th>
                         <th>
                             <div class="flex justify-content-between align-items-center" style=" width: 60%;">
@@ -654,15 +654,15 @@
                                 <p-sortIcon field="staff_email"></p-sortIcon>
                               </div>
                         </th>
-                        
-                
+
+
                       </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-customer>
                       <tr class="p-selectable-row">
                        <td>
                         <p-tableCheckbox [value]="customer"></p-tableCheckbox>
-            
+
                        </td>
                         <td>
                           {{customer.staff_full_name}}
@@ -673,13 +673,13 @@
                       </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
-                
+
                     </ng-template>
                   </p-table>
                   </div>
                   </div>
                 </div>
-            
+
                 <div class=" mt-3" >
                     <h3 class="text-right">Escuela</h3>
                   <div class="col-12">
@@ -692,11 +692,11 @@
                     [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
                     [globalFilterFields]="['school_email','school']">
-                
+
                     <ng-template pTemplate="header">
                       <tr>
-                       
-                
+
+
                        <th>
                         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                        </th>
@@ -705,7 +705,7 @@
                             Nombre
                             <p-sortIcon field="school"></p-sortIcon>
                           </div>
-                         
+
                         </th>
                         <th>
                             <div class="flex justify-content-between align-items-center" style=" width: 60%;">
@@ -713,15 +713,15 @@
                                 <p-sortIcon field="school_email"></p-sortIcon>
                               </div>
                         </th>
-                        
-                
+
+
                       </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-customer>
                       <tr class="p-selectable-row">
                        <td>
                         <p-tableCheckbox [value]="customer"></p-tableCheckbox>
-            
+
                        </td>
                         <td>
                           {{customer.name}}
@@ -732,7 +732,7 @@
                       </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
-                
+
                     </ng-template>
                   </p-table>
                   </div>
@@ -741,9 +741,9 @@
             </p-tabPanel>
         </p-tabView>
     </div>
-  
-    
-     
+
+
+
 </p-dialog>
 
 
@@ -763,17 +763,17 @@
                 <form action="" >
                   <div class="mx-auto container">
                       <div class="row">
-                        
+
 
                           <div class="col-lg-12  mt-4" >
                               <h3>Nombre del campamento enviado: {{dataGmailifno.campaign.title}}</h3>
 
-                          
+
                           </div>
                           <hr>
                           <h4 class="mt-3">Listado de campamentos:</h4>
                           <div  style="display: flex; flex-wrap: wrap; gap: 10px;" class="mb-2">
-                           
+
                             <div *ngFor="let item of dataGmailifno.camps">
                               <p-tag  >{{item.name}}</p-tag>
 
@@ -785,7 +785,7 @@
 
                           <h4 class="mt-3">Listado de campers:</h4>
                           <div  style="display: flex; flex-wrap: wrap; gap: 10px;">
-                           
+
                             <div *ngFor="let item of dataGmailifno.campers">
                               <p-tag  >{{item.camper_name}}</p-tag>
 
@@ -793,26 +793,26 @@
 
 
                           </div>
-                        
-                          
+
+
 
                       </div>
                   </div>
 
                   <div class="mt-4 col-12">
-                      <ckeditor [editor]="Editor"  [data]="dataGmailifno.campaign.template" >
+                      <ckeditor [editor]="Editor"  [data]="dataGmailifno.campaign.template" (ready)="onReady($event)">
                       </ckeditor>
 
                   </div>
               </form>
-            
+
             </div>
         </div>
-   
+
     </div>
     </div>
-    
-     
+
+
 </p-dialog>
 
 
@@ -823,7 +823,7 @@
   <div>
     <h3 class="text-center">¿Estás seguro que quieres eliminar?</h3>
   </div>
-  
+
   <ng-template pTemplate="footer">
     <button *ngIf="!spinnerDelet" class="btn btn-primary" (click)="selectdelet()">Guardar</button>
     <div *ngIf="spinnerDelet" class="spinner-border text-primary" role="status">
