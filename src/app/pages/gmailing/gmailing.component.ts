@@ -830,15 +830,10 @@ alert('No se pudo actualizar')
 
     for (const item of range.getItems()) {
 
-      console.log(item);
-      console.log(item.data);
-
       if ( item.data && item.data.includes(oldText)) {
         // Encontrar la posición del texto a reemplazar
         const start = item.data.indexOf(oldText);
-        console.log(start);
         const end = start + oldText.length;
-        console.log(end);
         //edit the text on item data
         const text = item.data.replace(oldText, newText);
         // Reemplazar el texto
