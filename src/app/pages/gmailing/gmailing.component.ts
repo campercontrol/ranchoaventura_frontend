@@ -772,44 +772,54 @@ alert('No se pudo actualizar')
 
 
   onReady(editor: any) {
-    // editor.model.document.on('change:data', () => {
-    //   const selection = editor.model.document.selection;
-    //   if (selection.hasAttribute('bold')) {
-    //     const range = selection.getFirstRange();
-    //     const nativeRange = editor.editing.view.domConverter.viewRangeToDom(range);
-    //     const nativeSelection = window.getSelection();
-    //     nativeSelection.removeAllRanges();
-    //     nativeSelection.addRange(nativeRange);
-    //   }
-    // });
     editor.plugins.get('Clipboard').on('inputTransformation', (evt, data) => {
-      const pastedData = data.content.getChild(0)?.data;
+        const pastedData = data.content.getChild(0)?.data;
 
-      // Patrón general para cualquier URL
-      const urlPattern = /(https?:\/\/[^\s]+)/i;
+        // Patrón general para cualquier URL
+        const urlPattern = /(https?:\/\/[^\s]+)/i;
 
-      if (pastedData && urlPattern.test(pastedData)) {
-        const imageUrl = pastedData.match(urlPattern)[0];
+        // Patrón para detectar enlaces de Google Drive
+        const drivePattern = /https:\/\/drive\.google\.com\/file\/d\/([^\/\s]+)\//i;
 
-        // Intentar cargar la imagen
-        const img = new Image();
-        img.src = imageUrl;
-        img.onload = () => {
-          // Si la imagen se carga correctamente, insertar en CKEditor
-          editor.model.change(writer => {
-            const imageElement = writer.createElement('image', {
-              src: imageUrl
-            });
-            editor.model.insertContent(imageElement);
-          });
-          this.replaceText(pastedData, '', editor);
-          evt.stop(); // Detener el evento para evitar que la URL se pegue como texto
-        };
-        // Si falla, simplemente no hacemos nada y la URL se pegará como texto
-      }
+        // Patrón para detectar imágenes en formato base64
+        const base64Pattern = /^data:image\/[a-zA-Z]+;base64,/i;
+
+        if (pastedData) {
+            let imageUrl = pastedData;
+
+            // Verificar si es un enlace de Google Drive y convertirlo a un enlace de imagen directa
+            if (urlPattern.test(pastedData)) {
+                if (drivePattern.test(pastedData)) {
+                    const driveFileId = pastedData.match(drivePattern)[1];
+                    imageUrl = `https://drive.google.com/uc?export=view&id=${driveFileId}`;
+                }
+            }
+
+            // Verificar si es un enlace base64
+            if (base64Pattern.test(imageUrl) || urlPattern.test(imageUrl)) {
+                // Intentar cargar la imagen
+                const img = new Image();
+                img.src = imageUrl;
+                img.onload = () => {
+                    // Si la imagen se carga correctamente, insertar en CKEditor
+                    editor.model.change(writer => {
+                        const imageElement = writer.createElement('image', {
+                            src: imageUrl
+                        });
+                        editor.model.insertContent(imageElement);
+                    });
+                    this.replaceText(pastedData, '', editor);
+                    evt.stop(); // Detener el evento para evitar que la URL se pegue como texto
+                };
+                img.onerror = () => {
+                    // Si falla, simplemente no hacemos nada y la URL se pegará como texto
+                };
+            }
+        }
     });
-  }
+}
 
+  
   deletPlantilla(id:any){
     this.showDelet= true;
     this.deletid = id
@@ -831,7 +841,14 @@ alert('No se pudo actualizar')
           alert('no se pudo eliminar')
         }
 
-    })
+    },error=>{
+      this.spinnerDelet = false;
+      this.showDelet= false;
+      alert('Lo sentimos no se pudo eliminar el template')
+
+
+    }
+    )
   }
 
  // Método para reemplazar texto en el editor

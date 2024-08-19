@@ -73,8 +73,7 @@
                                     <input type="file" accept="image/jpeg" (change)="subiendo($event)" >
                                     
     
-                                    <label class="mt-2">La foto es obligatoria ,nos ayuda a identificar a los campers,
-                                        recomendamos subas una foto reciente y de poco peso, máximo 3Mb debe ser formato jpg</label>
+                                    <label class="mt-2">La foto es obligatoria para identificar a los campers. Recomendamos subir una imagen reciente y de tamaño reducido, en formato JPG, con un peso máximo de 3 MB.</label>
     
                                 </div>
                                 <div *ngIf="spinerPhot">
@@ -235,9 +234,7 @@
                     </div>
 
                     <div class="alert-dismissible alert alert-secondary">
-                        <p style="text-align:justify;" for="">Marca las casillas de las enfermedades que haya
-                            padecido o padezca el camper en la columna camper. En caso de que un familiar haya
-                            padecido alguna de esas enfermedades marca en la columna de familiar</p>
+                        <p style="text-align:justify;" for="">La foto es obligatoria ,nos ayuda a identificar a los campers, recomendamos subas una foto reciente y de poco peso, máximo 3Mb debe ser formato jpg</p>
                     </div>
 
                     <h2 style="text-align:center ; margin-top: 30px;">{{textos['Pathologicalhistory']}}</h2>
@@ -376,7 +373,7 @@
                                 ngbTooltip="Si no requiere de tratamiento médico, teclea la palabra NINGUNO">
                                 <h3>{{textos['Duringcamp']}}</h3>
                                 <textarea
-                                    placeholder="Especificar dosis y horarios para la toma de medicamentos en tal caso de no necitar poner NINGUNO"
+                                    placeholder="Si no requiere de tratamiento médico, teclea la palabra NINGUNO"
                                     name="" id="" cols="90" rows="10"
                                     formControlName = "drugs"
                                     class="form-control"
@@ -431,8 +428,6 @@
 
 
                 </div>
-               
-
                 <div class="card">
 
                     <div class="card-body">
@@ -567,7 +562,6 @@
                     </div>
 
                 </div>
-
                 <div class="card">
 
                     <div class="card-body">
@@ -578,7 +572,7 @@
                         </div>
 
                         <div class="alert alert-success mt-3">
-                            En caso de emergencia y NO PODER CONTACTAR A LOS PADRES, registra los datos de una tercera
+                            En caso de emergencia y NO PODER CONTACTAR A LOS TUTORES, registra los datos de una tercera
                             persona.
                         </div>
 
@@ -624,8 +618,6 @@
 
 
                 </div>
-
-
                 <div class="card">
 
                     <div class="card-body">

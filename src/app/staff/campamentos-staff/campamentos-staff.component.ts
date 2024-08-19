@@ -12,6 +12,11 @@ import { CreateCampsService } from 'src/services/create-camps.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CatalogosService } from 'src/services/catalogos.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+import { data } from 'jquery';
+
+
 
 @Component({
   selector: 'app-campamentos-staff',
@@ -22,7 +27,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 })
 export class CampamentosStaffComponent implements OnInit {
 
-
+  
   selectedCustomers: any[];
 
   representatives: any[];
@@ -658,6 +663,487 @@ newExtracharges(){
 deletExtracharges(i){
   this.extra_charges.splice(i);
 
+}
+
+reporteGeneral() {
+  this.capms.getReportesGenerales(this.idCamp).subscribe({
+    next: (response: any) => {
+      const data = response.data;
+
+      // Mapeo de claves del JSON a cabeceras en español solo para los atributos especificados
+      const headersMap: any = {
+        'id':'ID',
+        'name': 'Nombre',
+        'lastname_father': 'Apellido Paterno',
+        'lastname_mother': 'Apellido Materno',
+        'birthday': 'Fecha de Nacimiento',
+        'height': 'Altura',
+        'weight': 'Peso',
+        'gender': 'Género',
+        'grade': 'Grado',
+        'school_other': 'Otra Escuela',
+        'swim': 'Nada',
+        'affliction': 'Afección',
+        'blood_type': 'Tipo de Sangre',
+        'heart_problems': 'Problemas Cardíacos',
+        'psicology_treatments': 'Tratamientos Psicológicos',
+        'prevent_activities': 'Actividades Preventivas',
+        'other_allergies': 'Otras Alergias',
+        'nocturnal_disorders': 'Trastornos Nocturnos',
+        'phobias': 'Fobias',
+        'drugs': 'Medicamentos',
+        'doctor_precall': 'Llamada al Doctor',
+        'prohibited_foods': 'Alimentos Prohibidos',
+        'comments_admin': 'Comentarios Administrativos',
+        'insurance_company': 'Compañía de Seguro',
+        'insurance_number': 'Número de Seguro',
+        'security_social_number': 'Número de Seguridad Social',
+        'tutor_name': 'Nombre del Tutor',
+        'tutor_lastname_father': 'Apellido Paterno del Tutor',
+        'tutor_lastname_mother': 'Apellido Materno del Tutor',
+        'tutor_cellphone': 'Celular del Tutor',
+        'tutor_home_phone': 'Teléfono de Casa del Tutor',
+        'tutor_work_phone': 'Teléfono del Trabajo del Tutor',
+        'tutor_email': 'Email del Tutor',
+        'second_tutor_name': 'Nombre del Segundo Tutor',
+        'second_tutor_mothers_lastname': 'Apellido Materno del Segundo Tutor',
+        'second_tutor_fathers_lastname': 'Apellido Paterno del Segundo Tutor',
+        'second_tutor_cellphone': 'Celular del Segundo Tutor',
+        'second_tutor_work_phone': 'Teléfono del Trabajo del Segundo Tutor',
+        'second_tutor_email': 'Email del Segundo Tutor',
+        'emergency contact': 'Contacto de Emergencia',
+        'contact kinship': 'Parentesco del Contacto de Emergencia',
+        'contact_cellphone': 'Celular del Contacto de Emergencia',
+        'contact_homephone': 'Teléfono de Casa del Contacto de Emergencia',
+        'payment_balance': 'Saldo de Pago',
+        'registration date': 'Fecha de Registro',
+        'Comments (Parent)': 'Comentarios de Padres',
+        'Comments (Staff)': 'Comentarios del Personal',
+        'Comments (School)': 'Comentarios de la Escuela'
+      };
+
+      // Convertir los valores booleanos a "Sí" o "No" y concatenar comentarios
+      const modifiedData = data.map((row: any) => {
+        const newRow: any = {};
+
+        for (const key in headersMap) {
+          if (headersMap.hasOwnProperty(key)) {
+            newRow[headersMap[key]] = row.hasOwnProperty(key) ? row[key] : '';
+          }
+        }
+
+        // Convertir valores booleanos a "Sí" o "No"
+        for (const key in newRow) {
+          if (typeof newRow[key] === 'boolean') {
+            newRow[key] = newRow[key] ? 'Sí' : 'No';
+          }
+        }
+        
+        // Concatenar comentarios
+        newRow['Comentarios de Padres'] = row['Comments (Parent)'] ? row['Comments (Parent)'].map((comment: any) => comment.comment).join(', ') : '';
+        newRow['Comentarios del Personal'] = row['Comments (Staff)'] ? row['Comments (Staff)'].map((comment: any) => comment.comment).join(', ') : '';
+        newRow['Comentarios de la Escuela'] = row['Comments (School)'] ? row['Comments (School)'].map((comment: any) => comment.comment).join(', ') : '';
+
+        return newRow;
+      });
+
+      // Obtener las cabeceras en el formato correcto
+      const headers = Object.keys(headersMap);
+      const translatedHeaders = headers.map(header => headersMap[header]);
+
+      // Convertir los datos a una hoja de Excel
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(modifiedData, { header: translatedHeaders });
+
+      // Modificar las cabeceras de la hoja de Excel
+      const range = XLSX.utils.decode_range(worksheet['!ref']!);
+      for (let i = range.s.c; i <= range.e.c; i++) {
+        const cell_address = XLSX.utils.encode_cell({ r: 0, c: i });
+        if (worksheet[cell_address]) {
+          worksheet[cell_address].v = translatedHeaders[i];
+        }
+      }
+
+      // Ajustar el ancho de las columnas
+      const columnWidths = translatedHeaders.map((header, index) => {
+        const maxWidth = Math.max(...modifiedData.map((row: any) => (row[translatedHeaders[index]] || '').toString().length));
+        return Math.max(header.length, maxWidth) + 2; // Agregar un margen extra
+      });
+
+      worksheet['!cols'] = columnWidths.map(width => ({ wpx: width * 10 })); // Ajustar el ancho de las columnas (multiplicador por 10 es opcional)
+
+      // Ajustar el alto de las filas (opcional)
+      worksheet['!rows'] = modifiedData.map(() => ({ hpx: 20 })); // Ajustar alto a 20px (ajusta según sea necesario)
+
+      // Crear un nuevo libro de trabajo
+      const workbook: XLSX.WorkBook = { Sheets: { 'Datos': worksheet }, SheetNames: ['Datos'] };
+
+      // Generar el archivo Excel
+      const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+      // Guardar el archivo
+      this.saveAsExcelFile(excelBuffer, 'Reporte General ' + this.infoCamp.name);
+    },
+    error: (error) => {
+      console.error('Error al obtener los datos del reporte general', error);
+    }
+  });
+}
+
+
+reporteDatosGenerales() {
+  this.capms.getReportesSeguros(this.idCamp).subscribe({
+    next: (response: any) => {
+      const data = response;
+
+      // Mapeo de claves del JSON a cabeceras en español
+      const headersMap: any = {
+        'id': 'ID',
+        'name': 'Nombre',
+        'lastname_father': 'Apellido Paterno',
+        'lastname_mother': 'Apellido Materno',
+        'birthday': 'Fecha de Nacimiento',
+        'Age': 'Edad',
+        'gender': 'Género'
+      };
+
+      // Convertir los valores booleanos a "Sí" o "No" (si es necesario)
+      // Puedes agregar esta lógica si los datos contienen valores booleanos
+
+      // Convertir los datos a una hoja de Excel
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data, { header: Object.keys(headersMap) });
+
+      // Modificar las cabeceras de la hoja de Excel
+      const range = XLSX.utils.decode_range(worksheet['!ref']!);
+      for (let i = range.s.c; i <= range.e.c; i++) {
+        const cell_address = XLSX.utils.encode_cell({ r: 0, c: i });
+        worksheet[cell_address] = { v: headersMap[Object.keys(headersMap)[i]], t: 's' };
+      }
+
+      // Ajustar el ancho de las columnas
+      const columnWidths = Object.keys(headersMap).map((key, index) => {
+        const headerWidth = headersMap[key].length;
+        const maxWidth = Math.max(
+          ...data.map((row: any) => (row[key] ? row[key].toString().length : 0))
+        );
+        return Math.max(headerWidth, maxWidth) + 2; // Agregar un margen extra
+      });
+
+      worksheet['!cols'] = columnWidths.map(width => ({ wpx: width * 10 })); // Ajustar el ancho de las columnas (multiplicador por 10 es opcional)
+
+      // Ajustar el alto de las filas (opcional)
+      worksheet['!rows'] = [{ hpx: 20 }]; // Ajustar el alto de la primera fila (cabecera)
+
+      // Crear un nuevo libro de trabajo
+      const workbook: XLSX.WorkBook = { Sheets: { 'Datos': worksheet }, SheetNames: ['Datos'] };
+
+      // Generar el archivo Excel
+      const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+      // Guardar el archivo
+      this.saveAsExcelFile(excelBuffer, 'Reporte Basico ' + this.infoCamp.name);
+    },
+    error: (error) => {
+      console.error('Error al obtener los datos del reporte general', error);
+    }
+  });
+}
+reporteDatosContactos() {
+  this.capms.getReportesContactossMedical(this.idCamp).subscribe({
+    next: (response: any) => {
+      const data = response;
+
+      // Mapeo de claves del JSON a cabeceras en español
+      const headersMap: any = {
+        'id': 'ID',
+        'name': 'Nombre',
+        'lastname_father': 'Apellido Paterno',
+        'lastname_mother': 'Apellido Materno',
+        'tutor_name': 'Nombre del Tutor',
+        'tutor_lastname_father': 'Apellido Paterno del Tutor',
+        'tutor_lastname_mother': 'Apellido Materno del Tutor',
+        'tutor_cellphone': 'Celular del Tutor',
+        'tutor_home_phone': 'Teléfono de Casa del Tutor',
+        'tutor_work_phone': 'Teléfono del Trabajo del Tutor',
+        'tutor_email': 'Email del Tutor',
+        'second_tutor_name': 'Nombre del Segundo Tutor',
+        'second_tutor_mothers_lastname': 'Apellido Materno del Segundo Tutor',
+        'second_tutor_fathers_lastname': 'Apellido Paterno del Segundo Tutor',
+        'second_tutor_cellphone': 'Celular del Segundo Tutor',
+        'second_tutor_work_phone': 'Teléfono del Trabajo del Segundo Tutor',
+        'second_tutor_email': 'Email del Segundo Tutor',
+        'emergency_contact': 'Contacto de Emergencia',
+        'emergency_contact_kinship': 'Parentesco del Contacto de Emergencia',
+        'emergency_contact_phone': 'Teléfono del Contacto de Emergencia',
+        'emergency_contact_cellphone': 'Celular del Contacto de Emergencia'
+      };
+
+      // Convertir los valores booleanos a "Sí" o "No" (si es necesario)
+     
+
+      // Construir los datos con las cabeceras en español
+      const headers = Object.keys(headersMap);
+      const translatedHeaders = headers.map(header => headersMap[header]);
+
+      // Convertir los datos a una hoja de Excel
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data, { header: headers });
+
+      // Modificar la cabecera de la hoja de Excel
+      const range = XLSX.utils.decode_range(worksheet['!ref']!);
+      for (let i = range.s.c; i <= range.e.c; i++) {
+        const cell_address = XLSX.utils.encode_cell({ r: 0, c: i });
+        worksheet[cell_address] = { v: translatedHeaders[i], t: 's' };
+      }
+
+      // Crear un nuevo libro de trabajo
+      const workbook: XLSX.WorkBook = { Sheets: { 'Datos': worksheet }, SheetNames: ['Datos'] };
+
+      // Generar el archivo Excel
+      const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+      // Guardar el archivo
+      this.saveAsExcelFile(excelBuffer, 'Reporte de Contactos ' + this.infoCamp.name);
+    },
+    error: (error) => {
+      console.error('Error al obtener los datos del reporte de contactos', error);
+    }
+  });
+}
+
+
+reporteMedical() {
+  this.capms.getReportesContactossMedical(this.idCamp).subscribe({
+    next: (response: any) => {
+      const data = response;
+
+      // Mapeo de claves del JSON a cabeceras en español solo para los atributos especificados
+      const headersMap: any = {
+        'name': 'Nombre',
+        'lastname_father': 'Apellido Paterno',
+        'lastname_mother': 'Apellido Materno',
+        'Age': 'Edad',
+        'height': 'Altura',
+        'weight': 'Peso',
+        'gender': 'Género',
+        'swim': 'Nada',
+        'affliction': 'Afección',
+        'blood_type': 'Tipo de Sangre',
+        'heart_problems': 'Problemas Cardíacos',
+        'psicology_treatments': 'Tratamientos Psicológicos',
+        'prevent_activities': 'Actividades Preventivas',
+        'other_allergies': 'Otras Alergias',
+        'nocturnal_disorders': 'Trastornos Nocturnos',
+        'phobias': 'Fobias',
+        'drugs': 'Medicamentos',
+        'doctor_precall': 'Llamada al Doctor',
+        'prohibited_foods': 'Alimentos Prohibidos',
+        'insurance': 'Seguro',
+        'insurance_number': 'Número de Seguro',
+        'security_social_number': 'Número de Seguridad Social',
+        'tutor_name': 'Nombre del Tutor',
+        'tutor_lastname_father': 'Apellido Paterno del Tutor',
+        'tutor_lastname_mother': 'Apellido Materno del Tutor',
+        'tutor_cellphone': 'Celular del Tutor',
+        'tutor_home_phone': 'Teléfono de Casa del Tutor',
+        'tutor_work_phone': 'Teléfono del Trabajo del Tutor',
+        'tutor_email': 'Email del Tutor',
+        'second_tutor_name': 'Nombre del Segundo Tutor',
+        'second_tutor_mothers_lastname': 'Apellido Materno del Segundo Tutor',
+        'second_tutor_fathers_lastname': 'Apellido Paterno del Segundo Tutor',
+        'second_tutor_cellphone': 'Celular del Segundo Tutor',
+        'second_tutor_work_phone': 'Teléfono del Trabajo del Segundo Tutor',
+        'second_tutor_email': 'Email del Segundo Tutor',
+        'emergency_contact': 'Contacto de Emergencia',
+        'emergency_contact_kinship': 'Parentesco del Contacto de Emergencia',
+        'emergency_contact_cellphone': 'Celular del Contacto de Emergencia',
+        'emergency_home_phone': 'Teléfono de Casa del Contacto de Emergencia'
+      };
+
+      // Construir los datos modificados solo con las cabeceras especificadas
+      const modifiedData = data.map((row: any) => {
+        const newRow: any = { ...row };
+        const updatedRow: any = {};
+
+        for (const key in newRow) {
+          if (headersMap.hasOwnProperty(key)) {
+            updatedRow[headersMap[key]] = newRow[key];
+          } else {
+            updatedRow[key] = newRow[key];  // Mantener el nombre original para otras claves
+          }
+        }
+        return updatedRow;
+      });
+
+      // Construir los datos con las cabeceras en español
+      const headers = Object.keys(headersMap);
+      const translatedHeaders = headers.map(header => headersMap[header]);
+
+      // Convertir los datos a una hoja de Excel
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(modifiedData, { header: translatedHeaders });
+
+      // Modificar la cabecera de la hoja de Excel
+      const range = XLSX.utils.decode_range(worksheet['!ref']!);
+      for (let i = range.s.c; i <= range.e.c; i++) {
+        const cell_address = XLSX.utils.encode_cell({ r: 0, c: i });
+        worksheet[cell_address] = { v: translatedHeaders[i], t: 's' };
+      }
+
+      // Crear un nuevo libro de trabajo
+      const workbook: XLSX.WorkBook = { Sheets: { 'Datos': worksheet }, SheetNames: ['Datos'] };
+
+      // Generar el archivo Excel
+      const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+      // Guardar el archivo
+      this.saveAsExcelFile(excelBuffer, 'Reporte Médico ' + this.infoCamp.name);
+    },
+    error: (error) => {
+      console.error('Error al obtener los datos del reporte médico', error);
+    }
+  });
+}
+
+reporteComida() {
+  this.capms.getReportesContactossMedical(this.idCamp).subscribe({
+    next: (response: any) => {
+      const data = response; // Asegúrate de que 'data' contenga el array de objetos
+
+      // Mapeo de claves del JSON a cabeceras en español solo para los atributos especificados
+      const headersMap: any = {
+        'name': 'Nombre',
+        'lastname_father': 'Apellido Paterno',
+        'lastname_mother': 'Apellido Materno',
+        'other_allergies': 'Otras Alergias',
+        'prohibited_foods': 'Alimentos Prohibidos',
+        'Kosher': 'Kosher',
+        'Intolerante al Gluten / Gluten intolerant': 'Intolerante al Gluten',
+        'Intolerante a la lactosa / Lactose intolerant': 'Intolerante a la Lactosa',
+        'Vegetariana / Vegetarian': 'Vegetariana'
+      };
+
+      // Construir los datos modificados solo con las cabeceras especificadas
+      const modifiedData = data.map((row: any) => {
+        const newRow: any = {};
+        for (const key in row) {
+          if (headersMap.hasOwnProperty(key)) {
+            newRow[headersMap[key]] = row[key];
+          } else {
+            newRow[key] = row[key];  // Mantener el nombre original para otras claves
+          }
+        }
+        return newRow;
+      });
+
+      // Construir los datos con las cabeceras en español
+      const headers = Object.keys(headersMap);
+      const translatedHeaders = headers.map(header => headersMap[header]);
+
+      // Convertir los datos a una hoja de Excel
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(modifiedData, { header: translatedHeaders });
+
+      // Modificar la cabecera de la hoja de Excel
+      const range = XLSX.utils.decode_range(worksheet['!ref']!);
+      for (let i = range.s.c; i <= range.e.c; i++) {
+        const cell_address = XLSX.utils.encode_cell({ r: 0, c: i });
+        worksheet[cell_address] = { v: translatedHeaders[i], t: 's' };
+      }
+
+      // Crear un nuevo libro de trabajo
+      const workbook: XLSX.WorkBook = { Sheets: { 'Datos': worksheet }, SheetNames: ['Datos'] };
+
+      // Generar el archivo Excel
+      const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+      // Guardar el archivo
+      this.saveAsExcelFile(excelBuffer, 'Reporte de Comida ' + this.infoCamp.name);
+    },
+    error: (error) => {
+      console.error('Error al obtener los datos del reporte de comida', error);
+    }
+  });
+}
+
+ReporteExtras() {
+  this.capms.getReporteExtras(this.idCamp).subscribe({
+    next: (response: any) => {
+      const data = response; // Asegúrate de que 'data' contenga el array de objetos
+
+      // Mapeo de claves del JSON a cabeceras en español solo para los atributos especificados
+      const headersMap: any = {
+        'name': 'Nombre',
+        'lastname_father': 'Apellido Paterno',
+        'lastname_mother': 'Apellido Materno',
+        'payment_balance': 'Saldo de Pago'
+      };
+
+      // Construir los datos modificados solo con las cabeceras especificadas
+      const modifiedData = data.map((row: any) => {
+        const newRow: any = {};
+        for (const key in row) {
+          if (headersMap.hasOwnProperty(key)) {
+            newRow[headersMap[key]] = row[key];
+          } else {
+            newRow[key] = row[key];  // Mantener el nombre original para otras claves
+          }
+        }
+        return newRow;
+      });
+
+      // Construir los datos con las cabeceras en español
+      const headers = Object.keys(headersMap);
+      const translatedHeaders = headers.map(header => headersMap[header]);
+
+      // Convertir los datos a una hoja de Excel
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(modifiedData, { header: translatedHeaders });
+
+      // Modificar la cabecera de la hoja de Excel
+      const range = XLSX.utils.decode_range(worksheet['!ref']!);
+      for (let i = range.s.c; i <= range.e.c; i++) {
+        const cell_address = XLSX.utils.encode_cell({ r: 0, c: i });
+        worksheet[cell_address] = { v: translatedHeaders[i], t: 's' };
+      }
+
+      // Crear un nuevo libro de trabajo
+      const workbook: XLSX.WorkBook = { Sheets: { 'Datos': worksheet }, SheetNames: ['Datos'] };
+
+      // Generar el archivo Excel
+      const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+      // Guardar el archivo
+      this.saveAsExcelFile(excelBuffer, 'Reporte de Extras ' + this.infoCamp.name);
+    },
+    error: (error) => {
+      console.error('Error al obtener los datos del reporte de extras', error);
+    }
+  });
+}
+
+
+
+
+ adjustWorksheet(worksheet: XLSX.WorkSheet, data: any[], headersMap: any) {
+  // Ajustar el ancho de las columnas
+  const headers = Object.keys(headersMap);
+  const columnWidths = headers.map((key) => {
+    const headerWidth = headersMap[key].length;
+    const maxWidth = Math.max(
+      ...data.map((row: any) => (row[key] ? row[key].toString().length : 0))
+    );
+    return Math.max(headerWidth, maxWidth) + 2; // Agregar un margen extra
+  });
+
+  worksheet['!cols'] = columnWidths.map(width => ({ wpx: width * 10 })); // Ajustar el ancho de las columnas (multiplicador por 10 es opcional)
+
+  // Ajustar el alto de las filas (opcional)
+  worksheet['!rows'] = [{ hpx: 20 }]; // Ajustar el alto de la primera fila (cabecera)
+}
+
+
+private saveAsExcelFile(buffer: any, fileName: string): void {
+  const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
+
+  const data: Blob = new Blob([buffer], {type: EXCEL_TYPE});
+  saveAs(data, `${fileName}.xlsx`);
 }
 
 

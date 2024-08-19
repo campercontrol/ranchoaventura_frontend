@@ -44,4 +44,27 @@ export class CampsVistaService {
   }
 
 
+
+  // reportes
+
+
+  getReportesGenerales(id:any){
+    return this.http.get(`http://142.93.12.234:8000/camps/${id}/general_report`); 
+  }
+  getReportesSeguros(id:any){
+    return this.http.get(`http://142.93.12.234:8000/camps/${id}/insurance_report`); 
+  }
+  getReportesContactossMedical(id:any){
+    return this.http.get(`http://142.93.12.234:8000/camps/${id}/medical_report`); 
+  }
+  getReporteComidaRestringida(id:any){
+    return this.http.get(`http://142.93.12.234:8000/camps/${id}/food_report`); 
+  }
+
+  getReporteSocialExtras(id:any){
+    return this.http.get(`http://142.93.12.234:8000/camps/${id}/social_report`); 
+  }
+  getReporteExtras(id:any){
+    return this.http.get(`http://142.93.12.234:8000/camps/${id}/extras_report`); 
+  }
 }

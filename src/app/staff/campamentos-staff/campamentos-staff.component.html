@@ -138,9 +138,15 @@
                   <button type="button" class="btn btn-outline-primary" id="dropdownBasic2"
                     ngbDropdownToggle>Reportes</button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-                    <button ngbDropdownItem>Acampadores</button>
-                    <button ngbDropdownItem>Detalles de pagos</button>
-                    <button ngbDropdownItem (click)="pdfinfodecampers()">Info de campers</button>
+                    <button ngbDropdownItem  (click)="reporteGeneral()">General</button>
+                    <button ngbDropdownItem (click)="reporteDatosGenerales()">Datos generales </button>
+                    <button ngbDropdownItem (click)="reporteDatosContactos()">Datos de contactos</button>
+                    <button ngbDropdownItem (click)="reporteMedical()">Datos medicos</button>
+                    <button ngbDropdownItem (click)="reporteComida()">Datos comidas prohibidos </button>
+                    <button ngbDropdownItem (click)="ReporteExtras()">Cargos extras </button>
+
+
+
                   </div>
                 </div>
                 <div ngbDropdown placement="top-end" class="d-inline-block">
