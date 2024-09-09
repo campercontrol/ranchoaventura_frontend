@@ -394,6 +394,8 @@ export class AdmiuserComponent implements OnInit {
   update(item){
     this.updateId = item.camper_id; 
    this.camperSer.getCamper(item.camper_id).subscribe((res:any)=>{
+    console.log(res,'informacion del camper');
+
     this.blood_types = res.blood_types;
     this.food_restrictions = res.food_restrictions;
     this.genders = res.genders;
@@ -405,7 +407,7 @@ export class AdmiuserComponent implements OnInit {
     this.vaccines = res.vaccines; 
     this.photoSelectUp = 'http://142.93.12.234:8000/'+res['camper'].photo;
    
-
+    
     this.formFood.patchValue({
      
       name:res['camper'].name,

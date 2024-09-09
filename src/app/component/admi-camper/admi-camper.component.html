@@ -177,12 +177,7 @@
                                         <input type="number" class="form-control" id="" formControlName="reminder_discount_days" #reminder_discount_days>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
-                                    <label for="" class="col-sm-3 col-form-label">Fecha limite de pago:</label>
-                                    <div class=" control-label col-sm-9">
-                                        <input type="datetime-local" class="form-control" placeholder="yyyy-mm-dd" >
-                                    </div>
-                                </div>
+                             
                                 <div class="row mb-3">
                                     <label class="col-sm-3 col-form-label">Tipo de pago</label>
                                     <div class="control-label col-sm-9">
@@ -242,7 +237,7 @@
         
                                             </div>
                                             <div class="p-field-checkbox col-9 d-flex flex-row">
-                                                <input type="checkbox" value="true" formControlName="show_paypal_button" 
+                                                <input type="checkbox" value="true" formControlName="show_mercadopago_button" 
                                                 class="mb-2"/>
                                             <label style="margin-left: 20px;" for="ny">Pagos atra vez de mercado pago</label>
                                             </div>
@@ -678,12 +673,20 @@
                                     </div>
 
                                  </div>
+                                 <div class="row mb-4">
+                                    <label for="" class="col-sm-3 col-form-label">Recordatorio fecha limite de pago:</label>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" id="" formControlName="reminder_discount_days" #reminder_discount_days>
+                                    </div>
+                                </div>
+                             
+                               
 
                                  <div class="row mb-3">
                                     <label class="col-sm-3 col-form-label">Tipo de pago</label>
                                     <div class="control-label col-sm-9">
 
-                                    <ng-select [items]="tipoPago" bindValue="id"(change)="onChange($event)"   bindLabel="name" 
+                                    <ng-select [items]="tipoPago" bindValue="id" (change)="onChange($event)"   bindLabel="name"  [(ngModel)]="tipoDepago" [ngModelOptions]="{standalone: true}"
                                       ></ng-select>
                                     </div>
 
@@ -746,7 +749,7 @@
         
                                             </div>
                                             <div class="p-field-checkbox col-9 d-flex flex-row">
-                                                <input type="checkbox" value="true" formControlName="show_paypal_button" 
+                                                <input type="checkbox" value="true" formControlName="show_mercadopago_button" 
                                                 class="mb-2"/>
                                             <label style="margin-left: 20px;" for="ny">Pagos atra vez de mercado pago</label>
                                             </div>
@@ -1048,6 +1051,57 @@
             
             
                                 </div>
+
+                            </div>
+                            <hr class="mt-4">
+                                                            <div class="col-lg-6 mt-4 mt-5">
+                                                                <div class="row">
+                                                                    <div >
+                                                                        <h4 for="">
+                                                                            Fechas sugeridas pagos</h4>
+                                                                        <hr>
+                                                                        <div *ngFor="let item of fecha_pago let i = index">
+                                                                            <div class="mt-4">
+                                                                                <div class="footerMensje">
+                                                                                    <div>
+                                                                                        <h3>Fechas {{i+1}}  <small (click)="deletFechaPago(i)" style="color: red;">X</small></h3>
+                                                                                    </div>
+                                                                                    
+                                        
+                                                                                </div>
+                                                                           
+                                                                                <div>
+                                                                                    <label for="" class="col-sm-6 col-form-label">Fecha del pago</label>
+                                                                                    <div class=" control-label col-lg-10">
+                                                                                        <input type="date" class="form-control" [(ngModel)]="item.name" name="name" [ngModelOptions]="{standalone: true}">
+                                                                                    </div>
+                                                                                </div>
+                                                                           
+                                                                              
+                                                                                <div>
+                                                                                    <label for="" class="col-sm-6 col-form-label">Cantidad</label>
+                                                                                    <div class=" control-label col-lg-10">
+                                                                                        <input type="number" class="form-control" [(ngModel)]="item.price" name="price" [ngModelOptions]="{standalone: true}">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                         
+                                                                       
+                                                                       
+                                                                       
+                                                                        </div>  
+                                                                    </div>
+                                                                    <div class="alert alert-danger" role="alert" *ngIf="alercharges">
+                                                                        Para poder agregar otra pregunta llena el campo antes
+                                                                     </div>
+                                                                       
+                                                                   <button class="btn btn-primary col-12 mt-3" (click)="newFechaPago()">Agregar fecha de pago</button>
+                                    
+                                                                </div>
+                                        
+                                        
+                                        
+                                                          
                                 
                                
             

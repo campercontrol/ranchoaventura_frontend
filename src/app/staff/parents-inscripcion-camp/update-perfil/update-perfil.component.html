@@ -75,13 +75,7 @@
     
                                 </div>
                                 <div *ngIf="spinerPhot">
-                                    <div class="alert alert-danger" role="alert" *ngIf="!photoSatus">
-                                        Aun no has  seleciona una imagen Recuerda tiene que ser un imagen TIPO JPG
-                                       </div>
-     
-                                       <div class="alert alert-secondary" role="alert" *ngIf="photoSatus">
-                                         Se Agrego corectamente
-                                       </div>
+                                 
                                 </div>
         
                                   <div class="spinner-border" role="status" *ngIf="!spinerPhot">
@@ -191,7 +185,7 @@
     
     
                                         <div class="form-check form-check-inline" *ngFor="let item of vaccines;index as i">
-                                            <input (click)="vaccinesValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions"
+                                            <input (click)="vaccinesValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions" [checked]="item.is_active"
                                                 id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}"
                                                 >
                                             <label class="form-check-label" for="inlineRadio1">{{item.name}}</label>
@@ -241,7 +235,7 @@
                             <div class="input-datos-medicos">
                                 <p style="margin-top:2px ;">{{textos['CAMPER']}}</p>
                                 <ng-container  *ngFor="let item of pathological_background;index as i">
-                                    <input (click)="pathological_backgroundValu(i)" type="checkbox" style="margin-top:10px ;" value="{{item.is_active}}"
+                                    <input (click)="pathological_backgroundValu(i)" type="checkbox" style="margin-top:10px ;" value="{{item.is_active}}" [checked]="item.is_active"
                                         id="{{item.id}}">
                                     <br>
 
@@ -250,7 +244,7 @@
                             <div class="input-datos-medicos">
                                 <p style="margin-top:2px ;">{{textos['FAMILY']}}</p>
                                 <ng-container  *ngFor="let item of pathological_background_fm;index as i">
-                                    <input (click)="pathological_background_fmValu(i)" type="checkbox" style="margin-top:10px ;" value="{{item.is_active}}"
+                                    <input (click)="pathological_background_fmValu(i)" type="checkbox" style="margin-top:10px ;" value="{{item.is_active}}" [checked]="item.is_active"
                                         id="{{item.id}}">
                                     <br>
                                 </ng-container>
@@ -338,7 +332,7 @@
                                 <div class="input-datos-medicos" style="margin-top: 0px;">
 
                                     <div *ngFor="let item of licensed_medicines; index as i" >
-                                        <input type="checkbox" style="margin-top:13px ;" (click)="licensed_medicinesValu(i)" value="{{item.is_active}}" 
+                                        <input type="checkbox" style="margin-top:13px ;" (click)="licensed_medicinesValu(i)" value="{{item.is_active}}"  [checked]="item.is_active"
                                             id="{{item.id}}">
                                         <br>
                                     </div>
@@ -407,8 +401,7 @@
                                
                                 <div class="form-check">
                                     <input type="checkbox" class=" form-check-input" formControlName="doctor_precall">
-                                    <label for="" class="form-check-label"> ¿Te gustaría que el médico del campamento se ponga en contacto con
-                                        usted antes del campamento?</label>
+                                    <label for="" class="form-check-label"> Me gustaría tener una llamada con el doctor antes de que inicie el campamento, pues hay detalles importantes que quiero compartir y que podrían tomar demasiado tiempo si lo hago el día que sale el campamento</label>
                                 </div>
                             </div>
                         </div>

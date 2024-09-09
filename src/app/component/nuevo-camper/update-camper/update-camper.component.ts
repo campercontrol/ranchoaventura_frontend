@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CamperService } from 'src/services/camper.service';
 import traducciones  from 'src/assets/json/lengua.json';
 import { LangService } from 'src/services/lang.service';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -79,7 +80,7 @@ export class UpdateCamperComponent implements OnInit {
 
 
 
-  constructor(private catalogos: CamperService , private formGrup: FormBuilder, private router:Router,private routesA:ActivatedRoute,private render:Renderer2,private info: AuthenticationService,private lang:LangService) {
+  constructor(private catalogos: CamperService,private location: Location , private formGrup: FormBuilder, private router:Router,private routesA:ActivatedRoute,private render:Renderer2,private info: AuthenticationService,private lang:LangService) {
     this.routesA.params.subscribe((params)=>{
       this.id = params['id']
     })
@@ -122,7 +123,7 @@ export class UpdateCamperComponent implements OnInit {
       school_id:[0,[Validators.required,this.greaterThanZeroValidator()]],
       school_other:["",],
       email: [""],
-      can_swim: [0],
+      can_swim: [87],
       affliction: ["",[Validators.required]],
       blood_type: [0,[Validators.required,this.greaterThanZeroValidator()]],
       heart_problems: ["",[Validators.required,Validators.minLength(2)]],
@@ -621,7 +622,7 @@ export class UpdateCamperComponent implements OnInit {
             contact_homephone: res['camper'].contact_homephone,
             contact_cellphone: res['camper'].contact_cellphone,
             record_id:0,
-            parent_id: this.info.infToken.profile_id,
+            parent_id: res['camper'].parent_id,
         
 
 
@@ -654,7 +655,20 @@ export class UpdateCamperComponent implements OnInit {
         console.log(res);
         if(res.succes = 200){
           this.spinner=false;
+          if(this.info.infToken.role_id >1){
+
+            const previousUrl = this.location.path(); // Obtiene la URL anterior
+
+            if (previousUrl) {
+              this.location.back(); // Regresa a la página anterior
+            } else {
+              this.router.navigate([' dashboard/parents/inscription/camper/'+this.id]); // Redirige a una ruta específica si no hay página anterior
+            }
+          
+          }
+        }else{
           this.router.navigate(['dashboard']);
+
         }
         
     });

@@ -33,14 +33,29 @@ export class RegisteredChildrenComponent implements OnInit {
   selectValue: string[];
   idioma = 'esp'
   textos = {}
-  total:any ;
+  total:any =0;
   constructor(private modalService: NgbModal, private formBuilder: FormBuilder,private hijos:CamperService, private router:Router,private info: AuthenticationService,private lang :LangService) { 
     this.hijos.getHijos(this.info.infToken.profile_id).subscribe(
       (res:any)=>{
         console.log(res);
         this.hijosRes = res.campers;
+        console.log(this.hijosRes, 'informacion');
+        
+        this.hijosRes.forEach((hijo: any) => {
+            hijo.camper_balance_update = 0;
+        
+            if (Array.isArray(hijo.camps)) {
+                hijo.camps.forEach(camp => {
+                    if (camp.show_payment_parent) {
+                        hijo.camper_balance_update += camp.camper_payment_balance;
+                    }
+                });
+            }
+            this.total = hijo.camper_balance_update + this.total
+
+        });
+        
         this.cargando = true;
-        this.total = res.parent_total_amount
       }
     )
 

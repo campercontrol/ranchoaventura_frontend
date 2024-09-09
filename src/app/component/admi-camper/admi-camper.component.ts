@@ -83,10 +83,11 @@ export class AdmiCamperComponent implements OnInit {
   parent:any = [];
   paymanacout:any = [];
   selected:any = [];
-  tipoPago =[{'name':'Mercado pago','id':1},{'name':'Pago en escuela','id':2},{'name':'Ficha de pago','id':3}]
+  tipoPago =[{'name':'Mercado pago','id':1},{'name':'Pago en escuela','id':2},{'name':'Ficha de pago','id':3},{'name':'Personalizado','id':4}]
 
   escuelas:any = [];
   photoSelectUp : string | ArrayBuffer;
+  tipoDepago = 4
   idioma = 'esp';
   cargando =true;
   rol:any=[];
@@ -138,6 +139,7 @@ export class AdmiCamperComponent implements OnInit {
       special_message_admin: ["",[Validators.required]],
       public_price:  [0,[Validators.required]], // listo 
       show_payment_parent:  [true], //listo
+      show_mercadopago_button:[false],
       show_rebate_parent:  [true],//listo
       show_paypal_button:  [true],// listo
       show_payment_order:  [true],
@@ -156,16 +158,56 @@ export class AdmiCamperComponent implements OnInit {
       school_id:  [0,[Validators.required,Validators.min(1)]], // listo
       season_id:  [0,[Validators.required,Validators.min(1)]], // listo
       created_at: [this.fecha],
+      recommended_payment_dates:[''],
       extra_charges: [this.extra_charges],
       extra_question:[ this.extra_question],
-      payment_accounts:[[],]
+      payment_accounts:[this.payment_accounts]
       
     })
    
     this.getCatalogos();
   }
   showDialog() {
-   
+    this.formFood = this.formGrup.group({
+      name: ["",[Validators.required,Validators.minLength(2)]], //listo
+      start: ["",[Validators.required]], //listo
+      end:  ["",[Validators.required]], //listo
+      start_registration: ["",[Validators.required]], //listo
+      end_registration:["",[Validators.required]], //listo
+      registration: [true], //listo insurance
+      url: [""], //listo
+      special_message: ["",[Validators.required]],
+      special_message_admin: ["",[Validators.required]],
+      public_price:  [0,[Validators.required]], // listo 
+      show_payment_parent:  [true], //listo
+      show_rebate_parent:  [true],//listo
+      show_mercadopago_button:  [false],//listo
+
+      show_paypal_button:  [true],// listo
+      show_payment_order:  [true],
+      reminder_camp_days:  [15],//listo fecha limite de pago
+      reminder_discount_days:  [15],//listo
+      insurance:  [0,[Validators.required]], // listo
+      venue:  ["",[Validators.required]], // listo 
+      photo_url:  ["",[Validators.required]], // listo
+      photo_password:  ["",[Validators.required]], // listo
+      medical_report:  ["  "],//listo
+      occupancy_camp:  [0], // cupo de campamentos faltante
+      active:  [true], //listo
+      general_camp:  [false], //listo
+      currency_id: [0,[Validators.required,Validators.min(1)]],// listo
+      location_id:  [0,[Validators.required,Validators.min(1)]], //listo
+      school_id:  [0,[Validators.required,Validators.min(1)]], // listo
+      season_id:  [0,[Validators.required,Validators.min(1)]], // listo
+      created_at: [this.fecha],
+      extra_charges: [],
+      extra_question:[ ],
+      payment_accounts:[],
+      recommended_payment_dates:['']
+
+      
+    })
+    this.fecha_pago=[]
     this.table = false;
   }
   showDialog2() {
@@ -215,6 +257,11 @@ export class AdmiCamperComponent implements OnInit {
     this.spinner=true;
     if(this.formFood.valid){  
       let pay = this.formFood.get('payment_accounts').value;
+      this.formFood.patchValue({
+
+        recommended_payment_dates: this.arrayToJsonString(this.fecha_pago)
+
+      }) 
      //this.payment_accounts = pay;
 
       let a = {
@@ -224,6 +271,9 @@ export class AdmiCamperComponent implements OnInit {
          "extra_charges":this.extra_charges,
          "extra_discounts":this.extra_discounts,
     }
+
+    console.log(a);
+    
     delete a.camp.payment_accounts;
     delete a.camp.extra_question;
     delete a.camp.extra_charges;
@@ -236,6 +286,7 @@ export class AdmiCamperComponent implements OnInit {
             this.statuAgrgado = true;
             this.extra_charges = [];
             this.extra_question= [];
+            this.fecha_pago=[]
             this.formFood.reset;
             this.resteValu();
            // this.table= true;
@@ -271,7 +322,7 @@ export class AdmiCamperComponent implements OnInit {
 
     }
 
-    
+  
   }
   resteValu() {
     this.formFood.reset();
@@ -324,14 +375,17 @@ export class AdmiCamperComponent implements OnInit {
       season_id:  item.season_id, // listo
       extra_charges:item.extra_charges,
       extra_question:item.extra_question,
-      payment_accounts:res.camp.payment_accounts
+      show_mercadopago_button:item.show_mercadopago_button,
+      payment_accounts:res.payment_accounts
    })
+   this.fecha_pago = this.jsonStringToArray(item.recommended_payment_dates)
    this.extra_charges = res.extra_charges;
    this.extra_question =res.extra_questions;
+   this.payment_accounts =res.payment_accounts
    
     });
   
-
+    this.tipoDepago = this.determineTipoDepago();
    
   
     
@@ -345,7 +399,7 @@ export class AdmiCamperComponent implements OnInit {
   onChange(event:any){
       if(event.id == 1){
         this.formFood.patchValue({
-          show_paypal_button: true,
+          show_mercadopago_button: true,
           show_payment_order:false,
           show_payment_parent:true,
           show_rebate_parent:true
@@ -382,12 +436,42 @@ export class AdmiCamperComponent implements OnInit {
     })
   }
 
+
+
+  determineTipoDepago() {
+    const formValues = this.formFood.value;
+  
+    if (formValues.show_paypal_button === true && 
+        formValues.show_payment_order === false && 
+        formValues.show_payment_parent === true && 
+        formValues.show_rebate_parent === true) {
+      return 1;
+    } else if (formValues.show_paypal_button === false && 
+               formValues.show_payment_order === false && 
+               formValues.show_payment_parent === false && 
+               formValues.show_rebate_parent === false) {
+      return 2;
+    } else if (formValues.show_paypal_button === false && 
+               formValues.show_payment_order === false && 
+               formValues.show_payment_parent === true && 
+               formValues.show_rebate_parent === true) {
+      return 3;
+    } else {
+      return 4; // En caso de que no se ajuste a ningún tipoDepago
+    }
+  }
+
   keepUpdate(){
     this.spinner=true;
     if(this.formFood.valid){     
+      this.formFood.patchValue({
+
+        recommended_payment_dates: this.arrayToJsonString(this.fecha_pago)
+
+      }) 
       let a = {
         "camp":this.formFood.value,
-        "payment_accounts":this.payment_accounts,
+        "payment_accounts":this.formFood.get('payment_accounts').value ,
         "extra_question":this.extra_question,
          "extra_charges":this.extra_charges,
          "extra_discounts":this.extra_discounts,
@@ -405,11 +489,11 @@ export class AdmiCamperComponent implements OnInit {
             this.formFood.reset;
             this.resteValu();
            // this.table= true;
-            setTimeout(() => {
+           
               this.statuAgrgado = false;
               this.table= true;
               this.display2 = false;
-            }, 1000);    
+           
           }
           
       },error => {
@@ -638,6 +722,23 @@ export class AdmiCamperComponent implements OnInit {
   deletFechaPago(i){
     this.fecha_pago.splice(i);
 
+  }
+
+
+  arrayToJsonString(array: any[]): string {
+    return JSON.stringify(array);
+  }
+
+  jsonStringToArray(jsonString: string | null | undefined): any[] {
+    if (jsonString !== null && jsonString !== undefined) {
+      try {
+        return JSON.parse(jsonString);
+      } catch (error) {
+        console.error("Error al parsear JSON:", error);
+        return [];
+      }
+    }
+    return [];
   }
   
   

@@ -18,34 +18,47 @@ export class NuevaConsultaComponent implements OnInit {
   bloodytype:any = [];
   formConsult!:FormGroup;
   showSpinner:boolean= false;
-
-
+  idConsult:any ;
+  medicalTracing= false;
+  idSeguimiento :any = null
   constructor(private routesA:ActivatedRoute,private medical:MedicalService,private formBuild:FormBuilder,private router:Router) {
     this.routesA.params.subscribe((params) => {
       this.camperid = params['camperid'];
       this.campId = params['campId'];
+      this.idConsult = params['idConsult'];
+      console.log(this.idConsult);
+      
+      if(this.idConsult== undefined){
+        this.medicalTracing= false;
+        this.idSeguimiento= null;
+
+      }else{
+        this.medicalTracing= true;
+        this.idSeguimiento = this.idConsult
+      }
+      this.formConsult= formBuild.group({
+        "medical_tracing": this.medicalTracing,
+        "doctor": ["",[Validators.required]], // listo
+        "attention_date": ["",[Validators.required]], //listo
+        "attention_time": ["",[Validators.required]], // listo
+        "diagnostic": ["",[Validators.required]], // listo  
+        "description": ["",[Validators.required]], // listo
+        "triage": 1,
+        "medication_authorization": [1,[Validators.required]],
+        "event_description": ["",[Validators.required]],
+        "camp_restriction": ["",[Validators.required]], // listo
+        "administered_medications": ["",[Validators.required]],
+        "medical_monitoring": ["",[Validators.required]],
+        "comment": ["",[Validators.required]],// listo
+        "medical_comment": ["",[Validators.required]], // listo
+        "send_in_email": true,
+        "already_sent": true,
+        "camp_id": this.campId,
+        "camper_id": this.camperid,
+        "initial_visit_id": this.idSeguimiento,
+      })
     })
-    this.formConsult= formBuild.group({
-      "medical_tracing": true,
-      "doctor": ["",[Validators.required]], // listo
-      "attention_date": ["",[Validators.required]], //listo
-      "attention_time": ["",[Validators.required]], // listo
-      "diagnostic": ["",[Validators.required]], // listo  
-      "description": ["",[Validators.required]], // listo
-      "triage": 1,
-      "medication_authorization": [1,[Validators.required]],
-      "event_description": ["",[Validators.required]],
-      "camp_restriction": ["",[Validators.required]], // listo
-      "administered_medications": ["",[Validators.required]],
-      "medical_monitoring": ["",[Validators.required]],
-      "comment": ["",[Validators.required]],// listo
-      "medical_comment": ["",[Validators.required]], // listo
-      "send_in_email": true,
-      "already_sent": true,
-      "camp_id": this.campId,
-      "camper_id": this.camperid,
-      "initial_visit_id": null,
-    })
+  
 
   }
 

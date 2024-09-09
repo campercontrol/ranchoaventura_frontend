@@ -173,6 +173,7 @@ import { LocacionComponent } from './component/locacion/locacion.component';
 
 
 
+
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
 } else {
@@ -257,7 +258,7 @@ export function createTranslateLoader(http: HttpClient): any {
     OrderListModule,
     NgbToastModule,
     TabViewModule,
-    
+    TagModule,
 
       TableModule,
     TranslateModule.forRoot({

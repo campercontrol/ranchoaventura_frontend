@@ -134,6 +134,8 @@ export class CampamentosStaffComponent implements OnInit {
   fecha = new Date();
   alercharges= false;
   public Editor = ClassicEditor;
+  alertPago =false
+
 
 
   
@@ -176,6 +178,10 @@ export class CampamentosStaffComponent implements OnInit {
   { Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },
   { Nombre: "Campamento con agrupaciones", grado: "prueba2", inicio: "2020-11-10 ", termina: "2020-11-10 " },
   ]
+  fecha_pago =[]
+  tipoPago =[{'name':'Mercado pago','id':1},{'name':'Pago en escuela','id':2},{'name':'Ficha de pago','id':3},{'name':'Personalizado','id':4}]
+
+  tipoDepago = 4
   customer = [{id:2, name: "Alberto Ulises Hernandez Cruz", record: { n: 2, b: 2, d: 3 }, precio: 5500, sede: "Los Potros", inicio: "2023-11-28", termina: "2023-11-28", estado: "Pagado", cumple: true }
     , {id:3, name: "Arueba de Nombre", record: { n: 12, b: 2, d: 3 }, precio: 2500, sede: "Los Potros", inicio: "2023-11-28", termina: "2023-11-28", estado: "Pagado", cumple: false },
   {id:4, name: "Lrueba de Nombre", record: { n: 12, b: 2, d: 3 }, precio: 5500, sede: "aLos Potros", inicio: "2023-11-28", termina: "2023-11-28", estado: "Pagado", cumple: true }]
@@ -212,13 +218,66 @@ export class CampamentosStaffComponent implements OnInit {
       school_id:  [0,[Validators.required,Validators.min(1)]], // listo
       season_id:  [0,[Validators.required,Validators.min(1)]], // listo
       created_at: [this.fecha],
+      show_mercadopago_button:[false],
       extra_charges: [this.extra_charges],
       extra_question:[ this.extra_question],
+      recommended_payment_dates:[''],
       payment_accounts:[this.payment_accounts]
       
     })
 
   }
+
+  onChange(event:any){
+    if(event.id == 1){
+      this.formFood.patchValue({
+        show_paypal_button: true,
+        show_payment_order:false,
+        show_payment_parent:true,
+        show_rebate_parent:true
+      })
+    }else if(event.id == 2){
+      this.formFood.patchValue({
+        show_paypal_button: false,
+        show_payment_order:false,
+        show_payment_parent:false,
+        show_rebate_parent:false
+      })
+
+    }else if(event.id == 3){
+      this.formFood.patchValue({
+        show_paypal_button: false,
+        show_payment_order:false,
+        show_payment_parent:true,
+        show_rebate_parent:true
+      })
+    }
+}
+
+
+
+determineTipoDepago() {
+  const formValues = this.formFood.value;
+
+  if (formValues.show_paypal_button === true && 
+      formValues.show_payment_order === false && 
+      formValues.show_payment_parent === true && 
+      formValues.show_rebate_parent === true) {
+    return 1;
+  } else if (formValues.show_paypal_button === false && 
+             formValues.show_payment_order === false && 
+             formValues.show_payment_parent === false && 
+             formValues.show_rebate_parent === false) {
+    return 2;
+  } else if (formValues.show_paypal_button === false && 
+             formValues.show_payment_order === false && 
+             formValues.show_payment_parent === true && 
+             formValues.show_rebate_parent === true) {
+    return 3;
+  } else {
+    return 4; // En caso de que no se ajuste a ningún tipoDepago
+  }
+}
 
   getInof(){
     this.cargando= false;
@@ -466,10 +525,17 @@ update(){
    season_id:  item.season_id, // listo
    extra_charges:item.extra_charges,
    extra_question:item.extra_question,
-   payment_accounts:item.payment_accounts
+   payment_accounts:res.payment_accounts,
+   show_mercadopago_button: item.show_mercadopago_button
 })
 this.extra_charges = res.extra_charges;
 this.extra_question =res.extra_questions;
+this.payment_accounts =res.payment_accounts;
+this.fecha_pago = this.jsonStringToArray(item.recommended_payment_dates)
+
+this.tipoDepago = this.determineTipoDepago();
+
+
  });
 
 
@@ -484,12 +550,62 @@ fechaParse(fechaDesdeBackend){
 }
 
 
+
+arrayToJsonString(array: any[]): string {
+  return JSON.stringify(array);
+}
+
+jsonStringToArray(jsonString: string | null | undefined): any[] {
+  if (jsonString !== null && jsonString !== undefined) {
+    try {
+      return JSON.parse(jsonString);
+    } catch (error) {
+      console.error("Error al parsear JSON:", error);
+      return [];
+    }
+  }
+  return [];
+}
+
+newFechaPago(){
+  let a = this.extra_charges.length;
+  if(this.extra_charges.length>0){
+    let b =this.extra_charges[a-1].name;
+    if( b.length>0){
+      let a = {
+        "name": "",
+        "price": 0,
+        "created_at":this.fecha
+
+      }
+      this.fecha_pago.push(a);
+      this.alertPago = false;
+    }else{
+      this.alertPago = true;
+    }
+  }else{
+    let a = {
+      "name": "",
+      "price": 0,
+      "created_at":this.fecha
+    }
+    this.fecha_pago.push(a);
+    this.alertPago = false
+  }
+ 
+}
+
 keepUpdate(){
  if(this.formFood.valid){    
+  this.formFood.patchValue({
+
+    recommended_payment_dates: this.arrayToJsonString(this.fecha_pago)
+
+  }) 
   this.spinner = true; 
    let a = {
      "camp":this.formFood.value,
-     "payment_accounts":this.payment_accounts,
+     "payment_accounts":this.formFood.get('payment_accounts').value ,
      "extra_question":this.extra_question,
       "extra_charges":this.extra_charges,
       "extra_discounts":this.extra_discounts,
@@ -598,6 +714,10 @@ validateSchoolId(): void {
 validateSeasonId(): void {
   this.validateFormField(this.season_id,'season_id');
 }
+deletFechaPago(i){
+  this.fecha_pago.splice(i);
+
+} 
 newExtraQuestion(){
   let a = this.extra_question.length;
   if(this.extra_question.length>0){
@@ -664,7 +784,7 @@ deletExtracharges(i){
   this.extra_charges.splice(i);
 
 }
-
+// ya esta
 reporteGeneral() {
   this.capms.getReportesGenerales(this.idCamp).subscribe({
     next: (response: any) => {
@@ -712,11 +832,11 @@ reporteGeneral() {
         'second_tutor_work_phone': 'Teléfono del Trabajo del Segundo Tutor',
         'second_tutor_email': 'Email del Segundo Tutor',
         'emergency contact': 'Contacto de Emergencia',
-        'contact kinship': 'Parentesco del Contacto de Emergencia',
+        'contact_kinship': 'Parentesco del Contacto de Emergencia',
         'contact_cellphone': 'Celular del Contacto de Emergencia',
         'contact_homephone': 'Teléfono de Casa del Contacto de Emergencia',
         'payment_balance': 'Saldo de Pago',
-        'registration date': 'Fecha de Registro',
+        'registration_date': 'Fecha de Registro',
         'Comments (Parent)': 'Comentarios de Padres',
         'Comments (Staff)': 'Comentarios del Personal',
         'Comments (School)': 'Comentarios de la Escuela'
@@ -726,19 +846,29 @@ reporteGeneral() {
       const modifiedData = data.map((row: any) => {
         const newRow: any = {};
 
+        // Mapear claves conocidas
         for (const key in headersMap) {
           if (headersMap.hasOwnProperty(key)) {
             newRow[headersMap[key]] = row.hasOwnProperty(key) ? row[key] : '';
           }
         }
 
+        // Incluir cualquier clave no mapeada (sin traducción)
+        for (const key in row) {
+          if (!headersMap.hasOwnProperty(key)) {
+            newRow[key] = row[key];
+          }
+        }
+
         // Convertir valores booleanos a "Sí" o "No"
         for (const key in newRow) {
           if (typeof newRow[key] === 'boolean') {
-            newRow[key] = newRow[key] ? 'Sí' : 'No';
+              newRow[key] = newRow[key] ? 'Sí' : 'No';
+          } else if (typeof newRow[key] === 'number' && (newRow[key] === 0 || newRow[key] === 1)) {
+              newRow[key] = newRow[key] === 1 ? 'Sí' : 'No';
           }
-        }
-        
+      }
+
         // Concatenar comentarios
         newRow['Comentarios de Padres'] = row['Comments (Parent)'] ? row['Comments (Parent)'].map((comment: any) => comment.comment).join(', ') : '';
         newRow['Comentarios del Personal'] = row['Comments (Staff)'] ? row['Comments (Staff)'].map((comment: any) => comment.comment).join(', ') : '';
@@ -748,8 +878,8 @@ reporteGeneral() {
       });
 
       // Obtener las cabeceras en el formato correcto
-      const headers = Object.keys(headersMap);
-      const translatedHeaders = headers.map(header => headersMap[header]);
+      const headers = [...new Set([...Object.keys(headersMap), ...data.flatMap(Object.keys)])];
+      const translatedHeaders = headers.map(header => headersMap[header] || header);
 
       // Convertir los datos a una hoja de Excel
       const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(modifiedData, { header: translatedHeaders });
@@ -790,6 +920,7 @@ reporteGeneral() {
 }
 
 
+// ya esta
 reporteDatosGenerales() {
   this.capms.getReportesSeguros(this.idCamp).subscribe({
     next: (response: any) => {
@@ -806,9 +937,6 @@ reporteDatosGenerales() {
         'gender': 'Género'
       };
 
-      // Convertir los valores booleanos a "Sí" o "No" (si es necesario)
-      // Puedes agregar esta lógica si los datos contienen valores booleanos
-
       // Convertir los datos a una hoja de Excel
       const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data, { header: Object.keys(headersMap) });
 
@@ -819,19 +947,31 @@ reporteDatosGenerales() {
         worksheet[cell_address] = { v: headersMap[Object.keys(headersMap)[i]], t: 's' };
       }
 
-      // Ajustar el ancho de las columnas
+      // Ajustar el ancho de las columnas basado en el contenido más largo
       const columnWidths = Object.keys(headersMap).map((key, index) => {
         const headerWidth = headersMap[key].length;
         const maxWidth = Math.max(
+          headerWidth,
           ...data.map((row: any) => (row[key] ? row[key].toString().length : 0))
         );
-        return Math.max(headerWidth, maxWidth) + 2; // Agregar un margen extra
+        return maxWidth + 2; // Agregar un margen extra
       });
 
-      worksheet['!cols'] = columnWidths.map(width => ({ wpx: width * 10 })); // Ajustar el ancho de las columnas (multiplicador por 10 es opcional)
+      worksheet['!cols'] = columnWidths.map(width => ({ wch: width })); // Usar 'wch' para ajustar automáticamente al contenido
 
-      // Ajustar el alto de las filas (opcional)
-      worksheet['!rows'] = [{ hpx: 20 }]; // Ajustar el alto de la primera fila (cabecera)
+      // Ajustar el alto de las filas basado en el contenido más largo
+      const rowHeights = data.map(row => {
+        const maxHeight = Math.max(...Object.keys(headersMap).map(key => {
+          const cellContent = row[key] ? row[key].toString() : '';
+          return cellContent.split('\n').length * 20; // Ajustar a 20px por línea
+        }));
+        return { hpx: maxHeight }; // Ajustar el alto basado en el contenido
+      });
+
+      // Añadir una altura específica para la cabecera si es necesario
+      rowHeights.unshift({ hpx: 25 }); // Añadir altura específica para la cabecera
+
+      worksheet['!rows'] = rowHeights;
 
       // Crear un nuevo libro de trabajo
       const workbook: XLSX.WorkBook = { Sheets: { 'Datos': worksheet }, SheetNames: ['Datos'] };
@@ -840,15 +980,17 @@ reporteDatosGenerales() {
       const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
 
       // Guardar el archivo
-      this.saveAsExcelFile(excelBuffer, 'Reporte Basico ' + this.infoCamp.name);
+      this.saveAsExcelFile(excelBuffer, 'Reporte Seguro Vs Accidentes' + this.infoCamp.name);
     },
     error: (error) => {
       console.error('Error al obtener los datos del reporte general', error);
     }
   });
 }
+
+// ya esta 
 reporteDatosContactos() {
-  this.capms.getReportesContactossMedical(this.idCamp).subscribe({
+  this.capms.getReporteSocialExtras(this.idCamp).subscribe({
     next: (response: any) => {
       const data = response;
 
@@ -877,22 +1019,44 @@ reporteDatosContactos() {
         'emergency_contact_cellphone': 'Celular del Contacto de Emergencia'
       };
 
-      // Convertir los valores booleanos a "Sí" o "No" (si es necesario)
-     
+      // Convertir los datos a una hoja de Excel
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data, { header: Object.keys(headersMap) });
 
-      // Construir los datos con las cabeceras en español
+      // Modificar las cabeceras de la hoja de Excel
+      const range = XLSX.utils.decode_range(worksheet['!ref']!);
       const headers = Object.keys(headersMap);
       const translatedHeaders = headers.map(header => headersMap[header]);
 
-      // Convertir los datos a una hoja de Excel
-      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data, { header: headers });
-
-      // Modificar la cabecera de la hoja de Excel
-      const range = XLSX.utils.decode_range(worksheet['!ref']!);
       for (let i = range.s.c; i <= range.e.c; i++) {
         const cell_address = XLSX.utils.encode_cell({ r: 0, c: i });
         worksheet[cell_address] = { v: translatedHeaders[i], t: 's' };
       }
+
+      // Ajustar el ancho de las columnas basado en el contenido más largo
+      const columnWidths = headers.map((key, index) => {
+        const headerWidth = headersMap[key].length;
+        const maxWidth = Math.max(
+          headerWidth,
+          ...data.map((row: any) => (row[key] ? row[key].toString().length : 0))
+        );
+        return maxWidth + 2; // Agregar un margen extra
+      });
+
+      worksheet['!cols'] = columnWidths.map(width => ({ wch: width })); // Usar 'wch' para ajustar automáticamente al contenido
+
+      // Ajustar el alto de las filas basado en el contenido más largo
+      const rowHeights = data.map(row => {
+        const maxHeight = Math.max(...headers.map(key => {
+          const cellContent = row[key] ? row[key].toString() : '';
+          return cellContent.split('\n').length * 20; // Ajustar a 20px por línea
+        }));
+        return { hpx: maxHeight }; // Ajustar el alto basado en el contenido
+      });
+
+      // Añadir una altura específica para la cabecera si es necesario
+      rowHeights.unshift({ hpx: 25 }); // Añadir altura específica para la cabecera
+
+      worksheet['!rows'] = rowHeights;
 
       // Crear un nuevo libro de trabajo
       const workbook: XLSX.WorkBook = { Sheets: { 'Datos': worksheet }, SheetNames: ['Datos'] };
@@ -909,13 +1073,12 @@ reporteDatosContactos() {
   });
 }
 
-
+// ya esta
 reporteMedical() {
   this.capms.getReportesContactossMedical(this.idCamp).subscribe({
     next: (response: any) => {
       const data = response;
 
-      // Mapeo de claves del JSON a cabeceras en español solo para los atributos especificados
       const headersMap: any = {
         'name': 'Nombre',
         'lastname_father': 'Apellido Paterno',
@@ -958,42 +1121,47 @@ reporteMedical() {
         'emergency_home_phone': 'Teléfono de Casa del Contacto de Emergencia'
       };
 
-      // Construir los datos modificados solo con las cabeceras especificadas
       const modifiedData = data.map((row: any) => {
-        const newRow: any = { ...row };
-        const updatedRow: any = {};
-
-        for (const key in newRow) {
+        const newRow: any = {};
+        for (const key in row) {
           if (headersMap.hasOwnProperty(key)) {
-            updatedRow[headersMap[key]] = newRow[key];
+            newRow[headersMap[key]] = this.convertToYesNo(row[key]);
           } else {
-            updatedRow[key] = newRow[key];  // Mantener el nombre original para otras claves
+            newRow[key] = row[key];
           }
         }
-        return updatedRow;
+        return newRow;
       });
 
-      // Construir los datos con las cabeceras en español
-      const headers = Object.keys(headersMap);
-      const translatedHeaders = headers.map(header => headersMap[header]);
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(modifiedData);
 
-      // Convertir los datos a una hoja de Excel
-      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(modifiedData, { header: translatedHeaders });
+      const columnWidths = Object.keys(headersMap).map((key) => {
+        const headerWidth = headersMap[key].length;
+        const maxWidth = Math.max(
+          headerWidth,
+          ...data.map((row: any) => (row[key] ? row[key].toString().length : 0))
+        );
+        return maxWidth + 2;
+      });
 
-      // Modificar la cabecera de la hoja de Excel
-      const range = XLSX.utils.decode_range(worksheet['!ref']!);
-      for (let i = range.s.c; i <= range.e.c; i++) {
-        const cell_address = XLSX.utils.encode_cell({ r: 0, c: i });
-        worksheet[cell_address] = { v: translatedHeaders[i], t: 's' };
-      }
+      worksheet['!cols'] = columnWidths.map(width => ({ wch: width }));
 
-      // Crear un nuevo libro de trabajo
+      const rowHeights = modifiedData.map(row => {
+        const maxHeight = Math.max(...Object.keys(headersMap).map(key => {
+          const cellContent = row[headersMap[key]] ? row[headersMap[key]].toString() : '';
+          return cellContent.split('\n').length * 15;
+        }));
+        return { hpx: maxHeight };
+      });
+
+      rowHeights.unshift({ hpx: 25 });
+
+      worksheet['!rows'] = rowHeights;
+
       const workbook: XLSX.WorkBook = { Sheets: { 'Datos': worksheet }, SheetNames: ['Datos'] };
 
-      // Generar el archivo Excel
       const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
 
-      // Guardar el archivo
       this.saveAsExcelFile(excelBuffer, 'Reporte Médico ' + this.infoCamp.name);
     },
     error: (error) => {
@@ -1003,11 +1171,10 @@ reporteMedical() {
 }
 
 reporteComida() {
-  this.capms.getReportesContactossMedical(this.idCamp).subscribe({
+  this.capms.getReporteComidaRestringida(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response; // Asegúrate de que 'data' contenga el array de objetos
+      const data = response;
 
-      // Mapeo de claves del JSON a cabeceras en español solo para los atributos especificados
       const headersMap: any = {
         'name': 'Nombre',
         'lastname_father': 'Apellido Paterno',
@@ -1020,40 +1187,47 @@ reporteComida() {
         'Vegetariana / Vegetarian': 'Vegetariana'
       };
 
-      // Construir los datos modificados solo con las cabeceras especificadas
       const modifiedData = data.map((row: any) => {
         const newRow: any = {};
         for (const key in row) {
           if (headersMap.hasOwnProperty(key)) {
-            newRow[headersMap[key]] = row[key];
+            newRow[headersMap[key]] = this.convertToYesNo(row[key]);
           } else {
-            newRow[key] = row[key];  // Mantener el nombre original para otras claves
+            newRow[key] = row[key];
           }
         }
         return newRow;
       });
 
-      // Construir los datos con las cabeceras en español
-      const headers = Object.keys(headersMap);
-      const translatedHeaders = headers.map(header => headersMap[header]);
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(modifiedData);
 
-      // Convertir los datos a una hoja de Excel
-      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(modifiedData, { header: translatedHeaders });
+      const columnWidths = Object.keys(headersMap).map((key) => {
+        const headerWidth = headersMap[key].length;
+        const maxWidth = Math.max(
+          headerWidth,
+          ...data.map((row: any) => (row[key] ? row[key].toString().length : 0))
+        );
+        return maxWidth + 2;
+      });
 
-      // Modificar la cabecera de la hoja de Excel
-      const range = XLSX.utils.decode_range(worksheet['!ref']!);
-      for (let i = range.s.c; i <= range.e.c; i++) {
-        const cell_address = XLSX.utils.encode_cell({ r: 0, c: i });
-        worksheet[cell_address] = { v: translatedHeaders[i], t: 's' };
-      }
+      worksheet['!cols'] = columnWidths.map(width => ({ wch: width }));
 
-      // Crear un nuevo libro de trabajo
+      const rowHeights = modifiedData.map(row => {
+        const maxHeight = Math.max(...Object.keys(headersMap).map(key => {
+          const cellContent = row[headersMap[key]] ? row[headersMap[key]].toString() : '';
+          return cellContent.split('\n').length * 15;
+        }));
+        return { hpx: maxHeight };
+      });
+
+      rowHeights.unshift({ hpx: 25 });
+
+      worksheet['!rows'] = rowHeights;
+
       const workbook: XLSX.WorkBook = { Sheets: { 'Datos': worksheet }, SheetNames: ['Datos'] };
 
-      // Generar el archivo Excel
       const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
 
-      // Guardar el archivo
       this.saveAsExcelFile(excelBuffer, 'Reporte de Comida ' + this.infoCamp.name);
     },
     error: (error) => {
@@ -1062,12 +1236,13 @@ reporteComida() {
   });
 }
 
+
+
 ReporteExtras() {
   this.capms.getReporteExtras(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response; // Asegúrate de que 'data' contenga el array de objetos
+      const data = response;
 
-      // Mapeo de claves del JSON a cabeceras en español solo para los atributos especificados
       const headersMap: any = {
         'name': 'Nombre',
         'lastname_father': 'Apellido Paterno',
@@ -1075,40 +1250,47 @@ ReporteExtras() {
         'payment_balance': 'Saldo de Pago'
       };
 
-      // Construir los datos modificados solo con las cabeceras especificadas
       const modifiedData = data.map((row: any) => {
         const newRow: any = {};
         for (const key in row) {
           if (headersMap.hasOwnProperty(key)) {
-            newRow[headersMap[key]] = row[key];
+            newRow[headersMap[key]] = this.convertToYesNo(row[key]);
           } else {
-            newRow[key] = row[key];  // Mantener el nombre original para otras claves
+            newRow[key] = row[key];
           }
         }
         return newRow;
       });
 
-      // Construir los datos con las cabeceras en español
-      const headers = Object.keys(headersMap);
-      const translatedHeaders = headers.map(header => headersMap[header]);
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(modifiedData);
 
-      // Convertir los datos a una hoja de Excel
-      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(modifiedData, { header: translatedHeaders });
+      const columnWidths = Object.keys(headersMap).map((key) => {
+        const headerWidth = headersMap[key].length;
+        const maxWidth = Math.max(
+          headerWidth,
+          ...data.map((row: any) => (row[key] ? row[key].toString().length : 0))
+        );
+        return maxWidth + 2;
+      });
 
-      // Modificar la cabecera de la hoja de Excel
-      const range = XLSX.utils.decode_range(worksheet['!ref']!);
-      for (let i = range.s.c; i <= range.e.c; i++) {
-        const cell_address = XLSX.utils.encode_cell({ r: 0, c: i });
-        worksheet[cell_address] = { v: translatedHeaders[i], t: 's' };
-      }
+      worksheet['!cols'] = columnWidths.map(width => ({ wch: width }));
 
-      // Crear un nuevo libro de trabajo
+      const rowHeights = modifiedData.map(row => {
+        const maxHeight = Math.max(...Object.keys(headersMap).map(key => {
+          const cellContent = row[headersMap[key]] ? row[headersMap[key]].toString() : '';
+          return cellContent.split('\n').length * 15;
+        }));
+        return { hpx: maxHeight };
+      });
+
+      rowHeights.unshift({ hpx: 25 });
+
+      worksheet['!rows'] = rowHeights;
+
       const workbook: XLSX.WorkBook = { Sheets: { 'Datos': worksheet }, SheetNames: ['Datos'] };
 
-      // Generar el archivo Excel
       const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
 
-      // Guardar el archivo
       this.saveAsExcelFile(excelBuffer, 'Reporte de Extras ' + this.infoCamp.name);
     },
     error: (error) => {
@@ -1117,6 +1299,15 @@ ReporteExtras() {
   });
 }
 
+
+
+
+convertToYesNo(value: any): string {
+  if (typeof value === 'boolean' || value === 0 || value === 1) {
+    return value ? 'Verdadero' : 'Falso'
+  }
+  return value;
+}
 
 
 
@@ -1145,6 +1336,8 @@ const EXCEL_EXTENSION = '.xlsx';
   const data: Blob = new Blob([buffer], {type: EXCEL_TYPE});
   saveAs(data, `${fileName}.xlsx`);
 }
+
+
 
 
 

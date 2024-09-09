@@ -19,7 +19,13 @@
             <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="campers"
                 [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-                [globalFilterFields]="['name','country.name','representative.name','status']">
+                [globalFilterFields]="['camper_name',
+                'tutor_fullname',
+                'tutor_email',
+                'tutor_cellphone',
+                'second_tutor_full_name',
+               ' second_tutor_email',
+                'second_tutor_cellphone']">
 
                 <ng-template pTemplate="header">
                     <tr>
@@ -75,7 +81,7 @@
                                 size="large"></p-avatar>
                         </td>
                         <td (click)="navegate(customer.camper_id)">
-                            sssss
+                            {{customer.camper_name}}
                         </td>
                         <td>
                            {{customer.tutor_fullname}}<br>
@@ -91,23 +97,18 @@
                               
 
                         <td>
+
+                            <div style="display: flex;flex-wrap: wrap;width: 100%;">
+                                <div *ngFor="let item of customer.medical_triages" >
+                                    <p-avatar  [image]="'../../../assets/images/medical/' + item[0].value + '.png'" pBadge value="{{item.length}}"
+                                    [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px','display':'block'} "
+                                    (click)="valores(customer)" (click)="   data(customer.camper_id,item[0].id)"></p-avatar>
+                                </div>
+                            </div>
+                         
                             
-                            <p-avatar *ngIf="customer.no_urgencia.length>0" image="../../../assets/images/medical/No urgencia.png" pBadge value="2"
-                                [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px'}"
-                                (click)="valores(customer)" (click)="op.toggle($event)"></p-avatar>
-                            <p-avatar *ngIf="customer.emergencia.length>0" image="../../../assets/images/medical/Emergencia.png" pBadge value="1"
-                                [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px'}"
-                                (click)="op.toggle($event)"></p-avatar>
-                            <p-avatar *ngIf="customer.reanimacion.length>0" image="../../../assets/images/medical/Reanimacion.png" pBadge value="3"
-                                [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 10px'}"
-                                (click)="op.toggle($event)"></p-avatar>
-                            <p-avatar *ngIf="customer.urgencia.length>0" image="../../../assets/images/medical/Urgencia menor.png"
-                                [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 5px'}"
-                                (click)="op.toggle($event)"></p-avatar>
-                                <p-avatar *ngIf="customer.urgencia_menor.length>0" image="../../../assets/images/medical/Urgencia.png"
-                                    [style]="{'height': '30px',  'width': 'auto','margin': '0px 7px 5px'}"
-                                    (click)="op.toggle($event)"></p-avatar>
-                          
+                       
+                           
                     
      
 
@@ -236,102 +237,262 @@
 
 <p-overlayPanel #op [showCloseIcon]="true" [style]="{ width: '200px' }">
     <ng-template pTemplate>
-        <p>Fecha de atención: </p>
-        <p class="fw-bold">02 de Enero de 2023 </p>
-        <p>Hora de atención: </p>
-        <p class="fw-bold">10:00 p.m. </p>
-        <p>Diagnostico: </p>
-        <p class="fw-bold">{{diagnostio}} </p>
-        <button class="btn btn-primary" (click)="showMaximizableDialog()">Ver Mas</button>
+        <div *ngIf="!showSpinner">
+            <p>Fecha de atención: </p>
+            <p class="fw-bold">{{infoDataCamp.attention_date }}</p>
+            <p>Hora de atención: </p>
+            <p class="fw-bold">{{infoDataCamp.attention_time }}</p>
+            <p>Diagnostico: </p>
+            <p class="fw-bold">{{infoDataCamp.diagnostic }}</p>
+            <button class="btn btn-primary" (click)="showMaximizableDialog()">Ver Mas</button>
+        </div>
+
+        <div *ngIf="showSpinner">
+            <div class="spinner-border" role="status">
+              </div>
+        </div>
+       
     </ng-template>
 </p-overlayPanel>
 
 
 
-<p-dialog  [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '60vw'}" [maximizable]="true" [baseZIndex]="10000"
+<p-dialog  [(visible)]="displayMaximizable" *ngIf="displayMaximizable" [modal]="true" [style]="{width: '60vw'}" [maximizable]="true" [baseZIndex]="10000"
     [draggable]="false" [resizable]="false">
-    <div class="container-fluid col-11">
-        <div class="row">
-            <div class="col-6 text-end fs-2">
-                Diagnostico :
-            </div>
-            <div class="col-6 text-start fs-2">
-                Prueba de diagnostio
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-6 text-start fs-4">
-                Médico Responsable  :
-            </div>
-            <div class="col-6 text-end fs-4">
-                Medico Prueba
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-6 text-start fs-4">
-                Dia y fecha de atención :
-            </div>
-            <div class="col-6 text-end fs-4">
-                09:30 p.m. - 30 de Septiembre de 2022
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-6 text-start fs-4">
-                TRIAGE :
-            </div>
-            <div class="col-6 text-end fs-4">
-                No urgency
-            </div>
-        </div>
-        <hr>
-        <div class="col">
-            <div class="text-start fs-4">
-                Descripción basica para personal no medico :
-            </div>
-            <div class=" text-start  fs-4 mt-2">
-               .............................
-            </div>
-        </div>
-        <hr>
-        <div class="col">
-            <div class="text-start fs-4">
-                Tratamiento :
-            </div>
-            <div class=" text-start fs-4 mt-2">
-               .............................
-            </div>
-        </div>
-        <hr>
-        <div class="col">
-            <div class="text-start fs-4">
-                Restricciones o medidas dentro del campamento :
-            </div>
-            <div class="text-start fs-4 mt-2">
-               .............................
-            </div>
-        </div>
-        <hr>
-        <div class="col">
-            <div class="text-start fs-4">
-                Recomendaciones para seguimiento posterior al campamento :
-            </div>
-            <div class="col-6 text-start fs-4 mt-2">
-               .............................
-            </div>
-        </div>
-        <hr>
-        <div class="col">
-            <div class="text-start fs-4">
-                Comentario de la consulta :
-            </div>
-            <div class="text-start fs-4 mt-2">
-               .............................
-            </div>
-        </div>
-        <hr>
-
+    <div class=" p-5" >
+    
+        <p-tabView>
+            <p-tabPanel header="Consuta inicial">
+                <div class="col-12 " style="margin-top: 30px;">
+                    <p class="text-center fs-4 fw-bolder">Diagnóstico : Pequeña contusion en la parte del cranio por
+                        caida
+                        de niños corriendo</p>
+    
+                    <p class="text-center fs-4 fw-bold mt-4">Medico Responsable : {{infoDataCamp.doctor}}</p>
+    
+                </div>
+                <div>
+                    <div class="row mt-5">
+                        <div class="col-6 fs-4">
+                            <p> Fecha y hora de atencion</p>
+    
+                        </div>
+                        <div class="col-6 fs-4 ">
+                            <p>{{infoDataCamp.attention_date}} {{infoDataCamp.attention_time}} </p>
+                        </div>
+    
+                        <hr>
+                    </div>
+    
+                    <div class="row mt-5">
+                        <div class="col-6 fs-6">
+                            <p> Descripcion basica para personal no medico</p>
+    
+                        </div>
+                        <div class="col-6 fs-6">
+                            <p>{{infoDataCamp.description}}</p>
+                        </div>
+    
+                        <hr>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-6 fs-6">
+                            <p> Descripción del evento en palabras del camper </p>
+    
+                        </div>
+                        <div class="col-6 fs-6 ">
+                            <p>{{infoDataCamp.event_description}}</p>
+    
+                        </div>
+    
+                        <hr>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-6 fs-6">
+                            <p> ¿Quién autorizó el medicamento?</p>
+    
+                        </div>
+                        <div class="col-6 fs-6">
+                            <p>{{getAuthorizationName(infoDataCamp.medication_authorization)}}</p>
+                                            </div>
+    
+                        <hr>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-6 fs-6">
+                            <p>tratamientos </p>
+    
+                        </div>
+                        <div class="col-6 fs-6">
+                            <p>{{infoDataCamp.administered_medications}}</p>
+                        </div>
+    
+                        <hr>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-6 fs-6">
+                            <p>Restricciones o medidas dentro del campamento</p>
+    
+                        </div>
+                        <div class="col-6 fs-6">
+                            <p>{{infoDataCamp.camp_restriction}}</p>
+                        </div>
+    
+                        <hr>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-6 fs-6">
+                            <p>Recomendaciones para seguimiento posterior al campamento</p>
+    
+                        </div>
+                        <div class="col-6 fs-6">
+                            <p>{{infoDataCamp.medical_monitoring}}</p>
+                        </div>
+    
+                        <hr>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-6 fs-6">
+                            <p>Comentario de la consulta </p>
+    
+                        </div>
+                        <div class="col-6 fs-6">
+                            <p>{{infoDataCamp.medical_comment}}</p>
+                        </div>
+    
+                        <hr>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-6 fs-6">
+                            <p>Comentario solo para medicos y staff
+                            </p>
+    
+                        </div>
+                        <div class="col-6 fs-6">
+                            <p>{{infoDataCamp.comment}}</p>
+                        </div>
+    
+                        <hr>
+                    </div>
+    
+                </div>            </p-tabPanel>
+            <p-tabPanel *ngFor="let seguimiento of infoDataCamp.tracing_visits" header="Consulta de seguimiento">
+                <div class="col-12 " style="margin-top: 30px;">
+                    <p class="text-center fs-4 fw-bolder">Diagnóstico : Pequeña contusion en la parte del cranio por
+                        caida
+                        de niños corriendo</p>
+    
+                    <p class="text-center fs-4 fw-bold mt-4">Medico Responsable : {{seguimiento.doctor}}</p>
+    
+                </div>
+                <div>
+                    <div class="row mt-5">
+                        <div class="col-6 fs-4">
+                            <p> Fecha y hora de atencion</p>
+    
+                        </div>
+                        <div class="col-6 fs-4 ">
+                            <p>{{seguimiento.attention_date}} {{seguimiento.attention_time}} </p>
+                        </div>
+    
+                        <hr>
+                    </div>
+    
+                    <div class="row mt-5">
+                        <div class="col-6 fs-6">
+                            <p> Descripcion basica para personal no medico</p>
+    
+                        </div>
+                        <div class="col-6 fs-6">
+                            <p>{{seguimiento.description}}</p>
+                        </div>
+    
+                        <hr>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-6 fs-6">
+                            <p> Descripción del evento en palabras del camper </p>
+    
+                        </div>
+                        <div class="col-6 fs-6 ">
+                            <p>{{seguimiento.event_description}}</p>
+    
+                        </div>
+    
+                        <hr>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-6 fs-6">
+                            <p> ¿Quién autorizó el medicamento?</p>
+    
+                        </div>
+                        <div class="col-6 fs-6">
+                            <p>{{getAuthorizationName(seguimiento.medication_authorization)}}</p>
+                                            </div>
+    
+                        <hr>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-6 fs-6">
+                            <p>tratamientos </p>
+    
+                        </div>
+                        <div class="col-6 fs-6">
+                            <p>{{seguimiento.administered_medications}}</p>
+                        </div>
+    
+                        <hr>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-6 fs-6">
+                            <p>Restricciones o medidas dentro del campamento</p>
+    
+                        </div>
+                        <div class="col-6 fs-6">
+                            <p>{{seguimiento.camp_restriction}}</p>
+                        </div>
+    
+                        <hr>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-6 fs-6">
+                            <p>Recomendaciones para seguimiento posterior al campamento</p>
+    
+                        </div>
+                        <div class="col-6 fs-6">
+                            <p>{{seguimiento.medical_monitoring}}</p>
+                        </div>
+    
+                        <hr>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-6 fs-6">
+                            <p>Comentario de la consulta </p>
+    
+                        </div>
+                        <div class="col-6 fs-6">
+                            <p>{{seguimiento.medical_comment}}</p>
+                        </div>
+    
+                        <hr>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-6 fs-6">
+                            <p>Comentario solo para medicos y staff
+                            </p>
+    
+                        </div>
+                        <div class="col-6 fs-6">
+                            <p>{{seguimiento.comment}}</p>
+                        </div>
+    
+                        <hr>
+                    </div>
+    
+                </div>   
+            </p-tabPanel>
+          
+        </p-tabView>
     </div>
+
 </p-dialog>

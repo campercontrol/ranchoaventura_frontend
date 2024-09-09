@@ -62,7 +62,7 @@ export class CampsVistaService {
   }
 
   getReporteSocialExtras(id:any){
-    return this.http.get(`http://142.93.12.234:8000/camps/${id}/social_report`); 
+    return this.http.get(`http://142.93.12.234:8000/camps/${id}/contact_report`); 
   }
   getReporteExtras(id:any){
     return this.http.get(`http://142.93.12.234:8000/camps/${id}/extras_report`); 

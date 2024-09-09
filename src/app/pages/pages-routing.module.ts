@@ -142,6 +142,8 @@ const routes: Routes = [
   {path: 'medical/care/:campId/:camperid', component: MedicoComponent, canActivate: [AuthGuard] },
   {path: 'medical/camp-medical/:id', component: TablaMedicalComponent, canActivate: [AuthGuard] },
   { path: 'medical/add_consultation/:campId/:camperid',component:NuevaConsultaComponent, canActivate: [AuthGuard] },
+  { path: 'medical/add_consultation/:campId/:camperid/:idConsult',component:NuevaConsultaComponent, canActivate: [AuthGuard] },
+
 
 
   {path: 'mailing', component: GmailingComponent },

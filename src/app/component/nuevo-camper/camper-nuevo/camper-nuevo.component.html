@@ -233,12 +233,14 @@
                         </h4>
                     </div>
 
-                    <div class="alert-dismissible alert alert-secondary">
-                        <p style="text-align:justify;" for="">La foto es obligatoria ,nos ayuda a identificar a los campers, recomendamos subas una foto reciente y de poco peso, máximo 3Mb debe ser formato jpg</p>
-                    </div>
+                   
 
                     <h2 style="text-align:center ; margin-top: 30px;">{{textos['Pathologicalhistory']}}</h2>
                     <div class="mt-5">
+                        <label for="" class="text-center mt-2 mb-2" style="color: rgb(177, 179, 180);">
+                            Marca las casillas de las enfermedades que haya padecido o padezca el camper en la columna camper. En caso de que un familiar haya padecido alguna de esas enfermedades marca en la columna de familiar
+
+                        </label>
                         <div class="contenedor-datos">
                             <div class="titulos-datos-medicos">
                                 <p style="margin-top:2px ;">Nombre</p>
@@ -262,13 +264,16 @@
                                 </ng-container>
                             </div>
                         </div>
+                        <div>
+                           
+                        </div>
                        
 
 
                         <div class="container-medico mt-5">
                             <h3>{{textos['Heartproblems']}}</h3>
                             <textarea
-                                placeholder="En caso de NO padecer ningun problema cardiaco, teclea la palabra NINGUNO"
+                                [placeholder]="placeholder[idioma]['place1']"
                                 name="" id="" cols="90" rows="10"
                                 formControlName = "heart_problems"
                                 class="form-control"
@@ -278,8 +283,8 @@
                         <div class="container-medico mt-5">
                             <h3>{{textos['Medicalcircumstances']}}</h3>
                             <textarea
-                                placeholder="En caso de NO haber tenido o tener cirugías, fracturas y/o esguinces que le impidan realizar actividades, teclea la palabra NINGUNA"
-                                name="" id="" cols="90" rows="10"
+                            [placeholder]="placeholder[idioma]['place2']"
+                            name="" id="" cols="90" rows="10"
                                 formControlName = "prevent_activities"
                                 class="form-control"
                                 (input)="getprevent_activities()"
@@ -358,23 +363,18 @@
                            
 
                             <div class="alert alert-secondary">
-                                <p>Descuida que al final del campamento, te notificaríamos si tu hij@ tuvo algún
-                                    malestar y
-                                    qué medicamento se le administró.</p>
+                                <p>
+                                    {{placeholder[idioma]['leyenda4']}}</p>
 
-                                <p style="text-align:justify ;">Te pedimos que selecciones los medicamentos que
-                                    autorizas.
-                                    Cualquier medicamento no
-                                    seleccionado se considerará como NO PRE-AUTORIZADO, en cuyo caso, nos comunicaremos
-                                    contigo.</p>
+                                <p style="text-align:justify ;">{{placeholder[idioma]['leyenda3']}}</p>
                             </div>
 
                             <div class="container-medico mt-5" placement="top"
                                 ngbTooltip="Si no requiere de tratamiento médico, teclea la palabra NINGUNO">
                                 <h3>{{textos['Duringcamp']}}</h3>
                                 <textarea
-                                    placeholder="Si no requiere de tratamiento médico, teclea la palabra NINGUNO"
-                                    name="" id="" cols="90" rows="10"
+                                [placeholder]="placeholder[idioma]['place3']"
+                                name="" id="" cols="90" rows="10"
                                     formControlName = "drugs"
                                     class="form-control"
                                     (input)="getdrugs()"
@@ -389,7 +389,7 @@
                                 ngbTooltip="Si no requiere de tratamiento médico, teclea la palabra NINGUNO">
                                 <h3>{{textos['Drugallergies']}}</h3>
                                 <textarea
-                                    placeholder="En caso de que el acampador no sea alérgico a algún medicamento, teclea la palabra NINGUNO"
+                                [placeholder]="placeholder[idioma]['place4']"
                                     name="" id="" cols="90" rows="10"
                                     formControlName = "drug_allergies"
                                     class="form-control"
@@ -402,7 +402,9 @@
                                 ngbTooltip="Si no requiere de tratamiento médico, teclea la palabra NINGUNO">
                                 <h3><h3>{{textos['OtrasCondiciones']}}</h3></h3>
                                 <textarea
-                                    placeholder="En caso de que el acampador no sea alérgico, teclea la palabra NINGUNA"
+                                [placeholder]="placeholder[idioma]['place5']"
+
+                                   
                                     name="" id="" cols="90" rows="10"
                                     formControlName = "other_allergies"
                                     class="form-control"
@@ -418,8 +420,7 @@
                                
                                 <div class="form-check">
                                     <input type="checkbox" id="medico" class=" form-check-input" formControlName="doctor_precall">
-                                    <label for="medico" class="form-check-label"> ¿Te gustaría que el médico del campamento se ponga en contacto con
-                                        usted antes del campamento?</label>
+                                    <label for="medico" class="form-check-label"> Me gustaría tener una llamada con el doctor antes de que inicie el campamento, pues hay detalles importantes que quiero compartir y que podrían tomar demasiado tiempo si lo hago el día que sale el campamento</label>
                                 </div>
                             </div>
                         </div>
@@ -444,7 +445,7 @@
                             <div class="container-medico mt-5">
                                 <h3>{{textos['Nightdisturbance']}}</h3>
                                 <textarea
-                                    placeholder="En caso de que el acampador no padezca de alteraciones nocturnas, teclea la palabra NINGUNA"
+                                [placeholder]="placeholder[idioma]['place6']"
                                     name="" id="" cols="90" rows="10"
                                     formControlName="nocturnal_disorders"
                                     class="form-control"
@@ -456,7 +457,8 @@
                             <div class="container-medico mt-5">
                                 <h3>{{textos['Phobiasfears']}}</h3>
                                 <textarea
-                                    placeholder="En caso de que el acampador no padezca de fobias, teclea la palabra NINGUNO"
+                                [placeholder]="placeholder[idioma]['place7']"
+
                                     name="" id="" cols="90" rows="10"
                                     formControlName="phobias"
                                     class="form-control"
@@ -469,7 +471,7 @@
                             <div class="container-medico mt-5">
                                 <h3>{{textos['Psychiatricpsychologicaltreatments']}}</h3>
                                 <textarea
-                                    placeholder="En caso de NO estar en ningun tratamiento psicologico o psiquiatrico, teclea la palabra NINGUNO"
+                                [placeholder]="placeholder[idioma]['place8']"
                                     name="" id="" cols="90" rows="10"
                                     formControlName="psicology_treatments"
                                     class="form-control"
@@ -500,10 +502,7 @@
                             </div>
 
                             <div class="alert alert-warning">
-                                En caso de no saber nadar y querer participar en actividades acuáticas, será
-                                responsabilidad
-                                de los padres de familia el incluir en su equipaje un dispositivo de flotación (chaleco,
-                                flotis)
+                                {{placeholder[idioma]['leyenda2']}}
                             </div>
 
 
@@ -545,7 +544,7 @@
                             <div class="container-medico mt-5">
                                 <h3>{{textos['Forbiddenfood']}}</h3>
                                 <textarea
-                                    placeholder="En caso de que el acampador pueda comer cualquier tipo de comida, teclea la palabra NINGUNA"
+                                [placeholder]="placeholder[idioma]['place9']"
                                     name="" id="" cols="90" rows="10"
                                     formControlName ="prohibited_foods"
                                     class="form-control"
@@ -660,11 +659,7 @@
                                 </div>
                             </div>
                             <div class="alert alert-success mt-3">
-                                Camper Control cuenta con seguro de gastos contra accidentes menores con
-                                compañia_seguros. En caso de que las atenciones médicas superen la cantidad asegurada,
-                                los gastos correrán a cargo de los padres de familia o del seguro de gastos médicos
-                                mayores del acampador (en caso de contar con uno). Checa los detalles de tu camp para
-                                conocer los montos asegurados y características del seguro.
+                                {{placeholder[idioma]['leyenda1']}}
                             </div>
 
                         </div>

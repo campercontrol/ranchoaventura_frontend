@@ -71,7 +71,7 @@
         
                                         <div class="col-sm-9">
                                             <select bindLabel="value" bindValue="id" formControlName="gender_id"  style="width: 100%;" (change)="getgender_id()"  class=" form-control" #gender_id>
-                                                <option value="0" > Seleciona una opcion</option>
+                                              
                                                 <option *ngFor="let item of genders" [value]="item.id" > {{item.value}}</option>
                                             </select>
                                         </div>
@@ -131,7 +131,6 @@
                                         <label for="" class="col-sm-3 col-form-label">{{textos['School']}}</label>
                                         <div class="control-label col-sm-9">
                                             <select name="school_id" id="school_id" formControlName="school_id" (change)="getschool_id()" class="form-control" #school_id>
-                                                <option value="0" > Seleciona una opcion</option>
                                                 <option *ngFor="let item of school" [value]="item.id" >
                                                     {{item.name}}
                                                 </option>
@@ -153,7 +152,6 @@
                                           
         
                                             <select name="school_id" id="school_id" formControlName="grade" (change)="getgrade()" class="form-control" #grade>
-                                                <option value="0" > Seleciona una opcion</option>
                                                 <option *ngFor="let item of grades" [value]="item.id" >
                                                     {{item.value}}
                                                 </option>
@@ -219,7 +217,7 @@
             
                                                 <div class="form-check form-check-inline" *ngFor="let item of vaccines;index as i">
                                                     <input (click)="vaccinesValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions"
-                                                        id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}"
+                                                        id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}" [checked]="item.is_active" 
                                                         >
                                                     <label class="form-check-label" for="inlineRadio1">{{item.name}}</label>
                                                 </div>
@@ -232,7 +230,6 @@
                                         <label for="" class="col-sm-3 col-form-label">{{textos['Bloodtype']}}</label>
                                         <div class="control-label col-sm-9">
                                             <select name="school_id" id="school_id" formControlName="blood_type" (change)="getblood_type()" class="form-control" #blood_type>
-                                                <option value="0" > Seleciona una opcion</option>
                                                 <option *ngFor="let item of blood_types" [value]="item.id" >
                                                     {{item.value}}
                                                 </option>
@@ -433,8 +430,7 @@
                                        
                                         <div class="form-check">
                                             <input type="checkbox" class=" form-check-input" formControlName="doctor_precall">
-                                            <label for="" class="form-check-label"> ¿Te gustaría que el médico del campamento se ponga en contacto con
-                                                usted antes del campamento?</label>
+                                            <label for="" class="form-check-label"> Me gustaría tener una llamada con el doctor antes de que inicie el campamento, pues hay detalles importantes que quiero compartir y que podrían tomar demasiado tiempo si lo hago el día que sale el campamento</label>
                                         </div>
                                     </div>
                                 </div>
@@ -814,7 +810,6 @@
 
                                 <div class="col-sm-9">
                                     <select bindLabel="value" bindValue="id" formControlName="gender_id"  style="width: 100%;" (change)="getgender_id()"  class=" form-control" #gender_id>
-                                        <option value="0" > Seleciona una opcion</option>
                                         <option *ngFor="let item of genders" [value]="item.id" > {{item.value}}</option>
                                     </select>
                                 </div>
@@ -845,13 +840,7 @@
     
                                 </div>
                                 <div *ngIf="spinerPhot">
-                                    <div class="alert alert-danger" role="alert" *ngIf="!photoSatus">
-                                        Aun no has  seleciona una imagen Recuerda tiene que ser un imagen TIPO JPG
-                                       </div>
-     
-                                       <div class="alert alert-secondary" role="alert" *ngIf="photoSatus">
-                                         Se Agrego corectamente
-                                       </div>
+                                  
                                 </div>
         
                                   <div class="spinner-border" role="status" *ngIf="!spinerPhot">
@@ -874,7 +863,6 @@
                                 <label for="" class="col-sm-3 col-form-label">{{textos['School']}}</label>
                                 <div class="control-label col-sm-9">
                                     <select name="school_id" id="school_id" formControlName="school_id" (change)="getschool_id()" class="form-control" #school_id>
-                                        <option value="0" > Seleciona una opcion</option>
                                         <option *ngFor="let item of school" [value]="item.id" >
                                             {{item.name}}
                                         </option>
@@ -896,7 +884,6 @@
                                   
 
                                     <select name="school_id" id="school_id" formControlName="grade" (change)="getgrade()" class="form-control" #grade>
-                                        <option value="0" > Seleciona una opcion</option>
                                         <option *ngFor="let item of grades" [value]="item.id" >
                                             {{item.value}}
                                         </option>
@@ -962,9 +949,9 @@
     
                                         <div class="form-check form-check-inline" *ngFor="let item of vaccines;index as i">
                                             <input (click)="vaccinesValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions"
-                                                id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}"
+                                                value="{{item.is_active}}" [checked]="item.is_active"
                                                 >
-                                            <label class="form-check-label" for="inlineRadio1">{{item.name}}</label>
+                                            <label class="form-check-label" >{{item.name}}</label>
                                         </div>
     
     
@@ -975,7 +962,6 @@
                                 <label for="" class="col-sm-3 col-form-label">{{textos['Bloodtype']}}</label>
                                 <div class="control-label col-sm-9">
                                     <select name="school_id" id="school_id" formControlName="blood_type" (change)="getblood_type()" class="form-control" #blood_type>
-                                        <option value="0" > Seleciona una opcion</option>
                                         <option *ngFor="let item of blood_types" [value]="item.id" >
                                             {{item.value}}
                                         </option>
@@ -1175,8 +1161,7 @@
                                
                                 <div class="form-check">
                                     <input type="checkbox" class=" form-check-input" formControlName="doctor_precall">
-                                    <label for="" class="form-check-label"> ¿Te gustaría que el médico del campamento se ponga en contacto con
-                                        usted antes del campamento?</label>
+                                    <label for="" class="form-check-label"> Me gustaría tener una llamada con el doctor antes de que inicie el campamento, pues hay detalles importantes que quiero compartir y que podrían tomar demasiado tiempo si lo hago el día que sale el campamento</label>
                                 </div>
                             </div>
                         </div>
@@ -1244,12 +1229,12 @@
 
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="can_swim"
-                                            id="inlineRadio1" [value]=1 formControlName="can_swim">
+                                            id="inlineRadio1" [value]=86 formControlName="can_swim">
                                         <label class="form-check-label" for="inlineRadio1">Si</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="can_swim"
-                                            id="inlineRadio2" [value]=0 formControlName="can_swim">
+                                            id="inlineRadio2" [value]=87 formControlName="can_swim">
                                         <label class="form-check-label" for="inlineRadio2">No</label>
                                     </div>
 
@@ -1535,7 +1520,7 @@
                         placeholder="Global Search" />
                 </div>
         <div style="overflow: auto;">
-            <p-table #dt [value]="listcatalogos" [rows]="5"
+            <p-table #dt [value]="listcatalogos" [rows]="20"
             [rowsPerPageOptions]="[5, 25, 50]"
             [globalFilterFields]="['camper_name','camper_lastname_mother','camper_lastname_father','school','tutor_fullname','tutor_email','camper_id']"
             [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"

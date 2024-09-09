@@ -47,9 +47,9 @@ export class PerfilComponent implements OnInit {
       texto11:"Confirmar correo electrónico*",
       texto12:"Acepto los términos y condiciones",
       texto13:"términos y condiciones  ",
-      texto14:"Se enviará un correo electrónico de confirmación a tu correo, te pedimos que revises tu bandeja de",
+      texto14:"Se enviará un correo electrónico de confirmación a tu correo, te pedimos que revises tu bandeja de spam",
       textto15:"Correo no deseado",
-      texto16:"para asegurar que lo recibiste bien. Si no lo recibes,ponte en contacto con nosotros.",
+      texto16:"para asegurar que lo recibiste bien. Si no lo recibes ,ponte en contacto con nosotros.",
       text017:"Guardar",
       text018:"Cancelar",
     

@@ -616,7 +616,7 @@ export class UpdatePerfilComponent implements OnInit {
             contact_homephone: res['camper'].contact_homephone,
             contact_cellphone: res['camper'].contact_cellphone,
             record_id:0,
-            parent_id: this.info.infToken.profile_id
+            parent_id: res['camper'].parent_id,
         
 
 

@@ -65,7 +65,11 @@ h3{
     font-size: 13px;
 }
 .contenedor-p{
+    
     border: 1px solid rgb(212, 211, 211);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 .margin-timile{
     margin-left: -350px;

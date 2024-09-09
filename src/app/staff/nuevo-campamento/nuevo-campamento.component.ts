@@ -42,6 +42,10 @@ export class NuevoCampamentoComponent implements OnInit {
   extra_discounts = [];
   fecha = new Date();
   Catpaymanacout:any = []
+  fecha_pago:any = [];
+  alertPago =false
+  tipoPago =[{'name':'Mercado pago','id':1},{'name':'Pago en escuela','id':2},{'name':'Ficha de pago','id':3},{'name':'Personalizado','id':4}]
+
 
 
 
@@ -91,7 +95,7 @@ export class NuevoCampamentoComponent implements OnInit {
       //console.log(this.location);
 
      });
-    this.formCamp = this.formGrup.group({
+    this.formCamp =this.formGrup.group({
       name: ["",[Validators.required,Validators.minLength(2)]], //listo
       start: ["",[Validators.required]], //listo
       end:  ["",[Validators.required]], //listo
@@ -101,29 +105,32 @@ export class NuevoCampamentoComponent implements OnInit {
       url: [""], //listo
       special_message: ["",[Validators.required]],
       special_message_admin: ["",[Validators.required]],
-      public_price:  [0,[Validators.required,Validators.min(1)]], // listo 
+      public_price:  [0,[Validators.required]], // listo 
       show_payment_parent:  [true], //listo
+      show_mercadopago_button:[false],
       show_rebate_parent:  [true],//listo
       show_paypal_button:  [true],// listo
       show_payment_order:  [true],
-      reminder_camp_days:  [15],//listo
-      reminder_discount_days:  [0],//listo
-      insurance:  [0,[Validators.required,Validators.min(1)]], // listo
+      reminder_camp_days:  [15],//listo fecha limite de pago
+      reminder_discount_days:  [10],//listo
+      insurance:  [0,[Validators.required]], // listo
       venue:  ["",[Validators.required]], // listo 
       photo_url:  ["",[Validators.required]], // listo
       photo_password:  ["",[Validators.required]], // listo
-      medical_report:  [" "],//listo
+      medical_report:  ["  "],//listo
       occupancy_camp:  [0], // cupo de campamentos faltante
       active:  [true], //listo
-      general_camp:  [true], //listo
+      general_camp:  [false], //listo
       currency_id: [0,[Validators.required,Validators.min(1)]],// listo
       location_id:  [0,[Validators.required,Validators.min(1)]], //listo
       school_id:  [0,[Validators.required,Validators.min(1)]], // listo
       season_id:  [0,[Validators.required,Validators.min(1)]], // listo
-      created_at: ['2023-07-20T16:21:21.283177'],
+      created_at: [this.fecha],
+      recommended_payment_dates:[''],
       extra_charges: [this.extra_charges],
       extra_question:[ this.extra_question],
       payment_accounts:[this.payment_accounts]
+      
     })
   }
 
@@ -131,6 +138,11 @@ export class NuevoCampamentoComponent implements OnInit {
    // console.log(this.formCamp.value);
    this.spinner=true;
     if(this.formCamp.valid){
+      this.formCamp.patchValue({
+
+        recommended_payment_dates: this.arrayToJsonString(this.fecha_pago)
+
+      }) 
     this.payment_accounts=  this.formCamp.get('payment_accounts').value;
       let a = {
           "camp":this.formCamp.value,
@@ -317,5 +329,83 @@ console.log(a);
     this.extra_charges.splice(i);
 
   }
+
+  onChange(event:any){
+    if(event.id == 1){
+      this.formCamp.patchValue({
+        show_mercadopago_button: true,
+        show_payment_order:false,
+        show_payment_parent:true,
+        show_rebate_parent:true
+      })
+    }else if(event.id == 2){
+      this.formCamp.patchValue({
+        show_paypal_button: false,
+        show_payment_order:false,
+        show_payment_parent:false,
+        show_rebate_parent:false
+      })
+
+    }else if(event.id == 3){
+      this.formCamp.patchValue({
+        show_mercadopago_button: false,
+
+        show_paypal_button: false,
+        show_payment_order:false,
+        show_payment_parent:true,
+        show_rebate_parent:true
+      })
+    }
+}
+newFechaPago(){
+  let a = this.extra_charges.length;
+  if(this.extra_charges.length>0){
+    let b =this.extra_charges[a-1].name;
+    if( b.length>0){
+      let a = {
+        "name": "",
+        "price": 0,
+        "created_at":this.fecha
+
+      }
+      this.fecha_pago.push(a);
+      this.alertPago = false;
+    }else{
+      this.alertPago = true;
+    }
+  }else{
+    let a = {
+      "name": "",
+      "price": 0,
+      "created_at":this.fecha
+    }
+    this.fecha_pago.push(a);
+    this.alertPago = false
+  }
+ 
+}
+
+deletFechaPago(i){
+  this.fecha_pago.splice(i);
+
+}
+
+
+arrayToJsonString(array: any[]): string {
+  return JSON.stringify(array);
+}
+
+jsonStringToArray(jsonString: string | null | undefined): any[] {
+  if (jsonString !== null && jsonString !== undefined) {
+    try {
+      return JSON.parse(jsonString);
+    } catch (error) {
+      console.error("Error al parsear JSON:", error);
+      return [];
+    }
+  }
+  return [];
+}
+
 
 }

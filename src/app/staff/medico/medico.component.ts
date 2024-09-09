@@ -14,8 +14,9 @@ export class MedicoComponent implements OnInit {
   infoParent:any ={}
   infoCamper:any ={}
   cargando:boolean = true;
-  bloodytype:any = []
-
+  bloodytype:any = [];
+  medicalConsult=[];
+  showConsult= true;
 
   constructor(private routesA:ActivatedRoute,private medical:MedicalService,private router:Router) {
     this.routesA.params.subscribe((params) => {
@@ -29,30 +30,46 @@ export class MedicoComponent implements OnInit {
         
         this.infoParent = res.parent_info
         this.infoCamper = res.camper_info
+        this.medicalConsult = res.camper_visits
+
+      this.medicalConsult.forEach((item:any)=>{
+
+        item.show = false
+      })
         this.infoCamper.vaccinesT=""
-        this.infoCamper.vaccines.forEach(element => {
-          this.infoCamper.vaccinesT= this.infoCamper.vaccinesT + element.name+ ','+" " ;
+        this.infoCamper.vaccines.filter(element => {
+          return element.is_active == true;
         });
-        this.infoCamper.licensed_medicinesT=""
+     
         this.infoCamper.licensed_medicines.forEach(element => {
-          this.infoCamper.licensed_medicinesT= this.infoCamper.licensed_medicinesT + element.name+ ','+" " ;
+          return element.is_active == true;
+
         });
-        this.infoCamper.food_restrictionsT=""
+       
         this.infoCamper.food_restrictions.forEach(element => {
-          this.infoCamper.food_restrictions= this.infoCamper.food_restrictionsT + element.name+ ','+" " ;
+          return element.is_active == true;
+
+        });
+        this.infoCamper.licensed_medicines.forEach(element => {
+          return element.is_active == true;
+
         });
 
-        this.infoCamper.pathological_backgroundT=""
+
+      
         this.infoCamper.pathological_background.forEach(element => {
-          this.infoCamper.food_restrictions= this.infoCamper.pathological_backgroundT + element.name+ ','+" " ;
+          return element.is_active == true;
+
         });
 
-        this.infoCamper.pathological_background_fmT=""
+        
         this.infoCamper.pathological_background_fm.forEach(element => {
-          this.infoCamper.food_restrictions= this.infoCamper.pathological_background_fmT + element.name+ ','+" " ;
+          return element.is_active == true;
+
         });
         this.cargando = false;
 
+        
 
 
        
@@ -71,6 +88,10 @@ export class MedicoComponent implements OnInit {
   redireccion(){
     this.router.navigate(['/dashboard/medical/add_consultation/'+this.campId+'/'+this.camperid]);
   }
+
+  redireccionId(id){
+    this.router.navigate(['/dashboard/medical/add_consultation/'+this.campId+'/'+this.camperid+'/'+id]);
+  }
   InfoBlood(id){
     console.log(id);
     
@@ -80,4 +101,23 @@ export class MedicoComponent implements OnInit {
     
     return b[0].value
   }
+
+  getAuthorizationName(value: number): string {
+    const caseV =  Number(value)
+    switch (caseV) {
+      case 1:
+        return 'Preautorización en sistema de registro';
+      case 2:
+        return 'Se contacta a tutores';
+      case 3:
+        return 'Por parte de la Escuela / Maestras';
+      case 4:
+        return 'Por parte del campamento';
+      case 5:
+        return 'No se administraron medicamentos';
+      default:
+        return 'Desconocido';
+    }
+  }
+  
 }

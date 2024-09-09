@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CamperService } from 'src/services/camper.service';
 import { CampsService } from 'src/services/camps.service';
 import { LangService } from 'src/services/lang.service';
+import { MercadoPagoService } from './mercado-pago.service';
 
 @Component({
   selector: 'app-campamento',
@@ -61,10 +62,12 @@ export class CampamentoComponent implements OnInit {
     }
 
   }
+
+  
   idCamper=0;
   idCamp=0;
   cargosExtr= false;
-  dataCamp:Camp;
+  dataCamp:any;
   dataPagos:any={};
   extra_questions:any=[];
   extra_charges:any=[];
@@ -74,6 +77,9 @@ export class CampamentoComponent implements OnInit {
   PreguntasExtras:any ;
   respuestPregunta:any="";
   cargosExtra:false;
+  inscripcion = true;
+  
+
   estatusPago:Boolean= false;
   pagos:boolean=false;
   statusInscri:boolean=false;
@@ -82,9 +88,15 @@ export class CampamentoComponent implements OnInit {
   balance = 0;
   @ViewChild('baucher') baucher  :ElementRef;
   cargando= false;
+  displayModal = false;
+  showMercadopago:boolean = false;
+
+  declare  MercadoPago: any;
+  pagoMercado:number=0;
+  fechadePagos:any=[]
 
 
-  constructor(private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router,private render:Renderer2,private lang:LangService,private routerNav:Router) { 
+  constructor(private mercadoPagoService: MercadoPagoService,private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router,private render:Renderer2,private lang:LangService,private routerNav:Router) { 
     this.routesA.params.subscribe((params)=>{
       this.idCamp = params['camp'];
     //  console.log(this.idCamp);
@@ -100,6 +112,7 @@ export class CampamentoComponent implements OnInit {
       console.log(res,'respuesta');
         let a :any=res.camp
         this.balance= res.payment_balance;
+        this.pagoMercado = this.balance;
         console.log(res.camper_subscribe,'aasas');
         this.location = res.location
         
@@ -108,6 +121,8 @@ export class CampamentoComponent implements OnInit {
         this.dataPagos = res.payments;
         console.log(this.dataCamp,'aa');
         this.cargando= true;
+        this.fechadePagos = this.arrayToJsonString(this.dataCamp.recommended_payment_dates)
+        console.log(this.fechadePagos,'informacion');
         
         if(this.dataPagos){
           this.dataPagos.length> 0 ? this.pagos =true:this.pagos=false;   
@@ -129,9 +144,42 @@ export class CampamentoComponent implements OnInit {
       
     })
 
+    this.pay()
+
   }
+  pay() {
+    this.mercadoPagoService.createPreference({
+      // Datos de la preferencia
+      items: [
+        {
+          title: 'Producto de prueba',
+          unit_price: 100,
+          quantity: 1,
+        }
+      ]
+    }).subscribe((response: any) => {
+      const mp = new this.MercadoPago('APP_USR-dc72967b-8153-42ed-8a2a-12dcc157feca', {
+        locale: 'es-AR'
+      });
 
-
+      mp.checkout({
+        preference: {
+          id: response.preference_id
+        },
+        render: {
+          container: '.cho-container',
+          label: 'Pagar'
+        }
+      });
+    });
+  }
+  removeHtmlTags(inputString: string): string {
+    if (!inputString) {
+      return ''; // Devuelve una cadena vacía si el string es null o undefined
+    }
+    // Usamos una expresión regular para eliminar todas las etiquetas HTML
+    return inputString.replace(/<\/?[^>]+(>|$)/g, '');
+  }
   open(content) {
 		this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' })
 		
@@ -147,6 +195,18 @@ export class CampamentoComponent implements OnInit {
       this.cargando= true;
     })
 
+  }
+
+  arrayToJsonString(jsonString: string | null | undefined): any[] {
+    if (jsonString !== null && jsonString !== undefined) {
+      try {
+        return JSON.parse(jsonString);
+      } catch (error) {
+        console.error("Error al parsear JSON:", error);
+        return [];
+      }
+    }
+    return [];
   }
   getQuestion(){
     this.camps.getPreguntas(Number(this.idCamp),Number(this.idCamper)).subscribe((res:any)=>{
@@ -257,7 +317,17 @@ export class CampamentoComponent implements OnInit {
         console.log(res);
         
         if(res.status ==2){
-          this.routerNav.navigate(['dashboard/parents/camp-info/'+this.idCamper+'/'+this.idCamp]);
+          this.extra_questions = res.extra_questions;
+          this.extra_questions.forEach(element => {
+              if (element.camp_extra_question_question) {
+                  element.camp_extra_question_question = this.parseHTMLContent(element.camp_extra_question_question);
+              }
+          });
+          this.extra_charges = res.extra_charges;
+          this.inscripcion = false;
+          this.cargosExtr = false;
+          
+          this.displayModal =true;
 
         } else if(res.status ==1){
           this.routerNav.navigate(['dashboard/parents/camp-info/'+this.idCamper+'/'+this.idCamp]);
@@ -281,6 +351,32 @@ export class CampamentoComponent implements OnInit {
     return html.replace(regex, '');
   }
 
+  enviarCargosPreguntas(){
+    this.extra_charges.forEach(element => {
+      if(element.camp_extra_charge_is_selected == null){
+          element.camp_extra_charge_is_selected=false
+      }
+    });
+    
+    let b:any ={
+      extra_answers:this.extra_questions,
+      extra_charges:this.extra_charges
+    }
+    console.log(b);
+    
+   this.camps.setCargosPregustas(this.idCamper,b).subscribe((res:any)=>{
+    console.log(res);
+    if(res.status == 1){
+      window.location.reload();
+     
+  
+    }
+  
+  })
+    
+    
+  }
+  
 }
 
 
@@ -292,6 +388,8 @@ export interface Camp {
   insurance:              number;
   general_camp:           boolean;
   start_registration:     Date;
+  recommended_payment_dates: string;
+  show_mercadopago_button: boolean;
   show_rebate_parent:     boolean;
   venue:                  string;
   currency_id:            number;

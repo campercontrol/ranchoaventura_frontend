@@ -335,7 +335,7 @@ export class PerfilCamperComponent implements OnInit {
       this.infoCamp.can_swim = this.infoCamp.can_swim == 1 ? 'Si' : 'No';
       this.infoCamp.insurance = this.infoCamp.insurance == true ? 'Si' : 'No';
 
-      this.infoCamp.doctor_precall=this.infoCamp.doctor_precall== true ? "Sí, se requiere una llamada previa al campamento por parte del medico" :  "No, se requiere una llamada previa"
+      this.infoCamp.doctor_precall=this.infoCamp.doctor_precall== true ? "Sí, se requiere una llamada previa al campamento por parte del medico" :  "No se requiere una llamada previa"
 
 
 

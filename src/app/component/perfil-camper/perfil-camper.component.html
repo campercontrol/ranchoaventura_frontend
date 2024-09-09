@@ -1,53 +1,66 @@
 <div *ngIf="!error">
     <header class="container-fluid">
+
         <div class="row">
             <div class="col-lg-12">
+    
                 <div class="card campamentos-header">
-                    <div class="bg-primary text-white p-3">
+                    <div class="bg-primary text-white  p-3">
+    
                         <h3 class="text-white">{{camperband.full_name}}</h3>
                         <h5 class="text-white">{{camperband.school}}</h5>
                         <h6 class="text-white">{{infoCamp.birthdayA}}</h6>
                     </div>
-                    <section class="campamentos">
+                    <section class="campamentos ">
                         <div class="Campementos_anteriores">
-                            <div>{{camperband.past_camps}}</div>
                             <div>
-                                <p>{{ getTranslation('HEADER.PAST_CAMPS') }}</p>
+                                {{camperband.past_camps}}
+                            </div>
+                            <div>
+                                <p>Camps Anteriores</p>
                             </div>
                         </div>
                         <div class="foto-perfil">
                             <img src="http://142.93.12.234:8000/{{photo}}" class="avatar-lg rounded-circle" alt="">
-                            <button class="btn-rounded btn btn-success mt-3">
-                                <a class="text-white" (click)="linkPerfil()" style="width: 100%;">{{ getTranslation('HEADER.INSCRIBE_TO_CAMPS') }}</a>
+                            <button class="btn-rounded btn btn-success mt-3 ">
+                                <a class="text-white" (click)="linkPerfil()" style="width: 100%;">Inscribir a Camps</a>
                             </button>
                         </div>
+    
+    
                         <div class="Campamentos_proximo">
-                            <div>{{camperband.future_camps}}</div>
                             <div>
-                                <p>{{ getTranslation('HEADER.UPCOMING_CAMPS') }}</p>
+                                {{camperband.future_camps}}
                             </div>
+                            <div>
+                                <p>Camps Proximo</p>
+                            </div>
+    
                         </div>
+    
+    
                     </section>
                 </div>
             </div>
         </div>
     </header>
-
-    <div class="alert alert-danger mt-2 mb-2" role="alert" *ngIf="deuda > 0">
-        <h2>{{ getTranslation('ALERT.PENDING_PAYMENTS') }}</h2>
-        <p>{{infoCamp.name}} {{ getTranslation('ALERT.TOTAL_BALANCE') }}: {{deuda | currency}}</p>
-    </div>
-
+    
+    <div class="alert alert-danger mt-2 mb-2" role="alert" *ngIf="deuda>0">
+      <h2> Pendiente de pagos: </h2> 
+       <p>{{infoCamp.name}} tiene un  saldo total  pendiente  pago por: {{deuda |currency}}</p>
+      </div>
     <main class="container-fluid">
         <div class="row">
             <div class="col-lg-7">
                 <div class="card p-5">
+                   
+    
                     <div class="header">
                         <div>
-                            <h4>{{ getTranslation('PROFILE.CAMPER_PROFILE') }}</h4>
+                            <h4>Perfil del Acampador </h4>
                         </div>
                         <div>
-                            <button class="btn btn-primary btn-sm" (click)="update()">{{ getTranslation('PROFILE.EDIT') }}</button>
+                            <button class="btn btn-primary btn-sm"  (click)="update()">editar</button>
                         </div>
                     </div>
                     <div class="row mt-4">
@@ -55,58 +68,74 @@
                             <div class="container-fluid">
                                 <div class="titulo-info">
                                     <i class="bx bx-id-card"></i>
-                                    <h4 style="margin-left: 10px;">{{ getTranslation('PROFILE.CAMPER') }}</h4>
+                                    <h4 style="margin-left: 10px;">Campista</h4>
                                 </div>
+    
                                 <div class="container-fluid">
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.NAME') }}:</span> {{infoCamp.name}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.DATE_OF_BIRTH') }}:</span> {{infoCamp.birthday}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.AGE') }}:</span> {{infoCamp.birthdayA}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.GENDER') }}:</span> {{infoCamp.gender_id}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.EMAIL') }}:</span> {{infoCamp.email}}</p>
+                                    <p> <span class="fw-bold">Nombre:</span>  {{infoCamp.name}}</p>
+                                    <p> <span class="fw-bold">Fecha de nacimiento:</span>{{infoCamp.birthday}}</p>
+                                    <p> <span class="fw-bold">Edad: </span> {{infoCamp.birthdayA}}</p>
+                                    <p> <span class="fw-bold">Sexo: </span> {{infoCamp.gender_id}}</p>
+                                    <p> <span class="fw-bold"> Correo: </span>{{infoCamp.email}}</p>
+    
                                 </div>
                                 <hr>
+    
                             </div>
                             <div class="container-fluid">
                                 <div class="titulo-info">
                                     <i class="fas fa-book-reader"></i>
-                                    <h4 style="margin-left: 10px;">{{ getTranslation('PROFILE.EDUCATION') }}</h4>
+                                    <h4 style="margin-left: 10px;"> Educación</h4>
                                 </div>
+    
                                 <div class="container-fluid">
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.SCHOOL') }}:</span> {{infoCamp.school_id}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.GRADE') }}:</span> {{infoCamp.grade}}</p>
+                                    <p> <span class="fw-bold">Escuela:</span> {{infoCamp.school_id}} </p>
+                                    <p> <span class="fw-bold">Grado:</span> {{infoCamp.grade}}</p>
+    
                                 </div>
                                 <hr>
                                 <br>
+    
                                 <div class="titulo-info">
                                     <i class="fas fa-diagnoses"></i>
-                                    <h4 style="margin-left: 10px;">{{ getTranslation('PROFILE.SKILLS') }}</h4>
+                                    <h4 style="margin-left: 10px;">Habilidades</h4>
                                 </div>
+    
                                 <div class="container-fluid">
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.CAN_SWIM') }}:</span> {{infoCamp.can_swim}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.PREVENT_ACTIVITIES') }}:</span> {{infoCamp.prevent_activities}}</p>
+                                    <p> <span class="fw-bold">¿Sabe nadar?:</span>{{infoCamp.can_swim}}</p>
+                                    <p> <span class="fw-bold">Impide realizar actividades</span> {{infoCamp.prevent_activities}}</p>
+    
                                 </div>
+    
                             </div>
                             <hr>
                             <div class="container-fluid">
                                 <div class="titulo-info">
-                                    <i class="fas fa-ambulance"></i>
-                                    <h4 style="margin-left: 10px;">{{ getTranslation('PROFILE.MEDICAL_INFO') }}</h4>
+                                    <i class="fas fa-ambulance "></i>
+                                    <h4 style="margin-left: 10px;">Info Médica</h4>
                                 </div>
+    
                                 <div class="container-fluid">
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.REQUIRES_MEDICAL_INSTRUCTIONS') }}:</span> {{infoCamp.doctor_precall}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.WEIGHT') }}:</span> {{infoCamp.weight}} kg</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.HEIGHT') }}:</span> {{infoCamp.height}} cm</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.BLOOD_TYPE') }}:</span> {{infoCamp.blood_type}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.VACCINES') }}:</span> <span class="badge bg-info ms-1" *ngFor="let item of vacunasACtivos">{{item.name}}</span></p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.AFFLICTION') }}:</span> {{infoCamp.affliction}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.HEART_PROBLEMS') }}:</span> {{infoCamp.heart_problems}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.DRUG_ALLERGIES') }}:</span> {{infoCamp.drug_allergies}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.OTHER_ALLERGIES') }}:</span> {{infoCamp.other_allergies}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.NOCTURNAL_DISORDERS') }}:</span> {{infoCamp.nocturnal_disorders}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.MEDICATION') }}:</span> {{infoCamp.drugs}}</p>
+                                    <p> <span class="fw-bold">Requiere Instruciones Medicas:</span>{{ infoCamp.doctor_precall}} </p>
+                                    <p> <span class="fw-bold">Peso:</span> {{infoCamp.weight}} kg</p>
+                                    <p> <span class="fw-bold">Estatura: </span> {{infoCamp.height}} cm.</p>
+                                    <p> <span class="fw-bold">Tipo de sangre: </span> {{infoCamp.blood_type}}</p>
+                                    <p> <span class="fw-bold">Vacunas:</span>   <span class="badge bg-info ms-1"  *ngFor="let item of vacunasACtivos">{{item.name}}</span></p>
+                                  
+    
+                                    <p> <span class="fw-bold"> Enfermedades:</span>{{infoCamp.affliction}}</p>
+                                    <p> <span class="fw-bold"> Problemas cardiacos:</span>{{infoCamp.heart_problems}}</p>
+                                    <p> <span class="fw-bold"> Alergias a Medicamentos:</span>{{infoCamp.drug_allergies}}</p>
+                                    <p> <span class="fw-bold">Otras Alergias:</span>{{infoCamp.other_allergies}}</p>
+                                    <p> <span class="fw-bold">Alteraciones nocturnas:</span>{{infoCamp.other_allergies}}</p>
+                                    <p> <span class="fw-bold">Fobias o miedos:</span>{{infoCamp.nocturnal_disorders}}</p>
+                                    <p> <span class="fw-bold">Medicacion:</span>{{infoCamp.drugs}}</p>
                                 </div>
+    
                             </div>
                         </div>
+    
+    
                     </div>
                     <div class="row mt-4">
                         <hr>
@@ -114,70 +143,250 @@
                             <div class="container-fluid">
                                 <div class="titulo-info">
                                     <i class="fas fa-ambulance"></i>
-                                    <h4 style="margin-left: 10px;">{{ getTranslation('PROFILE.INSURANCE') }}</h4>
+                                    <h4 style="margin-left: 10px;"> Seguro médico</h4>
                                 </div>
+    
                                 <div class="container-fluid">
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.HAS_INSURANCE') }}:</span> {{infoCamp.insurance}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.SOCIAL_SECURITY_NUMBER') }}:</span> {{infoCamp.security_social_number}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.POLICY_NUMBER') }}:</span> {{infoCamp.insurance_number}}</p>
+                                    <p> <span class="fw-bold">Tiene seguro médico:</span>{{infoCamp.insurance}}</p>
+                                    <p> <span class="fw-bold">Numero de seguridad:</span>{{infoCamp.security_social_number}}</p>
+                                    <p> <span class="fw-bold">Numero de póliza:</span>{{infoCamp.insurance_number}}</p>
                                 </div>
+    
                             </div>
                             <hr>
                             <div class="container-fluid mt-5">
                                 <div class="titulo-info">
                                     <i class="fas fa-drumstick-bite"></i>
-                                    <h4 style="margin-left: 10px;">{{ getTranslation('PROFILE.NUTRITION') }}</h4>
+                                    <h4 style="margin-left: 10px;">Alimentación</h4>
                                 </div>
+    
                                 <div class="container-fluid">
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.PROHIBITED_FOODS') }}:</span> {{infoCamp.prohibited_foods}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.FOOD') }}:</span> <span class="badge bg-info ms-1" *ngFor="let item of catalogosComida">{{item.name}}</span></p>
+                                    <p> <span class="fw-bold">Comida prohibida:</span>{{infoCamp.prohibited_foods}}</p>
+                                    <p> <span class="fw-bold">Alimentacion:</span>   <span class="badge bg-info ms-1"  *ngFor="let item of catalogosComida">{{item.name}}</span></p>
                                 </div>
+    
                             </div>
                             <hr>
                             <div class="container-fluid mt-5">
                                 <div class="titulo-info">
                                     <i class="bx bxs-bookmark-star"></i>
-                                    <h4 style="margin-left: 10px;">{{ getTranslation('PROFILE.PRIMARY_TUTOR') }}</h4>
+                                    <h4 style="margin-left: 10px;"> Tutor Principal</h4>
                                 </div>
-                                <div class="container-fluid">
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.TUTOR_NAME') }}:</span> {{infoCamp.name_tutor}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.TUTOR_PHONE') }}:</span> {{infoCamp.phone_tutor}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.TUTOR_EMAIL') }}:</span> {{infoCamp.email_tutor}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.TUTOR_RELATED') }}:</span> {{infoCamp.relation_tutor}}</p>
+    
+                                <div class="container-fluid" style="margin-left: 20px;">
+                                    <p *ngIf=" userPermis.infToken.user_admin != true">{{nombreTutor}}</p>
+                                    <p *ngIf="userPermis.infToken.role_id == 2 || userPermis.infToken.user_admin == true"> <a routerLink="/dashboard/admi/parent/{{parent.id}}">{{nombreTutor}} </a></p>
+
+    
+                                    <p> <i class="bx bxs-envelope"></i>  {{emailTuto}}</p>
+                                    <p> <i class="bx bxl-whatsapp"></i>  {{parent.tutor_cellphone}}</p>
+                                    <p> <i class="bx bxs-contact"></i>  {{parent.tutor_home_phone}}</p>
+                                    <p> <i class="bx bxs-city"></i>  {{parent.tutor_work_phone}}</p>
+    
+    
+    
                                 </div>
+    
                             </div>
                             <hr>
                             <div class="container-fluid mt-5">
                                 <div class="titulo-info">
-                                    <i class="bx bx-time-five"></i>
-                                    <h4 style="margin-left: 10px;">{{ getTranslation('PROFILE.SECONDARY_TUTOR') }}</h4>
+                                    <i class="bx bxs-bookmark-plus"></i>
+                                    <h4 style="margin-left: 10px;">Tutor Secundario</h4>
                                 </div>
-                                <div class="container-fluid">
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.SECONDARY_TUTOR_NAME') }}:</span> {{infoCamp.name_tutor2}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.SECONDARY_TUTOR_PHONE') }}:</span> {{infoCamp.phone_tutor2}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.SECONDARY_TUTOR_EMAIL') }}:</span> {{infoCamp.email_tutor2}}</p>
-                                    <p><span class="fw-bold">{{ getTranslation('PROFILE.SECONDARY_TUTOR_RELATED') }}:</span> {{infoCamp.relation_tutor2}}</p>
+    
+                                <div class="container-fluid" style="margin-left: 20px;">
+                                    <p>{{nombreTutorSecundario}}</p>
+                                    <p> <i class="bx bxs-envelope"></i>  {{parent.contact_email}}</p>
+                                    <p> <i class="bx bxl-whatsapp"></i>  {{parent.contact_cellphone}}</p>
+                                    <p> <i class="bx bxs-contact"></i>  {{parent.contact_home_phone}}</p>
+                                    <p> <i class="bx bxs-city"></i>  {{parent.contact_work_phone}}</p>
+    
+    
                                 </div>
+    
                             </div>
+                            <hr>
+                            <div class="container-fluid mt-5">
+                                <div class="titulo-info">
+                                    <i class="mdi-card-account-phone-outline"></i>
+                                    <h4 style="margin-left: 10px;">Contacto de emergencia</h4>
+                                </div>
+    
+                                <div class="container-fluid" style="margin-left: 20px;">
+                                    <p> <i class="bx bxl-whatsapp"></i>  {{infoCamp.contact_cellphone}}</p>
+                                    <p> <i class="bx bxs-city"></i>  {{infoCamp.contact_homephone}}</p>
+    
+    
+                                </div>
+    
+                            </div>
+    
                         </div>
+    
                     </div>
+    
                 </div>
+    
             </div>
+    
+    
             <div class="col-lg-5">
-                <div class="card p-4">
-                    <h4>{{ getTranslation('PROFILE.EMERGENCY_CONTACTS') }}</h4>
-                    <div *ngFor="let contact of infoCamp.emergency_contacts">
-                        <hr>
-                        <div class="container-fluid">
-                            <p><span class="fw-bold">{{ getTranslation('PROFILE.CONTACT_NAME') }}:</span> {{contact.name}}</p>
-                            <p><span class="fw-bold">{{ getTranslation('PROFILE.CONTACT_PHONE') }}:</span> {{contact.phone}}</p>
-                            <p><span class="fw-bold">{{ getTranslation('PROFILE.CONTACT_EMAIL') }}:</span> {{contact.email}}</p>
-                            <p><span class="fw-bold">{{ getTranslation('PROFILE.CONTACT_RELATION') }}:</span> {{contact.relation}}</p>
-                        </div>
+                <div class="col-lg-12">
+                    <div class="top-p">
+    
                     </div>
+                    <div class="card p-4">
+                        <div class="chat">
+                            <div class="row">
+                                <h5 class="col-9">Algo más que debamos saber sobre Camper</h5>
+                                <p-badge [value]="comenarios.length" class="col-1"></p-badge>
+                                <div class="col-1" style="font-size: 25px; margin-top: -5px;" (click)="isCollapsed = ! isCollapsed">+</div>
+                            </div>
+                        <div  #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+                            <hr >
+                            <!-- en este espacio es donde va el contenedor del chat-->
+                            <div class="chat-espacio">
+                                <div>
+                                    <div class="row mt-2"*ngFor="let item of comenarios">
+                                        <div class="col-3">
+                                            <p class="Nombre-envidao">{{nombreCome}}(tutor)</p>
+                                            <p-avatar image="assets/images/camp/chat-padres.png" size="large"></p-avatar>
+                                        </div>
+                                        <div class="col-8" >
+                                            <p class="fecha-chat" style="text-align: right;"> {{item.created_at.substring(0,9)}}</p>
+                                            <div class="col-12 mensaje">
+                                                <p class="p-2">{{item.comment}}
+                                                </p>
+                                        </div>
+                                        </div>
+                                        
+                                    </div>
+                                  
+                                </div>
+                                
+                               
+    
+                            </div>
+                            <div class="col">
+                                <input type="text" name="" id="" class="form-control" placeholder="Username"
+                                    aria-label="Username" [(ngModel)]="comment">
+                                    <div class="d-flex flex-row-reverse">
+                                        <button class="btn btn-primary mt-3" (click)="comentario()">Guardar Comentario</button>
+                                    </div>
+                               
+                            </div>
+                            
+                        </div>
+                           
+                        </div>
+    
+                    </div>
+    
                 </div>
+                <div class="col-lg-12">
+                    <div class="top-p">
+    
+                    </div>
+                    <div class="card p-4">
+                        <div class="chat">
+                            <div class="row">
+                                <h5 class="col-9">Algo más que debamos saber sobre </h5>
+                                <p-badge [value]="comenarios.length" class="col-1"></p-badge>
+                                <div class="col-1" style="font-size: 25px; margin-top: -5px;" (click)="isCollapsed = ! isCollapsed">+</div>
+                            </div>
+                        <div  #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+                            <hr >
+                            <!-- en este espacio es donde va el contenedor del chat-->
+                            <div class="chat-espacio">
+                                <div class="p-1">
+                                    <div class="mt-2"*ngFor="let item of comenarios">
+                                        <div >
+                                            <div class="row">
+                                                <div class="col-2 mt-4">
+                                                    <img src="assets/images/camp/chat-padres.png" class="rounded-circle "width="100%"/>
+                                                </div>
+                                                <div class="col-10" >
+                                                    <p class="fecha-chat" style="text-align: right;"> {{item.StaffComment.created_at.substring(0,10)}}</p>
+                                                    <div class="col-12 mensaje">
+                                                        <p class="p-2">{{item.StaffComment.comment}}
+                                                        </p>
+                                                </div>
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+                                       
+                                        
+                                    </div>
+                                  
+                                </div>
+                                
+                               
+    
+                            </div>
+                            <div class="col">
+                                <label for="">Mostrar este comentario a</label>
+                                <select name="" id="" [(ngModel)]="typecoment">
+                                    <option value=3>Admin</option>
+                                    <option value=2>Coordinador</option>
+                                    <option value=1>staff</option>
+    
+    
+                                </select>
+    
+                            </div>
+                          
+                        </div>
+                           
+                        </div>
+    
+                    </div>
+    
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <p-timeline [value]="historialCaps" align="left" styleClass="customized-timeline" class="margin-timile">
+                            <ng-template pTemplate="marker" let-event>
+                                <div class="timilin-logo" [ngClass]="{'cancell':event.type=='cancelled','suscribe':event.type=='subscribe','passed':event.type=='passed'}">
+                                    <i *ngIf="event.type =='subscribe'" class="fas fa-check"></i>
+                                    <i *ngIf="event.type =='cancelled'" class="far fa-times-circle"></i>
+                                    <i *ngIf="event.type =='passed'" class="fas fa-check"></i>
+
+    
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="content" let-event>
+                                <div class="contendor-timiline mt-3 p-1" [ngClass]="{'passed':event.type=='passed','cancell':event.type=='cancelled','suscribe':event.type=='subscribe'}">
+                                    <h3 style="cursor: pointer;"> {{event.camp_name}} <i class="fa fa-info-circle" (click)="link(event.camp_id)"></i></h3>
+                                    <p (click)="link(event.camp_id)" style="cursor: pointer;"  class="badge bg-warning ms-1">Pendiente de Pago: {{event.camper_payment_balance}} MXN</p>
+                                </div>
+                                <div class="contenedor-p" >
+                                    <p class="icononos-s">{{event.camp_start.substring(0,10)}} - {{event.camp_end.substring(0,10)}}<i class="fas fa-calendar-alt"> </i></p>
+                                    
+                                </div>
+                            </ng-template>
+                        </p-timeline>
+                    </div>
+    
+                </div>
+    
             </div>
+    
+    
         </div>
+    
+    
+    
+    
     </main>
 </div>
-    
+
+<div class="div-error" *ngIf="error">
+    <img src="../../../assets/images/camp/problema.png" height="400px">
+    <h1 class="mt-3">¡UPS! TUVIMOS UN PROBLEMA.
+    </h1>
+    <h2>Te recomendamos que regreses a la página de inicio o nos contactes a info@campercontrol.com o al (777) 560 9123
+
+    </h2>
+</div>
