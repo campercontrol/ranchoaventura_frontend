@@ -74,6 +74,14 @@ export class AdmiService {
 
   }
 
+  gaetCampsSchoolProx(id:any){
+    return this.http.get('http://142.93.12.234:8000/school/'+id+'/upcoming_camps')
+
+  }
+
+  gaetCampsSchoolAnteriores(id:any){
+    return this.http.get('http://142.93.12.234:8000/school/'+id+'/past_camps')
+  }
 
 
   deletComments(id){

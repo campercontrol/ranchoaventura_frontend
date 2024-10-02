@@ -134,7 +134,7 @@
             </div>
             <div class="container-btn">
               <div>
-                <div ngbDropdown placement="top-end" class="d-inline-block">
+                <div ngbDropdown placement="top-end" class="d-inline-block" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">
                   <button type="button" class="btn btn-outline-primary" id="dropdownBasic2"
                     ngbDropdownToggle>Reportes</button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
@@ -149,7 +149,7 @@
 
                   </div>
                 </div>
-                <div ngbDropdown placement="top-end" class="d-inline-block">
+                <div ngbDropdown placement="top-end" class="d-inline-block" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">
                   <button type="button" class="btn btn-outline-primary" id="dropdownBasic2"
                     ngbDropdownToggle>Credenciales</button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
@@ -157,7 +157,7 @@
                     <button ngbDropdownItem>Fotos</button>
                   </div>
                 </div>
-                <div ngbDropdown placement="top-end" class="d-inline-block">
+                <div ngbDropdown placement="top-end" class="d-inline-block" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">
                   <button type="button" class="btn btn-outline-primary" id="dropdownBasic2"
                     ngbDropdownToggle>Pulseras</button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
@@ -174,8 +174,8 @@
                     <button type="button" class="btn btn-success" id="dropdownBasic2"
                       ngbDropdownToggle>Modulos</button>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-                        <button ngbDropdownItem (click)="puntosControl()">Punto de control</button>
-                        <button ngbDropdownItem (click)="medicos()">Medicos</button>
+                        <button ngbDropdownItem (click)="puntosControl()" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">Punto de control</button>
+                        <button ngbDropdownItem (click)="medicos()" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">Medicos</button>
                         <button ngbDropdownItem (click)="Agrupaciones()">Agrupaciones</button>
 
       
@@ -226,7 +226,7 @@
                     </div>
                   </th>
                
-                  <th pSortableColumn="camper_total_balance" style=" min-width: 100px;">
+                  <th pSortableColumn="camper_total_balance" style=" min-width: 100px;" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">
                     <div>
                       Saldo
                       <p-sortIcon field="camper_total_balance"></p-sortIcon>
@@ -280,7 +280,7 @@
                    
   
                   </td>
-                  <td (click)="linkPagos(customer.camper_id)">
+                  <td (click)="linkPagos(customer.camper_id)" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">
                    {{ customer.camper_total_balance | currency}}
                     <br>
                     <p-tag value="Pagado" severity="success"  [rounded]="true" *ngIf=" customer.camper_total_balance==0"></p-tag>

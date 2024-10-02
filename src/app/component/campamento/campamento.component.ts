@@ -1,15 +1,23 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, LOCALE_ID, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterLinkActive } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CamperService } from 'src/services/camper.service';
 import { CampsService } from 'src/services/camps.service';
 import { LangService } from 'src/services/lang.service';
 import { MercadoPagoService } from './mercado-pago.service';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+import { AuthenticationService } from 'src/app/core/services/auth.service';
+
+registerLocaleData(localeEs, 'es');
+
 
 @Component({
   selector: 'app-campamento',
   templateUrl: './campamento.component.html',
-  styleUrls: ['./campamento.component.scss']
+  styleUrls: ['./campamento.component.scss'],
+  providers: [{ provide: LOCALE_ID, useValue: 'es' }],
+
 })
 export class CampamentoComponent implements OnInit {
   textos= {
@@ -62,7 +70,20 @@ export class CampamentoComponent implements OnInit {
     }
 
   }
-
+  dialogResponsiveOptions = [
+    {
+      breakpoint: '1024px',
+      width: '70vw',
+    },
+    {
+      breakpoint: '768px',
+      width: '90vw',
+    },
+    {
+      breakpoint: '560px',
+      width: '100vw',
+    }
+  ];
   
   idCamper=0;
   idCamp=0;
@@ -78,6 +99,7 @@ export class CampamentoComponent implements OnInit {
   respuestPregunta:any="";
   cargosExtra:false;
   inscripcion = true;
+  loadingMercadoPago = false;
   
 
   estatusPago:Boolean= false;
@@ -86,7 +108,7 @@ export class CampamentoComponent implements OnInit {
   location= "";
   typeSucribe:number = 0;
   balance = 0;
-  @ViewChild('baucher') baucher  :ElementRef;
+  @ViewChild('baucher') baucher ? :ElementRef;
   cargando= false;
   displayModal = false;
   showMercadopago:boolean = false;
@@ -94,9 +116,12 @@ export class CampamentoComponent implements OnInit {
   declare  MercadoPago: any;
   pagoMercado:number=0;
   fechadePagos:any=[]
+  rol=0;
 
-
-  constructor(private mercadoPagoService: MercadoPagoService,private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router,private render:Renderer2,private lang:LangService,private routerNav:Router) { 
+  constructor(private mercadoPagoService: MercadoPagoService,private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router,private render:Renderer2,private lang:LangService,private routerNav:Router,private info : AuthenticationService) { 
+    
+    this.rol=this.info.infToken.role_id
+    
     this.routesA.params.subscribe((params)=>{
       this.idCamp = params['camp'];
     //  console.log(this.idCamp);
@@ -144,35 +169,9 @@ export class CampamentoComponent implements OnInit {
       
     })
 
-    this.pay()
 
   }
-  pay() {
-    this.mercadoPagoService.createPreference({
-      // Datos de la preferencia
-      items: [
-        {
-          title: 'Producto de prueba',
-          unit_price: 100,
-          quantity: 1,
-        }
-      ]
-    }).subscribe((response: any) => {
-      const mp = new this.MercadoPago('APP_USR-dc72967b-8153-42ed-8a2a-12dcc157feca', {
-        locale: 'es-AR'
-      });
-
-      mp.checkout({
-        preference: {
-          id: response.preference_id
-        },
-        render: {
-          container: '.cho-container',
-          label: 'Pagar'
-        }
-      });
-    });
-  }
+ 
   removeHtmlTags(inputString: string): string {
     if (!inputString) {
       return ''; // Devuelve una cadena vacía si el string es null o undefined
@@ -375,6 +374,21 @@ export class CampamentoComponent implements OnInit {
   })
     
     
+  }
+
+  linkMercadoPago(){
+    this.loadingMercadoPago = true;
+    this.mercadoPagoService.createPreference(this.idCamp,this.idCamper,this.pagoMercado).subscribe({
+      next:(response)=>{
+
+        const link = response.sandbox_init_point;
+        window.location.href = link;
+
+
+      }
+
+    })
+
   }
   
 }

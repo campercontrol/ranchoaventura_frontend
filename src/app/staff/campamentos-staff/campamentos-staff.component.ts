@@ -378,7 +378,15 @@ determineTipoDepago() {
 
   }
   vercamper(id){
-    this.routerN.navigate(['/dashboard/parents/inscription/camper/'+id])
+    if(this.rol == 2){
+
+      this.routerN.navigate(['/dashboard/parents/inscription/camper/'+id])
+
+    }else {
+      this.routerN.navigate(['/dashboard/parents/inscription/camp-info/'+id +'/'+this.idCamp])
+
+      
+    }
 
 
   }

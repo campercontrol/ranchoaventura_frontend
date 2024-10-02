@@ -72,6 +72,10 @@ import { AuthGuard } from '../core/guards/auth.guard';
 import { ListadoStaffComponent } from '../staff/listado-staff/listado-staff.component';
 import { ListadoCampersComponent } from '../staff/listado-campers/listado-campers.component';
 import { LocacionComponent } from '../component/locacion/locacion.component';
+import { MercadoPagoSuccessComponent } from '../component/mercado_pago_success/mercado_pago_success.component';
+import { CampamentosProximosEscuelasComponent } from '../component/campamentos-proximos-escuelas/campamentos-proximos-escuelas.component';
+import { CampamentosAnterioresEscuelasComponent } from '../component/campamentos-anteriores-escuelas/campamentos-anteriores-escuelas.component';
+import { CamparsSchoolComponent } from '../component/campars-school/campars-school.component';
 
 const routes: Routes = [
   
@@ -114,6 +118,14 @@ const routes: Routes = [
   { path: 'admi/grouping', component: GroupingAdmiComponent, canActivate: [AuthGuard] },// admi a camps
 
 
+  { path: 'school/upcoming_camps', component: CampamentosProximosEscuelasComponent, canActivate: [AuthGuard] },// admi a 
+  
+  { path: 'school/past_camps', component: CampamentosAnterioresEscuelasComponent, canActivate: [AuthGuard] },// admi a camps
+  { path: 'school/campers', component: CamparsSchoolComponent, canActivate: [AuthGuard] },// admi a camps
+
+
+
+
 
 
   { path: 'staff/events', component: ListEventsComponent, canActivate: [AuthGuard] },// admi a camps
@@ -147,12 +159,12 @@ const routes: Routes = [
 
 
   {path: 'mailing', component: GmailingComponent },
-  {path: 'school/profile', component: PerfilEscuelaComponent, canActivate: [AuthGuard] },
+  
   {path: 'shop', component: TienditaComponent, canActivate: [AuthGuard] },
 
   {path: 'staff/update',component:UpdateStaffComponent, canActivate: [AuthGuard] },
   {path: 'staff/update/:id',component:UpdateStaffComponent, canActivate: [AuthGuard] },
-
+  
 
 
 
@@ -204,10 +216,6 @@ const routes: Routes = [
 
 
 
-  {path: 'school/new', component: CampamentosNuevosComponent, canActivate: [AuthGuard] },
-  {path: 'school/laste', component: CampamentosAnterioresComponent, canActivate: [AuthGuard] },
-  {path: 'school/camp', component: TablaCampersEscuelasComponent, canActivate: [AuthGuard] },
-  {path: 'school/perfil', component: PerfilEscuelaComponent, canActivate: [AuthGuard] },
 
   
 

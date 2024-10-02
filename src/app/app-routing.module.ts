@@ -12,6 +12,7 @@ import { RedirigirComponent } from './redirigir/redirigir.component';
 import { ResetPaswordComponent } from './component/reset-pasword/reset-pasword.component';
 import { ResetEmailComponent } from './component/reset-email/reset-email.component';
 import { VerificacionCuentaComponent } from './component/verificacion-cuenta/verificacion-cuenta.component';
+import { MercadoPagoSuccessComponent } from './component/mercado_pago_success/mercado_pago_success.component';
 
 const routes: Routes = [
  // { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
@@ -24,7 +25,9 @@ const routes: Routes = [
   {path:'reset_password',component:ResetPaswordComponent},
   {path:'user/verify',component:VerificacionCuentaComponent},
 
-
+  { path: 'mercado_pago/success', component: MercadoPagoSuccessComponent},
+  { path: 'mercado_pago/failure', component: MercadoPagoSuccessComponent },
+  { path: 'mercado_pago/pending', component: MercadoPagoSuccessComponent },
  
 
 

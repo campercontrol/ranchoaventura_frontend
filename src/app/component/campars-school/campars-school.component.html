@@ -1,0 +1,67 @@
+<div *ngIf="table">
+    
+        <div>
+
+            <div class="card border border-info border-1">
+                <div class="bg-info p-2">
+                    <h1 class="card-title text-white">Acampadores</h1>
+                </div>
+                <div class="card-body">
+                <div class="container-btn mt-1 mb-3">
+                    <div class="btn-footer">
+                    
+                    </div>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        placeholder="Global Search" />
+                </div>
+        <div style="overflow: auto;">
+            <p-table #dt [value]="listcatalogos" [rows]="20"
+            [rowsPerPageOptions]="[5, 25, 50]"
+            [globalFilterFields]="['name','lastname_mother','lastname_father','school','tutor_fullname','tutor_email','camper_id']"
+           [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true"
+            [paginator]="true">
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="name" style="min-width: 120px;">Nombre<p-sortIcon field="camper_name"style="font-size: 10px;"></p-sortIcon></th>
+                    <th pSortableColumn="school" style="min-width: 150px;">Escuela<p-sortIcon field="school"></p-sortIcon></th>
+                    <th pSortableColumn="updated" style="min-width: 140px;">Update<p-sortIcon field="updated_at"></p-sortIcon></th>
+               
+                 
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-customer>
+                <tr>
+                    <td style="cursor:pointer;">
+                       <a routerLink="/dashboard/parents/camper/{{customer.id}}"> {{customer.name}} {{customer.lastname_father}}     {{customer.lastname_mother}} </a> 
+                    </td>
+                 
+                 
+                    <td>
+                        {{gradeName(customer.grade)}}
+                    </td>
+                    <td>
+                        {{customer.birthday}} 
+                       <br>
+                       {{calculateAgeString(customer.birthday)}}
+                    </td>
+                  
+                 
+                </tr>
+            </ng-template>
+
+        </p-table>
+   
+ 
+        </div>
+  
+</div>
+            </div>
+        </div>
+</div>
+
+<div class="spinner-border text-primary col-12 mx-auto" role="status" *ngIf="!table">
+    <span class="sr-only text-center">Loading...</span>
+</div>

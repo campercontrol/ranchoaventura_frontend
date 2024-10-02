@@ -17,6 +17,9 @@
     align-items: center;
     padding: 10px 20px;
 }
+td{
+    border: 2px;
+}
 
 
 .container-pagos{
@@ -93,6 +96,16 @@ i{
     margin: 10px;
     
 }
+
+.table {
+    border: 2px solid #dee2e6;
+  }
+  
+  .table-bordered th, 
+  .table-bordered td {
+    border: 2px solid #dee2e6 !important;
+  }
+  
 
 @media (max-width: 980px) {
     

@@ -62,10 +62,14 @@ export class LoginComponent implements OnInit {
           
           console.log(this.authenticationService.infToken.role_id);
           
-          if(this.authenticationService.infToken.role_id>1){
+          if(this.authenticationService.infToken.role_id  == 2){
             this.router.navigate(['dashboard/staff']);
             console.log(this.authenticationService.infToken);
  
+          }else if(this.authenticationService.infToken.role_id  == 3 || this.authenticationService.infToken.role_id  == 4 ){
+            this.router.navigate(['dashboard/school/upcoming_camps']);
+            console.log(this.authenticationService.infToken);
+            
           }else{
             this.router.navigate(['dashboard/parents']);
             console.log(this.authenticationService.infToken);

@@ -60,6 +60,7 @@ import { NuevaConsultaComponent } from '../pages/medical/nueva-consulta/nueva-co
 import { AdminTipoAgrupacionesComponent } from './admin-tipo-agrupaciones/admin-tipo-agrupaciones.component';
 import { GroupingAdmiComponent } from './grouping-admi/grouping-admi.component';
 import { ListadoStaffComponent } from './listado-staff/listado-staff.component';
+import { MercadoPagoSuccessComponent } from '../component/mercado_pago_success/mercado_pago_success.component';
 
 
 
@@ -99,6 +100,7 @@ import { ListadoStaffComponent } from './listado-staff/listado-staff.component';
     UpdatePerfilComponent,
     AdminTipoAgrupacionesComponent,
     GroupingAdmiComponent,
+    MercadoPagoSuccessComponent
     
   ],
   imports: [

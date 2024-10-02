@@ -165,6 +165,9 @@ import { AdminStaffCreateComponent } from './component/admin-staff/admin-staff-c
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { VerificacionCuentaComponent } from './component/verificacion-cuenta/verificacion-cuenta.component';
 import { LocacionComponent } from './component/locacion/locacion.component';
+import { CampamentosProximosEscuelasComponent } from './component/campamentos-proximos-escuelas/campamentos-proximos-escuelas.component';
+import { CampamentosAnterioresEscuelasComponent } from './component/campamentos-anteriores-escuelas/campamentos-anteriores-escuelas.component';
+import { CamparsSchoolComponent } from './component/campars-school/campars-school.component';
 
 
 
@@ -234,7 +237,10 @@ export function createTranslateLoader(http: HttpClient): any {
     AdminStaffCreateComponent,
     ResetPasswordComponent,
     VerificacionCuentaComponent,
-    LocacionComponent, 
+    LocacionComponent,
+    CampamentosProximosEscuelasComponent,
+    CampamentosAnterioresEscuelasComponent,
+    CamparsSchoolComponent, 
        
   ],
   imports: [

@@ -6,12 +6,12 @@ import { Observable } from 'rxjs';
 })
 export class MercadoPagoService {
 
-  private baseUrl = 'https://tu-backend.com/api';  // Cambia esto por la URL de tu backend
+  private baseUrl = 'http://142.93.12.234:8000/';  // Cambia esto por la URL de tu backend
 
   constructor(private http: HttpClient) {}
 
   // Método para crear una preferencia en el backend
-  createPreference(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/create_preference`, data);
+  createPreference(camp_id,camper_id,pago): Observable<any> {
+    return this.http.get(`${this.baseUrl}mercado_pago/create_payment_link/${camp_id}/${camper_id}/${pago}`);
   }
 }

@@ -1,0 +1,151 @@
+<div  *ngIf="!spiner">
+    <div >
+  
+      <div class="card">
+    
+        <div class="card border border-info border-2">
+              <div class="p-1 bg-info" style="width: 100%;">
+                <h1 class="card-title text-white">Próximos camps</h1>
+      
+              </div>
+              <div *ngIf="spiner" class="p-4">
+                <div class="d-flex justify-content-center">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class=" scroll-y" *ngIf="!spiner" >
+    
+              <div class="card-body">
+                <div>
+                  <div class="col text-end">
+      
+                  </div>
+                </div>
+                <div class="container-btn">
+                   
+                    <div class="btn-grup">
+                      <div>
+                         
+                      </div>
+                      <input style="height: 30px;" class="mb-2" pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                          placeholder="Global Search" />
+                  </div>
+                 
+                 
+                </div>
+      
+                <p-table #dt [rowHover]="true" [rows]="5" [value]="listCamps" 
+                [globalFilterFields]="['name','location','start','end']"
+                  [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,25,50]"  [paginator]="true"
+                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                  responsiveLayout="scroll"
+                  scrollHeight="flex"
+                  >
+                  <ng-template pTemplate="header">
+                    <tr>
+                       
+      
+                      <th pSortableColumn="lastname_father" class="camp">
+                        <div class="flex justify-content-between align-items-center" style="width: 200px;">
+                          Camp
+                          <p-sortIcon field="lastname_father"></p-sortIcon>
+                        </div>
+                      </th>
+                      <th pSortableColumn="birthday" class="camp">
+                        <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
+                          Sede
+                          <p-sortIcon field="birthday"></p-sortIcon>
+                        </div>
+                      </th>
+                      
+                  
+                     
+                      <th pSortableColumn="season_name">
+                        <div class="flex justify-content-between align-items-center" style="width: 140px;">
+                          Record
+                          <p-sortIcon field="season_name"></p-sortIcon>
+                        </div>
+                      </th>
+                   
+                      <th pSortableColumn="public_price" style="width: 130px; min-width: 120px;">
+                        <div class="flex justify-content-between align-items-center">
+                            Inicia
+                          <p-sortIcon field="public_price"></p-sortIcon>
+                        </div>
+                      </th>
+                      
+                      <th pSortableColumn="public_price" style="width: 130px; min-width: 120px;">
+                        <div class="flex justify-content-between align-items-center">
+                            Termina
+                          <p-sortIcon field="public_price"></p-sortIcon>
+                        </div>
+                      </th>
+      
+                     
+                    
+      
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-customer>
+                    <tr class="p-selectable-row">
+                        <td  style=" cursor:pointer;" >
+                          <a routerLink="/dashboard/camp/{{customer.id}}"> {{customer.name}}</a> 
+                        </td>
+                          <td>
+                            {{customer.location}}
+                          </td>
+                       
+                          <td> 
+                          <p-badge [value]="customer.records.campers_recod" pTooltip="Acampadores" tooltipPosition="top"></p-badge> --> 
+                           
+                            <p-badge [value]="customer.records.staff_available_record" pTooltip="Staff Apuntado" tooltipPosition="top"
+                                severity="danger" severity="danger"></p-badge> 
+                                
+                            <p-badge [value]="customer.records.staff_record " pTooltip="Staff Confirmado" tooltipPosition="top"
+                                severity="success" severity="success"></p-badge> 
+                          </td>
+                          <td style="font-size: 12px;" class="container-contac">
+          
+                   {{customer.start.substring(0,10)}} 
+                       
+                          </td>
+                          <td>
+          
+                           
+                           {{customer.end.substring(0,10)}}
+          
+                          </td> 
+                   
+      
+                    
+      
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+      
+                  </ng-template>
+                </p-table>
+    
+            </div>
+            </div>
+          </div>
+    
+    
+    
+    
+       
+    </div>
+    
+ 
+  </div>
+  <div *ngIf="spiner" class="p-4">
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+  

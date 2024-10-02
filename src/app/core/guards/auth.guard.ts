@@ -54,14 +54,18 @@ export class AuthGuard implements CanActivate {
 
                 break;
             case 3:
+                if (state.url.includes('/camp') || state.url.includes('/medical') || state.url.includes('/staff')|| state.url.includes('/mailing')|| state.url.includes('/school')) {
+                    return true;
+                }
                 return false;
                 break;
             case 4: //coordinator
-                // Permitir acceso a las rutas que comienzan con 'camp' o 'medical'
-                // if (state.url.includes('/camp') || state.url.includes('/medical')) {
-                //     return true;
-                // }
-                return false;
+            if (state.url.includes('/camp') || state.url.includes('/medical') || state.url.includes('/staff')|| state.url.includes('/mailing')|| state.url.includes('/school')) {
+                return true;
+            }
+            // Permitir acceso a las rutas que comienzan con 'camp' o 'camp' o 'medical' lo que es lo mismo que staff
+            // no puede entrar a mailing, catalogos, administrador
+            return false;
                 break;
             case 5: //medical
                 // Permitir acceso a las rutas que comienzan con 'medical'

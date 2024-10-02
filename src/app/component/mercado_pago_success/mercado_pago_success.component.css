@@ -1,0 +1,52 @@
+.logo-mercado-pago {
+  width: 150px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.logo-success {
+  filter: invert(42%) sepia(76%) saturate(356%) hue-rotate(66deg) brightness(92%) contrast(88%);
+}
+
+.logo-failure {
+  filter: invert(18%) sepia(89%) saturate(6582%) hue-rotate(356deg) brightness(89%) contrast(99%);
+}
+
+.logo-pending {
+  filter: invert(79%) sepia(71%) saturate(587%) hue-rotate(17deg) brightness(97%) contrast(97%);
+}
+
+.success-icon {
+  color: green;
+  font-size: 2.5rem;
+}
+
+.error-icon {
+  color: red;
+  font-size: 2.5rem;
+}
+
+.pending-icon {
+  color: orange;
+  font-size: 2.5rem;
+}
+
+.warning-icon {
+  color: yellow;
+  font-size: 2.5rem;
+  margin-top: 20px;
+}
+.success-icon {
+  color: green;
+  font-size: 4rem;
+}
+
+.error-icon {
+  color: red;
+  font-size: 4rem;
+}
+
+.warning-icon {
+  color: orange;
+  font-size: 4rem;
+}

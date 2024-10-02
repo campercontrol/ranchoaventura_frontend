@@ -17,8 +17,9 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() isCondensed = false;
   @ViewChild('sideMenu') sideMenu: ElementRef;
 
-  paretn = true;
-  staff = true;
+  paretn = false;
+  staff = false;
+  school = false;
   catalogos = false;
   admi = false;
   rol_id = 0;
@@ -39,6 +40,10 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
     if (currentUser) {
       this.info.infToken = jwt_decode(currentUser);
       this.rol_id = this.info.infToken.role_id;
+      console.log(this.rol_id,'ssss');
+      
+      this.configureRoleBasedVisibility();
+
       this.info.loggedIn = true;
     } else {
       this.info.infToken = null;
@@ -46,7 +51,6 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
     }
 
     // Configurar la visibilidad de las secciones basadas en el rol del usuario
-    this.configureRoleBasedVisibility();
 
     // Subscribirse a eventos de navegación para activar el menú dropdown
     router.events.forEach((event) => {
@@ -173,17 +177,28 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   configureRoleBasedVisibility() {
+    console.log('token',this.info.infToken.rol_id);
+    
+
     if (!this.info.infToken) {
       this.paretn = false;
       this.staff = false;
-    } else if (this.info.infToken.role_id == 1) {
+    } else if (this.rol_id == 1) {
       this.paretn = true;
       this.staff = false;
-    } else if (this.info.infToken.role_id == 2) {
+      this.school = false;
+
+    } else if (this.rol_id == 2) {
       this.paretn = false;
       this.staff = true;
       this.user_admin = this.info.infToken.user_admin;
       this.user_coordinator = this.info.infToken.user_coordinator;
+    } else if(this.rol_id == 3 || this.rol_id == 4 ){
+      this.paretn = false;
+      this.staff = false;
+      this.school = true;
+      
+
     }
   }
 }

@@ -16,4 +16,7 @@ import { FormModule } from '../form/form.module';
   
   ]
 })
-export class MedicalModule { }
+export class MedicalModule {
+
+  
+ }
