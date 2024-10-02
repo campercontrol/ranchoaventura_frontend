@@ -36,7 +36,9 @@ export class CamparsSchoolComponent implements OnInit {
       this.listcatalogos = res.data;
       const data :any= this.info.infToken;
 
-    
+    this.listcatalogos= this.listcatalogos.filter((item:any)=>{
+        return item.school_id == data.profile_id;
+      })
 
       this.camperSer.getCatalogos().subscribe((res:any)=>{
         //console.log(info.infToken);     
