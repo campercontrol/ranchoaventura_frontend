@@ -7,7 +7,52 @@
     align-items: center;
     padding: 10px 20px;
 }
-
+/* Estilos para los diferentes estatus */
+.status-pending {
+    color: orange;
+    font-weight: bold;
+  }
+  
+  .status-approved {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .status-authorized {
+    color: blue;
+    font-weight: bold;
+  }
+  
+  .status-in_process {
+    color: purple;
+    font-weight: bold;
+  }
+  
+  .status-in_mediation {
+    color: darkorange;
+    font-weight: bold;
+  }
+  
+  .status-rejected {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .status-cancelled {
+    color: gray;
+    font-weight: bold;
+  }
+  
+  .status-refunded {
+    color: teal;
+    font-weight: bold;
+  }
+  
+  .status-charged_back {
+    color: brown;
+    font-weight: bold;
+  }
+  
 .bodyCamper2{
     background-color: #b2cce8;
     width: 100%;

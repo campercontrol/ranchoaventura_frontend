@@ -1,0 +1,169 @@
+
+  
+  <div class="card pt-4 pb-4">
+    <div class="card-container">
+        <div *ngFor="let card of cards" class="card" [ngClass]="card.bgClass">
+          <div class="card-content">
+            <h2 class="card-amount">${{ card.amount | number:'1.1-1' }}</h2>
+            <p class="card-title">{{ card.title }}</p>
+            <p class="card-transactions">
+              {{ card.transactions }} Transacciones
+              <i class="pi pi-check"></i>
+            </p>
+            <!-- Icono grande como marca de agua -->
+            <div class="card-icon">
+              <i [ngClass]="card.iconClass"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="mt-4  border border-success border-3">
+    <div class=" scroll-y">
+        <div class="bg-success p-2">
+            <h1 class="card-title text-white">Campers</h1>
+
+        </div>
+        <button class="btn btn-primary m-3 " (click)="open()">
+            Aplicar pago masivo
+        </button>
+    <p-table [value]="campers" [(selection)]="selectedCampers" dataKey="id">
+        <ng-template pTemplate="header">
+            <tr role="row">
+                <th class="select-checkbox sorting_disabled" rowspan="1" colspan="1" style="width: 25px;" aria-label="">
+                    <p-tableHeaderCheckbox 
+                        [selection]="selectedCampers" 
+                        [data]="campers" 
+                        (onChange)="onHeaderCheckboxToggle($event)">
+                    </p-tableHeaderCheckbox>
+                </th>
+                <th data-priority="1" class="sorting_asc" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 183px;" aria-label="Nombre: Activar para ordenar la columna de manera descendente" aria-sort="ascending">
+                    Nombre
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 53px;" aria-label="Inscrito: Activar para ordenar la columna de manera ascendente">
+                    Inscrito
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 142px;" aria-label="1525 Kingswood PP 1: Activar para ordenar la columna de manera ascendente">
+                    1525 Kingswood PP 1
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 141px;" aria-label="Clip, pago con tarjeta : Activar para ordenar la columna de manera ascendente">
+                    Clip, pago con tarjeta
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 164px;" aria-label="Depósito BBVA Kin Camp: Activar para ordenar la columna de manera ascendente">
+                    Depósito BBVA Kin Camp
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 152px;" aria-label="Depósito BBVA Patricia: Activar para ordenar la columna de manera ascendente">
+                    Depósito BBVA Patricia
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 56px;" aria-label="Efectivo: Activar para ordenar la columna de manera ascendente">
+                    Efectivo
+                </th>
+                <th data-priority="4" class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 96px;" aria-label="Total de pagos: Activar para ordenar la columna de manera ascendente">
+                    Total de pagos
+                </th>
+                <th data-priority="5" class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 78px;" aria-label="Descuentos: Activar para ordenar la columna de manera ascendente">
+                    Descuentos
+                </th>
+                <th data-priority="6" class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 74px;" aria-label="Reembolsos: Activar para ordenar la columna de manera ascendente">
+                    Reembolsos
+                </th>
+                <th data-priority="3" class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 84px;" aria-label="Saldo: Activar para ordenar la columna de manera ascendente">
+                    Saldo
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-camper let-columns="columns">
+            <tr [pSelectableRow]="camper">
+                <td>
+                    <p-tableCheckbox [value]="camper"></p-tableCheckbox>
+                </td>
+                <td>{{ camper.name }}</td>
+                <td>
+                    <span *ngIf="camper.registered; else notRegistered">✓</span>
+                    <ng-template #notRegistered>✗</ng-template>
+                </td>
+                <td>{{ camper.kingswoodPP1 }}</td>
+                <td>{{ camper.clipPayment }}</td>
+                <td>{{ camper.bbvaKinCampDeposit }}</td>
+                <td>{{ camper.bbvaPatriciaDeposit }}</td>
+                <td>{{ camper.cash }}</td>
+                <td>{{ camper.totalPayments }}</td>
+                <td>{{ camper.discounts }}</td>
+                <td>{{ camper.refunds }}</td>
+                <td>{{ camper.balance }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+    
+
+  </div>
+
+
+  <ng-template #content let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		
+		<button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+	</div>
+    <div class="col-12 p-5" [formGroup]="updatePage">
+        <div class="row mb-3" >
+            <label for="inputEmail3" class="col-sm-3 col-form-label">Método de pago*</label>
+            <div class="col-sm-8">
+                <select 
+                formControlName="payment_method_id"
+                name="payment_method_id"
+                style="width: 100%;" 
+                class=" form-control">
+                <option  value="0">Método de pago*</option>
+                 <option *ngFor="let item of tiposPago" [value]="item.id">{{item.name}}</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputPassword3" class="col-sm-3 col-form-label">Monto*</label>
+            <div class="col-sm-8">
+                <input type="number" class="form-control" id="inputPassword3" formControlName="payment_amount" name="payment_amount" >
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputEmail3" class="col-sm-3 col-form-label">Tipo de Movimiento*</label>
+            <div class="col-sm-8">
+                <select 
+                formControlName="txn_type_id"
+                name="txn_type_id"
+                style="width: 100%;" 
+                 class=" form-control">
+                 <option  value="0">Seleciona un Tipo de Movimiento</option>
+
+                 <option *ngFor="let item of tiposMovimiento" [value]="item.id">{{item.name}}</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputPassword3" class="col-sm-3 col-form-label">Número de transacción*</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" formControlName="txn_number"  name="txn_number" >
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="inputPassword3" class="col-sm-3 col-form-label">Fecha*</label>
+            <div class="col-sm-8">
+                <input type="date" class="form-control" formControlName="payment_date" name="payment_date" >
+            </div>
+        </div>
+
+       
+        <hr>
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-primary" type="button" (click)="update()">Editar Pago</button>
+          </div>
+
+
+          
+    </div>
+	
+</ng-template>

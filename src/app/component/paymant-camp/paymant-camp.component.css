@@ -1,0 +1,67 @@
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.card {
+  flex: 1;
+  margin: 0 10px;
+  border-radius: 5px;
+  color: white;
+  text-align: left;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+}
+
+.card-amount {
+  font-size: 1.8rem;
+  margin: 0;
+  line-height: 1.2;
+  color: white;
+}
+
+.card-title {
+  font-size: 1.0rem;
+  margin-top: 5px;
+  color: white;
+}
+
+.card-transactions {
+  font-size: 0,8rem;
+  margin-top: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.card-transactions i {
+  margin-left: 5px;
+  font-size: 1.2rem;
+}
+
+.card-icon {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  opacity: 0.1;
+  font-size: 6rem;
+}
+
+.green-background {
+  background-color: #28a745;
+}
+
+.blue-background {
+  background-color: #007bff;
+}
+
+.orange-background {
+  background-color: #fd7e14;
+}

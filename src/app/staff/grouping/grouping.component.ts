@@ -42,10 +42,13 @@ export class GroupingComponent  {
   capMax = 0;
   capEdit = 0;
   edintGroup:any;
+  groupingsList: string[] = [];
+
 
   // Select2 Dropdown
   selectValue: string[];
   selecType:any =0;
+  tipoAgrupaciosn:any=[];
   selectCatalogos:any=[]
 
   columns = [{ prop: 'agrupación' }, { name: 'Tipo' }, { name: 'Editar' } ];
@@ -56,7 +59,7 @@ export class GroupingComponent  {
 
   ColumnMode = ColumnMode;
 
-  constructor(private modalService: NgbModal, private formBuilder: FormBuilder,private router:ActivatedRoute,private grouping:GroupingService,private listGrouping:AdminService, private listTypeAgrup:AdmitipoAgrupacionesService) {
+  constructor(private modalService: NgbModal, private formBuilder: FormBuilder,private router:ActivatedRoute,private grouping:GroupingService,private listGrouping:AdminService, private listTypeAgrup:AdmitipoAgrupacionesService,private camps: AdmitipoAgrupacionesService) {
     this.rows=this.datos;
     this.temp=this.datos;
 
@@ -75,15 +78,14 @@ export class GroupingComponent  {
        element.nameComplet =  element.nameTipo  + " | " + element.name
       });
       this.getGruposInscritos();
+
     });
     this.router.params.subscribe((res)=>{
       this.idCamp= res.id;
       this.grouping.getCamper(this.idCamp).subscribe((res:any)=>{
         console.log(res);
         this.listCampers = res.data;
-        this.listCampers.forEach((item:any)=>{
-          item.groupings = this.resetGroupingU(item.groupings)
-        })
+     
       })
   })
    }
@@ -147,22 +149,41 @@ export class GroupingComponent  {
   dateId(id){
     let b = id
   }
+
+
+  hasGrouping(item: any, grouping: string): boolean {
+    return item.groupings ? item.groupings.split(',').includes(grouping) : false;
+  }
   getGruposInscritos(){
-    this.grouping.getGruposInscritos(this.idCamp).subscribe((res:any)=>{
+    // Obtener los grupos inscritos
+    this.grouping.getGruposInscritos(this.idCamp).subscribe((res: any) => {
       this.listGruposImscritos = res.data;
-      this.listGruposImscritos.forEach((item:any)=>{
-        item.nameCample =  item.type + " | " + item.capacity; 
+      this.listGruposImscritos.forEach((item: any) => {
+        item.nameCample = item.grouping+" ("+ item.type+")" + " | " + item.capacity; 
+      });
+      const gruposFiltrados = this.grupos.filter(grupo =>
+        !this.listGruposImscritos.some(inscrito => 
+          inscrito.nameTipo === grupo.type && inscrito.grouping === grupo.name
+        )
+      );
+      this.grupos= gruposFiltrados      
+      this.camps.getAgrupaciones().subscribe((res:any)=>{
+      
+        this.tipoAgrupaciosn = res
       })
-    })
-    this.grouping.getCamper(this.idCamp).subscribe((res:any)=>{
+      console.log(gruposFiltrados,'informacion');
+    });
+   
+    
+    
+    // Obtener los campers y generar groupingsList
+    this.grouping.getCamper(this.idCamp).subscribe((res: any) => {
       console.log(res);
       this.listCampers = res.data;
-      this.listCampers.forEach((item:any)=>{
-        item.groupings = this.resetGroupingU(item.groupings)
-      })
-    })
+    
+   
+    });
   }
-
 
   createGroup(){
     let a = {
@@ -284,5 +305,25 @@ export class GroupingComponent  {
       return data.split(',');
     }
   }
+
+  customSort(event: any) {
+    event.data.sort((a: any, b: any) => {
+      const grouping = event.field; // El nombre de la agrupación que se está ordenando
+      const aHasGroup = this.hasGrouping(a, grouping);
+      const bHasGroup = this.hasGrouping(b, grouping);
+
+      // Comparar si tiene la agrupación (con palomita)
+      return (aHasGroup === bHasGroup) ? 0 : aHasGroup ? -1 : 1;
+    });
+  }
+
+  getGroupingName(camper: any, groupingTypeId: number): string {
+  // Filtra las agrupaciones que coincidan con el grouping_type_id
+  const groupings = camper.groupings.filter((g: any) => g.grouping_type_id === groupingTypeId);
+  // Si existen agrupaciones con el mismo tipo, concatena los nombres, si no, retorna '-'
+  return groupings.length > 0 ? groupings.map(g => g.name).join(', ') : '-';
+}
+
+  
 
 }

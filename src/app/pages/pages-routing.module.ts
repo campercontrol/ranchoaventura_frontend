@@ -76,6 +76,7 @@ import { MercadoPagoSuccessComponent } from '../component/mercado_pago_success/m
 import { CampamentosProximosEscuelasComponent } from '../component/campamentos-proximos-escuelas/campamentos-proximos-escuelas.component';
 import { CampamentosAnterioresEscuelasComponent } from '../component/campamentos-anteriores-escuelas/campamentos-anteriores-escuelas.component';
 import { CamparsSchoolComponent } from '../component/campars-school/campars-school.component';
+import { PaymantCampComponent } from '../component/paymant-camp/paymant-camp.component';
 
 const routes: Routes = [
   
@@ -198,6 +199,7 @@ const routes: Routes = [
 //campers
 {path: 'catalogs/campercomment',component:CampercommentComponent, canActivate: [AuthGuard] },
 
+{path: 'payments/:camp',component:PaymantCampComponent, canActivate: [AuthGuard] },
 
 
 
@@ -219,25 +221,6 @@ const routes: Routes = [
 
   
 
-  { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
-  { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
-  { path: 'filemanager', component: FilemanagerComponent, canActivate: [AuthGuard] },
-  { path: 'dashboards', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule), canActivate: [AuthGuard] },
-  { path: 'ecommerce', loadChildren: () => import('./ecommerce/ecommerce.module').then(m => m.EcommerceModule), canActivate: [AuthGuard] },
-  { path: 'crypto', loadChildren: () => import('./crypto/crypto.module').then(m => m.CryptoModule), canActivate: [AuthGuard] },
-  { path: 'email', loadChildren: () => import('./email/email.module').then(m => m.EmailModule), canActivate: [AuthGuard] },
-  { path: 'invoices', loadChildren: () => import('./invoices/invoices.module').then(m => m.InvoicesModule), canActivate: [AuthGuard] },
-  { path: 'projects', loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule), canActivate: [AuthGuard] },
-  { path: 'tasks', loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksModule), canActivate: [AuthGuard] },
-  { path: 'contacts', loadChildren: () => import('./contacts/contacts.module').then(m => m.ContactsModule), canActivate: [AuthGuard] },
-  { path: 'blog', loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule), canActivate: [AuthGuard] },
-  { path: 'pages', loadChildren: () => import('./utility/utility.module').then(m => m.UtilityModule), canActivate: [AuthGuard] },
-  { path: 'ui', loadChildren: () => import('./ui/ui.module').then(m => m.UiModule), canActivate: [AuthGuard] },
-  { path: 'form', loadChildren: () => import('./form/form.module').then(m => m.FormModule), canActivate: [AuthGuard] },
-  { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule), canActivate: [AuthGuard] },
-  { path: 'icons', loadChildren: () => import('./icons/icons.module').then(m => m.IconsModule), canActivate: [AuthGuard] },
-  { path: 'charts', loadChildren: () => import('./chart/chart.module').then(m => m.ChartModule), canActivate: [AuthGuard] },
-  { path: 'maps', loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule), canActivate: [AuthGuard]}
 ];
 
 @NgModule({

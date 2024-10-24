@@ -8,7 +8,7 @@ import { MercadoPagoService } from './mercado-pago.service';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
-
+import jwt_decode from "jwt-decode";
 registerLocaleData(localeEs, 'es');
 
 
@@ -112,6 +112,7 @@ export class CampamentoComponent implements OnInit {
   cargando= false;
   displayModal = false;
   showMercadopago:boolean = false;
+  paymentsMp:any;
 
   declare  MercadoPago: any;
   pagoMercado:number=0;
@@ -119,7 +120,7 @@ export class CampamentoComponent implements OnInit {
   rol=0;
 
   constructor(private mercadoPagoService: MercadoPagoService,private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router,private render:Renderer2,private lang:LangService,private routerNav:Router,private info : AuthenticationService) { 
-    
+
     this.rol=this.info.infToken.role_id
     
     this.routesA.params.subscribe((params)=>{
@@ -147,6 +148,7 @@ export class CampamentoComponent implements OnInit {
         console.log(this.dataCamp,'aa');
         this.cargando= true;
         this.fechadePagos = this.arrayToJsonString(this.dataCamp.recommended_payment_dates)
+        if(this.dataCamp.show_mercadopago_button == true){this.linkMercadoPago()}
         console.log(this.fechadePagos,'informacion');
         
         if(this.dataPagos){
@@ -376,12 +378,12 @@ export class CampamentoComponent implements OnInit {
     
   }
 
-  linkMercadoPago(){
+  linkMp(){
     this.loadingMercadoPago = true;
     this.mercadoPagoService.createPreference(this.idCamp,this.idCamper,this.pagoMercado).subscribe({
       next:(response)=>{
 
-        const link = response.sandbox_init_point;
+        const link = response.init_point;
         window.location.href = link;
 
 
@@ -389,6 +391,39 @@ export class CampamentoComponent implements OnInit {
 
     })
 
+  }
+  
+
+  linkMercadoPago(){
+    this.loadingMercadoPago = true;
+    this.mercadoPagoService.tablereference(this.idCamp,this.idCamper).subscribe({
+      next:(response)=>{
+
+        this.paymentsMp = response
+      }
+
+    })
+
+  }
+
+  mapStatus(status: string): string {
+    const statusMap = {
+      pending: 'Pendiente',
+      approved: 'Aprobado',
+      authorized: 'Autorizado',
+      in_process: 'En Proceso',
+      in_mediation: 'En Mediación',
+      rejected: 'Rechazado',
+      cancelled: 'Cancelado',
+      refunded: 'Reembolsado',
+      charged_back: 'Contracargo',
+    };
+    return statusMap[status] || 'Desconocido';
+  }
+
+  // Devuelve la clase CSS dependiendo del estatus
+  getStatusClass(status: string): string {
+    return `status-${status.replace('_', '-')}`;
   }
   
 }

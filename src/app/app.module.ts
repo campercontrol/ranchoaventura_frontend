@@ -168,6 +168,7 @@ import { LocacionComponent } from './component/locacion/locacion.component';
 import { CampamentosProximosEscuelasComponent } from './component/campamentos-proximos-escuelas/campamentos-proximos-escuelas.component';
 import { CampamentosAnterioresEscuelasComponent } from './component/campamentos-anteriores-escuelas/campamentos-anteriores-escuelas.component';
 import { CamparsSchoolComponent } from './component/campars-school/campars-school.component';
+import { PaymantCampComponent } from './component/paymant-camp/paymant-camp.component';
 
 
 
@@ -240,7 +241,8 @@ export function createTranslateLoader(http: HttpClient): any {
     LocacionComponent,
     CampamentosProximosEscuelasComponent,
     CampamentosAnterioresEscuelasComponent,
-    CamparsSchoolComponent, 
+    CamparsSchoolComponent,
+    PaymantCampComponent
        
   ],
   imports: [
