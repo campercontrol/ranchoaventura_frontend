@@ -1,24 +1,61 @@
 
-  
-  <div class="card pt-4 pb-4">
-    <div class="card-container">
-        <div *ngFor="let card of cards" class="card" [ngClass]="card.bgClass">
+<div class="card  p-4">
+    <div class="card-container" [class.expanded]="showAllCards" *ngIf="!loading">
+
+        <div class="card-item green-background">
+            <div class="card-content">
+                <h2 class="card-amount">{{ contatorTotal | number:'1.1-1' }}</h2>
+                <p class="card-title">Pagos recibidos</p>
+                <p class="card-transactions">
+                  {{ transaciones }} Transacciones
+                  <i class="pi pi-check"></i>
+                </p>
+                <div class="card-icon">
+                  <i></i>
+                </div>
+              </div>
+        </div>
+
+        <div class="card-item orange-background">
           <div class="card-content">
-            <h2 class="card-amount">${{ card.amount | number:'1.1-1' }}</h2>
-            <p class="card-title">{{ card.title }}</p>
-            <p class="card-transactions">
-              {{ card.transactions }} Transacciones
-              <i class="pi pi-check"></i>
-            </p>
-            <!-- Icono grande como marca de agua -->
-            <div class="card-icon">
-              <i [ngClass]="card.iconClass"></i>
+              <h2 class="card-amount">{{ camper.length | number:'1.1-1' }}</h2>
+              <p class="card-title">Registros activos </p>
+              <p class="card-transactions">
+            
+              </p>
+              <div class="card-icon">
+                <i></i>
+              </div>
             </div>
+      </div>
+      <!-- Tarjetas -->
+      <div *ngFor="let card of cards" class="card-item" 
+           [ngClass]="{'blue-background': card.payment_method !== 'Descuentos', 'orange-background': card.payment_method === 'Descuentos'}">
+        <div class="card-content">
+          <h2 class="card-amount">{{ card.total_amount | number:'1.1-1' }}</h2>
+          <p class="card-title">{{ card.payment_method }}</p>
+          <p class="card-transactions">
+            {{ card.transactions }} Transacciones
+            <i class="pi pi-check"></i>
+          </p>
+          <div class="card-icon">
+            <i [ngClass]="card.iconClass"></i>
           </div>
         </div>
       </div>
-  </div>
+    </div>
 
+    <div class="spinner-border mx-auto" role="status" *ngIf="loading">
+
+      </div>
+
+    <!-- Botón "Ver más" / "Ver menos" -->
+    <button (click)="showAllCards = !showAllCards" class="btn btn-primary mt-3">
+      {{ showAllCards ? 'Ver menos' : 'Ver más' }}
+    </button>
+  </div>
+  
+  
   <div class="mt-4  border border-success border-3">
     <div class=" scroll-y">
         <div class="bg-success p-2">
@@ -28,75 +65,82 @@
         <button class="btn btn-primary m-3 " (click)="open()">
             Aplicar pago masivo
         </button>
-    <p-table [value]="campers" [(selection)]="selectedCampers" dataKey="id">
-        <ng-template pTemplate="header">
-            <tr role="row">
-                <th class="select-checkbox sorting_disabled" rowspan="1" colspan="1" style="width: 25px;" aria-label="">
-                    <p-tableHeaderCheckbox 
-                        [selection]="selectedCampers" 
-                        [data]="campers" 
-                        (onChange)="onHeaderCheckboxToggle($event)">
-                    </p-tableHeaderCheckbox>
-                </th>
-                <th data-priority="1" class="sorting_asc" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 183px;" aria-label="Nombre: Activar para ordenar la columna de manera descendente" aria-sort="ascending">
-                    Nombre
-                </th>
-                <th class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 53px;" aria-label="Inscrito: Activar para ordenar la columna de manera ascendente">
-                    Inscrito
-                </th>
-                <th class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 142px;" aria-label="1525 Kingswood PP 1: Activar para ordenar la columna de manera ascendente">
-                    1525 Kingswood PP 1
-                </th>
-                <th class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 141px;" aria-label="Clip, pago con tarjeta : Activar para ordenar la columna de manera ascendente">
-                    Clip, pago con tarjeta
-                </th>
-                <th class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 164px;" aria-label="Depósito BBVA Kin Camp: Activar para ordenar la columna de manera ascendente">
-                    Depósito BBVA Kin Camp
-                </th>
-                <th class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 152px;" aria-label="Depósito BBVA Patricia: Activar para ordenar la columna de manera ascendente">
-                    Depósito BBVA Patricia
-                </th>
-                <th class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 56px;" aria-label="Efectivo: Activar para ordenar la columna de manera ascendente">
-                    Efectivo
-                </th>
-                <th data-priority="4" class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 96px;" aria-label="Total de pagos: Activar para ordenar la columna de manera ascendente">
-                    Total de pagos
-                </th>
-                <th data-priority="5" class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 78px;" aria-label="Descuentos: Activar para ordenar la columna de manera ascendente">
-                    Descuentos
-                </th>
-                <th data-priority="6" class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 74px;" aria-label="Reembolsos: Activar para ordenar la columna de manera ascendente">
-                    Reembolsos
-                </th>
-                <th data-priority="3" class="sorting" tabindex="0" aria-controls="campers" rowspan="1" colspan="1" style="width: 84px;" aria-label="Saldo: Activar para ordenar la columna de manera ascendente">
-                    Saldo
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-camper let-columns="columns">
-            <tr [pSelectableRow]="camper">
-                <td>
-                    <p-tableCheckbox [value]="camper"></p-tableCheckbox>
-                </td>
-                <td>{{ camper.name }}</td>
-                <td>
-                    <span *ngIf="camper.registered; else notRegistered">✓</span>
-                    <ng-template #notRegistered>✗</ng-template>
-                </td>
-                <td>{{ camper.kingswoodPP1 }}</td>
-                <td>{{ camper.clipPayment }}</td>
-                <td>{{ camper.bbvaKinCampDeposit }}</td>
-                <td>{{ camper.bbvaPatriciaDeposit }}</td>
-                <td>{{ camper.cash }}</td>
-                <td>{{ camper.totalPayments }}</td>
-                <td>{{ camper.discounts }}</td>
-                <td>{{ camper.refunds }}</td>
-                <td>{{ camper.balance }}</td>
-            </tr>
-        </ng-template>
-    </p-table>
-    
+            <!-- Icono grande como marca de agua 
+  
+--> 
+<p-table [value]="camper" [paginator]="true" [rows]="10" [globalFilterFields]="['name']" [(selection)]="selectedCampers" *ngIf="!loading">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>
+        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+      </th>
+      <th pSortableColumn="payments_info.camper_fullname">Camper
+        <p-sortIcon field="payments_info.camper_fullname"></p-sortIcon>
+      </th>
 
+      <th pSortableColumn="payments_info.camp_statusenrolment_status">Status
+        <p-sortIcon field="payments_info.camp_statusenrolment_status"></p-sortIcon>
+      </th>
+      <th *ngFor="let key of getObjectKeys(tiposPago)" [pSortableColumn]="getPaymentMethodField(key,tiposPago)">
+        {{ tiposPago[key].name }}
+        <p-sortIcon [field]="getPaymentMethodField(key,tiposPago)"></p-sortIcon>
+      </th>
+      
+      <th pSortableColumn="payments_info.total_payments.amount">Total de pagos
+        <p-sortIcon field="payments_info.total_payments.amount"></p-sortIcon>
+      </th>
+      <th pSortableColumn="payments_info.discounts.amount">Descuentos
+        <p-sortIcon field="payments_info.discounts.amount"></p-sortIcon>
+      </th>
+      <th pSortableColumn="payments_info.refunds.refunds">Rembolso
+        <p-sortIcon field="payments_info.refunds.refunds"></p-sortIcon>
+      </th>
+      <th pSortableColumn="payments_info.camp_status.balance">Saldo
+        <p-sortIcon field="payments_info.camp_status.balance"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  
+  <ng-template pTemplate="body" let-rowData>
+    <tr>
+      <td>
+        <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+      </td>
+      <td>
+        <a [routerLink]="['/dashboard/payments', rowData.camper_id, camp]">{{ rowData.camper_fullname }}</a>
+        <i *ngIf="rowData.payments_info.camp_statusenrolment_status == 'Inscrito'" class="pi pi-times-circle ms-2" style="color:red"></i>
+        <i *ngIf="rowData.number_of_comments > 0" class="fas fa-sticky-note" style="color: rgb(192, 192, 187);"></i>
+      </td>
+
+      <td>
+        {{ rowData.payments_info.camp_status.enrolment_status }}
+
+      </td>
+      <td *ngFor="let key of getObjectKeys(rowData.payments_info.payments_by_payment_method)">
+        {{ rowData.payments_info?.payments_by_payment_method[key]?.total_amount || 0 | number:'1.0-0' }}
+      </td>
+      <td>
+        {{ rowData.payments_info.total_payments.amount || 0 | number:'1.0-0' }}
+        <p-tag [value]="rowData.payments_info.total_payments.number_of_payments" severity="success" *ngIf="rowData.payments_info.total_payments.number_of_payments > 0"></p-tag>
+      </td>
+      <td>
+        {{ rowData.payments_info.discounts.amount || 0 | number:'1.0-0' }}
+        <p-tag [value]="rowData.payments_info.discounts.number_of_discounts" severity="success" *ngIf="rowData.payments_info.discounts.number_of_discounts > 0"></p-tag>
+      </td>
+      <td>{{ rowData.payments_info.refunds.refunds || 0 | number:'1.0-0' }}</td>
+      <td class="text-center">
+        {{ rowData.payments_info.camp_status.balance || 0 | number:'1.0-0' }}
+        <br>
+        <p-tag value="Pagado" severity="success" *ngIf="rowData.payments_info.camp_status.balance == 0"></p-tag>
+        <p-tag value="Saldo pendiente" severity="warning" *ngIf="rowData.payments_info.camp_status.balance > 0"></p-tag>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+  <div class="spinner-border mx-auto" role="status" *ngIf="loading">
+
+  </div>
   </div>
 
 
@@ -159,7 +203,10 @@
         <hr>
 
         <div class="d-grid gap-2 col-6 mx-auto">
-            <button class="btn btn-primary" type="button" (click)="update()">Editar Pago</button>
+            <button class="btn btn-primary" type="button" (click)="update()" *ngIf="!loading">Aplicar Pago</button>
+            <div class="spinner-border mx-auto" role="status" *ngIf="loading">
+
+            </div>
           </div>
 
 

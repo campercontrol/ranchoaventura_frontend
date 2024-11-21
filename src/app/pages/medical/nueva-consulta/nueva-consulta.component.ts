@@ -52,7 +52,7 @@ export class NuevaConsultaComponent implements OnInit {
         "comment": ["",[Validators.required]],// listo
         "medical_comment": ["",[Validators.required]], // listo
         "send_in_email": true,
-        "already_sent": true,
+        "already_sent": false,
         "camp_id": this.campId,
         "camper_id": this.camperid,
         "initial_visit_id": this.idSeguimiento,

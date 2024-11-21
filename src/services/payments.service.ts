@@ -37,5 +37,17 @@ export class PaymentsService {
   }
 
 
+  /// pagos masivos
+
+  getDatosPagosMasivo(id){
+
+    return this.http.get('http://142.93.12.234:8000/camp/'+id+'/incomes')
+  }
+
+  setDatosPagosMasivo(id,data){
+
+    return this.http.post('http://142.93.12.234:8000/camps/'+id+'/campers/0/massive_payment',data)
+  }
+
 
 }

@@ -570,7 +570,7 @@ alert('No se pudo actualizar')
           "campaign": {
 
             "name": this.tituloTemplateAlmacenado,
-            "template_title": this.tituloTemplateAlmacenado,
+            "template_title": this.asuntoTemplateAlmacenado,
 
             "camp_parents": campers,
             "camp_staff": staff,
@@ -621,7 +621,7 @@ alert('No se pudo actualizar')
       });
        a = {
           "campaign": {
-
+            "template_title": this.asuntoTemplateAlmacenado,
             "name": this.tituloTemplateAlmacenado,
             "camp_parents": false,
             "camp_staff": true,
@@ -668,8 +668,7 @@ alert('No se pudo actualizar')
         "campaign": {
 
           "name": this.tituloTemplateAlmacenado,
-          "template_title": this.tituloTemplateAlmacenado,
-
+          "template_title": this.asuntoTemplateAlmacenado,
           "camp_parents": campers,
           "camp_staff": staff,
           "camp_school": escuela,
@@ -720,7 +719,7 @@ alert('No se pudo actualizar')
       });
        a = {
           "campaign": {
-
+            "template_title": this.tituloTemplateAlmacenado,
             "name": this.tituloTemplateAlmacenado,
             "camp_parents": false,
             "camp_staff": true,

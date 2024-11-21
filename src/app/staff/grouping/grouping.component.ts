@@ -9,13 +9,16 @@ import { AdminTipoAgrupacionesComponent } from '../admin-tipo-agrupaciones/admin
 import { AdmitipoAgrupacionesService } from '../admin-tipo-agrupaciones/tipo-agrupacion.service';
 import { switchMap } from 'rxjs/operators';
 import { element } from 'protractor';
+import { MessageService } from 'primeng/api';
+import { error } from 'console';
 
 
 
 @Component({
   selector: 'app-grouping',
   templateUrl: './grouping.component.html',
-  styleUrls: ['./grouping.component.scss']
+  styleUrls: ['./grouping.component.scss'],
+  providers: [MessageService]
 })
 export class GroupingComponent  {
   datos= [{agrupación:"Camping",tipo:"Autobús", editar:'<a class=" btn btn-success">Editar</a>'}, {agrupación:"Camping2",tipo:"Autobús", editar:'<a class=" btn btn-success">Editar</a>'}]
@@ -43,7 +46,8 @@ export class GroupingComponent  {
   capEdit = 0;
   edintGroup:any;
   groupingsList: string[] = [];
-
+  idDelet:any ={};
+  displayDeleteDialog= false;
 
   // Select2 Dropdown
   selectValue: string[];
@@ -59,7 +63,7 @@ export class GroupingComponent  {
 
   ColumnMode = ColumnMode;
 
-  constructor(private modalService: NgbModal, private formBuilder: FormBuilder,private router:ActivatedRoute,private grouping:GroupingService,private listGrouping:AdminService, private listTypeAgrup:AdmitipoAgrupacionesService,private camps: AdmitipoAgrupacionesService) {
+  constructor(private messageService: MessageService,private modalService: NgbModal, private formBuilder: FormBuilder,private router:ActivatedRoute,private grouping:GroupingService,private listGrouping:AdminService, private listTypeAgrup:AdmitipoAgrupacionesService,private camps: AdmitipoAgrupacionesService) {
     this.rows=this.datos;
     this.temp=this.datos;
 
@@ -214,15 +218,17 @@ export class GroupingComponent  {
     })
   }
 
-  changeGrups(id:any){
-    console.log(id);
-    this.selecType = id.id
+    changeGrups(id: any) {
+      const tipo = id.grouping;
+      console.log(this.listCampers, id);
     
-      this.grouping.getCampersInscritos(id.id).subscribe((res:any)=>{
-        console.log(res);
-        this.listcatalogos = res;
-        
-      })
+      this.listcatalogos = this.listCampers.filter(item => {
+        // Filtra solo los elementos donde ninguno de los `grouping_type_name` es igual a `tipo`
+        return !item.groupings.some(element => element.name === tipo);
+      });
+      
+    
+   
   }
   EditchangeGrups(id:any){
     console.log(id);
@@ -266,37 +272,68 @@ export class GroupingComponent  {
       this.capMax = 0;
     })
   }
-  saveGrouping(){
-    console.log(this.selectCatalogos);
-    let b = [];
-    this.spinner = true;
-    this.selectCatalogos.forEach((element:any)=>{
-      b.push({"camper_id":element.id,"grouping_camp_id":this.selecType})
-    })
+  saveGrouping() {
+    const campersToAdd = this.selectCatalogos.map((element: any) => ({
+      camper_id: element.id,
+      grouping_camp_id: this.selecType,
+    }));
 
-    this.grouping.campersInscritos(b).subscribe((res:any)=>{
-      console.log(res,'se isncribio correctamenta');
-      this.listTypeAgrup.getAgrupaciones().pipe(
+    this.spinner = true;
+    this.grouping.campersInscritos(campersToAdd).subscribe(
+      (res: any) => {
+        this.handleResponseStatus(res);
+        this.updateGroupings();
+      },
+      () => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Ocurrió un error, los campers no se añadieron correctamente.' });
+        this.spinner = false;
+      }
+    );
+  }
+
+  private handleResponseStatus(res: any) {
+    let severityType = 'info';
+
+    switch (res.status) {
+      case 1:
+        severityType = 'success';  // Éxito
+        break;
+      case 2:
+        severityType = 'warn';    // Advertencia para capacidad excedida
+        break;
+      case 3:
+      case 4:
+        severityType = 'error';   // Errores para duplicidad en agrupación y agrupación de mismo tipo
+        break;
+      default:
+        severityType = 'error';   // Cualquier otro error no manejado
+    }
+
+    // Mostrar el mensaje directamente desde `detail` proporcionado por el backend
+    this.messageService.add({ severity: severityType, summary: 'Resultado', detail: res.detail });
+  }
+
+  private updateGroupings() {
+    this.listTypeAgrup.getAgrupaciones()
+      .pipe(
         switchMap((res: any) => {
           this.tipoAgrupacion = res;
           return this.listGrouping.getAgrupaciones();
         })
-      ).subscribe((res: any) => {
-        this.grupos   = res;
-        console.log(this.grupos,'grupos');
-        this.grupos = this.grupos.filter(item => item.is_active === true);
+      )
+      .subscribe((res: any) => {
+        this.grupos = res.filter(item => item.is_active === true);
         this.grupos.forEach(element => {
-         element.nameTipo = this.filterType( element.grouping_type_id );
-         element.nameComplet =  element.nameTipo  + " | " + element.name
+          element.nameTipo = this.filterType(element.grouping_type_id);
+          element.nameComplet = `${element.nameTipo} | ${element.name}`;
         });
         this.getGruposInscritos();
         this.spinner = false;
-        this.display3 = false
-
+        this.display3 = false;
       });
-    })
-    
   }
+
+
 
   resetGroupingU(data){
     if (data === null) {
@@ -306,16 +343,6 @@ export class GroupingComponent  {
     }
   }
 
-  customSort(event: any) {
-    event.data.sort((a: any, b: any) => {
-      const grouping = event.field; // El nombre de la agrupación que se está ordenando
-      const aHasGroup = this.hasGrouping(a, grouping);
-      const bHasGroup = this.hasGrouping(b, grouping);
-
-      // Comparar si tiene la agrupación (con palomita)
-      return (aHasGroup === bHasGroup) ? 0 : aHasGroup ? -1 : 1;
-    });
-  }
 
   getGroupingName(camper: any, groupingTypeId: number): string {
   // Filtra las agrupaciones que coincidan con el grouping_type_id
@@ -324,6 +351,78 @@ export class GroupingComponent  {
   return groupings.length > 0 ? groupings.map(g => g.name).join(', ') : '-';
 }
 
+
+deletGrping(camper: any, groupingTypeId: number){
+
+  const groupings = camper.groupings.filter((g: any) => g.grouping_type_id === groupingTypeId);
+  // Si existen agrupaciones con el mismo tipo, concatena los nombres, si no, retorna '-'
+  console.log(groupings[0]);
+  this.idDelet= groupings[0];  
+  this.displayDeleteDialog =true;
+  //*this.grouping.deletGruping(item.)
+}
+confirmDelet(){
+  this.grouping.deletGruping(this.idDelet.grouping_camper_id).subscribe({
+    next:(response) =>{
+      console.log(response,'respuesta de error');
+      
+      this.listTypeAgrup.getAgrupaciones()
+      .pipe(
+        switchMap((res: any) => {
+          this.tipoAgrupacion = res;
+          return this.listGrouping.getAgrupaciones();
+        })
+      )
+      .subscribe((res: any) => {
+        this.grupos = res.filter(item => item.is_active === true);
+        this.grupos.forEach(element => {
+          element.nameTipo = this.filterType(element.grouping_type_id);
+          element.nameComplet = `${element.nameTipo} | ${element.name}`;
+        });
+        this.getGruposInscritos();
+        this.spinner = false;
+        this.displayDeleteDialog =false;
+      });
+    },error:(error)  =>{
+        console.error(error);
+    }
+
+  }
+    
+  )
+}
+
+
+
+customSort(event: any): void {
+  const field = event.field;
+  const order = event.order;
+  console.log(event, 'el evento');
+  
+  this.listCampers.sort((a, b) => {
+    let value1 = this.getSortingValue(a, field);
+    let value2 = this.getSortingValue(b, field);
+
+    let result = 0;
+    if (value1 == null && value2 != null) result = -1;
+    else if (value1 != null && value2 == null) result = 1;
+    else if (value1 == null && value2 == null) result = 0;
+    else result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+
+    return order * result;
+  });
+}
+
+getSortingValue(item: any, field: string): any {
+  // Verifica si el campo es un campo dinámico (ej. "grouping0", "grouping1")
+  if (field.startsWith('grouping')) {
+    const index = parseInt(field.replace('grouping', ''), 10);
+    const grouping = this.tipoAgrupaciosn[index];
+    return this.getGroupingName(item, grouping.id);
+  }
+  // Para otros campos estáticos (name, birthday, etc.)
+  return item[field];
+}
   
 
 }

@@ -61,6 +61,7 @@ import { AdminTipoAgrupacionesComponent } from './admin-tipo-agrupaciones/admin-
 import { GroupingAdmiComponent } from './grouping-admi/grouping-admi.component';
 import { ListadoStaffComponent } from './listado-staff/listado-staff.component';
 import { MercadoPagoSuccessComponent } from '../component/mercado_pago_success/mercado_pago_success.component';
+import { ToastModule } from 'primeng/toast';
 
 
 
@@ -127,6 +128,7 @@ import { MercadoPagoSuccessComponent } from '../component/mercado_pago_success/m
     BadgeModule,
     AvatarModule,
     TagModule,
+    ToastModule,
     RatingModule,
     AvatarGroupModule,
     SplitButtonModule,

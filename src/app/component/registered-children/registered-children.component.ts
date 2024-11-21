@@ -32,33 +32,51 @@ export class RegisteredChildrenComponent implements OnInit {
   // Select2 Dropdown
   selectValue: string[];
   idioma = 'esp'
-  textos = {}
-  total:any =0;
+  textos = {};
+totalGeneralBalance: { [key: string]: number } = {}; // Totales por moneda para todos los campers
+total: number = 0;
   constructor(private modalService: NgbModal, private formBuilder: FormBuilder,private hijos:CamperService, private router:Router,private info: AuthenticationService,private lang :LangService) { 
-    this.hijos.getHijos(this.info.infToken.profile_id).subscribe(
-      (res:any)=>{
-        console.log(res);
-        this.hijosRes = res.campers;
-        console.log(this.hijosRes, 'informacion');
-        
-        this.hijosRes.forEach((hijo: any) => {
-            hijo.camper_balance_update = 0;
-        
-            if (Array.isArray(hijo.camps)) {
-                hijo.camps.forEach(camp => {
-                    if (camp.show_payment_parent) {
-                        hijo.camper_balance_update += camp.camper_payment_balance;
-                    }
-                });
+    this.hijos.getHijos(this.info.infToken.profile_id).subscribe((res: any) => {
+      console.log(res);
+      this.hijosRes = res.campers.map((hijo: any) => {
+        hijo.camper_balance_update = 0;
+        hijo.currencyBalances = {}; // Balance por moneda para cada camper
+    
+        if (Array.isArray(hijo.camps)) {
+          hijo.camps.forEach((camp: any) => {
+            if (camp.show_payment_parent) {
+              const currencyKey = camp.currency_acronyms;
+              const balance = camp.camper_payment_balance;
+    
+              hijo.camper_balance_update += balance;
+    
+              // Sumar al balance por moneda
+              if (!hijo.currencyBalances[currencyKey]) {
+                hijo.currencyBalances[currencyKey] = 0;
+              }
+              hijo.currencyBalances[currencyKey] += balance;
             }
-            this.total = hijo.camper_balance_update + this.total
-
+          });
+        }
+    
+        return hijo;
+      });
+    
+      // Calcular balances totales generales por moneda
+      this.totalGeneralBalance = this.hijosRes.reduce((acc: { [key: string]: number }, hijo: any) => {
+        Object.entries(hijo.currencyBalances || {}).forEach(([currency, balance]) => {
+          if (!acc[currency]) {
+            acc[currency] = 0;
+          }
+          acc[currency] += Number(balance);  // Convertimos 'balance' a número
         });
-        
-        this.cargando = true;
-      }
-    )
-
+        return acc;
+      }, {});
+    
+      this.total = Object.values(this.totalGeneralBalance).reduce((acc: number, balance: number) => acc + balance, 0);
+      this.cargando = true;
+    });
+    
     this.textos  = traducciones['traduciones'][this.idioma]['dashboardParent']
     
     

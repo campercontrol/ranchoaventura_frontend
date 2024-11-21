@@ -165,7 +165,7 @@ export class PerfilCamperComponent implements OnInit {
 
 
 
-  constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private hijos: CamperService,private parents : ParentService, private rou:Router,private info: AuthenticationService,private staff: StaffService,private lang:LangService) {
+  constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private hijos: CamperService,private parents : ParentService, private rou:Router,public info: AuthenticationService,private staff: StaffService,private lang:LangService) {
     this.routesA.params.subscribe((params) => {
       this.id = params['id'];
     })

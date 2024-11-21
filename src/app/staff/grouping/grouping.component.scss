@@ -116,6 +116,14 @@ td{
   justify-content: space-between;
   padding: 10px;
 }
+.small-circular-btn {
+  width: 27px;            /* Tamaño del botón */
+  height: 27px;
+  border-radius: 50%;     /* Hace que el botón sea circular */
+  padding: 0;
+
+  font-size: 1rem;        /* Tamaño del ícono */
+}
 @media (max-width: 750px) {
   .campamentos{
     display: flex;

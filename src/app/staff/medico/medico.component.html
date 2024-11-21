@@ -263,9 +263,7 @@
             <p-tabView>
                 <p-tabPanel header="Consuta inicial">
                     <div class="col-12 " style="margin-top: 30px;">
-                        <p class="text-center fs-4 fw-bolder">Diagnóstico : Pequeña contusion en la parte del cranio por
-                            caida
-                            de niños corriendo</p>
+                        <p class="text-center fs-4 fw-bolder">Diagnóstico : {{item.diagnostic}}</p>
         
                         <p class="text-center fs-4 fw-bold mt-4">Medico Responsable : {{item.doctor}}</p>
         
@@ -377,9 +375,7 @@
                     </div>            </p-tabPanel>
                 <p-tabPanel *ngFor="let seguimiento of item.tracing_visits" header="Consulta de seguimiento">
                     <div class="col-12 " style="margin-top: 30px;">
-                        <p class="text-center fs-4 fw-bolder">Diagnóstico : Pequeña contusion en la parte del cranio por
-                            caida
-                            de niños corriendo</p>
+                        <p class="text-center fs-4 fw-bolder">Diagnóstico : {{item.diagnostic}}</p>
         
                         <p class="text-center fs-4 fw-bold mt-4">Medico Responsable : {{seguimiento.doctor}}</p>
         

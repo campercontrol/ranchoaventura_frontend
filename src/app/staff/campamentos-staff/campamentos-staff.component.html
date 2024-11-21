@@ -177,6 +177,8 @@
                         <button ngbDropdownItem (click)="puntosControl()" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">Punto de control</button>
                         <button ngbDropdownItem (click)="medicos()" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">Medicos</button>
                         <button ngbDropdownItem (click)="Agrupaciones()">Agrupaciones</button>
+                        <button ngbDropdownItem > <a [routerLink]="['/dashboard/payments',idCamp]">Ingresos</a></button>
+
 
       
                       </div>

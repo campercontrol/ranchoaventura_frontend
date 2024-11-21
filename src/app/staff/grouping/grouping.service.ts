@@ -29,4 +29,10 @@ export class GroupingService {
     return this.http.post('http://142.93.12.234:8000/grouping_campers',data)
 
   }
+
+  deletGruping(id){
+
+    return this.http.delete('http://142.93.12.234:8000/grouping_camper/'+id)
+
+  }
 }

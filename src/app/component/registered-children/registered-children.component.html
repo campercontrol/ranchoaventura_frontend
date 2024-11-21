@@ -1,238 +1,80 @@
-<div class="container-fluid">
 
-  <!-- start page title -->
-  <!-- end page title -->
-  <div class="d-flex justify-content-center"  *ngIf="!cargando">
-    <div class="spinner-border" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
+<div *ngIf="cargando">
+  <div class="card text-center p-2">
+    <h2>Tienes un saldo pendiente de :</h2>
+    <ul>
+      <li *ngFor="let currency of (totalGeneralBalance | keyvalue)" style="list-style-type:none">
+        <h4> {{ currency.key }}: {{ currency.value | currency:currency.key:'symbol-narrow' }} </h4>
+      </li>
+    </ul>
   </div>
-  <div *ngIf="cargando"><h2>{{textos['subtitel']}} {{total | currency}}</h2></div>
 
-  <div class="row" *ngIf="cargando">
-    <div class="d-flex">
-      <button class="btn btn-success ms-auto mb-2" [routerLink]="['../parents/new-camper']" >{{textos['Botton']}} </button>
-    </div>
  
-
-
-
-    <div class="col-xl-6 col-sm-12 " *ngFor="let data of hijosRes" >
-      <div class="card text-center " >
-        <div class="card-body">
-          <div class="avatar-sm mx-auto mb-4" *ngIf="!data.camper.photo" (click)="redirectPerfil(data.camper.id)" style="cursor: pointer;">
-            <span class="avatar-title rounded-circle bg-soft bg-primary text-primary font-size-16">
-              {{data.camper.full_name.charAt(0)}}
-            </span>
-          </div>
-          <div *ngIf="data.camper.photo" class="mb-4" (click)="redirectPerfil(data.camper.id)" style="cursor: pointer;">
-            <img class="rounded-circle avatar-sm" src="http://142.93.12.234:8000/{{data.camper.photo}}" alt />
-          </div>
-          <h5 class="font-size-15 mb-1" (click)="redirectPerfil(data.camper.id)" style="cursor: pointer;"><a href="javascript: void(0);" class="text-dark">{{data.camper.full_name}}</a></h5>
-          <p class="text-muted">{{data.camper.school}}</p>
-          <p class="text-muted">{{textos['subtitul2']}} {{data.camper.full_name}}</p>
-          <p class="text-muted">{{data.camper_balance_update | currency}}MXN</p>
-          <p class="text-muted">{{textos['cardSubt']}}</p>
-          <div class="col-12 card-info" style="margin: 0 auto; cursor: pointer;">
-            <div class="col-12 center-ifno"
-              *ngFor="let a of data.camps"  (click)="redirect(a.camp_id,data.camper.id)">
-           <p class=" font-size-15 camps" >{{a.camp_name}} : <small class="badge font-size-11" [ngClass]="{'bg-warning ': a.camper_payment_balance > 0, 'bg-success ': a.camper_payment_balance <= 0}" *ngIf="a.show_payment_parent">{{a.currency_symbol}} {{a.camper_payment_balance}} {{a.currency_acronyms}}</small>
-           </p> 
-
-          </div>
-         
-          <div style="margin: 0 auto;">
-            <hr>
-             <a  [routerLink]="['/dashboard/parents/inscription/'+data.camper.id]" class="btn btn-success" style="width: 90%;">{{textos['cardBotton']}}</a>
-          </div>
+</div>
+<div class="row" *ngIf="cargando">
+  <div class="col-xl-6 col-sm-12" *ngFor="let data of hijosRes">
+    <div class="card text-center">
+      <div class="card-body">
+        <!-- Foto o inicial del camper -->
+        <div class="avatar-sm mx-auto mb-4" *ngIf="!data.camper.photo" (click)="redirectPerfil(data.camper.id)" style="cursor: pointer;">
+          <span class="avatar-title rounded-circle bg-soft bg-primary text-primary font-size-16">
+            {{ data.camper.full_name.charAt(0) }}
+          </span>
         </div>
-        <div class="card-footer bg-transparent border-top">
-          <div class="contact-links d-flex font-size-20">
-            <div class="flex-fill">
-              <a [routerLink]="['/dashboard/parents/update-camper/' + data.camper.id ]"ngbTooltip="Editar informacion"><i
-                  class="bx dripicons-document-edit"></i></a>
-            </div>
-
-            <div class="flex-fill">
-              <a [routerLink]="['/dashboard/parents/camper/'+data.camper.id]" ngbTooltip="Perfil"><i class="bx bx-user-circle"></i></a>
-            </div>
-            <div class="flex-fill">
-              <a [routerLink]="['/dashboard/parents/inscription/'+data.camper.id]" ngbTooltip="Inscribir"><i
-                  class="mdi  mdi-account-arrow-right-outline"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-</div> <!-- container-fluid -->
-
-
-
-<ng-template #exlargeModal let-modal>
-  <div class="modal-header">
-    <div class="row">
-      <div class="col" (click)="status()">
-        <h5 class="modal-title mt-0" [ngClass]="!modalVista? 'title-btn':'title-btn-d'">Campamento</h5>
-      </div>
-      <div class="col" (click)="status()">
-        <h5 class="modal-title mt-0" [ngClass]="modalVista? 'title-btn-p':'title-btn-d'">Pagos</h5>
-
-      </div>
-
-    </div>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Close click')">
-
-    </button>
-  </div>
-  <div class="modal-body" *ngIf="!modalVista">
-    <div class="container-modal-camp">
-      <div class="container-btn">
-        <button class="btn  btn-info" style="height:60px;">Inicio</button>
-        <button class="btn  btn-secondary" style="height:60px;">Perfil acampador</button>
-        <button class="btn  btn-success" style="height:60px;">ver respuestas</button>
-        <button class="btn  btn-info" style="height:60px;">servicios adicionales</button>
-        <button class="btn  btn-danger" style="height:60px;">cancelar inscripcion</button>
-      </div>
-      <div class="col-lg-9 border border-warning">
-        <div class="card">
-          <div class="bodyCamper1">
-            <h1 style="color:white ;">Campamento Inscrito: Campamento 2</h1>
-          </div>
-          <div class="mt-3 ms-3 container-pagos">
-            <h1>Camper Control </h1>
-          </div>
-          <hr>
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="conatiner-info-camp">
-                <div>
-                  <p class="fw-bold"> <i class="fas fa-calendar-alt"> </i> Fechas: </p>
-                </div>
-                <div>
-                  <p> 28/Nov/2023 - 30/Nov/2023</p>
-                </div>
-              </div>
-              <div class="conatiner-info-camp">
-                <div>
-                  <p class="fw-bold"> <i class="bx bxs-time"> </i> Salida: </p>
-                </div>
-                <div>
-                  <p> Martes, 28 Noviembre 2023 - 9:38 p.m.</p>
-                </div>
-              </div>
-              <div class="conatiner-info-camp">
-                <div>
-                  <p class="fw-bold"> <i class="bx bxs-time"> </i> Regreso: </p>
-                </div>
-                <div>
-                  <p> Martes, 28 Diciembre 2023 - 9:38 p.m.</p>
-                </div>
-              </div>
-              <div class="conatiner-info-camp">
-                <div>
-                  <p class="fw-bold"> <i class="fas fa-map-marked-alt"> </i> Punto de reunión: </p>
-                </div>
-                <div>
-                  <p> Escuela</p>
-                </div>
-              </div>
-              <div class="conatiner-info-camp">
-                <div>
-                  <p class="fw-bold"> <i class="fas fa-map"> </i> Lugar del campamento: </p>
-                </div>
-                <div>
-                  <p> Escuela</p>
-                </div>
-              </div>
-              <div class="conatiner-info-camp">
-                <div>
-                  <p class="fw-bold"> <i class="fab fa-google"> </i> Mas informacion </p>
-                </div>
-                <div>
-                  <p> <a href=" http://www.campercontrol.com"> http://www.campercontrol.com</a></p>
-                </div>
-              </div>
-            </div>
-            <hr>
-
-            <div class="conatiner-info-camp">
-              <div>
-                <p class="fw-bold"> <i class="far fa-money-bill-alt"> </i> Precio del camp: </p>
-              </div>
-              <div>
-                <p> $5,500.0 MXN.</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <div class="container-fluid" *ngIf="modalVista">
-
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="bodyCamper border border-success">
-          <h1 style="color:white ;">Detalle de pagos</h1>
-        </div>
-        <div class="mt-5px container-pagos">
-          <h1>Tu saldo actual es de: $5,500.0 MXN</h1>
+        <div *ngIf="data.camper.photo" class="mb-4" (click)="redirectPerfil(data.camper.id)" style="cursor: pointer;">
+          <img class="rounded-circle avatar-sm" [src]="'http://142.93.12.234:8000/' + data.camper.photo" alt />
         </div>
 
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
+        <!-- Información del camper -->
+        <h5 class="font-size-15 mb-1"><a href="javascript:void(0);" class="text-dark">{{ data.camper.full_name }}</a></h5>
+        <p class="text-muted">{{ data.camper.school }}</p>
 
-              <p class="card-title-title">Una vez realizado el pago envianos tu comprobante a pagos@campercontrol.com
-                indicando nombre completo del acampador.
+        <!-- Balance por moneda -->
+        <h6>Balances por Moneda:</h6>
+        <ul style="list-style-type:none">
+          <li *ngFor="let currency of (data.currencyBalances | keyvalue)">
+            {{ currency.key }}: {{ currency.value | currency:currency.key:'symbol-narrow' }}
+          </li>
+        </ul>
 
-                Tu pago se verá reflejado en nuestro sistema en un lapso de 48 horas hábiles.
-              </p>
+        <!-- Total general del camper -->
 
-              <div class="table-responsive">
-                <table class="table mb-0">
+        <!-- Campamentos -->
+        <div class="col-12 card-info" style="margin: 0 auto; cursor: pointer;">
+          <div class="col-12 center-ifno" *ngFor="let a of data.camps" (click)="redirect(a.camp_id, data.camper.id)">
+            <p class="font-size-15 camps">
+              {{ a.camp_name }}:
+              <small
+                class="badge font-size-11"
+                [ngClass]="{ 'bg-warning': a.camper_payment_balance > 0, 'bg-success': a.camper_payment_balance <= 0 }"
+                *ngIf="a.show_payment_parent">
+                {{ a.currency_symbol }} {{ a.camper_payment_balance }} {{ a.currency_acronyms }}
+              </small>
+            </p>
+          </div>
+        </div>
 
-                  <thead class="thead-dark">
-                    <tr>
-                      <th>#</th>
-                      <th>Fecha</th>
-                      <th>Descripcion</th>
-                      <th>Cargo</th>
-                      <th>Abono</th>
-                      <th>Saldo</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>2022-02-25</td>
-                      <td>Servicio Adicional *Costo Extra sleeping* metodo de pago:N/A</td>
-                      <td>$1,500.0 MXN</td>
-                      <td></td>
-                      <td>$5,500.0 MXN</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>2022-02-25</td>
-                      <td>Servicio Adicional *Costo Extra sleeping* metodo de pago:N/A</td>
-                      <td>$1,500.0 MXN</td>
-                      <td></td>
-                      <td>$5,500.0 MXN</td>
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
-
-            </div>
+        <!-- Botones -->
+        <div style="margin: 0 auto;">
+          <hr />
+          <a [routerLink]="['/dashboard/parents/inscription/' + data.camper.id]" class="btn btn-success" style="width: 90%;">
+            {{ textos['cardBotton'] }}
+          </a>
+        </div>
+      </div>
+      <div class="card-footer bg-transparent border-top">
+        <div class="contact-links d-flex font-size-20">
+          <div class="flex-fill">
+            <a [routerLink]="['/dashboard/parents/update-camper/' + data.camper.id]" ngbTooltip="Editar informacion"><i class="bx dripicons-document-edit"></i></a>
+          </div>
+          <div class="flex-fill">
+            <a [routerLink]="['/dashboard/parents/camper/' + data.camper.id]" ngbTooltip="Perfil"><i class="bx bx-user-circle"></i></a>
+          </div>
+          <div class="flex-fill">
+            <a [routerLink]="['/dashboard/parents/inscription/' + data.camper.id]" ngbTooltip="Inscribir"><i class="mdi mdi-account-arrow-right-outline"></i></a>
           </div>
         </div>
       </div>
     </div>
   </div>
-</ng-template>
+</div>
