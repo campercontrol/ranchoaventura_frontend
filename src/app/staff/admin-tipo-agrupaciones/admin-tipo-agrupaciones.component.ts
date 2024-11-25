@@ -20,6 +20,7 @@ export class AdminTipoAgrupacionesComponent implements OnInit {
   idDalete =0;
   updateId= 0;
   text: any;
+  spinner= false;
   TextElimint="";
   formFood: FormGroup;
   date: Date = new Date();

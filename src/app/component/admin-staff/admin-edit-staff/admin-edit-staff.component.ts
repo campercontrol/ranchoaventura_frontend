@@ -100,7 +100,6 @@ export class AdminEditStaffComponent implements OnInit {
       affliction: ["", [Validators.required,Validators.minLength(2)]],
       prohibited_foods: ["", [Validators.required,Validators.minLength(2)]],
       staff_contact_name: ["", [Validators.required,Validators.minLength(2)]],
-      "season_id": 1,   // por detras se parseas  
       blood_type: [0, [Validators.required,Validators.min(1)]],   // sangre 
       staff_contact_relation: ["", [Validators.required,Validators.minLength(2)]],
       drug_allergies: ["", [Validators.required,Validators.minLength(2)]],

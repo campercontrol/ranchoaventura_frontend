@@ -185,6 +185,7 @@ export class AdmiUserComponent implements OnInit {
             this.getCatalogos();
             this.statuAgrgado = true;
             this.resteValu();
+            this.spinner=false; 
            // this.table= true;
             setTimeout(() => {
               this.statuAgrgado = false;
@@ -195,6 +196,7 @@ export class AdmiUserComponent implements OnInit {
           
       },error => {
         alert('No se pudo Agregar')
+        this.spinner=false; 
       });
       this.spinner=false;
 

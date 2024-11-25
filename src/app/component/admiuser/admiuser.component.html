@@ -498,12 +498,12 @@
         
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="can_swim"
-                                                    id="inlineRadio1" [value]=1 formControlName="can_swim">
+                                                    id="inlineRadio1" [value]=86 formControlName="can_swim">
                                                 <label class="form-check-label" for="inlineRadio1">Si</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="can_swim"
-                                                    id="inlineRadio2" [value]=0 formControlName="can_swim">
+                                                    id="inlineRadio2" [value]=87 formControlName="can_swim">
                                                 <label class="form-check-label" for="inlineRadio2">No</label>
                                             </div>
         
@@ -690,8 +690,8 @@
         
                             <div class="btn-footer">
                                 <div>
-                                    <button class="btn btn-info w-lg btn-lg"  (click)="prueba1()" >Guardar</button>
-                                    <button class="btn btn-secondary btn-lg mt-3" (click)="canelar()">Cancelar</button>
+                                    <button class="btn btn-info   btn-lg" style="width: 90%;"  (click)="prueba1()" *ngIf="!spinner" >Guardar</button>
+                                    <button class="btn btn-secondary btn-lg mt-3" style="width: 90%;" (click)="canelar()">Cancelar</button>
 
                                     <div class="spinner-border" role="status" *ngIf="spinner">
                                         <span class="visually-hidden">Loading...</span>
@@ -732,7 +732,10 @@
                             </div>
                     </div>
                     <p-dialog-footer>
-                        <button class="btn btn-primary" (click)="select()">Guardar</button>
+                        <button class="btn btn-primary" (click)="select()" *ngIf="!spinner">Guardar</button>
+                        <div class="spinner-border" role="status" *ngIf="spinner">
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
                     </p-dialog-footer>	
                 </p-dialog>
             </div>
@@ -1418,9 +1421,12 @@
     
                         <div class="btn-footer">
                             <div>
-                                <button class="btn btn-info w-lg btn-lg"  (click)="keepUpdate()" >Guardar</button>
-                                <button class="btn btn-secondary btn-lg mt-3" (click)="cancelarUpdate()"
+                                <button class="btn btn-info  btn-lg"  style="width: 90%;" (click)="keepUpdate()"   *ngIf="!spinner" >Guardar</button>
+                                <button class="btn btn-secondary btn-lg mt-3" (click)="cancelarUpdate()"  
                                 style="width: 90%;">Cancelar</button>
+                                <div class="spinner-border" role="status" *ngIf="spinner">
+                                    <span class="visually-hidden">Loading...</span>
+                                  </div>
                                 
                             </div>
                           
@@ -1472,7 +1478,10 @@
 
     <ng-template pTemplate="footer">
         <button type="button" class="btn btn-outline-secondary" (click)="closeModal2()">Cancel</button>
-        <button type="button" class="btn btn-danger" (click)="keepUpdate()">Guardar</button>
+        <button type="button" class="btn btn-danger" (click)="keepUpdate()" *ngIf="!spinner">Guardar</button>
+        <div class="spinner-border" role="status" *ngIf="spinner">
+            <span class="visually-hidden">Loading...</span>
+          </div>
     </ng-template>
 </div>
 

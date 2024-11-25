@@ -43,8 +43,8 @@
             </ng-template>
             <ng-template pTemplate="body" let-customer>
                 <tr>
-                    <td (click)="update(customer)" style="cursor:pointer;" class="infoCamper">
-                        <a routerLink="/dashboard/admi/parent//{{customer.tutor_id}}">{{customer.tutor_name}} {{customer.tutor_lastname_father}}  {{customer.tutor_lastname_mother}}</a>
+                    <td style="cursor:pointer;" class="infoCamper">
+                        <a routerLink="/dashboard/admi/parent/{{customer.tutor_id}}">{{customer.tutor_name}} {{customer.tutor_lastname_father}}  {{customer.tutor_lastname_mother}}</a>
                     </td>
 
                     <td>

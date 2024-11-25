@@ -135,8 +135,8 @@ export class AdmiCamperComponent implements OnInit {
       end_registration:["",[Validators.required]], //listo
       registration: [true], //listo insurance
       url: [""], //listo
-      special_message: ["",[Validators.required]],
-      special_message_admin: ["",[Validators.required]],
+      special_message: [""],
+      special_message_admin: [""],
       public_price:  [0,[Validators.required]], // listo 
       show_payment_parent:  [true], //listo
       show_mercadopago_button:[false],
@@ -298,6 +298,8 @@ export class AdmiCamperComponent implements OnInit {
           }
           
       },error => {
+        this.spinner=false;
+
         alert('No se pudo Agregar')
       });
       this.spinner=false;

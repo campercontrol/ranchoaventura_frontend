@@ -129,7 +129,7 @@ export class AdmiuserComponent implements OnInit {
       school_id: [0, [Validators.required, this.greaterThanZeroValidator()]],
       school_other: [""],
       email: [""],
-      can_swim: [0],
+      can_swim: [87],
       affliction: ["", [Validators.required]],
       blood_type: [0, [Validators.required, this.greaterThanZeroValidator()]],
       heart_problems: ["", [Validators.required, Validators.minLength(2)]],
@@ -323,6 +323,7 @@ export class AdmiuserComponent implements OnInit {
           }
           
       },error => {
+        this.spinner= false;
         alert('No se pudo Agregar')
       });
       this.spinner=false;
@@ -385,7 +386,7 @@ export class AdmiuserComponent implements OnInit {
     this.nameParent = "";
     this.formFood.patchValue({
       assigned_id: 0,
-      can_swim: 0,
+      can_swim: 87,
       order: 0,
       created_at: this.date
     })

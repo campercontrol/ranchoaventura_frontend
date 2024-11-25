@@ -184,7 +184,7 @@ export class TemporadaComponent implements OnInit {
       this.getTrainig();
       this.statuAgrgado = true;
       this.resteValu();
-      this.showButton = true;
+      this.showButton = false;
 
       setTimeout(() => {
         this.statuAgrgado = false;

@@ -27,7 +27,7 @@ const routes: Routes = [
 
   { path: 'mercado_pago/success', component: MercadoPagoSuccessComponent},
   { path: 'mercado_pago/failure', component: MercadoPagoSuccessComponent },
-  { path: 'mercado_pago/pending', component: MercadoPagoSuccessComponent },
+  { path: 'mercado_pago/pending', component:  MercadoPagoSuccessComponent },
  
 
 

@@ -23,6 +23,7 @@ export class EventosCapacitacionesComponent implements OnInit {
   statuAgrgado = false;
   TextElimint="";
   idDalete=0;
+  spinner = false;
   updateId =0;
 
   capa = {
@@ -57,9 +58,11 @@ export class EventosCapacitacionesComponent implements OnInit {
   }
 
   onSave () : void {
+    this.spinner= true;
     console.log(this.addTrainingForm.value)
     this.catalogos.postEventos(this.addTrainingForm.value).subscribe((res) => {
       this.addTrainingForm.reset();
+      this.spinner=false;
       this.addTrainingForm.patchValue({
         "start": "",
         "end":  "",
@@ -177,11 +180,13 @@ export class EventosCapacitacionesComponent implements OnInit {
   }
 
   keepUpdate(){
+    this.spinner= true;
     this.catalogos.updateTrainingEvent(this.addTrainingForm.value,this.updateId).subscribe((res: any) => {
      console.log(res);
       this.getTrainig();
       this.statuAgrgado = true;
       this.resteValu();
+      this.spinner=false;
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal2();

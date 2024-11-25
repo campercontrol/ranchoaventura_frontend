@@ -289,11 +289,12 @@ export class AdmiParentComponent implements OnInit {
           console.log(res);
           if(res.succes == 200){
 
-            this.spinner=false; 
             this.getCatalogos();
             this.statuAgrgado = true;
             this.resteValu();
             this.table= true;
+            this.spinner=false; 
+
             setTimeout(() => {
               this.statuAgrgado = false;
               this.table= true;
@@ -445,12 +446,15 @@ export class AdmiParentComponent implements OnInit {
     if(this.formFood.valid){
       this.catalogos.patchParent(this.updateId,this.formFood.value).subscribe((res:any)=>{
         console.log(res);
-        if(res.succes == 200){
-
+        if(res.mensaje
+          == "Actualizado Correctamente"
+          ){
           this.spinner = false;
           this.getCatalogos();
           this.statuAgrgado = true;
           this.cancelarUpdate();
+          this.spinner = false;
+          
           setTimeout(() => {
             this.statuAgrgado = false;
             this.closeModal2();

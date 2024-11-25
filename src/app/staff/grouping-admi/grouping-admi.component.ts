@@ -22,6 +22,7 @@ export class GroupingAdmiComponent implements OnInit {
   display3: boolean = false;
   idDalete =0;
   updateId= 0;
+  showButtons = false;
   text: any;
   TextElimint="";
   formFood: FormGroup;
@@ -87,9 +88,12 @@ export class GroupingAdmiComponent implements OnInit {
   
 
   guardar() {
+    this.showButtons = true;
     this.camps.postAgrupaciones(this.formFood.value).subscribe((res: any) => {
       this.statuAgrgado = true;
       this.resteValu();
+      this.showButtons = false;
+
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal();
@@ -128,9 +132,12 @@ export class GroupingAdmiComponent implements OnInit {
   }
 
   keepUpdate(){
+    this.showButtons = true;
+
     this.camps.updateAgrupaciones(this.formFood.value,this.updateId).subscribe((res: any) => {
      console.log(res);
-     
+     this.showButtons = false;
+
       this.statuAgrgado = true;
       this.resteValu();
       setTimeout(() => {
