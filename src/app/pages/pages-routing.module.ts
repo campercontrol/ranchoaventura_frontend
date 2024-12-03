@@ -15,7 +15,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { ChatComponent } from './chat/chat.component';
 import { DefaultComponent } from './dashboards/default/default.component';
 import { FilemanagerComponent } from './filemanager/filemanager.component';
-import { NuevaConsultaComponent } from './medical/nueva-consulta/nueva-consulta.component';
+
 import { GmailingComponent } from './gmailing/gmailing.component';
 import { AgregarAgrupacionComponent } from '../staff/agregar-agrupacion/agregar-agrupacion.component';
 import { PerfilEscuelaComponent } from '../escuela/perfil-escuela/perfil-escuela.component';
@@ -77,6 +77,8 @@ import { CampamentosProximosEscuelasComponent } from '../component/campamentos-p
 import { CampamentosAnterioresEscuelasComponent } from '../component/campamentos-anteriores-escuelas/campamentos-anteriores-escuelas.component';
 import { CamparsSchoolComponent } from '../component/campars-school/campars-school.component';
 import { PaymantCampComponent } from '../component/paymant-camp/paymant-camp.component';
+import { NuevaConsultaComponent } from './medical/nueva-consulta/nueva-consulta.component';
+import { MedicalComponentComponent } from '../staff/medical-component/medical-component.component';
 
 const routes: Routes = [
   
@@ -156,7 +158,7 @@ const routes: Routes = [
   {path: 'medical/camp-medical/:id', component: TablaMedicalComponent, canActivate: [AuthGuard] },
   { path: 'medical/add_consultation/:campId/:camperid',component:NuevaConsultaComponent, canActivate: [AuthGuard] },
   { path: 'medical/add_consultation/:campId/:camperid/:idConsult',component:NuevaConsultaComponent, canActivate: [AuthGuard] },
-
+  {path: 'medical/camps', component: MedicalComponentComponent , canActivate: [AuthGuard] },
 
 
   {path: 'mailing', component: GmailingComponent },

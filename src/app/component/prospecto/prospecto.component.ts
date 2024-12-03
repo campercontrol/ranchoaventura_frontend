@@ -192,26 +192,38 @@ export class ProspectoComponent implements OnInit {
       
     }
     if(this.formUser.valid){
-      this.staff.prospectos(a).subscribe((res:any)=>{
-        if(res.data){
-
-          alert('se creo correctamente tu cuenta');
-          this.router.navigate(['login']);
-
-        }
-       
+      this.staff.prospectos(a).subscribe({
+        next: (res: any) => {
+          this.spinner = false;
       
-       
-
-      },error=>{
-        this.erroA=true;
-        this.spinner=false;
-
-        setTimeout(() => {
-          this.erroA=false;
-          
-        }, 10000);
-      })
+          // Verificar el status en la respuesta
+          switch (res.detail.status) {
+            case 1:
+              alert(res.detail.msg); // "Se ha creado correctamente el usuario doctor"
+              this.router.navigate(['login']); // Redirigir a la página de login
+              break;
+            case 2:
+              alert(res.detail.msg); // "Ya existe un usuario con ese correo"
+              break;
+            case 3:
+              alert(res.detail.msg); // "Ocurrió un error al crear el usuario"
+              break;
+            default:
+              alert('Ocurrió un error inesperado');
+          }
+        },
+        error: (error) => {
+          // Mostrar mensaje de error
+          this.erroA = true;
+          this.spinner = false;
+      
+          // Ocultar el mensaje de error después de 10 segundos
+          setTimeout(() => {
+            this.erroA = false;
+          }, 10000);
+        }
+      });
+      
 
     }else{
       this.spinner=false;

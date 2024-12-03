@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { LanguageService } from '../../core/services/language.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LangService } from 'src/services/lang.service';
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-topbar',
@@ -24,8 +25,9 @@ export class TopbarComponent implements OnInit {
   flagvalue:any;
   countryName;
   valueset;
+  rol_id;
 
-  constructor(@Inject(DOCUMENT) private document: any, private router: Router, private authService: AuthenticationService,private  lang: LangService,
+  constructor(@Inject(DOCUMENT) private document: any, private router: Router, private authService: AuthenticationService,private  lang: LangService,    private info: AuthenticationService,
               
               public languageService: LanguageService,
               public translate: TranslateService,
@@ -34,11 +36,25 @@ export class TopbarComponent implements OnInit {
                   console.log('idioma',res[0]);
                   
                 })
-
+                const currentUser = localStorage.getItem('currentUser');
+                if (currentUser) {
+                  this.info.infToken = jwt_decode(currentUser);
+                  this.rol_id = this.info.infToken.role_id;
+                  console.log(this.rol_id,'ssss');
+                  
+            
+                  this.info.loggedIn = true;
+                } else {
+                  this.info.infToken = null;
+                  this.info.loggedIn = false;
+                }
+            
                
   }
 
+
   
+
 
   listLang = [
     {id:1, text: 'English', flag: 'assets/images/flags/us.jpg', lang: 'eng' },
@@ -70,7 +86,23 @@ export class TopbarComponent implements OnInit {
 
   }
 
-  
+redirigir(){
+  if(this.rol_id  == 2){
+    this.router.navigate(['dashboard/staff']);
+    //console.log(this.authenticationService.infToken);
+
+  }else if(this.rol_id  == 3 || this.rol_id  == 4 ){
+    this.router.navigate(['dashboard/school/upcoming_camps']);
+   // console.log(this.authenticationService.infToken);
+    
+  }else if(this.rol_id  == 1 ){
+    this.router.navigate(['dashboard/parents']);
+//console.log(this.authenticationService.infToken);
+  }else{
+    this.router.navigate(['dashboard/medical/camps']);
+//console.log(this.authenticationService.infToken);
+  }
+}
 
   setLanguage(text: string, lang: string, flag: string) {
     this.countryName = text;

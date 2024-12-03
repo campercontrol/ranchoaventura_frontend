@@ -377,8 +377,8 @@ export class GmailingComponent implements OnInit {
       })
       this.editTemplate= false;
 
-    }else if(a == 'Plantillas del sistemas'){
-      this.Titulo='Plantillas del sistemas';
+    }else if(a == 'Templates del sistema”'){
+      this.Titulo='Templates del sistema”';
       this.cargando=true;
 
       this.data.getTempletSystem().subscribe((res:any)=>{
@@ -421,7 +421,7 @@ export class GmailingComponent implements OnInit {
 
   selectUpadate(item){
     this.editTemplate= true;
-    if(this.Titulo ="Plantillas del sistemas"){
+    if(this.Titulo ="Templates del sistema”"){
       this.typetemplate=2
       this.idUpdate=item.id
       this.data.getPlantillSelect(item.id).subscribe((res:any)=>{
@@ -570,7 +570,7 @@ alert('No se pudo actualizar')
           "campaign": {
 
             "name": this.tituloTemplateAlmacenado,
-            "template_title": this.asuntoTemplateAlmacenado,
+          
 
             "camp_parents": campers,
             "camp_staff": staff,
@@ -580,14 +580,15 @@ alert('No se pudo actualizar')
             "camp_id": this.campamento,
             "send_type_id": 82,
             "template_id": template.id,
-            "template_body": this.template
+
           },
 
           "camps":
 
               this.dataResGmail,
-              "template_title": "tituloTemplateAlmacenado",
-              "email_subject": "string"
+              "template_body": this.template,
+       
+              "email_subject": this.asuntoTemplateAlmacenado
 
 
 
@@ -603,7 +604,7 @@ alert('No se pudo actualizar')
             this.page=1;
             this.template ="";
 
-            this.status('Plantillas del sistemas')
+            this.status('Templates del sistema”')
             this.cargandoMailing = false;
 
 
@@ -646,7 +647,7 @@ alert('No se pudo actualizar')
             this.template ="";
             this.asuntoTemplateAlmacenado ="";
             this.tituloTemplateAlmacenado="";
-            this.selectUpadate('Plantillas del sistemas')
+            this.selectUpadate('Templates del sistema”')
 
           }
         });
@@ -664,32 +665,34 @@ alert('No se pudo actualizar')
 
 
         })
-      a = {
-        "campaign": {
+        a = {
+          "campaign": {
 
-          "name": this.tituloTemplateAlmacenado,
-          "template_title": this.asuntoTemplateAlmacenado,
-          "camp_parents": campers,
-          "camp_staff": staff,
-          "camp_school": escuela,
-          "active_time": "1",
-          "send": true,
-          "camp_id": this.campamento,
-          "send_type_id": 82,
-          "template_id": template.id,
-          "template_body": this.template
-        },
+            "name": this.tituloTemplateAlmacenado,
+          
 
-        "camps":
+            "camp_parents": campers,
+            "camp_staff": staff,
+            "camp_school": escuela,
+            "active_time": "1",
+            "send": true,
+            "camp_id": this.campamento,
+            "send_type_id": 82,
+            "template_id": template.id,
 
-            this.dataResGmail,
-            "template_title": "tituloTemplateAlmacenado",
-            "email_subject": "string"
+          },
+
+          "camps":
+
+              this.dataResGmail,
+              "this.template": this.template,
+       
+              "template_body": this.asuntoTemplateAlmacenado
 
 
 
 
-      }
+        }
 
         console.log(a);
         this.campInfo.createEmail(a).subscribe((res:any)=>{
@@ -703,7 +706,7 @@ alert('No se pudo actualizar')
             this.asuntoTemplateAlmacenado ="";
             this.tituloTemplateAlmacenado="";
 
-            this.status('Plantillas del sistemas')
+            this.status('Templates del sistema”')
 
 
           }else{
@@ -744,7 +747,7 @@ alert('No se pudo actualizar')
             this.template ="";
             this.asuntoTemplateAlmacenado ="";
             this.tituloTemplateAlmacenado="";
-            this.selectUpadate('Plantillas del sistemas')
+            this.selectUpadate('Templates del sistema”')
 
           }
         });

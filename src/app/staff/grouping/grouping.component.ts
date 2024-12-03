@@ -108,6 +108,10 @@ export class GroupingComponent  {
     
   return b.name
   }
+  openasig(){
+    this.listcatalogos = [];
+    this.display3 = true;
+  }
  
 
   updateFilter(event) {
@@ -219,12 +223,14 @@ export class GroupingComponent  {
   }
 
     changeGrups(id: any) {
-      const tipo = id.grouping;
+      const tipo = id.type;
       console.log(this.listCampers, id);
-    
+      this.selecType = id.id
+console.log(this.listCampers);
+
       this.listcatalogos = this.listCampers.filter(item => {
         // Filtra solo los elementos donde ninguno de los `grouping_type_name` es igual a `tipo`
-        return !item.groupings.some(element => element.name === tipo);
+        return !item.groupings.some(element => element.grouping_type_name === tipo);
       });
       
     
@@ -297,13 +303,19 @@ export class GroupingComponent  {
     switch (res.status) {
       case 1:
         severityType = 'success';  // Éxito
+        this.listcatalogos = [];
+
         break;
       case 2:
         severityType = 'warn';    // Advertencia para capacidad excedida
+        this.listcatalogos = [];
+
         break;
       case 3:
       case 4:
         severityType = 'error';   // Errores para duplicidad en agrupación y agrupación de mismo tipo
+        this.listcatalogos = [];
+
         break;
       default:
         severityType = 'error';   // Cualquier otro error no manejado

@@ -174,36 +174,40 @@ export class NewParentComponent implements OnInit {
     this.formParent = this.formBuild.group({
       tutor_lastname_father:["",[Validators.required,,Validators.minLength(1)]],
       tutor_cellphone:      ["",[Validators.required,
-                             Validators.pattern("^[0-9]*$"),
-                             Validators.minLength(8), Validators.maxLength(10)]],
+                             Validators.pattern('^[+]?\\d*$'),
+                             Validators.minLength(8), ]],
       tutor_home_phone:     ["",[Validators.required,
-                              Validators.pattern("^[0-9]*$"),
-                              Validators.minLength(8), Validators.maxLength(10)]],
+                              Validators.pattern('^[+]?\\d*$'),
+                              Validators.minLength(8), ]],
       contact_name:         ["",[Validators.required,Validators.minLength(1)]],
       contact_lastname_mother:[""],
 
     
       country:['+52'],
     contact_home_phone:     ["",[Validators.required,
-                            Validators.pattern("^[0-9]*$"),
-                            Validators.minLength(8), Validators.maxLength(10)]], 
+                            Validators.pattern('^[+]?\\d*$'),
+                            Validators.minLength(8), ]], 
     contact_email:          ["",[Validators.required,
                                    Validators.email]],
     tutor_name :            ["",[Validators.required,Validators.minLength(1)]],
     tutor_lastname_mother:  [""], 
-    tutor_work_phone:       ["",[Validators.required,
-                            Validators.pattern("^[0-9]*$"),
-                            Validators.minLength(8), Validators.maxLength(10)]],
+    tutor_work_phone:       [""],
     contact_lastname_father:  ["",[Validators.required]], 
     contact_cellphone:      ["",[Validators.required,
-                            Validators.pattern("^[0-9]*$"),
-                            Validators.minLength(8), Validators.maxLength(10)]],
-    contact_work_phone:     ["",[Validators.required,
-                            Validators.pattern("^[0-9]*$"),
-                            Validators.minLength(8), Validators.maxLength(10)]],
+                            Validators.pattern('^[+]?\\d*$'),
+                            Validators.minLength(8), ]],
+    contact_work_phone:     [""],
     terms:                   ['',[Validators.required,Validators.requiredTrue]],
-    user_id:                 [0],
-     password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,}$/)]],
+   
+    password: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/),
+      ],
+    ],
+    
     confirmPassword: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     confirmEmail: ['', [Validators.required,Validators.email]],
@@ -366,13 +370,7 @@ export class NewParentComponent implements OnInit {
   prueba(){
     this.spinner= true;
     if(this.formParent.valid){
-      this.formParent.patchValue({
-        tutor_cellphone:  this.formParent.get('country').value +this.formParent.get('tutor_cellphone').value,
-        tutor_home_phone:  this.formParent.get('country').value +this.formParent.get('tutor_home_phone').value,
-        tutor_work_phone:  this.formParent.get('country').value +this.formParent.get('tutor_home_phone').value
 
-
-      })
       let a = { 
         user:{
           email:this.formParent.get('email').value,
@@ -387,22 +385,36 @@ export class NewParentComponent implements OnInit {
         parent:this.formParent.value,
     }
     
-     this.parent.setParent(a).subscribe(
-      (res:any)=>{
-       // this.centerModal();
-       this.info.login2(this.formParent.get('email').value,this.formParent.get('password').value).then((res:any)=>{
-        console.log(res);
+    this.spinner = true;
+    this.parent.setParent(a).subscribe(
+      (res: any) => {
+        if (res?.detail?.status === 1) {
+          // Si el status es 1, realiza el login
+          this.info.login2(
+            this.formParent.get('email').value,
+            this.formParent.get('password').value
+          ).then((loginRes: any) => {
+            console.log('Login exitoso:', loginRes);
+            this.spinner = false;
+          }).catch((error) => {
+            console.log('Error al realizar login:', error);
+            this.spinner = false;
+            alert('Hubo un problema al iniciar sesión. Intente nuevamente.');
+          });
+        } else {
+          // Si el status no es 1, muestra un alert con el mensaje del detalle
+          console.log('Error al crear cuenta:', res.detail.msg);
+          this.spinner = false;
+          alert(`No se pudo realizar su registro: ${res.detail.msg}`);
+        }
+      },
+      (error) => {
+        console.log('Error de la API:', error);
         this.spinner = false;
-
-       })
-
-      },error=>{
-        console.log(error);
-        this.spinner = false;
-        alert('No se pudo realizar su registro,al parecer el correo ya esta registrado')
-        
+        alert('Ocurrió un error al procesar su solicitud. Intente nuevamente.');
       }
-     )
+    );
+    
     }else{
       this.spinner= false;
 
@@ -423,9 +435,18 @@ export class NewParentComponent implements OnInit {
       this.getpassword();
       this.getconfirmEmail();
       this.getemail();
+      this.terms();
+
     }
     
    
+  }
+
+  terms(){
+    if(!this.formParent.get('terms').valid){
+      alert('Aún no aceptas los términos y condiciones');
+
+     }
   }
   getTutor_lastname_father(){
     if( this.formParent.get('tutor_lastname_father').valid){

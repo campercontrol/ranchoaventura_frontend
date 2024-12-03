@@ -62,6 +62,7 @@ import { GroupingAdmiComponent } from './grouping-admi/grouping-admi.component';
 import { ListadoStaffComponent } from './listado-staff/listado-staff.component';
 import { MercadoPagoSuccessComponent } from '../component/mercado_pago_success/mercado_pago_success.component';
 import { ToastModule } from 'primeng/toast';
+import { MedicalComponentComponent } from './medical-component/medical-component.component';
 
 
 
@@ -101,7 +102,8 @@ import { ToastModule } from 'primeng/toast';
     UpdatePerfilComponent,
     AdminTipoAgrupacionesComponent,
     GroupingAdmiComponent,
-    MercadoPagoSuccessComponent
+    MercadoPagoSuccessComponent,
+    MedicalComponentComponent
     
   ],
   imports: [

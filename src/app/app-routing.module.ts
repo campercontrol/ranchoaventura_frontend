@@ -25,9 +25,9 @@ const routes: Routes = [
   {path:'reset_password',component:ResetPaswordComponent},
   {path:'user/verify',component:VerificacionCuentaComponent},
 
-  { path: 'mercado_pago/success', component: MercadoPagoSuccessComponent},
-  { path: 'mercado_pago/failure', component: MercadoPagoSuccessComponent },
-  { path: 'mercado_pago/pending', component:  MercadoPagoSuccessComponent },
+  { path: 'mercado_pago_success', component: MercadoPagoSuccessComponent},
+  { path: 'mercado_pago_failure', component: MercadoPagoSuccessComponent },
+  { path: 'mercado_pago_pending', component:  MercadoPagoSuccessComponent },
  
 
 

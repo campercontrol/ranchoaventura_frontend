@@ -18,6 +18,7 @@ export class CurrencyComponent implements OnInit {
   display3: boolean = false;
   idDalete =0;
   updateId= 0;
+  spinner = false;
   text: any;
   TextElimint="";
   formFood: FormGroup;
@@ -76,9 +77,11 @@ export class CurrencyComponent implements OnInit {
   }
 
   guardar() {
+    this.spinner = true;
     this.catalogos.postcurrency(this.formFood.value).subscribe((res: any) => {
       this.getCatalogos();
       this.statuAgrgado = true;
+      this.spinner= false;
       this.resteValu();
       setTimeout(() => {
         this.statuAgrgado = false;
@@ -119,9 +122,10 @@ export class CurrencyComponent implements OnInit {
   }
 
   keepUpdate(){
+    this.spinner = true;
     this.catalogos.updatcurrency(this.formFood.value,this.updateId).subscribe((res: any) => {
      console.log(res);
-     
+     this.spinner = false;
       this.getCatalogos();
       this.statuAgrgado = true;
       this.resteValu();

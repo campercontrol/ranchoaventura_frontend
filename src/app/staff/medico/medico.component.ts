@@ -89,6 +89,10 @@ export class MedicoComponent implements OnInit {
     this.router.navigate(['/dashboard/medical/add_consultation/'+this.campId+'/'+this.camperid]);
   }
 
+  redireccionTabla(){
+    this.router.navigate(['/dashboard/medical/camp-medical/'+this.campId]);
+  }
+
   redireccionId(id){
     this.router.navigate(['/dashboard/medical/add_consultation/'+this.campId+'/'+this.camperid+'/'+id]);
   }

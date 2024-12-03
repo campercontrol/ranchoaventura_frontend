@@ -196,8 +196,8 @@ export class CampamentosStaffComponent implements OnInit {
       end_registration:["",[Validators.required]], //listo
       registration: [true], //listo insurance
       url: [""], //listo
-      special_message: ["",[Validators.required]],
-      special_message_admin: ["",[Validators.required]],
+      special_message: [""],
+      special_message_admin: [""],
       public_price:  [0,[Validators.required]], // listo 
       show_payment_parent:  [true], //listo
       show_rebate_parent:  [true],//listo
@@ -231,8 +231,9 @@ export class CampamentosStaffComponent implements OnInit {
   onChange(event:any){
     if(event.id == 1){
       this.formFood.patchValue({
-        show_paypal_button: true,
+        show_mercadopago_button: true,
         show_payment_order:false,
+        show_paypal_button: false,
         show_payment_parent:true,
         show_rebate_parent:true
       })
@@ -241,19 +242,22 @@ export class CampamentosStaffComponent implements OnInit {
         show_paypal_button: false,
         show_payment_order:false,
         show_payment_parent:false,
-        show_rebate_parent:false
+        show_rebate_parent:false,
+        show_mercadopago_button: false,
+
       })
 
     }else if(event.id == 3){
       this.formFood.patchValue({
         show_paypal_button: false,
-        show_payment_order:false,
+        show_payment_order:true,
         show_payment_parent:true,
-        show_rebate_parent:true
+        show_rebate_parent:true,
+        show_mercadopago_button: false,
+
       })
     }
 }
-
 
 
 determineTipoDepago() {

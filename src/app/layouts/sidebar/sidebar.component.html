@@ -94,6 +94,13 @@
           </a>
         </li>
 
+        <li *ngIf="rol_id == 5" >
+          <a routerLink="medical/camps" class="side-nav-link-ref" routerLinkActive="active" *ngIf="rol_id == 5">
+            <i class="bx bxs-spreadsheet"></i>
+            <span>Campamentos</span>
+          </a>
+        </li>
+
         <li *ngIf="staff">
           <a routerLink="staff" class="side-nav-link-ref" routerLinkActive="active" *ngIf="rol_id == 2">
             <i class="bx bxs-spreadsheet"></i>

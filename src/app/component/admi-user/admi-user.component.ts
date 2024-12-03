@@ -103,7 +103,7 @@ export class AdmiUserComponent implements OnInit {
   ngOnInit(): void {
     this.formFood = this._FormBuild.group({
         "email": ['',[Validators.required,Validators.email]],
-        "passw": ['', [Validators.required, Validators.minLength(6),Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]],
+        "passw": ['', [Validators.required, Validators.minLength(6) ]],
         "role_id": [0,[Validators.required,Validators.min(1)]],
         "is_coordinator": [false],
         "is_admin": [false],
@@ -180,7 +180,6 @@ export class AdmiUserComponent implements OnInit {
     if(this.formFood.valid){     
       this.catalogos.postUser(this.formFood.value).subscribe((res:any)=>{
           console.log(res);
-          if(res.succes = 200){
             this.spinner=false; 
             this.getCatalogos();
             this.statuAgrgado = true;
@@ -192,7 +191,7 @@ export class AdmiUserComponent implements OnInit {
               this.table= true;
               this.closeModal();
             }, 1000);    
-          }
+          
           
       },error => {
         alert('No se pudo Agregar')

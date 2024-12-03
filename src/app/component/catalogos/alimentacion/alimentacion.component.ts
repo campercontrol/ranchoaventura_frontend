@@ -17,6 +17,7 @@ export class AlimentacionComponent implements OnInit {
   display3: boolean = false;
   idDalete =0;
   updateId= 0;
+  spinner = false;
   text: any;
   TextElimint="";
   formFood: FormGroup;
@@ -91,10 +92,12 @@ export class AlimentacionComponent implements OnInit {
   }
 
   guardar() {
+    this.spinner = true;
     this.catalogos.postAlimentos(this.formFood.value).subscribe((res: any) => {
       this.getCatalogos();
       this.statuAgrgado = true;
       this.resteValu();
+      this.spinner = false;
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal();
@@ -132,9 +135,10 @@ export class AlimentacionComponent implements OnInit {
   }
 
   keepUpdate(){
+    this.spinner = true;
     this.catalogos.updateAlimentos(this.formFood.value,this.updateId).subscribe((res: any) => {
      console.log(res);
-     
+     this.spinner = false
       this.getCatalogos();
       this.statuAgrgado = true;
       this.resteValu();

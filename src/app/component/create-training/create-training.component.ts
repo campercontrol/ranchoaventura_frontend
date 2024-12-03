@@ -17,6 +17,7 @@ export class CreateTrainingComponent implements OnInit {
   display2: boolean = false;
   display3: boolean = false;
   text: any;
+  spinner = false;
   statuAgrgado = false;
   TextElimint="";
   idDalete=0;
@@ -53,13 +54,15 @@ export class CreateTrainingComponent implements OnInit {
   }
 
   onSave () : void {
+    this.spinner = true;
     this.catalogos.postTraining(this.addTrainingForm.value).subscribe((res) => {
       console.log(res);
-      
+      this.spinner = false;
       this.addTrainingForm.reset();
       this.getTrainig()
       this.closeModal();
       },error=>{
+        this.spinner = false;
         console.log(error);
         
       });
@@ -130,11 +133,13 @@ export class CreateTrainingComponent implements OnInit {
   }
 
   keepUpdate(){
+    this.spinner = true;
     this.catalogos.updateTraining(this.addTrainingForm.value,this.updateId).subscribe((res: any) => {
      console.log(res);
       this.getTrainig();
       this.statuAgrgado = true;
       this.resteValu();
+      this.spinner = false;
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal2();
@@ -142,7 +147,7 @@ export class CreateTrainingComponent implements OnInit {
 
     }, error => {
       console.log(error);
-      
+      this.spinner = false;
       alert('No se pudo Agregar')
     })
   }

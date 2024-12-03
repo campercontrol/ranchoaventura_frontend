@@ -43,7 +43,8 @@
               </div>
     
               <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="5" [value]="aCamp" 
-              [globalFilterFields]="['name','lastname_father','birthday','email','season_name','lastname_mother']"
+              [globalFilterFields]="['camp_name','location_name','public_price','camp_start','camp_end','lastname_mother']"
+
                 [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,25,50]" [loading]="loading" [paginator]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
                 responsiveLayout="scroll"
@@ -192,7 +193,8 @@
               </div>
     
               <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="5" [value]="pCamp" 
-              [globalFilterFields]="['name','lastname_father','birthday','email','season_name','lastname_mother']"
+              [globalFilterFields]="['camp_name','location_name','public_price','camp_start','camp_end','lastname_mother']"
+
                 [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,25,50]" [loading]="loading" [paginator]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
                 responsiveLayout="scroll"
@@ -327,7 +329,7 @@
               </div>
     
               <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="5" [value]="ICamp" 
-              [globalFilterFields]="['name','lastname_father','birthday','email','season_name','lastname_mother']"
+              [globalFilterFields]="['camp_name','location_name','public_price','camp_start','camp_end','lastname_mother']"
                 [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">
                 <ng-template pTemplate="header"  responsiveLayout="scroll"

@@ -196,8 +196,22 @@ export class AdminStaffCreateComponent implements OnInit {
     }
     if(this.formUser.valid){
       this.staff.prospectos(a).subscribe((res:any)=>{
-        console.log(res);
-        this.eventoAlPadre.emit(1);
+        switch (res.detail.status) {
+          case 1:
+            alert(res.detail.msg); // "Se ha creado correctamente el usuario doctor"
+            this.eventoAlPadre.emit(1);// Redirigir a la página de login
+            break;
+          case 2:
+            alert(res.detail.msg); // "Ya existe un usuario con ese correo"
+            this.eventoAlPadre.emit(1);
+            break;
+          case 3:
+            alert(res.detail.msg); // "Ocurrió un error al crear el usuario"
+            this.eventoAlPadre.emit(1);
+            break;
+          default:
+            alert('Ocurrió un error inesperado');
+         }
       },error=>{
         this.erroA=true;
         this.spinner=false;

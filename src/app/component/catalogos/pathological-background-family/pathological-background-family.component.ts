@@ -10,7 +10,7 @@ import { CatalogosService } from 'src/services/catalogos.service';
 })
 export class PathologicalBackgroundFamilyComponent implements OnInit {
 
-
+  spinner = false;
   listcatalogos: any = [];
   selectCatalogos: any;
   items: any;
@@ -83,16 +83,20 @@ export class PathologicalBackgroundFamilyComponent implements OnInit {
   }
 
   guardar() {
+    this.spinner = true;
     this.catalogos.posPathological_backgroundFamily(this.formFood.value).subscribe((res: any) => {
       this.getCatalogos();
       this.statuAgrgado = true;
       this.resteValu();
+      this.spinner = false;
+
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal();
       }, 1000);
 
     }, error => {
+      this.spinner = false;
       alert('No se pudo Agregar')
     })
 
@@ -135,18 +139,21 @@ export class PathologicalBackgroundFamilyComponent implements OnInit {
   }
 
   keepUpdate(){
+    this.spinner = true;
     this.catalogos.updatPathological_backgroundFamily(this.formFood.value,this.updateId).subscribe((res: any) => {
      console.log(res);
      
       this.getCatalogos();
       this.statuAgrgado = true;
       this.resteValu();
+      this.spinner = false;
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal2();
       }, 1000);
 
     }, error => {
+      this.spinner = false;
       console.log(error);
       
       alert('No se pudo Agregar')

@@ -16,6 +16,7 @@ export class PathologicalBackgroundComponent implements OnInit {
   display2: boolean = false;
   display3: boolean = false;
   idDalete =0;
+  spinner= false;
   updateId= 0;
   text: any;
   TextElimint="";
@@ -81,8 +82,10 @@ export class PathologicalBackgroundComponent implements OnInit {
   }
 
   guardar() {
+    this.spinner = true;
     this.catalogos.posPathological_background(this.formFood.value).subscribe((res: any) => {
       this.getCatalogos();
+      this.spinner = false;
       this.statuAgrgado = true;
       this.resteValu();
       setTimeout(() => {
@@ -91,6 +94,7 @@ export class PathologicalBackgroundComponent implements OnInit {
       }, 1000);
 
     }, error => {
+      this.spinner = false;
       alert('No se pudo Agregar')
     })
 
@@ -133,18 +137,21 @@ export class PathologicalBackgroundComponent implements OnInit {
   }
 
   keepUpdate(){
+    this.spinner = true;;
     this.catalogos.updatPathological_background(this.formFood.value,this.updateId).subscribe((res: any) => {
      console.log(res);
      
       this.getCatalogos();
       this.statuAgrgado = true;
       this.resteValu();
+      this.spinner = false;
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal2();
       }, 1000);
 
     }, error => {
+      this.spinner = false;
       console.log(error);
       
       alert('No se pudo Agregar')

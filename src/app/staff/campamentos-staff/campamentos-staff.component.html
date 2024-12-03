@@ -176,8 +176,8 @@
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
                         <button ngbDropdownItem (click)="puntosControl()" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">Punto de control</button>
                         <button ngbDropdownItem (click)="medicos()" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">Medicos</button>
-                        <button ngbDropdownItem (click)="Agrupaciones()">Agrupaciones</button>
-                        <button ngbDropdownItem > <a [routerLink]="['/dashboard/payments',idCamp]">Ingresos</a></button>
+                        <button ngbDropdownItem (click)="Agrupaciones()" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">Agrupaciones</button>
+                        <button ngbDropdownItem *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)" > <a [routerLink]="['/dashboard/payments',idCamp]">Ingresos</a></button>
 
 
       
@@ -260,7 +260,8 @@
                 <tr class="p-selectable-row">
   
                   <td>
-                    <p-avatar [image]="'http://142.93.12.234:8000/'+customer.photo_url" shape="circle" size="large"></p-avatar>
+                    <p-avatar [image]="'http://142.93.12.234:8000/'+customer.camper_photo" shape="circle" size="large"></p-avatar>
+                    
                   </td>
                   <td (click)="vercamper(customer.camper_id)">
                     {{customer.camper_full_name}}  <i class="bx bx-conversation" style="color: rgb(147, 147, 224);" *ngIf="customer.camper_comments>0" pTooltip="{{customer.camper_commentss}}"></i> <i class="bx bx-plus-medical"  style="color: rgb(228, 32, 26);"  pTooltip="Solicita llamada" *ngIf="customer.camper_doctor_precall== true"></i>
@@ -470,7 +471,7 @@
 
         </div>
       </div>
-      <div class="card border border-danger border-3" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">
+      <div class="card border border-danger border-3" *ngIf="rol == 2 && (user_admin==true || user_coordinator==true)">
         <div class="bg-danger p-2"  (click)="headerStaffApun=!headerStaffApun" style="cursor: pointer;">
           <h1 class="card-title text-white">Staff apuntado</h1>
 

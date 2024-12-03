@@ -17,16 +17,16 @@
       <div class="card-body">
         <!-- Foto o inicial del camper -->
         <div class="avatar-sm mx-auto mb-4" *ngIf="!data.camper.photo" (click)="redirectPerfil(data.camper.id)" style="cursor: pointer;">
-          <span class="avatar-title rounded-circle bg-soft bg-primary text-primary font-size-16">
+          <a class="avatar-title rounded-circle bg-soft bg-primary text-primary font-size-16">
             {{ data.camper.full_name.charAt(0) }}
-          </span>
+          </a>
         </div>
         <div *ngIf="data.camper.photo" class="mb-4" (click)="redirectPerfil(data.camper.id)" style="cursor: pointer;">
           <img class="rounded-circle avatar-sm" [src]="'http://142.93.12.234:8000/' + data.camper.photo" alt />
         </div>
 
         <!-- Información del camper -->
-        <h5 class="font-size-15 mb-1"><a href="javascript:void(0);" class="text-dark">{{ data.camper.full_name }}</a></h5>
+        <h5 class="font-size-15 mb-1"><a [routerLink]="['/dashboard/parents/camper/' + data.camper.id]"  class="text-dark">{{ data.camper.full_name }}</a></h5>
         <p class="text-muted">{{ data.camper.school }}</p>
 
         <!-- Balance por moneda -->
@@ -42,7 +42,8 @@
         <!-- Campamentos -->
         <div class="col-12 card-info" style="margin: 0 auto; cursor: pointer;">
           <div class="col-12 center-ifno" *ngFor="let a of data.camps" (click)="redirect(a.camp_id, data.camper.id)">
-            <p class="font-size-15 camps">
+            <a class="font-size-15 camps"   [routerLink]="['/dashboard/parents/camp-info', data.camper.id, a.camp_id]"
+            >
               {{ a.camp_name }}:
               <small
                 class="badge font-size-11"
@@ -50,7 +51,7 @@
                 *ngIf="a.show_payment_parent">
                 {{ a.currency_symbol }} {{ a.camper_payment_balance }} {{ a.currency_acronyms }}
               </small>
-            </p>
+            </a>
           </div>
         </div>
 

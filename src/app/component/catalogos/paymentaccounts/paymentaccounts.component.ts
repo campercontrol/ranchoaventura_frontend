@@ -15,6 +15,7 @@ export class PaymentaccountsComponent implements OnInit {
   listcatalogos: any = [];
   selectCatalogos: any;
   items: any;
+  spinner = false;
   display: boolean = false;
   display2: boolean = false;
   display3: boolean = false;
@@ -85,16 +86,19 @@ export class PaymentaccountsComponent implements OnInit {
   }
 
   guardar() {
+    this.spinner = true
     this.catalogos.postpaymentaccounts(this.formFood.value).subscribe((res: any) => {
       this.getCatalogos();
       this.statuAgrgado = true;
       this.resteValu();
+      this.spinner = false
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal();
       }, 1000);
 
     }, error => {
+      this.spinner = false
       alert('No se pudo Agregar')
     })
 
@@ -125,9 +129,10 @@ export class PaymentaccountsComponent implements OnInit {
   }
 
   keepUpdate(){
+    this.spinner = true
     this.catalogos.updatpaymentaccounts(this.formFood.value,this.updateId).subscribe((res: any) => {
      console.log(res);
-     
+     this.spinner = false
       this.getCatalogos();
       this.statuAgrgado = true;
       this.resteValu();
@@ -137,6 +142,7 @@ export class PaymentaccountsComponent implements OnInit {
       }, 1000);
 
     }, error => {
+      this.spinner = false
       console.log(error);
       
       alert('No se pudo Agregar')

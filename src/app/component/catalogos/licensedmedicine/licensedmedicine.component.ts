@@ -13,6 +13,7 @@ export class LicensedmedicineComponent implements OnInit {
   listcatalogos: any = [];
   selectCatalogos: any;
   items: any;
+  spinner= false;
   display: boolean = false;
   display2: boolean = false;
   display3: boolean = false;
@@ -82,16 +83,19 @@ export class LicensedmedicineComponent implements OnInit {
   }
 
   guardar() {
+    this.spinner = true;
     this.catalogos.postlicensed_medicine(this.formFood.value).subscribe((res: any) => {
       this.getCatalogos();
       this.statuAgrgado = true;
       this.resteValu();
+      this.spinner = false;
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal();
       }, 1000);
 
     }, error => {
+      this.spinner = false;
       alert('No se pudo Agregar')
     })
 
@@ -123,12 +127,14 @@ export class LicensedmedicineComponent implements OnInit {
   }
 
   keepUpdate(){
+    this.spinner = true;
     this.catalogos.updatlicensed_medicine(this.formFood.value,this.updateId).subscribe((res: any) => {
      console.log(res);
      
       this.getCatalogos();
       this.statuAgrgado = true;
       this.resteValu();
+      this.spinner = false;
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal2();
@@ -136,7 +142,7 @@ export class LicensedmedicineComponent implements OnInit {
 
     }, error => {
       console.log(error);
-      
+      this.spinner = false;
       alert('No se pudo Agregar')
     })
   }

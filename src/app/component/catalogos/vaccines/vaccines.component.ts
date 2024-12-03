@@ -18,6 +18,7 @@ export class VaccinesComponent implements OnInit {
   display2: boolean = false;
   display3: boolean = false;
   idDalete =0;
+  spinner = false;
   updateId= 0;
   text: any;
   TextElimint="";
@@ -83,16 +84,19 @@ export class VaccinesComponent implements OnInit {
   }
 
   guardar() {
+    this.spinner = true;
     this.catalogos.postVaccine(this.formFood.value).subscribe((res: any) => {
       this.getCatalogos();
       this.statuAgrgado = true;
       this.resteValu();
+      this.spinner = false;
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal();
       }, 1000);
 
     }, error => {
+      this.spinner = false;
       alert('No se pudo Agregar')
     })
 
@@ -125,13 +129,14 @@ export class VaccinesComponent implements OnInit {
 
   keepUpdate(){
     console.log(this.formFood.value);
-    
+    this.spinner = true;
     this.catalogos.updatVaccine(this.formFood.value,this.updateId).subscribe((res: any) => {
      console.log(res);
      
       this.getCatalogos();
       this.statuAgrgado = true;
       this.resteValu();
+      this.spinner = false;
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal2();
@@ -139,7 +144,7 @@ export class VaccinesComponent implements OnInit {
 
     }, error => {
       console.log(error);
-      
+      this.spinner = false;
       alert('No se pudo Agregar')
     })
   }

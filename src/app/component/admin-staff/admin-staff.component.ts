@@ -321,21 +321,62 @@ export class AdminStaffComponent implements OnInit {
 
       this.paymants.setpage(this.formFood.value).subscribe((res:any)=>{
           console.log(res);
-          if(res.succes = 200){
-            this.spinner=false; 
-            this.getCatalogos();
-            this.statuAgrgado = true;
-            this.extra_charges = [];
-            this.extra_question= [];
-            this.formFood.reset;
-            this.resteValu();
-           // this.table= true;
-            setTimeout(() => {
-              this.statuAgrgado = false;
-              this.table= true;
-              this.closeModal();
-            }, 1000);    
-          }
+         
+          
+
+            switch (res.detail.status) {
+              case 1:
+                alert(res.detail.msg); // "Se ha creado correctamente el usuario doctor"
+                this.router.navigate(['login']); // Redirigir a la página de login
+                this.spinner=false; 
+                this.getCatalogos();
+                this.statuAgrgado = true;
+                this.extra_charges = [];
+                this.extra_question= [];
+                this.formFood.reset;
+                this.resteValu();
+               // this.table= true;
+                setTimeout(() => {
+                  this.statuAgrgado = false;
+                  this.table= true;
+                  this.closeModal();
+                }, 1000);    
+                break;
+              case 2:
+                alert(res.detail.msg); // "Ya existe un usuario con ese correo"
+                this.spinner=false; 
+                this.getCatalogos();
+                this.statuAgrgado = true;
+                this.extra_charges = [];
+                this.extra_question= [];
+                this.formFood.reset;
+                this.resteValu();
+               // this.table= true;
+                setTimeout(() => {
+                  this.statuAgrgado = false;
+                  this.table= true;
+                  this.closeModal();
+                }, 1000);    
+                break;
+              case 3:
+                alert(res.detail.msg); // "Ocurrió un error al crear el usuario"
+                this.spinner=false; 
+                this.getCatalogos();
+                this.statuAgrgado = true;
+                this.extra_charges = [];
+                this.extra_question= [];
+                this.formFood.reset;
+                this.resteValu();
+               // this.table= true;
+                setTimeout(() => {
+                  this.statuAgrgado = false;
+                  this.table= true;
+                  this.closeModal();
+                }, 1000);    
+                break;
+              default:
+                alert('Ocurrió un error inesperado');
+                 }
           
       },error => {
         alert('No se pudo Agregar')

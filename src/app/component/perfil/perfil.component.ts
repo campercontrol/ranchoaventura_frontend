@@ -92,33 +92,26 @@ export class PerfilComponent implements OnInit {
     this.formParent = this.formBuild.group({
       tutor_lastname_father:["",[Validators.required,Validators.minLength(2)]],
       tutor_cellphone:      ["",[Validators.required,
-                             Validators.pattern("^[0-9]*$"),
-                             Validators.minLength(10)]],
+                             Validators.pattern('^[+]?\\d*$')]],
       tutor_home_phone:     ["",[Validators.required,
-                              Validators.pattern("^[0-9]*$"),
-                              Validators.minLength(8)]],
+                              Validators.pattern('^[+]?\\d*$')]],
       contact_name:         ["",[Validators.required,Validators.minLength(2)]],
     
     contact_lastname_mother:[""],
     contact_home_phone:     ["",[Validators.required,
-                            Validators.pattern("^[0-9]*$"),
-                            Validators.minLength(8)]], 
+                            Validators.pattern('^[+]?\\d*$')]], 
     contact_email:          ["",[Validators.required,
                                    Validators.email]],
     confirmEmail: ['', [Validators.required,Validators.email]],
 
     tutor_name :            ["",[Validators.required,Validators.minLength(2)]],
     tutor_lastname_mother:  [""], 
-    tutor_work_phone:       ["",[Validators.required,
-                            Validators.pattern("^[0-9]*$"),
-                            Validators.minLength(10)]],
+    tutor_work_phone:       ["",[Validators.pattern('^[+]?\\d*$'),]],
     contact_lastname_father:  ["",[Validators.required,Validators.minLength(2)]], 
     contact_cellphone:      ["",[Validators.required,
-                            Validators.pattern("^[0-9]*$"),
-                            Validators.minLength(10)]],
-    contact_work_phone:     ["",[Validators.required,
-                            Validators.pattern("^[0-9]*$"),
-                            Validators.minLength(10)]],
+                            Validators.pattern('^[+]?\\d*$')]],
+    contact_work_phone:     ["",[
+                            Validators.pattern('^[+]?\\d*$')]],
     terms:                   ['',[Validators.required,Validators.requiredTrue]]
 
    
@@ -164,7 +157,7 @@ export class PerfilComponent implements OnInit {
         console.log(arg);
         
         this.spinner = true;
-        this.router.navigate(['dashboard/parent'])
+        this.router.navigate(['dashboard/parents'])
       });
     }else{
       this.spinner = false;
@@ -182,6 +175,8 @@ export class PerfilComponent implements OnInit {
       this.gettutor_lastname_mother();
       this.getTutor_lastname_father();
       this.gettutor_name();
+      this.terms();
+
       
     }
     
@@ -201,6 +196,12 @@ export class PerfilComponent implements OnInit {
   }
 
 
+  terms(){
+    if(!this.formParent.get('terms').valid){
+      alert('Aún no aceptas los términos y condiciones');
+
+     }
+  }
  
 
 

@@ -52,6 +52,7 @@ export class LocacionComponent implements OnInit {
   display3: boolean = false;
   idDalete = 0;
   updateId = 0;
+  spinner = false;
   text: any;
   TextElimint = "";
   formFood: FormGroup;
@@ -119,8 +120,10 @@ export class LocacionComponent implements OnInit {
 
   guardar() {
     if (this.formFood.valid) {
+      this.spinner= true;
       this.catalogos.postSchool(this.formFood.value).subscribe((res: any) => {
         console.log(res);
+        this.spinner= false;
 
         this.getCatalogos();
         this.statuAgrgado = true;
@@ -132,6 +135,7 @@ export class LocacionComponent implements OnInit {
         }, 400);
 
       }, error => {
+        this.spinner= false;
         alert('No se pudo Agregar')
       })
     } else {
@@ -199,15 +203,17 @@ export class LocacionComponent implements OnInit {
 
   keepUpdate() {
     if (this.formFood.valid) {
+      this.spinner= true;
       this.catalogos.updateSchool(this.formFood.value, this.updateId).subscribe((res: any) => {
         console.log(res);
-
+        this.spinner= false;
         this.getCatalogos();
         this.statuAgrgado = true;
         this.resteValu();
         this.resetInput();
         setTimeout(() => {
           this.statuAgrgado = false;
+          this.spinner= false;
           this.closeModal2();
         }, 400);
 

@@ -384,6 +384,8 @@ export class CamperNuevoComponent implements OnInit {
 
    } 
   }
+
+  
   
   get can_swim() {
     return this.formUser.get('can_swim')  ;
@@ -626,9 +628,12 @@ export class CamperNuevoComponent implements OnInit {
     if(! this.formUser.get('terms').valid){
       this.render.addClass(this.acept.nativeElement,"text-danger");
       this.render.addClass(this.terms.nativeElement,"text-danger");
+      alert('Aún no aceptas los términos y condiciones');
+
 
    }
   }
+
  
   subiendo(event: any) {
     this.spinerPhot = false;

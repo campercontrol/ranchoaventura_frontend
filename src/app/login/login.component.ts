@@ -70,8 +70,11 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['dashboard/school/upcoming_camps']);
             console.log(this.authenticationService.infToken);
             
-          }else{
+          }else if(this.authenticationService.infToken.role_id  == 1 ){
             this.router.navigate(['dashboard/parents']);
+            console.log(this.authenticationService.infToken);
+          }else{
+            this.router.navigate(['dashboard/medical/camps']);
             console.log(this.authenticationService.infToken);
           }
        

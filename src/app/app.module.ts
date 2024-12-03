@@ -243,6 +243,7 @@ export function createTranslateLoader(http: HttpClient): any {
     CampamentosAnterioresEscuelasComponent,
     CamparsSchoolComponent,
     PaymantCampComponent
+    
        
   ],
   imports: [
@@ -267,6 +268,7 @@ export function createTranslateLoader(http: HttpClient): any {
     NgbToastModule,
     TabViewModule,
     TagModule,
+    
 
       TableModule,
     TranslateModule.forRoot({
