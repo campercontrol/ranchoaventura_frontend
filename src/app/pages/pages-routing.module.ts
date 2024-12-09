@@ -212,7 +212,7 @@ const routes: Routes = [
 
 
   {path: 'staff/checkpoint/:id',component:PuntoControlComponent, canActivate: [AuthGuard] },
-  {path: 'staff/camps',component: MisCampamentosComponent, canActivate: [AuthGuard] },
+/////{path: 'staff/camps',component: MisCampamentosComponent, canActivate: [AuthGuard] },
   //{path:'staff/register', component:ProspectoComponent, canActivate: [AuthGuard] },
   
 

@@ -49,7 +49,7 @@
                 class="badge font-size-11"
                 [ngClass]="{ 'bg-warning': a.camper_payment_balance > 0, 'bg-success': a.camper_payment_balance <= 0 }"
                 *ngIf="a.show_payment_parent">
-                {{ a.currency_symbol }} {{ a.camper_payment_balance }} {{ a.currency_acronyms }}
+                {{ a.currency_symbol }} {{ a.camper_payment_balance | currency:'':'':'1.0-0' }} {{ a.currency_acronyms }}
               </small>
             </a>
           </div>

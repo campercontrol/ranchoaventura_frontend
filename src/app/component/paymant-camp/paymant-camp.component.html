@@ -1,6 +1,11 @@
 
 <div class="card  p-4">
+  <div>
+    <a class="btn btn-primary" [routerLink]="['/dashboard/camp', camp]" routerLinkActive="router-link-active" >Regresar</a>
+  </div>
     <div class="card-container" [class.expanded]="showAllCards" *ngIf="!loading">
+
+     
 
         <div class="card-item green-background">
             <div class="card-content">

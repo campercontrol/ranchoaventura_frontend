@@ -102,6 +102,8 @@ export class ListadoStaffComponent implements OnInit {
       this.listcatalogos = staffResponse.data;
       this.listcatalogos.forEach(element => {
         element.tipo = "Staff"
+        element.combined = `${element.Staff.name} ${element.Staff.lastname_father} ${element.Staff.lastname_mother}`.toLowerCase();
+
       });
   
       this.catalogos.getProspectos().subscribe((prospectResponse: any) => {
@@ -110,6 +112,7 @@ export class ListadoStaffComponent implements OnInit {
         
          b.forEach((prospect:any) => {
           prospect.tipo ="Prospecto"
+          prospect.combined = `${prospect.Staff.name} ${prospect.Staff.lastname_father} ${prospect.Staff.lastname_mother}`.toLowerCase();
          });
         this.listcatalogos = [...prospectResponse.data, ...this.listcatalogos]; // Concatenate arrays correctly
         this.cargando = false; // Set loading state to false after both requests are complete

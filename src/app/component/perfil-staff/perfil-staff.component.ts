@@ -41,20 +41,28 @@ export class PerfilStaffComponent implements OnInit {
   bandHitoryasistir:any;
   bandHitoryasitio:any;
   statusStaff:any=0;
-
+  editarPerfil = false;
+  tokenInfo
 
   constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private staff: StaffService,private parents : ParentService, private rou:Router,private catalogos: CatalogosService, private info:AuthenticationService,private router: Router) { }
 
   ngOnInit(): void {
     this.routesA.params.subscribe((params) => {
       this.id = params['id'];
-      this.statusStaff= Number(this.info.infToken.role_id) - 1;
+      this.statusStaff= Number(this.info.infToken.role_id) ;
+      this.tokenInfo =this.info.infToken
+ 
+      
       if(!this.id){
         console.log(this.statusStaff,'idd');
-        
+        this.editarPerfil = true;
         this.id = this.info.infToken.profile_id;
+      }else{
+        this.editarPerfil = false;
+
       }
     })
+    
     this.getInfo()
   }
 

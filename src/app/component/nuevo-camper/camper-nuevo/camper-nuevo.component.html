@@ -68,14 +68,25 @@
                                     
                                 </div>
 
-                                <div class="mt-3 foto"  tabindex="0" id="photo">
-                                    <label for="">{{textos['Profilepicture']}}</label>
-                                    <input type="file" accept="image/jpeg" (change)="subiendo($event)" >
-                                    
-    
-                                    <label class="mt-2">La foto es obligatoria para identificar a los campers. Recomendamos subir una imagen reciente y de tamaño reducido, en formato JPG, con un peso máximo de 3 MB.</label>
-    
+                                <div class="mt-3 foto" tabindex="0" id="photo">
+                                    <input 
+                                        type="file" 
+                                        id="fileInput" 
+                                        #fileInputRef 
+                                        accept="image/jpeg" 
+                                        (change)="subiendo($event)" 
+                                        style="display: none;">
+                                    <button type="button" class="custom-upload-btn" (click)="fileInputRef.click()">
+                                        Subir imagen
+                                    </button>
                                 </div>
+                                
+                                
+                                
+                                <div class="alert alert-primary mt-3" role="alert" >
+                                    La foto es obligatoria para identificar a los campers. Recomendamos subir una imagen reciente y de tamaño reducido, en formato JPG, con un peso máximo de 3 MB.  
+
+                                   </div>
                                 <div *ngIf="spinerPhot">
                                     <div class="alert alert-danger" role="alert" *ngIf="!photoSatus">
                                         Aun no has  seleciona una imagen Recuerda tiene que ser un imagen TIPO JPG

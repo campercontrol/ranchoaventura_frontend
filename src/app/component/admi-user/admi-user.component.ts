@@ -43,7 +43,8 @@ export class AdmiUserComponent implements OnInit {
   photoSelect : string | ArrayBuffer;
   photoSatus = false;
   spinerPhot= true;
-  table:boolean=true
+  table:boolean=true;
+  staff = false;
   
   idDalete =0;
   updateId= 0;
@@ -88,6 +89,7 @@ export class AdmiUserComponent implements OnInit {
   }
   breadCrumbItems: Array<{}>;
   selectedCities: string[] = [];
+  staff2: boolean = false;
   
   constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder,private camperSer: CamperService,private render :Renderer2) {
   //  this.textos  = traducciones['traduciones'][this.idioma]['formUserChildren'];
@@ -130,7 +132,10 @@ export class AdmiUserComponent implements OnInit {
 
 
   showDialog() {
-   
+    this.staff=false;
+    this.formFood.patchValue({
+      rol_id: 1
+    })
     this.table = false;
   }
   showDialog2() {
@@ -171,7 +176,18 @@ export class AdmiUserComponent implements OnInit {
 
  
 
+  isCoordinatorDisabled(): boolean {
+    console.log(this.formFood.get('role_id')?.value != 2);
+    
+    return this.formFood.get('role_id')?.value != 2;
+  }
 
+  // Función que verifica si se debe deshabilitar el checkbox "Administrador"
+  isAdminDisabled(): boolean {
+    console.log(this.formFood.get('role_id')?.value != 2);
+    
+    return this.formFood.get('role_id')?.value != 2;
+  }
 
   
 
@@ -238,7 +254,8 @@ export class AdmiUserComponent implements OnInit {
      this.updateId = item.id;
     this.display2= true;
     this.table= false;
-   
+   if(item.role_id == 2){
+    this.staff2 = true;
     this.formFood2.patchValue({     
       "email":item.email,
         "hashed_pass": "",
@@ -246,9 +263,26 @@ export class AdmiUserComponent implements OnInit {
         "is_coordinator":item.is_coordinator,
         "is_admin": item.is_admin,
         "is_employee": item.is_employee,
-        "is_superuser": item.is_superuser,
+        "is_superuser": false,
         "is_active": item.is_active,
    })
+
+   }else{
+    this.staff2 = false
+    this.formFood2.patchValue({     
+      "email":item.email,
+        "hashed_pass": "",
+        "role_id":item.role_id,
+        "is_coordinator":false,
+        "is_admin": false,
+        "is_employee": false,
+        "is_superuser": false,
+        "is_active": item.is_active,
+   })
+
+
+   }
+ 
    this.data=[]
    this.columns=[]
 
@@ -413,13 +447,11 @@ getCampsSummary(camps: any[]): string {
      }
   }
   gettutor_lastname_mother(){
-    if( this.formFood.get('role_id').valid){
-      this.render.removeClass(this.tutor_lastname_mother.nativeElement,"is-invalid");
-        this.render.addClass(this.tutor_lastname_mother.nativeElement,"is-valid");
+    if( this.formFood.get('role_id').value ==2){
+this.staff = true;  
+
      }else{
-      this.render.removeClass(this.tutor_lastname_mother.nativeElement,"is-valid");
-      this.render.addClass(this.tutor_lastname_mother.nativeElement,"is-invalid");
-      this.tutor_lastname_mother.nativeElement.focus()
+      this.staff = false;  
 
      }
   }
@@ -438,15 +470,14 @@ getCampsSummary(camps: any[]): string {
 
   
   gettutor_lastname_motherU(){
-    if( this.formFood2.get('role_id').valid){
-      this.render.removeClass(this.tutor_lastname_mother.nativeElement,"is-invalid");
-        this.render.addClass(this.tutor_lastname_mother.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.tutor_lastname_mother.nativeElement,"is-valid");
-      this.render.addClass(this.tutor_lastname_mother.nativeElement,"is-invalid");
-      this.tutor_lastname_mother.nativeElement.focus()
-
-     }
+    if( this.formFood2.get('role_id').value == 2){
+     
+        this.staff2 = true;  
+  
+       }else{
+        this.staff2 = false;  
+  
+       }
   }
   getTutor_nameU() {
     if( this.formFood2.get('email').valid){

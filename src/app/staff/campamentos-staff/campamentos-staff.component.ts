@@ -15,6 +15,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { data } from 'jquery';
+import { StaffService } from 'src/services/staff.service';
 
 
 
@@ -140,7 +141,8 @@ export class CampamentosStaffComponent implements OnInit {
 
   
 
-  constructor(private capms:CampsVistaService,private router :ActivatedRoute,private routerN: Router,private info : AuthenticationService, private createCamp: CreateCampsService,private formGrup: FormBuilder,private render :Renderer2,private catalogos:CatalogosService) { 
+  constructor(private capms:CampsVistaService,private router :ActivatedRoute,private routerN: Router,private info : AuthenticationService, private createCamp: CreateCampsService,private formGrup: FormBuilder,private render :Renderer2,private catalogos:CatalogosService,
+    private staffSer:StaffService) { 
   
     this.rol=this.info.infToken.role_id
     this.catalogos.getpaymentaccounts().subscribe((res: any) => {
@@ -473,6 +475,16 @@ determineTipoDepago() {
  
     })
   }
+
+  cancelar(id){
+    this.staffSer.cancelarParticipacio(id).subscribe((res)=>{
+      this.getInof();
+
+    },erro=>{
+      console.log(erro);
+      
+    })
+}
 
   cumpleanosEnRango( cumpleanos: any): boolean {
     let fechaInicio =  new Date(this.infoCamp.start);

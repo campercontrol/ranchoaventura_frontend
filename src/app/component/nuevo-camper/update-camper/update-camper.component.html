@@ -68,15 +68,20 @@
                                     
                                 </div>
 
-                                <div class="mt-3 foto"  tabindex="0" id="photo">
-                                    <label for="">{{textos['Profilepicture']}}</label>
-                                    <input type="file" accept="image/jpeg" (change)="subiendo($event)" >
-                                    
-    
-                                    <label class="mt-2">La foto es obligatoria ,nos ayuda a identificar a los campers,
-                                        recomendamos subas una foto reciente y de poco peso, máximo 3Mb debe ser formato jpg</label>
-    
+                                <div class="mt-3 foto" tabindex="0" id="photo">
+                                    <input 
+                                        type="file" 
+                                        id="fileInput" 
+                                        #fileInputRef 
+                                        accept="image/jpeg" 
+                                        (change)="subiendo($event)" 
+                                        style="display: none;">
+                                    <button type="button" class="custom-upload-btn" (click)="fileInputRef.click()">
+                                        Subir imagen
+                                    </button>
                                 </div>
+                                
+                                
                                 <div *ngIf="spinerPhot">
                                   
                                 </div>

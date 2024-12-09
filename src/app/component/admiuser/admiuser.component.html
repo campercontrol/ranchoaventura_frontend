@@ -1531,7 +1531,7 @@
         <div style="overflow: auto;">
             <p-table #dt [value]="listcatalogos" [rows]="20"
             [rowsPerPageOptions]="[5, 25, 50]"
-            [globalFilterFields]="['camper_name','camper_lastname_mother','camper_lastname_father','school','tutor_fullname','tutor_email','camper_id']"
+            [globalFilterFields]="['camper_name','camper_lastname_mother','camper_lastname_father','school','tutor_fullname','tutor_email','camper_id','namecomplet']"
             [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [showCurrentPageReport]="true"
@@ -1554,7 +1554,7 @@
             <ng-template pTemplate="body" let-customer>
                 <tr>
                     <td (click)="routerLink(customer)" style="cursor:pointer;">
-                       <a routerLink="/dashboard/admi/camper/{{customer.camper_id}}"> {{customer.camper_name}} {{customer.camper_lastname_father}}     {{customer.camper_lastname_mother}} </a> 
+                       <a routerLink="/dashboard/admi/camper/{{customer.camper_id}}"> {{customer.namecomplet}} </a> 
                     </td>
                  
                     <td>

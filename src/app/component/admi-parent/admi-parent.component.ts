@@ -199,6 +199,9 @@ export class AdmiParentComponent implements OnInit {
     if (this.id ==undefined) {
       this.catalogos.getParentAdmi().subscribe((res: any) => {
         this.listcatalogos = res.data;
+        this.listcatalogos.forEach(element => {
+          element.namecomplet = `${element.tutor_name} ${element.tutor_lastname_father}  ${element.tutor_lastname_mother}` 
+        });
       
         console.log(this.listcatalogos);
        

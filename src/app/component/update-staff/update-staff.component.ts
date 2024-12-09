@@ -119,7 +119,7 @@ export class UpdateStaffComponent implements OnInit {
       birthday: ["",[Validators.required]], //fecha de nacimiento
       curp: ["",[Validators.required]],
       bio: ["", [Validators.required]], // biografia
-      facebook: ["", [Validators.required]],
+      facebook: [""],
       home_phone: ["", [Validators.required,Validators.pattern("^[0-9]*$"), Validators.minLength(8)]],
       cellphone: ["", [Validators.required, Validators.pattern("^[0-9]*$"),Validators.minLength(8)]],
       cv: [""],
@@ -294,7 +294,7 @@ export class UpdateStaffComponent implements OnInit {
         
       }
       if(this.formUser.valid){
-        this.staff.editStaff(a,this.info.infToken.profile_id).subscribe((res:any)=>{
+        this.staff.editStaff(a,this.id).subscribe((res:any)=>{
           this.spinner = false;
           console.log(res);
           
@@ -358,7 +358,7 @@ export class UpdateStaffComponent implements OnInit {
           this.spinner = false;
           console.log(res);
           
-          this.centerModal()
+          this.router.navigate(['dashboard/staff'])
          
          
   

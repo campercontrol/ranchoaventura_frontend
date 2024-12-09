@@ -61,8 +61,10 @@
 
                                         </div>
                                         
-                                        <div  class="alert alert-danger" *ngIf="confirmPaswordAlert"><small style="color: red; font-size: 14px    ;">Las contraseñas no coinciden.</small></div>
-
+                                        <div class="alert alert-danger" *ngIf="paswordAlert">
+                                            <small style="color: red; font-size: 14px;">Las contraseñas no cumplen con las características requeridas.</small>
+                                          </div>
+                                          
                                     </div>
                                    
                                     <div class="row mb-4">

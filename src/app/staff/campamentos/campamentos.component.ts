@@ -34,10 +34,12 @@ export class CampamentosComponent implements OnInit {
 
   activityValues: number[] = [0, 100];
   customer:any =[];
-  rol_id = 0
+  rol_id = 0;
+  info:any ;
 
 constructor(private camps: CreateCampsService,private router :Router, private token:AuthenticationService) {
-  this.rol_id =token.infToken.role_id; 
+  this.rol_id =token.infToken.role_id;
+  this.info= token
 
  }
 cars=[{Nombre:"Campamento con agrupaciones",grado:"prueba2",inicio:"2020-11-10 ",termina:"2020-11-10 " },

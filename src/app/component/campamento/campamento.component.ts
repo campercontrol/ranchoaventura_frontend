@@ -118,6 +118,7 @@ export class CampamentoComponent implements OnInit {
   pagoMercado:number=0;
   fechadePagos:any=[]
   rol=0;
+  spinner = false;
 
   constructor(private mercadoPagoService: MercadoPagoService,private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router,private render:Renderer2,private lang:LangService,private routerNav:Router,private info : AuthenticationService) { 
 
@@ -244,30 +245,38 @@ export class CampamentoComponent implements OnInit {
   }
   saveRes(){
     let b :any[]=[];
+    this.spinner = true;
     this.PreguntasExtras.forEach(element => {
         let a = {
           
-            "camp_extra_answer_answer": element.answer,
-            "camp_extra_question_id": element.id,
+            "answer": element.answer,
+            "id": element.camper_extra_answer_id,
            
           
         }
-        b = b.concat(a);
+         b.push(a);
     });
+
+    this.camps.answer(b).subscribe((res:any)=>{
+      console.log(res);
+      this.getQuestion()
+      this.modalService.dismissAll()
+      this.spinner = false;
+      
+    })
    
    
-    this.camps.extras({"extra_charges":[],extra_answers:b},this.idCamper,this.idCamp).subscribe((res:any)=>{
-        console.log(res);
-        this.getQuestion();
-        
-      });
+ 
   }
   saveChange(){
-    
+    this.spinner= true
+    let a = [];
       this.cargosExtras.forEach(element => {
-          element.camper_id = this.idCamper;
-          element.camp_extra_charge_id= element.extra_charge_id
-          element.camp_extra_charge_is_selected= element.extra_selected
+         a.push(
+          {     
+            id :element.camper_extra_charge_id,
+                  is_selected: element.extra_selected} )
+   
 
           
       });
@@ -275,11 +284,11 @@ export class CampamentoComponent implements OnInit {
       "extra_charges":this.cargosExtras
     }
 
-    this.camps.extras({"extra_charges":this.cargosExtras,extra_answers:[]},this.idCamper,this.idCamp).subscribe((res:any)=>{
+    this.camps.extras(a).subscribe((res:any)=>{
       console.log(res);
       this.getQuestion()
       this.modalService.dismissAll()
-      
+      this.spinner= false
     })
     
    

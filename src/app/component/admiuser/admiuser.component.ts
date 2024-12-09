@@ -220,7 +220,10 @@ export class AdmiuserComponent implements OnInit {
         this.listcatalogos = res.data;
         console.log(res.data);
        
-           
+        this.listcatalogos.forEach(element => {
+          element.namecomplet = `${element.camper_name} ${element.camper_lastname_father}  ${element.camper_lastname_mother}` 
+        });
+      
        // this.table=true;
       });
     }else{
@@ -228,7 +231,10 @@ export class AdmiuserComponent implements OnInit {
       this.catalogos.getCamperAdmi().subscribe((res: any) => {
         this.listcatalogos = res.data;
         console.log(res.data);
-       
+        this.listcatalogos.forEach(element => {
+          element.namecomplet = `${element.camper_name} ${element.camper_lastname_father}  ${element.camper_lastname_mother}` 
+        });
+      
            
        // this.table=true;
       });

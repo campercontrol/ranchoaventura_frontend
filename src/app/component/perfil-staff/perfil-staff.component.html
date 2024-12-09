@@ -48,7 +48,11 @@
                     <div>
                         <h4>Perfil del Staff </h4>
                     </div>
-                    <div>
+                    <div *ngIf="editarPerfil">
+                        <button class="btn btn-primary btn-sm"  (click)="update()">editar</button>
+                    </div>
+
+                    <div *ngIf="!editarPerfil &&  tokenInfo.user_admin">
                         <button class="btn btn-primary btn-sm"  (click)="update()">editar</button>
                     </div>
                 </div>

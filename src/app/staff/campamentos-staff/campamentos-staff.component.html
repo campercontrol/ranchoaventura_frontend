@@ -74,7 +74,7 @@
             <p>{{infoCamp.photo_password}}</p>
           </div>
         </div>
-        <div class="conatiner-info-camp ">
+        <div class="conatiner-info-camp "  *ngIf=" rol ==2 && (user_admin==true || user_coordinator==true)" >
           <div>
             <p class="fw-bold">Página del camp <i class="bx bx-world"> </i> : </p>
           </div>
@@ -82,7 +82,7 @@
             <p> {{infoCamp.url}}</p>
           </div>
         </div>
-        <div class="conatiner-info-camp ">
+        <div class="conatiner-info-camp "  *ngIf=" rol ==2 && (user_admin==true || user_coordinator==true)">
           <div>
             <p class="fw-bold">Mensaje especial <i class="bx bxs-message-alt"></i> : </p>
           </div>
@@ -90,7 +90,7 @@
             <p> {{infoCamp.special_message}}</p>
           </div>
         </div>
-        <div class="conatiner-info-camp ">
+        <div class="conatiner-info-camp "  *ngIf=" rol ==2 && (user_admin==true || user_coordinator==true)">
           <div>
             <p class="fw-bold">Precio Público <i class="far fa-money-bill-alt"> </i> : </p>
           </div>
@@ -98,7 +98,7 @@
             <p> {{infoCamp.public_price}}</p>
           </div>
         </div>
-        <div class="conatiner-info-camp ">
+        <div class="conatiner-info-camp " *ngIf=" rol ==2 && (user_admin==true || user_coordinator==true)" >
           <div>
             <p class="fw-bold">Mensaje para admin <i class="bx bxs-message-alt"> </i> : </p>
           </div>
@@ -122,11 +122,11 @@
       <div class="card border border-info border-3" >
       
           <div class="bg-info p-2" (click)="headerCampers=!headerCampers" style="cursor: pointer;">
-            <h1 class="card-title text-white">Acampadores</h1>
-  
+            <h1 class="card-title text-white">Acampadores : <span class="text-end">{{ listCampers?.length }}</span></h1>
+            
           </div>
-          
-          <div class="card-body" *ngIf="headerCampers">
+            
+          <div class="card-body" *ngIf="headerCampers &&  rol ==2 && (user_admin==true || user_coordinator==true)|| (rol == 3 )"  >
             <div>
               <div class="col text-end">
   
@@ -134,7 +134,7 @@
             </div>
             <div class="container-btn">
               <div>
-                <div ngbDropdown placement="top-end" class="d-inline-block" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">
+                <div ngbDropdown placement="top-end" class="d-inline-block" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)|| (rol == 3 )">
                   <button type="button" class="btn btn-outline-primary" id="dropdownBasic2"
                     ngbDropdownToggle>Reportes</button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
@@ -153,7 +153,7 @@
                   <button type="button" class="btn btn-outline-primary" id="dropdownBasic2"
                     ngbDropdownToggle>Credenciales</button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-                    <button ngbDropdownItem>Exel</button>
+             
                     <button ngbDropdownItem>Fotos</button>
                   </div>
                 </div>
@@ -171,11 +171,11 @@
                 <div>
 
                   <div ngbDropdown placement="top-end" class="d-inline-block"  style="margin-right: 10px;">
-                    <button type="button" class="btn btn-success" id="dropdownBasic2"
+                    <button type="button" class="btn btn-success" id="dropdownBasic2" *ngIf="(rol ==2 && (user_admin==true || user_coordinator==true)|| rol == 3 )"
                       ngbDropdownToggle>Modulos</button>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-                        <button ngbDropdownItem (click)="puntosControl()" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">Punto de control</button>
-                        <button ngbDropdownItem (click)="medicos()" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">Medicos</button>
+                        <button ngbDropdownItem (click)="puntosControl()" *ngIf=" (rol ==2 && (user_admin==true || user_coordinator==true)|| rol == 3 )" >Punto de control</button>
+                        <button ngbDropdownItem (click)="medicos()" *ngIf="(rol ==2 && (user_admin==true || user_coordinator==true)|| rol == 3 )">Medicos</button>
                         <button ngbDropdownItem (click)="Agrupaciones()" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">Agrupaciones</button>
                         <button ngbDropdownItem *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)" > <a [routerLink]="['/dashboard/payments',idCamp]">Ingresos</a></button>
 
@@ -315,12 +315,12 @@
         </div>
       </div>
 
-      <div class="card border border-success border-3" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">
+      <div class="card border border-success border-3"  >
         <div class="bg-success p-2" (click)="headerStaffConf=!headerStaffConf" style="cursor: pointer;">
-          <h1 class="card-title text-white">Staff confirmado</h1>
+          <h1 class="card-title text-white">Staff :  <span class="text-end">{{ listStaffConfirm?.length }}</span></h1>
 
         </div>
-        <div class="card-body" *ngIf="headerStaffConf">
+        <div class="card-body" *ngIf="headerStaffConf && rol ==2 && (user_admin==true || user_coordinator==true)">
           <div>
             <div class="col text-end">
 
@@ -413,6 +413,9 @@
                   <div class="flex justify-content-between align-items-center" style="width: 80px;">
                   </div>
                 </th>
+                <th>
+
+                </th>
 
               </tr>
             </ng-template>
@@ -456,6 +459,9 @@
 
                 <td>
                   <button class="btn btn-primary" class="btn btn-primary"  (click)="verStaff(customer.staff_id)">ver staff</button>
+                </td>
+                <td>
+                  <button class="btn btn-danger"  (click)="cancelar(customer.staff_in_camp_id)">Cancelar asistecian </button>
                 </td>
 
 
@@ -559,6 +565,9 @@
                   <div class="flex justify-content-between align-items-center" style="width: 80px;">
                   </div>
                 </th>
+                <th>
+
+                </th>
 
               </tr>
             </ng-template>
@@ -601,7 +610,9 @@
                 <td>
                   <button class="btn btn-primary" class="btn btn-primary" (click)="verStaff(customer.staff_id)">ver staff</button>
                 </td>
-
+                <td>
+                  <button class="btn btn-danger" (click)="cancelar(customer.staff_in_camp_id)">Cancelar asistecian </button>
+                </td>
 
               </tr>
             </ng-template>
@@ -698,8 +709,7 @@
                            </div>
                           <div class="row mb-4">
                             <div class="row mb-4">
-                                <label for="" class="col-sm-3 col-form-label">Link para
-                                    información adicional del acampador</label>
+                                <label for="" class="col-sm-3 col-form-label">URL CAMP</label>
                                 <div class="col-sm-9 mt-4">
                                     <input type="text" class="form-control" id="" formControlName="url" #url>
                                 </div>
@@ -772,7 +782,7 @@
                                       <div class="p-field-checkbox col-9 d-flex flex-row">
                                           <input type="checkbox" value="true" formControlName="show_mercadopago_button" 
                                           class="mb-2"/>
-                                      <label style="margin-left: 20px;" for="ny">Pagos atra vez de mercado pago</label>
+                                      <label style="margin-left: 20px;" for="ny">Pagos usando Mercado Pago</label>
                                       </div>
                                   </div>
                                     <div>
@@ -1208,8 +1218,8 @@
   
     
         <ng-template pTemplate="footer">
-            <p-button icon="pi pi-check" (click)="displayMaximizable=false" label="Cancelar" class="p-button-text"></p-button>
-            <p-button icon="pi pi-times"  label="Aceptar staff" (click)="agregarStaffNoApuntado()"></p-button>
+            <p-button  (click)="displayMaximizable=false" label="Cancelar" class="p-button-text"></p-button>
+            <p-button  label="Aceptar staff" (click)="agregarStaffNoApuntado()"></p-button>
         </ng-template>
 </p-dialog>
 
@@ -1263,8 +1273,8 @@
   
     
         <ng-template pTemplate="footer">
-            <p-button icon="pi pi-check" (click)="displayMaximizable2=false" label="Cancelar" class="p-button-text"></p-button>
-            <p-button icon="pi pi-times"  label="Aceptar staff" (click)="agregarStaffApuntado()"></p-button>
+            <p-button   (click)="displayMaximizable2=false" label="Cancelar" class="p-button-text"></p-button>
+            <p-button  label="Aceptar staff" (click)="agregarStaffApuntado()"></p-button>
         </ng-template>
 </p-dialog>
 
@@ -1318,7 +1328,7 @@
   
     
         <ng-template pTemplate="footer">
-            <p-button icon="pi pi-check" (click)="modalConfir=false" label="Cancelar" class="p-button-text"></p-button>
-            <p-button icon="pi pi-times"  label="Aceptar" (click)="selectstaff()" *ngIf="selectRol>0"></p-button>
+            <p-button (click)="modalConfir=false" label="Cancelar" class="p-button-text"></p-button>
+            <p-button    label="Aceptar" (click)="selectstaff()" *ngIf="selectRol>0"></p-button>
         </ng-template>
 </p-dialog>

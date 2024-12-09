@@ -63,7 +63,7 @@
                         <div>
                             <h4>Perfil del Acampador </h4>
                         </div>
-                        <div>
+                        <div *ngIf="this.info.infToken.role_id == 1 ||( this.info.infToken.role_id == 2  && this.info.infToken.user_admin == true )">
                             <a 
                               class="btn btn-primary btn-sm text-white text-decoration-none" 
                               [routerLink]="'/dashboard/parents/update-camper/' + id" 
@@ -113,7 +113,7 @@
 
                                 <div class="container-fluid">
                                     <p> <span class="fw-bold">¿Sabe nadar?:</span>{{infoCamp.can_swim}}</p>
-                                    <p> <span class="fw-bold">Impide realizar actividades</span>
+                                    <p> <span class="fw-bold"> ¿Hay alguna situación que le impida realizar actividades?</span>:
                                         {{infoCamp.prevent_activities}}</p>
 
                                 </div>
@@ -293,7 +293,7 @@
 
                                 </div>
                                 <div class="col">
-                                    <input type="text" name="" id="" class="form-control" placeholder="Username"
+                                    <input type="text" name="" id="" class="form-control"  
                                         aria-label="Username" [(ngModel)]="comment">
                                     <div class="d-flex flex-row-reverse">
                                         <button class="btn btn-primary mt-3" (click)="comentario()">Guardar
@@ -392,6 +392,7 @@
                                     <h3 style="cursor: pointer;"> {{event.camp_name}} <i class="fa fa-info-circle"
                                             (click)="link(event.camp_id)"></i></h3>
                                     <p (click)="link(event.camp_id)" style="cursor: pointer;"
+                                        *ngIf="event.show_payment_parent"
                                         class="badge bg-warning ms-1">Pendiente de Pago:
                                         {{event.camper_payment_balance}} MXN</p>
                                 </div>

@@ -31,7 +31,8 @@
 
                 <hr class="mb-4">
                 <div class="display-flex p-2">
-                    <button class="btn btn-secondary" type="submit">ver camp</button>
+
+                    <button class="btn btn-secondary" [routerLink]="['/dashboard/camp', id]"  >ver camp</button>
                     <button class="btn btn-primary" type="submit" (click)="crearCheck()" [disabled]="chekpoint.invalid">Agregar punto de Control</button>
                 </div>
 

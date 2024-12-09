@@ -115,22 +115,30 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline" *ngIf="staff">
                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                        formControlName="is_superuser" value=true>
-                                    <label class="form-check-label" for="inlineCheckbox1">Indica que este usuario tiene
-                                        todos los permisos sin asignárselos explícitamente.</label>
+                                           formControlName="is_coordinator" value="true"  >
+                                    <label class="form-check-label" for="inlineCheckbox1"> Coordinador.</label>
                                 </div>
+                                
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
-                                        formControlName="is_active" value=true>
+                                           formControlName="is_active" value="true">
                                     <label class="form-check-label" for="inlineCheckbox2">Activo</label>
                                 </div>
-                                <div class="form-check form-check-inline">
+                                
+                                <div class="form-check form-check-inline" *ngIf="staff">
                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
-                                        formControlName="is_admin" value=true>
+                                           formControlName="is_admin" value="true"  >
                                     <label class="form-check-label" for="inlineCheckbox3">Administrador</label>
                                 </div>
+                                <div class="form-check form-check-inline" *ngIf="staff">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
+                                           formControlName="is_employee" value="true"  >
+                                    <label class="form-check-label" for="inlineCheckbox3">is_employee</label>
+                                </div>
+                                
+                                
 
                             </div>
                         </div>
@@ -187,8 +195,8 @@
                                              >
                                     </div>
                                 </div>
-                                <div class="row mb-4">
-                                    <label for="" class="col-sm-3 col-form-label">Rol</label>
+                                <div class="row mb-4"   >
+                                    <label for="" class="col-sm-3 col-form-label" >Rol</label>
                                     <div class="col-sm-9">
                                         <select class="form-select" aria-label="Default select example"
                                             formControlName="role_id" (change)="gettutor_lastname_motherU()"
@@ -198,23 +206,26 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline"  *ngIf="staff2">
                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                        formControlName="is_superuser" value=true>
-                                    <label class="form-check-label" for="inlineCheckbox1">Indica que este usuario tiene
-                                        todos los permisos sin asignárselos explícitamente.</label>
+                                        formControlName="is_coordinator" value=true>
+                                    <label class="form-check-label" for="inlineCheckbox1">Cordinador</label>
                                 </div>
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline"  >
                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
                                         formControlName="is_active" value=true>
                                     <label class="form-check-label" for="inlineCheckbox2">Activo</label>
                                 </div>
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline"  *ngIf="staff2">
                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
                                         formControlName="is_admin" value=true>
                                     <label class="form-check-label" for="inlineCheckbox3">Administrador</label>
                                 </div>
-
+                                <div class="form-check form-check-inline" *ngIf="staff2">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3"
+                                           formControlName="is_employee" value="true"  >
+                                    <label class="form-check-label" for="inlineCheckbox3">is_employee</label>
+                                </div>
                             </div>
                         </div>
                     </div>

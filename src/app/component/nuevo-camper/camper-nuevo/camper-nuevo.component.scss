@@ -83,6 +83,20 @@ label{
 .text_area_valid{
     border:  solid 1px rgb(82, 206, 82);
 }
+.custom-upload-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-upload-btn:hover {
+    background-color: #0056b3;
+}
+
+
 .slider {
     position:absolute;
     top:50%;

@@ -159,7 +159,7 @@
                                     </div>
                                 </div>
                                 <div class="row mb-4">
-                                    <label for="" class="col-sm-3 col-form-label">Facebook*</label>
+                                    <label for="" class="col-sm-3 col-form-label">Redes sociales"</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" id="" formControlName="facebook" name="facebook"
                                             (input)="validateFace()" #facebook>
@@ -196,8 +196,7 @@
                                     </select>
                                    
 
-                                    <small>En caso de no conocer el tipo de sangre, escribe NO RECUERDO
-                                    </small>
+                                    <small>En caso de no conocerlo, seleccionar "NO LO SE                                    </small>
                                 </div>
                             </div>
                             <!--  tipode  sangre el de abrriba-->
@@ -213,9 +212,9 @@
     
                                         <div class="form-check form-check-inline" *ngFor="let item of vaccines;index as i">
                                             <input (click)="vaccinesValu(i)" class="form-check-input" type="checkbox" name="inlineRadioOptions"
-                                                id="inlineRadio1" value="{{item.is_active}}" id="{{item.id}}"
+                                                  value="{{item.is_active}}"  id="{{item.id}}"  [checked]="item.is_active" 
                                                 >
-                                            <label class="form-check-label" for="inlineRadio1">{{item.name}}</label>
+                                            <label class="form-check-label" for="{{item.id}}">{{item.name}}</label>
                                         </div>
     
     

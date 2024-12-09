@@ -57,12 +57,17 @@
 
                                                             <ng-template pTemplate="header">
                                                                 <tr>
-                                                                    <th pSortableColumn="created_at" >Nombre<p-sortIcon
+                                                                    <th pSortableColumn="title" >Nombre<p-sortIcon
                                                                             field="title"
                                                                             style="font-size: 10px;"></p-sortIcon></th>
                                                                             <th *ngIf="Titulo != 'Correos enviados'">
 
                                                                             </th>
+
+                                                                            <th pSortableColumn="created_at" *ngIf="Titulo == 'Correos enviados'">Fecha<p-sortIcon
+                                                                              field="created_at"
+                                                                              style="font-size: 10px;"></p-sortIcon></th>
+                                                                          
                                                                 </tr>
 
                                                             </ng-template>
@@ -73,6 +78,10 @@
                                                                     </td>
                                                                     <td (click)="infoGmgail(customer.id)"  style="cursor: pointer;" *ngIf="Titulo == 'Correos enviados'">
                                                                       {{customer.name}} - {{customer.title}}
+                                                                  </td>
+
+                                                                     <td (click)="infoGmgail(customer.id)"  style="cursor: pointer;" *ngIf="Titulo == 'Correos enviados'">
+                                                                      {{customer.created_at.substring(0,10)}}
                                                                   </td>
 
                                                                   <td *ngIf="Titulo != 'Correos enviados'" >
@@ -245,7 +254,7 @@
                             <div  class="col-lg-12 mt-3 form-grup">
                                 <label for="">Nombre interno del correo:</label>
 
-                                <input type="text" name="" class="form-control" id="" [(ngModel)]="tituloTemplateAlmacenado" placeholder="Asunto">
+                                <input type="text" name="" class="form-control" id="" [(ngModel)]="tituloTemplateAlmacenado"  >
 
                             </div>
                             <div  class="col-lg-12 mt-3 form-grup">
@@ -271,7 +280,7 @@
                     </div>
 
                     <div class="btn-container mt-2 mb-2" *ngIf="page==1">
-                        <button class="btn btn-primary" >Cancelar</button>
+                      <button class="btn btn-primary" (click)="refreshPage()">Cancelar</button>
 
                         <button class="btn btn-primary" (click)="seguiente()" [disabled]="!botonDisiable">Siguente</button>
 
@@ -510,14 +519,13 @@
         <p-table #dt [(selection)]="selectdestinatariosEscuela" dataKey="school_id"  [rowHover]="true" [rows]="10" [value]="destinatariosEscuela"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-        [globalFilterFields]="['school_email','school']">
+        [globalFilterFields]="['school_email','school','name']">
 
         <ng-template pTemplate="header">
           <tr>
 
 
            <th>
-            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
            </th>
             <th pSortableColumn="tutor_full_name" class="camp">
               <div class="flex justify-content-between align-items-center" style=" width: 60%;">
@@ -536,7 +544,7 @@
 
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-customer>
+        <ng-template pTemplate="body" let-customer let-i="rowIndex">
           <tr class="p-selectable-row">
            <td>
             <p-tableCheckbox [value]="customer"></p-tableCheckbox>
@@ -546,7 +554,34 @@
               {{customer.name}}
             </td>
             <td>
-                {{customer.email}}
+              <p-checkbox 
+              [(ngModel)]="customer.email_select" 
+              (onChange)="onCheckboxChange(customer, 'email_select')">
+            </p-checkbox>
+            <input
+          type="checkbox"
+          [(ngModel)]="customer.email_select"
+          (change)="onCheckboxChange(customer, 'email_select')"
+          name="emailSelect{{ i }}"
+        />                    <span> Email: </span>  {{customer.email}} <br>
+
+        <input
+        type="checkbox"
+        [(ngModel)]="customer.email_second_select"
+        (change)="onCheckboxChange(customer, 'email_second_select')"
+        name="emailSecondSelect{{ i }}"
+      /><span> contact_second_email: </span>  {{customer.contact_second_email}} <br>
+
+
+      <input
+      type="checkbox"
+      [(ngModel)]="customer.email_thirdselect"
+      (change)="onCheckboxChange(customer, 'email_thirdselect')"
+      name="emailThirdSelect{{ i }}"
+    />      <span> contact_third_email: </span>  {{customer.contact_third_email}} <br>
+
+
+               
               </td>
           </tr>
         </ng-template>
@@ -573,7 +608,7 @@
                     <p-table #dt [(selection)]="item.camp.camperSelect"   [rowHover]="true" [rows]="10" [value]="item.camp.campers"
                     [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-                    [globalFilterFields]="['tutor_full_name','tutor_email']">
+                    [globalFilterFields]="['tutor_full_name','tutor_email','camper_full_name','tutor_email']">
 
                     <ng-template pTemplate="header">
                       <tr>
@@ -691,14 +726,13 @@
                     <p-table #dt [(selection)]="item.camp.schollSelect" dataKey="school_id"  [rowHover]="true" [rows]="10" [value]="item.camp.schollList"
                     [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-                    [globalFilterFields]="['school_email','school']">
+                    [globalFilterFields]="['school_email','school','name']">
 
                     <ng-template pTemplate="header">
                       <tr>
 
 
                        <th>
-                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                        </th>
                         <th pSortableColumn="tutor_full_name" class="camp">
                           <div class="flex justify-content-between align-items-center" style=" width: 60%;">
@@ -727,7 +761,33 @@
                           {{customer.name}}
                         </td>
                         <td>
-                            {{customer.email}}
+                          <p-checkbox 
+                          [(ngModel)]="customer.email_select" 
+                          (onChange)="onCheckboxChange(customer, 'email_select')">
+                        </p-checkbox>
+                        <input
+                      type="checkbox"
+                      [(ngModel)]="customer.email_select"
+                      (change)="onCheckboxChange(customer, 'email_select')"
+                      name="emailSelect{{ i }}"
+                    />                    <span> Email: </span>  {{customer.email}} <br>
+            
+                    <input
+                    type="checkbox"
+                    [(ngModel)]="customer.email_second_select"
+                    (change)="onCheckboxChange(customer, 'email_second_select')"
+                    name="emailSecondSelect{{ i }}"
+                  /><span> contact_second_email: </span>  {{customer.contact_second_email}} <br>
+            
+            
+                  <input
+                  type="checkbox"
+                  [(ngModel)]="customer.email_thirdselect"
+                  (change)="onCheckboxChange(customer, 'email_thirdselect')"
+                  name="emailThirdSelect{{ i }}"
+                />      <span> contact_third_email: </span>  {{customer.contact_third_email}} <br>
+            
+            
                           </td>
                       </tr>
                     </ng-template>

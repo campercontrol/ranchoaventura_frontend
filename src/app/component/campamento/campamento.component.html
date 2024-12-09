@@ -192,7 +192,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg- col-sm-12 col-md-6" *ngIf="fechadePagos.length>0">
+      <div class="col-lg- col-sm-12 col-md-6"  >
         <div class="card" *ngIf="statusInscri">
           <div class="bodyCamper2">
             <h1 style="color:white ;" class="mt-2">Fechas de pago recomendadas</h1>
@@ -204,7 +204,7 @@
               <div class="card-body">
   
   
-                <div class="table-responsive" *ngIf="pagos && dataCamp.show_payment_parent ">
+                <div class="table-responsive"  >
   
                   <table class="table table-bordered table-striped mb-0">
   
@@ -434,7 +434,10 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="saveRes()">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="saveRes()" *ngIf="!spinner">Guardar</button>
+    <div class="spinner-border" role="status" *ngIf="spinner">
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
 </ng-template>
 
@@ -457,7 +460,12 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="saveChange()">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="saveChange()" *ngIf="!spinner">Guardar</button>
+
+
+    <div class="spinner-border" role="status" *ngIf="spinner">
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
 </ng-template>
 
@@ -516,7 +524,7 @@
 
         <div class="container col-10 mb-2">
           <button style="width: 100%;" class="btn btn-primary " (click)="enviarCargosPreguntas()">Enviar</button>
-
+          
         </div>
       </div>
     </div>

@@ -86,6 +86,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     InvoicesModule,
     HttpClientModule,
     ProjectsModule,
+    FormsModule,
     InputTextModule,
     UIModule,
     TasksModule,

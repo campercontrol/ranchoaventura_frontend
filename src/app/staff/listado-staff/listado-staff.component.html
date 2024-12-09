@@ -19,7 +19,7 @@
                       <div >
                         
                           <p-table #dt [value]="listcatalogos" [rows]="5" [rowsPerPageOptions]="[5, 25, 50]"
-                          [globalFilterFields]="['Staff.name','Staff.facebook','email','Staff.bio','Staff.cellphone','Staff.home_phone']"
+                          [globalFilterFields]="['combined','Staff.lastname_father','Staff.lastname_mother','Staff.facebook','email','Staff.bio','Staff.cellphone','Staff.home_phone']"
                                [rowHover]="true" dataKey="id"
                               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                               [paginator]="true">
@@ -27,7 +27,7 @@
                               <ng-template pTemplate="header">
                                   <tr>
                                       <th pSortableColumn="Staff.name" style="min-width: 190px; text-align: center;">
-                                          Nombre <p-sortIcon field="Staff.name"
+                                          Nombre <p-sortIcon field="combined"
                                               style="font-size: 10px;"></p-sortIcon></th>
                                           
                                       <th pSortableColumn="Staff.birthday" style="min-width: 150px;text-align: center;">
@@ -48,7 +48,7 @@
                               <ng-template pTemplate="body" let-customer>
                                   <tr>
                                       <td  style="cursor:pointer; text-align: center;">
-                                        <a routerLink="/dashboard/staff/perfil/{{customer.Staff.id}}">  {{customer.Staff.name}} {{customer.Staff.lastname_father}} {{customer.Staff.lastname_mother}}</a>
+                                        <a routerLink="/dashboard/staff/perfil/{{customer.Staff.id}}">  {{customer.combined}}  </a>
                                         
                                       </td>
 

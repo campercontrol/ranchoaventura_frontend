@@ -47,7 +47,7 @@ export class ProspectoComponent implements OnInit {
   confirmPaswordAlert = false;
   alertcorreo = false;
   alertConfirCorre = false;
-
+  passwordType ='password'
   correo:string = "";
   confirmarCorreo = "";
   estadoCorreo:boolean= false;
@@ -77,7 +77,7 @@ export class ProspectoComponent implements OnInit {
 
   ngOnInit(): void {
     this.formUser = this.formGrup.group({
-      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/),]],
       confirmPassword: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       confirmEmail: ['', [Validators.required,Validators.email]],
@@ -88,7 +88,7 @@ export class ProspectoComponent implements OnInit {
       birthday: ["",[Validators.required]], //fecha de nacimiento
       curp: ["",[Validators.required]],
       bio: ["", [Validators.required]], // biografia
-      facebook: ["", [Validators.required]],
+      facebook: [""],
       home_phone: ["", [Validators.required,Validators.pattern("^[0-9]*$"), Validators.minLength(8)]],
       cellphone: ["", [Validators.required, Validators.pattern("^[0-9]*$"),Validators.minLength(8)]],
       cv: [""],
@@ -249,7 +249,18 @@ export class ProspectoComponent implements OnInit {
     
    
   }
+  cambioTipo(){
+    if(this.passwordType =='password'){
+      this.passwordType = 'text';
+      console.log(this.passwordType);
+      
+    }else{
+      this.passwordType = 'password';
+      console.log(this.passwordType);
 
+
+    }
+  }
   centerModal(centerDataModal: any = this.content) {
     console.log(this.centerModal);
     

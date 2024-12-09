@@ -16,7 +16,7 @@
                                         <img src="assets/images/camp/prospectostaff.png" class="avatar-lg"
                                             alt="madre y padres">
                                         <h4 class="ms-3 mt-3"> Datos de acceso del staff</h4>
-                                        <h5 class="mt-2">Información de acceso con la cual entrarás a Camper Control.
+                                        <h5 class="mt-2">Información de acceso con la cual entrarás a Kin camp
                                         </h5>
                                     </div>
 
@@ -59,9 +59,14 @@
                                         <div class="row mb-1">
                                             <label for="" class="col-sm-3 col-form-label">Contraseña</label>
                                             <div class="col-sm-9">
-                                                <input type="password" class="form-control" id=""
+                                                <div class="input-group auth-pass-inputgroup">
+
+                                                <input [type]="passwordType" class="form-control" id=""
                                                     formControlName="password" name="password" #password
                                                     (input)="getpassword()">
+                                                    <button class="btn btn-light " id="password-addon"><i
+                                                        class="mdi mdi-eye-outline" (click)="cambioTipo()"></i></button>
+                                                    </div>
                                                 <div class="alert alert-warning mt-1"> Se usará para ingresar a Camper
                                                     Control. Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra
                                                     minuscula y un caracter especial</div>
@@ -70,15 +75,23 @@
                                         <div class="row mb-4">
                                             <label for="" class="col-sm-3 col-form-label">Confirma contraseña*</label>
                                             <div class="col-sm-9">
-                                                <input type="password" class="form-control" id=""
+                                                <div class="input-group auth-pass-inputgroup">
+                                                <input [type]="passwordType" class="form-control" id=""
                                                     formControlName="confirmPassword" name="confirmPassword"
                                                     #confirmPassword (input)="getconfirmPassword()">
+                                                    <button class="btn btn-light "  id="password-addon"><i
+                                                        class="mdi mdi-eye-outline" (click)="cambioTipo()"></i></button>
+                                            </div>
+                                                        
                                                 <div class="alert alert-danger" *ngIf="confirmPaswordAlert"><small
                                                         style="color: red; font-size: 14px    ;">Las contraseñas no
                                                         coinciden.</small></div>
 
                                             </div>
                                         </div>
+
+
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +109,10 @@
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="" formControlName="name"
                                                     name="name" (input)="validateName()" #name>
+                                                    <div class="alert alert-warning mt-1"> Favor de poner tu nombre oficial completo sin abreviaciones ni apodos</div>
+
                                             </div>
+
                                         </div>
                                         <div class="row mb-4">
                                             <label for="" class="col-sm-3 col-form-label">Apellido
@@ -105,6 +121,7 @@
                                                 <input type="text" class="form-control" id=""
                                                     formControlName="lastname_father" name="lastname_father"
                                                     (input)="validatelastname_father()" #lastname_father>
+                                                 
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -113,6 +130,7 @@
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id=""
                                                     formControlName="lastname_mother" name="lastname_mother" #lastname_mother>
+                                                  
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -234,7 +252,7 @@
                                                 </div>
                                             </div>
                                             <div class="row mb-4">
-                                                <label for="" class="col-sm-3 col-form-label">Facebook*</label>
+                                                <label for="" class="col-sm-3 col-form-label">Redes sociales</label>
                                                 <div class="col-sm-9">
                                                     <input type="text" class="form-control" id=""
                                                         formControlName="facebook" (input)="validateFace()" #facebook>

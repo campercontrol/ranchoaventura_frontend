@@ -36,8 +36,11 @@ export class CampsService {
   setPagos(pregunta){
     return this.http.post('http://142.93.12.234:8000/camper/extra_charges/',pregunta)
   }
-  extras(pregunta,id,idcamp){
-    return this.http.post('http://142.93.12.234:8000/camper/extras/camp/?camper_id='+id+'&camp_id='+idcamp,pregunta)
+  extras(pregunta){
+    return this.http.patch('http://142.93.12.234:8000/camper_extra_charges',pregunta)
+  }
+  answer(pregunta){
+    return this.http.patch('http://142.93.12.234:8000/camper_extra_answers',pregunta)
   }
   getDashbord(id){
     return this.http.get('http://142.93.12.234:8000/staff_dashboard/'+id)

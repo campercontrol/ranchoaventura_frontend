@@ -159,7 +159,15 @@ export class GmailingComponent implements OnInit {
 
 
      this.destinatariosEscuela.push(res.camps[0].camp.school);
+
      this.selectdestinatariosEscuela=this.destinatariosEscuela;
+     this.selectdestinatariosEscuela.forEach(element => {
+      element.email_select = true;
+      element.email_second_select = true;
+      element.email_thirdselect = true;
+
+
+     });
 
 
     this.selectdestinatariosStaff= res.camps[0].camp.staff;
@@ -198,9 +206,18 @@ export class GmailingComponent implements OnInit {
         data.camp.schollSelect.push(data.camp.school);
         data.camp.schollList =  data.camp.schollSelect
 
+        data.camp.schollSelect.forEach(element => {
+          element.email_select = true;
+          element.email_second_select = true;
+          element.email_thirdselect = true;
+        });
 
 
     })
+
+    
+    
+    
     console.log(this.dataResGmail,'camps multiples');
 
     this.botonDisiable=true
@@ -474,14 +491,17 @@ export class GmailingComponent implements OnInit {
     })
      this.data.getPlantillSelectMaisva(a[0].id).subscribe((res:any)=>{
         let b = res.data
-
+        this.asuntoTemplateAlmacenado =b.title
         this.template =b.template;
         console.log(b);
 
       })
 
   }
-
+  refreshPage(): void {
+    window.location.reload();
+  }
+  
   seguiente(){
     if(this.page<3){
         this.page=2;
@@ -560,7 +580,12 @@ alert('No se pudo actualizar')
           else if(element =='3'){escuela=true;}
          });
         console.log(this.dataResGmail);
+         this.selectdestinatariosEscuela.forEach(element => {
+            element.email_select == true ? element.email : element.email = '';
+            element.email_second_select == true ? element.contact_second_email : element.contact_second_email ='';
+            element.email_thirdselect == true ? element.contact_third_email : element.contact_third_email ='';
 
+         });
         this.dataResGmail[0].camp.campers = this.selectdestinatariosCampers
         this.dataResGmail[0].camp.staff = this.selectdestinatariosStaff
         this.dataResGmail[0].camp.school= this.selectdestinatariosEscuela[0]
@@ -601,12 +626,7 @@ alert('No se pudo actualizar')
           console.log(res);
           if(res.status==1){
             alert('Se enviaron los correos correctamente');
-            this.page=1;
-            this.template ="";
-
-            this.status('Templates del sistema”')
-            this.cargandoMailing = false;
-
+          this.refreshPage();
 
           }else{
             alert('Al parecer ocurrio un error por favor intentelo despues')
@@ -642,12 +662,7 @@ alert('No se pudo actualizar')
           console.log(res);
           if(res==1){
             alert('Se enviaron los correos correctamente');
-            this.template ="";
-            this.page=1;
-            this.template ="";
-            this.asuntoTemplateAlmacenado ="";
-            this.tituloTemplateAlmacenado="";
-            this.selectUpadate('Templates del sistema”')
+            this.refreshPage();
 
           }
         });
@@ -657,6 +672,12 @@ alert('No se pudo actualizar')
         this.cargandoMailing = true;
 
         this.dataResGmail.forEach((data:any)=>{
+
+          data.camp.schollSelect.forEach(element => {
+            element.email_select == true ? element.email : element.email = '';
+            element.email_second_select == true ? element.contact_second_email : element.contact_second_email ='';
+            element.email_thirdselect == true ? element.contact_third_email : element.contact_third_email ='';
+          });
 
             data.camp.campers =  data.camp.camperSelect ;
             data.camp.staff = data.camp.staffSelect ;
@@ -852,7 +873,10 @@ alert('No se pudo actualizar')
     }
     )
   }
-
+  onCheckboxChange(element: any, field: string): void {
+    console.log(`${field} changed for`, element);
+    // Lógica adicional si es necesario
+  }
  // Método para reemplazar texto en el editor
  replaceText(oldText: string, newText: string, editor:any) {
 
