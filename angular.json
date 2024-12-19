@@ -36,7 +36,7 @@
               "src/assets/scss/icons.scss",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/bootstrap4-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeng/resources/primeng.min.css"
               
             ],
             "scripts": [],
@@ -80,6 +80,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "proxyConfig": "proxy.conf.json",
             "browserTarget": "skote:build"
           },
           "configurations": {

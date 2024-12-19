@@ -16,7 +16,7 @@
           </div>
         <form [formGroup]="formFood">
             <div class="row">
-                <div class="col-9">
+                <div class="col-12">
     
                     <div class="col-lg-12">
                         <div class="card">
@@ -682,21 +682,21 @@
                   
                 </div>
         
-                <div class="col-3">
+                <div class="col-12">
                     <div class=col-lg-12>
                         <div class="card p-5">
                            
                         
         
-                            <div class="btn-footer">
-                                <div>
-                                    <button class="btn btn-info   btn-lg" style="width: 90%;"  (click)="prueba1()" *ngIf="!spinner" >Guardar</button>
-                                    <button class="btn btn-secondary btn-lg mt-3" style="width: 90%;" (click)="canelar()">Cancelar</button>
+                            <div style="display: flex; align-items:center ;align-items: center; flex-direction: column;" >
+                               
+                                    <button class="btn btn-info mx-auto" style="width: 90%;"  (click)="prueba1()" *ngIf="!spinner" >Guardar</button>
+                                    <button class="btn btn-secondary mx-auto   mt-3" style="width: 90%;" (click)="canelar()">Cancelar</button>
 
                                     <div class="spinner-border" role="status" *ngIf="spinner">
                                         <span class="visually-hidden">Loading...</span>
                                       </div>
-                                </div>
+                                
                               
                             </div>
                         </div>
@@ -762,7 +762,7 @@
     <form [formGroup]="formFood">
         <div class="row">
 
-            <div class="col-9">
+            <div class="col-12">
                 <div class="card">
 
                     <div class="card-body">
@@ -1413,22 +1413,22 @@
 
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-12">
                 <div class=col-lg-12>
                     <div class="card p-5">
                        
                     
     
-                        <div class="btn-footer">
-                            <div>
-                                <button class="btn btn-info  btn-lg"  style="width: 90%;" (click)="keepUpdate()"   *ngIf="!spinner" >Guardar</button>
-                                <button class="btn btn-secondary btn-lg mt-3" (click)="cancelarUpdate()"  
+                        <div style="display: flex; align-items: center;flex-direction: column; align-items: center;" >
+                           
+                                <button class="btn btn-info  mb-2"  style="width: 90%;" (click)="keepUpdate()"   *ngIf="!spinner" >Guardar</button>
+                                <button class="btn btn-secondary " style="width: 90%;" (click)="cancelarUpdate()"  
                                 style="width: 90%;">Cancelar</button>
                                 <div class="spinner-border" role="status" *ngIf="spinner">
                                     <span class="visually-hidden">Loading...</span>
                                   </div>
                                 
-                            </div>
+                         
                           
                         </div>
                     </div>

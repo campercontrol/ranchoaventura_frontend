@@ -653,7 +653,7 @@ export class UpdateCamperComponent implements OnInit {
     if(this.formUser.valid){
       this.catalogos.updateCamper(this.id,a).subscribe((res:any)=>{
         console.log(res);
-        if(res.succes = 200){
+       
           this.spinner=false;
           if(this.info.infToken.role_id >1){
 
@@ -665,11 +665,10 @@ export class UpdateCamperComponent implements OnInit {
               this.router.navigate([' dashboard/parents/inscription/camper/'+this.id]); // Redirige a una ruta específica si no hay página anterior
             }
           
+          }else{
+            this.router.navigate(['/dashboard/parents']);
           }
-        }else{
-          this.router.navigate(['dashboard']);
-
-        }
+        
         
     });
 

@@ -762,7 +762,7 @@ public fileLeave(event){
   }
  
   cancelar(){
-    this.router.navigate(["dashboard"])
+    this.router.navigate(["dashboard/parents"])
   }
  
  

@@ -238,7 +238,7 @@ export class CampamentoComponent implements OnInit {
     this.typeSucribe=1;
   }
   incio(){
-    this.router.navigate(['dashboard'])
+    this.router.navigate(['dashboard/parents'])
   }
   perfil(){
     this.router.navigate(['dashboard/parents/camper/'+this.idCamper])

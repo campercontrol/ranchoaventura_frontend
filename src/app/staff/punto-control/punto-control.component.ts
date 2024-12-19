@@ -146,49 +146,77 @@ export class PuntoControlComponent implements OnInit {
   Inscribe() {
     this.estatusUpdate = true;
     let b = new Date()
+    console.log(this.customer);
+     const itemIndex = this.customer.findIndex(item => item.camper.camper_id === this.inscribirPunto);
 
-    let a = {
-      "checkin": true,
-      "checkin_date": b,
-      "checkpoint_id": this.idCheck,
-      "camper_id": this.inscribirPunto,
-      "created_at": b
-    }
-    this.check.inscribir(a).subscribe((res: any) => {
-      this.estatusUpdate = false;
-      this.  nameCamper = this.customer.find((data:any)=>{
-        return data.camper.camper_id == this.inscribirPunto;
-      })
-      console.log(this.nameCamper);
-      
-      this.  nameCamper = this.nameCamper.camper.camper_name +" "+ this.nameCamper.camper.camper_lastname_father + " " + this.nameCamper.camper.camper_lastname_mother
-
-
-      this.getColumnas();
-      console.log(res);
-      this.cuadroMensaje = true;
-      this.inscribirPunto = 0;
-
-
-      setTimeout(() => {
-        this.cuadroMensaje = false
-        this.miInput.nativeElement.focus();
-
-      }, 5000);
-    }, error => {
-      console.log(error);
-      this.estatusUpdate = false;
-      this.cuadroMensaje = false;
-      this.mensajeerror = true;
-      setTimeout(() => {
+     console.log(this.inscribirPunto,itemIndex);
+     if(itemIndex>-1){
+      let a = {
+        "checkin": true,
+        "checkin_date": b,
+        "checkpoint_id": this.idCheck,
+        "camper_id": this.inscribirPunto,
+        "created_at": b
+      }
+   
+  
+      this.check.inscribir(a).subscribe((res: any) => {
+        this.estatusUpdate = false;
+        this.  nameCamper = this.customer.find((data:any)=>{
+          return data.camper.camper_id == this.inscribirPunto;
+        })
+        console.log(this.nameCamper);
         
-        this.cuadroMensaje = false
-        this.mensajeerror = false;
+        this.  nameCamper = this.customer[itemIndex].camper.camper_name + ' ' + this.customer[itemIndex].camper.camper_lastname_mother + ' ' + this.customer[itemIndex].camper.camper_lastname_father
+ 
 
-      }, 1000);
+          
+  
+  
+        this.getColumnas();
+        console.log(res);
+        this.cuadroMensaje = true;
+        this.mensajeActivo = true;
+        this.inscribirPunto = 0;
+        
+        
+  
+        setTimeout(() => {
+          this.cuadroMensaje = false
+          this.miInput.nativeElement.focus();
+          this.inscribirPunto =null;
 
-    })
-  }
+        }, 5000);
+      }, error => {
+        console.log(error);
+        this.estatusUpdate = false;
+        this.cuadroMensaje = false;
+        this.mensajeerror = true;
+        setTimeout(() => {
+          
+          this.cuadroMensaje = false
+          this.mensajeerror = false;
+  
+        }, 1000);
+  
+      })
+
+     } else{
+      this.mensajeerror = true;
+      this.cuadroMensaje = true;
+      this.estatusUpdate = false;
+      setTimeout(() => {
+        this.mensajeerror =false;
+        this.mensajeActivo = false;
+        this.cuadroMensaje = false;
+        this.miInput.nativeElement.focus();
+        this.inscribirPunto =null
+            }, 2000);
+          }
+     }
+   
+    
+  
 
 
 

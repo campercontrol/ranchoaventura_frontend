@@ -21,8 +21,9 @@ export class GmailingComponent implements OnInit {
   public Editor = ClassicEditor;
   public editorConfig:any = {
     toolbar: [
-      'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'undo', 'redo', 'imageUpload'
+      'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'undo', 'redo' 
     ],
+    
 
     ckfinder: {
       uploadUrl: null // Deshabilitar la carga de imágenes
@@ -706,9 +707,9 @@ alert('No se pudo actualizar')
           "camps":
 
               this.dataResGmail,
-              "this.template": this.template,
+              "template_body": this.template,
        
-              "template_body": this.asuntoTemplateAlmacenado
+              "email_subject": this.asuntoTemplateAlmacenado
 
 
 
@@ -726,8 +727,8 @@ alert('No se pudo actualizar')
             this.template ="";
             this.asuntoTemplateAlmacenado ="";
             this.tituloTemplateAlmacenado="";
-
-            this.status('Templates del sistema”')
+              this.refreshPage()
+            
 
 
           }else{

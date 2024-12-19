@@ -154,7 +154,7 @@
                     ngbDropdownToggle>Credenciales</button>
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
              
-                    <button ngbDropdownItem>Fotos</button>
+                    <button ngbDropdownItem  (click)="downloadImages()">Fotos</button>
                   </div>
                 </div>
                 <div ngbDropdown placement="top-end" class="d-inline-block" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">
@@ -332,7 +332,7 @@
                 <button type="button" class="btn btn-primary" id="dropdownBasic2"
                   ngbDropdownToggle>Reportes</button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-                  <button ngbDropdownItem>staff</button>
+                  <button ngbDropdownItem  (click)="reporteGeneralStaff()" >staff</button>
                 
                 </div>
               </div>
@@ -490,14 +490,7 @@
           </div>
           <div class="container-btn">
             <div>
-              <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
-                <button type="button" class="btn btn-primary" id="dropdownBasic2"
-                  ngbDropdownToggle>Reportes</button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-                  <button ngbDropdownItem>staff</button>
-                
-                </div>
-              </div>
+              
               <div ngbDropdown placement="top-end" class="d-inline-block"  style="margin-right: 10px;">
                 <button type="button" class="btn btn-success" (click)="showMaximizableDialog()">no apuntado</button>
               

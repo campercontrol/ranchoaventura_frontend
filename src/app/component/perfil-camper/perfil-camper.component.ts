@@ -33,6 +33,7 @@ export class PerfilCamperComponent implements OnInit {
   catalogosGrados: any;
   catalogoSangre: any;
   vacunas: any;
+  totals:any;
   vacunasACtivos: any;
   catalogosComida: any;
   parent: any = {};
@@ -162,6 +163,7 @@ export class PerfilCamperComponent implements OnInit {
   
   };
   idioma:string;
+  currencyKeys: string[];
 
 
 
@@ -230,7 +232,16 @@ export class PerfilCamperComponent implements OnInit {
 
   }
 
-  
+  calculateBalanceByCurrency(data: any[]): Record<string, { total: number; acronym: string }> {
+    return data.reduce((acc, item) => {
+      const symbol = item.currency_symbol;
+      if (!acc[symbol]) {
+        acc[symbol] = { total: 0, acronym: item.currency_acronyms };
+      }
+      acc[symbol].total += item.camper_payment_balance;
+      return acc;
+    }, {} as Record<string, { total: number; acronym: string }>);
+  }
 
   calculateAge(birthday: any): string {
     console.log(birthday,'eddddd');
@@ -258,6 +269,12 @@ export class PerfilCamperComponent implements OnInit {
       let b = [];
       this.error=false
       let camps = res.camper_subscribe_camps
+
+
+      this.totals = this.calculateBalanceByCurrency(camps);
+      this.currencyKeys = Object.keys(this.totals);  
+
+
       camps.forEach(element => {
         element.type= 'subscribe';
       });
@@ -343,6 +360,7 @@ export class PerfilCamperComponent implements OnInit {
       this.error= true
     })
   }
+
   update(){
     this.rou.navigate(['dashboard/parents/update-camper/'+this.id])
 

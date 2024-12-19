@@ -74,7 +74,7 @@ export class EscuelaComponent implements OnInit {
   ngOnInit(): void {
     this.formFood = this._FormBuild.group({
   name:  ['', [Validators.required,Validators.minLength(2)]],
-  password:  ['', [Validators.required,Validators.minLength(2)]],
+  password:  [''], 
   login_email:  [''],
 
   contact_first_email:  [''],
@@ -99,6 +99,29 @@ export class EscuelaComponent implements OnInit {
 
 
   showDialog() {
+    this.formFood = this._FormBuild.group({
+      name:  ['', [Validators.required,Validators.minLength(2)]],
+      password:  [''], 
+      login_email:  [''],
+    
+      contact_first_email:  [''],
+    
+      address:[''],
+      url: [''],
+      contact: [''],
+      phone: [''],
+      cellphone: [''],
+      contact_second_name: ['' ],
+      contact_second_phone: ['' ],
+      contact_second_cellphone:['' ],
+      contact_second_email:['' ],
+      contact_third_name: ['' ],
+      contact_third_phone:['' ],
+      contact_third_cellphone: ['' ],
+      contact_third_email: ['' ],
+      verify: [true],
+      active: [true],
+        })
     this.display = true;
     this.resetInput();
   }
@@ -135,10 +158,11 @@ export class EscuelaComponent implements OnInit {
       this.catalogos.postSchool(this.formFood.value).subscribe((res: any) => {
         console.log(res);
         if(res.detail.status ==1){
+          this.resetInput();
           this.getCatalogos();
           this.statuAgrgado = true;
           this.resteValu();
-          this.resetInput();
+         
           setTimeout(() => {
             this.statuAgrgado = false;
             this.closeModal();
@@ -216,7 +240,7 @@ export class EscuelaComponent implements OnInit {
       phone: item.phone,
       cellphone: item.cellphone,
       email: item.email,
-      contact_first_email:item.email,
+      contact_first_email:item.contact_first_email,
       contact_second_name:item.contact_second_name,
       contact_second_phone:item.contact_second_phone,
       contact_second_cellphone: item.contact_second_cellphone,
@@ -226,22 +250,30 @@ export class EscuelaComponent implements OnInit {
       contact_third_cellphone: item.contact_third_cellphone,
       contact_third_email: item.contact_third_email,
       verify: item.verify,
-      active: item.active
+      active: item.active,
+      password:'' 
 
     })
-  this.cargarValidadores();
+ 
     
   }
 
   keepUpdate(){
     if(this.formFood.valid){
-      this.catalogos.updateSchool(this.formFood.value,this.updateId).subscribe((res: any) => {
+      const b = {
+
+        school:this.formFood.value,
+        password:  this.formFood.get('password').value
+        
+      }
+      this.catalogos.updateSchool(b,this.updateId).subscribe((res: any) => {
         console.log(res);
         
          this.getCatalogos();
+         this.resetInput();
          this.statuAgrgado = true;
          this.resteValu();
-         this.resetInput();
+         
          setTimeout(() => {
            this.statuAgrgado = false;
            this.closeModal2();
@@ -263,7 +295,7 @@ export class EscuelaComponent implements OnInit {
       this.getContact_second_phone();
       this.getContact_second_name();
 
-      this.getEmail();
+     
       this.getCellphone();
       this.getPhone();
       this.getContact();
@@ -338,8 +370,8 @@ export class EscuelaComponent implements OnInit {
   }
 
   resetInfo(elementRef: any,name){
-    this.render.removeClass(elementRef.nativeElement, "is-invalid");
-    this.render.removeClass(elementRef.nativeElement, "is-valid");
+    this.render?.removeClass(elementRef.nativeElement, "is-invalid");
+    this.render?.removeClass(elementRef.nativeElement, "is-valid");
   }
   resetInput(){
     this.getContact_third_emailR();

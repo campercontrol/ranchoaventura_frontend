@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <div class="foto-perfil">
-                            <img src="http://142.93.12.234:8000/{{photo}}" class="avatar-lg rounded-circle" alt="">
+                            <img src="http://142.93.12.234:8000/{{photo}}" class="avatar-lg rounded-circle" alt="" height="10px">
 
                             <a class="btn-rounded btn btn-success mt-3 text-white text-decoration-none d-block text-center"
                                 [routerLink]="'/dashboard/parents/inscription/' + id" target="_blank">
@@ -51,7 +51,13 @@
 
     <div class="alert alert-danger mt-2 mb-2" role="alert" *ngIf="deuda != 0">
         <h2> Pendiente de pagos: </h2>
-        <p>{{infoCamp.name}} tiene un saldo total pendiente pago por: {{deuda |currency}}</p>
+        <div *ngFor="let currency of currencyKeys">
+            <p>
+              {{ totals[currency].total | currency:currency:true }} 
+              {{ totals[currency].acronym }}
+            </p>
+          </div>
+          
     </div>
     <main class="container-fluid">
         <div class="row">

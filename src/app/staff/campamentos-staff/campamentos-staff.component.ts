@@ -16,6 +16,10 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { data } from 'jquery';
 import { StaffService } from 'src/services/staff.service';
+import * as JSZip from 'jszip';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+ 
 
 
 
@@ -141,7 +145,7 @@ export class CampamentosStaffComponent implements OnInit {
 
   
 
-  constructor(private capms:CampsVistaService,private router :ActivatedRoute,private routerN: Router,private info : AuthenticationService, private createCamp: CreateCampsService,private formGrup: FormBuilder,private render :Renderer2,private catalogos:CatalogosService,
+  constructor(private http: HttpClient ,private capms:CampsVistaService,private router :ActivatedRoute,private routerN: Router,private info : AuthenticationService, private createCamp: CreateCampsService,private formGrup: FormBuilder,private render :Renderer2,private catalogos:CatalogosService,
     private staffSer:StaffService) { 
   
     this.rol=this.info.infToken.role_id
@@ -284,6 +288,40 @@ determineTipoDepago() {
     return 4; // En caso de que no se ajuste a ningún tipoDepago
   }
 }
+ 
+
+download(url: string): Observable<HttpResponse<Blob>> {
+  return this.http.get(url, {
+    responseType: 'blob',
+    observe: 'response', // Esto devuelve toda la respuesta, incluidos los encabezados
+  });
+}
+
+async downloadImages(listCampers = this.listCampers) {
+  const zip = new JSZip();
+  const b =[]
+  // Usamos Promise.all para esperar que todas las imágenes se descarguen
+  const imagePromises = listCampers.map(async (customer) => {
+    const imageUrl = `http://142.93.12.234:8000/${customer.camper_photo}`;
+
+    b.push(imageUrl)
+    this.capms.downloadImagesAsZip(b)
+  
+  });
+
+   
+}
+
+
+// Función para obtener el nombre del archivo desde el encabezado Content-Disposition
+private getFileNameFromHeader(contentDisposition: string | null): string | null {
+  if (contentDisposition) {
+    const matches = /filename="(.+)"/.exec(contentDisposition);
+    return matches ? matches[1] : null;
+  }
+  return null;
+}
+
 
   getInof(){
     this.cargando= false;
@@ -863,7 +901,8 @@ reporteGeneral() {
         'registration_date': 'Fecha de Registro',
         'Comments (Parent)': 'Comentarios de Padres',
         'Comments (Staff)': 'Comentarios del Personal',
-        'Comments (School)': 'Comentarios de la Escuela'
+        'Comments (School)': 'Comentarios de la Escuela',
+        "enrollment": "Estatus",
       };
 
       // Convertir los valores booleanos a "Sí" o "No" y concatenar comentarios
@@ -943,6 +982,110 @@ reporteGeneral() {
   });
 }
 
+reporteGeneralStaff() {
+  this.capms.getReportesGeneralesStaff(this.idCamp).subscribe({
+    next: (response: any) => {
+      const data = response.data;
+
+      // Mapeo de claves del JSON a cabeceras en español solo para los atributos especificados
+      const headersMap: any = {
+        'id': 'ID',
+        'name': 'Nombre',
+        'lastname_father': 'Apellido Paterno',
+        'lastname_mother': 'Apellido Materno',
+        'gender': 'Género',
+        'email': 'Correo Electrónico',
+        'curp': 'CURP',
+        'rfc': 'RFC',
+        'cellphone': 'Celular',
+        'home_phone': 'Teléfono de Casa',
+        'birthday': 'Fecha de Nacimiento',
+        'affliction': 'Afección',
+        'blood_type': 'Tipo de Sangre',
+        'drug_allergies': 'Alergias a Medicamentos',
+        'other_allergies': 'Otras Alergias',
+        'nocturnal_disorders': 'Trastornos Nocturnos',
+        'phobias': 'Fobias',
+        'drugs': 'Medicamentos',
+        'prohibited_foods': 'Alimentos Prohibidos',
+        'bio': 'Biografía',
+        'coordinator': 'Coordinador',
+        'facebook': 'Facebook',
+        'staff_contact_name': 'Contacto de Emergencia',
+        'staff_contact_relation': 'Relación del Contacto',
+        'staff_contact_homephone': 'Teléfono de Casa del Contacto',
+        'staff_contact_cellphone': 'Celular del Contacto',
+        
+      };
+
+      // Convertir los valores booleanos a "Sí" o "No"
+      const modifiedData = data.map((row: any) => {
+        const newRow: any = {};
+
+        // Mapear claves conocidas
+        for (const key in headersMap) {
+          if (headersMap.hasOwnProperty(key)) {
+            newRow[headersMap[key]] = row.hasOwnProperty(key) ? row[key] : '';
+          }
+        }
+
+        // Incluir cualquier clave no mapeada (sin traducción)
+        for (const key in row) {
+          if (!headersMap.hasOwnProperty(key)) {
+            newRow[key] = row[key];
+          }
+        }
+
+        // Convertir valores booleanos a "Sí" o "No"
+        for (const key in newRow) {
+          if (typeof newRow[key] === 'boolean') {
+            newRow[key] = newRow[key] ? 'Sí' : 'No';
+          }
+        }
+
+        return newRow;
+      });
+
+      // Obtener las cabeceras en el formato correcto
+      const headers = [...new Set([...Object.keys(headersMap), ...data.flatMap(Object.keys)])];
+      const translatedHeaders = headers.map(header => headersMap[header] || header);
+
+      // Convertir los datos a una hoja de Excel
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(modifiedData, { header: translatedHeaders });
+
+      // Modificar las cabeceras de la hoja de Excel
+      const range = XLSX.utils.decode_range(worksheet['!ref']!);
+      for (let i = range.s.c; i <= range.e.c; i++) {
+        const cell_address = XLSX.utils.encode_cell({ r: 0, c: i });
+        if (worksheet[cell_address]) {
+          worksheet[cell_address].v = translatedHeaders[i];
+        }
+      }
+
+      // Ajustar el ancho de las columnas
+      const columnWidths = translatedHeaders.map((header, index) => {
+        const maxWidth = Math.max(...modifiedData.map((row: any) => (row[translatedHeaders[index]] || '').toString().length));
+        return Math.max(header.length, maxWidth) + 2; // Agregar un margen extra
+      });
+
+      worksheet['!cols'] = columnWidths.map(width => ({ wpx: width * 10 })); // Ajustar el ancho de las columnas
+
+      // Crear un nuevo libro de trabajo
+      const workbook: XLSX.WorkBook = { Sheets: { 'Datos': worksheet }, SheetNames: ['Datos'] };
+
+      // Generar el archivo Excel
+      const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+      // Guardar el archivo
+      this.saveAsExcelFile(excelBuffer, 'Reporte General Staff ' + this.infoCamp.name);
+    },
+    error: (error) => {
+      console.error('Error al obtener los datos del reporte general staff', error);
+    }
+  });
+}
+
+
 
 // ya esta
 reporteDatosGenerales() {
@@ -958,7 +1101,9 @@ reporteDatosGenerales() {
         'lastname_mother': 'Apellido Materno',
         'birthday': 'Fecha de Nacimiento',
         'Age': 'Edad',
-        'gender': 'Género'
+        'gender': 'Género',
+        "enrollment": "Estatus",
+
       };
 
       // Convertir los datos a una hoja de Excel
@@ -1040,7 +1185,9 @@ reporteDatosContactos() {
         'emergency_contact': 'Contacto de Emergencia',
         'emergency_contact_kinship': 'Parentesco del Contacto de Emergencia',
         'emergency_contact_phone': 'Teléfono del Contacto de Emergencia',
-        'emergency_contact_cellphone': 'Celular del Contacto de Emergencia'
+        'emergency_contact_cellphone': 'Celular del Contacto de Emergencia',
+        "enrollment": "Estatus",
+
       };
 
       // Convertir los datos a una hoja de Excel
@@ -1142,7 +1289,9 @@ reporteMedical() {
         'emergency_contact': 'Contacto de Emergencia',
         'emergency_contact_kinship': 'Parentesco del Contacto de Emergencia',
         'emergency_contact_cellphone': 'Celular del Contacto de Emergencia',
-        'emergency_home_phone': 'Teléfono de Casa del Contacto de Emergencia'
+        'emergency_home_phone': 'Teléfono de Casa del Contacto de Emergencia',
+        "enrollment": "Estatus",
+
       };
 
       const modifiedData = data.map((row: any) => {
@@ -1208,7 +1357,9 @@ reporteComida() {
         'Kosher': 'Kosher',
         'Intolerante al Gluten / Gluten intolerant': 'Intolerante al Gluten',
         'Intolerante a la lactosa / Lactose intolerant': 'Intolerante a la Lactosa',
-        'Vegetariana / Vegetarian': 'Vegetariana'
+        'Vegetariana / Vegetarian': 'Vegetariana',
+        "enrollment": "Estatus"
+
       };
 
       const modifiedData = data.map((row: any) => {
@@ -1271,7 +1422,9 @@ ReporteExtras() {
         'name': 'Nombre',
         'lastname_father': 'Apellido Paterno',
         'lastname_mother': 'Apellido Materno',
-        'payment_balance': 'Saldo de Pago'
+        'payment_balance': 'Saldo de Pago',
+        "enrollment": "Estatus",
+
       };
 
       const modifiedData = data.map((row: any) => {

@@ -30,7 +30,40 @@ export class LoginComponent implements OnInit {
   closeResult = '';
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,private modalService: NgbModal,
-   ) { }
+   ) { 
+    const currentUser = localStorage.getItem('currentUser'); // Verifica si existe en localStorage
+
+    if (currentUser) {
+      // Si existe, decodifica el token
+      const user = JSON.parse(currentUser); // Convierte el string a un objeto
+      this.authenticationService.infToken = jwt_decode(user.access_token);
+      console.log(this.authenticationService.infToken, 'token transformado');
+    
+      // Redirección basada en el role_id
+      if (this.authenticationService.infToken.role_id == 2) {
+        this.router.navigate(['dashboard/staff']);
+        console.log(this.authenticationService.infToken);
+      } else if (
+        this.authenticationService.infToken.role_id == 3 || 
+        this.authenticationService.infToken.role_id == 4
+      ) {
+        this.router.navigate(['dashboard/school/upcoming_camps']);
+        console.log(this.authenticationService.infToken);
+      } else if (this.authenticationService.infToken.role_id == 1) {
+        this.router.navigate(['dashboard/parents']);
+        console.log(this.authenticationService.infToken);
+      } else {
+        this.router.navigate(['dashboard/medical/camps']);
+        console.log(this.authenticationService.infToken);
+      }
+    } else {
+      // Si no existe currentUser, puedes dejar al usuario en login o no hacer nada
+      console.log('No hay un usuario registrado');
+      this.router.navigate(['login']);
+    }
+
+
+   }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -41,6 +74,9 @@ export class LoginComponent implements OnInit {
     this.resetPass = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
     });
+
+
+
 
   }
   get f() { return this.loginForm.controls; }

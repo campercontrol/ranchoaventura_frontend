@@ -1,0 +1,8 @@
+{
+    "/media": {
+      "target": "http://142.93.12.234:8000",
+      "secure": false,
+      "changeOrigin": true
+    }
+  }
+  

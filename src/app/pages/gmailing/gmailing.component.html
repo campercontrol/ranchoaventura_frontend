@@ -81,7 +81,7 @@
                                                                   </td>
 
                                                                      <td (click)="infoGmgail(customer.id)"  style="cursor: pointer;" *ngIf="Titulo == 'Correos enviados'">
-                                                                      {{customer.created_at.substring(0,10)}}
+                                                                      {{customer.created_at}}
                                                                   </td>
 
                                                                   <td *ngIf="Titulo != 'Correos enviados'" >
@@ -401,7 +401,7 @@
         <p-table #dt [(selection)]="selectdestinatariosCampers"   [rowHover]="true" [rows]="10" [value]="destinatariosCampers"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-        [globalFilterFields]="['tutor_full_name','tutor_email']">
+        [globalFilterFields]="['tutor_full_name','tutor_email','camper_full_name']">
 
         <ng-template pTemplate="header">
           <tr>
@@ -519,7 +519,7 @@
         <p-table #dt [(selection)]="selectdestinatariosEscuela" dataKey="school_id"  [rowHover]="true" [rows]="10" [value]="destinatariosEscuela"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-        [globalFilterFields]="['school_email','school','name']">
+        [globalFilterFields]="['school_email','school','name','email','contact_second_email','contact_third_email']">
 
         <ng-template pTemplate="header">
           <tr>
