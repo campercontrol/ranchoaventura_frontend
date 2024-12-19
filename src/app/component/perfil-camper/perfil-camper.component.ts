@@ -268,7 +268,8 @@ export class PerfilCamperComponent implements OnInit {
       console.log(res,'hola');
       let b = [];
       this.error=false
-      let camps = res.camper_subscribe_camps
+      let camps =[ ...res.camper_subscribe_camps,...res.camper_passed_camps]
+    
 
 
       this.totals = this.calculateBalanceByCurrency(camps);

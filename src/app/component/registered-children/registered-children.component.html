@@ -53,6 +53,21 @@
               </small>
             </a>
           </div>
+
+
+
+          <div class="col-12 center-ifno" *ngFor="let a of data.due_past_camps" (click)="redirect(a.camp_id, data.camper.id)">
+            <a class="font-size-15 camps"   [routerLink]="['/dashboard/parents/camp-info', data.camper.id, a.camp_id]"
+            >
+              {{ a.camp_name }}:
+              <small
+                class="badge font-size-11"
+                [ngClass]="{ 'bg-warning': a.camper_payment_balance > 0, 'bg-success': a.camper_payment_balance <= 0 }"
+                *ngIf="a.show_payment_parent">
+                {{ a.currency_symbol }} {{ a.camper_payment_balance | currency:'':'':'1.0-0' }} {{ a.currency_acronyms }}
+              </small>
+            </a>
+          </div>
         </div>
 
         <!-- Botones -->

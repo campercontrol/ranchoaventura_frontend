@@ -42,22 +42,23 @@ total: number = 0;
         hijo.camper_balance_update = 0;
         hijo.currencyBalances = {}; // Balance por moneda para cada camper
     
-        if (Array.isArray(hijo.camps)) {
-          hijo.camps.forEach((camp: any) => {
-            if (camp.show_payment_parent) {
-              const currencyKey = camp.currency_acronyms;
-              const balance = camp.camper_payment_balance;
+        // Concatenar camps y due_past_camps
+        const allCamps = [...(hijo.camps || []), ...(hijo.due_past_camps || [])];
     
-              hijo.camper_balance_update += balance;
+        allCamps.forEach((camp: any) => {
+          if (camp.show_payment_parent) {
+            const currencyKey = camp.currency_acronyms;
+            const balance = camp.camper_payment_balance;
     
-              // Sumar al balance por moneda
-              if (!hijo.currencyBalances[currencyKey]) {
-                hijo.currencyBalances[currencyKey] = 0;
-              }
-              hijo.currencyBalances[currencyKey] += balance;
+            hijo.camper_balance_update += balance;
+    
+            // Sumar al balance por moneda
+            if (!hijo.currencyBalances[currencyKey]) {
+              hijo.currencyBalances[currencyKey] = 0;
             }
-          });
-        }
+            hijo.currencyBalances[currencyKey] += balance;
+          }
+        });
     
         return hijo;
       });
@@ -76,6 +77,7 @@ total: number = 0;
       this.total = Object.values(this.totalGeneralBalance).reduce((acc: number, balance: number) => acc + balance, 0);
       this.cargando = true;
     });
+    
     
     this.textos  = traducciones['traduciones'][this.idioma]['dashboardParent']
     
