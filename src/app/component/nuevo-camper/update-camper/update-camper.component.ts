@@ -96,6 +96,10 @@ export class UpdateCamperComponent implements OnInit {
       this.licensed_medicines = res.licensed_medicines;
       this.pathological_background = res.pathological_background;
       this.pathological_background_fm = res.pathological_background_fm;
+      // Ordenar los dos arreglos alfabéticamente por la propiedad 'name'
+this.pathological_background.sort((a, b) => a.name.localeCompare(b.name));
+this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
+
       this.school1 = res.school[0];
       this.vaccines = res.vaccines;       
     })

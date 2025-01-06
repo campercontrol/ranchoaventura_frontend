@@ -24,7 +24,8 @@
         <div style="overflow: auto;">
             <p-table #dt [value]="listcatalogos" [rows]="5"
             [rowsPerPageOptions]="[5, 25, 50]"
-            [globalFilterFields]="['tutor_name','tutor_lastname_father','tutor_lastname_mother','tutor_cellphone','contact_email','contact_name','tutor_id','namecomplet']"
+            [globalFilterFields]="['namecomplet', 'tutor_email', 'second_tutor_email',
+            'namecomplet1','namecomplet2','namecomplet3','namecomplet4','namecomplet5']"
             [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [showCurrentPageReport]="true"

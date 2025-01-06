@@ -96,7 +96,11 @@ export class UpdatePerfilComponent implements OnInit {
       this.pathological_background = res.pathological_background;
       this.pathological_background_fm = res.pathological_background_fm;
       this.school1 = res.school[0];
-      this.vaccines = res.vaccines;       
+      this.vaccines = res.vaccines;   
+      // Ordenar los dos arreglos alfabéticamente por la propiedad 'name'
+this.pathological_background.sort((a, b) => a.name.localeCompare(b.name));
+this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
+    
     })
 
   }

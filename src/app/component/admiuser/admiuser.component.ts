@@ -158,6 +158,16 @@ export class AdmiuserComponent implements OnInit {
     
   }
 
+  customFilter(value: any, filter: string): boolean {
+    console.log('busqueda');
+    
+    if (!filter) return true; // Si no hay filtro, mostrar todo
+    const keywords = filter.toLowerCase().split(' ').filter((k) => k.trim());
+    const name = value.namecomplet.toLowerCase();
+
+    // Verifica que todas las palabras clave estén en el nombre
+    return keywords.every((keyword) => name.includes(keyword));
+  }
   infoCatalogos(){
     this.camperSer.getCatalogos().subscribe((res:any)=>{
       //console.log(info.infToken);     
@@ -168,6 +178,10 @@ export class AdmiuserComponent implements OnInit {
       this.licensed_medicines = res.licensed_medicines;
       this.pathological_background = res.pathological_background;
       this.pathological_background_fm = res.pathological_background_fm;
+      // Ordenar los dos arreglos alfabéticamente por la propiedad 'name'
+this.pathological_background.sort((a, b) => a.name.localeCompare(b.name));
+this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
+
       this.school = res.school;
       this.vaccines = res.vaccines;
       this.getCatalogos()
@@ -221,7 +235,16 @@ export class AdmiuserComponent implements OnInit {
         console.log(res.data);
        
         this.listcatalogos.forEach(element => {
-          element.namecomplet = `${element.camper_name} ${element.camper_lastname_father}  ${element.camper_lastname_mother}` 
+          element.namecomplet = `${element.camper_name} ${element.camper_lastname_father} ${element.camper_lastname_mother}`;
+          element.namecomplet1 = `${element.camper_name} ${element.camper_lastname_mother} ${element.camper_lastname_father}`;
+          element.namecomplet2 = `${element.camper_lastname_father} ${element.camper_name} ${element.camper_lastname_mother}`;
+          element.namecomplet3 = `${element.camper_lastname_father} ${element.camper_lastname_mother} ${element.camper_name}`;
+          element.namecomplet4 = `${element.camper_lastname_mother} ${element.camper_name} ${element.camper_lastname_father}`;
+          element.namecomplet5 = `${element.camper_lastname_mother} ${element.camper_lastname_father} ${element.camper_name}`;
+          
+
+
+
         });
       
        // this.table=true;
@@ -232,7 +255,13 @@ export class AdmiuserComponent implements OnInit {
         this.listcatalogos = res.data;
         console.log(res.data);
         this.listcatalogos.forEach(element => {
-          element.namecomplet = `${element.camper_name} ${element.camper_lastname_father}  ${element.camper_lastname_mother}` 
+          element.namecomplet = `${element.camper_name} ${element.camper_lastname_father} ${element.camper_lastname_mother}`;
+          element.namecomplet1 = `${element.camper_name} ${element.camper_lastname_mother} ${element.camper_lastname_father}`;
+          element.namecomplet2 = `${element.camper_lastname_father} ${element.camper_name} ${element.camper_lastname_mother}`;
+          element.namecomplet3 = `${element.camper_lastname_father} ${element.camper_lastname_mother} ${element.camper_name}`;
+          element.namecomplet4 = `${element.camper_lastname_mother} ${element.camper_name} ${element.camper_lastname_father}`;
+          element.namecomplet5 = `${element.camper_lastname_mother} ${element.camper_lastname_father} ${element.camper_name}`;
+          
         });
       
            
@@ -410,6 +439,7 @@ export class AdmiuserComponent implements OnInit {
     this.licensed_medicines = res.licensed_medicines;
     this.pathological_background = res.pathological_background;
     this.pathological_background_fm = res.pathological_background_fm;
+    
     this.school = res.school[0];
     this.vaccines = res.vaccines; 
     this.photoSelectUp = 'http://142.93.12.234:8000/'+res['camper'].photo;
@@ -454,6 +484,10 @@ export class AdmiuserComponent implements OnInit {
       record_id:0,
       parent_id: res['camper'].parent_id,
     })
+    // Ordenar los dos arreglos alfabéticamente por la propiedad 'name'
+this.pathological_background.sort((a, b) => a.name.localeCompare(b.name));
+this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
+
     this.camperSer.getSearchParen(res['camper'].parent_id).subscribe((res)=>{
       console.log(res.tutor_name);
       

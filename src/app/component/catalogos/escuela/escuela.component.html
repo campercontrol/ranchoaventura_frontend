@@ -154,17 +154,17 @@
       
     </ng-template>
     <div class="col">
-        <form action="" [formGroup]="formFood">
+        <form action="" [formGroup]="formFood2">
             <div class="row mb-4">
                 <label for="" class="col-sm-3 col-form-label">Nombre de la escuela</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="" formControlName="name" name="name" #name (input)="getName()"  >
+                    <input type="text" class="form-control" id="" formControlName="name" name="name" #name   >
                 </div>         
             </div>
             <div class="row mb-4">
                 <label for="" class="col-sm-3 col-form-label">Email </label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="" formControlName="login_email" name="email" (input)="getEmail()" #email>
+                    <input type="text" class="form-control" id="" formControlName="login_email" name="email"   #email>
                 </div>         
             </div>
             <div class="row mb-4">
@@ -176,7 +176,7 @@
             <div class="row mb-4">
                 <label for="" class="col-sm-3 col-form-label">Pagina web</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="" formControlName="url" name="url" #url  (input)="getUrl()">
+                    <input type="text" class="form-control" id="" formControlName="url" name="url" #url   >
                 </div>         
             </div>
             <div class="row mb-4">
@@ -359,13 +359,13 @@
                         {{customer.name}}
                     </td>
                     <td>
-                        {{customer.contact_first_email}}
+                        {{customer.email}}
                     </td>
                     <td>
                         {{customer.contact_second_email}}
                     </td>
                     <td>
-                        {{customer.contact_third_name}}
+                        {{customer.contact_third_email}}
                     </td>
                     <td>
                         <i class="bx bxs-calendar-check" *ngIf="customer.verify" style="color: green;"></i> <i class="bx bxs-calendar-x" style="color: red;" *ngIf="!customer.verify"></i>

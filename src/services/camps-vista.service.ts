@@ -48,32 +48,23 @@ export class CampsVistaService {
  
 
   // Función para descargar imágenes y guardarlas en un ZIP
-  downloadImagesAsZip(imageUrls: string[]) {
-    const zip = new JSZip();
-    const folder = zip.folder("images");  // Crea una carpeta dentro del zip llamada 'images'
-
-    // Crear una lista de promesas que descargan las imágenes
-    const imagePromises = imageUrls.map((url, index) => 
-      fetch(url)  // Obtener la imagen desde la URL
-        .then(response => response.blob())  // Convertir la respuesta a Blob
-        .then(blob => {
-          const fileName = `image${index + 1}.jpg`; // Puedes ajustar el nombre y la extensión según el tipo de imagen
-          folder?.file(fileName, blob);  // Añadir la imagen al ZIP
-        })
-        .catch(error => console.error('Error al descargar la imagen:', error))
-    );
-
-    // Esperar a que todas las imágenes se descarguen
-    Promise.all(imagePromises)
-      .then(() => {
-        // Generar el archivo ZIP
-        zip.generateAsync({ type: 'blob' })
-          .then((content) => {
-            // Guardar el archivo ZIP en el navegador
-            saveAs(content, 'images.zip');
-          })
-          .catch(error => console.error('Error al generar el archivo ZIP:', error));
-      });
+  downloadImages(urls: string[]): void {
+    urls.forEach(url => {
+      this.http.get(url, { responseType: 'blob' }).subscribe(
+        (response: Blob) => {
+          // Crear un enlace para descargar la imagen
+          const link = document.createElement('a');
+          const objectUrl = URL.createObjectURL(response);
+          link.href = objectUrl;
+          link.download = url.split('/').pop() || 'downloaded_image'; // Extrae el nombre del archivo
+          link.click();
+          URL.revokeObjectURL(objectUrl); // Revocar el objeto URL para liberar memoria
+        },
+        (error) => {
+          console.error('Error al descargar la imagen:', error);
+        }
+      );
+    });
   }
 
 

@@ -191,23 +191,24 @@ export class PerfilCamperComponent implements OnInit {
   }
   comentario() {
     let a :any={}
-      if(this.info.infToken.role_id== 1){
+      if(this.info.infToken.role_id == 1){
         a = {
+     
+
           "comment": this.comment,
           "is_public": true,
           "show_to": 1,
-          "user_id": this.info.infToken.user_id,
-          "camp_id": 2,
-          "camper_id": Number(this.id),   
-          "role_id": this.info.infToken.role_id  
+          "user_id":  this.info.infToken.user_id,
+          "camp_id": 21100,
+          "camper_id": this.id,
         }
       }else{
         a = {
           "comment": this.comment,
           "is_public": true,
-          "show_to": 1,
+          "show_to": this.typecoment,
           "user_id": this.info.infToken.user_id,
-          "camp_id": null,
+          "camp_id": 21100,
           "camper_id": Number(this.id),    
           "role_id": this.info.infToken.role_id  
  
@@ -220,11 +221,11 @@ export class PerfilCamperComponent implements OnInit {
       this.parents.setComentarios(a).subscribe((res:any)=>{
         console.log(res.data);
         
-        if(res.data){
+       
           this.getInfo()
           this.comment = ""
   
-        }
+    
       })
 
     }
@@ -234,14 +235,17 @@ export class PerfilCamperComponent implements OnInit {
 
   calculateBalanceByCurrency(data: any[]): Record<string, { total: number; acronym: string }> {
     return data.reduce((acc, item) => {
-      const symbol = item.currency_symbol;
-      if (!acc[symbol]) {
-        acc[symbol] = { total: 0, acronym: item.currency_acronyms };
+      if (item.show_payment_parent) {  // Solo sumar si show_payment_parent es true
+        const symbol = item.currency_symbol;
+        if (!acc[symbol]) {
+          acc[symbol] = { total: 0, acronym: item.currency_acronyms };
+        }
+        acc[symbol].total += item.camper_payment_balance;
       }
-      acc[symbol].total += item.camper_payment_balance;
       return acc;
     }, {} as Record<string, { total: number; acronym: string }>);
   }
+  
 
   calculateAge(birthday: any): string {
     console.log(birthday,'eddddd');
@@ -268,12 +272,10 @@ export class PerfilCamperComponent implements OnInit {
       console.log(res,'hola');
       let b = [];
       this.error=false
-      let camps =[ ...res.camper_subscribe_camps,...res.camper_passed_camps]
+      let camps =[ ...res.camper_subscribe_camps]
     
 
 
-      this.totals = this.calculateBalanceByCurrency(camps);
-      this.currencyKeys = Object.keys(this.totals);  
 
 
       camps.forEach(element => {
@@ -292,6 +294,8 @@ export class PerfilCamperComponent implements OnInit {
      b= b.concat(campsCan);
      b= b.concat(campsPassed);
 
+     this.totals = this.calculateBalanceByCurrency(b);
+     this.currencyKeys = Object.keys(this.totals);  
 
 
      this.camperband = res.camper_band[0];
@@ -304,7 +308,7 @@ export class PerfilCamperComponent implements OnInit {
       
       
       
-      this.comenarios = res.camper_comments_parent
+      this.comenarios = res.camper_comments
       console.log(this.comenarios);
 
       this.photo = res.camper_band[0].photo
@@ -355,7 +359,8 @@ export class PerfilCamperComponent implements OnInit {
 
       this.infoCamp.doctor_precall=this.infoCamp.doctor_precall== true ? "Sí, se requiere una llamada previa al campamento por parte del medico" :  "No se requiere una llamada previa"
 
-
+        console.log(this.comenarios,'comentarioss');
+        
 
     },error=>{
       this.error= true

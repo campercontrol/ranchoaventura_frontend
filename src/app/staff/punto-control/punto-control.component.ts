@@ -167,7 +167,7 @@ export class PuntoControlComponent implements OnInit {
         })
         console.log(this.nameCamper);
         
-        this.  nameCamper = this.customer[itemIndex].camper.camper_name + ' ' + this.customer[itemIndex].camper.camper_lastname_mother + ' ' + this.customer[itemIndex].camper.camper_lastname_father
+        this.  nameCamper = this.customer[itemIndex].camper.camper_name + ' ' + this.customer[itemIndex].camper.camper_lastname_father + ' ' + this.customer[itemIndex].camper.camper_lastname_mother
  
 
           

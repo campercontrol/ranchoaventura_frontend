@@ -77,7 +77,7 @@
                                     </th>
                                     <th  *ngFor="let item of columnas">
                                         <div  style="min-width: 70px; width: 240px; white-space: pre-line;" class="conatiner-th">
-                                           <div> {{item.name}} </div>
+                                           <div> {{item.name}}  </div>
                                          <div>{{item.chekpoint_date_esp}} <i class="bx bx-highlight" style="margin-left: 5px;"(click)="showDialog(item)"></i> </div> 
                                      <div>  <span><i class="bx bxs-barcode p-1 bg-primary" style="color: white; font-size: 15px; margin-right: 4px;margin-top: 2px; border-radius: 2px;" (click)="showDialog2(item)"></i> <i class="bx bx-x p-1 bg-primary" style="color: white; font-size: 15px; margin-right: 4px;margin-top: 2px; border-radius: 2px;" (click)="delet(item)"></i>1 de 5 </span>   </div>  
                                         </div>
@@ -94,7 +94,7 @@
                                     </td>
 
                                     <td style="text-align: left; font-size: 10px;">
-                                        {{customer.camper.camper_name}}
+                                        {{customer.camper.camper_name}}  {{customer.camper.camper_lastname_father}} {{customer.camper.camper_lastname_mother}}
                                     </td>
                                     <td style="text-align: left; font-size: 10px;" *ngFor="let b  of customer.checkpoints" [ngClass]="{'acierto':b.checkpoint_check,'error':!b.checkpoint_check}">
                                         <div *ngIf="b.checkpoint_date"  style="">

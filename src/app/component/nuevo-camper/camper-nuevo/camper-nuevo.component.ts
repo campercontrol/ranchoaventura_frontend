@@ -144,6 +144,12 @@ export class CamperNuevoComponent implements OnInit {
       this.pathological_background_fm = res.pathological_background_fm;
       this.school = res.school;
       this.vaccines = res.vaccines;
+      // Ordenar los dos arreglos alfabéticamente
+// Ordenar los dos arreglos alfabéticamente por la propiedad 'name'
+this.pathological_background.sort((a, b) => a.name.localeCompare(b.name));
+this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
+
+
       this.getInfo();
 
       console.log(res);     

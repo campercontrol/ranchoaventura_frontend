@@ -227,29 +227,31 @@
 
                     <h2 style="text-align:center ; margin-top: 30px;">{{textos['Pathologicalhistory']}}</h2>
                     <div class="mt-5">
-                        <div class="contenedor-datos">
-                            <div class="titulos-datos-medicos">
-                                <p style="margin-top:2px ;">Nombre</p>
-                                <p *ngFor="let item of pathological_background" class="mt-2">{{item.name}}</p>
-                            </div>
-                            <div class="input-datos-medicos">
-                                <p style="margin-top:2px ;">{{textos['CAMPER']}}</p>
-                                <ng-container  *ngFor="let item of pathological_background;index as i">
-                                    <input (click)="pathological_backgroundValu(i)" type="checkbox" style="margin-top:10px ;" value="{{item.is_active}}" [checked]="item.is_active"
-                                        id="{{item.id}}">
-                                    <br>
-
-                                </ng-container>
-                            </div>
-                            <div class="input-datos-medicos">
-                                <p style="margin-top:2px ;">{{textos['FAMILY']}}</p>
-                                <ng-container  *ngFor="let item of pathological_background_fm;index as i">
-                                    <input (click)="pathological_background_fmValu(i)" type="checkbox" style="margin-top:10px ;" value="{{item.is_active}}" [checked]="item.is_active"
-                                        id="{{item.id}}">
-                                    <br>
-                                </ng-container>
-                            </div>
-                        </div>
+                        <table class="tabla-medicos" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>{{ textos['CAMPER'] }}</th>
+                                    <th>{{ textos['FAMILY'] }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of pathological_background; index as i">
+                                    <td class="nombre">{{ item.name }}</td>
+                                    <td>
+                                        <input (click)="pathological_backgroundValu(i)" type="checkbox" [checked]="item.is_active" id="{{item.id}}">
+                                    </td>
+                                    <td>
+                                        
+                                        <input *ngIf="pathological_background_fm[i]" 
+                                               (click)="pathological_background_fmValu(i)" 
+                                               type="checkbox" 
+                                               [checked]="pathological_background_fm[i]?.is_active" 
+                                               id="{{pathological_background_fm[i]?.id}}">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <div class="alert-dismissible alert alert-secondary">
                             <p style="text-align:justify;" for="">Marca las casillas de las enfermedades que haya
                                 padecido o padezca el camper en la columna camper. En caso de que un familiar haya
@@ -323,15 +325,15 @@
                         </h3>
 
                         <div action="" class="mt-5">
-                            <div class="contenedor-datos">
+                            <div class="contenedor-datos" *ngFor="let item of licensed_medicines; index as i">
 
 
                                 <div class="titulos-datos-medicos">
-                                    <p *ngFor="let item of licensed_medicines; index as i">{{item.name}}</p>
+                                    <p >{{item.name}}</p>
                                 </div>
                                 <div class="input-datos-medicos" style="margin-top: 0px;">
 
-                                    <div *ngFor="let item of licensed_medicines; index as i" >
+                                    <div   >
                                         <input type="checkbox" style="margin-top:13px ;" (click)="licensed_medicinesValu(i)" value="{{item.is_active}}"  [checked]="item.is_active"
                                             id="{{item.id}}">
                                         <br>

@@ -200,8 +200,13 @@ export class AdmiParentComponent implements OnInit {
       this.catalogos.getParentAdmi().subscribe((res: any) => {
         this.listcatalogos = res.data;
         this.listcatalogos.forEach(element => {
-          element.namecomplet = `${element.tutor_name} ${element.tutor_lastname_father}  ${element.tutor_lastname_mother}` 
-        });
+          element.namecomplet = `${element.tutor_name} ${element.tutor_lastname_father} ${element.tutor_lastname_mother}`;
+          element.namecomplet1 = `${element.tutor_name} ${element.tutor_lastname_mother} ${element.tutor_lastname_father}`;
+          element.namecomplet2 = `${element.tutor_lastname_father} ${element.tutor_name} ${element.tutor_lastname_mother}`;
+          element.namecomplet3 = `${element.tutor_lastname_father} ${element.tutor_lastname_mother} ${element.tutor_name}`;
+          element.namecomplet4 = `${element.tutor_lastname_mother} ${element.tutor_name} ${element.tutor_lastname_father}`;
+          element.namecomplet5 = `${element.tutor_lastname_mother} ${element.tutor_lastname_father} ${element.tutor_name}`;
+                  });
       
         console.log(this.listcatalogos);
        
@@ -261,7 +266,27 @@ export class AdmiParentComponent implements OnInit {
     
   }
 
-      
+  onGlobalFilter(event: any) {
+    let globalFilterValue = event.target.value?.toLowerCase();  // Obtener el valor del filtro
+    
+    // Verificar si el valor del filtro está vacío
+    if (!globalFilterValue) {
+      alert('El filtro está vacío. Por favor ingresa un valor para buscar.');
+      return; // Salir de la función si el filtro está vacío
+    }
+    
+    // Si el filtro no está vacío, filtrar los datos
+    this.listcatalogos = this.listcatalogos.filter(item =>
+      this.customFilter(item.namecomplet, globalFilterValue) ||
+      this.customFilter(item.tutor_email, globalFilterValue) ||
+      this.customFilter(item.second_tutor_email, globalFilterValue)
+    );
+  }
+
+  customFilter(value: string, filter: string): boolean {
+    if (!value || !filter) return false;
+    return value.toLowerCase().includes(filter);  // Comparar el valor con el filtro
+  }
 
   executeSearch() {
     if (this.id !=undefined) {

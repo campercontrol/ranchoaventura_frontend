@@ -54,6 +54,7 @@ export class EscuelaComponent implements OnInit {
   text: any;
   TextElimint="";
   formFood: FormGroup;
+  formFood2: FormGroup;
   date: Date = new Date();
   statuAgrgado = false;
   cat: any = {
@@ -95,6 +96,30 @@ export class EscuelaComponent implements OnInit {
   verify: [true],
   active: [true],
     })
+    this.formFood2 = this._FormBuild.group({
+      name:  ['', [Validators.required,Validators.minLength(2)]],
+      password:  [''],
+      login_id: [''],
+      login_email:  [''],
+    
+      contact_first_email:  [''],
+    
+      address:[''],
+      url: [''],
+      contact: [''],
+      phone: [''],
+      cellphone: [''],
+      contact_second_name: ['' ],
+      contact_second_phone: ['' ],
+      contact_second_cellphone:['' ],
+      contact_second_email:['' ],
+      contact_third_name: ['' ],
+      contact_third_phone:['' ],
+      contact_third_cellphone: ['' ],
+      contact_third_email: ['' ],
+      verify: [true],
+      active: [true],
+        })
   }
 
 
@@ -122,6 +147,8 @@ export class EscuelaComponent implements OnInit {
       verify: [true],
       active: [true],
         })
+
+     
     this.display = true;
     this.resetInput();
   }
@@ -232,15 +259,15 @@ export class EscuelaComponent implements OnInit {
     
     this.showDialog2();
     this.updateId = item.id;
-    this.formFood.patchValue({
+    this.formFood2.patchValue({
       name: item.name,
       address:item.address,
       url: item.url,
       contact: item.contact,
       phone: item.phone,
       cellphone: item.cellphone,
-      email: item.email,
-      contact_first_email:item.contact_first_email,
+      login_email: item.login_email,
+      contact_first_email:item.email,
       contact_second_name:item.contact_second_name,
       contact_second_phone:item.contact_second_phone,
       contact_second_cellphone: item.contact_second_cellphone,
@@ -251,7 +278,8 @@ export class EscuelaComponent implements OnInit {
       contact_third_email: item.contact_third_email,
       verify: item.verify,
       active: item.active,
-      password:'' 
+      password:'' ,
+      login_id:item.login_id
 
     })
  
@@ -259,20 +287,45 @@ export class EscuelaComponent implements OnInit {
   }
 
   keepUpdate(){
-    if(this.formFood.valid){
+    if(this.formFood2.valid){
+      const school = {
+        login_id:this.formFood2.get('login_id').value,
+        "name":  this.formFood2.get('name').value,
+        "address": this.formFood2.get('address').value,
+        "url":  this.formFood2.get('url').value ,
+        "contact":  this.formFood2.get('contact').value,
+        "phone":  this.formFood2.get('phone').value,
+        "cellphone":  this.formFood2.get('cellphone').value,
+        "email":  this.formFood2.get('contact_first_email').value,
+        "contact_second_name":  this.formFood2.get('contact_second_name').value,
+        "contact_second_phone":  this.formFood2.get('contact_second_phone').value,
+        "contact_second_cellphone":  this.formFood2.get('contact_second_cellphone').value,
+        "contact_second_email":  this.formFood2.get('contact_second_email').value,
+        "contact_third_name":  this.formFood2.get('contact_third_name').value,
+        "contact_third_phone":  this.formFood2.get('contact_third_phone').value,
+        "contact_third_cellphone":  this.formFood2.get('contact_third_cellphone').value,
+        "contact_third_email":  this.formFood2.get('contact_third_email').value,
+        "verify":  this.formFood2.get('verify').value,
+        "active":  this.formFood2.get('active').value,
+        "updated_at":   new Date()
+
+      }
       const b = {
 
-        school:this.formFood.value,
-        password:  this.formFood.get('password').value
+        school:school,
+        email: this.formFood2.get('login_email').value,
+ 
+        password:  this.formFood2.get('password').value
         
       }
       this.catalogos.updateSchool(b,this.updateId).subscribe((res: any) => {
         console.log(res);
-        
+        alert(res.detail.msg)
          this.getCatalogos();
          this.resetInput();
          this.statuAgrgado = true;
          this.resteValu();
+
          
          setTimeout(() => {
            this.statuAgrgado = false;
@@ -369,10 +422,15 @@ export class EscuelaComponent implements OnInit {
     }
   }
 
-  resetInfo(elementRef: any,name){
-    this.render?.removeClass(elementRef.nativeElement, "is-invalid");
-    this.render?.removeClass(elementRef.nativeElement, "is-valid");
+  resetInfo(elementRef: any, name: string): void {
+    if (elementRef?.nativeElement?.classList.contains("is-invalid")) {
+      this.render?.removeClass(elementRef.nativeElement, "is-invalid");
+    }
+    if (elementRef?.nativeElement?.classList.contains("is-valid")) {
+      this.render?.removeClass(elementRef.nativeElement, "is-valid");
+    }
   }
+  
   resetInput(){
     this.getContact_third_emailR();
     this.getContact_third_cellphoneR();

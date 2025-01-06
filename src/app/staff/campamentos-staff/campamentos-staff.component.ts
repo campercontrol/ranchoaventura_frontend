@@ -305,7 +305,7 @@ async downloadImages(listCampers = this.listCampers) {
     const imageUrl = `http://142.93.12.234:8000/${customer.camper_photo}`;
 
     b.push(imageUrl)
-    this.capms.downloadImagesAsZip(b)
+    this.capms.downloadImages(b)
   
   });
 
@@ -987,7 +987,11 @@ reporteGeneralStaff() {
     next: (response: any) => {
       const data = response.data;
 
-      // Mapeo de claves del JSON a cabeceras en español solo para los atributos especificados
+      // Filtrar los datos que coincidan con listStaffConfirm
+      const filteredData = data.filter((row: any) =>
+        this.listStaffConfirm.some((staff: any) => staff.staff_id === row.id)
+      );
+
       const headersMap: any = {
         'id': 'ID',
         'name': 'Nombre',
@@ -1015,11 +1019,10 @@ reporteGeneralStaff() {
         'staff_contact_relation': 'Relación del Contacto',
         'staff_contact_homephone': 'Teléfono de Casa del Contacto',
         'staff_contact_cellphone': 'Celular del Contacto',
-        
       };
 
       // Convertir los valores booleanos a "Sí" o "No"
-      const modifiedData = data.map((row: any) => {
+      const modifiedData = filteredData.map((row: any) => {
         const newRow: any = {};
 
         // Mapear claves conocidas
@@ -1046,21 +1049,10 @@ reporteGeneralStaff() {
         return newRow;
       });
 
-      // Obtener las cabeceras en el formato correcto
-      const headers = [...new Set([...Object.keys(headersMap), ...data.flatMap(Object.keys)])];
-      const translatedHeaders = headers.map(header => headersMap[header] || header);
+      const translatedHeaders = Object.keys(headersMap).map(header => headersMap[header]);
 
       // Convertir los datos a una hoja de Excel
       const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(modifiedData, { header: translatedHeaders });
-
-      // Modificar las cabeceras de la hoja de Excel
-      const range = XLSX.utils.decode_range(worksheet['!ref']!);
-      for (let i = range.s.c; i <= range.e.c; i++) {
-        const cell_address = XLSX.utils.encode_cell({ r: 0, c: i });
-        if (worksheet[cell_address]) {
-          worksheet[cell_address].v = translatedHeaders[i];
-        }
-      }
 
       // Ajustar el ancho de las columnas
       const columnWidths = translatedHeaders.map((header, index) => {
@@ -1068,7 +1060,7 @@ reporteGeneralStaff() {
         return Math.max(header.length, maxWidth) + 2; // Agregar un margen extra
       });
 
-      worksheet['!cols'] = columnWidths.map(width => ({ wpx: width * 10 })); // Ajustar el ancho de las columnas
+      worksheet['!cols'] = columnWidths.map(width => ({ wpx: width * 10 }));
 
       // Crear un nuevo libro de trabajo
       const workbook: XLSX.WorkBook = { Sheets: { 'Datos': worksheet }, SheetNames: ['Datos'] };
@@ -1084,6 +1076,7 @@ reporteGeneralStaff() {
     }
   });
 }
+
 
 
 

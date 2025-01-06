@@ -22,7 +22,8 @@ label{
 .contenedor-datos{
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    
+    gap: 20px;
 }
 .contenedor-datos input{
     height: 23px;
@@ -44,12 +45,7 @@ label{
     display: flex;
     flex-direction: column;
 }
-.input-datos-medicos{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-}
+ 
 
 .container-medico{
     display: flex;
@@ -139,5 +135,57 @@ label{
    .slider input[type=”range”]::-webkit-slider-thumb:hover {
     background:#7E6D57;
    }
-  
+   @media (max-width: 768px) {
+    .contenedor-datos {
+        gap: 15px; /* Ajusta el espacio entre los elementos */
+    }
+
+  /* Estilo para la tabla */
+.tabla-medicos {
+    width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
+    border-collapse: collapse; /* Elimina los bordes entre celdas */
+    table-layout: fixed; /* Permite el control del tamaño de las columnas */
+}
+
+/* Encabezado de la tabla */
+.tabla-medicos th {
+    text-align: left;
+    padding: 8px;
+    background-color: #f2f2f2; /* Fondo de encabezado */
+    font-weight: bold;
+}
+
+/* Filas de la tabla */
+.tabla-medicos td {
+    padding: 8px;
+    text-align: left;
+}
+
+/* Distribución de las columnas */
+.tabla-medicos th, .tabla-medicos td {
+    width: 70%; /* Columna de nombre */
+}
+
+.tabla-medicos td:nth-child(2),
+.tabla-medicos th:nth-child(2) {
+    width: 15%; /* Columna de CAMER */
+}
+
+.tabla-medicos td:nth-child(3),
+.tabla-medicos th:nth-child(3) {
+    width: 15%; /* Columna de FAMILY */
+}
+
+/* Estilo para la columna de checkboxes */
+.tabla-medicos input[type="checkbox"] {
+    margin: 0 auto;
+    display: block; /* Centra el checkbox en su celda */
+}
+
+/* Estilo opcional para la tabla sin bordes */
+.tabla-medicos, .tabla-medicos td, .tabla-medicos th {
+    border: none; /* Elimina los bordes de las celdas */
+}
+
+}
    
