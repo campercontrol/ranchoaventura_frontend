@@ -158,8 +158,13 @@ export class GmailingComponent implements OnInit {
     this.selectdestinatariosCampers= res.camps[0].camp.campers;
     this.destinatariosCampers= res.camps[0].camp.campers;
 
+    if(escuela == true){
+      this.destinatariosEscuela.push(res.camps[0].camp.school);
 
-     this.destinatariosEscuela.push(res.camps[0].camp.school);
+    }else{
+      this.destinatariosEscuela=[];
+
+    }
 
      this.selectdestinatariosEscuela=this.destinatariosEscuela;
      this.selectdestinatariosEscuela.forEach(element => {
@@ -580,16 +585,24 @@ alert('No se pudo actualizar')
           else if(element =='2'){staff=true;}
           else if(element =='3'){escuela=true;}
          });
-        console.log(this.dataResGmail);
+         
+        
          this.selectdestinatariosEscuela.forEach(element => {
             element.email_select == true ? element.email : element.email = '';
             element.email_second_select == true ? element.contact_second_email : element.contact_second_email ='';
             element.email_thirdselect == true ? element.contact_third_email : element.contact_third_email ='';
 
          });
-        this.dataResGmail[0].camp.campers = this.selectdestinatariosCampers
-        this.dataResGmail[0].camp.staff = this.selectdestinatariosStaff
-        this.dataResGmail[0].camp.school= this.selectdestinatariosEscuela[0]
+        this.dataResGmail[0].camp.campers = this.selectdestinatariosCampers;
+        this.dataResGmail[0].camp.staff = this.selectdestinatariosStaff;
+
+          if(this.selectdestinatariosEscuela.length>0){
+            this.dataResGmail[0].camp.school= this.selectdestinatariosEscuela[0].email_select == false && this.selectdestinatariosEscuela[0].email_second_select == false && this.selectdestinatariosEscuela[0].email_thirdselect == false ?null: this.selectdestinatariosEscuela[0]
+          }else{
+            this.dataResGmail[0].camp.school=null
+          }
+
+      
 
 
        a = {
@@ -680,9 +693,16 @@ alert('No se pudo actualizar')
             element.email_thirdselect == true ? element.contact_third_email : element.contact_third_email ='';
           });
 
+ 
             data.camp.campers =  data.camp.camperSelect ;
             data.camp.staff = data.camp.staffSelect ;
-            data.camp.schollSelect = data.camp.schollList ;
+            if(data.camp.schollSelect.length>0){
+              data.camp.schollSelect = data.camp.schollList ;
+
+            }else{
+              data.camp.schollSelect = null;     
+              data.camp.school= null;          
+            }
 
 
 

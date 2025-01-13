@@ -643,35 +643,68 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
  
   subiendo(event: any) {
     this.spinerPhot = false;
-
+  
     const archivo = event.target.files[0];
-
-    if (event.target.files && event.target.files[0]) {
+  
+    if (archivo) {
       const reader = new FileReader();
-      reader.onload = e => this.photoSelect = reader.result;
+  
+      reader.onload = (e: any) => {
+        const img = new Image();
+        img.src = e.target.result;
+  
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+  
+          // Verificar si la imagen es horizontal
+          if (img.width > img.height) {
+            canvas.width = img.height;
+            canvas.height = img.width;
+            ctx.rotate((90 * Math.PI) / 180); // Rotar 90 grados
+            ctx.translate(0, -canvas.width);
+          } else {
+            canvas.width = img.width;
+            canvas.height = img.height;
+          }
+  
+          // Dibujar la imagen en el canvas
+          ctx.drawImage(img, 0, 0);
+  
+          // Mostrar la imagen procesada en el avatar
+          this.photoSelect = canvas.toDataURL('image/jpeg');
+  
+          // Convertir canvas a Blob y enviar al servidor
+          canvas.toBlob((blob: Blob) => {
+            const archivoProcesado = new File([blob], archivo.name, { type: 'image/jpeg' });
+  
+            const formulario = new FormData();
+            formulario.append('file', archivoProcesado);
+  
+            this.catalogos.setPhoto(formulario).subscribe(
+              (res: any) => {
+                console.log(res.path);
+  
+                // Actualizar la ruta de la imagen en el formulario
+                this.formUser.patchValue({
+                  photo: res.path,
+                });
+                this.photoSatus = true;
+                this.spinerPhot = true;
+              },
+              error => {
+                console.error(error);
+                this.photoSatus = false;
+              }
+            );
+          }, 'image/jpeg');
+        };
+      };
+  
       reader.readAsDataURL(archivo);
-
-      const formulario = new FormData();
-      formulario.append('file',archivo)
-      this.catalogos.setPhoto(formulario).subscribe((res: any) => {
-        
-
-        console.log(res.path);
-
-        this.formUser.patchValue({
-          photo: res.path
-        });
-        this.photoSatus= true;
-        this.spinerPhot = true;
-
-      },
-        error => {
-          console.log(error);
-          this.photoSatus= false;
-        })
     }
   }
-
+  
 
 
 

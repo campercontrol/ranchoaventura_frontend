@@ -76,6 +76,8 @@ total: number = 0;
     
       this.total = Object.values(this.totalGeneralBalance).reduce((acc: number, balance: number) => acc + balance, 0);
       this.cargando = true;
+      this.checkImagesOrientation();
+
     });
     
     
@@ -154,7 +156,26 @@ total: number = 0;
     }
     this.submitted = true
   }
+  rotarSiHorizontal(imageUrl: string, imgElement: HTMLImageElement) {
+    const img = new Image();
+    img.src = imageUrl;
 
+    img.onload = () => {
+      // Detectar si la imagen es horizontal (ancho > alto)
+      if (img.width > img.height) {
+        // Si es horizontal, aplicamos rotación de 90 grados con CSS
+        imgElement.style.transform = 'rotate(90deg)';
+        imgElement.style.transition = 'transform 0.3s ease'; // Transición suave para rotar
+      } else {
+        // Si es vertical, no aplicamos ningún estilo de rotación
+        imgElement.style.transform = 'none';
+      }
+    };
+
+    img.onerror = () => {
+      console.error('No se pudo cargar la imagen');
+    };
+  }
   status(){
      this.modalVista= !this.modalVista
   }
@@ -166,5 +187,21 @@ total: number = 0;
     this.router.navigate(['dashboard/parents/camper/'+camp])
 
   }
+  checkImagesOrientation() {
+    this.hijosRes.camperList.forEach(camper => {
+      const img = new Image();
+      img.src = 'http://142.93.12.234:8000/' + camper.photo;
+
+      img.onload = () => {
+        // Detectar si la imagen es horizontal (ancho > alto)
+        camper.isImageHorizontal = img.width > img.height;
+      };
+
+      img.onerror = () => {
+        console.error('No se pudo cargar la imagen');
+      };
+    });
+  }
+  
 
 }
