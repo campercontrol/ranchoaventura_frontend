@@ -190,24 +190,35 @@
                                     <div class="row mb-4 mt-4">
                                         <label for="" class="col-sm-3 col-form-label">Biografía*</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="" formControlName="bio"
-                                                name="bio" (input)="validatebio()" #bio>
+                                            <textarea 
+                                                class="form-control" 
+                                                id="bio" 
+                                                formControlName="bio" 
+                                                name="bio" 
+                                                (input)="validatebio()" 
+                                                #bio 
+                                                rows="5">
+                                            </textarea>
                                         </div>
                                     </div>
+                                    
                                     <div class="row mb-4 mt-4" id="cv">
                                         <label for="" class="col-sm-3 col-form-label">CV</label>
                                         <div class="col-sm-9">
-                                            <input type="file" accept="image/pdf" (change)="subiendoPdf($event)">
-
-                                            <div class="alert alert-danger" role="alert" *ngIf="!cvSatus">
-                                                Aun no has agregado tu cv
+                                            <input type="file" accept="application/pdf" (change)="subiendoPdf($event)">
+                                    
+                                            <!-- Mensaje de error si el archivo es mayor a 5 MB -->
+                                            <div class="alert alert-danger" role="alert" *ngIf="!cvSatusPeso">
+                                                Aun no has agregado tu cv o excede el tamaño permitido (5 MB)
                                             </div>
-
-                                            <div class="alert alert-secondary" role="alert" *ngIf="cvSatus">
-                                                Se Agrego corectamente
+                                    
+                                            <!-- Mensaje si el archivo se agregó correctamente -->
+                                            <div class="alert alert-secondary" role="alert" *ngIf="cvSatusPeso">
+                                                Se agregó correctamente
                                             </div>
                                         </div>
                                     </div>
+                                    
                                 </div>
 
                             </div>

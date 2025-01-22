@@ -47,6 +47,7 @@ export class PerfilCamperComponent implements OnInit {
   error:boolean = false;
   typecoment:number = 1;
   userPermis:any;
+  infoCamper:Welcome;
   translations = 
     {
       "eng": {
@@ -269,9 +270,11 @@ export class PerfilCamperComponent implements OnInit {
   // doctor_precall varibles
   getInfo(){
     this.hijos.getPerfil(this.id).subscribe((res: any) => {
-      console.log(res,'hola');
       let b = [];
-      this.error=false
+      this.error=false;
+      this.infoCamper = res;
+      console.log(this.infoCamper,'holassss');
+
       let camps =[ ...res.camper_subscribe_camps]
     
 
@@ -381,4 +384,119 @@ export class PerfilCamperComponent implements OnInit {
 
   }
 
+}
+
+export interface Welcome {
+  camper_band:            CamperBand[];
+  camper_info:            CamperInfo;
+  camper_total_amount:    number;
+  parent:                 Parent;
+  user_email:             string;
+  camper_comments:        any[];
+  camper_subscribe_camps: any[];
+  camper_cancelled_camps: any[];
+  camper_passed_camps:    any[];
+}
+
+export interface CamperBand {
+  full_name:    string;
+  school:       string;
+  photo:        string;
+  birthday:     Date;
+  future_camps: number;
+  past_camps:   number;
+}
+
+export interface CamperInfo {
+  camper:                     Camper;
+  vaccines:                   FoodRestriction[];
+  licensed_medicines:         FoodRestriction[];
+  food_restrictions:          FoodRestriction[];
+  pathological_background:    FoodRestriction[];
+  pathological_background_fm: FoodRestriction[];
+  genders:                    BloodType[];
+  blood_types:                BloodType[];
+  school:                     Array<School[]>;
+  grades:                     BloodType[];
+}
+
+export interface BloodType {
+  id:    number;
+  value: string;
+}
+
+export interface Camper {
+  lastname_father:        string;
+  school_id:              number;
+  heart_problems:         string;
+  security_social_number: string;
+  contact_relation:       string;
+  photo:                  string;
+  school_other:           string;
+  psicology_treatments:   string;
+  doctor_precall:         boolean;
+  contact_name:           string;
+  lastname_mother:        string;
+  email:                  string;
+  prevent_activities:     string;
+  prohibited_foods:       string;
+  contact_homephone:      string;
+  gender_id:              number;
+  can_swim:               number;
+  drug_allergies:         string;
+  comments_admin:         string;
+  contact_cellphone:      string;
+  updated_at:             Date;
+  birthday:               Date;
+  affliction:             string;
+  other_allergies:        string;
+  insurance:              boolean;
+  parent_id:              number;
+  created_at:             Date;
+  id:                     number;
+  height:                 number;
+  blood_type:             number;
+  nocturnal_disorders:    string;
+  insurance_company:      string;
+  record_id:              number;
+  name:                   string;
+  weight:                 number;
+  temporal_blood_type:    null;
+  phobias:                string;
+  insurance_number:       string;
+  grade:                  number;
+  drugs:                  string;
+}
+
+export interface FoodRestriction {
+  id:        number;
+  name:      string;
+  is_active: boolean;
+}
+
+export interface School {
+  id:   number;
+  name: string;
+}
+
+export interface Parent {
+  tutor_lastname_mother:   string;
+  contact_home_phone:      string;
+  created_at:              Date;
+  uid:                     string;
+  tutor_cellphone:         string;
+  contact_work_phone:      string;
+  id:                      number;
+  tutor_home_phone:        string;
+  contact_email:           string;
+  user_id:                 number;
+  tutor_work_phone:        string;
+  toku_id:                 null;
+  contact_name:            string;
+  tutor_name:              string;
+  contact_lastname_father: string;
+  tutor_lastname_father:   string;
+  contact_lastname_mother: string;
+  contact_cellphone:       string;
+  updated_at:              Date;
 }

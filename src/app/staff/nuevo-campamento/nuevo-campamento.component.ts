@@ -132,8 +132,27 @@ export class NuevoCampamentoComponent implements OnInit {
       payment_accounts:[this.payment_accounts]
       
     })
-  }
+    const today = new Date();
 
+    // Configurar la fecha de inicio: hoy a las 6:30 AM
+     const startDefault = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 6, 30);
+  
+     // Configurar la fecha de fin: hoy a las 5:30 PM
+     const endDefault = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 17, 30);
+  
+     this.formCamp.patchValue({
+        "start":this.formatDateToInputValue(startDefault),
+        "end":this.formatDateToInputValue(endDefault)
+     })
+  }
+  formatDateToInputValue(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  }
   createCampPost(){
    // console.log(this.formCamp.value);
    this.spinner=true;

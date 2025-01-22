@@ -99,4 +99,47 @@ export class DashbordStaffComponent implements OnInit {
     this.router.navigate(['dashboard/camp/'+id])
   }
 
+    getDateRangeString(startDate: string, endDate: string): string {
+    const daysOfWeek = [
+      'Domingo',
+      'Lunes',
+      'Martes',
+      'Miércoles',
+      'Jueves',
+      'Viernes',
+      'Sábado',
+    ];
+    const months = [
+      'Enero',
+      'Febrero',
+      'Marzo',
+      'Abril',
+      'Mayo',
+      'Junio',
+      'Julio',
+      'Agosto',
+      'Septiembre',
+      'Octubre',
+      'Noviembre',
+      'Diciembre',
+    ];
+  
+    // Convertir las fechas de entrada a objetos Date
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+  
+    // Obtener día de la semana, día y mes de cada fecha
+    const startDayOfWeek = daysOfWeek[start.getDay()];
+    const startDay = start.getDate();
+    const startMonth = months[start.getMonth()];
+  
+    const endDayOfWeek = daysOfWeek[end.getDay()];
+    const endDay = end.getDate();
+    const endMonth = months[end.getMonth()];
+  
+    // Construir el string final
+    return `El campamento es del ${startDayOfWeek} ${startDay} de ${startMonth} al ${endDayOfWeek} ${endDay} de ${endMonth}.`;
+  }
+  
+
 }

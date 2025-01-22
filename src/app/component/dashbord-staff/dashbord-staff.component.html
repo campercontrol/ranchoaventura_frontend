@@ -42,7 +42,7 @@
                
               </div>
     
-              <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="5" [value]="aCamp" 
+              <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="20" [value]="aCamp" 
               [globalFilterFields]="['camp_name','location_name','public_price','camp_start','camp_end','lastname_mother']"
 
                 [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,25,50]" [loading]="loading" [paginator]="true"
@@ -100,6 +100,9 @@
                       <div class="flex justify-content-between align-items-center" style="min-width: 100px;">
                       </div>
                     </th>
+                    <th>
+
+                    </th>
     
                   </tr>
                 </ng-template>
@@ -134,6 +137,9 @@
                          {{customer.camp_end.substring(0,10)}}
         
                         </td> 
+                        <td>
+                          {{getDateRangeString(customer.camp_start, customer.camp_end)}}
+                        </td>
                  
     
                     <td>
@@ -192,7 +198,7 @@
                
               </div>
     
-              <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="5" [value]="pCamp" 
+              <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="20" [value]="pCamp" 
               [globalFilterFields]="['camp_name','location_name','public_price','camp_start','camp_end','lastname_mother']"
 
                 [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,25,50]" [loading]="loading" [paginator]="true"
@@ -249,6 +255,7 @@
                       <div class="flex justify-content-between align-items-center" style="width: 60px;">
                       </div>
                     </th>
+                    <th></th>
     
                   </tr>
                 </ng-template>
@@ -284,8 +291,12 @@
     
                     </td> 
                     <td>
+                      {{getDateRangeString(customer.camp_start, customer.camp_end)}}
+                    </td>
+                    <td>
                       <button class="btn btn-danger" (click)="cancelar(customer.staff_in_camp_id)">Cancelar mi participacion</button>
                     </td>
+                   
     
     
                   </tr>
@@ -328,7 +339,7 @@
                
               </div>
     
-              <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="5" [value]="ICamp" 
+              <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="20" [value]="ICamp" 
               [globalFilterFields]="['camp_name','location_name','public_price','camp_start','camp_end','lastname_mother']"
                 [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">
@@ -379,6 +390,7 @@
                       </div>
                     </th>
                     <th></th>
+                    <th></th>
     
                    
                    
@@ -418,6 +430,9 @@
                      {{customer.camp_end.substring(0,10)}}
     
                     </td> 
+                    <td>
+                      {{getDateRangeString(customer.camp_start, customer.camp_end)}}
+                    </td>
                     <td>
                     
                         <button class="btn btn-danger" (click)="cancelar(customer.staff_in_camp_id)">Cancelar mi participacion</button>

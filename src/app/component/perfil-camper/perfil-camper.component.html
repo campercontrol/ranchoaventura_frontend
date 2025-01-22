@@ -138,8 +138,13 @@
                                     <p> <span class="fw-bold">Peso:</span> {{infoCamp.weight}} kg</p>
                                     <p> <span class="fw-bold">Estatura: </span> {{infoCamp.height}} cm.</p>
                                     <p> <span class="fw-bold">Tipo de sangre: </span> {{infoCamp.blood_type}}</p>
-                                    <p> <span class="fw-bold">Vacunas:</span> <span class="badge bg-info ms-1"
+                                    <p> <span class="fw-bold">Vacunas:</span> <span class="badge bg-info ms-1 mt-1"
                                             *ngFor="let item of vacunasACtivos">{{item.name}}</span></p>
+
+                                      
+                                            <p><span class="fw-bold">Antecedentes camper: </span> <span  *ngFor="let item of infoCamper.camper_info.pathological_background" > <span class="badge bg-info ms-1 mt-1" *ngIf="item.is_active">{{item.name}} </span> </span></p>
+                                            <p><span class="fw-bold">Antecedentes familiares: </span> <span  *ngFor="let item of infoCamper.camper_info.pathological_background_fm" > <span class="badge bg-info ms-1 mt-1" *ngIf="item.is_active">{{item.name}} </span> </span></p>
+                                            <p><span class="fw-bold">Medicamentos preautorizados en : </span> <span  *ngFor="let item of infoCamper.camper_info.licensed_medicines" > <span class="badge bg-info ms-1 mt-1" *ngIf="item.is_active">{{item.name}} </span> </span></p>
 
 
                                     <p> <span class="fw-bold"> Enfermedades:</span>{{infoCamp.affliction}}</p>
@@ -148,9 +153,9 @@
                                     <p> <span class="fw-bold"> Alergias a
                                             Medicamentos:</span>{{infoCamp.drug_allergies}}</p>
                                     <p> <span class="fw-bold">Otras Alergias:</span>{{infoCamp.other_allergies}}</p>
-                                    <p> <span class="fw-bold">Alteraciones nocturnas:</span>{{infoCamp.other_allergies}}
+                                    <p> <span class="fw-bold">Alteraciones nocturnas:</span>{{infoCamp.nocturnal_disorders}}
                                     </p>
-                                    <p> <span class="fw-bold">Fobias o miedos:</span>{{infoCamp.nocturnal_disorders}}
+                                    <p> <span class="fw-bold">Fobias o miedos:</span>{{infoCamp.phobias}}
                                     </p>
                                     <p> <span class="fw-bold">Medicacion:</span>{{infoCamp.drugs}}</p>
                                 </div>

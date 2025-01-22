@@ -164,7 +164,7 @@ export class AdmiCamperComponent implements OnInit {
       payment_accounts:[this.payment_accounts]
       
     })
-   
+   this.fechas();
     this.getCatalogos();
   }
   showDialog() {
@@ -207,7 +207,8 @@ export class AdmiCamperComponent implements OnInit {
 
       
     })
-    this.fecha_pago=[]
+    this.fecha_pago=[];
+    this.fechas()
     this.table = false;
   }
   showDialog2() {
@@ -328,14 +329,41 @@ export class AdmiCamperComponent implements OnInit {
   }
   resteValu() {
     this.formFood.reset();
+    this.fechas()
   }
   canelar(){
     this.formFood.reset();
+    this.fechas();
     this.extra_charges = [];
    this.extra_question = [];
     this.table=true;
     this.display2= false
 
+  }
+
+
+  fechas(){
+    const today = new Date();
+
+    // Configurar la fecha de inicio: hoy a las 6:30 AM
+     const startDefault = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 6, 30);
+  
+     // Configurar la fecha de fin: hoy a las 5:30 PM
+     const endDefault = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 17, 30);
+    console.log("ejecutrando la informacion dde front");
+    
+     this.formFood.patchValue({
+      "start":this.formatDateToInputValue(startDefault),
+      "end":this.formatDateToInputValue(endDefault)
+   })
+  }
+  formatDateToInputValue(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
   }
 
   update(id){

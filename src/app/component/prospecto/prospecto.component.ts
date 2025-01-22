@@ -52,6 +52,8 @@ export class ProspectoComponent implements OnInit {
   confirmarCorreo = "";
   estadoCorreo:boolean= false;
   breadCrumbItems: Array<{}>;
+  cvSatusPeso: boolean = false; // Estado del CV
+
   @ViewChild("name") name: ElementRef;
   @ViewChild("lastname_father") lastname_father: ElementRef; 
   @ViewChild("lastname_mother") lastname_mother: ElementRef; 
@@ -400,27 +402,42 @@ export class ProspectoComponent implements OnInit {
 
   subiendoPdf(event: any) {
     this.spinerPhot = false;
-
+  
     const [file] = event.target.files;
-    this.filetemp = {
-      fileRow:file,
-      fileName: file.name
+  
+    // Validar que el archivo no exceda los 5 MB
+    const maxSizeInMB = 5;
+    const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+  
+    if (file.size > maxSizeInBytes) {
+      this.cvSatus = false;
+      alert('El archivo excede el tamaño máximo permitido de 5 MB.');
+      return; // Salir de la función si el archivo es demasiado grande
     }
+  
+    this.filetemp = {
+      fileRow: file,
+      fileName: file.name,
+    };
+  
     const formulario = new FormData();
-      formulario.append('file',file)
-      this.catalogos.setpdf(formulario).subscribe((res: any) => {
+    formulario.append('file', file);
+  
+    // Llamar al servicio para subir el archivo
+    this.catalogos.setpdf(formulario).subscribe(
+      (res: any) => {
         console.log(res);
-        this.cvSatus = true;
+        this.cvSatus = true; // Indicar que el CV se subió correctamente
         this.formUser.patchValue({
-          cv: res
-        })
+          cv: res, // Actualizar el formulario con la respuesta del backend
+        });
       },
-        error => {
-          this.cvSatus = false;
-          console.log(error)
-        })
-
-    
+      (error) => {
+        this.cvSatus = false; // Indicar que hubo un error en la subida
+        console.log(error);
+      }
+    );
   }
+  
 
 }
