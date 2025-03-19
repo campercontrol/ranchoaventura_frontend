@@ -91,6 +91,7 @@ export class UpdateStaffComponent implements OnInit {
       this.id = params['id'];
       console.log(this.id,'log id');
       
+      
     })
   }
 
@@ -179,6 +180,7 @@ export class UpdateStaffComponent implements OnInit {
             
   
           })
+          this.id = this.info.infToken.profile_id;
       })
     }else{
       this.staff.infoPerfil(this.id).subscribe((res:any)=>{

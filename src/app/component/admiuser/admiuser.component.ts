@@ -24,6 +24,8 @@ export class AdmiuserComponent implements OnInit {
   tabla= true;
   table= false;
   item:any={}
+  spiner = false;
+
   resSearch:boolean = false;
   @ViewChild("name") name: ElementRef;
   @ViewChild("lastname_father") lastname_father: ElementRef;
@@ -169,6 +171,7 @@ export class AdmiuserComponent implements OnInit {
     return keywords.every((keyword) => name.includes(keyword));
   }
   infoCatalogos(){
+    this.spiner = false;
     this.camperSer.getCatalogos().subscribe((res:any)=>{
       //console.log(info.infToken);     
       this.blood_types = res.blood_types;
@@ -184,8 +187,10 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
 
       this.school = res.school;
       this.vaccines = res.vaccines;
+      
       this.getCatalogos()
-      console.log(res);     
+      console.log(res);   
+  
     })
     this.table = false;
   }
@@ -242,7 +247,7 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
           element.namecomplet4 = `${element.camper_lastname_mother} ${element.camper_name} ${element.camper_lastname_father}`;
           element.namecomplet5 = `${element.camper_lastname_mother} ${element.camper_lastname_father} ${element.camper_name}`;
           
-
+          this.spiner = true;
 
 
         });
@@ -261,7 +266,7 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
           element.namecomplet3 = `${element.camper_lastname_father} ${element.camper_lastname_mother} ${element.camper_name}`;
           element.namecomplet4 = `${element.camper_lastname_mother} ${element.camper_name} ${element.camper_lastname_father}`;
           element.namecomplet5 = `${element.camper_lastname_mother} ${element.camper_lastname_father} ${element.camper_name}`;
-          
+          this.spiner = true;
         });
       
            

@@ -1,0 +1,7 @@
+.p-table {
+    width: 100%; /* Asegura que la tabla use el 100% del ancho disponible */
+}
+
+.p-table .p-datatable-wrapper {
+    overflow-x: auto; /* Permite desplazarse horizontalmente en pantallas pequeñas */
+}

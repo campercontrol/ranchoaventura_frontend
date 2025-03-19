@@ -59,6 +59,7 @@ export class AdmiParentComponent implements OnInit {
   date: Date = new Date();
   statuAgrgado = false;
   textos:any ={};
+  spiner:boolean = false;
   licensed_medicines:any = [];
   pathological_background:any = [];
   pathological_background_fm:any = [];
@@ -194,7 +195,7 @@ export class AdmiParentComponent implements OnInit {
   }
 
   getCatalogos() {
-    
+    this.spiner = false;
 
     if (this.id ==undefined) {
       this.catalogos.getParentAdmi().subscribe((res: any) => {
@@ -209,6 +210,8 @@ export class AdmiParentComponent implements OnInit {
                   });
       
         console.log(this.listcatalogos);
+        this.spiner = true;
+
        
       });     
     } else{

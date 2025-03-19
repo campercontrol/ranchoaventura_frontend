@@ -81,7 +81,7 @@
                                         <label for="" class="col-sm-3 col-form-label">{{textos['Birthdate']}}</label>
                                         <div class=" control-label col-sm-9">
                                             
-                                                <input type="date" class="form-control" placeholder="yyyy-mm-dd"
+                                                <input type="date" class="form-control" placeholder="dd-mm-yyy"
                                                 formControlName="birthday" style="width: 100%;"  (input)="getbirthday()" #birthday>
                                            
                                         </div>
@@ -130,11 +130,18 @@
                                     <div class="row mb-4">
                                         <label for="" class="col-sm-3 col-form-label">{{textos['School']}}</label>
                                         <div class="control-label col-sm-9">
-                                            <select name="school_id" id="school_id" formControlName="school_id" (change)="getschool_id()" class="form-control" #school_id>
-                                                <option *ngFor="let item of school" [value]="item.id" >
-                                                    {{item.name}}
-                                                </option>
-                                            </select>
+                                            <ng-select
+                                            name="school_id"
+                                            id="school_id"
+                                            formControlName="school_id"
+                                            [items]="school" 
+                                            bindLabel="name"
+                                            bindValue="id"
+                                            (change)="getschool_id()"
+                                            [searchable]="true"
+                                            class="form-control">
+                                        </ng-select>
+                                        
                                           
                                         </div>
                                        
@@ -867,11 +874,18 @@
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label">{{textos['School']}}</label>
                                 <div class="control-label col-sm-9">
-                                    <select name="school_id" id="school_id" formControlName="school_id" (change)="getschool_id()" class="form-control" #school_id>
-                                        <option *ngFor="let item of school" [value]="item.id" >
-                                            {{item.name}}
-                                        </option>
-                                    </select>
+                                    <ng-select
+                                    name="school_id"
+                                    id="school_id"
+                                    formControlName="school_id"
+                                    [items]="school" 
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    (change)="getschool_id()"
+                                    [searchable]="true"
+                                    class="form-control">
+                                </ng-select>
+                                
                                   
                                 </div>
                                
@@ -1532,7 +1546,7 @@
                     <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
                         placeholder="Global Search" />
                 </div>
-        <div style="overflow: auto;">
+        <div style="overflow: auto;" *ngIf="spiner">
             <p-table #dt [value]="listcatalogos" [rows]="20"
             [rowsPerPageOptions]="[5, 25, 50]"
             [globalFilterFields]="['camper_name','camper_lastname_mother','camper_lastname_father','school','tutor_fullname','tutor_email','camper_id','namecomplet',
@@ -1587,7 +1601,13 @@
 
         </p-table>
         </div>
-                
+        <div *ngIf="!spiner" class="p-4">
+            <div class="d-flex justify-content-center">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </div>
             </div>
             </div>
         

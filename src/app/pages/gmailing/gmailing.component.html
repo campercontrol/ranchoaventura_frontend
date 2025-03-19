@@ -76,11 +76,11 @@
                                                                     <td (click)="selectUpadate(customer)"  style="cursor: pointer;" *ngIf="Titulo != 'Correos enviados'">
                                                                         {{customer.title}}
                                                                     </td>
-                                                                    <td (click)="infoGmgail(customer.id)"  style="cursor: pointer;" *ngIf="Titulo == 'Correos enviados'">
+                                                                    <td (click)="infoGmgail(customer.id,customer.created_at)"  style="cursor: pointer;" *ngIf="Titulo == 'Correos enviados'">
                                                                       {{customer.name}} - {{customer.title}}
                                                                   </td>
 
-                                                                     <td (click)="infoGmgail(customer.id)"  style="cursor: pointer;" *ngIf="Titulo == 'Correos enviados'">
+                                                                     <td (click)="infoGmgail(customer.id,customer.created_at)"  style="cursor: pointer;" *ngIf="Titulo == 'Correos enviados'">
                                                                       {{customer.created_at}}
                                                                   </td>
 
@@ -401,7 +401,8 @@
         <p-table #dt [(selection)]="selectdestinatariosCampers"   [rowHover]="true" [rows]="10" [value]="destinatariosCampers"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-        [globalFilterFields]="['tutor_full_name','tutor_email','camper_full_name']">
+        [globalFilterFields]="['tutor_full_name','tutor_email','camper_full_name']"  responsiveLayout="scroll"
+        scrollHeight="flex">
 
         <ng-template pTemplate="header">
           <tr>
@@ -460,7 +461,8 @@
         <p-table #dt [(selection)]="selectdestinatariosStaff"   [rowHover]="true" [rows]="10" [value]="destinatariosStaff"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-        [globalFilterFields]="['staff_full_name','staff_email']">
+        [globalFilterFields]="['staff_full_name','staff_email']"  responsiveLayout="scroll"
+        scrollHeight="flex">
 
         <ng-template pTemplate="header">
           <tr>
@@ -519,7 +521,9 @@
         <p-table #dt [(selection)]="selectdestinatariosEscuela" dataKey="school_id"  [rowHover]="true" [rows]="10" [value]="destinatariosEscuela"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-        [globalFilterFields]="['school_email','school','name','email','contact_second_email','contact_third_email']">
+        [globalFilterFields]="['school_email','school','name','email','contact_second_email','contact_third_email']"
+        responsiveLayout="scroll"
+        scrollHeight="flex">
 
         <ng-template pTemplate="header">
           <tr>
@@ -608,7 +612,9 @@
                     <p-table #dt [(selection)]="item.camp.camperSelect"   [rowHover]="true" [rows]="10" [value]="item.camp.campers"
                     [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-                    [globalFilterFields]="['tutor_full_name','tutor_email','camper_full_name','tutor_email']">
+                    [globalFilterFields]="['tutor_full_name','tutor_email','camper_full_name','tutor_email']"
+                    responsiveLayout="scroll"
+                    scrollHeight="flex">
 
                     <ng-template pTemplate="header">
                       <tr>
@@ -667,7 +673,8 @@
                     <p-table #dt [(selection)]="item.camp.staffSelect"   [rowHover]="true" [rows]="10" [value]="item.camp.staff"
                     [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-                    [globalFilterFields]="['staff_full_name','staff_email']">
+                    [globalFilterFields]="['staff_full_name','staff_email']"  responsiveLayout="scroll"
+                    scrollHeight="flex">
 
                     <ng-template pTemplate="header">
                       <tr>
@@ -726,7 +733,8 @@
                     <p-table #dt [(selection)]="item.camp.schollSelect" dataKey="school_id"  [rowHover]="true" [rows]="10" [value]="item.camp.schollList"
                     [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-                    [globalFilterFields]="['school_email','school','name']">
+                    [globalFilterFields]="['school_email','school','name']"  responsiveLayout="scroll"
+                    scrollHeight="flex">
 
                     <ng-template pTemplate="header">
                       <tr>
@@ -808,8 +816,7 @@
 
 
 
-
-<p-dialog header="Elige a tus destinatarios" [(visible)]="infoEmail" [modal]="true" [style]="{width: '90%'}" [maximizable]="true" [baseZIndex]="10000" *ngIf="infoEmail"
+<p-dialog header="Correo enviado el: {{ dataGmailifno.date | date:' dd-MM-yyyy':'es' }}" [(visible)]="infoEmail" [modal]="true" [style]="{width: '90%'}" [maximizable]="true" [baseZIndex]="10000" *ngIf="infoEmail"
     [draggable]="false" [resizable]="false">
     <div class="spinner-border text-primary" role="status" *ngIf="showSpinnerGmail">
       <span class="sr-only">...</span>

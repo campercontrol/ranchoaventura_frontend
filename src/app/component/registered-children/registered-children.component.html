@@ -1,6 +1,10 @@
 
-<div *ngIf="cargando">
-  <div class="card text-center p-2">
+
+
+<div *ngIf="cargando"  >
+  <div class="card text-center p-4">
+
+   
     <h2>Tienes un saldo pendiente de :</h2>
     <ul>
       <li *ngFor="let currency of (totalGeneralBalance | keyvalue)" style="list-style-type:none">
@@ -12,6 +16,8 @@
  
 </div>
 <div class="row" *ngIf="cargando">
+  <div *ngIf="hijosRes && hijosRes.length > 0; else noCamperAlert">
+
   <div class="col-xl-6 col-sm-12" *ngFor="let data of hijosRes">
     <div class="card text-center">
       <div class="card-body">
@@ -95,4 +101,15 @@
       </div>
     </div>
   </div>
+  </div>
+  <ng-template #noCamperAlert>
+    <div class="alert alert-warning text-center" role="alert">
+      <h4 class="alert-heading">¡No tienes campers registrados!</h4>
+      <p>Por favor, registra un camper para comenzar.</p>
+      <hr />
+      <a [routerLink]="['/dashboard/parents/new-camper']" class="btn btn-primary">
+        Registrar Camper
+      </a>
+    </div>
+  </ng-template>
 </div>

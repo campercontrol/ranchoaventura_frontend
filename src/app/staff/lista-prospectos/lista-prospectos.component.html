@@ -19,7 +19,8 @@
               </div>
             </div>
            
-            <div class="container-btn">
+            <div  *ngIf="spinner">
+              <div class="container-btn">
                
                 <div class="btn-grup">
                   <div>
@@ -34,112 +35,124 @@
              
             </div>
       
-        
-            <p-table  #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="prospectosArray" 
-            [globalFilterFields]="['name','lastname_father','birthday','email','season_name','lastname_mother']"
-              [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
-              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">
-              <ng-template pTemplate="header">
-                <tr>
-                    <th>
-                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                      </th>
-  
-                  <th pSortableColumn="lastname_father" class="camp" >
-                    <div class="flex justify-content-between align-items-center" style="width: 250px;">
-                      Nombre
-                      <p-sortIcon field="lastname_father"></p-sortIcon>
-                    </div>
-                  </th>
-                  <th pSortableColumn="birthday" class="camp">
-                    <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
-                      Fecha de Nacimiento
-                      <p-sortIcon field="birthday"></p-sortIcon>
-                    </div>
-                  </th>
-                  <th pSortableColumn="email" class="record">
-                    <div class="flex justify-content-between align-items-center" style=" min-width: 250px;">
-                      Contacto
-                      <p-sortIcon field="email"></p-sortIcon>
-                    </div>
-                  </th>
-                  <th pSortableColumn="season_name">
-                    <div class="flex justify-content-between align-items-center" style="width: 140px;">
-                    Temporada
-                      <p-sortIcon field="season_name"></p-sortIcon>
-                    </div>
-                  </th>
-               
-                  <th pSortableColumn="public_price" style="width: 130px; min-width: 120px;">
-                    <div class="flex justify-content-between align-items-center">
-                      Record
-                      <p-sortIcon field="public_price"></p-sortIcon>
-                    </div>
-                  </th>
-  
+            
+               <p-table  #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="prospectosArray" 
+              [globalFilterFields]="['name','lastname_father','birthday','email','season_name','lastname_mother']"
+                [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">
+                <ng-template pTemplate="header">
+                  <tr>
+                      <th>
+                          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+    
+                    <th pSortableColumn="lastname_father" class="camp" >
+                      <div class="flex justify-content-between align-items-center" style="width: 250px;">
+                        Nombre
+                        <p-sortIcon field="lastname_father"></p-sortIcon>
+                      </div>
+                    </th>
+                    <th pSortableColumn="birthday" class="camp">
+                      <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
+                        Fecha de Nacimiento
+                        <p-sortIcon field="birthday"></p-sortIcon>
+                      </div>
+                    </th>
+                    <th pSortableColumn="email" class="record">
+                      <div class="flex justify-content-between align-items-center" style=" min-width: 250px;">
+                        Contacto
+                        <p-sortIcon field="email"></p-sortIcon>
+                      </div>
+                    </th>
+                    <th pSortableColumn="season_name">
+                      <div class="flex justify-content-between align-items-center" style="width: 140px;">
+                      Temporada
+                        <p-sortIcon field="season_name"></p-sortIcon>
+                      </div>
+                    </th>
                  
-                  <th pSortableColumn="precio">
-                    <div class="flex justify-content-between align-items-center" style="width: 140px;">
-                    </div>
-                  </th>
+                    <th pSortableColumn="public_price" style="width: 130px; min-width: 120px;">
+                      <div class="flex justify-content-between align-items-center">
+                        Record
+                        <p-sortIcon field="public_price"></p-sortIcon>
+                      </div>
+                    </th>
+    
+                   
+                    <th pSortableColumn="precio">
+                      <div class="flex justify-content-between align-items-center" style="width: 140px;">
+                      </div>
+                    </th>
+    
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-customer>
+                  <tr class="p-selectable-row">
+                      <td>
+                          <p-tableCheckbox [value]="customer"  ></p-tableCheckbox>
+                        </td>
+                   
+                    <td (click)=" infostaff(customer.id)" >
+                      <a routerLink="/dashboard/staff/perfil/{{customer.id}}">  {{customer.name}} {{customer.lastname_father}} {{customer.lastname_mother}}</a>
   
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-customer>
-                <tr class="p-selectable-row">
+                     
+                    </td>
+                    <td> 
+                      {{customer.birthday}}
+                    </td>
+                    <td style="font-size: 12px;" class="container-contac">
+    
+                   <span> <i class="fas fa-envelope-open-text" style="margin-right: 5px;"></i>  {{customer.email}} </span> 
+                     <span> <i class="fab fa-whatsapp" style="margin-right: 5px;" ></i>{{customer.home_phone}}</span>
+                      
+                      <span> <i class="fas fa-industry" style="margin-right: 5px;"></i>  {{customer.staff_contact_homephone}}</span>
+    
+                    </td>
                     <td>
-                        <p-tableCheckbox [value]="customer"  ></p-tableCheckbox>
-                      </td>
+    
+                     
+                     {{customer.season_name}}
+    
+                    </td>
+                    <td>
+                      <p-badge value="0" pTooltip="Total" tooltipPosition="top"></p-badge>
+                     
+                      <p-badge value="0" pTooltip="Camps Anterior" tooltipPosition="top"
+                          severity="danger" severity="danger"></p-badge>
+                          
+                      <p-badge value="0" pTooltip="Próximos camps" tooltipPosition="top"
+                          severity="success" severity="success"></p-badge>
+    
+                    </td>
                  
-                  <td (click)=" infostaff(customer.id)" >
-                    <a routerLink="/dashboard/staff/perfil/{{customer.id}}">  {{customer.name}} {{customer.lastname_father}} {{customer.lastname_mother}}</a>
+    
+                    <td>
+                      <button class="btn btn-primary" class="btn btn-primary" (click)=" infostaff(customer.id)" >ver Perfil</button>
+                    </td>
+    
+    
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+    
+                </ng-template>
+              </p-table>
+            </div>
+          
+            </div>
+          
 
-                   
-                  </td>
-                  <td> 
-                    {{customer.birthday}}
-                  </td>
-                  <td style="font-size: 12px;" class="container-contac">
-  
-                 <span> <i class="fas fa-envelope-open-text" style="margin-right: 5px;"></i>  {{customer.email}} </span> 
-                   <span> <i class="fab fa-whatsapp" style="margin-right: 5px;" ></i>{{customer.home_phone}}</span>
-                    
-                    <span> <i class="fas fa-industry" style="margin-right: 5px;"></i>  {{customer.staff_contact_homephone}}</span>
-  
-                  </td>
-                  <td>
-  
-                   
-                   {{customer.season_name}}
-  
-                  </td>
-                  <td>
-                    <p-badge value="0" pTooltip="Total" tooltipPosition="top"></p-badge>
-                   
-                    <p-badge value="0" pTooltip="Camps Anterior" tooltipPosition="top"
-                        severity="danger" severity="danger"></p-badge>
-                        
-                    <p-badge value="0" pTooltip="Próximos camps" tooltipPosition="top"
-                        severity="success" severity="success"></p-badge>
-  
-                  </td>
-               
-  
-                  <td>
-                    <button class="btn btn-primary" class="btn btn-primary" (click)=" infostaff(customer.id)" >ver Perfil</button>
-                  </td>
-  
-  
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="emptymessage">
-  
-              </ng-template>
-            </p-table>
+            <div *ngIf="!spinner" class="p-4">
+              <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            </div>
 
         </div>
         </div>
-      </div>
+     
 
 
 

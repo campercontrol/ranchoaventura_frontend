@@ -54,7 +54,11 @@ export class DashbordStaffComponent implements OnInit {
         this.alerts = false;
         this.aCamp =res.data.next_camps;
         this.pCamp = res.data.available_camps;
-        this.ICamp =  res.data.staff_camps;       
+        this.ICamp =  res.data.staff_camps;   
+        this.aCamp = res.data.next_camps.sort((a, b) => new Date(a.camp_start).getTime() - new Date(b.camp_start).getTime());
+this.pCamp = res.data.available_camps.sort((a, b) => new Date(a.camp_start).getTime() - new Date(b.camp_start).getTime());
+this.ICamp = res.data.staff_camps.sort((a, b) => new Date(a.camp_start).getTime() - new Date(b.camp_start).getTime());
+    
         this.spiner= false;
       }else{
         

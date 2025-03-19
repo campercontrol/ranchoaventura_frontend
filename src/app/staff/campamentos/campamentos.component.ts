@@ -25,7 +25,7 @@ export class CampamentosComponent implements OnInit {
 
   
   selectedCustomers: any[];
-
+  spiner : boolean = true;
   representatives: any[];
 
   statuses: any[];
@@ -50,9 +50,10 @@ cars=[{Nombre:"Campamento con agrupaciones",grado:"prueba2",inicio:"2020-11-10 "
   ]
 
   ngOnInit(): void {
+    this.spiner = false;
      this.camps.getCamp().subscribe((res:any)=>{
       console.log(res,'respuesta');
-      
+      this.spiner = true;
       this.customer = res.data;
       console.log(this.customer);
       

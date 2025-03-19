@@ -6,122 +6,134 @@
           <h4 class="card-title text-white">Campamentos</h4>
 
         </div>
-        <div class="table-header  p-3">
-            <div class="btn-container" >
-                <a routerLink="/dashboard/camps/camp_add" class="btn btn-primary" *ngIf="this.info.infToken.user_admin == true ">
-                    Agregar camp
-                </a>
-                <div>
-                    <span class="p-input-icon-left">
-                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                            placeholder="Global Search" />
-                    </span>
+        <div *ngIf="spiner" >
+            <div class="table-header  p-3">
+                <div class="btn-container" >
+                    <a routerLink="/dashboard/camps/camp_add" class="btn btn-primary" *ngIf="this.info.infToken.user_admin == true ">
+                        Agregar camp
+                    </a>
+                    <div>
+                        <span class="p-input-icon-left">
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Global Search" />
+                        </span>
+                    </div>
+                 
                 </div>
-             
+                
             </div>
             
-        </div>
-       
-        <div style="overflow-x: scroll;">
-            
-            
-            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [responsive]="true" [value]="customer" 
-            [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-            [globalFilterFields]="['camp_name','camp_public_price','camp_start','camp_end','location_name']">
-            
-            <ng-template pTemplate="header">
-                <tr>
-    
-                    <th pSortableColumn="camp_name" class="camp">
-                        <div class="flex justify-content-between align-items-center" style="min-width: 180px;">
-                            Campamentos
-                            <p-sortIcon field="camp_name"></p-sortIcon>
-                        </div>
-                    </th>
-                    <th pSortableColumn="record.n" class="record">
-                        <div class="flex justify-content-between align-items-center" style="min-width: 80px;">
-                            Record
-                            <p-sortIcon field="record.n"></p-sortIcon>
-                        </div>
-                    </th>
-                    <th pSortableColumn="camp_public_price">
-                        <div class="flex justify-content-between align-items-center" style="min-width: 170px;">
-                            Precio Público
-                            <p-sortIcon field="camp_public_price"></p-sortIcon>
-    
-    
-                        </div>
-                    </th>
-                    <th pSortableColumn="location_name" style="min-width: 10rem">
-                        <div class="flex justify-content-between align-items-center">
-                            Sede
-                            <p-sortIcon field="location_name"></p-sortIcon>
-                        </div>
-                    </th>
-                    <th pSortableColumn="camp_start" style="min-width: 10rem" style="min-width: 170px;">
-                        <div class="flex justify-content-between align-items-center">
-                            Inicia
-                            <p-sortIcon field="camp_start"></p-sortIcon>
-                        </div>
-                    </th>
-                    <th pSortableColumn="camp_end" style="min-width: 10rem" style="min-width: 170px;">
-                        <div class="flex justify-content-between align-items-center">
-                            Termina
-                            <p-sortIcon field="camp_end"></p-sortIcon>
-                        </div>
-                    </th>
-                    <th pSortableColumn="status" style="min-width: 8rem">
-                      
-                    </th>
-    
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-customer>
-                <tr class="p-selectable-row">
-    
-                    <td (click)="reditCamps(customer.camp_id)">
-                        <a routerLink="/dashboard/camp/{{customer.camp_id}}"> {{customer.camp_name}}</a> 
-                    </td>
-                    <td>
-                        <p-badge value=" {{customer.records.campers_recod}}" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
-                        <p-badge value=" {{customer.records.staff_record }}" pTooltip="Staff apuntados" tooltipPosition="top"
-                            severity="info" severity="warning"></p-badge>
-                        <p-badge value=" {{customer.records.staff_available_record}}" pTooltip="Staff confirmado" tooltipPosition="top"
-                            severity="danger" severity="danger"></p-badge>
-                    </td>
-                    <td>
-                        {{customer.camp_public_price}}  <small *ngIf="customer.camp_show_payment_parent"><i class="bx bx-dollar-circle" pTooltip="Se muestra el precio a los padres" tooltipPosition="top"></i></small>
-                    </td>
-                    <td>
-                        {{customer.location_name}}
-                    </td>
-                  
-                    <td>
-                        {{customer.camp_start.substring(0,10)}}
-                    </td>
-                    <td>
-                        {{customer.camp_end.substring(0,10)}}
-                    </td>
-    
-                 
-                    <td>
-                        <a class="btn btn-primary" class="btn btn-primary" routerLink="/dashboard/camp/{{customer.camp_id}}" routerLinkActive="router-link-active" *ngIf="this.rol_id!=3" >ver campamento</a>
-                        <a class="btn btn-primary" class="btn btn-primary" routerLink="/dashboard/medical/camp-medical/{{customer.camp_id}}" routerLinkActive="router-link-active"  *ngIf="this.rol_id==3" >ver campamento</a>
-
-                    </td>
-    
+            <div >
+                <div style="overflow-x: scroll;">
+                
+                
+                    <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [responsive]="true" [value]="customer" 
+                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                    [globalFilterFields]="['camp_name','camp_public_price','camp_start','camp_end','location_name']">
                     
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="emptymessage">
-                <tr>
-                    <td colspan="8">No customers found.</td>
-                </tr>
-            </ng-template>
-        </p-table>
+                    <ng-template pTemplate="header">
+                        <tr>
+            
+                            <th pSortableColumn="camp_name" class="camp">
+                                <div class="flex justify-content-between align-items-center" style="min-width: 180px;">
+                                    Campamentos
+                                    <p-sortIcon field="camp_name"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="record.n" class="record">
+                                <div class="flex justify-content-between align-items-center" style="min-width: 80px;">
+                                    Record
+                                    <p-sortIcon field="record.n"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="camp_public_price">
+                                <div class="flex justify-content-between align-items-center" style="min-width: 170px;">
+                                    Precio Público
+                                    <p-sortIcon field="camp_public_price"></p-sortIcon>
+            
+            
+                                </div>
+                            </th>
+                            <th pSortableColumn="location_name" style="min-width: 10rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    Sede
+                                    <p-sortIcon field="location_name"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="camp_start" style="min-width: 10rem" style="min-width: 170px;">
+                                <div class="flex justify-content-between align-items-center">
+                                    Inicia
+                                    <p-sortIcon field="camp_start"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="camp_end" style="min-width: 10rem" style="min-width: 170px;">
+                                <div class="flex justify-content-between align-items-center">
+                                    Termina
+                                    <p-sortIcon field="camp_end"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="status" style="min-width: 8rem">
+                              
+                            </th>
+            
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-customer>
+                        <tr class="p-selectable-row">
+            
+                            <td (click)="reditCamps(customer.camp_id)">
+                                <a routerLink="/dashboard/camp/{{customer.camp_id}}"> {{customer.camp_name}}</a> 
+                            </td>
+                            <td>
+                                <p-badge value=" {{customer.records.campers_recod}}" pTooltip="Acampadores" tooltipPosition="top"></p-badge>
+                                <p-badge value=" {{customer.records.staff_record }}" pTooltip="Staff apuntados" tooltipPosition="top"
+                                    severity="info" severity="warning"></p-badge>
+                                <p-badge value=" {{customer.records.staff_available_record}}" pTooltip="Staff confirmado" tooltipPosition="top"
+                                    severity="danger" severity="danger"></p-badge>
+                            </td>
+                            <td>
+                                {{customer.camp_public_price}}  <small *ngIf="customer.camp_show_payment_parent"><i class="bx bx-dollar-circle" pTooltip="Se muestra el precio a los padres" tooltipPosition="top"></i></small>
+                            </td>
+                            <td>
+                                {{customer.location_name}}
+                            </td>
+                          
+                            <td>
+                                {{customer.camp_start.substring(0,10)}}
+                            </td>
+                            <td>
+                                {{customer.camp_end.substring(0,10)}}
+                            </td>
+            
+                         
+                            <td>
+                                <a class="btn btn-primary" class="btn btn-primary" routerLink="/dashboard/camp/{{customer.camp_id}}" routerLinkActive="router-link-active" *ngIf="this.rol_id!=3" >ver campamento</a>
+                                <a class="btn btn-primary" class="btn btn-primary" routerLink="/dashboard/medical/camp-medical/{{customer.camp_id}}" routerLinkActive="router-link-active"  *ngIf="this.rol_id==3" >ver campamento</a>
+        
+                            </td>
+            
+                            
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="8">No customers found.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                </div>
+            </div>
         </div>
        
+        
+        <div *ngIf="!spiner" class="p-4">
+            <div class="d-flex justify-content-center">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
   </div>

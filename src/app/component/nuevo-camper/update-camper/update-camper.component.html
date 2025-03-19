@@ -106,12 +106,19 @@
                             <div class="row mb-4">
                                 <label for="" class="col-sm-12 col-form-label">{{textos['School']}}</label>
                                 <div class="control-label col-sm-12">
-                                    <select name="school_id" id="school_id" formControlName="school_id" (change)="getschool_id()" class="form-control" #school_id>
-                                        <option *ngFor="let item of school1" [value]="item.id" >
-                                            {{item.name}}
-                                        </option>
-                                    </select>
+                                   
                                   
+                                    <ng-select
+                                    name="school_id"
+                                    id="school_id"
+                                    formControlName="school_id"
+                                    [items]="school1" 
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    (change)="getschool_id()"
+                                    [searchable]="true"
+                                    class="form-control">
+                                </ng-select>
                                 </div>
                                
                             </div>

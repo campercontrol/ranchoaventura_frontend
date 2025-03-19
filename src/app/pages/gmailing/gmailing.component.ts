@@ -800,7 +800,7 @@ alert('No se pudo actualizar')
         break;
     }
   }
-  infoGmgail(id){
+  infoGmgail(id,date){
     this.infoEmail = true;
       console.log('entrando');
 
@@ -808,6 +808,7 @@ alert('No se pudo actualizar')
 
     this.data.getCorreosInfo(id).subscribe((res:any)=>{
       this.dataGmailifno= res;
+      this.dataGmailifno.date = date;
       this.showSpinnerGmail =!this.showSpinnerGmail;
 
 

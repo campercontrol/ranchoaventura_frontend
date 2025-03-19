@@ -34,7 +34,7 @@ export class AuthGuard implements CanActivate {
                 }
                 if(user_coordinator){
                     //Permitir acceso a todo menos administrador, catalogos
-                    if (state.url.includes('/catalogs') || state.url.includes('/admi') ) {
+                    if (state.url.includes('/catalogs') || state.url.includes('/admi') || state.url.includes('/mailing')) {
  
 
                         return false;
@@ -42,9 +42,9 @@ export class AuthGuard implements CanActivate {
                     return true;
                 }
 
-                if(!user_admin && !user_coordinator){
+                if( !user_coordinator){
                     // Solo puede entrar a listado de campamentos, medical y staff
-                    if (state.url.includes('/camp') || state.url.includes('/medical') || state.url.includes('/staff')|| state.url.includes('/mailing')) {
+                    if (state.url.includes('/camp') || state.url.includes('/medical') || state.url.includes('/staff')) {
                         return true;
                     }
                     // Permitir acceso a las rutas que comienzan con 'camp' o 'camp' o 'medical' lo que es lo mismo que staff
@@ -54,7 +54,7 @@ export class AuthGuard implements CanActivate {
 
                 break;
             case 3:
-                if (state.url.includes('/camp') || state.url.includes('/medical') || state.url.includes('/staff')|| state.url.includes('/mailing')|| state.url.includes('/school')) {
+                if (state.url.includes('/camp') || state.url.includes('/medical') || state.url.includes('/staff')|| state.url.includes('/school')) {
                     return true;
                 }
                 return false;

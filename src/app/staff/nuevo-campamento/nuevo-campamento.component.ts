@@ -1,7 +1,9 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { NgSelectComponent } from '@ng-select/ng-select';
+import { set } from 'date-fns';
 import { CatalogosService } from 'src/services/catalogos.service';
 import { CreateCampsService } from 'src/services/create-camps.service';
 
@@ -10,7 +12,7 @@ import { CreateCampsService } from 'src/services/create-camps.service';
   templateUrl: './nuevo-campamento.component.html',
   styleUrls: ['./nuevo-campamento.component.scss']
 })
-export class NuevoCampamentoComponent implements OnInit {
+export class NuevoCampamentoComponent implements OnInit,AfterViewInit {
 
   location:any = [];
   temporada:any = [];
@@ -30,7 +32,9 @@ export class NuevoCampamentoComponent implements OnInit {
   @ViewChild("photo_password") photo_password: ElementRef;
   @ViewChild("currency_id") currency_id: ElementRef;
   @ViewChild("location_id") location_id: ElementRef;
-  @ViewChild("school_id") school_id: ElementRef;
+
+  @ViewChild('school_id', { static: false }) school_id!: NgSelectComponent;
+
   @ViewChild("season_id") season_id: ElementRef;
   @ViewChild("insurance") insurance: ElementRef;
   @ViewChild("public_price") public_price: ElementRef;
@@ -68,6 +72,11 @@ export class NuevoCampamentoComponent implements OnInit {
 
 
  public Editor = ClassicEditor;
+
+ ngAfterViewInit() {
+  this.school_id.open();
+ 
+}
   ngOnInit(): void {
      this.catalogo.getpaymentaccounts().subscribe((res: any) => {
       this.Catpaymanacout = res.data;
@@ -276,8 +285,19 @@ console.log(a);
   }
   
   validateSchoolId(): void {
-    this.validateFormField(this.school_id,'school_id');
+    const schoolControl = this.formCamp.get('school_id');
+  
+  if (schoolControl?.valid) {
+    // Si el control es válido, aplicar clase 'is-valid'
+    this.school_id.classes = 'form-control is-valid';
+  } else {
+    // Si el control es inválido, aplicar clase 'is-invalid'
+    this.school_id.classes = 'form-control is-invalid';
+
+      this.school_id.focus();
+    }
   }
+    
   
   validateSeasonId(): void {
     this.validateFormField(this.season_id,'season_id');

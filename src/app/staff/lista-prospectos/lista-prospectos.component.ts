@@ -12,7 +12,7 @@ export class ListaProspectosComponent implements OnInit {
   selectedProducts: any[];
 
   product: any;
-
+    spinner = false;
 
   submitted: boolean;
   selectedCustomers: any[];
@@ -64,9 +64,11 @@ export class ListaProspectosComponent implements OnInit {
 
   getProspecto(){
     let a:any = []
+    this.spinner = false;
     this.prospectos.getProspectos().subscribe((res:any)=>{
       console.log(res);
-      
+      this.spinner = true;
+
       this.prospectosArray = res.data;
       this.prospectosArray.forEach((item:any)=>{
             item.Staff.email = item.email;
