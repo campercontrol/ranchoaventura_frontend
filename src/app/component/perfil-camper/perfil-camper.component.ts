@@ -303,13 +303,12 @@ export class PerfilCamperComponent implements OnInit {
 
      this.camperband = res.camper_band[0];
       this.historialCaps = b;
-      this.historialCaps.sort((x,y)=>{
-        x.camp_start - y.camp_start
-      })
-
-      console.log(this.historialCaps,'ddd');
+      this.historialCaps.sort((x, y) => {
+        // Comparando las fechas de inicio (camp_start) para ordenarlas de la más cercana a la más lejana
+        return new Date(x.camp_start).getTime() - new Date(y.camp_start).getTime();
+      });
       
-      
+      console.log(this.historialCaps, 'ddd');
       
       this.comenarios = res.camper_comments
       console.log(this.comenarios);

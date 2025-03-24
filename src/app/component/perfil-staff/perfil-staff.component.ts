@@ -133,7 +133,7 @@ export class PerfilStaffComponent implements OnInit {
 
       this.historialCaps = b;
       this.historialCaps.sort((x,y)=>{
-        x.camp_start - y.camp_start
+        return new Date(x.camp_start).getTime() - new Date(y.camp_start).getTime();
       })
 
       console.log(this.historialCaps, 'cambios en campamento');

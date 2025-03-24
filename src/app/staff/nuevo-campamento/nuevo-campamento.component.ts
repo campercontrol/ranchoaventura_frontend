@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { NgSelectComponent } from '@ng-select/ng-select';
+import { log } from 'console';
 import { set } from 'date-fns';
 import { CatalogosService } from 'src/services/catalogos.service';
 import { CreateCampsService } from 'src/services/create-camps.service';
@@ -86,7 +87,8 @@ export class NuevoCampamentoComponent implements OnInit,AfterViewInit {
        
     this.createCamp.getSede().subscribe((res:any)=>{
       this.location = res.data;
-      //console.log(this.location);
+      this.location.sort((a, b) => b.name.localeCompare(a.name));
+
 
      });
      this.createCamp.getTemporada().subscribe((res:any)=>{

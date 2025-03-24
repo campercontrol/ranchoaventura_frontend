@@ -245,12 +245,7 @@ export class AdmiCamperComponent implements OnInit {
    
       console.log(this.paymanacout);
     });
-   
-    
-  
-
-  
-
+ 
    
   }
 
@@ -259,7 +254,6 @@ export class AdmiCamperComponent implements OnInit {
     if(this.formFood.valid){  
       let pay = this.formFood.get('payment_accounts').value;
       this.formFood.patchValue({
-
         recommended_payment_dates: this.arrayToJsonString(this.fecha_pago)
 
       }) 

@@ -133,18 +133,18 @@
                                     <label for="" class="col-sm-3 col-form-label">Sede*
                                     </label>
                                     <div class="control-label col-sm-9">
-                                        <select style="width: 100%;" class="form-control" formControlName = "location_id" name="location_id" #location_id (change)="validateLocationId()">
-                                            <option *ngFor="let item of location" [value]="item.id">{{item.name}}</option>
-                                        </select>
+                                        <ng-select style="width: 100%;"  [items]="location" bindValue="id"  bindLabel="name"  #location_id    formControlName = "location_id"
+                                        ></ng-select>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
                                     <label for="" class="col-sm-3 col-form-label">Escuela*
                                         </label>
                                     <div class="control-label col-sm-9">
-                                        <select style="width: 100%;" class="form-control" formControlName ="school_id" name="school_id" #school_id (change)="validateSchoolId()">
-                                            <option *ngFor="let item of school" [value]="item.id">{{item.name}}</option>
-                                        </select>
+                                       
+
+                                        <ng-select style="width: 100%;"  [items]="school" bindValue="id"  bindLabel="name"  #school_id    formControlName = "school_id"
+                                        ></ng-select>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
