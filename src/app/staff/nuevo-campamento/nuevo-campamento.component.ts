@@ -32,7 +32,7 @@ export class NuevoCampamentoComponent implements OnInit,AfterViewInit {
   @ViewChild("photo_url") photo_url: ElementRef;
   @ViewChild("photo_password") photo_password: ElementRef;
   @ViewChild("currency_id") currency_id: ElementRef;
-  @ViewChild("location_id") location_id: ElementRef;
+  @ViewChild("location_id", { static: false }) location_id!: NgSelectComponent;
 
   @ViewChild('school_id', { static: false }) school_id!: NgSelectComponent;
 
@@ -283,7 +283,7 @@ console.log(a);
   }
   
   validateLocationId(): void {
-    this.validateFormField(this.location_id,'location_id');
+    this.validateLocotion();
   }
   
   validateSchoolId(): void {
@@ -291,14 +291,28 @@ console.log(a);
   
   if (schoolControl?.valid) {
     // Si el control es válido, aplicar clase 'is-valid'
-    this.school_id.classes = 'form-control is-valid';
-  } else {
+   } else {
     // Si el control es inválido, aplicar clase 'is-invalid'
-    this.school_id.classes = 'form-control is-invalid';
+    schoolControl?.markAsTouched();
 
       this.school_id.focus();
     }
   }
+
+  validateLocotion(): void {
+    const schoolControl = this.formCamp.get('location_id');
+  
+  if (schoolControl?.valid) {
+    // Si el control es válido, aplicar clase 'is-valid'
+   } else {
+    // Si el control es inválido, aplicar clase 'is-invalid'
+    schoolControl?.markAsTouched();
+
+      this.location_id.focus();
+    }
+  }
+
+ 
     
   
   validateSeasonId(): void {

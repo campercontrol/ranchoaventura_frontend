@@ -21,15 +21,26 @@
                     <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
                         placeholder="Global Search" />
                 </div>
-        <div *ngIf="spiner" style="overflow: auto;">
-            <p-table #dt [value]="listcatalogos" [rows]="5"
+        <div   style="overflow: auto;">
+            <p-table 
+            #dt 
+            [value]="listcatalogos" 
+            [rows]="5"
             [rowsPerPageOptions]="[5, 25, 50]"
-            [globalFilterFields]="['namecomplet', 'tutor_email', 'second_tutor_email',
-            'namecomplet1','namecomplet2','namecomplet3','namecomplet4','namecomplet5']"
-            [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [showCurrentPageReport]="true"
-            [paginator]="true">
+            [paginator]="true"
+            [loading]="spiner"
+            [lazy]="true"
+            (onLazyLoad)="loadCatalogosLazy($event)"
+            [totalRecords]="totalRecords"
+            [globalFilterFields]="[
+              'namecomplet', 'tutor_email', 'second_tutor_email',
+              'namecomplet1','namecomplet2','namecomplet3','namecomplet4','namecomplet5'
+            ]"
+            [(selection)]="selectCatalogos" 
+            [rowHover]="true" 
+            dataKey="id"
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+            [showCurrentPageReport]="true">
 
             <ng-template pTemplate="header">
                 <tr>
@@ -74,13 +85,7 @@
 
         </p-table>
         </div>
-        <div *ngIf="!spiner" class="p-4">
-            <div class="d-flex justify-content-center">
-              <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-            </div>
-          </div> 
+        
             </div>
             </div>
         

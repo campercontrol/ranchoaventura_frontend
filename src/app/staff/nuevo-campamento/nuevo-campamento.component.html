@@ -25,7 +25,8 @@
                                 <label for="" class="col-sm-3 col-form-label">Sede*
                                 </label>
                                 <div class="control-label col-sm-9">
-                                    <ng-select style="width: 100%;"  [items]="location" bindValue="id"  bindLabel="name"  #location_id    formControlName = "location_id"
+                                    <ng-select style="width: 100%;"  [items]="location" bindValue="id"  bindLabel="name"  #location_id                                         [class.is-valid]="formCamp.get('location_id')?.valid && formCamp.get('location_id')?.touched"
+                                    [class.is-invalid]="formCamp.get('location_id')?.invalid && formCamp.get('location_id')?.touched"   formControlName = "location_id"
                                     ></ng-select>
                                 </div>
                             </div>
@@ -42,6 +43,8 @@
                                         name="school_id" 
                                         #school_id 
                                         (change)="validateSchoolId()" 
+                                        [class.is-valid]="formCamp.get('school_id')?.valid && formCamp.get('school_id')?.touched"
+                                        [class.is-invalid]="formCamp.get('school_id')?.invalid && formCamp.get('school_id')?.touched"
                                         [searchable]="true" 
                                         [clearable]="false"
                                         style="width: 100%;">

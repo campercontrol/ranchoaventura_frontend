@@ -36,10 +36,22 @@
             </div>
       
             
-               <p-table  #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="prospectosArray" 
-              [globalFilterFields]="['name','lastname_father','birthday','email','season_name','lastname_mother']"
-                [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">
+               <p-table  #dt 
+               [(selection)]="selectedCustomers" 
+               dataKey="id" 
+               [rowHover]="true" 
+               [value]="prospectosArray"
+               [lazy]="true"
+               (onLazyLoad)="loadProspectosLazy($event)"
+               [paginator]="true"
+               [rows]="10"
+               [totalRecords]="totalRecords"
+               [globalFilterFields]="['name','lastname_father','birthday','email','season_name','lastname_mother']"
+               [showCurrentPageReport]="true" 
+               [rowsPerPageOptions]="[10,25,50]" 
+               [loading]="loading"
+               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" 
+               [filterDelay]="0">
                 <ng-template pTemplate="header">
                   <tr>
                       <th>

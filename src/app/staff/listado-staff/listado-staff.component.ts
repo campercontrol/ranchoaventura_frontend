@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CatalogosService } from 'src/services/catalogos.service';
@@ -61,6 +61,7 @@ export class ListadoStaffComponent implements OnInit {
   escuelas:any = [];
   photoSelectUp : string | ArrayBuffer;
   idioma = 'esp';
+  totalRecords: number = 0;
   cargando =true;
   informacion:any=[];
   moneda:any = [];
@@ -86,44 +87,43 @@ export class ListadoStaffComponent implements OnInit {
   selectedCities: string[] = [];
   
 
-  constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private catalogos:CatalogosService,private paymants:PaymentsService,private routerAc :Router) {  
+  constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private catalogos:CatalogosService,private paymants:PaymentsService,private routerAc :Router,    private cdr: ChangeDetectorRef
+  ) {  
   }
   ngOnInit(): void {
     
-    this.info()
+    this.info(1)
 
   }
  
-  info() {
-    this.cargando = true; // Set loading state to true before fetching data
+  info(page: number = 0, rows: number = 10) {
+   
+    this.catalogos.getStaff(page + 1, rows).subscribe(
+      (staffResponse: any) => {
+        console.log(staffResponse.data, 'respuesta staff');
+        this.listcatalogos = staffResponse.data.items;
   
-    this.catalogos.getStaff().subscribe((staffResponse: any) => {
-      console.log(staffResponse.data, 'respuesta staff');
-      this.listcatalogos = staffResponse.data;
-      this.listcatalogos.forEach(element => {
-        element.tipo = "Staff"
-        element.combined = `${element.Staff.name} ${element.Staff.lastname_father} ${element.Staff.lastname_mother}`.toLowerCase();
+        this.listcatalogos.forEach(element => {
+          element.tipo = "Staff";
+          element.combined = `${element.Staff.name} ${element.Staff.lastname_father} ${element.Staff.lastname_mother}`.toLowerCase();
+        });
+  
+        this.totalRecords = staffResponse.data.total; // Guarda el total de registros
+  
+        this.cargando = false;
+        this.cdr.detectChanges();
 
-      });
-  
-      this.catalogos.getProspectos().subscribe((prospectResponse: any) => {
-        let b = prospectResponse.data;
-        console.log(b);
-        
-         b.forEach((prospect:any) => {
-          prospect.tipo ="Prospecto"
-          prospect.combined = `${prospect.Staff.name} ${prospect.Staff.lastname_father} ${prospect.Staff.lastname_mother}`.toLowerCase();
-         });
-        this.listcatalogos = [...prospectResponse.data, ...this.listcatalogos]; // Concatenate arrays correctly
-        this.cargando = false; // Set loading state to false after both requests are complete
-      }, (error: any) => {
-        console.error('Error fetching prospectos:', error);
-        this.cargando = false; // Set loading state to false even if an error occurs
-      });
-    }, (error: any) => {
-      console.error('Error fetching staff:', error);
-      this.cargando = false; // Set loading state to false even if an error occurs
-    });
+      },
+      (error: any) => {
+        console.error('Error fetching staff:', error);
+        this.cargando = false;
+      }
+    );
+  }
+  loadStaffLazy(event: any) {
+    const page = event.first / event.rows;
+    const rows = event.rows;
+    this.info(page, rows);
   }
   
 hypervinculo(id:any){

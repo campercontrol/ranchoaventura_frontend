@@ -27,6 +27,9 @@
                         <div class="alert alert-primary mt-5" role="alert" *ngIf="alertPass">
                           ¡Su cuenta ha sido activada correctamente!
                         </div>
+                        <div class="text-center mt-4" *ngIf="alertPass">
+                            <a href="#" class="btn btn-primary"> Iniciar sesión</a>
+                        </div>
                         <div class="alert alert-warning mt-5" role="alert" *ngIf="alertPassError">
                             Al parecer no se pudo activar su cuenta. Por favor, comuníquese con soporte.
                           </div>

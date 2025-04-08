@@ -102,6 +102,7 @@ export class AdmiuserComponent implements OnInit {
     name: ''
   }
   breadCrumbItems: Array<{}>;
+  totalRecords: number = 0;
   selectedCities: string[] = [];
   
   constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder,private camperSer: CamperService,private render :Renderer2,private router :Router,private routerAct:ActivatedRoute) {
@@ -231,14 +232,22 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
     this.resteValu();
 
   }
+  loadStaffLazy(event: any) {
+    // event.first: índice del primer elemento (empezando en 0)
+    // event.rows: cantidad de registros por página
+    const page = Math.floor(event.first / event.rows) + 1; // Backend espera páginas que inician en 1
+    const rows = event.rows;
+    this.getCatalogos(page, rows);
+  }
 
-  getCatalogos() {
+  getCatalogos(page: number = 1, per_page: number = 5) {
     if(this.id == undefined){
 
-      this.catalogos.getCamperAdmi().subscribe((res: any) => {
-        this.listcatalogos = res.data;
+      this.catalogos.getCamperAdmi(page,per_page).subscribe((res: any) => {
+        this.listcatalogos = res.data.items;
         console.log(res.data);
-       
+        this.totalRecords = res.data.total;
+
         this.listcatalogos.forEach(element => {
           element.namecomplet = `${element.camper_name} ${element.camper_lastname_father} ${element.camper_lastname_mother}`;
           element.namecomplet1 = `${element.camper_name} ${element.camper_lastname_mother} ${element.camper_lastname_father}`;
@@ -256,8 +265,9 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
       });
     }else{
       this.update({camper_id:this.id})
-      this.catalogos.getCamperAdmi().subscribe((res: any) => {
-        this.listcatalogos = res.data;
+      this.catalogos.getCamperAdmi(page,per_page).subscribe((res: any) => {
+        this.listcatalogos = res.data.items;
+         this.totalRecords = res.data.total;
         console.log(res.data);
         this.listcatalogos.forEach(element => {
           element.namecomplet = `${element.camper_name} ${element.camper_lastname_father} ${element.camper_lastname_mother}`;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StaffService } from 'src/services/staff.service';
@@ -15,6 +15,7 @@ export class ListaProspectosComponent implements OnInit {
     spinner = false;
 
   submitted: boolean;
+  totalRecords: number = 0;
   selectedCustomers: any[];
   loading: boolean = false;
   customer:any =[];
@@ -22,7 +23,7 @@ export class ListaProspectosComponent implements OnInit {
   id= 0;
   cargando:boolean=false;
   prospectosArray:any=[]
-  constructor(private prospectos: StaffService,private modalService: NgbModal, private router:Router) {
+  constructor(private prospectos: StaffService,private modalService: NgbModal, private router:Router, private cdr: ChangeDetectorRef) {
 
    }
 
@@ -61,27 +62,36 @@ export class ListaProspectosComponent implements OnInit {
     this.router.navigate(['dashboard/staff/perfil/'+id]);
 
   }
-
-  getProspecto(){
-    let a:any = []
-    this.spinner = false;
-    this.prospectos.getProspectos().subscribe((res:any)=>{
+  getProspecto(page: number = 1, per_page: number = 10) {
+    // Activa el spinner o estado de carga
+  this.cargando = false
+    this.prospectos.getProspectos(page, per_page).subscribe((res: any) => {
       console.log(res);
       this.spinner = true;
-
-      this.prospectosArray = res.data;
-      this.prospectosArray.forEach((item:any)=>{
-            item.Staff.email = item.email;
-            item.Staff.season_name=item.season_name;
-            a.push(item.Staff)
-      })
-
-      this.prospectosArray = a;
-
-      //console.log(this.prospectosArray);
-      
+      // Mapea los prospectos para extraer la info del Staff
+      const arrayTemp: any[] = [];
+      res.data.items.forEach((item: any) => {
+        // Actualiza o asigna datos necesarios en Staff
+        item.Staff.email = item.email;
+        item.Staff.season_name = item.season_name;
+        arrayTemp.push(item.Staff);
+      });
+      this.prospectosArray = arrayTemp;
+      // Guarda el total de registros para la paginación
+      this.totalRecords = res.data.total;
+      this.cargando = false;
+    }, error => {
+      console.error('Error fetching prospectos:', error);
+      this.cargando = false;
     });
-    this.cargando=false;
-
   }
+  loadProspectosLazy(event: any) {
+    // event.first: índice del primer elemento de la página actual (empezando en 0)
+    // event.rows: cantidad de registros por página
+    const page = (event.first / event.rows) + 1; // El backend espera páginas iniciando en 1
+    const rows = event.rows;
+    this.getProspecto(page, rows);
+  }
+  
+  
 }

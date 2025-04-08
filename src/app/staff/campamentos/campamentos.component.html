@@ -27,10 +27,24 @@
                 <div style="overflow-x: scroll;">
                 
                 
-                    <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [responsive]="true" [value]="customer" 
-                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
-                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-                    [globalFilterFields]="['camp_name','camp_public_price','camp_start','camp_end','location_name']">
+                    <p-table
+                    #dt
+                    [(selection)]="selectedCustomers"
+                    [value]="customer"
+                    dataKey="id"
+                    [rowHover]="true"
+                    [rows]="10"
+                    [paginator]="true"
+                    [lazy]="true"
+                    (onLazyLoad)="loadCampsLazy($event)"
+                    [totalRecords]="totalRecords"
+                    [responsive]="true"
+                    [showCurrentPageReport]="true"
+                    [rowsPerPageOptions]="[10,25,50]"
+                    [loading]="loading"
+                    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+                    [globalFilterFields]="['camp_name','camp_public_price','camp_start','camp_end','location_name']"
+                >
                     
                     <ng-template pTemplate="header">
                         <tr>

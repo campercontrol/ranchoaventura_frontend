@@ -195,7 +195,7 @@
       <div class="col-lg- col-sm-12 col-md-6"  >
         <div class="card" *ngIf="statusInscri">
           <div class="bodyCamper2">
-            <h1 style="color:white ;" class="mt-2">Fechas de pago recomendadas</h1>
+            <h3 style="color:white ;" class="mt-2">Fechas de pago recomendadas</h3>
           </div>
         
         
@@ -386,7 +386,7 @@
               respuestas</button>
             <button class="btn  btn-info p-2" style="height:60px;" (click)="open(content2)"
               *ngIf="statusInscri">servicios adicionales</button>
-            <button class="btn  btn-danger p-2" style="height:60px;" (click)="deletCamp()" *ngIf="statusInscri">cancelar
+            <button class="btn  btn-danger p-2" style="height:60px;" (click)="showCancelDialog= !showCancelDialog" *ngIf="statusInscri">cancelar
               inscripcion</button>
           </div>
 
@@ -599,5 +599,28 @@
       </div>
     </div>
 
+  </div>
+</p-dialog>
+
+<p-dialog [(visible)]="showCancelDialog" [modal]="true" [style]="{width: '50vw'}"
+  [draggable]="false" [resizable]="false" [responsiveOptions]="dialogResponsiveOptions" [closable]="false">
+  <div class="container-fluid">
+    <div class="card col-12 border border-danger border-1">
+      <div class="bg-danger p-2">
+        <h1 class="card-title text-white">Cancelar participación</h1>
+      </div>
+      <div class="mt-3 text-center" style="margin: 0 auto;">
+        <div class="alert alert-warning col-10 mx-auto" role="alert">
+          Estás a punto de cancelar tu participación en el campamento. <br>
+          Esta acción no se puede deshacer.<br><br>
+          ¿Estás seguro de que deseas continuar?
+        </div>
+
+        <div class="d-flex justify-content-center gap-3 mt-4 mb-4">
+          <button class="btn btn-danger" (click)="deletCamp()">Sí, cancelar</button>
+          <button class="btn btn-secondary" (click)="showCancelDialog = false">No, regresar</button>
+        </div>
+      </div>
+    </div>
   </div>
 </p-dialog>

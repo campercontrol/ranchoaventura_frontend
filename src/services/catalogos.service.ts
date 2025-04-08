@@ -236,8 +236,8 @@ export class CatalogosService {
       return this.http.get('http://142.93.12.234:8000/camper/');
 
     }
-    getCamperAdmi(){
-      return this.http.get('http://142.93.12.234:8000/admin/camper/');
+    getCamperAdmi(page=1,per_page=10){
+      return this.http.get('http://142.93.12.234:8000/admin/camper/?page='+page+'&per_page='+per_page+'&order=desc');
     }
     getCamper(){
       return this.http.get('http://142.93.12.234:8000/camper/');
@@ -255,15 +255,15 @@ export class CatalogosService {
     getParent(){
       return this.http.get('http://142.93.12.234:8000/parent/');
      }
-     getStaff(){
-      return this.http.get('http://142.93.12.234:8000/staff/');
+     getStaff(page=1,per_page=10){
+      return this.http.get('http://142.93.12.234:8000/staff/?page='+page+'&per_page='+per_page+'&order=desc');
      }
      getProspectos(){
       return this.http.get('http://142.93.12.234:8000/prospect/');
 
      }
-     getParentAdmi(){
-      return this.http.get('http://142.93.12.234:8000/admin/parent/');
+     getParentAdmi(page=1,per_page=10){
+      return this.http.get('http://142.93.12.234:8000/admin/parent/?page='+page+'&per_page='+per_page+'&order=desc');
      }
      getParentU(id){
       return this.http.get('http://142.93.12.234:8000/parent/'+id);

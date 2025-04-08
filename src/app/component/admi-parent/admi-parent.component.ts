@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Table } from 'primeng/table';
@@ -72,6 +72,7 @@ export class AdmiParentComponent implements OnInit {
   parent:any = [];
   escuelas:any = [];
   @ViewChild('dt') dt: Table;
+  totalRecords: number; // Property to store total records for pagination
 
   photoSelectUp : string | ArrayBuffer;
   idioma = 'esp';
@@ -88,7 +89,7 @@ export class AdmiParentComponent implements OnInit {
   selectedCities: string[] = [];
   id:any ;
   
-  constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder,private camperSer: CamperService,private render :Renderer2,private routerAct:ActivatedRoute) {
+  constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder,private camperSer: CamperService,private render :Renderer2,private routerAct:ActivatedRoute,private cdRef: ChangeDetectorRef) {
   //  this.textos  = traducciones['traduciones'][this.idioma]['formUserChildren'];
     console.log(this.textos);
      
@@ -194,12 +195,16 @@ export class AdmiParentComponent implements OnInit {
 
   }
 
-  getCatalogos() {
-    this.spiner = false;
+  getCatalogos(page: number = 1, per_page: number = 5) {
+     this.spiner = true;
+    if (this.id === undefined) {
 
-    if (this.id ==undefined) {
-      this.catalogos.getParentAdmi().subscribe((res: any) => {
-        this.listcatalogos = res.data;
+      this.catalogos.getParentAdmi(page, per_page).subscribe((res: any) => {
+        this.listcatalogos = res.data.items;
+ 
+        this.totalRecords = res.data.total; // 👈 importante para paginación
+        this.spiner = false;
+
         this.listcatalogos.forEach(element => {
           element.namecomplet = `${element.tutor_name} ${element.tutor_lastname_father} ${element.tutor_lastname_mother}`;
           element.namecomplet1 = `${element.tutor_name} ${element.tutor_lastname_mother} ${element.tutor_lastname_father}`;
@@ -207,20 +212,20 @@ export class AdmiParentComponent implements OnInit {
           element.namecomplet3 = `${element.tutor_lastname_father} ${element.tutor_lastname_mother} ${element.tutor_name}`;
           element.namecomplet4 = `${element.tutor_lastname_mother} ${element.tutor_name} ${element.tutor_lastname_father}`;
           element.namecomplet5 = `${element.tutor_lastname_mother} ${element.tutor_lastname_father} ${element.tutor_name}`;
-                  });
-      
-        console.log(this.listcatalogos);
-        this.spiner = true;
+        });
+         this.cdRef.detectChanges();
 
-       
-      });     
-    } else{
-      console.log('update---',this.id);
-      
-      this.updateInfo({id:this.id})
+        
 
+      });
+    } else {
+      this.spiner = true;
+
+      console.log('update---', this.id);
+      this.updateInfo({ id: this.id });
     }
   }
+  
 
   updateInfo(item){
     this.resteValu()
@@ -557,6 +562,13 @@ export class AdmiParentComponent implements OnInit {
             return 'danger';
     }
   }
+
+  loadCatalogosLazy(event: any) {
+    const page = Math.floor(event.first / event.rows) + 1;
+    const per_page = event.rows;
+    this.getCatalogos(page, per_page);
+  }
+  
  
   searchparten(){
     this.resSearch= false;

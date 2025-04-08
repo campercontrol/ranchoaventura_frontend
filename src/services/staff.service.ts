@@ -25,8 +25,8 @@ export class StaffService {
     return this.http.get('http://142.93.12.234:8000/staff/profile/'+id+'/'+idioma)
   }
 
-  getProspectos(){
-    return this.http.get('http://142.93.12.234:8000/prospect/')
+  getProspectos(page=1,per_page =10){
+    return this.http.get('http://142.93.12.234:8000/prospect/?page='+page+'&per_page='+per_page+'&order=desc')
 
   }
   aceptarProspectos(id){

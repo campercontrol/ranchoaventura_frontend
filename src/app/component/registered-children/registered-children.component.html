@@ -2,9 +2,15 @@
 
 
 <div *ngIf="cargando"  >
+ 
   <div class="card text-center p-4">
-
-   
+    <div class="mb-4 text-end">
+      <a [routerLink]="['/dashboard/parents/new-camper']" class="btn btn-success">
+        Nuevo acampador
+      </a>
+    </div>
+    
+ 
     <h2>Tienes un saldo pendiente de :</h2>
     <ul>
       <li *ngFor="let currency of (totalGeneralBalance | keyvalue)" style="list-style-type:none">

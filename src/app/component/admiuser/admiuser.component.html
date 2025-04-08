@@ -1546,7 +1546,7 @@
                     <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
                         placeholder="Global Search" />
                 </div>
-        <div style="overflow: auto;" *ngIf="spiner">
+        <div style="overflow: auto;" >
             <p-table #dt [value]="listcatalogos" [rows]="20"
             [rowsPerPageOptions]="[5, 25, 50]"
             [globalFilterFields]="['camper_name','camper_lastname_mother','camper_lastname_father','school','tutor_fullname','tutor_email','camper_id','namecomplet',
@@ -1555,7 +1555,12 @@
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [showCurrentPageReport]="true"
             [filterFunction]="customFilter"
-            [paginator]="true">
+            [totalRecords]="totalRecords"
+
+            [paginator]="true"
+            [lazy]="true"
+            (onLazyLoad)="loadStaffLazy($event)"
+            >
 
             <ng-template pTemplate="header">
                 <tr>
@@ -1601,13 +1606,7 @@
 
         </p-table>
         </div>
-        <div *ngIf="!spiner" class="p-4">
-            <div class="d-flex justify-content-center">
-              <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-            </div>
-          </div>
+        
             </div>
             </div>
         

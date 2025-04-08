@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import traducciones  from 'src/assets/json/lengua.json';
 import { LangService } from 'src/services/lang.service';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 
 
@@ -116,10 +117,14 @@ export class CamperNuevoComponent implements OnInit {
 
   @ViewChild("terms") terms: ElementRef;
   @ViewChild("acept") acept: ElementRef;
+  @ViewChild('schoolSelect', { static: false }) schoolSelect!: NgSelectComponent;
+
 
   photoSatus = false;
   spinerPhot= true;
   textos ={};
+  maxDate: string = '';
+edad: number | null = null;
   idioma = 'esp' 
   
 
@@ -129,7 +134,9 @@ export class CamperNuevoComponent implements OnInit {
 
   constructor(private catalogos: CamperService , private formGrup: FormBuilder, private router:Router,private render:Renderer2,private info: AuthenticationService,private lang:LangService) {
     
-    
+    const today = new Date();
+    today.setFullYear(today.getFullYear() - 3);
+    this.maxDate = today.toISOString().split('T')[0];
     this.textos  = traducciones['traduciones'][this.idioma]['formUserChildren'];
     
     this.catalogos.getCatalogos().subscribe((res:any)=>{
@@ -174,8 +181,8 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
       photo:["",[Validators.required,Validators.minLength(2)]],
       gender_id:[0,[Validators.required,this.greaterThanZeroValidator()]],
       birthday:["",[Validators.required]],
-      height: [0, [Validators.required, this.validateMaxHeight,Validators.pattern("^[0-9]*$"),this.validateNumberWithoutDecimal, Validators.min(1)]],
-      weight: [0, [Validators.required, this.validateMaxHeight,Validators.pattern("^[0-9]*$"),this.validateNumberWithoutDecimal, Validators.min(1)]],
+      height: [null, [Validators.required, this.validateMaxHeight,Validators.pattern("^[0-9]*$"),this.validateNumberWithoutDecimal, Validators.min(1)]],
+      weight: [null, [Validators.required, this.validateMaxHeight,Validators.pattern("^[0-9]*$"),this.validateNumberWithoutDecimal, Validators.min(1)]],
       grade:[0,[Validators.required,this.greaterThanZeroValidator()]],
       school_id:[0,[Validators.required,this.greaterThanZeroValidator()]],
       school_other:["",],
@@ -309,6 +316,22 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
   }
   
   getbirthday() {
+    const birthdate = this.formUser.get('birthday')?.value;
+    if (birthdate) {
+      const birth = new Date(birthdate);
+      const today = new Date();
+      let age = today.getFullYear() - birth.getFullYear();
+      const m = today.getMonth() - birth.getMonth();
+  
+      if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
+        age--;
+      }
+  
+      this.edad = age;
+    } else {
+      this.edad = null;
+    }
+    
     if( this.formUser.get('birthday').valid){
       this.render.removeClass(this.birthday.nativeElement,"is-invalid");
       this.render.addClass(this.birthday.nativeElement,"is-valid");
@@ -357,15 +380,17 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
   }
   
   getschool_id() {
-    if( this.formUser.get('school_id').valid){
-      this.render.removeClass(this.school_id.nativeElement,"is-invalid");
-      this.render.addClass(this.school_id.nativeElement,"is-valid");
-   }else{
-    this.render.removeClass(this.school_id.nativeElement,"is-valid");
-    this.render.addClass(this.school_id.nativeElement,"is-invalid");
-    this.school_id.nativeElement.focus()
+    const control = this.formUser.get('school_id');
 
-   }
+  if (control?.valid) {
+    // Solo clases, si gustas
+  } else {
+    // Marcar como tocado para que se activen los estilos
+    control?.markAsTouched();
+
+    // Enfocar ng-select
+    this.schoolSelect.focus();
+  }
   }
   
   getSchool_other() {

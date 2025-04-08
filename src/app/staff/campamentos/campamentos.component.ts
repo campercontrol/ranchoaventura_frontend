@@ -22,7 +22,9 @@ import { AuthenticationService } from 'src/app/core/services/auth.service';
 })
 export class CampamentosComponent implements OnInit {
 
-
+  totalRecords: number = 0;
+  loading: boolean = false;
+  customer: any[] = [];
   
   selectedCustomers: any[];
   spiner : boolean = true;
@@ -30,11 +32,9 @@ export class CampamentosComponent implements OnInit {
 
   statuses: any[];
 
-  loading: boolean = false;
-
+ 
   activityValues: number[] = [0, 100];
-  customer:any =[];
-  rol_id = 0;
+   rol_id = 0;
   info:any ;
 
 constructor(private camps: CreateCampsService,private router :Router, private token:AuthenticationService) {
@@ -54,7 +54,7 @@ cars=[{Nombre:"Campamento con agrupaciones",grado:"prueba2",inicio:"2020-11-10 "
      this.camps.getCamp().subscribe((res:any)=>{
       console.log(res,'respuesta');
       this.spiner = true;
-      this.customer = res.data;
+      this.customer = res.data.items;
       console.log(this.customer);
       
      })
@@ -70,6 +70,20 @@ cars=[{Nombre:"Campamento con agrupaciones",grado:"prueba2",inicio:"2020-11-10 "
     }
     
   }
+
+
+loadCampsLazy(event: any) {
+  this.loading = true;
+
+  const page = Math.floor(event.first / event.rows) + 1;
+  const perPage = event.rows;
+
+  this.camps.getCamp(page, perPage).subscribe((res: any) => {
+    this.customer = res.data.items;
+    this.totalRecords = res.data.total; // Ajusta esto si la API devuelve total con otro nombre
+    this.loading = false;
+  });
+}
 }
 
 

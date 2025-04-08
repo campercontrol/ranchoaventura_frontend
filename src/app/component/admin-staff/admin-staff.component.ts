@@ -102,37 +102,33 @@ export class AdminStaffComponent implements OnInit {
   }
   breadCrumbItems: Array<{}>;
   selectedCities: string[] = [];
+  totalRecords: any;
   
   constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private catalogos:CatalogosService,private paymants:PaymentsService,private router:Router) {  
   }
 
-  info() {
-    this.cargando = true; // Set loading state to true before fetching data
+  info(page: number = 1, per_page: number = 5) {
+    this.cargando = false;  // Se activa el loading mientras se carga la data
   
-    this.catalogos.getStaff().subscribe((staffResponse: any) => {
-      console.log(staffResponse.data, 'respuesta staff');
-      this.listcatalogos = staffResponse.data;
-      this.listcatalogos.forEach(element => {
-        element.tipo = "Staff"
-      });
-  
-      this.catalogos.getProspectos().subscribe((prospectResponse: any) => {
-        let b = prospectResponse.data;
-        console.log(b);
-        
-         b.forEach((prospect:any) => {
-          prospect.tipo ="Prospecto"
-         });
-        this.listcatalogos = [...prospectResponse.data, ...this.listcatalogos]; // Concatenate arrays correctly
-        this.cargando = false; // Set loading state to false after both requests are complete
-      }, (error: any) => {
-        console.error('Error fetching prospectos:', error);
-        this.cargando = false; // Set loading state to false even if an error occurs
-      });
+    this.catalogos.getStaff(page, per_page).subscribe((staffResponse: any) => {
+      let staffData = staffResponse.data.items;
+      this.listcatalogos = staffData;
+      // Asigna el total de registros para que se muestre la paginación
+      this.totalRecords = staffResponse.data.total;
+      this.cargando = false;
     }, (error: any) => {
       console.error('Error fetching staff:', error);
-      this.cargando = false; // Set loading state to false even if an error occurs
+      this.cargando = false;
     });
+  }
+  
+  
+  loadStaffLazy(event: any) {
+    // event.first: índice del primer elemento (empezando en 0)
+    // event.rows: cantidad de registros por página
+    const page = Math.floor(event.first / event.rows) + 1; // Backend espera páginas que inician en 1
+    const rows = event.rows;
+    this.info(page, rows);
   }
   
 

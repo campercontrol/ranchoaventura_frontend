@@ -54,14 +54,24 @@
                             </div>
 
                             <div class="row mb-4 mt-3">
-                                <label for="" class="col-sm-12 col-form-label">{{textos['Birthdate']}}</label>
-                                <div class=" control-label col-sm-12">
-                                    
-                                        <input type="date" class="form-control" placeholder="dd-mm-yyyy"
-                                        formControlName="birthday" style="width: 100%;"  (input)="getbirthday()" #birthday>
-                                   
+                                <label class="col-sm-12 col-form-label">{{ textos['Birthdate'] }}</label>
+                                <div class="control-label col-sm-12">
+                                  <input
+                                    type="date"
+                                    class="form-control"
+                                    formControlName="birthday"
+                                    placeholder="dd-mm-yyyy"
+                                    [attr.max]="maxDate"
+                                    style="width: 100%;"
+                                    (input)="getbirthday()"
+                                    #birthday />
+                              
+                                  <div *ngIf="edad !== null" class="text-muted mt-1">
+                                    Edad: {{ edad }} años
+                                  </div>
                                 </div>
-                            </div>
+                              </div>
+                              
                             <div class="foto mt-4">
                                 <div class="container-footer-parents">
                                     <!-- Muestra la imagen seleccionada o la predeterminada -->
@@ -73,7 +83,7 @@
                                         type="file" 
                                         id="fileInput" 
                                         #fileInputRef 
-                                        accept="image/jpeg" 
+                                        accept="image/jpeg, image/png" 
                                         (change)="subiendo($event)" 
                                         style="display: none;">
                                     <button type="button" class="custom-upload-btn" (click)="fileInputRef.click()">
@@ -84,7 +94,7 @@
                                 
                                 
                                 <div class="alert alert-primary mt-3" role="alert" >
-                                    La foto es obligatoria para identificar a los campers. Recomendamos subir una imagen reciente y de tamaño reducido, en formato JPG, con un peso máximo de 3 MB.  
+                                    La foto es obligatoria para identificar a los campers. Recomendamos subir una imagen reciente y de tamaño reducido, en formato JPG y PNG, con un peso máximo de 3 MB.  
 
                                    </div>
                                 <div *ngIf="spinerPhot">
@@ -117,14 +127,24 @@
                             <div class="row mb-4">
                                 <label for="" class="col-sm-12 col-form-label">{{textos['School']}}</label>
                                 <div class="control-label col-sm-12">
-                                    <select name="school_id" id="school_id" formControlName="school_id" (change)="getschool_id()" class="form-control" #school_id>
-                                        <option *ngFor="let item of school" [value]="item.id" >
-                                            {{item.name}}
-                                        </option>
-                                    </select>
+                                    <ng-select 
+                                    [items]="school"
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    formControlName="school_id"
+                                    placeholder="Selecciona una escuela"
+                                    [searchable]="true"
+                                    [class.is-valid]="formUser.get('school_id')?.valid && formUser.get('school_id')?.touched"
+                                    [class.is-invalid]="formUser.get('school_id')?.invalid && formUser.get('school_id')?.touched"
+                                    (change)="getschool_id()"
+                                    #schoolSelect>
+                                  </ng-select>
                                   
                                 </div>
-                               
+                                <div *ngIf="formUser.get('school_id')?.invalid && formUser.get('school_id')?.touched" class="text-danger mt-1">
+                                    Por favor, selecciona una escuela.
+                                  </div>
+                                  
                             </div>
                             <div class="row mb-4">
                                 <label for="" class="col-sm-12 col-form-label">{{textos['Otherschool']}}</label>

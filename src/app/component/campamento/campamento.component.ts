@@ -119,6 +119,7 @@ export class CampamentoComponent implements OnInit {
   fechadePagos:any=[]
   rol=0;
   spinner = false;
+  showCancelDialog= false;
 
   constructor(private mercadoPagoService: MercadoPagoService,private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router,private render:Renderer2,private lang:LangService,private routerNav:Router,private info : AuthenticationService) { 
 

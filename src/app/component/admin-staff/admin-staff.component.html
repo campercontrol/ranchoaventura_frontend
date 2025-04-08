@@ -19,11 +19,19 @@
                                 placeholder="Global Search" />
                         </div>
                         <div style="overflow: auto;">
-                            <p-table #dt [value]="listcatalogos" [rows]="5" [rowsPerPageOptions]="[5, 25, 50]"
-                                [globalFilterFields]="['Staff.name','Staff.facebook','email','Staff.bio','Staff.cellphone','Staff.home_phone']"
-                                 [rowHover]="true" dataKey="id"
-                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                                [showCurrentPageReport]="true" [paginator]="true">
+                            <p-table  #dt
+                            [value]="listcatalogos"
+                            [rows]="25"
+                            [rowsPerPageOptions]="[5, 25, 50]"
+                            [lazy]="true"
+                            (onLazyLoad)="loadStaffLazy($event)"
+                            [totalRecords]="totalRecords"
+                            [globalFilterFields]="['Staff.name','Staff.facebook','email','Staff.bio','Staff.cellphone','Staff.home_phone']"
+                            [rowHover]="true"
+                            dataKey="id"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [showCurrentPageReport]="true"
+                            [paginator]="true">
 
                                 <ng-template pTemplate="header">
                                     <tr>
