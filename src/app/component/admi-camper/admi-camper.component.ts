@@ -83,12 +83,17 @@ export class AdmiCamperComponent implements OnInit {
   parent:any = [];
   paymanacout:any = [];
   selected:any = [];
+   // Filtros de búsqueda
+   searchName: string = '';
+   searchLocation: number | null = null;
+   searchSchool: number | null = null;
   tipoPago =[{'name':'Mercado pago','id':1},{'name':'Pago en escuela','id':2},{'name':'Ficha de pago','id':3},{'name':'Personalizado','id':4}]
 
   escuelas:any = [];
   photoSelectUp : string | ArrayBuffer;
   tipoDepago = 4
   idioma = 'esp';
+  totalRecords: number = 0;
   cargando =true;
   rol:any=[];
   cat: any = {
@@ -101,6 +106,7 @@ export class AdmiCamperComponent implements OnInit {
     name: ''
   }
   breadCrumbItems: Array<{}>;
+  filtrosActivos: boolean = false;
   selectedCities: string[] = [];
   
   constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private catalogos:CatalogosService,) {  
@@ -164,6 +170,7 @@ export class AdmiCamperComponent implements OnInit {
       payment_accounts:[this.payment_accounts]
       
     })
+    this.loadCampsLazy({ first: 0, rows: 10 });
    this.fechas();
     this.getCatalogos();
   }
@@ -231,13 +238,10 @@ export class AdmiCamperComponent implements OnInit {
 
   getCatalogos() {
     this.listcatalogos=[];
-    this.catalogos.getCamps().subscribe((res: any) => {
-      
-      this.listcatalogos = res.data;
-      this.cargando = false;
-      console.log(this.listcatalogos);
-      
-    });
+    
+    this.loadCampsLazy({ first: 0, rows: 10 });
+    this.cargando = false;
+
 
 
     this.catalogos.getpaymentaccounts().subscribe((res: any) => {
@@ -248,7 +252,47 @@ export class AdmiCamperComponent implements OnInit {
  
    
   }
+  buscarCampamentos() {
+    this.filtrosActivos = true;
+    this.loadCampsLazy({ first: 0, rows: 10 });
+  }
 
+  loadCampsLazy(event: any) {
+     const page = Math.floor(event.first / event.rows) + 1;
+    const perPage = event.rows;
+
+    if (this.filtrosActivos) {
+      // Si hay filtros activos, buscar con filtros
+      this.createCamp.searchCamps(
+        this.searchName,
+        this.searchLocation,
+        this.searchSchool,
+        page,
+        perPage
+      ).subscribe((res: any) => {
+        this.listcatalogos = res.data.items;
+        this.totalRecords = res.data.total;
+        this.cargando = false;
+      });
+    } else {
+      // Sin filtros: carga normal
+      this.createCamp.getCamp(page, perPage).subscribe((res: any) => {
+        this.listcatalogos = res.data.items;
+        this.totalRecords = res.data.total;
+        this.cargando = false;
+
+      });
+    }
+  }
+
+  resetFiltros() {
+    this.searchName = '';
+    this.searchLocation = null;
+    this.searchSchool = null;
+    this.filtrosActivos = false;
+    
+    this.loadCampsLazy({ first: 0, rows: 10 });
+  } 
   prueba(){
     this.spinner=true;
     if(this.formFood.valid){  

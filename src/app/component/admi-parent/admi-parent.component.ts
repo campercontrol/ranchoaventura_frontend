@@ -22,6 +22,8 @@ export class AdmiParentComponent implements OnInit {
   display3: boolean = false;
   vacunas:any = [];
   item:any={}
+  lazyParams: any;
+
   displayEditUpd:boolean= false;
   resSearch:boolean = false;
   cargando:boolean = false;
@@ -49,10 +51,12 @@ export class AdmiParentComponent implements OnInit {
   photoSelect : string | ArrayBuffer;
   photoSatus = false;
   spinerPhot= true;
-  table:boolean=true
+  table:boolean=true;
+  reset: boolean = false;
   
   idDalete =0;
   updateId= 0;
+
   text: any;
   TextElimint="";
   formFood: FormGroup;
@@ -70,6 +74,14 @@ export class AdmiParentComponent implements OnInit {
   grades:any = [];
   school:any = [];
   parent:any = [];
+  filters: any = {
+    tutor_1_name: '',
+    tutor_1_lastname_father: '',
+    tutor_1_lastname_mother: '',
+    tutor_1_email: '',
+    tutor_2_email: '',
+    contact_name: ''
+  };
   escuelas:any = [];
   @ViewChild('dt') dt: Table;
   totalRecords: number; // Property to store total records for pagination
@@ -303,6 +315,24 @@ export class AdmiParentComponent implements OnInit {
     } 
   }
 
+  buscarCatalogos() {
+    this.getCatalogos(1, this.lazyParams?.rows || 5);
+  }
+
+  resetFilters() {
+    // Resetear todos los filtros
+    this.filters = {
+      tutor_1_name: '',
+      tutor_1_lastname_father: '',
+      tutor_1_lastname_mother: '',
+      tutor_1_email: '',
+      tutor_2_email: '',
+      contact_name: ''
+    };
+  
+    // Llamar la función de búsqueda para obtener los datos sin filtros
+    this.buscarCatalogos();
+  }
   schoolinf(id) {
     console.log(this.school);
     

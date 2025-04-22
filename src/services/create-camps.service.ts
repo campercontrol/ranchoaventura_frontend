@@ -37,4 +37,15 @@ export class CreateCampsService {
   get_temporada(){
     return this.http.get('http://142.93.12.234:8000/season/');
   }
+  searchCamps(name: string, location: any, school: any, page: number = 1, perPage: number = 10) {
+    const params = new URLSearchParams();
+    if (name) params.append('name', name);
+    if (location) params.append('location', location);
+    if (school) params.append('school', school);
+    params.append('page', page.toString());
+    params.append('per_page', perPage.toString());
+    params.append('order', 'desc');
+
+    return this.http.get(`http://142.93.12.234:8000/search/active_camp/?${params.toString()}`);
+  }
 }

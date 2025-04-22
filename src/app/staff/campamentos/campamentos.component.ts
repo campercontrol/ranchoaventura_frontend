@@ -36,7 +36,15 @@ export class CampamentosComponent implements OnInit {
   activityValues: number[] = [0, 100];
    rol_id = 0;
   info:any ;
+ 
 
+  // Filtros de búsqueda
+  searchName: string = '';
+  searchLocation: number | null = null;
+  searchSchool: number | null = null;
+
+  // Para mantener estado de filtros activos
+  filtrosActivos = false;
 constructor(private camps: CreateCampsService,private router :Router, private token:AuthenticationService) {
   this.rol_id =token.infToken.role_id;
   this.info= token
@@ -51,13 +59,8 @@ cars=[{Nombre:"Campamento con agrupaciones",grado:"prueba2",inicio:"2020-11-10 "
 
   ngOnInit(): void {
     this.spiner = false;
-     this.camps.getCamp().subscribe((res:any)=>{
-      console.log(res,'respuesta');
-      this.spiner = true;
-      this.customer = res.data.items;
-      console.log(this.customer);
-      
-     })
+    this.loadCampsLazy({ first: 0, rows: 10 });
+
   }
 
   reditCamps(id){
@@ -72,18 +75,46 @@ cars=[{Nombre:"Campamento con agrupaciones",grado:"prueba2",inicio:"2020-11-10 "
   }
 
 
-loadCampsLazy(event: any) {
-  this.loading = true;
+  loadCampsLazy(event: any) {
+    this.loading = true;
+    const page = Math.floor(event.first / event.rows) + 1;
+    const perPage = event.rows;
 
-  const page = Math.floor(event.first / event.rows) + 1;
-  const perPage = event.rows;
+    if (this.filtrosActivos) {
+      // Si hay filtros activos, buscar con filtros
+      this.camps.searchCamps(
+        this.searchName,
+        this.searchLocation,
+        this.searchSchool,
+        page,
+        perPage
+      ).subscribe((res: any) => {
+        this.customer = res.data.items;
+        this.totalRecords = res.data.total;
+        this.loading = false;
+      });
+    } else {
+      // Sin filtros: carga normal
+      this.camps.getCamp(page, perPage).subscribe((res: any) => {
+        this.customer = res.data.items;
+        this.totalRecords = res.data.total;
+        this.loading = false;
+      });
+    }
+  }
 
-  this.camps.getCamp(page, perPage).subscribe((res: any) => {
-    this.customer = res.data.items;
-    this.totalRecords = res.data.total; // Ajusta esto si la API devuelve total con otro nombre
-    this.loading = false;
-  });
-}
+  buscarCampamentos() {
+    this.filtrosActivos = true;
+    this.loadCampsLazy({ first: 0, rows: 10 });
+  }
+
+  resetFiltros() {
+    this.searchName = '';
+    this.searchLocation = null;
+    this.searchSchool = null;
+    this.filtrosActivos = false;
+    this.loadCampsLazy({ first: 0, rows: 10 });
+  }
 }
 
 

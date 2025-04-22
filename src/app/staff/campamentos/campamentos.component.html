@@ -6,20 +6,9 @@
           <h4 class="card-title text-white">Campamentos</h4>
 
         </div>
-        <div *ngIf="spiner" >
+        <div *ngIf="!spiner" >
             <div class="table-header  p-3">
-                <div class="btn-container" >
-                    <a routerLink="/dashboard/camps/camp_add" class="btn btn-primary" *ngIf="this.info.infToken.user_admin == true ">
-                        Agregar camp
-                    </a>
-                    <div>
-                        <span class="p-input-icon-left">
-                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                                placeholder="Global Search" />
-                        </span>
-                    </div>
-                 
-                </div>
+            
                 
             </div>
             
@@ -45,7 +34,29 @@
                     currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
                     [globalFilterFields]="['camp_name','camp_public_price','camp_start','camp_end','location_name']"
                 >
-                    
+                <ng-template pTemplate="caption">
+                    <div class="row mb-2">
+                      <div class="col-md-4">
+                        <input pInputText type="text" [(ngModel)]="searchName" placeholder="Nombre del campamento" class="form-control" />
+                      </div>
+                      <div class="col-md-4">
+                        <input pInputText type="text" [(ngModel)]="searchLocation" placeholder="Sede (location)" class="form-control" />
+                      </div>
+                      <div class="col-md-4">
+                        <input pInputText type="text" [(ngModel)]="searchSchool" placeholder=" Escuela (school)" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-md-12 text-end">
+                        <button class="btn btn-success" (click)="buscarCampamentos()">Buscar</button>
+                        <a routerLink="/dashboard/camps/camp_add " class="btn btn-primary ms-2" *ngIf="this.info.infToken.user_admin == true ">   Agregar camp
+                        </a>
+
+                        <button class="btn btn-secondary ms-2" (click)="resetFiltros()">Limpiar</button>
+                          
+                      </div>
+                    </div>
+                  </ng-template>
                     <ng-template pTemplate="header">
                         <tr>
             
@@ -141,7 +152,7 @@
         </div>
        
         
-        <div *ngIf="!spiner" class="p-4">
+        <div *ngIf="spiner" class="p-4">
             <div class="d-flex justify-content-center">
               <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>

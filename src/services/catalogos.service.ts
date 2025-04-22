@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -14,6 +14,21 @@ export class CatalogosService {
     return this.http.post('http://142.93.12.234:8000/update/order/catalogs?catalog_type='+id,info);
 
   }
+
+  getParentAdmiSearc(filters: any){
+    let params = new HttpParams()
+  
+
+    // Agregar los filtros de búsqueda dinámicamente
+    Object.keys(filters).forEach(key => {
+      if (filters[key] && key !== 'page' && key !== 'per_page' && key !== 'order') {
+        params = params.set(key, filters[key]);
+      }
+    });
+
+    return this.http.get<any>('http://142.93.12.234:8000/search_admin_parent/', { params });
+  }
+
 
   getAlimentos(){
     return this.http.get('http://142.93.12.234:8000/food_restriction/');

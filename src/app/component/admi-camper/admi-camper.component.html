@@ -15,15 +15,43 @@
 
                                 </div>
                             </div>
-                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                                placeholder="Global Search" />
+                           
                         </div>
                         <div style="overflow: auto;">
                             <p-table #dt [value]="listcatalogos" [rows]="5" [rowsPerPageOptions]="[5, 25, 50]"
-                                [globalFilterFields]="['name','start','lastname_mother','tutor_cellphone','contact_email','acronyms','tutor_home_phone','tutor_work_phone']"
-                                [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
-                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                                [showCurrentPageReport]="true" [paginator]="true">
+                            dataKey="id"
+                            [rowHover]="true"
+                            [rows]="10"
+                            [paginator]="true"
+                            [lazy]="true"
+                            (onLazyLoad)="loadCampsLazy($event)"
+                            [totalRecords]="totalRecords"
+                            [responsive]="true"
+                            [showCurrentPageReport]="true"
+                            [rowsPerPageOptions]="[10,25,50]"
+                                 [showCurrentPageReport]="true" [paginator]="true">
+                                <ng-template pTemplate="caption">
+                                    <div class="row mb-2">
+                                      <div class="col-md-4">
+                                        <input pInputText type="text" [(ngModel)]="searchName" placeholder="Nombre del campamento" class="form-control" />
+                                      </div>
+                                      <div class="col-md-4">
+                                        <input pInputText type="text" [(ngModel)]="searchLocation" placeholder="Sede (location)" class="form-control" />
+                                      </div>
+                                      <div class="col-md-4">
+                                        <input pInputText type="text" [(ngModel)]="searchSchool" placeholder=" Escuela (school)" class="form-control" />
+                                      </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                      <div class="col-md-12 text-end">
+                                        <button class="btn btn-success" (click)="buscarCampamentos()">Buscar</button>
+                                      
+                
+                                        <button class="btn btn-secondary ms-2" (click)="resetFiltros()">Limpiar</button>
+                                          
+                                      </div>
+                                    </div>
+                                  </ng-template>
 
                                 <ng-template pTemplate="header">
                                     <tr>
@@ -52,22 +80,22 @@
                                 <ng-template pTemplate="body" let-customer>
                                     <tr>
                                         <td (click)="update(customer)" style="cursor:pointer; text-align: center;">
-                                            {{customer.name}}
+                                            {{customer.camp_name}}
                                         </td>
                                         <td style="font-size: 12px; font-size: 12px;">
-                                            {{customer.start.slice(0,10) }} - {{ customer.start.slice(11,16)}}
+                                            {{customer.camp_start.slice(0,10) }} - {{ customer.camp_start.slice(11,16)}}
                                         </td>
                                         <td style="font-size: 12px; font-size: 12px;">
-                                            {{customer.end.slice(0,10)}} - {{ customer.start.slice(11,16)}}
+                                            {{customer.camp_end.slice(0,10)}} - {{ customer.camp_end.slice(11,16)}}
                                         </td>
                                         <td style="text-align: center; font-size: 12px;">
-                                            {{customer.venue}}
+                                            {{customer.location_name}}
                                         </td>
                                         <td style="text-align: center; font-size: 12px;">
-                                            {{customer.school_id}}
+                                            {{customer.school_name}}
                                         </td>
                                         <td style="text-align: center; font-size: 12px;" >
-                                            {{customer.public_price}}
+                                            {{customer.camp_public_price}}
                                         </td>
                                      
 
