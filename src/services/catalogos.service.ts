@@ -254,6 +254,26 @@ export class CatalogosService {
     getCamperAdmi(page=1,per_page=10){
       return this.http.get('http://142.93.12.234:8000/admin/camper/?page='+page+'&per_page='+per_page+'&order=desc');
     }
+
+    searchCampers(filters: any, page: number = 1, perPage: number = 10) {
+      const params = new HttpParams()
+        .set('camper_name', filters.camper_name || '')
+        .set('camper_lastname_father', filters.camper_lastname_father || '')
+        .set('camper_lastname_mother', filters.camper_lastname_mother || '')
+        .set('tutor_1_name', filters.tutor_1_name || '')
+        .set('tutor_1_lastname_father', filters.tutor_1_lastname_father || '')
+        .set('tutor_1_lastname_mother', filters.tutor_1_lastname_mother || '')
+        .set('tutor_1_email', filters.tutor_1_email || '')
+        .set('tutor_2_name', filters.tutor_2_name || '')
+        .set('tutor_2_lastname_father', filters.tutor_2_lastname_father || '')
+        .set('tutor_2_lastname_mother', filters.tutor_2_lastname_mother || '')
+        .set('tutor_2_email', filters.tutor_2_email || '')
+        .set('page', page.toString())
+        .set('per_page', perPage.toString())
+        .set('order', 'desc');
+  
+      return this.http.get<any>('http://142.93.12.234:8000/admin/search_camper/', { params });
+    }
     getCamper(){
       return this.http.get('http://142.93.12.234:8000/camper/');
     }
@@ -273,6 +293,26 @@ export class CatalogosService {
      getStaff(page=1,per_page=10){
       return this.http.get('http://142.93.12.234:8000/staff/?page='+page+'&per_page='+per_page+'&order=desc');
      }
+     searchUusario(filters: any, page: number = 1, perPage: number = 10) {
+      const params = new HttpParams()
+        .set('is_active', filters.is_active || true)
+        .set('email', filters.email || '')
+        .set('page', page.toString())
+        .set('per_page', perPage.toString())
+        .set('order', 'desc');
+  
+      return this.http.get<any>('http://142.93.12.234:8000/search_usuario/', { params });
+    }
+    searchStaff(filters: any, page: number = 1, perPage: number = 10) {
+      const params = new HttpParams()
+        .set('name', filters.name || '')
+        .set('email', filters.email || '')
+        .set('page', page.toString())
+        .set('per_page', perPage.toString())
+        .set('order', 'desc');
+  
+      return this.http.get<any>('http://142.93.12.234:8000/search_staff/', { params });
+    }
      getProspectos(){
       return this.http.get('http://142.93.12.234:8000/prospect/');
 
@@ -280,6 +320,23 @@ export class CatalogosService {
      getParentAdmi(page=1,per_page=10){
       return this.http.get('http://142.93.12.234:8000/admin/parent/?page='+page+'&per_page='+per_page+'&order=desc');
      }
+
+     getParentAdmiSearcg(filters: any, page: number = 1, per_page: number = 10){
+      let params = new HttpParams()
+        .set('page', page.toString())
+        .set('per_page', per_page.toString())
+        .set('order', 'desc'); // Parámetro común de orden
+  
+      // Agregar filtros, solo si no están vacíos
+      Object.keys(filters).forEach(key => {
+        if (filters[key]) { // Solo agregar filtros no vacíos
+          params = params.set(key, filters[key]);
+        }
+      });
+  
+      // Realizamos la solicitud GET con los filtros y parámetros como query string
+      return this.http.get<any>(`http://142.93.12.234:8000/search_admin_parent/`, { params });
+    }
      getParentU(id){
       return this.http.get('http://142.93.12.234:8000/parent/'+id);
 
@@ -295,10 +352,17 @@ export class CatalogosService {
     }
      // user admi
 
-     getUser(){
-      return this.http.get('http://142.93.12.234:8000/usuario/');
+    
 
-     }
+     getUsuarios(isActive: boolean, page: number, perPage: number, order: string) {
+      let params = new HttpParams()
+        .set('is_active', String(isActive))
+        .set('page', String(page))
+        .set('per_page', String(perPage))
+        .set('order', order);
+  
+      return this.http.get<any>('http://142.93.12.234:8000/usuario/', { params });
+    }
      getUserF(){
       return this.http.get('http://142.93.12.234:8000/usuario?is_active=false');
 

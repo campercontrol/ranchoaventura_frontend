@@ -20,6 +20,13 @@ export class ListaProspectosComponent implements OnInit {
   loading: boolean = false;
   customer:any =[];
   idCamps:any[]=[];
+  filters = {
+    name: '',
+    email: '',
+    page: 1,
+    per_page: 10,
+    order: 'desc'
+  }
   id= 0;
   cargando:boolean=false;
   prospectosArray:any=[]
@@ -92,6 +99,37 @@ export class ListaProspectosComponent implements OnInit {
     const rows = event.rows;
     this.getProspecto(page, rows);
   }
+  buscarProspectos() {
+    this.loading = true;
+    this.prospectos.getProspectosSearch(this.filters).subscribe((res) => {
+      this.spinner = true;
+      // Mapea los prospectos para extraer la info del Staff
+      const arrayTemp: any[] = [];
+      res.data.items.forEach((item: any) => {
+        // Actualiza o asigna datos necesarios en Staff
+        item.Staff.email = item.email;
+        item.Staff.season_name = item.season_name;
+        arrayTemp.push(item.Staff);
+      });
+      this.prospectosArray = arrayTemp;
+      // Guarda el total de registros para la paginación
+      this.totalRecords = res.data.total;
+      this.cargando = false;
+      this.loading = false;
+    });
+  }
+  
+  resetFilters() {
+    this.filters = {
+      name: '',
+      email: '',
+      page: 1,
+      per_page: 10,
+      order: 'desc'
+    };
+    this.getProspecto();
+  }
+  
   
   
 }

@@ -75,6 +75,12 @@ export class AdmiUserComponent implements OnInit {
   data =[];
   tablastaff=[];
   displayColumns: string[] = [];
+  totalRecords: number = 0;
+
+  filters: any = {
+    is_active: true,
+    email: ''
+  };
 
   columns: string[] = [];
 
@@ -125,7 +131,8 @@ export class AdmiUserComponent implements OnInit {
       "is_active": [true]
     
   })
-    this.getCatalogos();
+  this.loadUsuarios({ first: 0, rows: 10 });
+
   }
 
  
@@ -156,22 +163,22 @@ export class AdmiUserComponent implements OnInit {
 
   }
 
-  getCatalogos() {
-    this.listcatalogos=[];
-    this.catalogos.getUser().subscribe((res: any) => {
-      
-      this.listcatalogos = res.data;
-      this.catalogos.getUserF().subscribe((res: any) => {    
-        //console.log(res);
-        
-        this.listcatalogos =this.listcatalogos.concat(res.data); 
-        this.cargando = false;
- 
-      });
-       
-    });
+  
+  loadUsuarios(event: any) {
+    const page = (event.first! / event.rows!) + 1;
+    const perPage = event.rows || 5;
 
-   
+ 
+    this.catalogos.getUsuarios(true, page, perPage, 'desc').subscribe({
+      next: (response) => {
+        this.listcatalogos = response.data.items;
+        this.totalRecords = response.data.total;
+        this.cargando = false;
+      },
+      error: () => {
+        this.cargando = true;
+      }
+    });
   }
 
  
@@ -197,7 +204,7 @@ export class AdmiUserComponent implements OnInit {
       this.catalogos.postUser(this.formFood.value).subscribe((res:any)=>{
           console.log(res);
             this.spinner=false; 
-            this.getCatalogos();
+            this.loadUsuarios({ first: 0, rows: 10 });
             this.statuAgrgado = true;
             this.resteValu();
             this.spinner=false; 
@@ -225,7 +232,7 @@ export class AdmiUserComponent implements OnInit {
 
   guardar() {
     this.catalogos.postAlimentos(this.formFood.value).subscribe((res: any) => {
-      this.getCatalogos();
+      this.loadUsuarios({ first: 0, rows: 10 });
       this.statuAgrgado = true;
       this.resteValu();
       setTimeout(() => {
@@ -360,7 +367,7 @@ getCampsSummary(camps: any[]): string {
         console.log(res);
         if(res.succes = 200){
           this.spinner = false;
-          this.getCatalogos();
+          this.loadUsuarios({ first: 0, rows: 10 });
           this.statuAgrgado = true;
           this.cancelarUpdate();
           setTimeout(() => {
@@ -396,7 +403,7 @@ getCampsSummary(camps: any[]): string {
       this.statuAgrgado = true;
       this.cargando= true;
       this.canelar();
-      this.getCatalogos();
+      this.loadUsuarios({ first: 0, rows: 10 });
       setTimeout(() => {
         this.statuAgrgado = false;
         this.closeModal3();
@@ -491,7 +498,28 @@ this.staff = true;
      }
     
   }
-  
+  buscarStaff( ) {
+    this.catalogos.searchUusario(this.filters).subscribe(response => {
+       this.listcatalogos = response.data.items;
+        this.totalRecords = response.data.total;
+        this.cargando = false;
+        this.totalRecords = response.data.total;
+
+    
+       
+    }, error => {
+      console.error('Error al buscar staff:', error);
+    });
+  }
+
+  resetFilters() {
+    this.filters = {
+      is_active: true,
+      email: ''
+    };
+    this.loadUsuarios({ first: 0, rows: 10 });
+  }
+
 
   
 

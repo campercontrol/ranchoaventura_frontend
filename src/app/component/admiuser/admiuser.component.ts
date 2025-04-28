@@ -86,6 +86,18 @@ export class AdmiuserComponent implements OnInit {
   buscador:boolean=false;
   escuelas:any = [];
   listBuscador:any=[];
+  filters = {
+    camper_name: '',
+    camper_lastname_father: '',
+    camper_lastname_mother: '',
+    tutor_1_name: '',
+    tutor_1_lastname_father: '',
+    tutor_1_email: '',
+    tutor_2_name: '',
+    tutor_2_lastname_father: '',
+    tutor_2_lastname_mother: '',
+    tutor_2_email: ''
+  };
   photoSelectUp : string | ArrayBuffer;
   displayEditUpd:boolean = false;
   idioma = 'esp';
@@ -285,6 +297,52 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
     }
  
   }
+  resetFilters() {
+    this.dt.reset();  // Resetea la tabla
+    this.selectCatalogos = [];  // Limpia las selecciones
+    this.buscador = false;  // Si tienes algún filtro visual (como el buscador)
+    this.getCatalogos()// Resetea el filtro global a vacío
+  }
+  buscarCatalogos() {
+    const params = {
+      camper_name: this.filters.camper_name,
+      camper_lastname_father: this.filters.camper_lastname_father,
+      camper_lastname_mother: this.filters.camper_lastname_mother,
+      tutor_1_name: this.filters.tutor_1_name,
+      tutor_1_lastname_father: this.filters.tutor_1_lastname_father,
+      tutor_1_email: this.filters.tutor_1_email,
+      tutor_2_name: this.filters.tutor_2_name,
+      tutor_2_lastname_father: this.filters.tutor_2_lastname_father,
+      tutor_2_lastname_mother: this.filters.tutor_2_lastname_mother,
+      tutor_2_email: this.filters.tutor_2_email,
+      page: 1,  // Si es necesario ajustar la paginación
+      per_page: 10,  // O lo que sea necesario
+      order: 'desc'
+    };
+
+    // Llamada al servicio para obtener los datos con los parámetros
+    this.catalogos.searchCampers(params).subscribe(res => {
+      this.listcatalogos = res.data.items;
+      console.log(res.data);
+      this.totalRecords = res.data.total;
+
+      this.listcatalogos.forEach(element => {
+        element.namecomplet = `${element.camper_name} ${element.camper_lastname_father} ${element.camper_lastname_mother}`;
+        element.namecomplet1 = `${element.camper_name} ${element.camper_lastname_mother} ${element.camper_lastname_father}`;
+        element.namecomplet2 = `${element.camper_lastname_father} ${element.camper_name} ${element.camper_lastname_mother}`;
+        element.namecomplet3 = `${element.camper_lastname_father} ${element.camper_lastname_mother} ${element.camper_name}`;
+        element.namecomplet4 = `${element.camper_lastname_mother} ${element.camper_name} ${element.camper_lastname_father}`;
+        element.namecomplet5 = `${element.camper_lastname_mother} ${element.camper_lastname_father} ${element.camper_name}`;
+        
+        this.spiner = true;
+
+
+      });
+    
+    }, error => {
+      console.error('Error al obtener los datos:', error);
+    });
+  }
 
 
   executeSearch() {
@@ -293,6 +351,7 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
      
     } 
   }
+
 
   schoolinf(id) {
     //console.log(this.school);

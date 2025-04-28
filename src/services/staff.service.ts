@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -14,6 +14,17 @@ export class StaffService {
     
     return this.http.post('http://142.93.12.234:8000/prospect/',prospecto)
   }
+  getProspectosSearch(filters: any) {
+    let params = new HttpParams();
+    Object.keys(filters).forEach(key => {
+      if (filters[key] !== '' && filters[key] !== null && filters[key] !== undefined) {
+        params = params.set(key, filters[key]);
+      }
+    });
+  
+    return this.http.get<any>('http://142.93.12.234:8000/search_prospect/', { params });
+  }
+  
   editStaff(a,id){
     return this.http.patch('http://142.93.12.234:8000/staff/complete/'+id,a)
   }

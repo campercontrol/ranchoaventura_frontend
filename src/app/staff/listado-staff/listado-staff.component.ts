@@ -28,6 +28,10 @@ export class ListadoStaffComponent implements OnInit {
   photoSelect : string | ArrayBuffer;
   photoSatus = false;
   spinerPhot= true;
+   filters = {
+    name: '',
+    email: ''
+  };
   table:boolean=true;
 
   location:any = [];
@@ -129,6 +133,32 @@ export class ListadoStaffComponent implements OnInit {
 hypervinculo(id:any){
   this.routerAc.navigate(['dashboard/staff/perfil/'+id])
 }
-  
+buscarStaff(page: number = 1) {
+  this.catalogos.searchStaff(this.filters, page).subscribe(
+    (staffResponse: any) => {
+      console.log(staffResponse.data, 'respuesta staff');
+      this.listcatalogos = staffResponse.data.items;
+
+      this.listcatalogos.forEach(element => {
+        element.tipo = "Staff";
+        element.combined = `${element.Staff.name} ${element.Staff.lastname_father} ${element.Staff.lastname_mother}`.toLowerCase();
+      });
+
+      this.totalRecords = staffResponse.data.total; // Guarda el total de registros
+
+      this.cargando = false;
+      this.cdr.detectChanges();
+  }, error => {
+    console.error('Error al buscar staff:', error);
+  });
+}
+
+resetFilters() {
+  this.filters = {
+    name: '',
+    email: ''
+  };
+  this.info(); // Buscar sin filtros
+}
 
 }

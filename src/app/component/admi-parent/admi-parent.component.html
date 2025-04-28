@@ -9,42 +9,56 @@
                 <div class="card-body">
                 <div class="container-btn mt-1 mb-3">
                     <div>
-                        <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
-                            <button type="button" class="btn btn-primary" (click)="showDialog()">Añadir Titular de cuenta</button>
-        
-                        </div>
-                        <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
-                            <button type="button" class="btn btn-primary" (click)="buscador=!buscador;">Buscador</button>
-        
-                        </div>
+                     
+                        
                     </div>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                        placeholder="Global Search" />
+                    
                 </div>
         <div   style="overflow: auto;">
             <div class="mb-3">
                 <!-- Filtros -->
-                <label for="tutor_name">Nombre</label>
-                <input type="text" pInputText [(ngModel)]="filters.tutor_1_name" class="form-control" placeholder="Nombre Tutor 1" />
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="tutor_name">Nombre</label>
+                    <input type="text" pInputText [(ngModel)]="filters.tutor_1_name" class="form-control" placeholder="Nombre Tutor 1" />
+                  
+                    <label for="tutor_lastname_father">Apellido paterno</label>
+                    <input type="text" pInputText [(ngModel)]="filters.tutor_1_lastname_father" class="form-control" placeholder="Apellido Paterno Tutor 1" />
+                  
+                    <label for="tutor_lastname_mother">Apellido materno</label>
+                    <input type="text" pInputText [(ngModel)]="filters.tutor_1_lastname_mother" class="form-control" placeholder="Apellido Materno Tutor 1" />
+                  
+                          </div>
               
-                <label for="tutor_lastname_father">Apellido paterno</label>
-                <input type="text" pInputText [(ngModel)]="filters.tutor_1_lastname_father" class="form-control" placeholder="Apellido Paterno Tutor 1" />
+                  <div class="col-md-6">
+                    <label for="second_tutor_email">Correo contacto 2</label>
+                    <input type="text" pInputText [(ngModel)]="filters.tutor_2_email" class="form-control" placeholder="Correo contacto 2" />
+                  
+                    <label for="contact_name">Acampador</label>
+                    <input type="text" pInputText [(ngModel)]="filters.contact_name" class="form-control" placeholder="Nombre Acampador" />
+                    <label for="tutor_email">Correo principal</label>
+                    <input type="text" pInputText [(ngModel)]="filters.tutor_1_email" class="form-control" placeholder="Correo principal Tutor 1" />
+          
+                </div>
+                </div>
               
-                <label for="tutor_lastname_mother">Apellido materno</label>
-                <input type="text" pInputText [(ngModel)]="filters.tutor_1_lastname_mother" class="form-control" placeholder="Apellido Materno Tutor 1" />
-              
-                <label for="tutor_email">Correo principal</label>
-                <input type="text" pInputText [(ngModel)]="filters.tutor_1_email" class="form-control" placeholder="Correo principal Tutor 1" />
-              
-                <label for="second_tutor_email">Correo contacto 2</label>
-                <input type="text" pInputText [(ngModel)]="filters.tutor_2_email" class="form-control" placeholder="Correo contacto 2" />
-              
-                <label for="contact_name">Acampador</label>
-                <input type="text" pInputText [(ngModel)]="filters.contact_name" class="form-control" placeholder="Nombre Acampador" />
-              
-                <button pButton type="button" label="Buscar" (click)="buscarCatalogos()"></button>
-                <button pButton type="button" label="Resetear" class="p-button-secondary" (click)="resetFilters()"></button>
+                <!-- Botones centrados -->
+                <div class="text-center mt-3">
+                    <div  class="d-inline-block" style="margin-right: 10px;">
+
+                  <button   type="button" label=""  class="btn btn-primary" (click)="buscarCatalogos()"> Buscar</button>
+                  </div>
+                  <div  class="d-inline-block" style="margin-right: 10px;">
+
+                  <button   type="button" label="" class="btn btn-secondary ms-3" (click)="resetFilters()"> Resetear</button>
+                  </div>
+                
+                  <div  class="d-inline-block" style="margin-right: 10px;">
+                    <button type="button" class="btn btn-primary" (click)="showDialog()">Añadir Titular de cuenta</button>
+
+                </div></div>
               </div>
+              
             <p-table 
             #dt 
             [value]="listcatalogos" 

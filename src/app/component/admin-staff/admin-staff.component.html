@@ -8,16 +8,23 @@
                         <h1 class="card-title text-white">Staff</h1>
                     </div>
                     <div class="card-body">
-                        <div class="container-btn mt-1 mb-3">
-                            <div>
-                                <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
-                                    <button type="button" class="btn btn-primary" (click)="showDialog()">Añadir Staff</button>
-
-                                </div>
+                        <div class="mb-3 mt-3">
+                            <label for="name">Nombre</label>
+                            <input type="text" pInputText [(ngModel)]="filters.name" class="form-control" placeholder="Nombre del staff" />
+                        
+                            <label for="email">Correo</label>
+                            <input type="text" pInputText [(ngModel)]="filters.email" class="form-control" placeholder="Correo del staff" />
+                        <div class="d-flex justify-content-center mt-3">
+                            <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
+                                <button type="button" class="btn btn-primary" (click)="showDialog()">Añadir Staff</button>
+                               
                             </div>
-                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                                placeholder="Global Search" />
+                            <button   type="button" label="" class="btn btn-secondary ms-3" (click)="resetFilters()"> Resetear</button>
+                            <button   type="button" label="" class="btn btn-primary ms-3" (click)="buscarStaff()"> Buscar</button>
+
                         </div>
+
+                          </div>
                         <div style="overflow: auto;">
                             <p-table  #dt
                             [value]="listcatalogos"

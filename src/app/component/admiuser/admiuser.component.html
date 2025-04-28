@@ -1531,84 +1531,99 @@
                     <h1 class="card-title text-white">Acampadores</h1>
                 </div>
                 <div class="card-body">
-                <div class="container-btn mt-1 mb-3">
-                    <div class="btn-footer">
-                        <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
-                            <button type="button" class="btn btn-primary" (click)="showDialog()">Agregar nuevo Acampador</button>
-        
+                    <div class="container-btn mt-1 mb-3">
+                        <div class="btn-footer">
+                          
+            
+                           
                         </div>
-
-                        <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
-                            <button type="button" class="btn btn-primary" (click)="buscador=!buscador">Buscador</button>
-        
+                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Global Search" />
+                    </div>
+            
+                    <!-- Buscador de filtros -->
+                    <div  class="mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="camper_name">Nombre Acampador</label>
+                                <input type="text" pInputText [(ngModel)]="filters.camper_name" class="form-control" placeholder="Nombre Acampador" />
+            
+                                <label for="camper_lastname_father">Apellido paterno Acampador</label>
+                                <input type="text" pInputText [(ngModel)]="filters.camper_lastname_father" class="form-control" placeholder="Apellido Paterno Acampador" />
+            
+                                <label for="camper_lastname_mother">Apellido materno Acampador</label>
+                                <input type="text" pInputText [(ngModel)]="filters.camper_lastname_mother" class="form-control" placeholder="Apellido Materno Acampador" />
+                            </div>
+            
+                            <div class="col-md-6">
+                                <label for="tutor_1_name">Nombre Tutor 1</label>
+                                <input type="text" pInputText [(ngModel)]="filters.tutor_1_name" class="form-control" placeholder="Nombre Tutor 1" />
+            
+                                <label for="tutor_1_lastname_father">Apellido paterno Tutor 1</label>
+                                <input type="text" pInputText [(ngModel)]="filters.tutor_1_lastname_father" class="form-control" placeholder="Apellido Paterno Tutor 1" />
+            
+                                <label for="tutor_1_email">Correo Tutor 1</label>
+                                <input type="text" pInputText [(ngModel)]="filters.tutor_1_email" class="form-control" placeholder="Correo Tutor 1" />
+                            </div>
                         </div>
                     </div>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                        placeholder="Global Search" />
+                    <div class="d-flex justify-content-center mb-3">
+                        <button   type="button" label="" class="btn btn-primary"  (click)="buscarCatalogos()"> Buscar</button>
+                        <button   type="button" label="" class="btn  btn-secondary ms-3" (click)="resetFilters()">Resetear</button>
+                        <div ngbDropdown placement="top-end" class="d-inline-block" style="margin-right: 10px;">
+                            <button type="button" class="btn btn-primary ms-3"  (click)="showDialog()">Agregar nuevo Acampador</button>
+                        </div>
+                    </div>
+            
+                    <div style="overflow: auto;">
+                        <p-table #dt [value]="listcatalogos" [rows]="20"
+                            [rowsPerPageOptions]="[5, 25, 50]"
+                            [globalFilterFields]="['camper_name', 'camper_lastname_father', 'camper_lastname_mother', 'school', 'tutor_fullname', 'tutor_email', 'camper_id', 'namecomplet']"
+                            [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
+                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                            [showCurrentPageReport]="true"
+                            [totalRecords]="totalRecords"
+                            [paginator]="true"
+                            [lazy]="true"
+                            (onLazyLoad)="loadStaffLazy($event)"
+                        >
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="camper_name" style="min-width: 120px;">Nombre<p-sortIcon field="camper_name" style="font-size: 10px;"></p-sortIcon></th>
+                                    <th pSortableColumn="school" style="min-width: 150px;">Escuela<p-sortIcon field="school"></p-sortIcon></th>
+                                    <th pSortableColumn="updated" style="min-width: 140px;">Update<p-sortIcon field="updated_at"></p-sortIcon></th>
+                                    <th pSortableColumn="tutor_fullname" style="min-width: 130px;">Nombre contacto<p-sortIcon field="tutor_fullname"></p-sortIcon></th>
+                                    <th pSortableColumn="tutor_email" style="min-width: 210px;">Correo del tutor<p-sortIcon field="tutor_email"></p-sortIcon></th>
+                                    <th style="width: 40px;"></th>
+                                    <th style="width: 40px;"></th>
+                                </tr>
+                            </ng-template>
+            
+                            <ng-template pTemplate="body" let-customer>
+                                <tr>
+                                    <td (click)="routerLink(customer)" style="cursor:pointer;">
+                                        <a routerLink="/dashboard/parents/camper/{{customer.camper_id}}"> {{customer.namecomplet}} </a> 
+                                    </td>
+                                    <td>{{customer.school}}</td>
+                                    <td>{{customer.updated.substring(0,10)}}</td>
+                                    <td>
+                                        <a routerLink="/dashboard/admi/parent/{{customer.tutor_id}}">{{customer.tutor_fullname}}</a>
+                                    </td>
+                                    <td>
+                                        <a routerLink="/dashboard/admi/parent/{{customer.tutor_id}}"> {{customer.tutor_email}} </a> 
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-warning" (click)="update(customer)">Editar</button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger" (click)="deletModal(customer.camper_name,customer.camper_id)">Eliminar</button>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
                 </div>
-        <div style="overflow: auto;" >
-            <p-table #dt [value]="listcatalogos" [rows]="20"
-            [rowsPerPageOptions]="[5, 25, 50]"
-            [globalFilterFields]="['camper_name','camper_lastname_mother','camper_lastname_father','school','tutor_fullname','tutor_email','camper_id','namecomplet',
-            'namecomplet1','namecomplet2','namecomplet3','namecomplet4','namecomplet5']"
-            [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-            [showCurrentPageReport]="true"
-            [filterFunction]="customFilter"
-            [totalRecords]="totalRecords"
-
-            [paginator]="true"
-            [lazy]="true"
-            (onLazyLoad)="loadStaffLazy($event)"
-            >
-
-            <ng-template pTemplate="header">
-                <tr>
-                    <th pSortableColumn="camper_name" style="min-width: 120px;">Nombre<p-sortIcon field="camper_name"style="font-size: 10px;"></p-sortIcon></th>
-                    <th pSortableColumn="school" style="min-width: 150px;">Escuela<p-sortIcon field="school"></p-sortIcon></th>
-                    <th pSortableColumn="updated" style="min-width: 140px;">Update<p-sortIcon field="updated_at"></p-sortIcon></th>
-                    <th pSortableColumn="tutor_fullname" style="min-width: 130px;">Nombre contacto<p-sortIcon field="tutor_fullname"></p-sortIcon></th>
-                    <th pSortableColumn="tutor_email" style="min-width: 210px;">correo del parde<p-sortIcon field="tutor_email"></p-sortIcon></th>
-
-
-                    <th style="width: 40px;"></th>
-                    <th style="width: 40px;"></th>
-                 
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-customer>
-                <tr>
-                    <td (click)="routerLink(customer)" style="cursor:pointer;">
-                       <a routerLink="/dashboard/parents/camper/{{customer.camper_id}}"> {{customer.namecomplet}} </a> 
-                    </td>
-                 
-                    <td>
-                        {{customer.school}}
-                    </td>
-                    <td>
-                        {{customer.updated.substring(0,10)}}
-                    </td>
-                    <td>
-                       <a routerLink="/dashboard/admi/parent/{{customer.tutor_id}}">{{customer.tutor_fullname}}</a> 
-                    </td>
-                    <td>
-                         <a routerLink="/dashboard/admi/parent/{{customer.tutor_id}}"> {{customer.tutor_email}} </a> 
-                    </td>
-                    <td>
-                        <button class="btn btn-warning" (click)="update(customer)">Editar</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger" (click)="deletModal(customer.camper_name,customer.camper_id)">Eliminar</button>
-                    </td>
-                 
-                </tr>
-            </ng-template>
-
-        </p-table>
-        </div>
-        
             </div>
-            </div>
+            
         
         
         

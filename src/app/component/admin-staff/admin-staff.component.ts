@@ -103,6 +103,7 @@ export class AdminStaffComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   selectedCities: string[] = [];
   totalRecords: any;
+  filters: { name: string; email: string } = { name: '', email: '' };
   
   constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private catalogos:CatalogosService,private paymants:PaymentsService,private router:Router) {  
   }
@@ -410,6 +411,35 @@ export class AdminStaffComponent implements OnInit {
    
   
     
+  }
+
+  buscarStaff(page: number = 1) {
+    this.catalogos.searchStaff(this.filters, page).subscribe(res => {
+      this.listcatalogos = res.data.items;
+      console.log(this.listcatalogos);
+
+      this.listcatalogos.map((pago:any) => {
+        pago.metodosPago = this.tipoSearch(pago.payment_method_id);
+        pago.nombreCamper = this.nombreCmper(pago.camper_id);
+        pago.tipoMovimiento = this.searchTicpo(pago.txn_type_id);
+        pago.Padres = this.nombrePadre(pago.camp_id);
+
+        pago.camp = this.campssearch(pago.camp_id);
+      });
+      this.cargando = false;
+      
+      this.totalRecords = res.data.total;
+    }, error => {
+      console.error('Error al buscar staff:', error);
+    });
+  }
+
+  resetFilters() {
+    this.filters = {
+      name: '',
+      email: ''
+    };
+    this.info(); // Buscar sin filtros
   }
 
 

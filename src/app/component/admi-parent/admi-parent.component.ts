@@ -11,69 +11,69 @@ import { CatalogosService } from 'src/services/catalogos.service';
   styleUrls: ['./admi-parent.component.scss']
 })
 export class AdmiParentComponent implements OnInit {
-  buscador:boolean=false;
+  buscador: boolean = false;
   listcatalogos: any = [];
   selectCatalogos: any;
   items: any;
-  displayEdit: boolean=false;
-  nameParent="";
+  displayEdit: boolean = false;
+  nameParent = "";
   display: boolean = false;
   display2: boolean = false;
   display3: boolean = false;
-  vacunas:any = [];
-  item:any={}
+  vacunas: any = [];
+  item: any = {}
   lazyParams: any;
 
-  displayEditUpd:boolean= false;
-  resSearch:boolean = false;
-  cargando:boolean = false;
+  displayEditUpd: boolean = false;
+  resSearch: boolean = false;
+  cargando: boolean = false;
   @ViewChild("email") email: ElementRef;
   @ViewChild("password") password: ElementRef;
 
   @ViewChild("emailConfir") emailConfir: ElementRef;
   @ViewChild("confirmPassword") confirmPassword: ElementRef;
-  @ViewChild("tutor_name") tutor_name: ElementRef; 
-  @ViewChild("tutor_lastname_father") tutor_lastname_father: ElementRef; 
-  @ViewChild("tutor_lastname_mother") tutor_lastname_mother: ElementRef; 
-  @ViewChild("tutor_cellphone") tutor_cellphone: ElementRef; 
-  @ViewChild("tutor_home_phone") tutor_home_phone: ElementRef; 
-  @ViewChild("tutor_work_phone") tutor_work_phone: ElementRef; 
-  @ViewChild("contact_name") contact_name: ElementRef; 
-  @ViewChild("contact_lastname_father") contact_lastname_father: ElementRef; 
-  @ViewChild("contact_lastname_mother") contact_lastname_mother: ElementRef; 
-  @ViewChild("contact_cellphone") contact_cellphone: ElementRef; 
-  @ViewChild("contact_work_phone") contact_work_phone: ElementRef; 
-  @ViewChild("contact_home_phone") contact_home_phone: ElementRef; 
-  @ViewChild("contact_email") contact_email: ElementRef; 
+  @ViewChild("tutor_name") tutor_name: ElementRef;
+  @ViewChild("tutor_lastname_father") tutor_lastname_father: ElementRef;
+  @ViewChild("tutor_lastname_mother") tutor_lastname_mother: ElementRef;
+  @ViewChild("tutor_cellphone") tutor_cellphone: ElementRef;
+  @ViewChild("tutor_home_phone") tutor_home_phone: ElementRef;
+  @ViewChild("tutor_work_phone") tutor_work_phone: ElementRef;
+  @ViewChild("contact_name") contact_name: ElementRef;
+  @ViewChild("contact_lastname_father") contact_lastname_father: ElementRef;
+  @ViewChild("contact_lastname_mother") contact_lastname_mother: ElementRef;
+  @ViewChild("contact_cellphone") contact_cellphone: ElementRef;
+  @ViewChild("contact_work_phone") contact_work_phone: ElementRef;
+  @ViewChild("contact_home_phone") contact_home_phone: ElementRef;
+  @ViewChild("contact_email") contact_email: ElementRef;
 
- 
-  spinner:boolean= false;
-  photoSelect : string | ArrayBuffer;
+
+  spinner: boolean = false;
+  photoSelect: string | ArrayBuffer;
   photoSatus = false;
-  spinerPhot= true;
-  table:boolean=true;
+  spinerPhot = true;
+  table: boolean = true;
   reset: boolean = false;
-  
-  idDalete =0;
-  updateId= 0;
+
+  idDalete = 0;
+  updateId = 0;
 
   text: any;
-  TextElimint="";
+  TextElimint = "";
   formFood: FormGroup;
   date: Date = new Date();
   statuAgrgado = false;
-  textos:any ={};
-  spiner:boolean = false;
-  licensed_medicines:any = [];
-  pathological_background:any = [];
-  pathological_background_fm:any = [];
-  food_restrictions:any = [];
-  blood_types:any = [];
-  vaccines:any = [];
-  genders:any = [];
-  grades:any = [];
-  school:any = [];
-  parent:any = [];
+  textos: any = {};
+  spiner: boolean = false;
+  licensed_medicines: any = [];
+  pathological_background: any = [];
+  pathological_background_fm: any = [];
+  food_restrictions: any = [];
+  blood_types: any = [];
+  vaccines: any = [];
+  genders: any = [];
+  grades: any = [];
+  school: any = [];
+  parent: any = [];
   filters: any = {
     tutor_1_name: '',
     tutor_1_lastname_father: '',
@@ -82,11 +82,11 @@ export class AdmiParentComponent implements OnInit {
     tutor_2_email: '',
     contact_name: ''
   };
-  escuelas:any = [];
+  escuelas: any = [];
   @ViewChild('dt') dt: Table;
   totalRecords: number; // Property to store total records for pagination
 
-  photoSelectUp : string | ArrayBuffer;
+  photoSelectUp: string | ArrayBuffer;
   idioma = 'esp';
   cat: any = {
     '0': 'ninguno',
@@ -99,46 +99,46 @@ export class AdmiParentComponent implements OnInit {
   }
   breadCrumbItems: Array<{}>;
   selectedCities: string[] = [];
-  id:any ;
-  
-  constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder,private camperSer: CamperService,private render :Renderer2,private routerAct:ActivatedRoute,private cdRef: ChangeDetectorRef) {
-  //  this.textos  = traducciones['traduciones'][this.idioma]['formUserChildren'];
+  id: any;
+
+  constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder, private camperSer: CamperService, private render: Renderer2, private routerAct: ActivatedRoute, private cdRef: ChangeDetectorRef) {
+    //  this.textos  = traducciones['traduciones'][this.idioma]['formUserChildren'];
     console.log(this.textos);
-     
+
   }
 
   ngOnInit(): void {
     this.formFood = this._FormBuild.group({
-      tutor_lastname_father:["",[Validators.required,,Validators.minLength(1)]],
-      tutor_cellphone:      ["",[Validators.required,
-                             Validators.pattern("^[0-9]*$"),
-                             Validators.minLength(8), Validators.maxLength(10)]],
-      tutor_home_phone:     ["",[Validators.required,
-                              Validators.pattern("^[0-9]*$"),
-                              Validators.minLength(8), Validators.maxLength(10)]],
-      contact_name:         ["",[Validators.required,Validators.minLength(1)]],
-    
-    contact_lastname_mother:[""],
-    contact_home_phone:     ["",[Validators.required,
-                            Validators.pattern("^[0-9]*$"),
-                            Validators.minLength(8), Validators.maxLength(10)]], 
-    contact_email:          ["",[Validators.required,
-                                   Validators.email]],
-    tutor_name :            ["",[Validators.required,Validators.minLength(1)]],
-    tutor_lastname_mother:  [""], 
-    tutor_work_phone:       ["",[Validators.required,
-                            Validators.pattern("^[0-9]*$"),
-                            Validators.minLength(8), Validators.maxLength(10)]],
-    contact_lastname_father:  ["",[Validators.required]], 
-    contact_cellphone:      ["",[Validators.required,
-                            Validators.pattern("^[0-9]*$"),
-                            Validators.minLength(8), Validators.maxLength(10)]],
-    contact_work_phone:     ["",[Validators.required,
-                            Validators.pattern("^[0-9]*$"),
-                            Validators.minLength(8), Validators.maxLength(10)]],
-    user_id:                ["",[Validators.required,Validators.min(1)]],
-    parent_name:             [""],
-      
+      tutor_lastname_father: ["", [Validators.required, , Validators.minLength(1)]],
+      tutor_cellphone: ["", [Validators.required,
+      Validators.pattern("^[0-9]*$"),
+      Validators.minLength(8), Validators.maxLength(10)]],
+      tutor_home_phone: ["", [Validators.required,
+      Validators.pattern("^[0-9]*$"),
+      Validators.minLength(8), Validators.maxLength(10)]],
+      contact_name: ["", [Validators.required, Validators.minLength(1)]],
+
+      contact_lastname_mother: [""],
+      contact_home_phone: ["", [Validators.required,
+      Validators.pattern("^[0-9]*$"),
+      Validators.minLength(8), Validators.maxLength(10)]],
+      contact_email: ["", [Validators.required,
+      Validators.email]],
+      tutor_name: ["", [Validators.required, Validators.minLength(1)]],
+      tutor_lastname_mother: [""],
+      tutor_work_phone: ["", [Validators.required,
+      Validators.pattern("^[0-9]*$"),
+      Validators.minLength(8), Validators.maxLength(10)]],
+      contact_lastname_father: ["", [Validators.required]],
+      contact_cellphone: ["", [Validators.required,
+      Validators.pattern("^[0-9]*$"),
+      Validators.minLength(8), Validators.maxLength(10)]],
+      contact_work_phone: ["", [Validators.required,
+      Validators.pattern("^[0-9]*$"),
+      Validators.minLength(8), Validators.maxLength(10)]],
+      user_id: ["", [Validators.required, Validators.min(1)]],
+      parent_name: [""],
+
     })
 
     this.routerAct.params.subscribe((params) => {
@@ -146,20 +146,20 @@ export class AdmiParentComponent implements OnInit {
       this.getCatalogos();
 
     })
-    
+
   }
 
- 
-  manejarEventoDesdeHijo(event:any){
-    this.update(event);
-    this.buscador=!this.buscador;
 
-    
+  manejarEventoDesdeHijo(event: any) {
+    this.update(event);
+    this.buscador = !this.buscador;
+
+
   }
 
   showDialog() {
-   this.nameParent="";
-   this.formFood.reset();
+    this.nameParent = "";
+    this.formFood.reset();
     this.table = false;
   }
   showDialog2() {
@@ -170,7 +170,7 @@ export class AdmiParentComponent implements OnInit {
 
   }
 
-  emitirEvento(item){
+  emitirEvento(item) {
     this.update(item)
   }
 
@@ -184,36 +184,36 @@ export class AdmiParentComponent implements OnInit {
 
   }
   showDialogSearchUp() {
-    this.displayEditUpd =!this.displayEditUpd;
+    this.displayEditUpd = !this.displayEditUpd;
 
   }
-  searchpartenEdit(){
-    this.resSearch= false;
-    let a :any = this.formFood.get('parent_name').value
-    if( a.length>2){
-      this.catalogos.searchUser(a).subscribe((res:any)=>{
+  searchpartenEdit() {
+    this.resSearch = false;
+    let a: any = this.formFood.get('parent_name').value
+    if (a.length > 2) {
+      this.catalogos.searchUser(a).subscribe((res: any) => {
         this.parent = res.data;
         console.log(this.parent);
-        this.resSearch= true;
-        let b = {'user_id':this.item.user_id,'tutor_email':this.item.tutor_email}
+        this.resSearch = true;
+        let b = { 'user_id': this.item.user_id, 'tutor_email': this.item.tutor_email }
         this.parent.push(b);
-      },error=>{
-         let b = {'user_id':this.item.user_id,'tutor_email':this.item.tutor_email}
+      }, error => {
+        let b = { 'user_id': this.item.user_id, 'tutor_email': this.item.tutor_email }
         this.parent.push(b);
         console.log(error);
-        
+
       })
     }
 
   }
 
   getCatalogos(page: number = 1, per_page: number = 5) {
-     this.spiner = true;
+    this.spiner = true;
     if (this.id === undefined) {
 
       this.catalogos.getParentAdmi(page, per_page).subscribe((res: any) => {
         this.listcatalogos = res.data.items;
- 
+
         this.totalRecords = res.data.total; // 👈 importante para paginación
         this.spiner = false;
 
@@ -225,9 +225,9 @@ export class AdmiParentComponent implements OnInit {
           element.namecomplet4 = `${element.tutor_lastname_mother} ${element.tutor_name} ${element.tutor_lastname_father}`;
           element.namecomplet5 = `${element.tutor_lastname_mother} ${element.tutor_lastname_father} ${element.tutor_name}`;
         });
-         this.cdRef.detectChanges();
+        this.cdRef.detectChanges();
 
-        
+
 
       });
     } else {
@@ -237,64 +237,64 @@ export class AdmiParentComponent implements OnInit {
       this.updateInfo({ id: this.id });
     }
   }
-  
 
-  updateInfo(item){
+
+  updateInfo(item) {
     this.resteValu()
-    this.display2= true;
-    this.table= false;
- 
-    this.catalogos.getParentU(item.id).subscribe((res:any)=>{
-   console.log(res);
-   this.item={user_id:res.data.user_id,tutor_email:res.data.tutor_email};
-   this.nameParent= res.data.tutor_name + res.data.tutor_lastname_mother + res.data.tutor_lastname_father;
-   this.updateId = res.data.id;
+    this.display2 = true;
+    this.table = false;
 
-    this.formFood.patchValue({
-     
-      tutor_lastname_father:res.data.tutor_lastname_father,
-      tutor_cellphone:      res.data.tutor_cellphone,
-      tutor_home_phone:     res.data.tutor_home_phone,
-      contact_name:         res.data.contact_name,
-    
-    contact_lastname_mother:res.data.contact_lastname_mother,
-    contact_home_phone:     res.data.contact_home_phone, 
-    contact_email:          res.data.contact_email,
-    tutor_name :           res.data.tutor_name,
-    tutor_lastname_mother:  res.data.tutor_lastname_mother, 
-    tutor_work_phone:      res.data.tutor_work_phone,
-    contact_lastname_father:  res.data.contact_lastname_father, 
-    contact_cellphone:      res.data.contact_cellphone,
-    contact_work_phone:     res.data.contact_work_phone,
-    user_id:                res.data.user_id,
-    parent_name:            name,
+    this.catalogos.getParentU(item.id).subscribe((res: any) => {
+      console.log(res);
+      this.item = { user_id: res.data.user_id, tutor_email: res.data.tutor_email };
+      this.nameParent = res.data.tutor_name + res.data.tutor_lastname_mother + res.data.tutor_lastname_father;
+      this.updateId = res.data.id;
+
+      this.formFood.patchValue({
+
+        tutor_lastname_father: res.data.tutor_lastname_father,
+        tutor_cellphone: res.data.tutor_cellphone,
+        tutor_home_phone: res.data.tutor_home_phone,
+        contact_name: res.data.contact_name,
+
+        contact_lastname_mother: res.data.contact_lastname_mother,
+        contact_home_phone: res.data.contact_home_phone,
+        contact_email: res.data.contact_email,
+        tutor_name: res.data.tutor_name,
+        tutor_lastname_mother: res.data.tutor_lastname_mother,
+        tutor_work_phone: res.data.tutor_work_phone,
+        contact_lastname_father: res.data.contact_lastname_father,
+        contact_cellphone: res.data.contact_cellphone,
+        contact_work_phone: res.data.contact_work_phone,
+        user_id: res.data.user_id,
+        parent_name: name,
+      })
+
+      this.catalogos.getParentAdmi().subscribe((res: any) => {
+        this.listcatalogos = res.data;
+
+        console.log(this.listcatalogos);
+
+      });
+
     })
 
-    this.catalogos.getParentAdmi().subscribe((res: any) => {
-      this.listcatalogos = res.data;
-    
-      console.log(this.listcatalogos);
-     
-    });   
-   
-   })
 
-  
 
-   
-  
-    
+
+
+
   }
 
   onGlobalFilter(event: any) {
     let globalFilterValue = event.target.value?.toLowerCase();  // Obtener el valor del filtro
-    
+
     // Verificar si el valor del filtro está vacío
     if (!globalFilterValue) {
       alert('El filtro está vacío. Por favor ingresa un valor para buscar.');
       return; // Salir de la función si el filtro está vacío
     }
-    
+
     // Si el filtro no está vacío, filtrar los datos
     this.listcatalogos = this.listcatalogos.filter(item =>
       this.customFilter(item.namecomplet, globalFilterValue) ||
@@ -309,71 +309,56 @@ export class AdmiParentComponent implements OnInit {
   }
 
   executeSearch() {
-    if (this.id !=undefined) {
+    if (this.id != undefined) {
       this.dt.filterGlobal(this.id, 'contains'); // Limpia cualquier filtro global anterior
-     
-    } 
+
+    }
   }
 
-  buscarCatalogos() {
-    this.getCatalogos(1, this.lazyParams?.rows || 5);
-  }
-
-  resetFilters() {
-    // Resetear todos los filtros
-    this.filters = {
-      tutor_1_name: '',
-      tutor_1_lastname_father: '',
-      tutor_1_lastname_mother: '',
-      tutor_1_email: '',
-      tutor_2_email: '',
-      contact_name: ''
-    };
   
-    // Llamar la función de búsqueda para obtener los datos sin filtros
-    this.buscarCatalogos();
-  }
+
+   
   schoolinf(id) {
     console.log(this.school);
-    
-    let b = this.school.filter((res:any) => {   
-  return res.id == Number(id);
+
+    let b = this.school.filter((res: any) => {
+      return res.id == Number(id);
     });
     console.log(b);
-    
+
     return b[0].name; // Assuming 'school' is an array of objects and you want to return the name of the first matching object.
   }
 
 
 
-  
 
-  prueba(){
-    this.spinner=true;
-    if(this.formFood.valid){     
-      this.catalogos.postParent(this.formFood.value).subscribe((res:any)=>{
-          console.log(res);
 
-            this.getCatalogos();
-            this.statuAgrgado = true;
-            this.resteValu();
-            this.table= true;
-            this.spinner=false; 
+  prueba() {
+    this.spinner = true;
+    if (this.formFood.valid) {
+      this.catalogos.postParent(this.formFood.value).subscribe((res: any) => {
+        console.log(res);
 
-            setTimeout(() => {
-              this.statuAgrgado = false;
-              this.table= true;
-              this.closeModal();
-            }, 1000);    
-          
-          
-      },error => {
+        this.getCatalogos();
+        this.statuAgrgado = true;
+        this.resteValu();
+        this.table = true;
+        this.spinner = false;
+
+        setTimeout(() => {
+          this.statuAgrgado = false;
+          this.table = true;
+          this.closeModal();
+        }, 1000);
+
+
+      }, error => {
         alert('No se pudo Agregar')
       });
-      this.spinner=false;
+      this.spinner = false;
 
-    }else{
-      this.spinner= false;
+    } else {
+      this.spinner = false;
 
       this.getcontact_email();
       this.getcontact_home_phone();
@@ -387,31 +372,31 @@ export class AdmiParentComponent implements OnInit {
       this.gettutor_cellphone();
       this.gettutor_lastname_mother();
       this.getTutor_lastname_father();
-      this. getTutor_name();
-      
+      this.getTutor_name();
+
     }
 
-    
+
   }
 
   guardar() {
-    if(this.formFood.valid){
-      this.catalogos.patchParent(this.updateId,this.formFood.value).subscribe((res: any) => {
+    if (this.formFood.valid) {
+      this.catalogos.patchParent(this.updateId, this.formFood.value).subscribe((res: any) => {
         this.getCatalogos();
         this.statuAgrgado = true;
         this.resteValu();
         setTimeout(() => {
           this.statuAgrgado = false;
           this.closeModal();
-          this.table=true;
-          this.display2= false
+          this.table = true;
+          this.display2 = false
         }, 1000);
-  
+
       }, error => {
         alert('No se pudo Agregar')
       })
-    }else{
-      
+    } else {
+
       this.getcontact_email();
       this.getcontact_home_phone();
       this.getcontact_work_phone();
@@ -424,70 +409,70 @@ export class AdmiParentComponent implements OnInit {
       this.gettutor_cellphone();
       this.gettutor_lastname_mother();
       this.getTutor_lastname_father();
-      this. getTutor_name();
+      this.getTutor_name();
     }
-   
+
 
   }
 
   resteValu() {
     this.formFood.reset();
   }
-  canelar(){
+  canelar() {
     this.formFood.reset();
-    this.table=true;
-    this.display2= false
+    this.table = true;
+    this.display2 = false
 
   }
 
-  update(item){
+  update(item) {
     this.resteValu()
-     this.updateId = item.id;
-    this.display2= true;
-    this.table= false;
-    this.item={user_id:item.user_id,tutor_email:item.tutor_email};
-    this.nameParent= item.tutor_name + item.tutor_lastname_mother + item.tutor_lastname_father;
-    this.catalogos.getParentU(item.tutor_id).subscribe((res:any)=>{
-   console.log(res);
-   
-    this.formFood.patchValue({
-     
-      tutor_lastname_father:res.data.tutor_lastname_father,
-      tutor_cellphone:      res.data.tutor_cellphone,
-      tutor_home_phone:     res.data.tutor_home_phone,
-      contact_name:         res.data.contact_name,
-    
-    contact_lastname_mother:res.data.contact_lastname_mother,
-    contact_home_phone:     res.data.contact_home_phone, 
-    contact_email:          res.data.contact_email,
-    tutor_name :           res.data.tutor_name,
-    tutor_lastname_mother:  res.data.tutor_lastname_mother, 
-    tutor_work_phone:      res.data.tutor_work_phone,
-    contact_lastname_father:  res.data.contact_lastname_father, 
-    contact_cellphone:      res.data.contact_cellphone,
-    contact_work_phone:     res.data.contact_work_phone,
-    user_id:                res.data.user_id,
-    parent_name:            name,
+    this.updateId = item.id;
+    this.display2 = true;
+    this.table = false;
+    this.item = { user_id: item.user_id, tutor_email: item.tutor_email };
+    this.nameParent = item.tutor_name + item.tutor_lastname_mother + item.tutor_lastname_father;
+    this.catalogos.getParentU(item.tutor_id).subscribe((res: any) => {
+      console.log(res);
+
+      this.formFood.patchValue({
+
+        tutor_lastname_father: res.data.tutor_lastname_father,
+        tutor_cellphone: res.data.tutor_cellphone,
+        tutor_home_phone: res.data.tutor_home_phone,
+        contact_name: res.data.contact_name,
+
+        contact_lastname_mother: res.data.contact_lastname_mother,
+        contact_home_phone: res.data.contact_home_phone,
+        contact_email: res.data.contact_email,
+        tutor_name: res.data.tutor_name,
+        tutor_lastname_mother: res.data.tutor_lastname_mother,
+        tutor_work_phone: res.data.tutor_work_phone,
+        contact_lastname_father: res.data.contact_lastname_father,
+        contact_cellphone: res.data.contact_cellphone,
+        contact_work_phone: res.data.contact_work_phone,
+        user_id: res.data.user_id,
+        parent_name: name,
+      })
+
+
+
     })
 
-    
-   
-   })
 
-  
 
-   
-  
-    
+
+
+
   }
-  getVaccinesValues(){
+  getVaccinesValues() {
     console.log(this.vacunas);
-    
-    this.vaccines.map((item:any)=>{
-      for(let   param of this.vacunas){
-        if(item.id == param.id){
+
+    this.vaccines.map((item: any) => {
+      for (let param of this.vacunas) {
+        if (item.id == param.id) {
           item.is_active = true;
-        }else{
+        } else {
           item.is_active = false;
         }
       }
@@ -495,45 +480,45 @@ export class AdmiParentComponent implements OnInit {
     })
   }
 
-  keepUpdate(){
-    this.spinner=true;
+  keepUpdate() {
+    this.spinner = true;
     this.getVaccinesValues();
     let a = {
-      "camper":this.formFood.value,
+      "camper": this.formFood.value,
       "vaccines": this.vaccines,
       "licensed_medicines": this.licensed_medicines,
       "food_restrictions": this.food_restrictions,
-      "pathological_background":this.pathological_background,
+      "pathological_background": this.pathological_background,
       "pathological_background_fm": this.pathological_background_fm
 
     }
     console.log(a);
-    if(this.formFood.valid){
-      this.catalogos.patchParent(this.updateId,this.formFood.value).subscribe((res:any)=>{
+    if (this.formFood.valid) {
+      this.catalogos.patchParent(this.updateId, this.formFood.value).subscribe((res: any) => {
         console.log(res);
-        if(res.mensaje
+        if (res.mensaje
           == "Actualizado Correctamente"
-          ){
+        ) {
           this.spinner = false;
           this.getCatalogos();
           this.statuAgrgado = true;
           this.cancelarUpdate();
           this.spinner = false;
-          
+
           setTimeout(() => {
             this.statuAgrgado = false;
             this.closeModal2();
           }, 1000);
         }
-        
-    }, error => {
-      console.log(error);
-      this.spinner = false;
-      alert('No se pudo Agregar')
-    });
 
-    }else{
-      this.spinner= false;
+      }, error => {
+        console.log(error);
+        this.spinner = false;
+        alert('No se pudo Agregar')
+      });
+
+    } else {
+      this.spinner = false;
       this.getcontact_email();
       this.getcontact_home_phone();
       this.getcontact_work_phone();
@@ -546,37 +531,37 @@ export class AdmiParentComponent implements OnInit {
       this.gettutor_cellphone();
       this.gettutor_lastname_mother();
       this.getTutor_lastname_father();
-      this. getTutor_name();       
+      this.getTutor_name();
     }
   }
 
-  cancelarUpdate(){
-   this.table =true;
-   this.display2 =false;
-    
+  cancelarUpdate() {
+    this.table = true;
+    this.display2 = false;
+
   }
-  deletModal(name,id){
-    this.idDalete= id;
-    this.TextElimint='Deseas Eliminar '+ name + '  del catalogo';
-    this.display3 = true; 
-   
+  deletModal(name, id) {
+    this.idDalete = id;
+    this.TextElimint = 'Deseas Eliminar ' + name + '  del catalogo';
+    this.display3 = true;
+
   }
 
-  delet(){
+  delet() {
     this.camperSer.deletCamper(this.idDalete).subscribe((res: any) => {
-      if(res.detail.status == 1){
+      if (res.detail.status == 1) {
 
-      this.statuAgrgado = true;
-      this.resteValu();
-      this.getCatalogos();
-      setTimeout(() => {
-        this.statuAgrgado = false;
-        this.closeModal3();
-      }, 1000);
-    }else{
-      alert('No se pudo Eliminar debido que esta en uso')
+        this.statuAgrgado = true;
+        this.resteValu();
+        this.getCatalogos();
+        setTimeout(() => {
+          this.statuAgrgado = false;
+          this.closeModal3();
+        }, 1000);
+      } else {
+        alert('No se pudo Eliminar debido que esta en uso')
 
-    }
+      }
 
     }, error => {
       alert('No se pudo Eliminar')
@@ -584,12 +569,12 @@ export class AdmiParentComponent implements OnInit {
   }
   getSeverity(status: string) {
     switch (status) {
-        case 'INSTOCK':
-            return 'success';
-        case 'LOWSTOCK':
-            return 'warning';
-        case 'OUTOFSTOCK':
-            return 'danger';
+      case 'INSTOCK':
+        return 'success';
+      case 'LOWSTOCK':
+        return 'warning';
+      case 'OUTOFSTOCK':
+        return 'danger';
     }
   }
 
@@ -598,200 +583,234 @@ export class AdmiParentComponent implements OnInit {
     const per_page = event.rows;
     this.getCatalogos(page, per_page);
   }
-  
- 
-  searchparten(){
-    this.resSearch= false;
-    let a :any = this.formFood.get('parent_name').value
-    if( a.length>2){
-      this.catalogos.searchUser(a).subscribe((res:any)=>{
+
+
+  searchparten() {
+    this.resSearch = false;
+    let a: any = this.formFood.get('parent_name').value
+    if (a.length > 2) {
+      this.catalogos.searchUser(a).subscribe((res: any) => {
         this.parent = res.data;
         console.log(this.parent);
-        this.resSearch= true;
-        
-      },error=>{
+        this.resSearch = true;
+
+      }, error => {
         console.log(error);
-        
+
       })
     }
 
   }
 
-  getTutor_lastname_father(){
-    if( this.formFood.get('tutor_lastname_father').valid){
-      this.render.removeClass(this.tutor_lastname_father.nativeElement,"is-invalid");
-        this.render.addClass(this.tutor_lastname_father.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.tutor_lastname_father.nativeElement,"is-valid");
-      this.render.addClass(this.tutor_lastname_father.nativeElement,"is-invalid");
+  getTutor_lastname_father() {
+    if (this.formFood.get('tutor_lastname_father').valid) {
+      this.render.removeClass(this.tutor_lastname_father.nativeElement, "is-invalid");
+      this.render.addClass(this.tutor_lastname_father.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.tutor_lastname_father.nativeElement, "is-valid");
+      this.render.addClass(this.tutor_lastname_father.nativeElement, "is-invalid");
       this.tutor_lastname_father.nativeElement.focus()
 
-     }
+    }
   }
-  gettutor_lastname_mother(){
-    if( this.formFood.get('tutor_lastname_mother').valid){
-      this.render.removeClass(this.tutor_lastname_mother.nativeElement,"is-invalid");
-        this.render.addClass(this.tutor_lastname_mother.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.tutor_lastname_mother.nativeElement,"is-valid");
-      this.render.addClass(this.tutor_lastname_mother.nativeElement,"is-invalid");
+  gettutor_lastname_mother() {
+    if (this.formFood.get('tutor_lastname_mother').valid) {
+      this.render.removeClass(this.tutor_lastname_mother.nativeElement, "is-invalid");
+      this.render.addClass(this.tutor_lastname_mother.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.tutor_lastname_mother.nativeElement, "is-valid");
+      this.render.addClass(this.tutor_lastname_mother.nativeElement, "is-invalid");
       this.tutor_lastname_mother.nativeElement.focus()
 
-     }
+    }
   }
-  gettutor_cellphone(){
-    if( this.formFood.get('tutor_cellphone').valid){
-      this.render.removeClass(this.tutor_cellphone.nativeElement,"is-invalid");
-        this.render.addClass(this.tutor_cellphone.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.tutor_cellphone.nativeElement,"is-valid");
-      this.render.addClass(this.tutor_cellphone.nativeElement,"is-invalid");
+  gettutor_cellphone() {
+    if (this.formFood.get('tutor_cellphone').valid) {
+      this.render.removeClass(this.tutor_cellphone.nativeElement, "is-invalid");
+      this.render.addClass(this.tutor_cellphone.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.tutor_cellphone.nativeElement, "is-valid");
+      this.render.addClass(this.tutor_cellphone.nativeElement, "is-invalid");
       this.tutor_cellphone.nativeElement.focus()
 
-     }
+    }
   }
-  gettutor_home_phone(){
-    if( this.formFood.get('tutor_home_phone').valid){
-      this.render.removeClass(this.tutor_home_phone.nativeElement,"is-invalid");
-        this.render.addClass(this.tutor_home_phone.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.tutor_home_phone.nativeElement,"is-valid");
-      this.render.addClass(this.tutor_home_phone.nativeElement,"is-invalid");
+  gettutor_home_phone() {
+    if (this.formFood.get('tutor_home_phone').valid) {
+      this.render.removeClass(this.tutor_home_phone.nativeElement, "is-invalid");
+      this.render.addClass(this.tutor_home_phone.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.tutor_home_phone.nativeElement, "is-valid");
+      this.render.addClass(this.tutor_home_phone.nativeElement, "is-invalid");
       this.tutor_home_phone.nativeElement.focus()
 
-     }
+    }
   }
-  gettutor_work_phone(){
-    if( this.formFood.get('tutor_work_phone').valid){
-      this.render.removeClass(this.tutor_work_phone.nativeElement,"is-invalid");
-        this.render.addClass(this.tutor_work_phone.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.tutor_work_phone.nativeElement,"is-valid");
-      this.render.addClass(this.tutor_work_phone.nativeElement,"is-invalid");
+  gettutor_work_phone() {
+    if (this.formFood.get('tutor_work_phone').valid) {
+      this.render.removeClass(this.tutor_work_phone.nativeElement, "is-invalid");
+      this.render.addClass(this.tutor_work_phone.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.tutor_work_phone.nativeElement, "is-valid");
+      this.render.addClass(this.tutor_work_phone.nativeElement, "is-invalid");
       this.tutor_work_phone.nativeElement.focus()
 
-     }
+    }
   }
 
-  getcontact_name(){
-    if( this.formFood.get('contact_name').valid){
-      this.render.removeClass(this.contact_name.nativeElement,"is-invalid");
-        this.render.addClass(this.contact_name.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.contact_name.nativeElement,"is-valid");
-      this.render.addClass(this.contact_name.nativeElement,"is-invalid");
+  getcontact_name() {
+    if (this.formFood.get('contact_name').valid) {
+      this.render.removeClass(this.contact_name.nativeElement, "is-invalid");
+      this.render.addClass(this.contact_name.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.contact_name.nativeElement, "is-valid");
+      this.render.addClass(this.contact_name.nativeElement, "is-invalid");
       this.contact_name.nativeElement.focus()
 
-     }
+    }
   }
   showDialogSearch() {
-    this.displayEdit =!this.displayEdit;
+    this.displayEdit = !this.displayEdit;
 
   }
 
-  getcontact_lastname_father(){
-    if( this.formFood.get('contact_lastname_father').valid){
-      this.render.removeClass(this.contact_lastname_father.nativeElement,"is-invalid");
-        this.render.addClass(this.contact_lastname_father.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.contact_lastname_father.nativeElement,"is-valid");
-      this.render.addClass(this.contact_lastname_father.nativeElement,"is-invalid");
+  getcontact_lastname_father() {
+    if (this.formFood.get('contact_lastname_father').valid) {
+      this.render.removeClass(this.contact_lastname_father.nativeElement, "is-invalid");
+      this.render.addClass(this.contact_lastname_father.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.contact_lastname_father.nativeElement, "is-valid");
+      this.render.addClass(this.contact_lastname_father.nativeElement, "is-invalid");
       this.contact_lastname_father.nativeElement.focus()
 
-     }
+    }
 
   }
 
-  getcontact_lastname_mother(){
-    if( this.formFood.get('contact_lastname_mother').valid){
-      this.render.removeClass(this.contact_lastname_mother.nativeElement,"is-invalid");
-        this.render.addClass(this.contact_lastname_mother.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.contact_lastname_mother.nativeElement,"is-valid");
-      this.render.addClass(this.contact_lastname_mother.nativeElement,"is-invalid");
+  getcontact_lastname_mother() {
+    if (this.formFood.get('contact_lastname_mother').valid) {
+      this.render.removeClass(this.contact_lastname_mother.nativeElement, "is-invalid");
+      this.render.addClass(this.contact_lastname_mother.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.contact_lastname_mother.nativeElement, "is-valid");
+      this.render.addClass(this.contact_lastname_mother.nativeElement, "is-invalid");
       this.contact_lastname_mother.nativeElement.focus()
 
-     }
+    }
 
   }
-  getcontact_cellphone(){
-    if( this.formFood.get('contact_cellphone').valid){
-      this.render.removeClass(this.contact_cellphone.nativeElement,"is-invalid");
-        this.render.addClass(this.contact_cellphone.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.contact_cellphone.nativeElement,"is-valid");
-      this.render.addClass(this.contact_cellphone.nativeElement,"is-invalid");
+  getcontact_cellphone() {
+    if (this.formFood.get('contact_cellphone').valid) {
+      this.render.removeClass(this.contact_cellphone.nativeElement, "is-invalid");
+      this.render.addClass(this.contact_cellphone.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.contact_cellphone.nativeElement, "is-valid");
+      this.render.addClass(this.contact_cellphone.nativeElement, "is-invalid");
       this.contact_cellphone.nativeElement.focus()
 
-     }
+    }
 
   }
-  getcontact_work_phone(){
-    if( this.formFood.get('contact_work_phone').valid){
-      this.render.removeClass(this.contact_work_phone.nativeElement,"is-invalid");
-        this.render.addClass(this.contact_work_phone.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.contact_work_phone.nativeElement,"is-valid");
-      this.render.addClass(this.contact_work_phone.nativeElement,"is-invalid");
+  getcontact_work_phone() {
+    if (this.formFood.get('contact_work_phone').valid) {
+      this.render.removeClass(this.contact_work_phone.nativeElement, "is-invalid");
+      this.render.addClass(this.contact_work_phone.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.contact_work_phone.nativeElement, "is-valid");
+      this.render.addClass(this.contact_work_phone.nativeElement, "is-invalid");
       this.contact_work_phone.nativeElement.focus()
 
-     }
+    }
 
   }
-  getcontact_home_phone(){
-    if( this.formFood.get('contact_home_phone').valid){
-      this.render.removeClass(this.contact_home_phone.nativeElement,"is-invalid");
-        this.render.addClass(this.contact_home_phone.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.contact_home_phone.nativeElement,"is-valid");
-      this.render.addClass(this.contact_home_phone.nativeElement,"is-invalid");
+  getcontact_home_phone() {
+    if (this.formFood.get('contact_home_phone').valid) {
+      this.render.removeClass(this.contact_home_phone.nativeElement, "is-invalid");
+      this.render.addClass(this.contact_home_phone.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.contact_home_phone.nativeElement, "is-valid");
+      this.render.addClass(this.contact_home_phone.nativeElement, "is-invalid");
       this.contact_home_phone.nativeElement.focus()
 
-     }
+    }
   }
-  getcontact_email(){
-    if( this.formFood.get('contact_email').valid){
-      this.render.removeClass(this.contact_email.nativeElement,"is-invalid");
-        this.render.addClass(this.contact_email.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.contact_email.nativeElement,"is-valid");
-      this.render.addClass(this.contact_email.nativeElement,"is-invalid");
+  getcontact_email() {
+    if (this.formFood.get('contact_email').valid) {
+      this.render.removeClass(this.contact_email.nativeElement, "is-invalid");
+      this.render.addClass(this.contact_email.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.contact_email.nativeElement, "is-valid");
+      this.render.addClass(this.contact_email.nativeElement, "is-invalid");
       this.contact_email.nativeElement.focus()
 
-     }
+    }
   }
   getTutor_name() {
-    if( this.formFood.get('tutor_name').valid){
-      this.render.removeClass(this.tutor_name.nativeElement,"is-invalid");
-        this.render.addClass(this.tutor_name.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.tutor_name.nativeElement,"is-valid");
-      this.render.addClass(this.tutor_name.nativeElement,"is-invalid");
+    if (this.formFood.get('tutor_name').valid) {
+      this.render.removeClass(this.tutor_name.nativeElement, "is-invalid");
+      this.render.addClass(this.tutor_name.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.tutor_name.nativeElement, "is-valid");
+      this.render.addClass(this.tutor_name.nativeElement, "is-invalid");
       this.tutor_name.nativeElement.focus()
 
-     }
-    
+    }
+
   }
-  select(){
-    let a = this.parent.filter(item=>
-     item.user_id== this.formFood.get('user_id').value 
+  select() {
+    let a = this.parent.filter(item =>
+      item.user_id == this.formFood.get('user_id').value
     )
     console.log(this.formFood.get('user_id').value);
-    
+
     console.log(a);
-    
-    if(a.length>0){
+
+    if (a.length > 0) {
       console.log('se encontro');
-      
-      this.nameParent = a[0].tutor_email; 
+
+      this.nameParent = a[0].tutor_email;
       this.displayEdit = false;
     }
-   
+
   }
-  
+  buscarCatalogos(): void {
+    this.spiner = true;
 
-  
+    // Llamamos al servicio para obtener los catálogos filtrados
+    this.catalogos.getParentAdmiSearcg(this.filters, 1, 10).subscribe(
+      response => {
+        this.listcatalogos = response.data.items;
 
-  
+        this.totalRecords = response.data.total; // 👈 importante para paginación
+        this.spiner = false;
 
+        this.listcatalogos.forEach(element => {
+          element.namecomplet = `${element.tutor_name} ${element.tutor_lastname_father} ${element.tutor_lastname_mother}`;
+          element.namecomplet1 = `${element.tutor_name} ${element.tutor_lastname_mother} ${element.tutor_lastname_father}`;
+          element.namecomplet2 = `${element.tutor_lastname_father} ${element.tutor_name} ${element.tutor_lastname_mother}`;
+          element.namecomplet3 = `${element.tutor_lastname_father} ${element.tutor_lastname_mother} ${element.tutor_name}`;
+          element.namecomplet4 = `${element.tutor_lastname_mother} ${element.tutor_name} ${element.tutor_lastname_father}`;
+          element.namecomplet5 = `${element.tutor_lastname_mother} ${element.tutor_lastname_father} ${element.tutor_name}`;
+        });
+        this.cdRef.detectChanges();
+      },
+      error => {
+        console.error('Error al obtener los datos:', error);
+        this.spiner = false;
+      }
+    );
+  }
+
+  // Método para resetear los filtros
+  resetFilters() {
+    this.filters = {
+      tutor_1_name: '',
+      tutor_1_lastname_father: '',
+      tutor_1_lastname_mother: '',
+      tutor_1_email: '',
+      tutor_2_email: '',
+      contact_name: ''
+    };
+    this.getCatalogos(); // Recargar los datos con filtros vacíos
+  }
 }
