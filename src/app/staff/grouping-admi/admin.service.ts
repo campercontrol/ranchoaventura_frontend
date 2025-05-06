@@ -9,25 +9,25 @@ export class AdminService {
 
 
   getAgrupaciones(){
-    return this.http.get('http://142.93.12.234:8000/groupings/')
+    return this.http.get('app.campercontrol.com:5050/groupings/')
   }
   postAgrupaciones(data:any){
-    return this.http.post('http://142.93.12.234:8000/groupings/',data)
+    return this.http.post('app.campercontrol.com:5050/groupings/',data)
   }
   typgetAgrupaciones(){
-    return this.http.get('http://142.93.12.234:8000/grouping_types/')
+    return this.http.get('app.campercontrol.com:5050/grouping_types/')
   }
 
   updateAgrupaciones(info:any,id){
-    return this.http.patch('http://142.93.12.234:8000/groupings/'+id,info)
+    return this.http.patch('app.campercontrol.com:5050/groupings/'+id,info)
   }
 
   deletGruping(id){
-    return this.http.delete('http://142.93.12.234:8000/groupings/'+id)
+    return this.http.delete('app.campercontrol.com:5050/groupings/'+id)
 
   }
 
   getAgrupacionesType(){
-    return this.http.get('http://142.93.12.234:8000/grouping_types/')
+    return this.http.get('app.campercontrol.com:5050/grouping_types/')
   }
 }

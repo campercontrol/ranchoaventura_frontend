@@ -13,36 +13,36 @@ export class CampsVistaService {
   }
 
   getInfoCamp(id){
-      return this.http.get('http://142.93.12.234:8000/staff/camp/'+id);
+      return this.http.get('app.campercontrol.com:5050/staff/camp/'+id);
   }
   getRolSatff( ){
-    return this.http.get('http://142.93.12.234:8000/staff_role/');
+    return this.http.get('app.campercontrol.com:5050/staff_role/');
   }
   getListaSatff(){
-    return this.http.get('http://142.93.12.234:8000/staff/');
+    return this.http.get('app.campercontrol.com:5050/staff/');
   }
 
   aceptarStaff(id,info){
-    return this.http.post('http://142.93.12.234:8000/accept/staff/camp/'+id,info)
+    return this.http.post('app.campercontrol.com:5050/accept/staff/camp/'+id,info)
   }
   asignarRolStaff(id,rolid,info){
-    return this.http.post('http://142.93.12.234:8000/update/staff/role/'+id+'/'+rolid,info)
+    return this.http.post('app.campercontrol.com:5050/update/staff/role/'+id+'/'+rolid,info)
   }
 
   pulseras1x11(id:any ){
     const headers = new HttpHeaders().set('Content-Type','application/json');
 
-    return this.http.get('http://142.93.12.234:8000/camp/bracelets/zt230/'+id,{headers,responseType: 'blob' as 'json'} );
+    return this.http.get('app.campercontrol.com:5050/camp/bracelets/zt230/'+id,{headers,responseType: 'blob' as 'json'} );
   }
   pulseras8hoja(id:any){
     const headers = new HttpHeaders().set('Content-Type','application/json');
 
-    return this.http.get('http://142.93.12.234:8000/camp/bracelets/'+id,{headers,responseType: 'blob' as 'json'} );
+    return this.http.get('app.campercontrol.com:5050/camp/bracelets/'+id,{headers,responseType: 'blob' as 'json'} );
   }
 
   Pdfinfodecampers(id:any){
     const headers = new HttpHeaders().set('Content-Type','application/json');
-    return this.http.get('http://142.93.12.234:8000/camp/bracelets/'+id,{headers,responseType: 'blob' as 'json'} );
+    return this.http.get('app.campercontrol.com:5050/camp/bracelets/'+id,{headers,responseType: 'blob' as 'json'} );
   }
 
  
@@ -73,25 +73,25 @@ export class CampsVistaService {
 
 
   getReportesGenerales(id:any){
-    return this.http.get(`http://142.93.12.234:8000/camps/${id}/general_report`); 
+    return this.http.get(`app.campercontrol.com:5050/camps/${id}/general_report`); 
   }
   getReportesGeneralesStaff(id:any){
-    return this.http.get(`http://142.93.12.234:8000/camps/${id}/general_staff_report`); 
+    return this.http.get(`app.campercontrol.com:5050/camps/${id}/general_staff_report`); 
   }
   getReportesSeguros(id:any){
-    return this.http.get(`http://142.93.12.234:8000/camps/${id}/insurance_report`); 
+    return this.http.get(`app.campercontrol.com:5050/camps/${id}/insurance_report`); 
   }
   getReportesContactossMedical(id:any){
-    return this.http.get(`http://142.93.12.234:8000/camps/${id}/medical_report`); 
+    return this.http.get(`app.campercontrol.com:5050/camps/${id}/medical_report`); 
   }
   getReporteComidaRestringida(id:any){
-    return this.http.get(`http://142.93.12.234:8000/camps/${id}/food_report`); 
+    return this.http.get(`app.campercontrol.com:5050/camps/${id}/food_report`); 
   }
 
   getReporteSocialExtras(id:any){
-    return this.http.get(`http://142.93.12.234:8000/camps/${id}/contact_report`); 
+    return this.http.get(`app.campercontrol.com:5050/camps/${id}/contact_report`); 
   }
   getReporteExtras(id:any){
-    return this.http.get(`http://142.93.12.234:8000/camps/${id}/extras_report`); 
+    return this.http.get(`app.campercontrol.com:5050/camps/${id}/extras_report`); 
   }
 }

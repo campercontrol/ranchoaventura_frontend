@@ -12,7 +12,7 @@ export class LoginService {
   constructor(private http: HttpClient,private router:Router) { }
   resetContrasena(a){
     return new Promise((resolve,reject)=>{
-        this.http.post('http://142.93.12.234:8000/user/send_mail_password_reset',a).subscribe((res:any)=>{
+        this.http.post('app.campercontrol.com:5050/user/send_mail_password_reset',a).subscribe((res:any)=>{
           resolve = res;
         },error=>{
           reject = error;

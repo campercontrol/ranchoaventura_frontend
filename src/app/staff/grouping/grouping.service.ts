@@ -8,31 +8,31 @@ export class GroupingService {
 
   constructor(private http:HttpClient)  { }
   getCamper(id){
-    return this.http.get('http://142.93.12.234:8000/camps/'+id+'/groupings/campers')
+    return this.http.get('app.campercontrol.com:5050/camps/'+id+'/groupings/campers')
   }
   createGroup(data){
-    return this.http.post('http://142.93.12.234:8000/grouping_camps',data)
+    return this.http.post('app.campercontrol.com:5050/grouping_camps',data)
   }
   editraCapcidadMaxima(id,data){
-    return this.http.put('http://142.93.12.234:8000/grouping_camps/'+id,data)
+    return this.http.put('app.campercontrol.com:5050/grouping_camps/'+id,data)
   }
 
   getGruposInscritos(id){
-    return this.http.get('http://142.93.12.234:8000/camps/'+id+'/groupings')
+    return this.http.get('app.campercontrol.com:5050/camps/'+id+'/groupings')
 
   }
   getCampersInscritos(id){
-    return this.http.get('http://142.93.12.234:8000/groupings/' + id +'/available_campers')
+    return this.http.get('app.campercontrol.com:5050/groupings/' + id +'/available_campers')
 
   }
   campersInscritos(data){
-    return this.http.post('http://142.93.12.234:8000/grouping_campers',data)
+    return this.http.post('app.campercontrol.com:5050/grouping_campers',data)
 
   }
 
   deletGruping(id){
 
-    return this.http.delete('http://142.93.12.234:8000/grouping_camper/'+id)
+    return this.http.delete('app.campercontrol.com:5050/grouping_camper/'+id)
 
   }
 }

@@ -9,33 +9,33 @@ export class CreateCampsService {
   constructor(private http:HttpClient) { }
 
   getSede(){
-    return this.http.get('http://142.93.12.234:8000/location');
+    return this.http.get('app.campercontrol.com:5050/location');
   }
   getTemporada(){
-    return this.http.get('http://142.93.12.234:8000/season');
+    return this.http.get('app.campercontrol.com:5050/season');
   }
   gerSchool(){
-    return this.http.get('http://142.93.12.234:8000/school');
+    return this.http.get('app.campercontrol.com:5050/school');
   }
   getcurrency(){
-    return this.http.get('http://142.93.12.234:8000/currency');
+    return this.http.get('app.campercontrol.com:5050/currency');
   }
   postCamp(a:any){
-    return this.http.post('http://142.93.12.234:8000/camp/',a);
+    return this.http.post('app.campercontrol.com:5050/camp/',a);
   }
   patchCamp(id,a:any){
-    return this.http.patch('http://142.93.12.234:8000/camp/'+id,a);
+    return this.http.patch('app.campercontrol.com:5050/camp/'+id,a);
   }
   getCamp( page=1,per_page=10){
-    return this.http.get('http://142.93.12.234:8000/active_camp/'+'?page='+page+'&per_page='+per_page+'&order=desc');
+    return this.http.get('app.campercontrol.com:5050/active_camp/'+'?page='+page+'&per_page='+per_page+'&order=desc');
   }
   getCampId( id:any){
-    return this.http.get('http://142.93.12.234:8000/camp/'+id);
+    return this.http.get('app.campercontrol.com:5050/camp/'+id);
   }
 
 
   get_temporada(){
-    return this.http.get('http://142.93.12.234:8000/season/');
+    return this.http.get('app.campercontrol.com:5050/season/');
   }
   searchCamps(name: string, location: any, school: any, page: number = 1, perPage: number = 10) {
     const params = new URLSearchParams();
@@ -46,6 +46,6 @@ export class CreateCampsService {
     params.append('per_page', perPage.toString());
     params.append('order', 'desc');
 
-    return this.http.get(`http://142.93.12.234:8000/search/active_camp/?${params.toString()}`);
+    return this.http.get(`app.campercontrol.com:5050/search/active_camp/?${params.toString()}`);
   }
 }

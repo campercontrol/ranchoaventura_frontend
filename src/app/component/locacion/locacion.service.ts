@@ -9,16 +9,16 @@ export class LocacionService {
   constructor(private http: HttpClient) { }
 
   getSchool(){
-    return this.http.get('http://142.93.12.234:8000/location/');
+    return this.http.get('app.campercontrol.com:5050/location/');
 
    }
    postSchool(info){
-    return this.http.post('http://142.93.12.234:8000/location/',info);
+    return this.http.post('app.campercontrol.com:5050/location/',info);
    }
    updateSchool(a:any,id){
-    return this.http.patch('http://142.93.12.234:8000/location/'+id,a);
+    return this.http.patch('app.campercontrol.com:5050/location/'+id,a);
   }
   deleteSchool(id){
-    return this.http.delete('http://142.93.12.234:8000/delete_location/'+id);
+    return this.http.delete('app.campercontrol.com:5050/delete_location/'+id);
   }
 }

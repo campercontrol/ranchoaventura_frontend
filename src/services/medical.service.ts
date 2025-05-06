@@ -9,15 +9,15 @@ export class MedicalService {
   constructor(private http:HttpClient)  { }
 
   getMedicalCamps(id:any){
-    return this.http.get('http://142.93.12.234:8000/medical/camp/'+ id);
+    return this.http.get('app.campercontrol.com:5050/medical/camp/'+ id);
     
   }
   getMedicalCampCamper(campId,camperId){
-    return this.http.get('http://142.93.12.234:8000/medical/camp/'+campId+'/camper/'+camperId);
+    return this.http.get('app.campercontrol.com:5050/medical/camp/'+campId+'/camper/'+camperId);
     
   }
   nuevaConsulta(data){
-    return this.http.post("http://142.93.12.234:8000/medical/camper/visit/",data);
+    return this.http.post("app.campercontrol.com:5050/medical/camper/visit/",data);
 
   }
 }

@@ -580,7 +580,7 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
     this.catalogos.getCamper(this.id).subscribe(
       (res:any)=>{
         console.log('respuestas',res);
-         this.photoSelect = 'http://142.93.12.234:8000/'+res['camper'].photo,
+         this.photoSelect = 'app.campercontrol.com:5050/'+res['camper'].photo,
 
           this.formUser.patchValue({
            

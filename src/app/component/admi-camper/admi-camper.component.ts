@@ -405,7 +405,7 @@ export class AdmiCamperComponent implements OnInit {
   }
 
   update(id){
-     this.updateId = id.id;
+     this.updateId = id.camp_id;
     this.display2= true;
     this.table= false;
     this.createCamp.getCampId(this.updateId).subscribe((res:any)=>{

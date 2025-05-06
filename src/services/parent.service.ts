@@ -20,28 +20,28 @@ export class ParentService {
   }
 
   getParet(id: any): Observable<any>{
-    return this.http.get('http://142.93.12.234:8000/parent/'+ id);
+    return this.http.get('app.campercontrol.com:5050/parent/'+ id);
     
   }
 
   partnPatch(id: any,info:{}):Observable<any> {
-     return this.http.patch('http://142.93.12.234:8000/parent/'+ id,info)
+     return this.http.patch('app.campercontrol.com:5050/parent/'+ id,info)
   }
 
   crearNuevoUsuario(info:{}){
 
-    let a =  this.http.post('http://142.93.12.234:8000/usuario/',info).subscribe((res:any)=>{
+    let a =  this.http.post('app.campercontrol.com:5050/usuario/',info).subscribe((res:any)=>{
           console.log(res);
     })
     
     return a
   }
   setComentarios(comentarios){
-    return  this.http.post('http://142.93.12.234:8000/camper_comment/',comentarios)
+    return  this.http.post('app.campercontrol.com:5050/camper_comment/',comentarios)
   }
 
   setParent(info:{}):Observable<any>{
-   return this.http.post('http://142.93.12.234:8000/parent_create/',info)
+   return this.http.post('app.campercontrol.com:5050/parent_create/',info)
   }
 
   

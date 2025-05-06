@@ -1,6 +1,6 @@
 {
   "/media": {
-    "target": "http://142.93.12.234:8000",
+    "target": "app.campercontrol.com:5050",
     "secure": false,
     "changeOrigin": true
   }

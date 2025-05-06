@@ -302,7 +302,7 @@ async downloadImages(listCampers = this.listCampers) {
   const b =[]
   // Usamos Promise.all para esperar que todas las imágenes se descarguen
   const imagePromises = listCampers.map(async (customer) => {
-    const imageUrl = `http://142.93.12.234:8000/${customer.camper_photo}`;
+    const imageUrl = `app.campercontrol.com:5050/${customer.camper_photo}`;
 
     b.push(imageUrl)
     this.capms.downloadImages(b)

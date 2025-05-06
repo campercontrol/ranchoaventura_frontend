@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 })
 export class MercadoPagoService {
 
-  private baseUrl = 'http://142.93.12.234:8000/';  // Cambia esto por la URL de tu backend
+  private baseUrl = 'app.campercontrol.com:5050/';  // Cambia esto por la URL de tu backend
 
   constructor(private http: HttpClient) {}
 
