@@ -260,7 +260,7 @@
                 <tr class="p-selectable-row">
   
                   <td>
-                    <p-avatar [image]="'app.campercontrol.com:5050/'+customer.camper_photo" shape="circle" size="large"></p-avatar>
+                    <p-avatar [image]="'https://api-dev.campercontrol.com/'+customer.camper_photo" shape="circle" size="large"></p-avatar>
                     
                   </td>
                   <td (click)="vercamper(customer.camper_id)">
@@ -418,7 +418,7 @@
                   <p-tableCheckbox [value]="customer"></p-tableCheckbox>
                 </td>
                 <td>
-                  <p-avatar [image]="'app.campercontrol.com:5050/'+customer.staff_photo" shape="circle" size="large"></p-avatar>
+                  <p-avatar [image]="'https://api-dev.campercontrol.com/'+customer.staff_photo" shape="circle" size="large"></p-avatar>
                 </td>
                 <td>
                   <a routerLink="/dashboard/staff/perfil/{{customer.staff_id}}" routerLinkActive="router-link-active" ></a>{{customer.staff_full_name}}
@@ -564,7 +564,7 @@
                   <p-tableCheckbox [value]="customer"></p-tableCheckbox>
                 </td>
                 <td>
-                  <p-avatar [image]="'app.campercontrol.com:5050/'+customer.staff_photo" shape="circle" size="large"></p-avatar>
+                  <p-avatar [image]="'https://api-dev.campercontrol.com/'+customer.staff_photo" shape="circle" size="large"></p-avatar>
                 </td>
                 <td>
                   <a routerLink="/dashboard/staff/perfil/{{customer.staff_id}}"  > {{customer.staff_full_name}} </a> 

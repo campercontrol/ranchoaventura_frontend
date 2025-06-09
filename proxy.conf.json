@@ -1,6 +1,6 @@
 {
   "/media": {
-    "target": "app.campercontrol.com:5050",
+    "target": "https://api-dev.campercontrol.com",
     "secure": false,
     "changeOrigin": true
   }

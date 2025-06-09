@@ -20,28 +20,33 @@ export class ParentService {
   }
 
   getParet(id: any): Observable<any>{
-    return this.http.get('app.campercontrol.com:5050/parent/'+ id);
+    return this.http.get('https://api-dev.campercontrol.com/parent/'+ id);
     
   }
 
   partnPatch(id: any,info:{}):Observable<any> {
-     return this.http.patch('app.campercontrol.com:5050/parent/'+ id,info)
+     return this.http.patch('https://api-dev.campercontrol.com/parent/'+ id,info)
   }
 
   crearNuevoUsuario(info:{}){
 
-    let a =  this.http.post('app.campercontrol.com:5050/usuario/',info).subscribe((res:any)=>{
+    let a =  this.http.post('https://api-dev.campercontrol.com/usuario/',info).subscribe((res:any)=>{
           console.log(res);
     })
     
     return a
   }
   setComentarios(comentarios){
-    return  this.http.post('app.campercontrol.com:5050/camper_comment/',comentarios)
+    return  this.http.post('https://api-dev.campercontrol.com/camper_comment/',comentarios)
   }
 
   setParent(info:{}):Observable<any>{
-   return this.http.post('app.campercontrol.com:5050/parent_create/',info)
+   return this.http.post('https://api-dev.campercontrol.com/parent_create/',info)
+  }
+
+  getComentarios(camper_id,role_id)
+  {
+    return this.http.get('https://api-dev.campercontrol.com/campers/'+camper_id+'/comments?role_id='+role_id);
   }
 
   

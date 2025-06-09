@@ -12,7 +12,7 @@ export class StaffService {
   prospectos(prospecto:any){
     console.log(prospecto);
     
-    return this.http.post('app.campercontrol.com:5050/prospect/',prospecto)
+    return this.http.post('https://api-dev.campercontrol.com/prospect/',prospecto)
   }
   getProspectosSearch(filters: any) {
     let params = new HttpParams();
@@ -22,39 +22,39 @@ export class StaffService {
       }
     });
   
-    return this.http.get<any>('app.campercontrol.com:5050/search_prospect/', { params });
+    return this.http.get<any>('https://api-dev.campercontrol.com/search_prospect/', { params });
   }
   
   editStaff(a,id){
-    return this.http.patch('app.campercontrol.com:5050/staff/complete/'+id,a)
+    return this.http.patch('https://api-dev.campercontrol.com/staff/complete/'+id,a)
   }
   infoPerfil(id,idioma = 'es'){
-    return this.http.get('app.campercontrol.com:5050/staff/complete/'+id+'/'+idioma)
+    return this.http.get('https://api-dev.campercontrol.com/staff/complete/'+id+'/'+idioma)
   }
 
   getPerfilStaff(id,idioma = 'es'){
-    return this.http.get('app.campercontrol.com:5050/staff/profile/'+id+'/'+idioma)
+    return this.http.get('https://api-dev.campercontrol.com/staff/profile/'+id+'/'+idioma)
   }
 
   getProspectos(page=1,per_page =10){
-    return this.http.get('app.campercontrol.com:5050/prospect/?page='+page+'&per_page='+per_page+'&order=desc')
+    return this.http.get('https://api-dev.campercontrol.com/prospect/?page='+page+'&per_page='+per_page+'&order=desc')
 
   }
   aceptarProspectos(id){
-    return this.http.patch('app.campercontrol.com:5050/accept_prospect/'+id,{})
+    return this.http.patch('https://api-dev.campercontrol.com/accept_prospect/'+id,{})
 
   }
   cancelarParticipacio(id){
-    return this.http.delete('app.campercontrol.com:5050/staff_unsubscribe/'+id)
+    return this.http.delete('https://api-dev.campercontrol.com/staff_unsubscribe/'+id)
 
   }
 
   getPerfil(id = 18){
-    return this.http.get('app.campercontrol.com:5050/staff/'+id)
+    return this.http.get('https://api-dev.campercontrol.com/staff/'+id)
   }
   
   createComment(info){
-    return this.http.post('app.campercontrol.com:5050/staff_comment/',info)
+    return this.http.post('https://api-dev.campercontrol.com/staff_comment/',info)
   }
 
 }

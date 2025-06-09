@@ -9,15 +9,15 @@ export class TrofeosService {
   constructor(private http:HttpClient) { }
 
   setTrofeos(data){
-    return this.http.post('app.campercontrol.com:5050/trophy',data);
+    return this.http.post('https://api-dev.campercontrol.com/trophy',data);
   }
   editarTrofeos(data,id){
-    return this.http.patch('app.campercontrol.com:5050/trophy/'+id,data);
+    return this.http.patch('https://api-dev.campercontrol.com/trophy/'+id,data);
   }
   getTrofeos(){
-    return this.http.get('app.campercontrol.com:5050/trophy');
+    return this.http.get('https://api-dev.campercontrol.com/trophy');
   }
   getTemporada(){
-    return this.http.get('app.campercontrol.com:5050/season');
+    return this.http.get('https://api-dev.campercontrol.com/season');
   }
 }

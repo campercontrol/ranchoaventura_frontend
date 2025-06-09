@@ -10,77 +10,77 @@ export class AdmiService {
 
 
   getCampers(){
-    return this.http.get('app.campercontrol.com:5050/camper/')
+    return this.http.get('https://api-dev.campercontrol.com/camper/')
   }
   getUsers(){
-    return this.http.get('app.campercontrol.com:5050/usuario?is_active=true')
+    return this.http.get('https://api-dev.campercontrol.com/usuario?is_active=true')
   }
 
   getComments(){
-    return this.http.get('app.campercontrol.com:5050/camper_comment/')
+    return this.http.get('https://api-dev.campercontrol.com/camper_comment/')
   }
   postComments(info:any){
-    return this.http.post('app.campercontrol.com:5050/camper_comment/',info)
+    return this.http.post('https://api-dev.campercontrol.com/camper_comment/',info)
   }
   updateComments(info:any,id){
-    return this.http.patch('app.campercontrol.com:5050/camper_comment/'+id,info)
+    return this.http.patch('https://api-dev.campercontrol.com/camper_comment/'+id,info)
   }
 
   getTempletMasive(){
-    return this.http.get('app.campercontrol.com:5050/mailing/template/massive/')
+    return this.http.get('https://api-dev.campercontrol.com/mailing/template/massive/')
   }
   getTempletSystem(){
-    return this.http.get('app.campercontrol.com:5050/mailing/template/system/')
+    return this.http.get('https://api-dev.campercontrol.com/mailing/template/system/')
   }
   getCorreos(){
-    return this.http.get('app.campercontrol.com:5050/mailing/campaign/')
+    return this.http.get('https://api-dev.campercontrol.com/mailing/campaign/')
   }
   getCorreosInfo(id){
-    return this.http.get('app.campercontrol.com:5050/mailing/campaign_info/'+id)
+    return this.http.get('https://api-dev.campercontrol.com/mailing/campaign_info/'+id)
   }
 
   
   createTemplate(data){
-    return this.http.post('app.campercontrol.com:5050/email/template/',data)
+    return this.http.post('https://api-dev.campercontrol.com/email/template/',data)
 
   }
 
   getPlantilla(idioma= 'es'){
-    return this.http.get('app.campercontrol.com:5050/get/mailing/template/'+idioma)
+    return this.http.get('https://api-dev.campercontrol.com/get/mailing/template/'+idioma)
 
   }
 
   getPlantillSelect(id:any){
-    return this.http.get('app.campercontrol.com:5050/email/system/template/'+id)
+    return this.http.get('https://api-dev.campercontrol.com/email/system/template/'+id)
 
   }
   getPlantillSelectMaisva(id:any){
-    return this.http.get('app.campercontrol.com:5050/email/massive/template/'+id)
+    return this.http.get('https://api-dev.campercontrol.com/email/massive/template/'+id)
 
   }
 
   getcorreoEnviados(id:any){
-    return this.http.get('app.campercontrol.com:5050/mailing/campaign/'+id)
+    return this.http.get('https://api-dev.campercontrol.com/mailing/campaign/'+id)
 
   }
 
   patchPlantilla(id:any,info){
-    return this.http.patch('app.campercontrol.com:5050/email/template/'+id,info)
+    return this.http.patch('https://api-dev.campercontrol.com/email/template/'+id,info)
 
   }
 
   delet(id:any){
-    return this.http.delete('app.campercontrol.com:5050/delete_email_template/'+id)
+    return this.http.delete('https://api-dev.campercontrol.com/delete_email_template/'+id)
 
   }
 
   gaetCampsSchoolProx(id:any){
-    return this.http.get('app.campercontrol.com:5050/school/'+id+'/upcoming_camps')
+    return this.http.get('https://api-dev.campercontrol.com/school/'+id+'/upcoming_camps')
 
   }
 
   gaetCampsSchoolAnteriores(id:any){
-    return this.http.get('app.campercontrol.com:5050/school/'+id+'/past_camps')
+    return this.http.get('https://api-dev.campercontrol.com/school/'+id+'/past_camps')
   }
 
 

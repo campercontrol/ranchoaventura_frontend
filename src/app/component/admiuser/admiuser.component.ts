@@ -516,7 +516,7 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
     
     this.school = res.school[0];
     this.vaccines = res.vaccines; 
-    this.photoSelectUp = 'app.campercontrol.com:5050/'+res['camper'].photo;
+    this.photoSelectUp = 'https://api-dev.campercontrol.com/'+res['camper'].photo;
    
     
     this.formFood.patchValue({
@@ -602,7 +602,7 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
     this.pathological_background_fm = res.pathological_background_fm;
     this.school = res.school[0];
     this.vaccines = res.vaccines; 
-    this.photoSelectUp = 'app.campercontrol.com:5050/'+res['camper'].photo;
+    this.photoSelectUp = 'https://api-dev.campercontrol.com/'+res['camper'].photo;
    
 
     this.formFood.patchValue({

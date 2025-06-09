@@ -190,7 +190,7 @@ total: number = 0;
   checkImagesOrientation() {
     this.hijosRes.camperList.forEach(camper => {
       const img = new Image();
-      img.src = 'app.campercontrol.com:5050/' + camper.photo;
+      img.src = 'https://api-dev.campercontrol.com/' + camper.photo;
 
       img.onload = () => {
         // Detectar si la imagen es horizontal (ancho > alto)

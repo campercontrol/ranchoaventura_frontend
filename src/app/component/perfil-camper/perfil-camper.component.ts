@@ -185,6 +185,11 @@ export class PerfilCamperComponent implements OnInit {
       console.log(this.idioma);
       
     })
+    this.parents.getComentarios(this.id,7).subscribe((res:any)=>{
+      this.comenarios = res;
+    }
+      
+  )
   }
 
   getTranslation(key: string): string {
@@ -223,10 +228,11 @@ export class PerfilCamperComponent implements OnInit {
         console.log(res.data);
         
        
-          this.getInfo()
-          this.comment = ""
+           this.comment = "";
   
-    
+           this.parents.getComentarios(this.id,this.info.infToken.role_id).subscribe((res:any)=>{
+            this.comenarios = res;
+          })
       })
 
     }
@@ -310,7 +316,6 @@ export class PerfilCamperComponent implements OnInit {
       
       console.log(this.historialCaps, 'ddd');
       
-      this.comenarios = res.camper_comments
       console.log(this.comenarios);
 
       this.photo = res.camper_band[0].photo

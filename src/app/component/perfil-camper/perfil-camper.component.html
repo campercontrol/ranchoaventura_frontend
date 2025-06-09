@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <div class="foto-perfil">
-                            <img src="app.campercontrol.com:5050/{{photo}}" class="avatar-lg rounded-circle" alt=""   >
+                            <img src="https://api-dev.campercontrol.com/{{photo}}" class="avatar-lg rounded-circle" alt=""   >
 
                             <a class="btn-rounded btn btn-success mt-3 text-white text-decoration-none d-block text-center"
                                 [routerLink]="'/dashboard/parents/inscription/' + id" target="_blank">
@@ -341,12 +341,12 @@
                                 <div class="chat-espacio">
                                     <div>
                                         <div class="row mt-2" *ngFor="let item of comenarios"  style="display: flex;align-items: center; justify-content: center;">
-                                            <div class="col-3" *ngIf="item.show_to == this.info.infToken.role_id   || item.show_to < this.info.infToken.role_id ">
-                                                <p class="Nombre-envidao">{{item.comment_author.fullname}}({{item.comment_author.role}})</p>
+                                            <div class="col-3" >
+                                                <p class="Nombre-envidao">{{item.author}}({{item.author_role}})</p>
                                                 <p-avatar image="assets/images/camp/chat-padres.png"
                                                     size="large"></p-avatar>
                                             </div>
-                                            <div class="col-8" *ngIf="item.show_to == this.info.infToken.role_id  || item.show_to < this.info.infToken.role_id ">
+                                            <div class="col-8"  >
                                                 <p class="fecha-chat" style="text-align: right;">
                                                     {{item.created_at?.substring(0,9)}}</p>
                                                 <div class="col-12 mensaje">
