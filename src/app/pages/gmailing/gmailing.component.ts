@@ -946,7 +946,7 @@ export interface Staff {
   staff_id: number;
   staff_photo: string;
   staff_full_name: string;
-  staff_birthday: string; // Fecha en formato YYYY-MM-DD
+  staff_birthday: string; // Fecha en formato dd-mm-yyy
   staff_cellphone: string;
   staff_email: string;
   staff_attend: number;

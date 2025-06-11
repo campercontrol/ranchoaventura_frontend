@@ -127,9 +127,9 @@ export class EventosCapacitacionesComponent implements OnInit {
     this.showDialog2();
     this.updateId = item.id;
     this.addTrainingForm.patchValue({
-      "start":     this.datePipe.transform(item.start, 'yyyy-MM-dd HH:mm:ss')
+      "start":     this.datePipe.transform(item.start, 'dd-mm-yyy HH:mm:ss')
       ,
-      "end":      this.datePipe.transform(item.end, 'yyyy-MM-dd HH:mm:ss')
+      "end":      this.datePipe.transform(item.end, 'dd-mm-yyy HH:mm:ss')
       ,
       "location":  item.location,
       "open_enrollment":item.open_enrollment,
