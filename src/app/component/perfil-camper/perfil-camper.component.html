@@ -62,7 +62,7 @@
     <main class="container-fluid">
         <div class="row">
             <div class="col-lg-7">
-                <div class="card p-5">
+                <div class="card p-5" style="overflow: auto; height: 100%;">
 
 
                     <div class="header">
@@ -142,7 +142,7 @@
                                             *ngFor="let item of vacunasACtivos">{{item.name}}</span></p>
 
                                       
-                                            <p><span class="fw-bold">Antecedentes camper: </span> <span  *ngFor="let item of infoCamper.camper_info.pathological_background" > <span class="badge bg-info ms-1 mt-1" *ngIf="item.is_active">{{item.name}} </span> </span></p>
+                                            <p><span class="fw-bold">Antecedentes camper: </span> <span   *ngFor="let item of infoCamper.camper_info.pathological_background" > <span class="badge bg-info ms-1 mt-1" *ngIf="item.is_active">{{item.name}} </span> </span></p>
                                             <p><span class="fw-bold">Antecedentes familiares: </span> <span  *ngFor="let item of infoCamper.camper_info.pathological_background_fm" > <span class="badge bg-info ms-1 mt-1" *ngIf="item.is_active">{{item.name}} </span> </span></p>
                                             <p><span class="fw-bold">Medicamentos preautorizados en : </span> <span  *ngFor="let item of infoCamper.camper_info.licensed_medicines" > <span class="badge bg-info ms-1 mt-1" *ngIf="item.is_active">{{item.name}} </span> </span></p>
 
@@ -247,7 +247,7 @@
                                 </div>
 
                                 <div class="container-fluid" style="margin-left: 20px;">
-                                    <p> <i class="bx bxl-whatsapp"></i> {{parent.tutor_name}}</p>
+                                    <p> <i class="bx bxs-envelope"></i> {{parent.tutor_name}}</p>
 
                                     <p> <i class="bx bxl-whatsapp"></i> {{infoCamp.contact_cellphone}}</p>
                                     <p> <i class="bx bxs-city"></i> {{infoCamp.contact_homephone}}</p>
@@ -284,13 +284,13 @@
                                 <!-- en este espacio es donde va el contenedor del chat-->
                                 <div class="chat-espacio">
                                     <div>
-                                        <div class="row mt-2" *ngFor="let item of comenarios" style="display: flex;align-items: center; justify-content: center;">
-                                            <div class="col-3" *ngIf="item.show_to == this.info.infToken.role_id   || item.show_to < this.info.infToken.role_id ">
-                                                <p class="Nombre-envidao">{{item.comment_author.fullname}}({{item.comment_author.role}})</p>
+                                        <div class="row mt-2" *ngFor="let item of comenarios"  style="display: flex;align-items: center; justify-content: center;">
+                                            <div class="col-3" >
+                                                <p class="Nombre-envidao">{{item.author}}({{item.author_role}})</p>
                                                 <p-avatar image="assets/images/camp/chat-padres.png"
                                                     size="large"></p-avatar>
                                             </div>
-                                            <div class="col-8" *ngIf="item.show_to == this.info.infToken.role_id   || item.show_to < this.info.infToken.role_id ">
+                                            <div class="col-8"  >
                                                 <p class="fecha-chat" style="text-align: right;">
                                                     {{item.created_at?.substring(0,9)}}</p>
                                                 <div class="col-12 mensaje">
@@ -300,6 +300,7 @@
                                             </div>
 
                                         </div>
+                                        
 
                                     </div>
 
@@ -365,9 +366,10 @@
                                 <div class="col">
                                     <label for="">Mostrar este comentario a</label>
                                     <select name="" id="" [(ngModel)]="typecoment">
-                                        <option value=4>Admin</option>
-                                        <option value=3>Coordinador</option>
-                                        <option value=2>staff</option>
+                                        <option value=6>Admin</option>
+                                        <option value=5>Coordinador</option>
+                                        <option value=2>escuela</option>
+                                        <option value=1>Papas</option>
 
 
                                     </select>

@@ -663,11 +663,9 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
 
             const previousUrl = this.location.path(); // Obtiene la URL anterior
 
-            if (previousUrl) {
-              this.location.back(); // Regresa a la página anterior
-            } else {
-              this.router.navigate([' dashboard/parents/inscription/camper/'+this.id]); // Redirige a una ruta específica si no hay página anterior
-            }
+               this.router.navigate(['/dashboard/parents/camper/'+this.id]); // Redirige a una ruta específica si no hay página anterior
+              // Regresa a la página anterior
+            
           
           }else{
             this.router.navigate(['/dashboard/parents']);

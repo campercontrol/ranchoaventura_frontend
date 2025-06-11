@@ -48,6 +48,7 @@ export class PerfilCamperComponent implements OnInit {
   typecoment:number = 1;
   userPermis:any;
   infoCamper:Welcome;
+  tipoUser:any;
   translations = 
     {
       "eng": {
@@ -179,13 +180,23 @@ export class PerfilCamperComponent implements OnInit {
     this.primengConfig.ripple = true;
     console.log(this.info.infToken,'datos del token');
     
+    this.typecoment = 1;
     this.userPermis = this.info
     this.lang.getLang().subscribe((res:any)=>{
       this.idioma=res
       console.log(this.idioma);
       
     })
-    this.parents.getComentarios(this.id,7).subscribe((res:any)=>{
+
+      if(this.info.infToken.user_admin == true){
+        this.tipoUser = 7;
+      }else if(this.info.infToken.user_coordinator == 1){
+        this.tipoUser = 6;
+
+      }else{
+        this.tipoUser = this.info.infToken.role_id;
+      }
+    this.parents.getComentarios(this.id,this.tipoUser).subscribe((res:any)=>{
       this.comenarios = res;
     }
       
@@ -230,7 +241,7 @@ export class PerfilCamperComponent implements OnInit {
        
            this.comment = "";
   
-           this.parents.getComentarios(this.id,this.info.infToken.role_id).subscribe((res:any)=>{
+           this.parents.getComentarios(this.id,this.tipoUser).subscribe((res:any)=>{
             this.comenarios = res;
           })
       })
