@@ -9,16 +9,16 @@ export class CreateCampsService {
   constructor(private http:HttpClient) { }
 
   getSede(){
-    return this.http.get('https://api-dev.campercontrol.com/location');
+    return this.http.get('https://api-dev.campercontrol.com/location/');
   }
   getTemporada(){
-    return this.http.get('https://api-dev.campercontrol.com/season');
+    return this.http.get('https://api-dev.campercontrol.com/season/');
   }
   gerSchool(){
-    return this.http.get('https://api-dev.campercontrol.com/school');
+    return this.http.get('https://api-dev.campercontrol.com/school/');
   }
   getcurrency(){
-    return this.http.get('https://api-dev.campercontrol.com/currency');
+    return this.http.get('https://api-dev.campercontrol.com/currency/');
   }
   postCamp(a:any){
     return this.http.post('https://api-dev.campercontrol.com/camp/',a);

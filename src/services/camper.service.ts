@@ -74,16 +74,16 @@ export class CamperService {
     return this.http.get('https://api-dev.campercontrol.com/camper_dashboard/' + camper_id )
    }
    postTraining(info: any) {
-    return this.http.post('https://api-dev.campercontrol.com/training', info)
+    return this.http.post('https://api-dev.campercontrol.com/training/', info)
    }
    postEventos(info: any) {
-    return this.http.post('https://api-dev.campercontrol.com/training_event', info)
+    return this.http.post('https://api-dev.campercontrol.com/training_event/', info)
    }
    getTraining() {
-    return this.http.get('https://api-dev.campercontrol.com/training' )
+    return this.http.get('https://api-dev.campercontrol.com/training/' )
    }
    getTemporadas() {
-    return this.http.get('https://api-dev.campercontrol.com/season' )
+    return this.http.get('https://api-dev.campercontrol.com/season/' )
    }
    updateTraining(info,id) {
     return this.http.patch('https://api-dev.campercontrol.com/training/'+id,info )
@@ -103,7 +103,7 @@ export class CamperService {
    }
 
    postTrainingPost(info: any) {
-    return this.http.post('https://api-dev.campercontrol.com/training_event', info)
+    return this.http.post('https://api-dev.campercontrol.com/training_event/', info)
    }
    updateTrainingEvent(info,id) {
     return this.http.patch('https://api-dev.campercontrol.com/training_event/'+id,info )
