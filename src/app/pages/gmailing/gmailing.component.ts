@@ -113,8 +113,8 @@ export class GmailingComponent implements OnInit {
   this.data.getPlantilla().subscribe((res:any)=>{
     this.tiposTemplates = res.data
   })
-  this.campInfo.getCamps().subscribe((res:any)=>{
-    this.listaCampamentos = res.data;
+  this.campInfo.getCampsMails().subscribe((res:any)=>{
+    this.listaCampamentos = res;
     console.log(res,'ñista de campamentos');
 
   })

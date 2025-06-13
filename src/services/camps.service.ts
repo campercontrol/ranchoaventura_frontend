@@ -65,6 +65,11 @@ export class CampsService {
   getCamps() {
     return this.http.get('https://api-dev.campercontrol.com/camp/')
  }
+
+
+ getCampsMails() {
+  return this.http.get('https://api-dev.campercontrol.com/mailing/camps/')
+} 
  getCampacitaciones() {
   return this.http.get('https://api-dev.campercontrol.com/mailing/training/event/')
 }
