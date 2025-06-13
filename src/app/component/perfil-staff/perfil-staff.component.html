@@ -250,7 +250,7 @@
                         </ng-template>
                         <ng-template pTemplate="content" let-event>
                             <div class="contendor-timiline mt-3 p-1" [ngClass]="{'passed':event.type=='passed','suscribe':event.type=='subscribe'}">
-                                <h3 style="cursor: pointer;"> {{event.camp_name}} <i class="fa fa-info-circle" (click)="link(event.camp_id)"></i></h3>
+                                <a style="cursor: pointer; color: white;" [routerLink]="['/dashboard/camp', id]" > {{event.camp_name}} <i class="fa fa-info-circle" (click)="link(event.camp_id)"></i></a>
                                 
                             </div>
                           

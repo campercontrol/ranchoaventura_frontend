@@ -37,10 +37,10 @@ export class CampsService {
     return this.http.post('https://api-dev.campercontrol.com/camper/extra_charges/',pregunta)
   }
   extras(pregunta){
-    return this.http.patch('https://api-dev.campercontrol.com/camper_extra_charges',pregunta)
+    return this.http.patch('https://api-dev.campercontrol.com/camper_extra_charges/',pregunta)
   }
   answer(pregunta){
-    return this.http.patch('https://api-dev.campercontrol.com/camper_extra_answers',pregunta)
+    return this.http.patch('https://api-dev.campercontrol.com/camper_extra_answers/',pregunta)
   }
   getDashbord(id){
     return this.http.get('https://api-dev.campercontrol.com/staff_dashboard/'+id)

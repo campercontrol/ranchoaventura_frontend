@@ -15,7 +15,7 @@ export class PaymentsService {
    }
    // crear pago
    setpage(info){
-    return this.http.post('https://api-dev.campercontrol.com/payment',info)
+    return this.http.post('https://api-dev.campercontrol.com/payment/',info)
    }
    updatepage(id,info){
     return this.http.patch('https://api-dev.campercontrol.com/payment/'+id,info)

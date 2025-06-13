@@ -75,12 +75,12 @@ export class AdmiService {
   }
 
   gaetCampsSchoolProx(id:any){
-    return this.http.get('https://api-dev.campercontrol.com/school/'+id+'/upcoming_camps')
+    return this.http.get('https://api-dev.campercontrol.com/school/'+id+'/upcoming_camps/')
 
   }
 
   gaetCampsSchoolAnteriores(id:any){
-    return this.http.get('https://api-dev.campercontrol.com/school/'+id+'/past_camps')
+    return this.http.get('https://api-dev.campercontrol.com/school/'+id+'/past_camps/')
   }
 
 

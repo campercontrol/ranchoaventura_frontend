@@ -302,7 +302,7 @@ async downloadImages(listCampers = this.listCampers) {
   const b =[]
   // Usamos Promise.all para esperar que todas las imágenes se descarguen
   const imagePromises = listCampers.map(async (customer) => {
-    const imageUrl = `https://api-dev.campercontrol.com/${customer.camper_photo}`;
+    const imageUrl = `https://api-dev.campercontrol.com/${customer.camper_photo}/`;
 
     b.push(imageUrl)
     this.capms.downloadImages(b)
@@ -347,11 +347,7 @@ private getFileNameFromHeader(contentDisposition: string | null): string | null 
 
       
     })
-    this.capms.getListaSatff().subscribe((res:any)=>{
-      console.log(res);
-      
-      this.listaStaff = res.data;
-    })
+   
 
   }
 
