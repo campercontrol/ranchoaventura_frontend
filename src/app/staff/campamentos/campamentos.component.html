@@ -11,7 +11,29 @@
             
                 
             </div>
-            
+            <div   style="width: 100%; margin-bottom: 20px; background-color: rgb(203, 201, 201); padding: 20px;" >
+                <div class="row mb-2">
+                  <div class="col-md-4">
+                    <input pInputText type="text" [(ngModel)]="searchName" placeholder="Nombre del campamento" class="form-control" />
+                  </div>
+                  <div class="col-md-4">
+                    <input pInputText type="text" [(ngModel)]="searchLocation" placeholder="Sede (location)" class="form-control" />
+                  </div>
+                  <div class="col-md-4">
+                    <input pInputText type="text" [(ngModel)]="searchSchool" placeholder=" Escuela (school)" class="form-control" />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-12 text-end">
+                    <button class="btn btn-success" (click)="buscarCampamentos()">Buscar</button>
+                    <a routerLink="/dashboard/camps/camp_add" class="btn btn-primary ms-2" *ngIf="this.info.infToken.user_admin == true ">   Agregar camp
+                    </a>
+
+                    <button class="btn btn-secondary ms-2" (click)="resetFiltros()">Limpiar</button>
+                      
+                  </div>
+                </div>
+            </div>
             <div >
                 <div style="overflow-x: scroll;">
                 
@@ -34,29 +56,7 @@
                     currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
                     [globalFilterFields]="['camp_name','camp_public_price','camp_start','camp_end','location_name']"
                 >
-                <ng-template pTemplate="caption">
-                    <div class="row mb-2">
-                      <div class="col-md-4">
-                        <input pInputText type="text" [(ngModel)]="searchName" placeholder="Nombre del campamento" class="form-control" />
-                      </div>
-                      <div class="col-md-4">
-                        <input pInputText type="text" [(ngModel)]="searchLocation" placeholder="Sede (location)" class="form-control" />
-                      </div>
-                      <div class="col-md-4">
-                        <input pInputText type="text" [(ngModel)]="searchSchool" placeholder=" Escuela (school)" class="form-control" />
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <div class="col-md-12 text-end">
-                        <button class="btn btn-success" (click)="buscarCampamentos()">Buscar</button>
-                        <a routerLink="/dashboard/camps/camp_add" class="btn btn-primary ms-2" *ngIf="this.info.infToken.user_admin == true ">   Agregar camp
-                        </a>
-
-                        <button class="btn btn-secondary ms-2" (click)="resetFiltros()">Limpiar</button>
-                          
-                      </div>
-                    </div>
-                  </ng-template>
+               
                     <ng-template pTemplate="header">
                         <tr>
             
@@ -98,9 +98,14 @@
                                     <p-sortIcon field="camp_end"></p-sortIcon>
                                 </div>
                             </th>
+
+                            <th pSortableColumn="photo_password" style="min-width: 50px;text-align: center;">
+                                Contraseña<p-sortIcon field="photo_password"></p-sortIcon></th>
                             <th pSortableColumn="status" style="min-width: 8rem">
                               
                             </th>
+
+                 
             
                         </tr>
                     </ng-template>
@@ -118,7 +123,7 @@
                                     severity="danger" severity="danger"></p-badge>
                             </td>
                             <td>
-                                {{customer.camp_public_price}}    <small *ngIf="customer.camp_show_payment_parent"><i class="bx bx-dollar-circle" pTooltip="Se muestra el precio a los padres" tooltipPosition="top"></i></small>
+                              {{ customer.camp_currency_symbol}}  {{customer.camp_public_price | number:'1.0-0'  }}    {{ customer.camp_currency_acronym}}  <small *ngIf="customer.camp_show_payment_parent"><i class="bx bx-dollar-circle" pTooltip="Se muestra el precio a los padres" tooltipPosition="top"></i></small>
                             </td>
                             <td>
                                 {{customer.location_name}}
@@ -130,7 +135,9 @@
                             <td>
                                 {{customer.camp_end.substring(0,10)}}
                             </td>
-            
+                            <td style="text-align: center; font-size: 12px;">
+                                {{customer.photo_password}}
+                            </td>
                          
                             <td>
                                 <a class="btn btn-primary" class="btn btn-primary" routerLink="/dashboard/camp/{{customer.camp_id}}" routerLinkActive="router-link-active" *ngIf="this.rol_id!=3" >ver campamento</a>

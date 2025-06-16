@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { CamperService } from 'src/services/camper.service';
 import { CatalogosService } from 'src/services/catalogos.service';
@@ -101,7 +101,7 @@ export class AdmiParentComponent implements OnInit {
   selectedCities: string[] = [];
   id: any;
 
-  constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder, private camperSer: CamperService, private render: Renderer2, private routerAct: ActivatedRoute, private cdRef: ChangeDetectorRef) {
+  constructor(private catalogos: CatalogosService, private _FormBuild: FormBuilder, private camperSer: CamperService, private render: Renderer2, private routerAct: ActivatedRoute, private cdRef: ChangeDetectorRef,private router: Router) {
     //  this.textos  = traducciones['traduciones'][this.idioma]['formUserChildren'];
     console.log(this.textos);
 
@@ -536,8 +536,8 @@ export class AdmiParentComponent implements OnInit {
   }
 
   cancelarUpdate() {
-    this.table = true;
-    this.display2 = false;
+    this.router.navigate(['dashboard/admi/parent']);
+
 
   }
   deletModal(name, id) {

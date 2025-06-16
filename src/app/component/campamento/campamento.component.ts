@@ -35,7 +35,7 @@ export class CampamentoComponent implements OnInit {
       texto10:"Fotos:",
       texto11:"Detalle de pagos",
       texto12:"Tu saldo actual es de:",
-      texto13:" Una vez realizado el pago envianos tu comprobante a pagos@campercontrol.com indicando nombre completo del acampador. Tu pago se verá reflejado en nuestro sistema en un lapso de 48 horas hábiles.",
+      texto13:" Una vez realizado el pago envianos tu comprobante a  pagos@campercontrol.com indicando nombre completo del acampador. Tu pago se verá reflejado en nuestro sistema en un lapso de 48 horas hábiles.",
       texto14:"Favor de consultar el estado de los pagos con el colegio",
       th:"Fecha",
       th1:"Descripcion",

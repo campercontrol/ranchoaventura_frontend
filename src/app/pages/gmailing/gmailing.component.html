@@ -292,7 +292,7 @@
                        <div>
                         <div class="spinner-border text-primary" role="status"  *ngIf="cargandoMailing">
                           </div>
-                        <button class="btn btn-primary" (click)="createEmail()"  *ngIf="!cargandoMailing">Enviar</button>
+                        <button class="btn btn-primary" (click)="confirmDestinatario = true"  *ngIf="!cargandoMailing">Enviar</button>
 
                        </div>
 
@@ -816,71 +816,89 @@
 
 
 
-<p-dialog header="Correo enviado el: {{ dataGmailifno.date | date:' dd-MM-yyyy':'es' }}" [(visible)]="infoEmail" [modal]="true" [style]="{width: '90%'}" [maximizable]="true" [baseZIndex]="10000" *ngIf="infoEmail"
-    [draggable]="false" [resizable]="false">
-    <div class="spinner-border text-primary" role="status" *ngIf="showSpinnerGmail">
-      <span class="sr-only">...</span>
-    </div>
+<p-dialog header="Destinatarios del mensaje"
+          [(visible)]="confirmDestinatario "
+          [modal]="true"
+          [style]="{ width: '90%' }"
+          [maximizable]="true"
+          [baseZIndex]="10000"
+          [draggable]="false"
+          [resizable]="false">
 
-    <div *ngIf="!showSpinnerGmail">
-      <div class="col" >
+  <div *ngIf="tipoTemplate != 3">
+    <h3>Staff</h3>
+    <ul>
+      <li *ngFor="let staff of selectdestinatariosStaff">
+        {{ staff.staff_full_name }} - {{ staff.staff_email }}
+      </li>
+    </ul>
+
+    <h3 class="mt-4">Escuelas</h3>
+    <ul>
+      <li *ngFor="let school of selectdestinatariosEscuela">
+        {{ school.name }} <br>
+        <span *ngIf="school.email_select">Email: {{ school.email }}</span><br>
+        <span *ngIf="school.email_second_select">Secundario: {{ school.contact_second_email }}</span><br>
+        <span *ngIf="school.email_thirdselect">Terciario: {{ school.contact_third_email }}</span>
         <hr>
-        <div class="mx-auto container">
-            <div class="row">
-                <form action="" >
-                  <div class="mx-auto container">
-                      <div class="row">
+      </li>
+    </ul>
 
+    <h3 class="mt-4">Campers</h3>
+    <ul>
+      <li *ngFor="let camper of selectdestinatariosCampers">
+        {{ camper.camper_full_name }} - {{ camper.tutor_email }}
+      </li>
+    </ul>
+  </div>
 
-                          <div class="col-lg-12  mt-4" >
-                              <h3>Nombre del campamento enviado: {{dataGmailifno.campaign.title}}</h3>
+  <div *ngIf="tipoTemplate == 3">
+    <p-tabView>
+      <p-tabPanel *ngFor="let item of dataResGmail; let i = index"
+                  [header]="item.camp.name"
+                  [selected]="i === 0">
+        <h4>Staff</h4>
+        <ul>
+          <li *ngFor="let staff of item.camp.staffSelect">
+            {{ staff.staff_full_name }} - {{ staff.staff_email }}
+          </li>
+        </ul>
 
+        <h4 class="mt-4">Escuelas</h4>
+        <ul>
+          <li *ngFor="let school of item.camp.schollSelect">
+            {{ school.name }} <br>
+            <span *ngIf="school.email_select">Email: {{ school.email }}</span><br>
+            <span *ngIf="school.email_second_select">Secundario: {{ school.contact_second_email }}</span><br>
+            <span *ngIf="school.email_thirdselect">Terciario: {{ school.contact_third_email }}</span>
+            <hr>
+          </li>
+        </ul>
 
-                          </div>
-                          <hr>
-                          <h4 class="mt-3">Listado de campamentos:</h4>
-                          <div  style="display: flex; flex-wrap: wrap; gap: 10px;" class="mb-2">
+        <h4 class="mt-4">Campers</h4>
+        <ul>
+          <li *ngFor="let camper of item.camp.camperSelect">
+            {{ camper.camper_full_name }} - {{ camper.tutor_email }}
+          </li>
+        </ul>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
 
-                            <div *ngFor="let item of dataGmailifno.camps">
-                              <p-tag  >{{item.name}}</p-tag>
+  <p-footer class="d-flex justify-content-end gap-2">
+    <button    
+            class="btn btn-secondary"
+            (click)="confirmDestinatario = false">Cancelar
+    </button>
 
-                            </div>
-
-
-                          </div>
-                          <hr>
-
-                          <h4 class="mt-3">Listado de campers:</h4>
-                          <div  style="display: flex; flex-wrap: wrap; gap: 10px;">
-
-                            <div *ngFor="let item of dataGmailifno.campers">
-                              <p-tag  >{{item.camper_name}}</p-tag>
-
-                            </div>
-
-
-                          </div>
-
-
-
-                      </div>
-                  </div>
-
-                  <div class="mt-4 col-12">
-                      <ckeditor [editor]="Editor"  [data]="dataGmailifno.campaign.template" (ready)="onReady($event)">
-                      </ckeditor>
-
-                  </div>
-              </form>
-
-            </div>
-        </div>
-
-    </div>
-    </div>
-
-
+    <button   type="button" label="Enviar correos"   
+            class=" btn btn-primary"
+            (click)="createEmail()">Enviar correos 
+    </button>
+  </p-footer>
 </p-dialog>
+
+
 
 
 

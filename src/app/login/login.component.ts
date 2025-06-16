@@ -139,6 +139,8 @@ export class LoginComponent implements OnInit {
       if(res.detail.status == 1){
         this.alertPass = true;
 
+      }else{
+       alert( 'El correo ingresado no existe, por favor verifique e intente nuevamente');
       }
 
     })

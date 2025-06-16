@@ -810,8 +810,10 @@ export class AdmiCamperComponent implements OnInit {
         console.error("Error al parsear JSON:", error);
         return [];
       }
+    }else{
+      return [];
     }
-    return [];
+  
   }
   
   

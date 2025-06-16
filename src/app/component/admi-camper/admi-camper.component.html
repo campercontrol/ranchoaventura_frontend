@@ -17,6 +17,28 @@
                             </div>
                            
                         </div>
+                        <div style="width: 100%; margin-bottom: 20px; background-color: rgb(203, 201, 201); padding: 20px;">
+                            <div class="row mb-2">
+                              <div class="col-md-4">
+                                <input pInputText type="text" [(ngModel)]="searchName" placeholder="Nombre del campamento" class="form-control" />
+                              </div>
+                              <div class="col-md-4">
+                                <input pInputText type="text" [(ngModel)]="searchLocation" placeholder="Sede (location)" class="form-control" />
+                              </div>
+                              <div class="col-md-4">
+                                <input pInputText type="text" [(ngModel)]="searchSchool" placeholder=" Escuela (school)" class="form-control" />
+                              </div>
+                            </div>
+                            <div class="row mb-3">
+                              <div class="col-md-12 text-end">
+                                <button class="btn btn-success" (click)="buscarCampamentos()">Buscar</button>
+                              
+        
+                                <button class="btn btn-secondary ms-2" (click)="resetFiltros()">Limpiar</button>
+                                  
+                              </div>
+                            </div>
+                        </div>
                         <div style="overflow: auto;">
                             <p-table #dt [value]="listcatalogos" [rows]="5" [rowsPerPageOptions]="[5, 25, 50]"
                             dataKey="id"
@@ -30,48 +52,30 @@
                             [showCurrentPageReport]="true"
                             [rowsPerPageOptions]="[10,25,50]"
                                  [showCurrentPageReport]="true" [paginator]="true">
-                                <ng-template pTemplate="caption">
-                                    <div class="row mb-2">
-                                      <div class="col-md-4">
-                                        <input pInputText type="text" [(ngModel)]="searchName" placeholder="Nombre del campamento" class="form-control" />
-                                      </div>
-                                      <div class="col-md-4">
-                                        <input pInputText type="text" [(ngModel)]="searchLocation" placeholder="Sede (location)" class="form-control" />
-                                      </div>
-                                      <div class="col-md-4">
-                                        <input pInputText type="text" [(ngModel)]="searchSchool" placeholder=" Escuela (school)" class="form-control" />
-                                      </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                      <div class="col-md-12 text-end">
-                                        <button class="btn btn-success" (click)="buscarCampamentos()">Buscar</button>
-                                      
-                
-                                        <button class="btn btn-secondary ms-2" (click)="resetFiltros()">Limpiar</button>
-                                          
-                                      </div>
-                                    </div>
-                                  </ng-template>
+                               
 
                                 <ng-template pTemplate="header">
                                     <tr>
-                                        <th pSortableColumn="name" style="min-width: 190px; text-align: center;">
-                                            Campamento <p-sortIcon field="name"
+                                        <th pSortableColumn="camp_name" style="min-width: 190px; text-align: center;">
+                                            Campamento <p-sortIcon field="camp_name"
                                                 style="font-size: 10px;"></p-sortIcon></th>
-                                        <th pSortableColumn="start" style="min-width: 150px;text-align: center;">
-                                            Inicio<p-sortIcon field="start"></p-sortIcon></th>
-                                        <th pSortableColumn="end" style="min-width: 150px;text-align: center;">
-                                            Finalización<p-sortIcon field="end"></p-sortIcon></th>
-                                            <th pSortableColumn="venue" style="min-width: 150px;text-align: center;">
-                                                Sede<p-sortIcon field="venue"></p-sortIcon></th>
-                                                <th pSortableColumn="school_id" style="min-width: 150px;text-align: center;">
-                                                    Escuela<p-sortIcon field="school_id"></p-sortIcon></th>
-                                                    <th pSortableColumn="public_price" style="min-width: 110px;text-align: center;">
-                                                        Precio<p-sortIcon field="public_price"></p-sortIcon></th>
+                                        <th pSortableColumn="camp_start" style="min-width: 150px;text-align: center;">
+                                            Inicio<p-sortIcon field="camp_start"></p-sortIcon></th>
+                                        <th pSortableColumn="camp_end" style="min-width: 150px;text-align: center;">
+                                            Finalización<p-sortIcon field="camp_end"></p-sortIcon></th>
+                                            <th pSortableColumn="location_name" style="min-width: 150px;text-align: center;">
+                                                Sede<p-sortIcon field="location_name"></p-sortIcon></th>
+                                                <th pSortableColumn="school_name" style="min-width: 150px;text-align: center;">
+                                                    Escuela<p-sortIcon field="school_name"></p-sortIcon></th>
+                                                    <th pSortableColumn="camp_public_price" style="min-width: 110px;text-align: center;">
+                                                        Precio<p-sortIcon field="camp_public_price"></p-sortIcon></th>
                                                         <th pSortableColumn="active" style="min-width: 60px;text-align: center;">
                                                             Activo<p-sortIcon field="active"></p-sortIcon></th>
                                                         <th pSortableColumn="registration" style="min-width: 50px;text-align: center;">
                                                             Registro Abierto<p-sortIcon field="registration"></p-sortIcon></th>
+
+                                                            <th pSortableColumn="photo_password" style="min-width: 50px;text-align: center;">
+                                                                Contraseña<p-sortIcon field="photo_password"></p-sortIcon></th>
                                                             <td>
 
                                                             </td>
@@ -95,7 +99,8 @@
                                             {{customer.school_name}}
                                         </td>
                                         <td style="text-align: center; font-size: 12px;" >
-                                            {{customer.camp_public_price}}
+                                            {{ customer.camp_currency_symbol}}  {{customer.camp_public_price | number:'1.0-0'  }}    {{ customer.camp_currency_acronym}}  <small *ngIf="customer.camp_show_payment_parent"><i class="bx bx-dollar-circle" pTooltip="Se muestra el precio a los padres" tooltipPosition="top"></i></small>
+
                                         </td>
                                      
 
@@ -112,6 +117,10 @@
                                             <div *ngIf="!customer.registration"><i class="dripicons-cross"
                                                     style="color: red;text-align: center;"></i></div>
                                         </td>
+                                        <td style="text-align: center; font-size: 12px;">
+                                            {{customer.photo_password}}
+                                        </td>
+                                        
                                         <td>
                                             <button class="btn btn-warning" (click)="update(customer)">editar</button>
                                         </td>

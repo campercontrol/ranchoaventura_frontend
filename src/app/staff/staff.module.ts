@@ -63,6 +63,7 @@ import { ListadoStaffComponent } from './listado-staff/listado-staff.component';
 import { MercadoPagoSuccessComponent } from '../component/mercado_pago_success/mercado_pago_success.component';
 import { ToastModule } from 'primeng/toast';
 import { MedicalComponentComponent } from './medical-component/medical-component.component';
+import { AdmiUserComponentId } from '../component/admi-user-id/admi-user.component';
 
 
 
@@ -78,6 +79,7 @@ import { MedicalComponentComponent } from './medical-component/medical-component
     CampamentosComponent,
     NuevoCampamentoComponent,
     CampamentosStaffComponent,
+    AdmiUserComponentId,
     GroupingComponent,
     NuevaConsultaComponent,
     MedicoComponent,

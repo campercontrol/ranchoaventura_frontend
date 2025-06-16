@@ -361,7 +361,7 @@ export class CatalogosService {
         .set('per_page', String(perPage))
         .set('order', order);
   
-      return this.http.get<any>('https://api-dev.campercontrol.com/usuario/', { params });
+      return this.http.get<any>('https://api-dev.campercontrol.com/usuario', { params });
     }
      getUserF(){
       return this.http.get('https://api-dev.campercontrol.com/usuario?is_active=false');

@@ -79,6 +79,7 @@ import { CamparsSchoolComponent } from '../component/campars-school/campars-scho
 import { PaymantCampComponent } from '../component/paymant-camp/paymant-camp.component';
 import { NuevaConsultaComponent } from './medical/nueva-consulta/nueva-consulta.component';
 import { MedicalComponentComponent } from '../staff/medical-component/medical-component.component';
+import { AdmiUserComponentId } from '../component/admi-user-id/admi-user.component';
 
 const routes: Routes = [
   
@@ -112,6 +113,8 @@ const routes: Routes = [
   { path: 'admi/parent/:id', component: AdmiParentComponent, canActivate: [AuthGuard] },// admi a acamapdores
 
   { path: 'admi/user', component: AdmiUserComponent, canActivate: [AuthGuard] },// admi a acamapdores
+  { path: 'admi/user/:id', component: AdmiUserComponentId, canActivate: [AuthGuard] },// admi a acamapdores
+
   { path: 'admi/camps', component: AdmiCamperComponent, canActivate: [AuthGuard] },// admi a camps
  // { path: 'admi/paymants', component: AdmiPagosComponent, canActivate: [AuthGuard] },// admi a camps
   { path: 'admi/search', component: SearchParentComponent, canActivate: [AuthGuard] },// admi a camps

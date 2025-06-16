@@ -98,6 +98,7 @@ export class GmailingComponent implements OnInit {
   listaTemplateAlmacenado:any =[];
   tituloTemplateAlmacenado:any = "";
   asuntoTemplateAlmacenado:any = "";
+  confirmDestinatario :boolean = false;
 
   page=1;
   edtitar=1;
