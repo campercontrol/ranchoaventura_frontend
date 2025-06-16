@@ -301,7 +301,7 @@ export class CatalogosService {
         .set('per_page', perPage.toString())
         .set('order', 'desc');
   
-      return this.http.get<any>('https://api-dev.campercontrol.com/search_usuario/', { params });
+      return this.http.get<any>('https://api-dev.campercontrol.com/search_usuario', { params });
     }
     searchStaff(filters: any, page: number = 1, perPage: number = 10) {
       const params = new HttpParams()
