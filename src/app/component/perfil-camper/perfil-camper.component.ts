@@ -411,6 +411,7 @@ export interface Welcome {
   camper_subscribe_camps: any[];
   camper_cancelled_camps: any[];
   camper_passed_camps:    any[];
+  siblings :            any[];
 }
 
 export interface CamperBand {

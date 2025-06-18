@@ -157,6 +157,16 @@ export class PerfilStaffComponent implements OnInit {
     this.rou.navigate(['/parents/inscription/'+id]);
 
   }
+  cancelar(id){
+    this.staff.cancelarParticipacio(id).subscribe((res)=>{
+      window.location.reload();
+
+
+    },erro=>{
+      console.log(erro);
+      
+    })
+}
   comentario() {
     let a = {
       "comment": this.comment,

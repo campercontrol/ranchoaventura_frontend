@@ -251,14 +251,15 @@
                         <ng-template pTemplate="content" let-event>
                             <div class="contendor-timiline mt-3 p-1" [ngClass]="{'passed':event.type=='passed','suscribe':event.type=='subscribe'}">
                                 <a style="cursor: pointer; color: white;" [routerLink]="['/dashboard/camp', id]" > {{event.camp_name}} <i class="fa fa-info-circle" (click)="link(event.camp_id)"></i></a>
-                                
+                                <button class="btn btn-danger mt-3 mb-2" *ngIf="event.type =='subscribe'" (click)="cancelar(event.staff_in_camp_id)">Cancelar mi participacion</button>
+
                             </div>
                           
                             <div class="contenedor-p" *ngIf="event.type!='passed' && event.type !='cancelled'">
                                 <p-tag value="Confirmado" severity="success"  [rounded]="true" *ngIf=" event.confirmed_staff"></p-tag>
                                 <p-tag value="Sin confirmar" severity="warning"  [rounded]="true" *ngIf=" !event.confirmed_staff"></p-tag>
                                 <p class="icononos-s mt-3">{{event.camp_start.substring(0,10)}} - {{event.camp_end.substring(0,10)}}<i class="fas fa-calendar-alt ms-3"> </i></p>
-                                
+
                             </div>
                         </ng-template>
                     </p-timeline>

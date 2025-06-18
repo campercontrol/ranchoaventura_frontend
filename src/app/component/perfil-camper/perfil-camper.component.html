@@ -90,9 +90,11 @@
                                 <div class="container-fluid">
                                     <p> <span class="fw-bold">Nombre:</span> {{infoCamp.name}}</p>
                                     <p> <span class="fw-bold">Fecha de nacimiento:</span>{{infoCamp.birthday}}</p>
+
                                     <p> <span class="fw-bold">Edad: </span> {{infoCamp.birthdayA}}</p>
                                     <p> <span class="fw-bold">Sexo: </span> {{infoCamp.gender_id}}</p>
                                     <p> <span class="fw-bold"> Correo: </span>{{infoCamp.email}}</p>
+                                    <p> <span class="fw-bold">Hermanos:</span>  <a  *ngFor="let item of infoCamper.siblings" routerLink="/dashboard/parents/camper/{{item.id}}">{{item.name}} {{item.lastname_father}} {{item.lastname_mother}}</a></p>
 
                                 </div>
                                 <hr>
