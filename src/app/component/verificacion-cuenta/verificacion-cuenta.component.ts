@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/core/services/auth.service';
+ import { AuthenticationService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-verificacion-cuenta',
@@ -27,7 +27,11 @@ export class VerificacionCuentaComponent implements OnInit {
         
         if(res.detail=="The account was successfully verified"){
           this.spinner = false;
-  
+          let user = {access_token: this.token
+          }
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.router.navigate(['dashboard/staff']);
+
           this.alertPass=true;
   
         }else{

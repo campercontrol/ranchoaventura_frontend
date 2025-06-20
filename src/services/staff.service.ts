@@ -49,8 +49,13 @@ export class StaffService {
 
   }
 
-  getPerfil(id = 18){
+  getPerfil(id ){
     return this.http.get('https://api-dev.campercontrol.com/staff/'+id)
+  }
+  
+
+  reportProspecto( ){
+    return this.http.post('https://api-dev.campercontrol.com/prospects/report/general',{})
   }
   
   createComment(info){

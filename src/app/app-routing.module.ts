@@ -23,7 +23,7 @@ const routes: Routes = [
   {path:'prospects',component:ProspectoComponent},
   {path:'Singup',component:NewParentComponent},
   {path:'reset_password',component:ResetPaswordComponent},
-  {path:'user/verify',component:VerificacionCuentaComponent},
+  {path:'verify',component:VerificacionCuentaComponent},
 
   { path: 'mercado_pago_success', component: MercadoPagoSuccessComponent},
   { path: 'mercado_pago_failure', component: MercadoPagoSuccessComponent },
