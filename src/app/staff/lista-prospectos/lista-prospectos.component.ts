@@ -16,7 +16,8 @@ export class ListaProspectosComponent implements OnInit {
   selectedProducts: any[];
 
   product: any;
-    spinner = false;
+    spinner = false; 
+    spinnerExcel = false;
 
   submitted: boolean;
   totalRecords: number = 0;
@@ -123,6 +124,7 @@ export class ListaProspectosComponent implements OnInit {
     });
   }
   reporteGeneralStaff() {
+    this.spinnerExcel = true;
     this.prospectos.reportProspecto( ).subscribe({
       next: (response: any) => {
         const data = response;
@@ -204,7 +206,8 @@ export class ListaProspectosComponent implements OnInit {
   
         // Generar el archivo Excel
         const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-  
+        this.spinnerExcel = false;
+
         // Guardar el archivo
         this.saveAsExcelFile(excelBuffer, 'Reporte General prospecto ' );
       },

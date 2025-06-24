@@ -299,17 +299,26 @@ download(url: string): Observable<HttpResponse<Blob>> {
 
 async downloadImages(listCampers = this.listCampers) {
   const zip = new JSZip();
-  const b =[]
-  // Usamos Promise.all para esperar que todas las imágenes se descarguen
-  const imagePromises = listCampers.map(async (customer) => {
+
+  const imagePromises = listCampers.map(async (customer, index) => {
     const imageUrl = `https://api-dev.campercontrol.com/${customer.camper_photo}/`;
 
-    b.push(imageUrl)
-    this.capms.downloadImages(b)
-  
+    try {
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      const extension = blob.type.split('/')[1] || 'jpg';
+
+      // Añade la imagen al zip con un nombre único
+      zip.file(` ${customer.camper_full_name }.${extension}`, blob);
+    } catch (error) {
+      console.error(`Error al descargar imagen para camper ${index + 1}:`, error);
+    }
   });
 
-   
+  await Promise.all(imagePromises); // Esperamos que todas se descarguen
+
+  const zipBlob = await zip.generateAsync({ type: 'blob' });
+  saveAs(zipBlob, this.infoCamp.name+'.zip');
 }
 
 

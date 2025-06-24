@@ -49,7 +49,7 @@
         </div>
     </header>
 
-    <div class="alert alert-danger mt-2 mb-2" role="alert" *ngIf="deuda != 0">
+    <div class="alert alert-danger mt-2 mb-2" role="alert" *ngIf="deuda != 0" >
         <h2> Pendiente de pagos: </h2>
         <div *ngFor="let currency of currencyKeys">
             <p>
@@ -94,7 +94,7 @@
                                     <p> <span class="fw-bold">Edad: </span> {{infoCamp.birthdayA}}</p>
                                     <p> <span class="fw-bold">Sexo: </span> {{infoCamp.gender_id}}</p>
                                     <p> <span class="fw-bold"> Correo: </span>{{infoCamp.email}}</p>
-                                    <p> <span class="fw-bold">Hermanos:</span>  <a  *ngFor="let item of infoCamper.siblings" routerLink="/dashboard/parents/camper/{{item.id}}">{{item.name}} {{item.lastname_father}} {{item.lastname_mother}}</a></p>
+                                    <p> <span class="fw-bold">Hermanos:</span>  <a  *ngFor="let item of infoCamper.siblings || []" routerLink="/dashboard/parents/camper/{{item.id}}">{{item.name}} {{item.lastname_father}} {{item.lastname_mother}}</a></p>
 
                                 </div>
                                 <hr>

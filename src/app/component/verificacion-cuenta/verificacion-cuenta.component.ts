@@ -15,6 +15,7 @@ export class VerificacionCuentaComponent implements OnInit {
   token:any = "";
   email:string="";
   spinner = true;
+  errorInfo =''
   alertPassError = false;
 
   constructor(private formBuilder: FormBuilder, private data: AuthenticationService,private router:Router,private route: ActivatedRoute) { 
@@ -25,7 +26,7 @@ export class VerificacionCuentaComponent implements OnInit {
       this.data.validarCuenta(this.token).subscribe((res:any)=>{
         console.log(res);
         
-        if(res.detail=="The account was successfully verified"){
+        if(res.detail.status== 1){
           this.spinner = false;
           let user = {access_token: this.token
           }
@@ -35,7 +36,10 @@ export class VerificacionCuentaComponent implements OnInit {
           this.alertPass=true;
   
         }else{
-          alert('Al parecer no se pudo activar su cuenta. Por favor, comuníquese con soporte.');
+          alert(res.detail.msg);
+          this.errorInfo = res.detail.msg;
+          this.spinner = false;
+          this.alertPassError = true;
         }
         
   

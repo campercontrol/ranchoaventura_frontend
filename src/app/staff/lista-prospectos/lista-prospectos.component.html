@@ -24,10 +24,12 @@
                
                 <div class="btn-grup">
                   <div>
-                    <button class="btn btn-success" style="margin-bottom: 10px;" (click)="reporteGeneralStaff()" >Descragar reporte</button>
+                    <button pButton [loading]="spinnerExcel" class="btn btn-success" style="margin-bottom: 10px;" (click)="reporteGeneralStaff()" >Descragar reporte   
 
-                      <button class="btn btn-success" style="margin-bottom: 10px;" (click)="open(content)" >Aceptar como staff</button>
-                      <button class="btn btn-warning" style="margin-bottom: 10px; margin-left: 5px;"  >Eliminar</button>
+                    </button>
+
+                      <button pButton   style="margin-bottom: 10px;  margin-left: 5px;"  class="p-button-success" (click)="open(content)" >Aceptar como staff</button>
+                      <button pButton   style="margin-bottom: 10px; margin-left: 5px;"   severity="danger" class="p-button-danger" >Eliminar</button>
                       
                   </div>
                

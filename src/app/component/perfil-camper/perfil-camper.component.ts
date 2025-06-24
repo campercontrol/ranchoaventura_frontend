@@ -252,6 +252,9 @@ export class PerfilCamperComponent implements OnInit {
   }
 
   calculateBalanceByCurrency(data: any[]): Record<string, { total: number; acronym: string }> {
+
+    console.log(data,'deudads');
+    
     return data.reduce((acc, item) => {
       if (item.show_payment_parent) {  // Solo sumar si show_payment_parent es true
         const symbol = item.currency_symbol;
