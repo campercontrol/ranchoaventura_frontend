@@ -50,11 +50,11 @@
                   </div>
                   <div  class="d-inline-block" style="margin-right: 10px;">
 
-                  <button   type="button" label="" class="btn btn-secondary ms-3" (click)="resetFilters()"> Resetear</button>
+                  <button   type="button" label="" class="btn btn-secondary ms-3" (click)="resetFilters()"> Limpiar</button>
                   </div>
                 
                   <div  class="d-inline-block" style="margin-right: 10px;">
-                    <button type="button" class="btn btn-primary" (click)="showDialog()">Añadir Titular de cuenta</button>
+                    <button type="button" class="btn btn-primary" (click)="showDialog()">Añadir titular de cuenta</button>
 
                 </div></div>
               </div>
@@ -144,15 +144,15 @@
             <div class="col-lg-9">
                 <div class="card">
                     <div class="card-body">
-                       <h2>Añadir Titular de la cuenta</h2>
+                       <h2>Añadir titular de la cuenta</h2>
 
                         <div class="mt-5">
                             <div class="row mb-4">
                                 <label for=""
-                                    class="col-sm-3 col-form-label">Buscar Padre o tutor</label>
+                                    class="col-sm-3 col-form-label">Buscar padre o tutor</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control " id=""    [value]="nameParent" disabled="false" (input)="searchparten()">
-                                        <button type="button" class="btn btn-primary" (click)="showDialogSearch()" icon="pi pi-info-circle" label="Selecionar  Padre o Tutor">Selecionar  Padre o Tutor</button>
+                                        <button type="button" class="btn btn-primary" (click)="showDialogSearch()" icon="pi pi-info-circle" label="Selecionar  Padre o Tutor">Selecionar padre o tutor</button>
                                     </div>
 
 
@@ -270,7 +270,7 @@
                 <p-dialog header="Buscador" *ngIf="displayEdit" [(visible)]="displayEdit" position="right" modal="True" [style]="{width: '50vw'}">
                     <div class="row mb-4">
                         <label for=""
-                            class="col-sm-3 col-form-label">Buscar Padre o tutor</label>
+                            class="col-sm-3 col-form-label">Buscar padre o tutor</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control " id="" formControlName="parent_name" name="parent_name"  (input)="searchparten()">
                                 <div class="alert alert-warning" role="alert" *ngIf="!resSearch">        
@@ -291,7 +291,7 @@
                             <div class="col-sm-9">
                                 <select bindLabel="value" bindValue="id" formControlName="user_id"  style="width: 100%;"   class=" form-control" >
                                     <option *ngIf="!resSearch">Por favor Agregue un nombre en el buscador para empezar</option>
-                                    <option *ngIf="resSearch">Seleciona un Padre o Tutor</option>
+                                    <option *ngIf="resSearch">Seleciona un padre o tutor</option>
                                     <option *ngFor="let items of parent" [value]="items.user_id" > {{items.tutor_email}}</option>
                                 </select>
                             </div>
@@ -313,10 +313,10 @@
             <div class="col-lg-9">
                 <div class="card">
                     <div class="card-body">
-                       <h2>Editar Titular de la cuenta</h2>
+                       <h2>Editar titular de la cuenta</h2>
                        <div class="row mb-4">
                         <label for=""
-                            class="col-sm-3 col-form-label">Buscar Padre o tutor</label>
+                            class="col-sm-3 col-form-label">Buscar padre o tutor</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control " id=""    [value]="nameParent" disabled="false" (input)="searchparten()">
                                 <button type="button" class="btn btn-primary" (click)="showDialogSearchUp()" icon="pi pi-info-circle" label="Selecionar  Padre o Tutor">Selecionar  Padre o Tutor</button>
