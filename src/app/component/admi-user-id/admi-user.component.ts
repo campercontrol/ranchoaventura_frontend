@@ -71,6 +71,30 @@ export class AdmiUserComponentId implements OnInit {
         this.cargando = false;
         alert('No se pudo Agregar');
       });
+
+      this.catalogos.getinID(this.updateId).subscribe((res: any) => {
+        console.log(res);
+        const item = res.data[0];
+       
+        this.formFood2.patchValue({     
+          "email":item.email,
+            "hashed_pass": "",
+            "role_id":item.role_id,
+            "is_coordinator":item.is_coordinator,
+            "is_admin": item.is_admin,
+            "is_employee": item.is_employee,
+            "is_superuser": false,
+            "is_active": item.is_active,
+       })
+        
+      }, error => {
+        this.cargando = false;
+        alert('No se pudo Agregar');
+      });
+
+
+
+    
     }
   }
 

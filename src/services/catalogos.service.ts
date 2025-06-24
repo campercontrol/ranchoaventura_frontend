@@ -387,6 +387,12 @@ export class CatalogosService {
 
 
     }
+
+    getinID(id){
+      return this.http.get('https://api-dev.campercontrol.com/usuario/'+id);
+
+
+    }
   
     // admi camper
     getCamps( ){

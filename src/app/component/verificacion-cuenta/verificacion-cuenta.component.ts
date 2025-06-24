@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
  import { AuthenticationService } from 'src/app/core/services/auth.service';
+ import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-verificacion-cuenta',
@@ -18,7 +19,7 @@ export class VerificacionCuentaComponent implements OnInit {
   errorInfo =''
   alertPassError = false;
 
-  constructor(private formBuilder: FormBuilder, private data: AuthenticationService,private router:Router,private route: ActivatedRoute) { 
+  constructor(private formBuilder: FormBuilder, private data: AuthenticationService,private router:Router,private route: ActivatedRoute, private authenticationService: AuthenticationService) { 
     console.log(this.data.infToken);
     this.route.queryParams.subscribe(params => {
       this.email = params['email'];
@@ -31,7 +32,10 @@ export class VerificacionCuentaComponent implements OnInit {
           let user = {access_token: this.token
           }
           localStorage.setItem('currentUser', JSON.stringify(user));
-          this.router.navigate(['dashboard/staff']);
+        this.authenticationService.infToken = jwt_decode(user.access_token);
+        console.log(this.authenticationService.infToken);
+        
+        this.authenticationService.loggedIn = true;
 
           this.alertPass=true;
   
@@ -61,6 +65,11 @@ export class VerificacionCuentaComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,}$/)]],
 
     });
+  }
+
+  returnMenu()
+  {
+    this.router.navigate(['dashboard/staff']);
   }
 
   resetPasword(){
