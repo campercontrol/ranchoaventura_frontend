@@ -169,7 +169,7 @@ export class AdmiUserComponent implements OnInit {
     const perPage = event.rows || 5;
 
  
-    this.catalogos.getUsuarios(true, page, perPage, 'desc').subscribe({
+    this.catalogos.getUsuarios(this.filters.is_active, page, perPage, 'desc').subscribe({
       next: (response) => {
         this.listcatalogos = response.data.items;
         this.totalRecords = response.data.total;
@@ -498,19 +498,37 @@ this.staff = true;
      }
     
   }
-  buscarStaff( ) {
-    this.catalogos.searchUusario(this.filters).subscribe(response => {
-       this.listcatalogos = response.data.items;
-        this.totalRecords = response.data.total;
-        this.cargando = false;
-        this.totalRecords = response.data.total;
-
-    
-       
-    }, error => {
-      console.error('Error al buscar staff:', error);
-    });
+  buscarStaff(page = 1, perPage = 10) {
+    const isEmailEmpty = !this.filters.email || this.filters.email.trim() === '';
+    const isActiveFalse = this.filters.is_active === false;
+  
+    // Caso especial: ambos filtros vacíos/falsos → usar otra API
+    if (isActiveFalse && isEmailEmpty) {
+      this.catalogos.getUsuarios(this.filters.is_active, page, perPage, 'desc').subscribe({
+        next: (response) => {
+          this.listcatalogos = response.data.items;
+          this.totalRecords = response.data.total;
+          this.cargando = false;
+        },
+        error: () => {
+          this.cargando = true;
+        }
+      });
+    } else {
+      // Caso normal: usar búsqueda con filtros
+      this.catalogos.searchUusario(this.filters).subscribe({
+        next: (response) => {
+          this.listcatalogos = response.data.items;
+          this.totalRecords = response.data.total;
+          this.cargando = false;
+        },
+        error: (error) => {
+          console.error('Error al buscar staff:', error);
+        }
+      });
+    }
   }
+  
 
   resetFilters() {
     this.filters = {

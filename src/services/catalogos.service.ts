@@ -295,7 +295,7 @@ export class CatalogosService {
      }
      searchUusario(filters: any, page: number = 1, perPage: number = 10) {
       const params = new HttpParams()
-        .set('is_active', filters.is_active || true)
+        .set('is_active', filters.is_active )
         .set('email', filters.email || '')
         .set('page', page.toString())
         .set('per_page', perPage.toString())
@@ -355,6 +355,9 @@ export class CatalogosService {
     
 
      getUsuarios(isActive: boolean, page: number, perPage: number, order: string) {
+
+      console.log(isActive);
+      
       let params = new HttpParams()
         .set('is_active', String(isActive))
         .set('page', String(page))
