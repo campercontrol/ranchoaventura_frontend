@@ -64,6 +64,7 @@ import { MercadoPagoSuccessComponent } from '../component/mercado_pago_success/m
 import { ToastModule } from 'primeng/toast';
 import { MedicalComponentComponent } from './medical-component/medical-component.component';
 import { AdmiUserComponentId } from '../component/admi-user-id/admi-user.component';
+import { LoginDeDpruebaComponent } from '../login-de-dprueba/login-de-dprueba.component';
 
 
 
@@ -105,8 +106,8 @@ import { AdmiUserComponentId } from '../component/admi-user-id/admi-user.compone
     AdminTipoAgrupacionesComponent,
     GroupingAdmiComponent,
     MercadoPagoSuccessComponent,
-    MedicalComponentComponent
-    
+    MedicalComponentComponent,
+     
   ],
   imports: [
     CommonModule,

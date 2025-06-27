@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   resetPass: FormGroup;
 
   submitted = false;
+  visible = true;
   error = '';
   returnUrl: string;
   passwordType= "password";

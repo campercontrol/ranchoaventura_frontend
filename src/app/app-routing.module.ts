@@ -13,6 +13,7 @@ import { ResetPaswordComponent } from './component/reset-pasword/reset-pasword.c
 import { ResetEmailComponent } from './component/reset-email/reset-email.component';
 import { VerificacionCuentaComponent } from './component/verificacion-cuenta/verificacion-cuenta.component';
 import { MercadoPagoSuccessComponent } from './component/mercado_pago_success/mercado_pago_success.component';
+import { LoginDeDpruebaComponent } from './login-de-dprueba/login-de-dprueba.component';
 
 const routes: Routes = [
  // { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
@@ -20,6 +21,8 @@ const routes: Routes = [
 
   {path:'',redirectTo:'login',pathMatch:"full"},
   {path:'login',component:LoginComponent},
+  {path:'temporal',component:LoginDeDpruebaComponent},
+
   {path:'prospects',component:ProspectoComponent},
   {path:'Singup',component:NewParentComponent},
   {path:'reset_password',component:ResetPaswordComponent},

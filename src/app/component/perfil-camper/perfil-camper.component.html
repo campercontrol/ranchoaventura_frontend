@@ -94,7 +94,7 @@
                                     <p> <span class="fw-bold">Edad: </span> {{infoCamp.birthdayA}}</p>
                                     <p> <span class="fw-bold">Sexo: </span> {{infoCamp.gender_id}}</p>
                                     <p> <span class="fw-bold"> Correo: </span>{{infoCamp.email}}</p>
-                                    <p> <span class="fw-bold">Hermanos:</span>  <a  *ngFor="let item of infoCamper.siblings || []" routerLink="/dashboard/parents/camper/{{item.id}}">{{item.name}} {{item.lastname_father}} {{item.lastname_mother}}</a></p>
+                                    <p> <span class="fw-bold">Hermanos:</span>  <a  *ngFor="let item of infoCamper.siblings || []" routerLink="/dashboard/parents/camper/{{item.id}}">{{item.name}} {{item.lastname_father}} {{item.lastname_mother + '  '}}</a></p>
 
                                 </div>
                                 <hr>
@@ -151,6 +151,8 @@
 
                                     <p> <span class="fw-bold"> Enfermedades:</span>{{infoCamp.affliction}}</p>
                                     <p> <span class="fw-bold"> Problemas cardiacos:</span>{{infoCamp.heart_problems}}
+                                    </p>
+                                    <p> <span class="fw-bold"> Tratamientos psiquiátricos o psicológicos*:</span>{{infoCamp.psicology_treatments}}
                                     </p>
                                     <p> <span class="fw-bold"> Alergias a
                                             Medicamentos:</span>{{infoCamp.drug_allergies}}</p>

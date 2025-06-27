@@ -5,7 +5,8 @@
 
         </div>
         <!-- end col -->
-
+     
+      
         <div class="col-xl-4 col-sm-12 col-md-7">
             <div class=" p-4" *ngIf="ressetPasword">
                 <div class="w-100">
@@ -40,6 +41,9 @@
                                             placeholder="Enter email" (keydown.enter)="login($event)" >
 
                                     </div>
+
+                                   
+                                    
 
                                     <div class="mb-3 mt-2">
 
@@ -191,3 +195,29 @@
 
     </div>
 </ng-template>
+<p-dialog 
+header="Aviso Importante" 
+[(visible)]="visible" 
+[modal]="false" 
+[closable]="true" 
+[dismissableMask]="true"
+[style]="{width: '70vw'}">
+
+<div class="p-2">
+  <p><strong>¡Atención!</strong></p>
+  <p>
+    A partir del <strong>01 de Julio de 2025</strong> en <strong>Kin Camp</strong> estamos estrenando nueva versión del sistema de inscripción.
+  </p>
+  <p>
+    Por tu seguridad, todas las contraseñas fueron borradas en la migración de la base de datos, por lo que antes de ingresar a tu cuenta deberás recuperar tu contraseña dando click en <strong>“Recuperar Contraseña”</strong>.
+  </p>
+  <p>
+    Te enviaremos un correo con una liga para que la asignes de nuevo. <strong>NO OLVIDES REVISAR</strong> tu bandeja de <strong>SPAM</strong>.
+  </p>
+  <p>
+    Este proceso solo debe realizarse una vez.
+    Si ya lo hiciste, no es necesario repetirlo.
+  </p>
+</div>
+
+</p-dialog>
