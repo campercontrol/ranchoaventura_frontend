@@ -32,7 +32,6 @@
                     </button>
 
                       <button pButton   style="margin-bottom: 10px;  margin-left: 5px;"  class="p-button-success" (click)="open(content)" >Aceptar como staff</button>
-                      <button pButton   style="margin-bottom: 10px; margin-left: 5px;"   severity="danger" class="p-button-danger" >Eliminar</button>
                       
                   </div>
                
@@ -125,6 +124,9 @@
                       <div class="flex justify-content-between align-items-center" style="width: 140px;">
                       </div>
                     </th>
+                    <th>
+
+                    </th>
     
                   </tr>
                 </ng-template>
@@ -170,6 +172,10 @@
     
                     <td>
                       <button class="btn btn-primary" class="btn btn-primary" (click)=" infostaff(customer.id)" >ver perfil</button>
+                    </td>
+                    <td>
+                      <button pButton   style="margin-bottom: 10px; margin-left: 5px;"   severity="danger" class="p-button-danger"  (click)="deleteProspect(customer.id)">Eliminar</button>
+
                     </td>
     
     

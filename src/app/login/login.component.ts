@@ -76,6 +76,7 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
     });
 
+    this.visible = localStorage.getItem('alreadySeenDialog') !== 'true';
 
 
 
@@ -135,6 +136,11 @@ export class LoginComponent implements OnInit {
     
   }
 
+
+  handleDialogClose() {
+    // Guardar que ya se mostró el diálogo
+    localStorage.setItem('alreadySeenDialog', 'true');
+  }
   resetPasword(){
     this.authenticationService.recuperarContra(this.resetPass.value).subscribe((res:any)=>{
       if(res.detail.status == 1){

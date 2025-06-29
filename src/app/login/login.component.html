@@ -197,11 +197,12 @@
 </ng-template>
 <p-dialog 
 header="Aviso Importante" 
-[(visible)]="visible" 
-[modal]="false" 
-[closable]="true" 
-[dismissableMask]="true"
-[style]="{width: '70vw'}">
+  [(visible)]="visible" 
+  [modal]="false" 
+  [closable]="true" 
+  [dismissableMask]="true" 
+  (onHide)="handleDialogClose()"
+  [style]="{width: '70vw'}">
 
 <div class="p-2">
   <p><strong>¡Atención!</strong></p>

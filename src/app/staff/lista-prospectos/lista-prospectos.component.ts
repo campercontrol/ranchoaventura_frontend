@@ -6,6 +6,7 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { data } from 'jquery';
  import * as JSZip from 'jszip';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-lista-prospectos',
@@ -35,7 +36,7 @@ export class ListaProspectosComponent implements OnInit {
   id= 0;
   cargando:boolean=false;
   prospectosArray:any=[]
-  constructor(private prospectos: StaffService,private modalService: NgbModal, private router:Router, private cdr: ChangeDetectorRef) {
+  constructor(private prospectos: StaffService,private modalService: NgbModal, private router:Router, private cdr: ChangeDetectorRef,private http: HttpClient) {
 
    }
 
@@ -213,6 +214,21 @@ export class ListaProspectosComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al obtener los datos del reporte general staff', error);
+      }
+    });
+  }
+  deleteProspect(id: number) {
+    console.log(id);
+    
+    const url = `https://api-dev.campercontrol.com/delete_prospect/${id}`;
+    this.http.delete(url).subscribe({
+      next: (res) => {
+        console.log('Prospecto eliminado:', res);
+        this.getProspecto();
+
+      },
+      error: (err) => {
+        console.error('Error al eliminar prospecto:', err);
       }
     });
   }
