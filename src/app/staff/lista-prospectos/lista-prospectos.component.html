@@ -174,7 +174,8 @@
                       <button class="btn btn-primary" class="btn btn-primary" (click)=" infostaff(customer.id)" >ver perfil</button>
                     </td>
                     <td>
-                      <button pButton   style="margin-bottom: 10px; margin-left: 5px;"   severity="danger" class="p-button-danger"  (click)="deleteProspect(customer.id)">Eliminar</button>
+                      <button pButton   style="margin-bottom: 10px; margin-left: 5px;"   severity="danger" class="p-button-danger" 
+                      (click)="openDeleteModal(deleteModal, customer)">Eliminar</button>
 
                     </td>
     
@@ -223,3 +224,17 @@
 	</div>
 </ng-template>
 
+
+<ng-template #deleteModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirmar eliminación</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cerrar')"></button>
+  </div>
+  <div class="modal-body">
+    <p>¿Estás seguro que deseas eliminar al prospecto <strong>{{prospectoSeleccionado?.name}} {{prospectoSeleccionado?.lastname_father}} {{prospectoSeleccionado?.lastname_mother}}</strong>?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</button>
+    <button type="button" class="btn btn-danger" (click)="confirmarEliminacion(modal)">Eliminar</button>
+  </div>
+</ng-template>

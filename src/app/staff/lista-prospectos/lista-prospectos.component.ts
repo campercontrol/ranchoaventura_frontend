@@ -21,6 +21,8 @@ export class ListaProspectosComponent implements OnInit {
     spinnerExcel = false;
 
   submitted: boolean;
+  prospectoSeleccionado: any = null;
+
   totalRecords: number = 0;
   selectedCustomers: any[];
   loading: boolean = false;
@@ -224,14 +226,25 @@ export class ListaProspectosComponent implements OnInit {
     this.http.delete(url).subscribe({
       next: (res) => {
         console.log('Prospecto eliminado:', res);
-        this.getProspecto();
-
+ window.location.reload();
       },
       error: (err) => {
         console.error('Error al eliminar prospecto:', err);
       }
     });
   }
+
+openDeleteModal(content: any, prospecto: any) {
+  this.prospectoSeleccionado = prospecto;
+  this.modalService.open(content, { ariaLabelledBy: 'modal-delete-title' });
+}
+
+confirmarEliminacion(modal: any) {
+  if (this.prospectoSeleccionado?.id) {
+    this.deleteProspect(this.prospectoSeleccionado.id);
+    modal.close();
+  }
+}
   
   private saveAsExcelFile(buffer: any, fileName: string): void {
     const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
