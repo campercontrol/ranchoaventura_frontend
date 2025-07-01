@@ -215,7 +215,7 @@ header="Aviso Importante"
 
 <div class="p-2">
 <p class="mt-4">
-  <strong>Importante:</strong> Queremos informarte que el sistema estará temporalmente fuera de servicio por tareas de mantenimiento programado. Este periodo de inactividad comenzará el <strong>domingo por la noche</strong> y se extenderá hasta la <strong>mañana del lunes</strong>.
+  <strong>Importante:</strong> Queremos informarte que el sistema estará temporalmente fuera de servicio por tareas de mantenimiento programado. Este periodo de inactividad comenzará el <strong>lunes por la noche</strong> y se extenderá hasta la <strong>mañana del martes</strong>.
 </p>
 <p>
   Estas labores de mantenimiento son necesarias para mejorar el rendimiento, seguridad y estabilidad de la plataforma, con el objetivo de brindarte una mejor experiencia de uso. Durante este tiempo no será posible acceder al sistema, registrar cuentas ni recuperar contraseñas.
