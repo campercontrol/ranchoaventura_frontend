@@ -136,13 +136,16 @@
                                             <ng-select
                                             name="school_id"
                                             id="school_id"
+                                            #schoolSelect
                                             formControlName="school_id"
                                             [items]="school" 
                                             bindLabel="name"
                                             bindValue="id"
                                             (change)="getschool_id()"
                                             [searchable]="true"
-                                            class="form-control">
+                                            [class.is-valid]="formFood.get('school_id')?.valid && formFood.get('school_id')?.touched"
+                                            [class.is-invalid]="formFood.get('school_id')?.invalid && formFood.get('school_id')?.touched"
+                                            >
                                         </ng-select>
                                         
                                           
@@ -884,12 +887,16 @@
                                     name="school_id"
                                     id="school_id"
                                     formControlName="school_id"
+                                    #schoolSelect
+
                                     [items]="school" 
                                     bindLabel="name"
                                     bindValue="id"
                                     (change)="getschool_id()"
+                                    [class.is-valid]="formFood.get('school_id')?.valid && formFood.get('school_id')?.touched"
+                                    [class.is-invalid]="formFood.get('school_id')?.invalid && formFood.get('school_id')?.touched"
                                     [searchable]="true"
-                                    class="form-control">
+                                     >
                                 </ng-select>
                                 
                                   

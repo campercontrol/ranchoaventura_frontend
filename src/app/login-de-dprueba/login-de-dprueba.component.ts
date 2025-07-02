@@ -221,8 +221,7 @@ header="Aviso Importante"
   Estas labores de mantenimiento son necesarias para mejorar el rendimiento, seguridad y estabilidad de la plataforma, con el objetivo de brindarte una mejor experiencia de uso. Durante este tiempo no será posible acceder al sistema, registrar cuentas ni recuperar contraseñas.
 </p>
 <p>
-  Te recomendamos planificar tus accesos antes del cierre programado y agradecemos tu comprensión y paciencia mientras trabajamos para seguir mejorando nuestro servicio.
-</p>
+Durante este tiempo seguiremos a tus órdenes en info@kincamp.com y vía telefónica al 55.5257.4937</p>
 
 </div>
 

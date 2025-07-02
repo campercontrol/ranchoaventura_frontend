@@ -5,6 +5,7 @@ import traducciones  from 'src/assets/json/lengua.json';
 import { CamperService } from 'src/services/camper.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Table } from 'primeng/table';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 
 @Component({
@@ -58,6 +59,8 @@ export class AdmiuserComponent implements OnInit {
   @ViewChild("photo") photo: ElementRef;
   @ViewChild("school_other") school_other: ElementRef;
   @ViewChild("insurance_company") insurance_company: ElementRef;
+      @ViewChild('schoolSelect', { static: false }) schoolSelect!: NgSelectComponent;
+  
   spinner:boolean= false;
   photoSelect : string | ArrayBuffer;
   photoSatus = false;
@@ -966,17 +969,21 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
    }
   }
   
-  getschool_id() {
-    if( this.formFood.get('school_id').valid){
-      this.render.removeClass(this.school_id.nativeElement,"is-invalid");
-      this.render.addClass(this.school_id.nativeElement,"is-valid");
-   }else{
-    this.render.removeClass(this.school_id.nativeElement,"is-valid");
-    this.render.addClass(this.school_id.nativeElement,"is-invalid");
-    this.school_id.nativeElement.focus()
+ 
 
-   }
+  getschool_id() {
+    const control = this.formFood.get('school_id');
+
+  if (control?.valid) {
+    // Solo clases, si gustas
+  } else {
+    // Marcar como tocado para que se activen los estilos
+    control?.markAsTouched();
+
+    // Enfocar ng-select
+    this.schoolSelect.focus();
   }
+}
   
   getSchool_other() {
     if( this.formFood.get('school_other').valid){

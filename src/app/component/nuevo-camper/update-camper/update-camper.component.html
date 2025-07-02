@@ -113,13 +113,16 @@
                                     <ng-select
                                     name="school_id"
                                     id="school_id"
+                                    #schoolSelect
                                     formControlName="school_id"
                                     [items]="school1" 
                                     bindLabel="name"
                                     bindValue="id"
                                     (change)="getschool_id()"
                                     [searchable]="true"
-                                    class="form-control">
+                                    [class.is-valid]="formUser.get('school_id')?.valid && formUser.get('school_id')?.touched"
+                                    [class.is-invalid]="formUser.get('school_id')?.invalid && formUser.get('school_id')?.touched"
+                                    >
                                 </ng-select>
                                 </div>
                                
