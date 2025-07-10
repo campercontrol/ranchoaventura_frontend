@@ -194,10 +194,10 @@ export class NewParentComponent implements OnInit {
     tutor_lastname_mother:  [""], 
     tutor_work_phone:       [""],
     contact_lastname_father:  ["",[Validators.required]], 
-    contact_cellphone:      ["",[Validators.required,
+    contact_work_phone:      ["",[Validators.required,
                             Validators.pattern('^[+]?\\d*$'),
                             Validators.minLength(8), ]],
-    contact_work_phone:     [""],
+     contact_cellphone:     [""],
     terms:                   ['',[Validators.required,Validators.requiredTrue]],
    
     password: [

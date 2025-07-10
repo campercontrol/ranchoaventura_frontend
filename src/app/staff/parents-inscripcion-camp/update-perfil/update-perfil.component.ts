@@ -582,7 +582,7 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
     this.catalogos.getCamper(this.id).subscribe(
       (res:any)=>{
         console.log('respuestas',res);
-         this.photoSelect = 'http://api-dev.kincamp.com/'+res['camper'].photo,
+         this.photoSelect = 'https://api-dev.kincamp.com/'+res['camper'].photo,
 
           this.formUser.patchValue({
            

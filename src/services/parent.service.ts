@@ -20,33 +20,33 @@ export class ParentService {
   }
 
   getParet(id: any): Observable<any>{
-    return this.http.get('http://api-dev.kincamp.com/parent/'+ id);
+    return this.http.get('https://api-dev.kincamp.com/parent/'+ id);
     
   }
 
   partnPatch(id: any,info:{}):Observable<any> {
-     return this.http.patch('http://api-dev.kincamp.com/parent/'+ id,info)
+     return this.http.patch('https://api-dev.kincamp.com/parent/'+ id,info)
   }
 
   crearNuevoUsuario(info:{}){
 
-    let a =  this.http.post('http://api-dev.kincamp.com/usuario/',info).subscribe((res:any)=>{
+    let a =  this.http.post('https://api-dev.kincamp.com/usuario/',info).subscribe((res:any)=>{
           console.log(res);
     })
     
     return a
   }
   setComentarios(comentarios){
-    return  this.http.post('http://api-dev.kincamp.com/camper_comment/',comentarios)
+    return  this.http.post('https://api-dev.kincamp.com/camper_comment/',comentarios)
   }
 
   setParent(info:{}):Observable<any>{
-   return this.http.post('http://api-dev.kincamp.com/parent_create/',info)
+   return this.http.post('https://api-dev.kincamp.com/parent_create/',info)
   }
 
   getComentarios(camper_id,role_id)
   {
-    return this.http.get('http://api-dev.kincamp.com/campers/'+camper_id+'/comments?role_id='+role_id);
+    return this.http.get('https://api-dev.kincamp.com/campers/'+camper_id+'/comments?role_id='+role_id);
   }
 
   

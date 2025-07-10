@@ -25,7 +25,7 @@ export class AuthenticationService {
    
     resetContrasena(a){
         return new Promise((resolve,reject)=>{
-            this.http.post('http://api-dev.kincamp.com/user/send_mail_password_reset',a).subscribe((res:any)=>{
+            this.http.post('https://api-dev.kincamp.com/user/send_mail_password_reset',a).subscribe((res:any)=>{
               resolve = res;
             },error=>{
               reject = error;
@@ -36,11 +36,11 @@ export class AuthenticationService {
     
      login(email: string, password: string) {
         
-    return this.http.post("http://api-dev.kincamp.com/token?username=" +email+ "&password="+password +"&lang=es",{ })
+    return this.http.post("https://api-dev.kincamp.com/token?username=" +email+ "&password="+password +"&lang=es",{ })
     }
     login2(email: string, password: string) {
       return new Promise((resolve,reject)=>{
-           this.http.post("http://api-dev.kincamp.com/token?username=" +email+ "&password="+password +"&lang=es",{ })
+           this.http.post("https://api-dev.kincamp.com/token?username=" +email+ "&password="+password +"&lang=es",{ })
           .subscribe((user:any) => {
               console.log(user);
               this.loggedIn = true;
@@ -67,26 +67,26 @@ export class AuthenticationService {
     }
 
     recuperarContra(a){
-     return  this.http.post("http://api-dev.kincamp.com/user/send_mail_password_reset",a)
+     return  this.http.post("https://api-dev.kincamp.com/user/send_mail_password_reset",a)
 
     }
 
     cambiarContrasena(email,a){
-      return  this.http.post("http://api-dev.kincamp.com/usuario/change_password/"+email,a)
+      return  this.http.post("https://api-dev.kincamp.com/usuario/change_password/"+email,a)
  
      }
      restPassword(token,a){
-      return  this.http.post("http://api-dev.kincamp.com/user/reset_password?t="+token,a)
+      return  this.http.post("https://api-dev.kincamp.com/user/reset_password?t="+token,a)
  
      }
 
      validarCuenta(token){
-      return  this.http.post("http://api-dev.kincamp.com/user/verify/?t="+token,"")
+      return  this.http.post("https://api-dev.kincamp.com/user/verify/?t="+token,"")
  
      }
      
      cambiarEmail(email,a){
-      return  this.http.post("http://api-dev.kincamp.com/usuario/change_email/"+email,a)
+      return  this.http.post("https://api-dev.kincamp.com/usuario/change_email/"+email,a)
  
      }
    
