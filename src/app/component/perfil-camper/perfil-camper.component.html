@@ -1,452 +1,627 @@
-<div *ngIf="!error">
-    <header class="container-fluid">
-
-        <div class="row">
-            <div class="col-lg-12">
-
-                <div class="card campamentos-header">
-                    <div class="bg-primary text-white  p-3">
-
-                        <h3 class="text-white">{{camperband.full_name}}</h3>
-                        <h5 class="text-white">{{camperband.school}}</h5>
-                        <h6 class="text-white">{{infoCamp.birthdayA}}</h6>
-                    </div>
-                    <section class="campamentos ">
-                        <div class="Campementos_anteriores">
-                            <div>
-                                {{camperband.past_camps}}
-                            </div>
-                            <div>
-                                <p>Camps Anteriores</p>
-                            </div>
-                        </div>
-                        <div class="foto-perfil">
-                            <img src="https://api-dev.campercontrol.com/{{photo}}" class="avatar-lg rounded-circle" alt=""   >
-
-                            <a class="btn-rounded btn btn-success mt-3 text-white text-decoration-none d-block text-center"
-                                [routerLink]="'/dashboard/parents/inscription/' + id" target="_blank">
-                                Inscribir a Camps
-                            </a>
-
-
-                        </div>
-
-
-                        <div class="Campamentos_proximo">
-                            <div>
-                                {{camperband.future_camps}}
-                            </div>
-                            <div>
-                                <p>Camps Proximo</p>
-                            </div>
-
-                        </div>
-
-
-                    </section>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div class="alert alert-danger mt-2 mb-2" role="alert" *ngIf="deuda != 0" >
-        <h2> Pendiente de pagos: </h2>
-        <div *ngFor="let currency of currencyKeys">
-            <p>
-              {{ totals[currency].total | currency:currency:true }} 
-              {{ totals[currency].acronym }}
-            </p>
-          </div>
-          
-    </div>
-    <main class="container-fluid">
-        <div class="row">
-            <div class="col-lg-7">
-                <div class="card p-5" style="overflow: auto; height: 100%;">
-
-
-                    <div class="header">
-                        <div>
-                            <h4>Perfil del Acampador </h4>
-                        </div>
-                        <div *ngIf="this.info.infToken.role_id == 1 ||( this.info.infToken.role_id == 2  && this.info.infToken.user_admin == true )">
-                            <a 
-                              class="btn btn-primary btn-sm text-white text-decoration-none" 
-                              [routerLink]="'/dashboard/parents/update-camper/' + id" 
-                              target="_blank">
-                              Editar
-                            </a>
-                          </div>
-                          
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-lg-12">
-                            <div class="container-fluid">
-                                <div class="titulo-info">
-                                    <i class="bx bx-id-card"></i>
-                                    <h4 style="margin-left: 10px;">Campista</h4>
-                                </div>
-
-                                <div class="container-fluid">
-                                    <p> <span class="fw-bold">Nombre:</span> {{infoCamp.name}}</p>
-                                    <p> <span class="fw-bold">Fecha de nacimiento:</span>{{infoCamp.birthday}}</p>
-
-                                    <p> <span class="fw-bold">Edad: </span> {{infoCamp.birthdayA}}</p>
-                                    <p> <span class="fw-bold">Sexo: </span> {{infoCamp.gender_id}}</p>
-                                    <p> <span class="fw-bold"> Correo: </span>{{infoCamp.email}}</p>
-                                    <p> <span class="fw-bold">Hermanos:</span>  <a  *ngFor="let item of infoCamper.siblings || []" routerLink="/dashboard/parents/camper/{{item.id}}">{{item.name}} {{item.lastname_father}} {{item.lastname_mother + '  '}}</a></p>
-
-                                </div>
-                                <hr>
-
-                            </div>
-                            <div class="container-fluid">
-                                <div class="titulo-info">
-                                    <i class="fas fa-book-reader"></i>
-                                    <h4 style="margin-left: 10px;"> Educación</h4>
-                                </div>
-
-                                <div class="container-fluid">
-                                    <p> <span class="fw-bold">Escuela:</span> {{infoCamp.school_id}} </p>
-                                    <p> <span class="fw-bold">Grado:</span> {{infoCamp.grade}}</p>
-
-                                </div>
-                                <hr>
-                                <br>
-
-                                <div class="titulo-info">
-                                    <i class="fas fa-diagnoses"></i>
-                                    <h4 style="margin-left: 10px;">Habilidades</h4>
-                                </div>
-
-                                <div class="container-fluid">
-                                    <p> <span class="fw-bold">¿Sabe nadar?:</span>{{infoCamp.can_swim}}</p>
-                                    <p> <span class="fw-bold"> ¿Hay alguna situación que le impida realizar actividades?</span>:
-                                        {{infoCamp.prevent_activities}}</p>
-
-                                </div>
-
-                            </div>
-                            <hr>
-                            <div class="container-fluid">
-                                <div class="titulo-info">
-                                    <i class="fas fa-ambulance "></i>
-                                    <h4 style="margin-left: 10px;">Info Médica</h4>
-                                </div>
-
-                                <div class="container-fluid">
-                                    <p> <span class="fw-bold">Requiere Instruciones Medicas:</span>{{
-                                        infoCamp.doctor_precall}} </p>
-                                    <p> <span class="fw-bold">Peso:</span> {{infoCamp.weight}} kg</p>
-                                    <p> <span class="fw-bold">Estatura: </span> {{infoCamp.height}} cm.</p>
-                                    <p> <span class="fw-bold">Tipo de sangre: </span> {{infoCamp.blood_type}}</p>
-                                    <p> <span class="fw-bold">Vacunas:</span> <span class="badge bg-info ms-1 mt-1"
-                                            *ngFor="let item of vacunasACtivos">{{item.name}}</span></p>
-
-                                      
-                                            <p><span class="fw-bold">Antecedentes camper: </span> <span   *ngFor="let item of infoCamper.camper_info.pathological_background" > <span class="badge bg-info ms-1 mt-1" *ngIf="item.is_active">{{item.name}} </span> </span></p>
-                                            <p><span class="fw-bold">Antecedentes familiares: </span> <span  *ngFor="let item of infoCamper.camper_info.pathological_background_fm" > <span class="badge bg-info ms-1 mt-1" *ngIf="item.is_active">{{item.name}} </span> </span></p>
-                                            <p><span class="fw-bold">Medicamentos preautorizados en : </span> <span  *ngFor="let item of infoCamper.camper_info.licensed_medicines" > <span class="badge bg-info ms-1 mt-1" *ngIf="item.is_active">{{item.name}} </span> </span></p>
-
-
-                                    <p> <span class="fw-bold"> Enfermedades:</span>{{infoCamp.affliction}}</p>
-                                    <p> <span class="fw-bold"> Problemas cardiacos:</span>{{infoCamp.heart_problems}}
-                                    </p>
-                                    <p> <span class="fw-bold"> Tratamientos psiquiátricos o psicológicos*:</span>{{infoCamp.psicology_treatments}}
-                                    </p>
-                                    <p> <span class="fw-bold"> Alergias a
-                                            Medicamentos:</span>{{infoCamp.drug_allergies}}</p>
-                                    <p> <span class="fw-bold">Otras Alergias:</span>{{infoCamp.other_allergies}}</p>
-                                    <p> <span class="fw-bold">Alteraciones nocturnas:</span>{{infoCamp.nocturnal_disorders}}
-                                    </p>
-                                    <p> <span class="fw-bold">Fobias o miedos:</span>{{infoCamp.phobias}}
-                                    </p>
-                                    <p> <span class="fw-bold">Medicacion:</span>{{infoCamp.drugs}}</p>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <div class="row mt-4">
-                        <hr>
-                        <div class="col-lg-12">
-                            <div class="container-fluid">
-                                <div class="titulo-info">
-                                    <i class="fas fa-ambulance"></i>
-                                    <h4 style="margin-left: 10px;"> Seguro médico</h4>
-                                </div>
-
-                                <div class="container-fluid">
-                                    <p> <span class="fw-bold">Tiene seguro médico:</span>{{infoCamp.insurance}}</p>
-                                    <p> <span class="fw-bold">Numero de
-                                            seguridad:</span>{{infoCamp.security_social_number}}</p>
-                                    <p> <span class="fw-bold">Numero de póliza:</span>{{infoCamp.insurance_number}}</p>
-                                </div>
-
-                            </div>
-                            <hr>
-                            <div class="container-fluid mt-5">
-                                <div class="titulo-info">
-                                    <i class="fas fa-drumstick-bite"></i>
-                                    <h4 style="margin-left: 10px;">Alimentación</h4>
-                                </div>
-
-                                <div class="container-fluid">
-                                    <p> <span class="fw-bold">Comida prohibida:</span>{{infoCamp.prohibited_foods}}</p>
-                                    <p> <span class="fw-bold">Alimentacion:</span> <span class="badge bg-info ms-1"
-                                            *ngFor="let item of catalogosComida">{{item.name}}</span></p>
-                                </div>
-
-                            </div>
-                            <hr>
-                            <div class="container-fluid mt-5">
-                                <div class="titulo-info">
-                                    <i class="bx bxs-bookmark-star"></i>
-                                    <h4 style="margin-left: 10px;"> Tutor Principal</h4>
-                                </div>
-
-                                <div class="container-fluid" style="margin-left: 20px;">
-                                    <p *ngIf=" userPermis.infToken.user_admin != true">{{nombreTutor}}</p>
-                                    <p
-                                        *ngIf="userPermis.infToken.role_id == 2 || userPermis.infToken.user_admin == true">
-                                        <a routerLink="/dashboard/admi/parent/{{parent.id}}">{{nombreTutor}} </a></p>
-
-
-                                    <p> <i class="bx bxs-envelope"></i> {{emailTuto}}</p>
-                                    <p> <i class="bx bxl-whatsapp"></i> {{parent.tutor_cellphone}}</p>
-                                    <p> <i class="bx bxs-contact"></i> {{parent.tutor_home_phone}}</p>
-                                    <p> <i class="bx bxs-city"></i> {{parent.tutor_work_phone}}</p>
-
-
-
-                                </div>
-
-                            </div>
-                            <hr>
-                            <div class="container-fluid mt-5">
-                                <div class="titulo-info">
-                                    <i class="bx bxs-bookmark-plus"></i>
-                                    <h4 style="margin-left: 10px;">Tutor Secundario</h4>
-                                </div>
-
-                                <div class="container-fluid" style="margin-left: 20px;">
-                                    <p>{{nombreTutorSecundario}}</p>
-
-                                    <p> <i class="bx bxs-envelope"></i> {{parent.contact_email}}</p>
-                                    <p> <i class="bx bxl-whatsapp"></i> {{parent.contact_cellphone}}</p>
-                                    <p> <i class="bx bxs-contact"></i> {{parent.contact_home_phone}}</p>
-                                    <p> <i class="bx bxs-city"></i> {{parent.contact_work_phone}}</p>
-
-
-                                </div>
-
-                            </div>
-                            <hr>
-                            <div class="container-fluid mt-5">
-                                <div class="titulo-info">
-                                    <i class="mdi-card-account-phone-outline"></i>
-                                    <h4 style="margin-left: 10px;">Contacto de emergencia</h4>
-                                </div>
-
-                                <div class="container-fluid" style="margin-left: 20px;">
-                                    <p>{{infoCamp.contact_name}} ({{infoCamp.contact_relation}})</p>
  
-                                    <p> <i class="bx bxl-whatsapp"></i> {{infoCamp.contact_cellphone}}</p>
-                                    <p> <i class="bx bxs-city"></i> {{infoCamp.contact_homephone}}</p>
 
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
+<div  >
+    <header class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card campamentos-header">
+            <div class="bg-primary text-white p-3">
+              <h3 class="text-white">{{ camperband.full_name }}</h3>
+              <h5 class="text-white">{{ camperband.school }}</h5>
+              <h6 class="text-white">{{ infoCamp.birthdayA }}</h6>
             </div>
-
-
-            <div class="col-lg-5">
-                <div class="col-lg-12">
-                    <div class="top-p" *ngIf="info.infToken.role_id == 1">
-
-                    </div>
-                    <div class="card p-4" *ngIf="info.infToken.role_id == 1">
-                        <div class="chat">
-                            <div class="row">
-                                <h5 class="col-9">Algo más que debamos saber sobre Camper</h5>
-                                <p-badge [value]="comenarios?.length" class="col-1"></p-badge>
-                                <div class="col-1" style="font-size: 25px; margin-top: -5px;"
-                                    (click)="isCollapsed = ! isCollapsed">+</div>
-                            </div>
-                            <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-                                <hr>
-                                <!-- en este espacio es donde va el contenedor del chat-->
-                                <div class="chat-espacio">
-                                    <div>
-                                        <div class="row mt-2" *ngFor="let item of comenarios"  style="display: flex;align-items: center; justify-content: center;">
-                                            <div class="col-3" >
-                                                <p class="Nombre-envidao">{{item.author}}({{item.author_role}})</p>
-                                                <p-avatar image="assets/images/camp/chat-padres.png"
-                                                    size="large"></p-avatar>
-                                            </div>
-                                            <div class="col-8"  >
-                                                <p class="fecha-chat" style="text-align: right;">
-                                                    {{item.created_at?.substring(0,9)}}</p>
-                                                <div class="col-12 mensaje">
-                                                    <p class="p-2">{{item.comment}}
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        
-
-                                    </div>
-
-
-
-                                </div>
-                                <div class="col">
-                                    <input type="text" name="" id="" class="form-control"  
-                                        aria-label="Username" [(ngModel)]="comment">
-                                    <div class="d-flex flex-row-reverse">
-                                        <button class="btn btn-primary mt-3" (click)="comentario()">Guardar
-                                            Comentario</button>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="col-lg-12">
-                    <div class="top-p" *ngIf="info.infToken.role_id > 1">
-
-                    </div>
-                    <div class="card p-4" *ngIf="info.infToken.role_id > 1">
-                        <div class="chat">
-                            <div class="row">
-                                <h5 class="col-9">Algo más que debamos saber sobre </h5>
-                                <p-badge [value]="comenarios?.length" class="col-1"></p-badge>
-                                <div class="col-1" style="font-size: 25px; margin-top: -5px;"
-                                    (click)="isCollapsed = ! isCollapsed">+</div>
-                            </div>
-                            <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-                                <hr>
-                                <!-- en este espacio es donde va el contenedor del chat-->
-                                <div class="chat-espacio">
-                                    <div>
-                                        <div class="row mt-2" *ngFor="let item of comenarios"  style="display: flex;align-items: center; justify-content: center;">
-                                            <div class="col-3" >
-                                                <p class="Nombre-envidao">{{item.author}}({{item.author_role}})</p>
-                                                <p-avatar image="assets/images/camp/chat-padres.png"
-                                                    size="large"></p-avatar>
-                                            </div>
-                                            <div class="col-8"  >
-                                                <p class="fecha-chat" style="text-align: right;">
-                                                    {{item.created_at?.substring(0,9)}}</p>
-                                                <div class="col-12 mensaje">
-                                                    <p class="p-2">{{item.comment}}
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-
-
-                                </div>
-                                <div class="col">
-                                    <label for="">Mostrar este comentario a</label>
-                                    <select name="" id="" [(ngModel)]="typecoment">
-                                        <option value=6>Admin</option>
-                                        <option value=5>Coordinador</option>
-                                        <option value=2>escuela</option>
-                                        <option value=1>Papás</option>
-
-
-                                    </select>
-
-                                </div>
-                                <div class="col">
-                                    <input type="text" name="" id="" class="form-control"  
-                                        aria-label="Username" [(ngModel)]="comment">
-                                    <div class="d-flex flex-row-reverse">
-                                        <button class="btn btn-primary mt-3" (click)="comentario()">Guardar
-                                            Comentario</button>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="col-lg-12">
-                    <div class="card">
-                        <p-timeline [value]="historialCaps" align="left" styleClass="customized-timeline"
-                            class="margin-timile">
-                            <ng-template pTemplate="marker" let-event>
-                                <div class="timilin-logo"
-                                    [ngClass]="{'cancell':event.type=='cancelled','suscribe':event.type=='subscribe','passed':event.type=='passed'}">
-                                    <i *ngIf="event.type =='subscribe'" class="fas fa-check"></i>
-                                    <i *ngIf="event.type =='cancelled'" class="far fa-times-circle"></i>
-                                    <i *ngIf="event.type =='passed'" class="fas fa-check"></i>
-
-
-                                </div>
-                            </ng-template>
-                            <ng-template pTemplate="content" let-event>
-                                <div class="contendor-timiline mt-3 p-1"
-                                    [ngClass]="{'passed':event.type=='passed','cancell':event.type=='cancelled','suscribe':event.type=='subscribe'}">
-                                    <h3 style="cursor: pointer;"> {{event.camp_name}} <i class="fa fa-info-circle"
-                                            (click)="link(event.camp_id)"></i></h3>
-                                    <p (click)="link(event.camp_id)" style="cursor: pointer;"
-                                        *ngIf="event.show_payment_parent"
-                                        class="badge bg-warning ms-1">Pendiente de Pago:
-                                        {{event.camper_payment_balance}} MXN</p>
-                                </div>
-                                <div class="contenedor-p">
-                                    <p class="icononos-s">{{event.camp_start.substring(0,10)}} -
-                                        {{event.camp_end.substring(0,10)}}<i class="fas fa-calendar-alt"> </i></p>
-
-                                </div>
-                            </ng-template>
-                        </p-timeline>
-                    </div>
-
-                </div>
-
-            </div>
-
-
+            <section class="campamentos">
+              <div class="Campementos_anteriores">
+                <div>{{ camperband.past_camps }}</div>
+                <div><p>{{ textos['campsAnteriores'] }}</p></div>
+              </div>
+              <div class="foto-perfil">
+                <img
+                  src="http://api-dev.kincamp.com/{{ photo }}"
+                  class="avatar-lg rounded-circle"
+                  alt
+                />
+                <a
+                  class="btn-rounded btn btn-success mt-3 text-white text-decoration-none d-block text-center"
+                  [routerLink]="'/dashboard/parents/inscription/' + id"
+                  target="_blank"
+                >
+                  {{ textos['inscribirACamps'] }}
+                </a>
+              </div>
+              <div class="Campamentos_proximo">
+                <div>{{ camperband.future_camps }}</div>
+                <div><p>{{ textos['campsProximo'] }}</p></div>
+              </div>
+            </section>
+          </div>
         </div>
-
-
-
-
+      </div>
+    </header>
+  
+    <div
+      class="alert alert-danger mt-2 mb-2"
+      role="alert"
+      *ngIf="deuda != 0"
+    >
+      <h2>{{ textos['pendientePagos'] }}</h2>
+      <div *ngFor="let currency of currencyKeys">
+        <p>
+          {{ totals[currency].total | currency:currency:true }}
+          {{ totals[currency].acronym }}
+        </p>
+      </div>
+    </div>
+  
+    <main class="container-fluid">
+      <div class="row">
+        <div class="col-lg-7">
+          <div class="card p-5" style="overflow: auto; height: 100%;">
+            <div class="header">
+              <div>
+                <h4>{{ textos['perfilAcampador'] }}</h4>
+              </div>
+              <div
+                *ngIf="
+                  info.infToken.role_id == 1 ||
+                  (info.infToken.role_id == 2 && info.infToken.user_admin == true)
+                "
+              >
+                <a
+                  class="btn btn-primary btn-sm text-white text-decoration-none"
+                  [routerLink]="'/dashboard/parents/update-camper/' + id"
+                  target="_blank"
+                >
+                  {{ textos['editar'] }}
+                </a>
+              </div>
+            </div>
+  
+            <!-- Sección Campista -->
+            <div class="row mt-4">
+              <div class="col-lg-12">
+                <div class="container-fluid">
+                  <div class="titulo-info">
+                    <i class="bx bx-id-card"></i>
+                    <h4 style="margin-left: 10px;">{{ textos['campista'] }}</h4>
+                  </div>
+                  <div class="container-fluid">
+                    <p>
+                      <span class="fw-bold">{{ textos['nombreLabel'] }}</span>
+                      {{ infoCamp.name }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{
+                        textos['fechaNacimiento']
+                      }}</span>
+                      {{ infoCamp.birthday }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['edadLabel'] }}</span>
+                      {{ infoCamp.birthdayA }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['sexoLabel'] }}</span>
+                      {{ infoCamp.gender_id }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['correoLabel'] }}</span>
+                      {{ infoCamp.email }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['hermanosLabel'] }}</span>
+                      <a
+                        *ngFor="let item of infoCamper.siblings || []"
+                        routerLink="/dashboard/parents/camper/{{ item.id }}"
+                      >
+                        {{ item.name }}
+                        {{ item.lastname_father }}
+                        {{ item.lastname_mother + '  ' }}
+                      </a>
+                    </p>
+                  </div>
+                  <hr />
+                </div>
+  
+                <!-- Sección Educación -->
+                <div class="container-fluid">
+                  <div class="titulo-info">
+                    <i class="fas fa-book-reader"></i>
+                    <h4 style="margin-left: 10px;">{{ textos['educacionTitulo'] }}</h4>
+                  </div>
+                  <div class="container-fluid">
+                    <p>
+                      <span class="fw-bold">{{ textos['escuelaLabel'] }}</span>
+                      {{ infoCamp.school_id }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['gradoLabel'] }}</span>
+                      {{ infoCamp.grade }}
+                    </p>
+                  </div>
+                  <hr /><br />
+  
+                  <!-- Sección Habilidades -->
+                  <div class="titulo-info">
+                    <i class="fas fa-diagnoses"></i>
+                    <h4 style="margin-left: 10px;">{{
+                      textos['habilidadesTitulo']
+                    }}</h4>
+                  </div>
+                  <div class="container-fluid">
+                    <p>
+                      <span class="fw-bold">{{ textos['sabeNadar'] }}</span
+                      >{{ infoCamp.can_swim }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['impideActividades'] }}</span
+                      >{{ infoCamp.prevent_activities }}
+                    </p>
+                  </div>
+                  <hr />
+  
+                  <!-- Sección Info Médica -->
+                  <div class="titulo-info">
+                    <i class="fas fa-ambulance"></i>
+                    <h4 style="margin-left: 10px;">{{
+                      textos['infoMedicaTitulo']
+                    }}</h4>
+                  </div>
+                  <div class="container-fluid">
+                    <p>
+                      <span class="fw-bold">{{
+                        textos['requiereInstruccionesMedicas']
+                      }}</span>
+                      {{ infoCamp.doctor_precall }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['pesoLabel'] }}</span>
+                      {{ infoCamp.weight }} kg
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['estaturaLabel'] }}</span>
+                      {{ infoCamp.height }} cm.
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['tipoSangreLabel'] }}</span>
+                      {{ infoCamp.blood_type }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['vacunasLabel'] }}</span>
+                      <span
+                        class="badge bg-info ms-1 mt-1"
+                        *ngFor="let item of vacunasACtivos"
+                        >{{ item.name }}</span
+                      >
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{
+                        textos['antecedentesCamper']
+                      }}</span>
+                      <span
+                        *ngFor="
+                          let item of infoCamper.camper_info.pathological_background
+                        "
+                        ><span
+                          class="badge bg-info ms-1 mt-1"
+                          *ngIf="item.is_active"
+                          >{{ item.name }}</span
+                        ></span
+                      >
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{
+                        textos['antecedentesFamiliares']
+                      }}</span>
+                      <span
+                        *ngFor="
+                          let item of infoCamper.camper_info
+                            .pathological_background_fm
+                        "
+                        ><span
+                          class="badge bg-info ms-1 mt-1"
+                          *ngIf="item.is_active"
+                          >{{ item.name }}</span
+                        ></span
+                      >
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{
+                        textos['medicamentosPreautorizados']
+                      }}</span>
+                      <span
+                        *ngFor="
+                          let item of infoCamper.camper_info.licensed_medicines
+                        "
+                        ><span
+                          class="badge bg-info ms-1 mt-1"
+                          *ngIf="item.is_active"
+                          >{{ item.name }}</span
+                        ></span
+                      >
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['enfermedadesLabel'] }}</span
+                      >{{ infoCamp.affliction }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['problemasCardiacos'] }}</span
+                      >{{ infoCamp.heart_problems }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{
+                        textos['tratamientosPsiquiatricos']
+                      }}</span
+                      >{{ infoCamp.psicology_treatments }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{
+                        textos['alergiasMedicamentos']
+                      }}</span
+                      >{{ infoCamp.drug_allergies }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['otrasAlergias'] }}</span
+                      >{{ infoCamp.other_allergies }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['alteracionesNocturnas'] }}</span
+                      >{{ infoCamp.nocturnal_disorders }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['fobiasMiedos'] }}</span
+                      >{{ infoCamp.phobias }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['medicacionLabel'] }}</span
+                      >{{ infoCamp.drugs }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- Sección Seguro médico -->
+              <div class="col-lg-12">
+                <div class="container-fluid">
+                  <div class="titulo-info">
+                    <i class="fas fa-ambulance"></i>
+                    <h4 style="margin-left: 10px;">{{ textos['seguroTitulo'] }}</h4>
+                  </div>
+                  <div class="container-fluid">
+                    <p>
+                      <span class="fw-bold">{{ textos['tieneSeguro'] }}</span
+                      >{{ infoCamp.insurance }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['numSeguridad'] }}</span
+                      >{{ infoCamp.security_social_number }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['numPoliza'] }}</span
+                      >{{ infoCamp.insurance_number }}
+                    </p>
+                  </div>
+                </div>
+                <hr />
+  
+                <!-- Sección Alimentación -->
+                <div class="container-fluid mt-5">
+                  <div class="titulo-info">
+                    <i class="fas fa-drumstick-bite"></i>
+                    <h4 style="margin-left: 10px;">{{
+                      textos['alimentacionTitulo']
+                    }}</h4>
+                  </div>
+                  <div class="container-fluid">
+                    <p>
+                      <span class="fw-bold">{{ textos['comidaProhibida'] }}</span
+                      >{{ infoCamp.prohibited_foods }}
+                    </p>
+                    <p>
+                      <span class="fw-bold">{{ textos['alimentacionLabel'] }}</span>
+                      <span
+                        class="badge bg-info ms-1"
+                        *ngFor="let item of catalogosComida"
+                        >{{ item.name }}</span
+                      >
+                    </p>
+                  </div>
+                </div>
+  
+                <!-- Sección Tutores y contacto -->
+                <hr />
+                <div class="container-fluid mt-5">
+                  <div class="titulo-info">
+                    <i class="bx bxs-bookmark-star"></i>
+                    <h4 style="margin-left: 10px;">
+                      {{ textos['tutorPrincipalTitulo'] }}
+                    </h4>
+                  </div>
+                  <div class="container-fluid" style="margin-left: 20px;">
+                    <p *ngIf="userPermis.infToken.user_admin != true">
+                      {{ nombreTutor }}
+                    </p>
+                    <p
+                      *ngIf="
+                        userPermis.infToken.role_id == 2 ||
+                        userPermis.infToken.user_admin == true
+                      "
+                    >
+                      <a routerLink="/dashboard/admi/parent/{{ parent.id }}"
+                        >{{ nombreTutor }}</a
+                      >
+                    </p>
+                    <p><i class="bx bxs-envelope"></i> {{ emailTuto }}</p>
+                    <p><i class="bx bxl-whatsapp"></i> {{ parent.tutor_cellphone }}</p>
+                    <p><i class="bx bxs-contact"></i> {{ parent.tutor_home_phone }}</p>
+                    <p><i class="bx bxs-city"></i> {{ parent.tutor_work_phone }}</p>
+                  </div>
+                </div>
+                <hr />
+                <div class="container-fluid mt-5">
+                  <div class="titulo-info">
+                    <i class="bx bxs-bookmark-plus"></i>
+                    <h4 style="margin-left: 10px;">
+                      {{ textos['tutorSecundarioTitulo'] }}
+                    </h4>
+                  </div>
+                  <div class="container-fluid" style="margin-left: 20px;">
+                    <p>{{ nombreTutorSecundario }}</p>
+                    <p><i class="bx bxs-envelope"></i> {{ parent.contact_email }}</p>
+                    <p><i class="bx bxl-whatsapp"></i> {{ parent.contact_cellphone }}</p>
+                    <p><i class="bx bxs-contact"></i> {{ parent.contact_home_phone }}</p>
+                    <p><i class="bx bxs-city"></i> {{ parent.contact_work_phone }}</p>
+                  </div>
+                </div>
+                <hr />
+                <div class="container-fluid mt-5">
+                  <div class="titulo-info">
+                    <i class="mdi-card-account-phone-outline"></i>
+                    <h4 style="margin-left: 10px;">
+                      {{ textos['contactoEmergenciaTitulo'] }}
+                    </h4>
+                  </div>
+                  <div class="container-fluid" style="margin-left: 20px;">
+                    <p>
+                      {{ infoCamp.contact_name }} ({{ infoCamp.contact_relation }})
+                    </p>
+                    <p>
+                      <i class="bx bxl-whatsapp"></i> {{ infoCamp.contact_cellphone }}
+                    </p>
+                    <p>
+                      <i class="bx bxs-city"></i> {{ infoCamp.contact_homephone }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Chat / Comentarios -->
+          <div class="col-lg-5">
+            <div class="col-lg-12">
+              <div class="top-p" *ngIf="info.infToken.role_id == 1"></div>
+              <div class="card p-4" *ngIf="info.infToken.role_id == 1">
+                <div class="chat">
+                  <div class="row">
+                    <h5 class="col-9">{{ textos['algoSaberseCamper'] }}</h5>
+                    <p-badge [value]="comenarios?.length" class="col-1"></p-badge>
+                    <div
+                      class="col-1"
+                      style="font-size: 25px; margin-top: -5px;"
+                      (click)="isCollapsed = !isCollapsed"
+                    >
+                      +
+                    </div>
+                  </div>
+                  <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+                    <hr />
+  
+                    <!-- Mensajes -->
+                    <div class="chat-espacio">
+                      <div>
+                        <div
+                          class="row mt-2"
+                          *ngFor="let item of comenarios"
+                          style="
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                          "
+                        >
+                          <div class="col-3">
+                            <p class="Nombre-envidao">
+                              {{ item.author }}({{ item.author_role }})
+                            </p>
+                            <p-avatar
+                              image="assets/images/camp/chat-padres.png"
+                              size="large"
+                            ></p-avatar>
+                          </div>
+                          <div class="col-8">
+                            <p class="fecha-chat" style="text-align: right;">
+                              {{ item.created_at?.substring(0, 9) }}
+                            </p>
+                            <div class="col-12 mensaje">
+                              <p class="p-2">{{ item.comment }}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="col">
+                      <input
+                        type="text"
+                        class="form-control"
+                        aria-label="Username"
+                        [(ngModel)]="comment"
+                      />
+                      <div class="d-flex flex-row-reverse">
+                        <button class="btn btn-primary mt-3" (click)="comentario()">
+                          {{ textos['guardarComentario'] }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Otra vista de chat para roles >1 -->
+            <div class="col-lg-12">
+              <div class="top-p" *ngIf="info.infToken.role_id > 1"></div>
+              <div class="card p-4" *ngIf="info.infToken.role_id > 1">
+                <div class="chat">
+                  <div class="row">
+                    <h5 class="col-9">{{ textos['algoSaberseCamper'] }}</h5>
+                    <p-badge [value]="comenarios?.length" class="col-1"></p-badge>
+                    <div
+                      class="col-1"
+                      style="font-size: 25px; margin-top: -5px;"
+                      (click)="isCollapsed = !isCollapsed"
+                    >
+                      +
+                    </div>
+                  </div>
+                  <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+                    <hr />
+  
+                    <div class="chat-espacio">
+                      <div>
+                        <div
+                          class="row mt-2"
+                          *ngFor="let item of comenarios"
+                          style="
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                          "
+                        >
+                          <div class="col-3">
+                            <p class="Nombre-envidao">
+                              {{ item.author }}({{ item.author_role }})
+                            </p>
+                            <p-avatar
+                              image="assets/images/camp/chat-padres.png"
+                              size="large"
+                            ></p-avatar>
+                          </div>
+                          <div class="col-8">
+                            <p class="fecha-chat" style="text-align: right;">
+                              {{ item.created_at?.substring(0, 9) }}
+                            </p>
+                            <div class="col-12 mensaje">
+                              <p class="p-2">{{ item.comment }}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="col">
+                      <label>{{ textos['mostrarComentarioA'] }}</label>
+                      <select [(ngModel)]="typecoment" class="form-select">
+                        <option value="6">Admin</option>
+                        <option value="5">Coordinador</option>
+                        <option value="2">Escuela</option>
+                        <option value="1">Papás</option>
+                      </select>
+                    </div>
+  
+                    <div class="col">
+                      <input
+                        type="text"
+                        class="form-control"
+                        aria-label="Username"
+                        [(ngModel)]="comment"
+                      />
+                      <div class="d-flex flex-row-reverse">
+                        <button class="btn btn-primary mt-3" (click)="comentario()">
+                          {{ textos['guardarComentario'] }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Historial de camps -->
+            <div class="col-lg-12">
+              <div class="card">
+                <p-timeline
+                  [value]="historialCaps"
+                  align="left"
+                  styleClass="customized-timeline"
+                  class="margin-timile"
+                >
+                  <ng-template pTemplate="marker" let-event>
+                    <div
+                      class="timilin-logo"
+                      [ngClass]="{
+                        cancell: event.type == 'cancelled',
+                        suscribe: event.type == 'subscribe',
+                        passed: event.type == 'passed'
+                      }"
+                    >
+                      <i
+                        *ngIf="event.type == 'subscribe'"
+                        class="fas fa-check"
+                      ></i>
+                      <i
+                        *ngIf="event.type == 'cancelled'"
+                        class="far fa-times-circle"
+                      ></i>
+                      <i
+                        *ngIf="event.type == 'passed'"
+                        class="fas fa-check"
+                      ></i>
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="content" let-event>
+                    <div
+                      class="contendor-timiline mt-3 p-1"
+                      [ngClass]="{
+                        passed: event.type == 'passed',
+                        cancell: event.type == 'cancelled',
+                        suscribe: event.type == 'subscribe'
+                      }"
+                    >
+                      <h3 style="cursor: pointer;">
+                        {{ event.camp_name }}
+                        <i class="fa fa-info-circle" (click)="link(event.camp_id)"></i>
+                      </h3>
+                      <p
+                        (click)="link(event.camp_id)"
+                        style="cursor: pointer;"
+                        *ngIf="event.show_payment_parent"
+                        class="badge bg-warning ms-1"
+                      >
+                        {{ textos['pendienteDePago'] }}
+                        {{ event.camper_payment_balance }} MXN
+                      </p>
+                    </div>
+                    <div class="contenedor-p">
+                      <p class="icononos-s">
+                        {{ event.camp_start.substring(0, 10) }} -
+                        {{ event.camp_end.substring(0, 10) }}
+                        <i class="fas fa-calendar-alt"></i>
+                      </p>
+                    </div>
+                  </ng-template>
+                </p-timeline>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
-</div>
-
-<div class="div-error" *ngIf="error">
-    <img src="../../../assets/images/camp/problema.png" height="400px">
-    <h1 class="mt-3">¡UPS! TUVIMOS UN PROBLEMA.
-    </h1>
-    <h2>Te recomendamos que regreses a la página de inicio o nos contactes a info@campercontrol.com o al (777) 560 9123
-
-    </h2>
-</div>
+  </div>
+  
+  <div class="div-error" *ngIf="error">
+    <img src="../../../assets/images/camp/problema.png" height="400px" />
+    <h1 class="mt-3">{{ textos['upsProblema'] }}</h1>
+    <h2>{{ textos['recomendacionError'] }}</h2>
+  </div>
+  

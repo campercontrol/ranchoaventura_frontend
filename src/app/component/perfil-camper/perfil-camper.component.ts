@@ -165,7 +165,191 @@ export class PerfilCamperComponent implements OnInit {
   
   };
   idioma:string;
+  texto = {
+    "campsAnteriores": {
+      "esp": "Campamentos Anteriores",
+      "eng": "Previous Camps"
+    },
+    "campsProximo": {
+      "esp": "Campamentos Próximos",
+      "eng": "Upcoming Camps"
+    },
+    "inscribirACamps": {
+      "esp": "Inscribir a campamentos",
+      "eng": "Enroll in Camps"
+    },
+    "pendientePagos": {
+      "esp": "Pendiente de pagos:",
+      "eng": "Pending payments:"
+    },
+    "perfilAcampador": {
+      "esp": "Perfil del acampador",
+      "eng": "Camper Profile"
+    },
+    "editar": {
+      "esp": "Editar",
+      "eng": "Edit"
+    },
+    "campista": {
+      "esp": "Campista",
+      "eng": "Camper"
+    },
+    "nombreLabel": {
+      "esp": "Nombre:",
+      "eng": "Name:"
+    },
+    "fechaNacimiento": {
+      "esp": "Fecha de nacimiento:",
+      "eng": "Birthdate:"
+    },
+    "edadLabel": {
+      "esp": "Edad:",
+      "eng": "Age:"
+    },
+    "sexoLabel": {
+      "esp": "Sexo:",
+      "eng": "Gender:"
+    },
+    "correoLabel": {
+      "esp": "Correo:",
+      "eng": "Email:"
+    },
+    "hermanosLabel": {
+      "esp": "Hermanos:",
+      "eng": "Siblings:"
+    },
+    "educacionTitulo": {
+      "esp": "Educación",
+      "eng": "Education"
+    },
+    "escuelaLabel": {
+      "esp": "Escuela:",
+      "eng": "School:"
+    },
+    "gradoLabel": {
+      "esp": "Grado:",
+      "eng": "Grade:"
+    },
+    "habilidadesTitulo": {
+      "esp": "Habilidades",
+      "eng": "Skills"
+    },
+    "sabeNadar": {
+      "esp": "¿Sabe nadar?",
+      "eng": "Can swim?"
+    },
+    "impideActividades": {
+      "esp": "¿Hay alguna situación que le impida realizar actividades?",
+      "eng": "Any condition preventing activities?"
+    },
+    "infoMedicaTitulo": {
+      "esp": "Info Médica",
+      "eng": "Medical Info"
+    },
+    "requiereInstruccionesMedicas": {
+      "esp": "Requiere instrucciones médicas:",
+      "eng": "Requires medical instructions:"
+    },
+    "pesoLabel": {
+      "esp": "Peso:",
+      "eng": "Weight:"
+    },
+    "estaturaLabel": {
+      "esp": "Estatura:",
+      "eng": "Height:"
+    },
+    "tipoSangreLabel": {
+      "esp": "Tipo de sangre:",
+      "eng": "Blood type:"
+    },
+    "vacunasLabel": {
+      "esp": "Vacunas:",
+      "eng": "Vaccines:"
+    },
+    "antecedentesCamper": {
+      "esp": "Antecedentes del camper:",
+      "eng": "Camper background:"
+    },
+    "antecedentesFamiliares": {
+      "esp": "Antecedentes familiares:",
+      "eng": "Family background:"
+    },
+    "medicamentosPreautorizados": {
+      "esp": "Medicamentos preautorizados en:",
+      "eng": "Preauthorized medicines in:"
+    },
+    "enfermedadesLabel": {
+      "esp": "Enfermedades:",
+      "eng": "Afflictions:"
+    },
+    "problemasCardiacos": {
+      "esp": "Problemas cardiacos:",
+      "eng": "Heart problems:"
+    },
+    "tratamientosPsiquiatricos": {
+      "esp": "Tratamientos psiquiátricos o psicológicos*:",
+      "eng": "Psychiatric/psychological treatments*:"
+    },
+    "alergiasMedicamentos": {
+      "esp": "Alergias a medicamentos:",
+      "eng": "Drug allergies:"
+    },
+    "otrasAlergias": {
+      "esp": "Otras alergias:",
+      "eng": "Other allergies:"
+    },
+    "alteracionesNocturnas": {
+      "esp": "Alteraciones nocturnas:",
+      "eng": "Nocturnal disorders:"
+    },
+    "fobiasMiedos": {
+      "esp": "Fobias o miedos:",
+      "eng": "Phobias or fears:"
+    },
+    "medicacionLabel": {
+      "esp": "Medicación:",
+      "eng": "Medication:"
+    },
+    "tutorPrincipalTitulo": {
+      "esp": "Tutor Principal",
+      "eng": "Primary Guardian"
+    },
+    "tutorSecundarioTitulo": {
+      "esp": "Tutor Secundario",
+      "eng": "Secondary Guardian"
+    },
+    "contactoEmergenciaTitulo": {
+      "esp": "Contacto de emergencia",
+      "eng": "Emergency Contact"
+    },
+    "algoSaberseCamper": {
+      "esp": "Algo más que debamos saber sobre Camper",
+      "eng": "Anything else we should know about Camper"
+    },
+    "mostrarComentarioA": {
+      "esp": "Mostrar este comentario a",
+      "eng": "Show this comment to"
+    },
+    "guardarComentario": {
+      "esp": "Guardar comentario",
+      "eng": "Save comment"
+    },
+    "pendienteDePago": {
+      "esp": "Pendiente de Pago:",
+      "eng": "Payment pending:"
+    },
+    "upsProblema": {
+      "esp": "¡UPS! TUVIMOS UN PROBLEMA.",
+      "eng": "Oops! We encountered a problem."
+    },
+    "recomendacionError": {
+      "esp": "Te recomendamos que regreses a la página de inicio o nos contactes a info@campercontrol.com o al (777) 560 9123",
+      "eng": "We recommend you go back to the home page or contact us at info@campercontrol.com or at (777) 560 9123"
+    }
+  }
+  
   currencyKeys: string[];
+  textos: {};
 
 
 
@@ -185,7 +369,13 @@ export class PerfilCamperComponent implements OnInit {
     this.lang.getLang().subscribe((res:any)=>{
       this.idioma=res
       console.log(this.idioma);
-      
+      this.lang.getLang().subscribe((res: any) => {
+        this.idioma = res;                // 'esp' o 'eng'
+        this.textos = {};
+        for (const key of Object.keys(this.texto)) {
+          this.textos[key] = this.texto[key][this.idioma];
+        }
+      });
     })
 
       if(this.info.infToken.user_admin == true){

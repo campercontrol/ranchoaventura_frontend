@@ -28,6 +28,34 @@ export class RegisteredChildrenComponent implements OnInit {
   submitted = false;
   hijosRes:any=[];
   items: FormArray;
+  public texto = {
+    esp: {
+      nuevoAcampador:    'Nuevo acampador',
+      saldoPendiente:    'Tienes un saldo pendiente de :',
+      balancesPorMoneda: 'Balances por Moneda:',
+      cardBotton:        'Inscribir',
+      editarInformacion: 'Editar información',
+      perfil:            'Perfil',
+      inscribir:         'Inscribir',
+      noTienesCampers:   '¡No tienes campers registrados!',
+      porFavorRegistra:  'Por favor, registra un camper para comenzar.',
+      registrarCamper:   'Registrar Camper'
+    },
+    eng: {
+      nuevoAcampador:    'New camper',
+      saldoPendiente:    'You have a pending balance of:',
+      balancesPorMoneda: 'Balances by Currency:',
+      cardBotton:        'Enroll',
+      editarInformacion: 'Edit information',
+      perfil:            'Profile',
+      inscribir:         'Enroll',
+      noTienesCampers:   "You don't have any registered campers!",
+      porFavorRegistra:  'Please register a camper to get started.',
+      registrarCamper:   'Register Camper'
+    }
+  };
+  
+  
   cargando= false;
   // Select2 Dropdown
   selectValue: string[];
@@ -81,8 +109,7 @@ total: number = 0;
     });
     
     
-    this.textos  = traducciones['traduciones'][this.idioma]['dashboardParent']
-    
+     
     
   }
 
@@ -90,9 +117,10 @@ total: number = 0;
     this.lang.getLang().subscribe((res:any)=>{
       this.idioma=res
       console.log(this.idioma);
+      this.textos = this.texto[this.idioma];
+
       
-      this.textos  = traducciones['traduciones'][this.idioma]['dashboardParent'];
-    })
+     })
 
     this.selectValue = ['Photoshop', 'illustrator', 'Html', 'Css', 'Php', 'Java', 'Python'];
 
@@ -190,7 +218,7 @@ total: number = 0;
   checkImagesOrientation() {
     this.hijosRes.camperList.forEach(camper => {
       const img = new Image();
-      img.src = 'https://api-dev.campercontrol.com/' + camper.photo;
+      img.src = 'http://api-dev.kincamp.com/' + camper.photo;
 
       img.onload = () => {
         // Detectar si la imagen es horizontal (ancho > alto)

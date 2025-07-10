@@ -137,7 +137,7 @@ export class AdminEditStaffComponent implements OnInit {
       this.food_restrictions = res.food_restrictions;
       this.blood_types = res.blood_types;
       let staff = res.staff
-        this.photoSelect = 'https://api-dev.campercontrol.com/'+staff.photo;
+        this.photoSelect = 'http://api-dev.kincamp.com/'+staff.photo;
         console.log(this.photoSelect);
         
         this.formUser.patchValue({

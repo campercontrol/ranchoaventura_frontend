@@ -2,7 +2,7 @@
     <form [formGroup]="formUser">
         <div class="row">
             <div class="alert alert-warning" role="alert">
-                Los  campos obligatorios son los que tienen *
+              {{textos['alert1']}}
               </div>
 
             <div class="col-lg-12">
@@ -20,7 +20,8 @@
                                 <div class="col-sm-12">
                                     <input type="text" class="form-control " id="" formControlName="name" name="name" #name (input)="getname()">
                                 </div>
-                                <div class="alert alert-warning mt-1"> Favor de poner tu nombre oficial completo sin abreviaciones ni apodos</div>
+                                <div class="alert alert-warning mt-1">               {{textos['alert2']}}
+                                </div>
 
                             </div>
                             <div class="row mb-4">
@@ -96,13 +97,13 @@
                                 
                                 
                                 <div class="alert alert-primary mt-3" role="alert" >
-                                    La foto es obligatoria para identificar a los campers. Recomendamos subir una imagen reciente y de tamaño reducido, en formato JPG y PNG, con un peso máximo de 3 MB.  
+                                  {{textos['alert3']}}
 
                                    </div>
                                 <div *ngIf="spinerPhot">
                                     <div class="alert alert-danger" role="alert" *ngIf="!photoSatus">
-                                        Aun no has  seleciona una imagen Recuerda tiene que ser un imagen TIPO JPG
-                                       </div>
+                                      {{textos['alert4']}}
+                                    </div>
      
                                        <div class="alert alert-secondary" role="alert" *ngIf="photoSatus">
                                          Se Agrego corectamente
@@ -271,7 +272,7 @@
                     <h2 style="text-align:center ; margin-top: 30px;">{{textos['Pathologicalhistory']}}</h2>
                     <div class="mt-5">
                         <label for="" class="text-center mt-2 mb-2" style="color: rgb(177, 179, 180);">
-                            Marca las casillas de las enfermedades que haya padecido o padezca el camper en la columna camper. En caso de que un familiar haya padecido alguna de esas enfermedades marca en la columna de familiar
+                          {{textos['alert5']}}
 
                         </label>
                         <table class="tabla-medicos" style="width: 100%;">
@@ -355,16 +356,13 @@
                         </div>
 
                         <p style="margin-top: 20px; color:#f46a6a;" class="fw-bold">
-                            Tenemos la política de comunicarnos con los papás antes de administrar cualquier medicamento
-                            que
-                            no haya sido autorizado previamente o enviado por la familia.
+                          {{textos['subTexto']}}
                         </p>
 
 
                         <p style="margin-top: 20px; color: #f46a6a                    ;" class="fw-bold">
-                            Para evitarte la molestia de nuestra llamada en casos menores, te proponemos que
-                            pre-autorices
-                            los medicamentos que creas convenientes de la siguiente lista:
+                             {{textos['subTexto2']}}
+
                         </p>
 
 
@@ -456,7 +454,11 @@
                                
                                 <div class="form-check">
                                     <input type="checkbox" id="medico" class=" form-check-input" formControlName="doctor_precall">
-                                    <label for="medico" class="form-check-label"> Me gustaría tener una llamada con el doctor antes de que inicie el campamento, pues hay detalles importantes que quiero compartir y que podrían tomar demasiado tiempo si lo hago el día que sale el campamento</label>
+                                    <label for="medico" class="form-check-label"> 
+
+                                      {{textos['subTexto3']}}
+
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -607,8 +609,8 @@
                         </div>
 
                         <div class="alert alert-success mt-3">
-                            En caso de emergencia y NO PODER CONTACTAR A LOS TUTORES, registra los datos de una tercera
-                            persona.
+                          {{textos['alert7']}}
+
                         </div>
 
 

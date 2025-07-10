@@ -5,6 +5,7 @@ import { AuthenticationService } from '../core/services/auth.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginService } from 'src/services/login.service';
 import jwt_decode from "jwt-decode";
+import { title } from 'process';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,20 @@ export class LoginComponent implements OnInit {
   errologin = false;
   ressetPasword= true;
   alertPass = false;
+  traducciones = {
+  
+  login: {
+    title:"¡Bienvenido!",
+    Email: "Emailr",
+    Password: "Password",
+
+  }
+  
+  
+  
+  
+  
+  }
   spinner= true;
 
   // set the currenr year

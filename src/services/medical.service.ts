@@ -9,15 +9,15 @@ export class MedicalService {
   constructor(private http:HttpClient)  { }
 
   getMedicalCamps(id:any){
-    return this.http.get('https://api-dev.campercontrol.com/medical/camp/'+ id);
+    return this.http.get('http://api-dev.kincamp.com/medical/camp/'+ id);
     
   }
   getMedicalCampCamper(campId,camperId){
-    return this.http.get('https://api-dev.campercontrol.com/medical/camp/'+campId+'/camper/'+camperId);
+    return this.http.get('http://api-dev.kincamp.com/medical/camp/'+campId+'/camper/'+camperId);
     
   }
   nuevaConsulta(data){
-    return this.http.post("https://api-dev.campercontrol.com/medical/camper/visit/",data);
+    return this.http.post("http://api-dev.kincamp.com/medical/camper/visit/",data);
 
   }
 }

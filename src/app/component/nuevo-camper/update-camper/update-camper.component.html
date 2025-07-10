@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <form [formGroup]="formUser">
         <div class="alert alert-warning" role="alert">
-            Los  campos obligatorios son los que tienen *
+            {{textos['alert1']}}
           </div>
         <div class="row">
 
@@ -20,7 +20,7 @@
                                 <div class="col-sm-12">
                                     <input type="text" class="form-control " id="" formControlName="name" name="name" #name (input)="getname()">
                                 </div>
-                                <div class="alert alert-warning mt-1"> Favor de poner tu nombre oficial completo sin abreviaciones ni apodos</div>
+                                <div class="alert alert-warning mt-1">  {{textos['alert2']}}</div>
 
                             </div>
                             <div class="row mb-4">
@@ -251,9 +251,7 @@
 
                        
                         <div class="alert-dismissible alert alert-secondary">
-                            <p style="text-align:justify;" for="">Marca las casillas de las enfermedades que haya
-                                padecido o padezca el camper en la columna camper. En caso de que un familiar haya
-                                padecido alguna de esas enfermedades marca en la columna de familiar</p>
+                            <p style="text-align:justify;" for=""> {{textos['alert5']}}</p>
                         </div>
                         <table class="tabla-medicos" style="width: 100%;">
                             <thead>
@@ -330,16 +328,13 @@
                         </div>
 
                         <p style="margin-top: 20px; color:#f46a6a;" class="fw-bold">
-                            Tenemos la política de comunicarnos con los papás antes de administrar cualquier medicamento
-                            que
-                            no haya sido autorizado previamente o enviado por la familia.
+                            {{textos['subTexto']}}
                         </p>
 
 
                         <p style="margin-top: 20px; color: #f46a6a                    ;" class="fw-bold">
-                            Para evitarte la molestia de nuestra llamada en casos menores, te proponemos que
-                            pre-autorices
-                            los medicamentos que creas convenientes de la siguiente lista:
+                            {{textos['subTexto2']}}
+
                         </p>
 
 
@@ -426,7 +421,8 @@
                                
                                 <div class="form-check">
                                     <input type="checkbox" class=" form-check-input" formControlName="doctor_precall">
-                                    <label for="" class="form-check-label"> Me gustaría tener una llamada con el doctor antes de que inicie el campamento, pues hay detalles importantes que quiero compartir y que podrían tomar demasiado tiempo si lo hago el día que sale el campamento</label>
+                                    <label for="" class="form-check-label">                             {{textos['subTexto3']}}
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -508,12 +504,7 @@
                            
                             </div>
 
-                            <div class="alert alert-warning">
-                                En caso de no saber nadar y querer participar en actividades acuáticas, será
-                                responsabilidad
-                                de los padres de familia el incluir en su equipaje un dispositivo de flotación (chaleco,
-                                flotis)
-                            </div>
+                           
 
 
 
@@ -582,8 +573,8 @@
                         </div>
 
                         <div class="alert alert-success mt-3">
-                            En caso de emergencia y NO PODER CONTACTAR A LOS PADRES, registra los datos de una tercera
-                            persona.
+                            {{textos['alert7']}}
+
                         </div>
 
 

@@ -55,7 +55,17 @@
             "Doyouhave":"Do you have medical insurance?",
             "InsuranceCompany":"Insurance Company",
             "policynumber":"policy number",
-            "SocialSecurity":"Social Security number"
+            "SocialSecurity":"Social Security number",
+            "alert1": "*Fields marked with an asterisk are required.",
+            "alert2": "Please enter your full official name without abbreviations or nicknames.",
+            "alert3": "A photo is required to identify the campers. We recommend uploading a recent image in JPG or PNG format, under 3 MB in size.",
+            "alert4": "You haven’t selected an image yet. Please remember it must be a JPG or PNG image, with a maximum size of 3 MB.",
+            "alert5": "Check the boxes for any illnesses the camper has had or currently has in the 'Camper' column. If a family member has had any of these illnesses, check the 'Family' column.",
+            "alert6": "If the camper does not have any illnesses, write the word NONE in the 'Illnesses the camper has' field.",
+            "subTexto": "We have a policy of contacting parents before administering any medication that hasn't been pre-authorized or sent by the family.",
+            "subTexto2": "To avoid the inconvenience of a phone call in minor cases, we suggest you pre-authorize any medications you deem appropriate from the list below.",
+            "subTexto3": "I would like to have a call with the doctor before camp begins, as there are important details I want to share that might take too long to explain on the day of departure.",
+            "alert7": "In case of an emergency and we CANNOT CONTACT THE GUARDIANS, please provide the contact details of a third person."
         }
 
     },
@@ -113,7 +123,17 @@
             "Doyouhave":"¿Cuenta con Seguro de Gastos Médicos Mayores?",
             "InsuranceCompany":"Compañía de seguros",
             "policynumber":"Numero de póliza",
-            "SocialSecurity":"Número de seguridad social"
+            "SocialSecurity":"Número de seguridad social",
+            "alert1":"*Los campos marcados con asterisco son obligatorios",
+            "alert2":"Favor de poner tu nombre oficial completo sin abreviaciones ni apodos",
+            "alert3":"La foto es obligatoria para identificar a los campers. Recomendamos subir una imagen reciente y de tamaño reducido, en formato JPG y PNG, con un peso máximo de 3 MB.",
+            "alert4":"Aun no has seleciona una imagen Recuerda tiene que ser un imagen TIPO JPG o PNG, con un peso máximo de 3 MB.",
+            "alert5":"Marca las casillas de las enfermedades que haya padecido o padezca el camper en la columna camper. En caso de que un familiar haya padecido alguna de esas enfermedades marca en la columna de familiar",
+            "alert6":"Si el camper no padece ninguna enfermedad, escribe la palabra NINGUNA en el campo de enfermedades que padece.",
+            "subTexto":"Tenemos la política de comunicarnos con los papás antes de administrar cualquier medicamento que no haya sido autorizado previamente o enviado por la familia.",
+            "subTexto2":"Para evitarte la molestia de nuestra llamada en casos menores, te proponemos que pre-autorices los medicamentos que creas convenientes de la siguiente lista.",
+            "subTexto3":"Me gustaría tener una llamada con el doctor antes de que inicie el campamento, pues hay detalles importantes que quiero compartir y que podrían tomar demasiado tiempo si lo hago el día que sale el campamento",
+            "alert7":"En caso de emergencia y NO PODER CONTACTAR A LOS TUTORES, registra los datos de una tercera persona."
         }
 
     }

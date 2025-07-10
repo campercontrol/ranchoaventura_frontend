@@ -84,11 +84,11 @@ import { AdmiUserComponentId } from '../component/admi-user-id/admi-user.compone
 const routes: Routes = [
   
   { path: '', component: RegisteredChildrenComponent, canActivate: [AuthGuard] },
-  { path: 'parents/my-profile', component: PerfilComponent, canActivate: [AuthGuard] },
-  { path: 'parents', component: RegisteredChildrenComponent, canActivate: [AuthGuard] },
+  { path: 'parents/my-profile', component: PerfilComponent, canActivate: [AuthGuard] }, // listo
+  { path: 'parents', component: RegisteredChildrenComponent, canActivate: [AuthGuard] }, //listo
 
-  { path: 'parents/registered-children', component: RegisteredChildrenComponent, canActivate: [AuthGuard] },
-  { path: 'parents/new-camper', component: CamperNuevoComponent, canActivate: [AuthGuard] },
+  { path: 'parents/registered-children', component: RegisteredChildrenComponent, canActivate: [AuthGuard] },// listo
+  { path: 'parents/new-camper', component: CamperNuevoComponent, canActivate: [AuthGuard] }, // listo 
   { path: 'parents/camp-info/:camper/:camp', component: CampamentoComponent, canActivate: [AuthGuard] },
   { path: 'parents/inscription/camp-info/:camper/:camp', component: CampamentoComponent, canActivate: [AuthGuard] },
   { path: 'parents/inscription/camper/:id', component: PerfilCamperComponent, canActivate: [AuthGuard] },
