@@ -1,0 +1,23 @@
+/* nueva-consulta.component.scss */
+.btn-accident {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+  
+  .preview-container {
+    img {
+      max-width: 200px;
+      border-radius: 4px;
+    }
+  }
+  

@@ -116,6 +116,22 @@ export class TablaMedicalComponent implements OnInit {
     return result;
   }
 
+
+  stripComment(text: string = ''): string {
+    return text.replace(/\$\{\{.*?\}\}/g, '');
+  }
+  
+  
+  getImageUrl(comment: string = ''): string | null {
+    const m = comment.match(/\$\{\{\s*(.*?)\s*\}\}/);
+    if (m && m[1]) {
+      return `https://api-dev.kincamp.com/${m[1]}`;
+    }
+    console.log('no jalo');
+    
+    return null;
+  }  
+
   getAuthorizationName(value: number): string {
     const caseV =  Number(value)
     switch (caseV) {

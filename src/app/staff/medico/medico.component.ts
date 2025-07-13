@@ -96,6 +96,21 @@ export class MedicoComponent implements OnInit {
   redireccionId(id){
     this.router.navigate(['/dashboard/medical/add_consultation/'+this.campId+'/'+this.camperid+'/'+id]);
   }
+
+  // nueva-consulta.component.ts
+stripComment(text: string = ''): string {
+  return text.replace(/\$\{\{.*?\}\}/g, '');
+}
+
+
+getImageUrl(comment: string = ''): string | null {
+  const m = comment.match(/\$\{\{\s*(.*?)\s*\}\}/);
+  if (m && m[1]) {
+    return `https://api-dev.kincamp.com/${m[1]}`;
+  }
+  return null;
+}
+
   InfoBlood(id){
     console.log(id);
     

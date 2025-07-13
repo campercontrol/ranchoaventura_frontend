@@ -367,11 +367,25 @@
     
                         </div>
                         <div class="col-6 fs-6">
-                            <p>{{infoDataCamp.comment}}</p>
+                            <p>{{ stripComment(infoDataCamp.comment) }}</p>
+
+                            
                         </div>
     
                         <hr>
                     </div>
+
+                    <div class="row mt-3" *ngIf="getImageUrl(infoDataCamp.comment) as imgUrl">
+                        <div class="col-12">
+                          <label class="form-label" style="display: block;">Imagen de la consulta</label>
+                          <img
+                            [src]="imgUrl"
+                            alt="Imagen de la consulta"
+                            class="img-fluid rounded"
+                            style="max-width: 300px; border: 1px solid #ddd; padding: 4px;"
+                          />
+                        </div>
+                      </div>
     
                 </div>            </p-tabPanel>
             <p-tabPanel *ngFor="let seguimiento of infoDataCamp.tracing_visits" header="Consulta de seguimiento">
@@ -479,11 +493,26 @@
     
                         </div>
                         <div class="col-6 fs-6">
-                            <p>{{seguimiento.comment}}</p>
+                            <p>{{ stripComment(seguimiento.comment) }}</p>
+
+                            
                         </div>
     
                         <hr>
                     </div>
+
+                    <div class="row mt-3" *ngIf="getImageUrl(seguimiento.comment) as imgUrl">
+                        <div class="col-12">
+                          <label class="form-label" style="display: block;">Imagen de la consulta</label>
+                          <img
+                            [src]="imgUrl"
+                            alt="Imagen de la consulta"
+                            class="img-fluid rounded"
+                            style="max-width: 300px; border: 1px solid #ddd; padding: 4px;"
+                          />
+                        </div>
+                      </div>
+                    
     
                 </div>   
             </p-tabPanel>

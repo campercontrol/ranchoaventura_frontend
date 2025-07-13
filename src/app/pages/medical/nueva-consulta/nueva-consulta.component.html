@@ -169,6 +169,53 @@
                             </div>
                           </div>
 
+                         <!-- nueva-consulta.component.html -->
+<!-- nueva-consulta.component.html -->
+<div class="row justify-content-center mb-3">
+  <div class="col-10 text-center">
+    <label for="accidentImage" class="form-label d-block mb-2">
+      Imagen del accidente
+    </label>
+    <input
+      #fileInput
+      id="accidentImage"
+      type="file"
+      accept="image/*"
+      hidden
+      (change)="subiendo($event)"
+    />
+    <button
+      type="button"
+      class="btn btn-accident"
+      (click)="fileInput.click()"
+    >
+      Seleccionar imagen
+    </button>
+
+    <!-- Spinner durante la carga -->
+    <div *ngIf="isImageUploading" class="mt-2">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="row justify-content-center mb-3"
+  *ngIf="  statusImageFals"
+>
+  <div class="col-auto text-center">
+    <img
+      [src]="photoSelect"
+      class="img-thumbnail"
+      alt="Previsualización de la imagen"
+      style="max-width: 300px;"
+    />
+  </div>
+</div>
+
+
                         
                         <div class="col-10 mx-auto">
                           <button type="submit" class="btn btn-primary " style="width: 100%;" (click)="crearConsulta()" *ngIf="!showSpinner">Guardar</button>
