@@ -59,7 +59,7 @@ export class NuevaConsultaComponent implements OnInit {
         "medical_monitoring": ["",[Validators.required]],
         "comment": ["",[Validators.required]],// listo
         "medical_comment": ["",[Validators.required]], // listo
-        "photo": [null],
+        "photo": [""],
         "send_in_email": true,
         "already_sent": false,
         "camp_id": this.campId,
