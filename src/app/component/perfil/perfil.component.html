@@ -99,16 +99,17 @@
                                     <input type="text" class="form-control" id="" (input)="getcontact_cellphone()" formControlName = "contact_cellphone" #contact_cellphone>
                                 </div>
                             </div>
+                          
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label">{{textos[idoma]["texto6"]}}</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="" (input)="getcontact_work_phone()" formControlName = "contact_work_phone" #contact_work_phone>
+                                    <input type="text" class="form-control" (input)="getcontact_home_phone()" id="" formControlName ="contact_home_phone"  #contact_home_phone>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <label for="" class="col-sm-3 col-form-label">{{textos[idoma]["texto7"]}}</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" (input)="getcontact_home_phone()" id="" formControlName ="contact_home_phone"  #contact_home_phone>
+                                    <input type="text" class="form-control" id="" (input)="getcontact_work_phone()" formControlName = "contact_work_phone" #contact_work_phone>
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -143,7 +144,7 @@
                                 </label>
                                 <label class="form-check-label fs-3 ms-3" for="terms">
                                     <a
-                                        href="https://demo.campercontrol.com/media/uploads/files/terminos-y-condiciones.pdf">Ver
+                                        href="https://registrokin.com/media/uploads/files/_terminos-y-condiciones.pdf">Ver
                                         {{textos[idoma]["texto13"]}}</a>
                                 </label>
 

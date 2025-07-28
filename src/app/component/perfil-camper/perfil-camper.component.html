@@ -110,7 +110,8 @@
                     </p>
                     <p>
                       <span class="fw-bold">{{ textos['hermanosLabel'] }}</span>
-                      <a
+                     <!-- 
+                         <a
                         *ngFor="let item of infoCamper.siblings || []"
                         routerLink="/dashboard/parents/camper/{{ item.id }}"
                       >
@@ -118,6 +119,9 @@
                         {{ item.lastname_father }}
                         {{ item.lastname_mother + '  ' }}
                       </a>
+                     -->
+                     
+                   
                     </p>
                   </div>
                   <hr />
@@ -398,223 +402,225 @@
           </div>
   
           <!-- Chat / Comentarios -->
-          <div class="col-lg-5">
-            <div class="col-lg-12">
-              <div class="top-p" *ngIf="info.infToken.role_id == 1"></div>
-              <div class="card p-4" *ngIf="info.infToken.role_id == 1">
-                <div class="chat">
-                  <div class="row">
-                    <h5 class="col-9">{{ textos['algoSaberseCamper'] }}</h5>
-                    <p-badge [value]="comenarios?.length" class="col-1"></p-badge>
-                    <div
-                      class="col-1"
-                      style="font-size: 25px; margin-top: -5px;"
-                      (click)="isCollapsed = !isCollapsed"
-                    >
-                      +
-                    </div>
-                  </div>
-                  <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-                    <hr />
-  
-                    <!-- Mensajes -->
-                    <div class="chat-espacio">
-                      <div>
-                        <div
-                          class="row mt-2"
-                          *ngFor="let item of comenarios"
-                          style="
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                          "
-                        >
-                          <div class="col-3">
-                            <p class="Nombre-envidao">
-                              {{ item.author }}({{ item.author_role }})
-                            </p>
-                            <p-avatar
-                              image="assets/images/camp/chat-padres.png"
-                              size="large"
-                            ></p-avatar>
-                          </div>
-                          <div class="col-8">
-                            <p class="fecha-chat" style="text-align: right;">
-                              {{ item.created_at?.substring(0, 9) }}
-                            </p>
-                            <div class="col-12 mensaje">
-                              <p class="p-2">{{ item.comment }}</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-  
-                    <div class="col">
-                      <input
-                        type="text"
-                        class="form-control"
-                        aria-label="Username"
-                        [(ngModel)]="comment"
-                      />
-                      <div class="d-flex flex-row-reverse">
-                        <button class="btn btn-primary mt-3" (click)="comentario()">
-                          {{ textos['guardarComentario'] }}
-                        </button>
-                      </div>
-                    </div>
+        
+        </div>
+       
+        <div class="col-lg-5">
+          <div class="col-lg-12">
+            <div class="top-p" *ngIf="info.infToken.role_id == 1"></div>
+            <div class="card p-4" *ngIf="info.infToken.role_id == 1">
+              <div class="chat">
+                <div class="row">
+                  <h5 class="col-9">{{ textos['algoSaberseCamper'] }}</h5>
+                  <p-badge [value]="comenarios?.length" class="col-1"></p-badge>
+                  <div
+                    class="col-1"
+                    style="font-size: 25px; margin-top: -5px;"
+                    (click)="isCollapsed = !isCollapsed"
+                  >
+                    +
                   </div>
                 </div>
-              </div>
-            </div>
-  
-            <!-- Otra vista de chat para roles >1 -->
-            <div class="col-lg-12">
-              <div class="top-p" *ngIf="info.infToken.role_id > 1"></div>
-              <div class="card p-4" *ngIf="info.infToken.role_id > 1">
-                <div class="chat">
-                  <div class="row">
-                    <h5 class="col-9">{{ textos['algoSaberseCamper'] }}</h5>
-                    <p-badge [value]="comenarios?.length" class="col-1"></p-badge>
-                    <div
-                      class="col-1"
-                      style="font-size: 25px; margin-top: -5px;"
-                      (click)="isCollapsed = !isCollapsed"
-                    >
-                      +
-                    </div>
-                  </div>
-                  <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-                    <hr />
-  
-                    <div class="chat-espacio">
-                      <div>
-                        <div
-                          class="row mt-2"
-                          *ngFor="let item of comenarios"
-                          style="
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                          "
-                        >
-                          <div class="col-3">
-                            <p class="Nombre-envidao">
-                              {{ item.author }}({{ item.author_role }})
-                            </p>
-                            <p-avatar
-                              image="assets/images/camp/chat-padres.png"
-                              size="large"
-                            ></p-avatar>
-                          </div>
-                          <div class="col-8">
-                            <p class="fecha-chat" style="text-align: right;">
-                              {{ item.created_at?.substring(0, 9) }}
-                            </p>
-                            <div class="col-12 mensaje">
-                              <p class="p-2">{{ item.comment }}</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-  
-                    <div class="col">
-                      <label>{{ textos['mostrarComentarioA'] }}</label>
-                      <select [(ngModel)]="typecoment" class="form-select">
-                        <option value="6">Admin</option>
-                        <option value="5">Coordinador</option>
-                        <option value="2">Escuela</option>
-                        <option value="1">Papás</option>
-                      </select>
-                    </div>
-  
-                    <div class="col">
-                      <input
-                        type="text"
-                        class="form-control"
-                        aria-label="Username"
-                        [(ngModel)]="comment"
-                      />
-                      <div class="d-flex flex-row-reverse">
-                        <button class="btn btn-primary mt-3" (click)="comentario()">
-                          {{ textos['guardarComentario'] }}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <!-- Historial de camps -->
-            <div class="col-lg-12">
-              <div class="card">
-                <p-timeline
-                  [value]="historialCaps"
-                  align="left"
-                  styleClass="customized-timeline"
-                  class="margin-timile"
-                >
-                  <ng-template pTemplate="marker" let-event>
-                    <div
-                      class="timilin-logo"
-                      [ngClass]="{
-                        cancell: event.type == 'cancelled',
-                        suscribe: event.type == 'subscribe',
-                        passed: event.type == 'passed'
-                      }"
-                    >
-                      <i
-                        *ngIf="event.type == 'subscribe'"
-                        class="fas fa-check"
-                      ></i>
-                      <i
-                        *ngIf="event.type == 'cancelled'"
-                        class="far fa-times-circle"
-                      ></i>
-                      <i
-                        *ngIf="event.type == 'passed'"
-                        class="fas fa-check"
-                      ></i>
-                    </div>
-                  </ng-template>
-                  <ng-template pTemplate="content" let-event>
-                    <div
-                      class="contendor-timiline mt-3 p-1"
-                      [ngClass]="{
-                        passed: event.type == 'passed',
-                        cancell: event.type == 'cancelled',
-                        suscribe: event.type == 'subscribe'
-                      }"
-                    >
-                      <h3 style="cursor: pointer;">
-                        {{ event.camp_name }}
-                        <i class="fa fa-info-circle" (click)="link(event.camp_id)"></i>
-                      </h3>
-                      <p
-                        (click)="link(event.camp_id)"
-                        style="cursor: pointer;"
-                        *ngIf="event.show_payment_parent"
-                        class="badge bg-warning ms-1"
+                <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+                  <hr />
+
+                  <!-- Mensajes -->
+                  <div class="chat-espacio">
+                    <div>
+                      <div
+                        class="row mt-2"
+                        *ngFor="let item of comenarios"
+                        style="
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                        "
                       >
-                        {{ textos['pendienteDePago'] }}
-                        {{ event.camper_payment_balance }} MXN
-                      </p>
+                        <div class="col-3">
+                          <p class="Nombre-envidao">
+                            {{ item.author }}({{ item.author_role }})
+                          </p>
+                          <p-avatar
+                            image="assets/images/camp/chat-padres.png"
+                            size="large"
+                          ></p-avatar>
+                        </div>
+                        <div class="col-8">
+                          <p class="fecha-chat" style="text-align: right;">
+                            {{ item.created_at?.substring(0, 9) }}
+                          </p>
+                          <div class="col-12 mensaje">
+                            <p class="p-2">{{ item.comment }}</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="contenedor-p">
-                      <p class="icononos-s">
-                        {{ event.camp_start.substring(0, 10) }} -
-                        {{ event.camp_end.substring(0, 10) }}
-                        <i class="fas fa-calendar-alt"></i>
-                      </p>
+                  </div>
+
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control"
+                      aria-label="Username"
+                      [(ngModel)]="comment"
+                    />
+                    <div class="d-flex flex-row-reverse">
+                      <button class="btn btn-primary mt-3" (click)="comentario()">
+                        {{ textos['guardarComentario'] }}
+                      </button>
                     </div>
-                  </ng-template>
-                </p-timeline>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+
+          <!-- Otra vista de chat para roles >1 -->
+          <div class="col-lg-12">
+            <div class="top-p" *ngIf="info.infToken.role_id > 1"></div>
+            <div class="card p-4" *ngIf="info.infToken.role_id > 1">
+              <div class="chat">
+                <div class="row">
+                  <h5 class="col-9">{{ textos['algoSaberseCamper'] }}</h5>
+                  <p-badge [value]="comenarios?.length" class="col-1"></p-badge>
+                  <div
+                    class="col-1"
+                    style="font-size: 25px; margin-top: -5px;"
+                    (click)="isCollapsed = !isCollapsed"
+                  >
+                    +
+                  </div>
+                </div>
+                <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+                  <hr />
+
+                  <div class="chat-espacio">
+                    <div>
+                      <div
+                        class="row mt-2"
+                        *ngFor="let item of comenarios"
+                        style="
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                        "
+                      >
+                        <div class="col-3">
+                          <p class="Nombre-envidao">
+                            {{ item.author }}({{ item.author_role }})
+                          </p>
+                          <p-avatar
+                            image="assets/images/camp/chat-padres.png"
+                            size="large"
+                          ></p-avatar>
+                        </div>
+                        <div class="col-8">
+                          <p class="fecha-chat" style="text-align: right;">
+                            {{ item.created_at?.substring(0, 9) }}
+                          </p>
+                          <div class="col-12 mensaje">
+                            <p class="p-2">{{ item.comment }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <label>{{ textos['mostrarComentarioA'] }}</label>
+                    <select [(ngModel)]="typecoment" class="form-select">
+                      <option value="6">Admin</option>
+                      <option value="5">Coordinador</option>
+                      <option value="2">Escuela</option>
+                      <option value="1">Papás</option>
+                    </select>
+                  </div>
+
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control"
+                      aria-label="Username"
+                      [(ngModel)]="comment"
+                    />
+                    <div class="d-flex flex-row-reverse">
+                      <button class="btn btn-primary mt-3" (click)="comentario()">
+                        {{ textos['guardarComentario'] }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Historial de camps -->
+          <div class="col-lg-12">
+            <div class="card">
+              <p-timeline
+                [value]="historialCaps"
+                 styleClass="customized-timeline"
+                class="margin-timile"
+              >
+                <ng-template pTemplate="marker" let-event>
+                  <div
+                    class="timilin-logo"
+                    [ngClass]="{
+                      cancell: event.type == 'cancelled',
+                      suscribe: event.type == 'subscribe',
+                      passed: event.type == 'passed'
+                    }"
+                  >
+                    <i
+                      *ngIf="event.type == 'subscribe'"
+                      class="fas fa-check"
+                    ></i>
+                    <i
+                      *ngIf="event.type == 'cancelled'"
+                      class="far fa-times-circle"
+                    ></i>
+                    <i
+                      *ngIf="event.type == 'passed'"
+                      class="fas fa-check"
+                    ></i>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="content" let-event>
+                  <div
+                    class="contendor-timiline mt-3 p-1"
+                    [ngClass]="{
+                      passed: event.type == 'passed',
+                      cancell: event.type == 'cancelled',
+                      suscribe: event.type == 'subscribe'
+                    }"
+                  >
+                    <h3 style="cursor: pointer;">
+                      {{ event.camp_name }}
+                      <i class="fa fa-info-circle" (click)="link(event.camp_id)"></i>
+                    </h3>
+                    <p
+                      (click)="link(event.camp_id)"
+                      style="cursor: pointer;"
+                      *ngIf="event.show_payment_parent"
+                      class="badge bg-warning ms-1"
+                    >
+                      {{ textos['pendienteDePago'] }}
+                      {{ event.camper_payment_balance }} MXN
+                    </p>
+                  </div>
+                  <div class="contenedor-p">
+                    <p class="icononos-s">
+                      {{ event.camp_start.substring(0, 10) }} -
+                      {{ event.camp_end.substring(0, 10) }}
+                      <i class="fas fa-calendar-alt"></i>
+                    </p>
+                  </div>
+                </ng-template>
+              </p-timeline>
+            </div>
+          </div>
         </div>
+ 
       </div>
     </main>
   </div>

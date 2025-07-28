@@ -59,10 +59,12 @@ export class PerfilComponent implements OnInit {
       texto1:"Access data of the Father, mother or guardian",
       texto2:"Name(s)*",
       texto3:"Last name*",
-      texto4:"Second Last Name",
-      texto5:"Mobile Phone*",
-      texto6:"Home phone*",
-      texto7:"Office phone*",
+     
+
+      texto5: "Primary Phone (1st contact method)*",
+      texto6: "Secondary Phone (2nd contact method)*",
+      texto7: "Tertiary Phone (3rd contact method)",
+  
       texto8:" Cotitular (Mother / Father / 2nd Guardian)",
       texto9:"Will not be the account principal, but is as important. We'll get in touch with this person in case we can't reach the account principal..",
       texto10:"Email*",
@@ -98,20 +100,20 @@ export class PerfilComponent implements OnInit {
       contact_name:         ["",[Validators.required,Validators.minLength(2)]],
     
     contact_lastname_mother:[""],
-    contact_home_phone:     ["",[Validators.required,
-                            Validators.pattern('^[+]?\\d*$')]], 
+    
     contact_email:          ["",[Validators.required,
                                    Validators.email]],
     confirmEmail: ['', [Validators.required,Validators.email]],
 
     tutor_name :            ["",[Validators.required,Validators.minLength(2)]],
     tutor_lastname_mother:  [""], 
-    tutor_work_phone:       ["",[Validators.pattern('^[+]?\\d*$'),]],
+    tutor_work_phone:       ["" ],
     contact_lastname_father:  ["",[Validators.required,Validators.minLength(2)]], 
     contact_cellphone:      ["",[Validators.required,
                             Validators.pattern('^[+]?\\d*$')]],
-    contact_work_phone:     ["",[
-                            Validators.pattern('^[+]?\\d*$')]],
+    contact_home_phone:     ["",[Validators.required,
+                              Validators.pattern('^[+]?\\d*$')]], 
+    contact_work_phone:     [""],
     terms:                   ['',[Validators.required,Validators.requiredTrue]]
 
    

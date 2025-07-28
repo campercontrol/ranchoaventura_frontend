@@ -14,19 +14,19 @@ import { ParentService } from 'src/services/parent.service';
   styleUrls: ['./new-parent.component.scss']
 })
 export class NewParentComponent implements OnInit {
-  public formParent : FormGroup;
-  estadoContrasena : boolean = false;
-  estadoEmail : boolean = false;
-  spinner:boolean = false;
-  @ViewChild('centerDataModal') content:ElementRef;
-  confiCon:boolean = false;
-  confiEmai:boolean = false;
-  passwordType= "password";
+  public formParent: FormGroup;
+  estadoContrasena: boolean = false;
+  estadoEmail: boolean = false;
+  spinner: boolean = false;
+  @ViewChild('centerDataModal') content: ElementRef;
+  confiCon: boolean = false;
+  confiEmai: boolean = false;
+  passwordType = "password";
 
-   regex:  RegExp = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+~`|}{[\]:;?<,>.\/-]).{8,}$/;
-   correoVal: RegExp =/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  contrasena:string="";
-  paisesLatinoamerica:any = [
+  regex: RegExp = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+~`|}{[\]:;?<,>.\/-]).{8,}$/;
+  correoVal: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  contrasena: string = "";
+  paisesLatinoamerica: any = [
     { id: 1, nombre: 'Argentina', abreviacion: 'ARG', lada: '+54' },
     { id: 2, nombre: 'Bolivia', abreviacion: 'BOL', lada: '+591' },
     { id: 3, nombre: 'Brasil', abreviacion: 'BRA', lada: '+55' },
@@ -48,9 +48,9 @@ export class NewParentComponent implements OnInit {
     { id: 19, nombre: 'Venezuela', abreviacion: 'VEN', lada: '+58' },
     { id: 20, nombre: 'Estados Unidos', abreviacion: 'USA', lada: '+1' }
   ];
-  confirmarContrasena:string = "";
-  confirmEmailAlert= false;
-  confirmEmailAlertInstruc= false;
+  confirmarContrasena: string = "";
+  confirmEmailAlert = false;
+  confirmEmailAlertInstruc = false;
   confirmPaswordAlert = false;
   alertcorreo = false;
 
@@ -59,163 +59,178 @@ export class NewParentComponent implements OnInit {
 
   @ViewChild("emailConfir") emailConfir: ElementRef;
   @ViewChild("confirmPassword") confirmPassword: ElementRef;
-  @ViewChild("tutor_name") tutor_name: ElementRef; 
-  @ViewChild("tutor_lastname_father") tutor_lastname_father: ElementRef; 
-  @ViewChild("tutor_lastname_mother") tutor_lastname_mother: ElementRef; 
-  @ViewChild("tutor_cellphone") tutor_cellphone: ElementRef; 
-  @ViewChild("tutor_home_phone") tutor_home_phone: ElementRef; 
-  @ViewChild("tutor_work_phone") tutor_work_phone: ElementRef; 
-  @ViewChild("contact_name") contact_name: ElementRef; 
-  @ViewChild("contact_lastname_father") contact_lastname_father: ElementRef; 
-  @ViewChild("contact_lastname_mother") contact_lastname_mother: ElementRef; 
-  @ViewChild("contact_cellphone") contact_cellphone: ElementRef; 
-  @ViewChild("contact_work_phone") contact_work_phone: ElementRef; 
-  @ViewChild("contact_home_phone") contact_home_phone: ElementRef; 
-  @ViewChild("contact_email") contact_email: ElementRef; 
-  idoma:string='eng'
-
-  textos= {
-    "esp":{
-      titulo:" Datos de acceso del Padre, Madre o Tutor titular de la cuenta",
-      texto1:"Ingresa la información del padre, madre o tutor titular de la cuenta.",
-      texto2:"Nombre(s)*",
-      texto3:"Apellido paterno*",
-      texto4:"Apellido materno",
-      texto5:"Teléfono primario (1er medio de contacto)*",
-      texto6:"Teléfono secundario (2do medio de contacto)*",
-      texto7:"Teléfono terciario (3er medio de contacto)",
-      texto8:"Segundo titular de la cuenta (PADRE, MADRE o SEGUNDO TUTOR)",
-      texto9:"No es el titular de la cuenta, pero es igual de importante ya que es a quién llamaremos en caso de no poder contactar al primer titular, también recibe los correos referentes a los campamentos.",
-      texto10:"Email*",
-      texto11:"Confirmar correo electrónico*",
-      texto12:"Acepto los términos y condiciones",
-      texto13:"términos y condiciones  ",
-      texto14:"Se enviará un correo electrónico de confirmación a tu correo. Te pedimos que revises tu bandeja de spam",
-      textto15:"Correo no deseado",
-      texto16:"para asegurar que lo recibiste bien. Si no lo recibes, ponte en contacto con nosotros.",
-      texto17:"Guardar",
-      texto18:"Cancelar",
-
-
-    
+  @ViewChild("tutor_name") tutor_name: ElementRef;
+  @ViewChild("tutor_lastname_father") tutor_lastname_father: ElementRef;
+  @ViewChild("tutor_lastname_mother") tutor_lastname_mother: ElementRef;
+  @ViewChild("tutor_cellphone") tutor_cellphone: ElementRef;
+  @ViewChild("tutor_home_phone") tutor_home_phone: ElementRef;
+  @ViewChild("tutor_work_phone") tutor_work_phone: ElementRef;
+  @ViewChild("contact_name") contact_name: ElementRef;
+  @ViewChild("contact_lastname_father") contact_lastname_father: ElementRef;
+  @ViewChild("contact_lastname_mother") contact_lastname_mother: ElementRef;
+  @ViewChild("contact_cellphone") contact_cellphone: ElementRef;
+  @ViewChild("contact_work_phone") contact_work_phone: ElementRef;
+  @ViewChild("contact_home_phone") contact_home_phone: ElementRef;
+  @ViewChild("contact_email") contact_email: ElementRef;
+  idoma: string = 'eng'
+  textos = {
+    "esp": {
+      titulo: "Datos de acceso del Padre, Madre o Tutor titular de la cuenta",
+      texto1: "Ingresa la información del padre, madre o tutor titular de la cuenta.",
+      texto2: "Correo electrónico*",
+      texto3: "Confirmar correo electrónico*",
+      texto4: "Contraseña*",
+      texto5: "Confirmar contraseña*",
+      texto6: "Este será el nombre de usuario para tu cuenta.",
+      texto7: "Introduce la contraseña",
+      texto8: "Esta será utilizada para ingresar a Kin Camp. Mínimo 6 caracteres, incluyendo una mayúscula, una minúscula y un carácter especial.",
+      texto9: "Introduce la contraseña",
+      texto10: "Nombre(s)*",
+      texto11: "Apellido paterno*",
+      texto12: "Apellido materno",
+      texto13: "Teléfono primario (1er medio de contacto)*",
+      texto14: "Teléfono secundario (2do medio de contacto)*",
+      texto15: "Teléfono terciario (3er medio de contacto)",
+      texto16: "Segundo titular de la cuenta (PADRE, MADRE o SEGUNDO TUTOR)",
+      texto17: "No es el titular de la cuenta, pero es igual de importante ya que es a quién llamaremos en caso de no poder contactar al primer titular. También recibe los correos referentes a los campamentos.",
+      texto18: "Acepto los términos y condiciones",
+      texto19: "Leer los términos y condiciones",
+      texto20: "Se enviará un correo electrónico de confirmación a ambas direcciones. Revisa tu bandeja de correo no deseado para asegurar que lo recibiste bien. Si no lo recibes, ponte en contacto con nosotros.",
+      texto21: "Correo no deseado",
+      texto22: "Guardar",
+      texto23: "Cancelar",
+      texto24: "Las contraseñas no cumplen con las características requeridas.",
+      texto25: "Las contraseñas no coinciden.",
+      texto26: "El correo no coincide.",
+      texto27: "Asegúrate de que sea una dirección de correo válida, ya que te enviaremos mensajes referentes a los campamentos a los que asistirán tus hijos.",
+      texto28: "Al finalizar el registro se enviará un mensaje de confirmación a esta cuenta de correo. Te pedimos que revises tu bandeja de Correo no deseado para asegurar que lo recibiste bien. Si no lo recibes, ponte en contacto con nosotros."
     },
-    "eng":{
-      titulo:"Account's principal name (Mother / Father / 2nd Guardian)",
-      texto1:"Access data of the Father, mother or guardian",
-      texto2:"Name(s)*",
-      texto3:"Last name*",
-      texto4:"Second Last Name",
-      texto5:"Mobile Phone*",
-      texto6:"Home phone*",
-      texto7:"Office phone",
-      texto8:" Cotitular (Mother / Father / 2nd Guardian)",
-      texto9:"Will not be the account principal, but is as important. We'll get in touch with this person in case we can't reach the account principal..",
-      texto10:"Email*",
-      texto11:"Reenter email*",
-      texto12:"I accept the terms and conditions.",
-      texto13:"Read the terms and conditions.",
-      texto14:"A confirmation email will be sent to your email, please check your",
-      texto15:"Spam",
-      texto16:"to make sure you get it . If you do not receive it, please contact us.",
-      text017:"Save",
-      text018:"Cancel",
+    "eng": {
+      titulo: "Access details of the Parent or Main Guardian of the account",
+      texto1: "Enter the information of the parent or guardian in charge of the account.",
+      texto2: "Email address*",
+      texto3: "Confirm email address*",
+      texto4: "Password*",
+      texto5: "Confirm password*",
+      texto6: "This will be the username for your account.",
+      texto7: "Enter password",
+      texto8: "This will be used to log into Kin Camp. Minimum of 6 characters, including 1 uppercase letter, 1 lowercase letter, and 1 special character.",
+      texto9: "Enter password",
+      texto10: "First Name(s)*",
+      texto11: "Paternal Last Name*",
+      texto12: "Maternal Last Name",
+      texto13: "Primary Phone (1st contact method)*",
+      texto14: "Secondary Phone (2nd contact method)*",
+      texto15: "Tertiary Phone (3rd contact method)",
+      texto16: "Second account holder (Father, Mother, or Second Guardian)",
+      texto17: "This person is not the primary account holder but is equally important, as we will contact them if we cannot reach the primary holder. They also receive emails related to the camps.",
+      texto18: "I accept the terms and conditions.",
+      texto19: "Read the terms and conditions.",
+      texto20: "A confirmation email will be sent to both email addresses. Please check your spam folder to ensure you received it. If you do not receive it, please contact us.",
+      texto21: "Spam",
+      texto22: "Save",
+      texto23: "Cancel",
+      texto24: "Passwords do not meet the required format.",
+      texto25: "Passwords do not match.",
+      texto26: "Emails do not match.",
+      texto27: "Make sure it is a valid email address, as we will send you messages related to the camps your children will attend.",
+      texto28: "At the end of the registration, a confirmation message will be sent to this email. Please check your spam folder to ensure you received it. If you do not receive it, please contact us."
+    }
+  }
+
+
+  cabezeras = {
+    "esp": {
+      titulo: "Datos de acceso del Padre, Madre o Tutor titular de la cuenta",
+      texto1: "Información de acceso con la cual entrarás a Kin Camp",
+      texto2: "Correo electrónico*",
+      texto3: "Confirma correo electrónico*",
+      texto4: "Contraseña*",
+      texto5: "Confirma contraseña* ",
+      texto6: "Será el usuario de acceso a la cuenta.",
+      texto7: "El correo no coincide",
+      texto8: "Se usará para ingresar a Kin Camp Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra minuscula y un caracter especial ",
+
+
+    },
+    "eng": {
+      titulo: " Access data of the Father, mother or guardian",
+      texto1: "Access information with which you access the Kin Camp Make sure it is a valid email address, as we will send you referrals from the camps your child will attend.",
+      texto2: "Email*",
+      texto3: "Reenter email*",
+      texto4: "Password*",
+      texto5: "Confirm password* ",
+      texto6: "This will be the access user to the account.",
+      texto7: "The email does not match",
+      texto8: "It will be used to enter Kin Camp Minimum of 6 characters, 1 uppercase letter, 1 lowercase letter and a special character ",
     }
 
   }
 
-  cabezeras= {
-    "esp":{
-      titulo:"Datos de acceso del Padre, Madre o Tutor titular de la cuenta",
-      texto1:"Información de acceso con la cual entrarás a Kin camp",
-      texto2:"Correo electrónico*",
-      texto3:"Confirma correo electrónico*",
-      texto4:"Contraseña*",
-      texto5:"Confirma contraseña* ",
-      texto6:"Será el usuario de acceso a la cuenta.",
-      texto7:"El correo no coincide",
-      texto8:"Se usará para ingresar a Kin camp Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra minuscula y un caracter especial ",
-     
-    
-    },
-    "eng":{
-      titulo:" Access data of the Father, mother or guardian",
-      texto1:"Access information with which you access the Kin camp Make sure it is a valid email address, as we will send you referrals from the camps your child will attend.",
-      texto2:"Email*",
-      texto3:"Reenter email*",
-      texto4:"Password*",
-      texto5:"Confirm password* ",
-      texto6:"This will be the access user to the account.",
-      texto7:"The email does not match",
-      texto8:"It will be used to enter Kin camp Minimum of 6 characters, 1 uppercase letter, 1 lowercase letter and a special character ",  
-    }
-
-  }
-
-  correo:string = "";
+  correo: string = "";
   confirmarCorreo = "";
-  estadoCorreo:boolean= false;
+  estadoCorreo: boolean = false;
   breadCrumbItems: Array<{}>;
   alertConfirCorre
-  paswordAlert= false; 
+  paswordAlert = false;
 
-  constructor(private formBuild:FormBuilder,private parent: ParentService,private router :Router,private modalService: NgbModal,private configService: ConfigService, private eventService: EventService,private render :Renderer2,private  lang :LangService,
-    private info :AuthenticationService) {
+  constructor(private formBuild: FormBuilder, private parent: ParentService, private router: Router, private modalService: NgbModal, private configService: ConfigService, private eventService: EventService, private render: Renderer2, private lang: LangService,
+    private info: AuthenticationService) {
 
-     }
-  
+  }
+
   ngOnInit(): void {
-    this.lang.getLang().subscribe((res:any)=>{
-      this.idoma=res
+    this.lang.getLang().subscribe((res: any) => {
+      this.idoma = res
       console.log
-      (res)
-      
+        (res)
+
     });
     this.breadCrumbItems = [{ label: 'UI Elements' }, { label: 'Modals', active: true }];
 
     this.formParent = this.formBuild.group({
-      tutor_lastname_father:["",[Validators.required,,Validators.minLength(1)]],
-      tutor_cellphone:      ["",[Validators.required,
-                             Validators.pattern('^[+]?\\d*$'),
-                             Validators.minLength(8), ]],
-      tutor_home_phone:     ["",[Validators.required,
-                              Validators.pattern('^[+]?\\d*$'),
-                              Validators.minLength(8), ]],
-      contact_name:         ["",[Validators.required,Validators.minLength(1)]],
-      contact_lastname_mother:[""],
+      tutor_lastname_father: ["", [Validators.required, , Validators.minLength(1)]],
+      tutor_cellphone: ["", [Validators.required,
+      Validators.pattern('^[+]?\\d*$'),
+      Validators.minLength(8),]],
+      tutor_home_phone: ["", [Validators.required,
+      Validators.pattern('^[+]?\\d*$'),
+      Validators.minLength(8),]],
+      contact_name: ["", [Validators.required, Validators.minLength(1)]],
+      contact_lastname_mother: [""],
 
-    
-      country:['+52'],
-    contact_home_phone:     ["",[Validators.required,
-                            Validators.pattern('^[+]?\\d*$'),
-                            Validators.minLength(8), ]], 
-    contact_email:          ["",[Validators.required,
-                                   Validators.email]],
-    tutor_name :            ["",[Validators.required,Validators.minLength(1)]],
-    tutor_lastname_mother:  [""], 
-    tutor_work_phone:       [""],
-    contact_lastname_father:  ["",[Validators.required]], 
-    contact_work_phone:      ["",[Validators.required,
-                            Validators.pattern('^[+]?\\d*$'),
-                            Validators.minLength(8), ]],
-     contact_cellphone:     [""],
-    terms:                   ['',[Validators.required,Validators.requiredTrue]],
-   
-    password: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/),
+
+
+      contact_email: ["",],
+      tutor_name: ["", [Validators.required, Validators.minLength(1)]],
+      tutor_lastname_mother: [""],
+      tutor_work_phone: [""],
+      contact_lastname_father: ["", [Validators.required]],
+      contact_work_phone: [""],
+      contact_home_phone: ["", [Validators.required,
+      Validators.pattern('^[+]?\\d*$'),
+      Validators.minLength(8)]],
+      contact_cellphone: ["", [Validators.required,
+      Validators.pattern('^[+]?\\d*$'),
+      Validators.minLength(8)]],
+      terms: ['', [Validators.required, Validators.requiredTrue]],
+
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/),
+        ],
       ],
-    ],
-    
-    confirmPassword: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    confirmEmail: ['', [Validators.required,Validators.email]],
-    
-  },{
-    validators: this.matchingFieldsValidator('password', 'confirmPassword', 'email', 'confirmEmail')
-  })
+
+      confirmPassword: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      confirmEmail: ['', [Validators.required, Validators.email]],
+
+    }, {
+      validators: this.matchingFieldsValidator('password', 'confirmPassword', 'email', 'confirmEmail')
+    })
   }
 
 
@@ -225,36 +240,36 @@ export class NewParentComponent implements OnInit {
       const confirmPassword = formGroup.controls[confirmPasswordField];
       const email = formGroup.controls[emailField];
       const confirmEmail = formGroup.controls[confirmEmailField];
-  
+
       // Verificar si la contraseña es válida
       if (password.value !== confirmPassword.value) {
         confirmPassword.setErrors({ passwordMismatch: true });
       } else {
         confirmPassword.setErrors(null);
       }
-  
+
       // Verificar si el email es válido
       if (email.value !== confirmEmail.value) {
         confirmEmail.setErrors({ emailMismatch: true });
       } else {
         confirmEmail.setErrors(null);
       }
-  
-    
+
+
     };
   }
-  
 
-  validarContrasena(){
-    this.estadoContrasena = this.regex.test(this.contrasena)  
+
+  validarContrasena() {
+    this.estadoContrasena = this.regex.test(this.contrasena)
     console.log(this.estadoContrasena)
   }
 
-  equalsCon(){
-    if( this.contrasena == this.confirmarContrasena){
+  equalsCon() {
+    if (this.contrasena == this.confirmarContrasena) {
       this.confiCon = true;
       console.log(this.confiCon)
-    }else{
+    } else {
       this.confiCon = false;
     }
   }
@@ -262,155 +277,156 @@ export class NewParentComponent implements OnInit {
     this.modalService.open(this.content, { centered: true });
   }
 
-  validatorsEmail(){
+  validatorsEmail() {
     this.estadoEmail = this.correoVal.test(this.correo);
     console.log(this.estadoEmail)
 
   }
 
   getpassword() {
-    if( this.formParent.get('password').valid){
-      this.render.removeClass(this.password.nativeElement,"is-invalid");
-        this.render.addClass(this.password.nativeElement,"is-valid");
-        this.paswordAlert = false;
+    if (this.formParent.get('password').valid) {
+      this.render.removeClass(this.password.nativeElement, "is-invalid");
+      this.render.addClass(this.password.nativeElement, "is-valid");
+      this.paswordAlert = false;
 
-     }else{
-      this.render.removeClass(this.password.nativeElement,"is-valid");
-      this.render.addClass(this.password.nativeElement,"is-invalid");
+    } else {
+      this.render.removeClass(this.password.nativeElement, "is-valid");
+      this.render.addClass(this.password.nativeElement, "is-invalid");
       this.password.nativeElement.focus()
       this.paswordAlert = true;
 
-     }
+    }
   }
   getconfirmPassword() {
-    if( this.formParent.get('confirmPassword').valid){
-      this.render.removeClass(this.confirmPassword.nativeElement,"is-invalid");
-        this.render.addClass(this.confirmPassword.nativeElement,"is-valid");
-        this.confirmPaswordAlert = false;        
-     }else{
-      this.render.removeClass(this.confirmPassword.nativeElement,"is-valid");
-      this.render.addClass(this.confirmPassword.nativeElement,"is-invalid");
+    if (this.formParent.get('confirmPassword').valid) {
+      this.render.removeClass(this.confirmPassword.nativeElement, "is-invalid");
+      this.render.addClass(this.confirmPassword.nativeElement, "is-valid");
+      this.confirmPaswordAlert = false;
+    } else {
+      this.render.removeClass(this.confirmPassword.nativeElement, "is-valid");
+      this.render.addClass(this.confirmPassword.nativeElement, "is-invalid");
       this.confirmPaswordAlert = true;
       this.confirmPassword.nativeElement.focus()
 
-     }
+    }
   }
   getemail() {
     //console.log(this.formParent.get('email').valid);
     this.alertcorreo = true;
-   if(this.formParent.get('email').valid){
-    this.render.removeClass(this.email.nativeElement,"is-invalid");
-      this.render.addClass(this.email.nativeElement,"is-valid");
+    if (this.formParent.get('email').valid) {
+      this.render.removeClass(this.email.nativeElement, "is-invalid");
+      this.render.addClass(this.email.nativeElement, "is-valid");
       console.log('respyesta');
-      
-   }else{
-    this.render.removeClass(this.email.nativeElement,"is-valid");
-    this.render.addClass(this.email.nativeElement,"is-invalid");
-    this.email.nativeElement.focus()
 
-   }
-   this.getconfirmEmailChanceEmail();
+    } else {
+      this.render.removeClass(this.email.nativeElement, "is-valid");
+      this.render.addClass(this.email.nativeElement, "is-invalid");
+      this.email.nativeElement.focus()
+
+    }
+    this.getconfirmEmailChanceEmail();
   }
 
-  getconfirmEmailChanceEmail(){
-    if( this.formParent.get('confirmEmail').valid){
-      this.render.removeClass(this.emailConfir.nativeElement,"is-invalid");
-        this.render.addClass(this.emailConfir.nativeElement,"is-valid");
-        this.confirmEmailAlert = false;        
-     }else{
-      this.render.removeClass(this.emailConfir.nativeElement,"is-valid");
-      this.render.addClass(this.emailConfir.nativeElement,"is-invalid");
+  getconfirmEmailChanceEmail() {
+    if (this.formParent.get('confirmEmail').valid) {
+      this.render.removeClass(this.emailConfir.nativeElement, "is-invalid");
+      this.render.addClass(this.emailConfir.nativeElement, "is-valid");
+      this.confirmEmailAlert = false;
+    } else {
+      this.render.removeClass(this.emailConfir.nativeElement, "is-valid");
+      this.render.addClass(this.emailConfir.nativeElement, "is-invalid");
       this.confirmEmailAlert = true;
 
-     }
+    }
 
   }
   getconfirmEmail() {
-    if( this.formParent.get('confirmEmail').valid){
-      this.render.removeClass(this.emailConfir.nativeElement,"is-invalid");
-        this.render.addClass(this.emailConfir.nativeElement,"is-valid");
-        this.confirmEmailAlert = false;        
-     }else{
-      this.render.removeClass(this.emailConfir.nativeElement,"is-valid");
-      this.render.addClass(this.emailConfir.nativeElement,"is-invalid");
+    if (this.formParent.get('confirmEmail').valid) {
+      this.render.removeClass(this.emailConfir.nativeElement, "is-invalid");
+      this.render.addClass(this.emailConfir.nativeElement, "is-valid");
+      this.confirmEmailAlert = false;
+    } else {
+      this.render.removeClass(this.emailConfir.nativeElement, "is-valid");
+      this.render.addClass(this.emailConfir.nativeElement, "is-invalid");
       this.confirmEmailAlert = true;
       this.emailConfir.nativeElement.focus()
 
-     }
-    
+    }
+
   }
   getTutor_name() {
-    if( this.formParent.get('tutor_name').valid){
-      this.render.removeClass(this.tutor_name.nativeElement,"is-invalid");
-        this.render.addClass(this.tutor_name.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.tutor_name.nativeElement,"is-valid");
-      this.render.addClass(this.tutor_name.nativeElement,"is-invalid");
+    if (this.formParent.get('tutor_name').valid) {
+      this.render.removeClass(this.tutor_name.nativeElement, "is-invalid");
+      this.render.addClass(this.tutor_name.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.tutor_name.nativeElement, "is-valid");
+      this.render.addClass(this.tutor_name.nativeElement, "is-invalid");
       this.tutor_name.nativeElement.focus()
 
-     }
-    
+    }
+
   }
-  
-  equalsEmail(){
-    if( this.correo == this.confirmarCorreo){
+
+  equalsEmail() {
+    if (this.correo == this.confirmarCorreo) {
       this.estadoCorreo = true;
       console.log(this.estadoCorreo)
 
-    }else{
+    } else {
       this.estadoCorreo = false;
-    }  }
+    }
+  }
 
-  prueba(){
-    this.spinner= true;
-    if(this.formParent.valid){
+  prueba() {
+    this.spinner = true;
+    if (this.formParent.valid) {
 
-      let a = { 
-        user:{
-          email:this.formParent.get('email').value,
+      let a = {
+        user: {
+          email: this.formParent.get('email').value,
           passw: this.formParent.get('password').value,
           role_id: 1,
           "is_coordinator": true,
           "is_admin": true,
           "is_employee": true,
           "is_superuser": true
-      
+
         },
-        parent:this.formParent.value,
-    }
-    
-    this.spinner = true;
-    this.parent.setParent(a).subscribe(
-      (res: any) => {
-        if (res?.detail?.status === 1) {
-          // Si el status es 1, realiza el login
-          this.info.login2(
-            this.formParent.get('email').value,
-            this.formParent.get('password').value
-          ).then((loginRes: any) => {
-            console.log('Login exitoso:', loginRes);
-            this.spinner = false;
-          }).catch((error) => {
-            console.log('Error al realizar login:', error);
-            this.spinner = false;
-            alert('Hubo un problema al iniciar sesión. Intente nuevamente.');
-          });
-        } else {
-          // Si el status no es 1, muestra un alert con el mensaje del detalle
-          console.log('Error al crear cuenta:', res.detail.msg);
-          this.spinner = false;
-          alert(`No se pudo realizar su registro: ${res.detail.msg}`);
-        }
-      },
-      (error) => {
-        console.log('Error de la API:', error);
-        this.spinner = false;
-        alert('Ocurrió un error al procesar su solicitud. Intente nuevamente.');
+        parent: this.formParent.value,
       }
-    );
-    
-    }else{
-      this.spinner= false;
+
+      this.spinner = true;
+      this.parent.setParent(a).subscribe(
+        (res: any) => {
+          if (res?.detail?.status === 1) {
+            // Si el status es 1, realiza el login
+            this.info.login2(
+              this.formParent.get('email').value,
+              this.formParent.get('password').value
+            ).then((loginRes: any) => {
+              console.log('Login exitoso:', loginRes);
+              this.spinner = false;
+            }).catch((error) => {
+              console.log('Error al realizar login:', error);
+              this.spinner = false;
+              alert('Hubo un problema al iniciar sesión. Intente nuevamente.');
+            });
+          } else {
+            // Si el status no es 1, muestra un alert con el mensaje del detalle
+            console.log('Error al crear cuenta:', res.detail.msg);
+            this.spinner = false;
+            alert(`No se pudo realizar su registro: ${res.detail.msg}`);
+          }
+        },
+        (error) => {
+          console.log('Error de la API:', error);
+          this.spinner = false;
+          alert('Ocurrió un error al procesar su solicitud. Intente nuevamente.');
+        }
+      );
+
+    } else {
+      this.spinner = false;
 
       this.getcontact_email();
       this.getcontact_home_phone();
@@ -424,7 +440,7 @@ export class NewParentComponent implements OnInit {
       this.gettutor_cellphone();
       this.gettutor_lastname_mother();
       this.getTutor_lastname_father();
-      this. getTutor_name();
+      this.getTutor_name();
       this.getconfirmPassword();
       this.getpassword();
       this.getconfirmEmail();
@@ -432,156 +448,156 @@ export class NewParentComponent implements OnInit {
       this.terms();
 
     }
-    
-   
+
+
   }
 
-  terms(){
-    if(!this.formParent.get('terms').valid){
+  terms() {
+    if (!this.formParent.get('terms').valid) {
       alert('Aún no aceptas los términos y condiciones');
 
-     }
+    }
   }
-  getTutor_lastname_father(){
-    if( this.formParent.get('tutor_lastname_father').valid){
-      this.render.removeClass(this.tutor_lastname_father.nativeElement,"is-invalid");
-        this.render.addClass(this.tutor_lastname_father.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.tutor_lastname_father.nativeElement,"is-valid");
-      this.render.addClass(this.tutor_lastname_father.nativeElement,"is-invalid");
+  getTutor_lastname_father() {
+    if (this.formParent.get('tutor_lastname_father').valid) {
+      this.render.removeClass(this.tutor_lastname_father.nativeElement, "is-invalid");
+      this.render.addClass(this.tutor_lastname_father.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.tutor_lastname_father.nativeElement, "is-valid");
+      this.render.addClass(this.tutor_lastname_father.nativeElement, "is-invalid");
       this.tutor_lastname_father.nativeElement.focus()
 
-     }
+    }
   }
-  gettutor_lastname_mother(){
-    if( this.formParent.get('tutor_lastname_mother').valid){
-      this.render.removeClass(this.tutor_lastname_mother.nativeElement,"is-invalid");
-        this.render.addClass(this.tutor_lastname_mother.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.tutor_lastname_mother.nativeElement,"is-valid");
-      this.render.addClass(this.tutor_lastname_mother.nativeElement,"is-invalid");
+  gettutor_lastname_mother() {
+    if (this.formParent.get('tutor_lastname_mother').valid) {
+      this.render.removeClass(this.tutor_lastname_mother.nativeElement, "is-invalid");
+      this.render.addClass(this.tutor_lastname_mother.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.tutor_lastname_mother.nativeElement, "is-valid");
+      this.render.addClass(this.tutor_lastname_mother.nativeElement, "is-invalid");
       this.tutor_lastname_mother.nativeElement.focus()
 
-     }
+    }
   }
-  gettutor_cellphone(){
-    if( this.formParent.get('tutor_cellphone').valid){
-        this.render.removeClass(this.tutor_cellphone.nativeElement,"is-invalid");
-        this.render.addClass(this.tutor_cellphone.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.tutor_cellphone.nativeElement,"is-valid");
-      this.render.addClass(this.tutor_cellphone.nativeElement,"is-invalid");
+  gettutor_cellphone() {
+    if (this.formParent.get('tutor_cellphone').valid) {
+      this.render.removeClass(this.tutor_cellphone.nativeElement, "is-invalid");
+      this.render.addClass(this.tutor_cellphone.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.tutor_cellphone.nativeElement, "is-valid");
+      this.render.addClass(this.tutor_cellphone.nativeElement, "is-invalid");
       this.tutor_cellphone.nativeElement.focus()
 
-     }
+    }
   }
-  gettutor_home_phone(){
-    if( this.formParent.get('tutor_home_phone').valid){
-      this.render.removeClass(this.tutor_home_phone.nativeElement,"is-invalid");
-        this.render.addClass(this.tutor_home_phone.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.tutor_home_phone.nativeElement,"is-valid");
-      this.render.addClass(this.tutor_home_phone.nativeElement,"is-invalid");
+  gettutor_home_phone() {
+    if (this.formParent.get('tutor_home_phone').valid) {
+      this.render.removeClass(this.tutor_home_phone.nativeElement, "is-invalid");
+      this.render.addClass(this.tutor_home_phone.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.tutor_home_phone.nativeElement, "is-valid");
+      this.render.addClass(this.tutor_home_phone.nativeElement, "is-invalid");
       this.tutor_home_phone.nativeElement.focus()
 
-     }
+    }
   }
-  gettutor_work_phone(){
-    if( this.formParent.get('tutor_work_phone').valid){
-      this.render.removeClass(this.tutor_work_phone.nativeElement,"is-invalid");
-        this.render.addClass(this.tutor_work_phone.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.tutor_work_phone.nativeElement,"is-valid");
-      this.render.addClass(this.tutor_work_phone.nativeElement,"is-invalid");
+  gettutor_work_phone() {
+    if (this.formParent.get('tutor_work_phone').valid) {
+      this.render.removeClass(this.tutor_work_phone.nativeElement, "is-invalid");
+      this.render.addClass(this.tutor_work_phone.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.tutor_work_phone.nativeElement, "is-valid");
+      this.render.addClass(this.tutor_work_phone.nativeElement, "is-invalid");
       this.tutor_work_phone.nativeElement.focus()
 
-     }
+    }
   }
 
-  getcontact_name(){
-    if( this.formParent.get('contact_name').valid){
-      this.render.removeClass(this.contact_name.nativeElement,"is-invalid");
-        this.render.addClass(this.contact_name.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.contact_name.nativeElement,"is-valid");
-      this.render.addClass(this.contact_name.nativeElement,"is-invalid");
+  getcontact_name() {
+    if (this.formParent.get('contact_name').valid) {
+      this.render.removeClass(this.contact_name.nativeElement, "is-invalid");
+      this.render.addClass(this.contact_name.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.contact_name.nativeElement, "is-valid");
+      this.render.addClass(this.contact_name.nativeElement, "is-invalid");
       this.contact_name.nativeElement.focus()
 
-     }
+    }
   }
 
-  getcontact_lastname_father(){
-    if( this.formParent.get('contact_lastname_father').valid){
-      this.render.removeClass(this.contact_lastname_father.nativeElement,"is-invalid");
-        this.render.addClass(this.contact_lastname_father.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.contact_lastname_father.nativeElement,"is-valid");
-      this.render.addClass(this.contact_lastname_father.nativeElement,"is-invalid");
+  getcontact_lastname_father() {
+    if (this.formParent.get('contact_lastname_father').valid) {
+      this.render.removeClass(this.contact_lastname_father.nativeElement, "is-invalid");
+      this.render.addClass(this.contact_lastname_father.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.contact_lastname_father.nativeElement, "is-valid");
+      this.render.addClass(this.contact_lastname_father.nativeElement, "is-invalid");
       this.contact_lastname_father.nativeElement.focus()
 
-     }
+    }
 
   }
 
-  getcontact_lastname_mother(){
-    if( this.formParent.get('contact_lastname_mother').valid){
-      this.render.removeClass(this.contact_lastname_mother.nativeElement,"is-invalid");
-        this.render.addClass(this.contact_lastname_mother.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.contact_lastname_mother.nativeElement,"is-valid");
-      this.render.addClass(this.contact_lastname_mother.nativeElement,"is-invalid");
+  getcontact_lastname_mother() {
+    if (this.formParent.get('contact_lastname_mother').valid) {
+      this.render.removeClass(this.contact_lastname_mother.nativeElement, "is-invalid");
+      this.render.addClass(this.contact_lastname_mother.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.contact_lastname_mother.nativeElement, "is-valid");
+      this.render.addClass(this.contact_lastname_mother.nativeElement, "is-invalid");
       this.contact_lastname_mother.nativeElement.focus()
 
-     }
+    }
 
   }
-  getcontact_cellphone(){
-    if( this.formParent.get('contact_cellphone').valid){
-      this.render.removeClass(this.contact_cellphone.nativeElement,"is-invalid");
-        this.render.addClass(this.contact_cellphone.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.contact_cellphone.nativeElement,"is-valid");
-      this.render.addClass(this.contact_cellphone.nativeElement,"is-invalid");
+  getcontact_cellphone() {
+    if (this.formParent.get('contact_cellphone').valid) {
+      this.render.removeClass(this.contact_cellphone.nativeElement, "is-invalid");
+      this.render.addClass(this.contact_cellphone.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.contact_cellphone.nativeElement, "is-valid");
+      this.render.addClass(this.contact_cellphone.nativeElement, "is-invalid");
       this.contact_cellphone.nativeElement.focus()
 
-     }
+    }
 
   }
-  getcontact_work_phone(){
-    if( this.formParent.get('contact_work_phone').valid){
-      this.render.removeClass(this.contact_work_phone.nativeElement,"is-invalid");
-        this.render.addClass(this.contact_work_phone.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.contact_work_phone.nativeElement,"is-valid");
-      this.render.addClass(this.contact_work_phone.nativeElement,"is-invalid");
+  getcontact_work_phone() {
+    if (this.formParent.get('contact_work_phone').valid) {
+      this.render.removeClass(this.contact_work_phone.nativeElement, "is-invalid");
+      this.render.addClass(this.contact_work_phone.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.contact_work_phone.nativeElement, "is-valid");
+      this.render.addClass(this.contact_work_phone.nativeElement, "is-invalid");
       this.contact_work_phone.nativeElement.focus()
 
-     }
+    }
 
   }
-  getcontact_home_phone(){
-    if( this.formParent.get('contact_home_phone').valid){
-      this.render.removeClass(this.contact_home_phone.nativeElement,"is-invalid");
-        this.render.addClass(this.contact_home_phone.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.contact_home_phone.nativeElement,"is-valid");
-      this.render.addClass(this.contact_home_phone.nativeElement,"is-invalid");
+  getcontact_home_phone() {
+    if (this.formParent.get('contact_home_phone').valid) {
+      this.render.removeClass(this.contact_home_phone.nativeElement, "is-invalid");
+      this.render.addClass(this.contact_home_phone.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.contact_home_phone.nativeElement, "is-valid");
+      this.render.addClass(this.contact_home_phone.nativeElement, "is-invalid");
       this.contact_home_phone.nativeElement.focus()
 
-     }
+    }
   }
-  getcontact_email(){
-    if( this.formParent.get('contact_email').valid){
-      this.render.removeClass(this.contact_email.nativeElement,"is-invalid");
-        this.render.addClass(this.contact_email.nativeElement,"is-valid");
-     }else{
-      this.render.removeClass(this.contact_email.nativeElement,"is-valid");
-      this.render.addClass(this.contact_email.nativeElement,"is-invalid");
+  getcontact_email() {
+    if (this.formParent.get('contact_email').valid) {
+      this.render.removeClass(this.contact_email.nativeElement, "is-invalid");
+      this.render.addClass(this.contact_email.nativeElement, "is-valid");
+    } else {
+      this.render.removeClass(this.contact_email.nativeElement, "is-valid");
+      this.render.addClass(this.contact_email.nativeElement, "is-invalid");
       this.contact_email.nativeElement.focus()
 
-     }
+    }
   }
-  cancelar(){
+  cancelar() {
     this.router.navigate(['login'])
   }
   /**
@@ -593,20 +609,20 @@ export class NewParentComponent implements OnInit {
   }
   centerModal(centerDataModal: any = this.content) {
     console.log(this.centerModal);
-    
+
     this.modalService.open(centerDataModal, { centered: true });
   }
 
-  cambioTipo(){
-    if(this.passwordType =='password'){
+  cambioTipo() {
+    if (this.passwordType == 'password') {
       this.passwordType = 'text';
-      
-    }else{
+
+    } else {
       this.passwordType = 'password';
 
     }
   }
 
- 
+
 
 }
