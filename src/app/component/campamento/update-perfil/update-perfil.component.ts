@@ -706,6 +706,8 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
 
       const formulario = new FormData();
       formulario.append('file',archivo)
+      formulario.append('file_path', ' uploads/campers/photos/');
+
       this.catalogos.setPhoto(formulario).subscribe((res: any) => {
         
 

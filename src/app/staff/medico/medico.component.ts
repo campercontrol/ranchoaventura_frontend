@@ -105,11 +105,10 @@ stripComment(text: string = ''): string {
 
 getImageUrl(comment: string = ''): string | null {
   const m = comment.match(/\$\{\{\s*(.*?)\s*\}\}/);
-  if (m && m[1]) {
-    return `https://api-dev.kincamp.com/${m[1]}`;
-  }
-  return null;
-}
+     return `https://api-dev.kincamp.com/${comment}`;
+   
+}  
+
 
   InfoBlood(id){
     console.log(id);

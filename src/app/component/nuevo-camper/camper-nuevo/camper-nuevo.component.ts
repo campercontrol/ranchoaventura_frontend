@@ -49,10 +49,16 @@ export class CamperNuevoComponent implements OnInit {
       place7:"If he/she hasn't any phobias or fears, type NONE",
       place8:"If the camper has NO treatments, type the Word “NONE",
       place9:"If he/she can eat any kind of food, type NONE",
-      leyenda1:"Camper Control has accident expense insurance with PANAMERICAN. If medical expenses exceed the insured amount, the costs will be covered by the parents or by the camper's major medical insurance (if applicable). Check your camp details to find out the insured amounts and characteristics of the insurance.",
+      leyenda1:"Kin Camp has minor accident insurance with AIG México. If medical expenses exceed the insured amount, the costs will be covered by the parents or the camper's major medical insurance (if available). Check your camp details for insured amounts and insurance features.",
       leyenda2:"Swimming does not refer to specific sports skills but to the ability to float and move in the water by making the necessary movements with the body and limbs without touching the bottom or using any object for support.  If the camper does not know how to swim and wants to participate in water activities, it will be the responsibility of the parents to include a flotation device (life jacket, floatie) in their luggage.",
       leyenda3:"We ask you to select the medications you authorize. Any medication not selected will be considered NOT PRE-AUTHORIZED, in which case we will contact you. We have a policy of contacting parents before administering any medication that has not been previously authorized or sent by the family.",
-      leyenda4:"Don't worry, at the end of the camp, we will notify you if your child had any discomfort and what medication was administered."
+      leyenda4:"Don't worry, at the end of the camp, we will notify you if your child had any discomfort and what medication was administered.",
+      titleFalta1:"Medical Insurance",
+      titleFalta2:" Medical Insurance",
+      titleFalta3:"  Medical Insurance",
+      titleFalta4:" Medical Insurance",
+
+
 
           
 
@@ -70,11 +76,14 @@ export class CamperNuevoComponent implements OnInit {
       place7:"En caso de que el acampador no padezca de fobias, teclea la palabra NINGUNO",
       place8:"En caso de NO estar en ningun tratamiento psicologico o psiquiatrico, teclea la palabra NINGUNO",
       place9:"En caso de que el acampador pueda comer cualquier tipo de comida, teclea la palabra NINGUNA",
-      leyenda1:" Camper Control cuenta con seguro de gastos contra accidentes menores con compañia_seguros. En caso de que las atenciones médicas superen la cantidad asegurada ,los gastos correrán a cargo de los padres de familia o del seguro de gastos médicos mayores del acampador (en caso de contar con uno). Checa los detalles de tu camp para conocer los montos asegurados y características del seguro.",
+      leyenda1:"Kin camp cuenta con seguro de gastos contra accidentes menores con AIG México por una suma asegurada de 500,000 pesos. En caso de que las atenciones médicas superen la cantidad asegurada, los gastos correrán a cargo de los padres de familia o del seguro de gastos médicos mayores del acampador (en caso de contar con uno). Checa los detalles de tu campamento para conocer los montos asegurados y características del seguro.",
       leyenda2:" Nadar no hace referencia a habilidades deportivas específicas sino a la capacidad de flotar y avanzar en el agua haciendo los movimientos necesarios con el cuerpo y las extremidades sin tocar el fondo ni otro apoyo de algún objeto para su desplazamiento. En caso de no saber nadar y querer participar en actividades acuáticas, será responsabilidad de los padres de familia el incluir en su equipaje un dispositivo de flotación (chaleco, flotis)" ,   
       leyenda3:"Te pedimos que selecciones los medicamentos que autorizas. Cualquier medicamento no seleccionado se considerará como NO PRE-AUTORIZADO, en cuyo caso, nos comunicaremos contigo.",
-      leyenda4:"Descuida que al final del campamento, te notificaríamos si tu hij@ tuvo algún malestar y qué medicamento se le administró."
-
+      leyenda4:"Descuida que al final del campamento, te notificaríamos si tu hij@ tuvo algún malestar y qué medicamento se le administró.",
+      titleFalta1:"Seguro Médico", 
+      titleFalta2:" Contacto de emergencia",
+      titleFalta3:"  Acepto los términos y condiciones",
+      titleFalta4:"  términos y condiciones",
     }
 
 
@@ -705,6 +714,8 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
             const archivoProcesado = new File([blob], archivo.name, { type: 'image/jpeg' });
   
             const formulario = new FormData();
+            formulario.append('file_path', ' uploads/campers/photos/');
+
             formulario.append('file', archivoProcesado);
   
             this.catalogos.setPhoto(formulario).subscribe(

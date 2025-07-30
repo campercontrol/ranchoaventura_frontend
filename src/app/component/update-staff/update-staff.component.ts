@@ -267,6 +267,8 @@ export class UpdateStaffComponent implements OnInit {
       reader.readAsDataURL(archivo);
 
       const formulario = new FormData();
+      formulario.append('file_path', 'uploads/staff/photos/');
+
       formulario.append('file',archivo)
       this.catalogos.setPhoto(formulario).subscribe((res: any) => {
         console.log(res.path);

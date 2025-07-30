@@ -124,13 +124,10 @@ export class TablaMedicalComponent implements OnInit {
   
   getImageUrl(comment: string = ''): string | null {
     const m = comment.match(/\$\{\{\s*(.*?)\s*\}\}/);
-    if (m && m[1]) {
-      return `https://api-dev.kincamp.com/${m[1]}`;
-    }
-    console.log('no jalo');
-    
-    return null;
+       return `https://api-dev.kincamp.com/${comment}`;
+     
   }  
+ 
 
   getAuthorizationName(value: number): string {
     const caseV =  Number(value)

@@ -59,7 +59,7 @@ export class NuevaConsultaComponent implements OnInit {
         "medical_monitoring": ["",[Validators.required]],
         "comment": ["",[Validators.required]],// listo
         "medical_comment": ["",[Validators.required]], // listo
-        "photo": [""],
+        "additional_photo": [""],
         "send_in_email": true,
         "already_sent": false,
         "camp_id": this.campId,
@@ -100,11 +100,13 @@ export class NuevaConsultaComponent implements OnInit {
           blob => {
             if (!blob) return;
             const formData = new FormData();
+            formData.append('file_path', 'uploads/medical_visit/photos/');
+
             formData.append('file', new File([blob], archivo.name, { type: mime }));
   
             this.catalogos.setPhoto(formData).subscribe(
               (res: any) => {
-                this.formConsult.patchValue({ photo: res.path });
+                this.formConsult.patchValue({ additional_photo: res.path });
                 this.statusImageFals = true;
                 this.isImageUploading = false;
                 this.cdr.detectChanges()
@@ -128,10 +130,7 @@ export class NuevaConsultaComponent implements OnInit {
 
   crearConsulta() {
     this.showSpinner= true;
-    let data = this.formConsult.get('comment').value;
-    let phtot = this.formConsult.get('photo').value;
-    let total = data + ' ' +'${{'+phtot + '}}'
-    this.formConsult.patchValue({ comment: total});
+    
 
 
 
