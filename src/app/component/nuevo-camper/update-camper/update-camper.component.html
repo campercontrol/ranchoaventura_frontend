@@ -568,12 +568,12 @@
                     <div class="card-body">
                         <div class="container-footer-parents">
                             <img src="assets/images/camp/bombero.png" class="avatar-lg" alt="madre y padres">
-                            <h4 class="ms-3"> Contacto de emergencia
+                            <h4 class="ms-3">  {{placeholder[idioma]['titleFalta2']}}
                             </h4>
                         </div>
 
                         <div class="alert alert-success mt-3">
-                            {{textos['alert7']}}
+                          {{textos['alert7']}}
 
                         </div>
 
@@ -606,7 +606,7 @@
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                 <label for="" class="col-sm-12 col-form-label"> {{textos['Homephone']}} </label>
+                                <label for="" class="col-sm-12 col-form-label"> {{textos['Homephone']}} </label>
                                 <div class="col-sm-12">
                                     <input type="text" class="form-control" id="" formControlName ="contact_homephone"
                                     #contact_homephone (input)="getcontact_homephone()"
@@ -619,14 +619,12 @@
 
 
                 </div>
-
-
                 <div class="card">
 
                     <div class="card-body">
                         <div class="container-footer-parents">
                             <img src="assets/images/camp/seguro.png" class="avatar-lg" alt="madre y padres">
-                            <h4 class="ms-3"> Seguro Médico
+                            <h4 class="ms-3">  [placeholder]="placeholder[idioma]['titleFalta1']"
                             </h4>
                         </div>
                         <div class="mt-5">
@@ -663,11 +661,7 @@
                                 </div>
                             </div>
                             <div class="alert alert-success mt-3">
-                                Camper Control cuenta con seguro de gastos contra accidentes menores con
-                                compañia_seguros. En caso de que las atenciones médicas superen la cantidad asegurada,
-                                los gastos correrán a cargo de los padres de familia o del seguro de gastos médicos
-                                mayores del acampador (en caso de contar con uno). Checa los detalles de tu camp para
-                                conocer los montos asegurados y características del seguro.
+                                {{placeholder[idioma]['leyenda1']}}
                             </div>
 
                         </div>
@@ -678,19 +672,21 @@
           
         </div>
 
+         
         <div class="row">
             <div class=col-lg-12>
                 <div class="card p-5">
                     <div class="mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="terms" height="40px" formControlName = "terms"  >
-                            <label class="form-check-label fs-3 ms-3" for="terms">
-                                Acepto los términos y condiciones
+                            <label class="form-check-label fs-3 ms-3" for="terms" #acept>
+                              {{placeholder[idioma]['titleFalta3']}}
                             </label>
-                            <label class="form-check-label fs-3 ms-3" for="terms">
+                            <label class="form-check-label fs-3 ms-3" for="terms" #terms>
                                 <a  target="_blank"
                                     href="https://registrokin.com/media/uploads/files/_terminos-y-condiciones.pdf">Ver
-                                    términos y condiciones</a>
+                                    {{placeholder[idioma]['titleFalta4']}}
+                                </a>
                             </label>
 
                         </div>
@@ -698,7 +694,7 @@
                 
 
                     <div class="btn-footer">
-                        <button class="btn btn-secondary w-lg btn-lg" (click)="cancelar()" routerLinkActive="router-link-active" >Cancelar</button>
+                        <button class="btn btn-secondary w-lg btn-lg" (click)="cancelar()">Cancelar</button>
                         <div>
                             <button class="btn btn-info w-lg btn-lg"  (click)="prueba1()" *ngIf="!spinner">Guardar</button>
                             <div class="spinner-border" role="status" *ngIf="spinner">
