@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MedicalService } from 'src/services/medical.service';
 
@@ -17,13 +18,35 @@ export class MedicoComponent implements OnInit {
   bloodytype:any = [];
   medicalConsult=[];
   showConsult= true;
+  displayEditModal = false;
+  editForm!: FormGroup;
+  private selectedConsultId!: number;
 
-  constructor(private routesA:ActivatedRoute,private medical:MedicalService,private router:Router) {
+  constructor(private routesA:ActivatedRoute,private medical:MedicalService,private router:Router, private fb: FormBuilder) {
     this.routesA.params.subscribe((params) => {
       this.camperid = params['camperid'];
       this.campId = params['campId'];
     })
-      
+    this.editForm = this.fb.group({
+      medical_tracing: [false],
+      doctor: [''],
+      attention_date: [''],
+      attention_time: [''],
+      diagnostic: [''],
+      description: [''],
+      triage: [0],
+      medication_authorization: [''],
+      event_description: [''],
+      camp_restriction: [''],
+      administered_medications: [''],
+      medical_monitoring: [''],
+      comment: [''],
+      medical_comment: [''],
+      send_in_email: [false],
+      already_sent: [false],
+      camp_id: this.campId,
+      camper_id: this.camperid,
+    });
       this.medical.getMedicalCampCamper(this.campId,this.camperid).subscribe((res:any)=>{
         console.log(res);
         this.bloodytype =res.camper_info.blood_types
@@ -105,11 +128,31 @@ stripComment(text: string = ''): string {
 
 getImageUrl(comment: string = ''): string | null {
   const m = comment.match(/\$\{\{\s*(.*?)\s*\}\}/);
-     return `https://api-dev.kincamp.com/${comment}`;
+     return ` https://api.kincamp.com/${comment}`;
    
 }  
 
+openEditModal(item: any) {
+  this.selectedConsultId = item.id;               // ← Usa el ID de la consulta
+  this.editForm.patchValue(item);                 // ← Rellena el formulario
+  this.displayEditModal = true;
+}
 
+/** Envía la edición al servicio */
+saveEdit() {
+  const updatedData = this.editForm.value;
+  this.medical
+    .editConsulta(this.selectedConsultId, updatedData)
+    .subscribe((res: any) => {
+      // Actualiza en el array local
+      const idx = this.medicalConsult.findIndex(c => c.id === this.selectedConsultId);
+      if (idx > -1) {
+        this.medicalConsult[idx] = res;
+      }
+      this.displayEditModal = false;
+      window.location.reload();
+    });
+}
   InfoBlood(id){
     console.log(id);
     
@@ -137,5 +180,7 @@ getImageUrl(comment: string = ''): string | null {
         return 'Desconocido';
     }
   }
+
+  
   
 }

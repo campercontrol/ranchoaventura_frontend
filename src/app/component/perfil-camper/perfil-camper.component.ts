@@ -587,6 +587,14 @@ export class PerfilCamperComponent implements OnInit {
     this.rou.navigate(['dashboard/parents/camp-info/'+this.id+'/'+id]);
 
   }
+  linkPagos(id){
+    if(this.info.infToken.role_id == 1){
+      this.rou.navigate(['dashboard/parents/camp-info/'+this.id+'/'+id]);
+    }else{
+    this.rou.navigate(['dashboard/payments/'+this.id+'/'+id]);
+    }
+
+  }
   linkPerfil(){
     this.rou.navigate(['dashboard/parents/inscription/'+this.id]);
 

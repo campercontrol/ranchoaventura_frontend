@@ -141,6 +141,7 @@ export class LoginComponent implements OnInit {
   closeResult = '';
   textosModal: { body1: string; contact: string; body2: string; newButton: string; cancelButton: string; } | { body1: string; contact: string; body2: string; newButton: string; cancelButton: string; };
   textosNotice: { attention: string; line1: string; line2: string; line3: string; line4: string; } | { attention: string; line1: string; line2: string; line3: string; line4: string; };
+buttonSend: any = false;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,private modalService: NgbModal,
     private  lang: LangService ) { 
@@ -270,6 +271,7 @@ this.textosNotice = this.texto.noticeDialog[idioma];
     localStorage.setItem('alreadySeenDialog', 'true');
   }
   resetPasword(){
+    this.buttonSend = true;
     this.authenticationService.recuperarContra(this.resetPass.value).subscribe((res:any)=>{
       if(res.detail.status == 1){
         this.alertPass = true;
@@ -277,6 +279,8 @@ this.textosNotice = this.texto.noticeDialog[idioma];
       }else{
        alert( 'El correo ingresado no existe, por favor verifique e intente nuevamente');
       }
+
+      this.buttonSend = false;
 
     })
   }

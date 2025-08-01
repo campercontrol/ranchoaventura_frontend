@@ -124,7 +124,7 @@ export class TablaMedicalComponent implements OnInit {
   
   getImageUrl(comment: string = ''): string | null {
     const m = comment.match(/\$\{\{\s*(.*?)\s*\}\}/);
-       return `https://api-dev.kincamp.com/${comment}`;
+       return ` https://api.kincamp.com/${comment}`;
      
   }  
  

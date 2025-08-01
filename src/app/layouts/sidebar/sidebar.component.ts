@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import jwt_decode from "jwt-decode";
+import { LangService } from 'src/services/lang.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -26,7 +27,40 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   user_admin = false;
   user_coordinator = false;
   menu: any;
+  traducciones = {
+    
+      "esp": {
+        "menu": {
+          "registeredCampers": "Mis Campers registrados",
+          "myProfile":          "Mi perfil",
+          "newCamper":          "Nuevo acampador",
+          "faq":                "Preguntas frecuentes",
+          "contact":            "Contacto",
+          "rules":              "Reglamento",
+          "participationAgreement": "Acuerdo de participación",
+          "privacyNotice":      "Aviso de privacidad",
+          "logout":             "Cerrar sesión"
+        }
+        /* …otras secciones… */
+      },
+      "eng": {
+        "menu": {
+          "registeredCampers": "My Registered Campers",
+          "myProfile":          "My Profile",
+          "newCamper":          "New Camper",
+          "faq":                "Frequently Asked Questions",
+          "contact":            "Contact",
+          "rules":              "Rules and Regulations",
+          "participationAgreement": "Participation Agreement",
+          "privacyNotice":      "Privacy Notice",
+          "logout":             "Log Out"
+        }
+      
+    }
+  }
+  
   menuItems = [];
+  idioma: string;
 
   constructor(
     private eventService: EventService,
@@ -34,6 +68,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
     public translate: TranslateService,
     private http: HttpClient,
     private info: AuthenticationService
+    ,private lang:LangService
   ) {
     // Recuperar el token del localStorage y decodificarlo
     const currentUser = localStorage.getItem('currentUser');
@@ -62,6 +97,11 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit() {
+    this.lang.getLang().subscribe((res: 'esp'|'eng') => {
+      this.idioma = res;
+      // Aquí extraemos directamente el bloque 'menu' de nuestro JSON
+      this.menu = this.traducciones[this.idioma].menu;
+    });
     this.initialize();
     this._scrollElement();
   }

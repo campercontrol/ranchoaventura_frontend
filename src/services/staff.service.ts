@@ -12,7 +12,7 @@ export class StaffService {
   prospectos(prospecto:any){
     console.log(prospecto);
     
-    return this.http.post('https://api-dev.kincamp.com/prospect/',prospecto)
+    return this.http.post(' https://api.kincamp.com/prospect/',prospecto)
   }
   getProspectosSearch(filters: any) {
     let params = new HttpParams();
@@ -22,44 +22,44 @@ export class StaffService {
       }
     });
   
-    return this.http.get<any>('https://api-dev.kincamp.com/search_prospect/', { params });
+    return this.http.get<any>(' https://api.kincamp.com/search_prospect/', { params });
   }
   
   editStaff(a,id){
-    return this.http.patch('https://api-dev.kincamp.com/staff/complete/'+id,a)
+    return this.http.patch(' https://api.kincamp.com/staff/complete/'+id,a)
   }
   infoPerfil(id,idioma = 'es'){
-    return this.http.get('https://api-dev.kincamp.com/staff/complete/'+id+'/'+idioma)
+    return this.http.get(' https://api.kincamp.com/staff/complete/'+id+'/'+idioma)
   }
 
   getPerfilStaff(id,idioma = 'es'){
-    return this.http.get('https://api-dev.kincamp.com/staff/profile/'+id+'/'+idioma)
+    return this.http.get(' https://api.kincamp.com/staff/profile/'+id+'/'+idioma)
   }
 
   getProspectos(page=1,per_page =10){
-    return this.http.get('https://api-dev.kincamp.com/prospect/?page='+page+'&per_page='+per_page+'&order=desc')
+    return this.http.get(' https://api.kincamp.com/prospect/?page='+page+'&per_page='+per_page+'&order=desc')
 
   }
   aceptarProspectos(id){
-    return this.http.patch('https://api-dev.kincamp.com/accept_prospect/'+id,{})
+    return this.http.patch(' https://api.kincamp.com/accept_prospect/'+id,{})
 
   }
   cancelarParticipacio(id){
-    return this.http.delete('https://api-dev.kincamp.com/staff_unsubscribe/'+id)
+    return this.http.delete(' https://api.kincamp.com/staff_unsubscribe/'+id)
 
   }
 
   getPerfil(id ){
-    return this.http.get('https://api-dev.kincamp.com/staff/'+id)
+    return this.http.get(' https://api.kincamp.com/staff/'+id)
   }
   
 
   reportProspecto( ){
-    return this.http.post('https://api-dev.kincamp.com/prospects/report/general',{})
+    return this.http.post(' https://api.kincamp.com/prospects/report/general',{})
   }
   
   createComment(info){
-    return this.http.post('https://api-dev.kincamp.com/staff_comment/',info)
+    return this.http.post(' https://api.kincamp.com/staff_comment/',info)
   }
 
 }

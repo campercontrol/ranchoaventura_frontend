@@ -42,6 +42,7 @@ export class ResetPaswordComponent implements OnInit {
         this.spinner = false;
 
         this.alertPass=true;
+        this.routerInfo();
 
       }
       

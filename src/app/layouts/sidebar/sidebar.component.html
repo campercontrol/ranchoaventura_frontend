@@ -12,42 +12,42 @@
         <li *ngIf="paretn">
           <a routerLink="../dashboard/parents" class="side-nav-link-ref" routerLinkActive="active">
             <i class="dripicons-user-id"></i>
-            <span>Mis Campers registrados</span>
+            <span>{{ menu.registeredCampers }}</span>
           </a>
-
+        
           <a routerLink="parents/my-profile" class="side-nav-link-ref" routerLinkActive="active">
             <i class="dripicons-user"></i>
-            <span>Mi perfil</span>
+            <span>{{ menu.myProfile }}</span>
           </a>
-
+        
           <a routerLink="parents/new-camper" class="side-nav-link-ref" routerLinkActive="active">
             <i class="bx bx-user-plus"></i>
-            <span>Nuevo acampador</span>
+            <span>{{ menu.newCamper }}</span>
           </a>
-
-          <a href="https://kincamp.com/faq" target="_blank" class="side-nav-link-ref" routerLinkActive="active">
+        
+          <a href="https://kincamp.com/faq" target="_blank" class="side-nav-link-ref">
             <i class="bx bx-question-mark"></i>
-            <span>Frecuentes</span>
+            <span>{{ menu.faq }}</span>
           </a>
-
-          <a href="https://kincamp.com/contacto" target="_blank" class="side-nav-link-ref" routerLinkActive="active">
+        
+          <a href="https://kincamp.com/contacto" target="_blank" class="side-nav-link-ref">
             <i class="dripicons-phone"></i>
-            <span>Contacto</span>
+            <span>{{ menu.contact }}</span>
           </a>
-
-          <a href="https://kincamp.com/reglamento" target="_blank" class="side-nav-link-ref" routerLinkActive="active">
+        
+          <a href="https://kincamp.com/reglamento" target="_blank" class="side-nav-link-ref">
             <i class="mdi mdi-book-education"></i>
-            <span>Reglamento</span>
+            <span>{{ menu.rules }}</span>
           </a>
-
-          <a href="https://kincamp.com/condiciones" target="_blank" class="side-nav-link-ref" routerLinkActive="active">
+        
+          <a href="https://kincamp.com/condiciones" target="_blank" class="side-nav-link-ref">
             <i class="mdi mdi-book-lock-outline"></i>
-            <span>Acuerdo de participación</span>
+            <span>{{ menu.participationAgreement }}</span>
           </a>
-
-          <a href="https://kincamp.com/aviso-de-privacidad" target="_blank" class="side-nav-link-ref" routerLinkActive="active">
+        
+          <a href="https://kincamp.com/aviso-de-privacidad" target="_blank" class="side-nav-link-ref">
             <i class="mdi mdi-lock-open-check-outline"></i>
-            <span>Aviso de privacidad</span>
+            <span>{{ menu.privacyNotice }}</span>
           </a>
         </li>
 
@@ -117,10 +117,7 @@
             <span>Staff</span>
           </a>
 
-          <a routerLink="staff/applicants" class="side-nav-link-ref" *ngIf="rol_id == 2 && (user_admin == true || user_coordinator == true)">
-            <i class="mdi mdi-account-question"></i>
-            <span>Prospectos</span>
-          </a>
+        
 
           <a routerLink="mailing" class="side-nav-link-ref" *ngIf="rol_id == 2 && (user_admin == true ) ">
             <i class="bx bx-barcode"></i>
@@ -168,6 +165,10 @@
   
               <a routerLink="admi/staff" class="side-nav-link-ref" routerLinkActive="active">
                 <span>Staff</span>
+              </a>
+              <a routerLink="staff/applicants" class="side-nav-link-ref" *ngIf="rol_id == 2 && (user_admin == true )">
+                <i class="mdi mdi-account-question"></i>
+                <span>Prospectos</span>
               </a>
   
               <a routerLink="admi/grouping/type" class="side-nav-link-ref" routerLinkActive="active">

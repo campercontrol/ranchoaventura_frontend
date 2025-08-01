@@ -17,7 +17,7 @@
               </div>
               <div class="foto-perfil">
                 <img
-                  src="https://api-dev.kincamp.com/{{ photo }}"
+                  src=" https://api.kincamp.com/{{ photo }}"
                   class="avatar-lg rounded-circle"
                   alt
                 />
@@ -110,7 +110,7 @@
                     </p>
                     <p>
                       <span class="fw-bold">{{ textos['hermanosLabel'] }}</span>
-                     <!-- 
+                 
                          <a
                         *ngFor="let item of infoCamper.siblings || []"
                         routerLink="/dashboard/parents/camper/{{ item.id }}"
@@ -119,7 +119,7 @@
                         {{ item.lastname_father }}
                         {{ item.lastname_mother + '  ' }}
                       </a>
-                     -->
+                  
                      
                    
                     </p>
@@ -599,7 +599,7 @@
                       <i class="fa fa-info-circle" (click)="link(event.camp_id)"></i>
                     </h3>
                     <p
-                      (click)="link(event.camp_id)"
+                      (click)="linkPagos(event.camp_id)"
                       style="cursor: pointer;"
                       *ngIf="event.show_payment_parent"
                       class="badge bg-warning ms-1"

@@ -238,7 +238,7 @@
     <div class="mt-5 mb4 container-consulta card" *ngFor="let item of medicalConsult ;let i = index">
         <div class="container-consultas p-2 rounded mb-2 bg-primary ">
 
-           
+            
             <div>
                 <h5 class="text-white">
                     Consulta y el por que fue {{ item.attention_date}} fecha y hora de {{ item.attention_time}}
@@ -262,6 +262,10 @@
     
             <p-tabView>
                 <p-tabPanel header="Consuta inicial">
+
+                    <button class="btn btn-info ms-2" (click)="openEditModal(item)">
+                        Editar
+                      </button>
                     <div class="col-12 " style="margin-top: 30px;">
                         <p class="text-center fs-4 fw-bolder">Diagnóstico : {{item.diagnostic}}</p>
         
@@ -515,3 +519,89 @@
     <div class="spinner-border mr-2" role="status"></div>
     <div>Permitanos, estamos cargando la información</div>
   </div>
+
+
+  <p-dialog 
+  header="Editar Consulta" 
+  [(visible)]="displayEditModal" 
+  [modal]="true" 
+  [style]="{ width: '80vw' }" 
+  (onHide)="displayEditModal = false"
+>
+  <form [formGroup]="editForm" class="p-fluid" (ngSubmit)="saveEdit()">
+    <div class="row mb-3">
+      <div class="col-sm-12">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="sendEmail" formControlName="send_in_email">
+          <label class="form-check-label" for="sendEmail">Enviar consulta a padres</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-12 col-form-label">Nombre del doctor*</label>
+      <div class="col-sm-12">
+        <input type="text" class="form-control" formControlName="doctor">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-12 col-form-label">Fecha de atención*</label>
+      <div class="col-sm-12">
+        <input type="date" class="form-control" formControlName="attention_date">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-12 col-form-label">Hora de atención*</label>
+      <div class="col-sm-12">
+        <input type="time" class="form-control" formControlName="attention_time">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-12 col-form-label">Diagnóstico*</label>
+      <div class="col-sm-12">
+        <input type="text" class="form-control" formControlName="diagnostic">
+      </div>
+    </div>
+
+    <fieldset class="row mb-3">
+      <legend class="col-form-label col-sm-4 pt-0">Tipo de consulta</legend>
+      <div class="col-sm-12">
+        <div class="form-check" *ngFor="let option of [
+          { id:90, label:'No urgencia' },
+          { id:91, label:'Urgencia menor' },
+          { id:92, label:'Urgencia' },
+          { id:93, label:'Emergencia' },
+          { id:94, label:'Reanimación' }
+        ]">
+          <input class="form-check-input" type="radio" name="triage" [id]="'triage'+option.id" [value]="option.id" formControlName="triage">
+          <label class="form-check-label" [for]="'triage'+option.id">{{ option.label }}</label>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="row mb-3" *ngFor="let field of [
+      { name:'description', label:'Descripción básica' },
+      { name:'event_description', label:'Eventos del camper' },
+      { name:'administered_medications', label:'Tratamiento' },
+      { name:'camp_restriction', label:'Restricciones en campamento' },
+      { name:'medical_monitoring', label:'Recomendaciones seguimiento' },
+      { name:'medical_comment', label:'Comentario de la consulta' },
+      { name:'comment', label:'Comentario para staff' }
+    ]">
+      <label class="col-sm-12 col-form-label">{{ field.label }}</label>
+      <div class="col-sm-12">
+        <textarea class="form-control" rows="3" [formControlName]="field.name"></textarea>
+      </div>
+    </div>
+
+     
+
+    <p-footer class="d-flex justify-content-end">
+      <button pButton type="button" label="Cancelar" icon="pi pi-times" (click)="displayEditModal = false"></button>
+      <button pButton type="submit" label="Guardar" icon="pi pi-check"></button>
+    </p-footer>
+  </form>
+</p-dialog>

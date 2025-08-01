@@ -131,9 +131,15 @@
               [placeholder]="textosReset.emailPlaceholder"
             />
             <div class="mt-3 d-grid">
-              <button class="btn btn-primary btn-block" (click)="resetPasword()">
+              <button class="btn btn-primary btn-block" (click)="resetPasword()" *ngIf="!buttonSend">
                 {{ textosReset.sendButton }}
               </button>
+            </div>
+            <div class="mt-3 d-grid">
+              <div class="spinner-border text-primary mx-auto" role="status" *ngIf="buttonSend">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+
             </div>
           </form>
   
