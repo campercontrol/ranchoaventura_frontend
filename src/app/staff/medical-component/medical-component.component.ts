@@ -31,8 +31,31 @@ export class MedicalComponentComponent implements OnInit {
   is_employee = false;
   alerts:boolean;
   rol:any =0;
+  escuelas:any = [];
+  photoSelectUp : string | ArrayBuffer;
+  tipoDepago = 4
+  idioma = 'esp';
+  totalRecords: number = 0;
+  cargando =true;
+ 
+  cat: any = {
+    '0': 'ninguno',
+    '1': 'Staff',
+    '2': 'Acampador',
+    '3': 'Staff y Acampador'
+  }
+  capa = {
+    name: ''
+  }
+  breadCrumbItems: Array<{}>;
+  filtrosActivos: boolean = false;
+  selectedCities: string[] = [];
   user_coordinator=false
   user_admin=false 
+  searchName: string;
+  searchLocation: null;
+  searchSchool: null;
+  listcatalogos: any;
 
   constructor( private staff:StaffService, private info : AuthenticationService,private router: Router,private camps: CreateCampsService) {
     this.getCamps();
@@ -59,4 +82,46 @@ export class MedicalComponentComponent implements OnInit {
   });
   
  }
+
+ loadCampsLazy(event: any) {
+  const page = Math.floor(event.first / event.rows) + 1;
+ const perPage = event.rows;
+
+ if (this.filtrosActivos) {
+   // Si hay filtros activos, buscar con filtros
+   this.staff.searchCamps(
+     this.searchName,
+     this.searchLocation,
+     this.searchSchool,
+     page,
+     perPage
+   ).subscribe((res: any) => {
+     this.listcatalogos = res.data.items;
+     this.totalRecords = res.data.total;
+     this.cargando = false;
+   });
+ } else {
+   // Sin filtros: carga normal
+   this.staff.getCamp(page, perPage).subscribe((res: any) => {
+     this.listcatalogos = res.data.items;
+     this.totalRecords = res.data.total;
+     this.cargando = false;
+
+   });
+ }
+}
+buscarCampamentos() {
+  this.filtrosActivos = true;
+  this.loadCampsLazy({ first: 0, rows: 10 });
+}
+
+resetFiltros() {
+ this.searchName = '';
+ this.searchLocation = null;
+ this.searchSchool = null;
+ this.filtrosActivos = false;
+ 
+ this.loadCampsLazy({ first: 0, rows: 10 });
+} 
+ 
   }

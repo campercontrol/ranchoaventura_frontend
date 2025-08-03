@@ -36,6 +36,7 @@ export class CampamentosStaffComponent implements OnInit {
   selectedCustomers: any[];
 
   representatives: any[];
+  url = 'https://api.kincamp.com//';
 
   statuses: any[];
 
@@ -301,7 +302,7 @@ async downloadImages(listCampers = this.listCampers) {
   const zip = new JSZip();
 
   const imagePromises = listCampers.map(async (customer, index) => {
-    const imageUrl = ` https://api.kincamp.com/${customer.camper_photo}/`;
+    const imageUrl = `https://api.kincamp.com//${customer.camper_photo}/`;
 
     try {
       const response = await fetch(imageUrl);

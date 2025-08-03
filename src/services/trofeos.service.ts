@@ -9,15 +9,15 @@ export class TrofeosService {
   constructor(private http:HttpClient) { }
 
   setTrofeos(data){
-    return this.http.post(' https://api.kincamp.com/trophy',data);
+    return this.http.post('https://api.kincamp.com//trophy',data);
   }
   editarTrofeos(data,id){
-    return this.http.patch(' https://api.kincamp.com/trophy/'+id,data);
+    return this.http.patch('https://api.kincamp.com//trophy/'+id,data);
   }
   getTrofeos(){
-    return this.http.get(' https://api.kincamp.com/trophy');
+    return this.http.get('https://api.kincamp.com//trophy');
   }
   getTemporada(){
-    return this.http.get(' https://api.kincamp.com/season');
+    return this.http.get('https://api.kincamp.com//season');
   }
 }
