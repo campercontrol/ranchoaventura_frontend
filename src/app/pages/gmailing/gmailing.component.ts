@@ -155,6 +155,9 @@ export class GmailingComponent implements OnInit {
    this.campInfo.getParticipantes(campers,staff,escuela,b).subscribe((res:any)=>{
     console.log(res);
     this.listaTemplateAlmacenado= res.massive_templates
+    this.listaTemplateAlmacenado = res.massive_templates
+    .sort((a, b) => a.title.localeCompare(b.title));
+    
     this.dataResGmail = res.camps;
     this.selectdestinatariosCampers= res.camps[0].camp.campers;
     this.destinatariosCampers= res.camps[0].camp.campers;
@@ -203,6 +206,8 @@ export class GmailingComponent implements OnInit {
    this.campInfo.getParticipantesMultiplesCamps(this.listCamp).subscribe((res:any)=>{
     this.dataResGmail = res.camps
     this.listaTemplateAlmacenado= res.massive_templates
+    this.listaTemplateAlmacenado = res.massive_templates
+    .sort((a, b) => a.title.localeCompare(b.title));
     this.dataResGmail.forEach((data:any)=>{
       data.camp.campers.forEach((element:any)=>{
         element .campers_id= element.id
@@ -247,6 +252,8 @@ export class GmailingComponent implements OnInit {
     this.campInfo.getParticipantesCapacitaciones(this.selectTemporada).subscribe((res:any)=>{
      console.log(res,'temprada');
      this.listaTemplateAlmacenado= res.massive_templates
+     this.listaTemplateAlmacenado = res.massive_templates
+    .sort((a, b) => a.title.localeCompare(b.title));
      this.selectdestinatariosStaff= res.staffs
      this.selectdestinatariosStaff.forEach((camps:any)=>{
         camps.staff_full_name = camps.name;
@@ -280,6 +287,8 @@ export class GmailingComponent implements OnInit {
       this.botonDisiable=true;
 
      this.listaTemplateAlmacenado= res.massive_templates
+     this.listaTemplateAlmacenado = res.massive_templates
+    .sort((a, b) => a.title.localeCompare(b.title));
      this.selectdestinatariosStaff= res.staffs
      this.selectdestinatariosStaff.forEach((camps:any)=>{
         camps.staff_full_name = camps.staff_fullname;

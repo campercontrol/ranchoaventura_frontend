@@ -126,7 +126,8 @@ export class AdmiCamperComponent implements OnInit {
 
      });
      this.createCamp.gerSchool().subscribe((res:any)=>{
-      this.school = res.data;
+       this.school = res.data.sort((a, b) => a.name.localeCompare(b.name));
+
       //console.log(this.location);
 
      });
