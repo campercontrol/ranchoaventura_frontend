@@ -11,7 +11,7 @@ export class CatalogosService {
   }
 
   order(id,info){
-    return this.http.post('https://api.kincamp.com//update/order/catalogs?catalog_type='+id,info);
+    return this.http.post(' https://api-dev.kincamp.com/update/order/catalogs?catalog_type='+id,info);
 
   }
 
@@ -26,233 +26,233 @@ export class CatalogosService {
       }
     });
 
-    return this.http.get<any>('https://api.kincamp.com//search_admin_parent/', { params });
+    return this.http.get<any>(' https://api-dev.kincamp.com/search_admin_parent/', { params });
   }
 
 
   getAlimentos(){
-    return this.http.get('https://api.kincamp.com//food_restriction/');
+    return this.http.get(' https://api-dev.kincamp.com/food_restriction/');
   }
 
   postAlimentos(a:any){
-    return this.http.post('https://api.kincamp.com//food_restriction/',a);
+    return this.http.post(' https://api-dev.kincamp.com/food_restriction/',a);
   }
   updateAlimentos(a:any,id){
-    return this.http.post('https://api.kincamp.com//food_restriction/'+id,a);
+    return this.http.post(' https://api-dev.kincamp.com/food_restriction/'+id,a);
   }
   delerAlimentos(id){
     console.log(id);
-    return this.http.delete('https://api.kincamp.com//delete_food_restriction/'+id);
+    return this.http.delete(' https://api-dev.kincamp.com/delete_food_restriction/'+id);
   }
 
   getGener(id = 'es'){
     console.log(id);
-    return this.http.delete('https://api.kincamp.com//get_all_gender/'+id);
+    return this.http.delete(' https://api-dev.kincamp.com/get_all_gender/'+id);
   }
 
 
   getcurrency(){
-    return this.http.get('https://api.kincamp.com//currency/');
+    return this.http.get(' https://api-dev.kincamp.com/currency/');
   }
 
   postcurrency(a:any){
-    return this.http.post('https://api.kincamp.com//currency/',a);
+    return this.http.post(' https://api-dev.kincamp.com/currency/',a);
   }
   updatcurrency(a:any,id){
-    return this.http.patch('https://api.kincamp.com//currency/'+id,a);
+    return this.http.patch(' https://api-dev.kincamp.com/currency/'+id,a);
   }
   delecurrency(id){
     console.log(id);
-    return this.http.delete('https://api.kincamp.com//delete_currency/'+id);
+    return this.http.delete(' https://api-dev.kincamp.com/delete_currency/'+id);
   }
 
 
 
 
   getPathological_background(){
-    return this.http.get('https://api.kincamp.com//pathological_background/');
+    return this.http.get(' https://api-dev.kincamp.com/pathological_background/');
   }
 
   posPathological_background(a:any){
-    return this.http.post('https://api.kincamp.com//pathological_background/',a);
+    return this.http.post(' https://api-dev.kincamp.com/pathological_background/',a);
   }
   updatPathological_background(a:any,id){
-    return this.http.post('https://api.kincamp.com//pathological_background/'+id,a);
+    return this.http.post(' https://api-dev.kincamp.com/pathological_background/'+id,a);
   }
   delePathological_background(id){
     console.log(id);
-    return this.http.delete('https://api.kincamp.com//delete_pathological_back/'+id);
+    return this.http.delete(' https://api-dev.kincamp.com/delete_pathological_back/'+id);
   }
 
 
 
   getPathological_backgroundFamily(){
-    return this.http.get('https://api.kincamp.com//pathological_background_family/');
+    return this.http.get(' https://api-dev.kincamp.com/pathological_background_family/');
   }
 
   posPathological_backgroundFamily(a:any){
-    return this.http.post('https://api.kincamp.com//pathological_background_family/',a);
+    return this.http.post(' https://api-dev.kincamp.com/pathological_background_family/',a);
   }
   updatPathological_backgroundFamily(a:any,id){
-    return this.http.post('https://api.kincamp.com//pathological_background_family/'+id,a);
+    return this.http.post(' https://api-dev.kincamp.com/pathological_background_family/'+id,a);
   }
   delePathological_backgroundFamily(id){
     console.log(id);
     
-    return this.http.delete('https://api.kincamp.com//delete_pathological_back_fm/'+id);
+    return this.http.delete(' https://api-dev.kincamp.com/delete_pathological_back_fm/'+id);
   }
 
 
 
   getpaymentaccounts(){
-    return this.http.get('https://api.kincamp.com//payment_account/');
+    return this.http.get(' https://api-dev.kincamp.com/payment_account/');
   }
 
   postpaymentaccounts(a:any){
-    return this.http.post('https://api.kincamp.com//payment_account/',a);
+    return this.http.post(' https://api-dev.kincamp.com/payment_account/',a);
   }
   updatpaymentaccounts(a:any,id){
-    return this.http.post('https://api.kincamp.com//payment_account/'+id,a);
+    return this.http.post(' https://api-dev.kincamp.com/payment_account/'+id,a);
   }
   delepaymentaccounts(id){
     console.log(id);
-    return this.http.delete('https://api.kincamp.com//delete_payment_account/'+id);
+    return this.http.delete(' https://api-dev.kincamp.com/delete_payment_account/'+id);
   }
 
 
 
   getlicensed_medicine(){
-    return this.http.get('https://api.kincamp.com//licensed_medicine/');
+    return this.http.get(' https://api-dev.kincamp.com/licensed_medicine/');
   }
 
   postlicensed_medicine(a:any){
-    return this.http.post('https://api.kincamp.com//licensed_medicine/',a);
+    return this.http.post(' https://api-dev.kincamp.com/licensed_medicine/',a);
   }
   updatlicensed_medicine(a:any,id){
-    return this.http.post('https://api.kincamp.com//licensed_medicine/'+id,a);
+    return this.http.post(' https://api-dev.kincamp.com/licensed_medicine/'+id,a);
   }
   delelicensed_medicine(id){
     console.log(id);
-    return this.http.delete('https://api.kincamp.com//delete_licensed_medicine/'+id);
+    return this.http.delete(' https://api-dev.kincamp.com/delete_licensed_medicine/'+id);
   }
 
 
   getVaccine(){
-    return this.http.get('https://api.kincamp.com//vaccine/');
+    return this.http.get(' https://api-dev.kincamp.com/vaccine/');
   }
 
   postVaccine(a:any){
-    return this.http.post('https://api.kincamp.com//vaccine/',a);
+    return this.http.post(' https://api-dev.kincamp.com/vaccine/',a);
   }
   updatVaccine(a:any,id){
-    return this.http.patch('https://api.kincamp.com//vaccine/'+id,a);
+    return this.http.patch(' https://api-dev.kincamp.com/vaccine/'+id,a);
   }
 
   deleVaccine(id){
     console.log(id);
-    return this.http.delete('https://api.kincamp.com//delete_vaccine/'+id);
+    return this.http.delete(' https://api-dev.kincamp.com/delete_vaccine/'+id);
   }
 
 
   getStaffroles(){
-    return this.http.get('https://api.kincamp.com//staff_role/');
+    return this.http.get(' https://api-dev.kincamp.com/staff_role/');
   }
 
   postStaffroles(a:any){
-    return this.http.post('https://api.kincamp.com//staff_role/',a);
+    return this.http.post(' https://api-dev.kincamp.com/staff_role/',a);
   }
   updatStaffroles(a:any,id){
-    return this.http.post('https://api.kincamp.com//staff_role/'+id,a);
+    return this.http.post(' https://api-dev.kincamp.com/staff_role/'+id,a);
   }
 
   deleStaffroles(id){
     console.log(id);
-    return this.http.delete('https://api.kincamp.com//delete_staff_role/'+id);
+    return this.http.delete(' https://api-dev.kincamp.com/delete_staff_role/'+id);
   }
   //metodos de pago
   getpayment_method(){
-    return this.http.get('https://api.kincamp.com//payment_method/');
+    return this.http.get(' https://api-dev.kincamp.com/payment_method/');
   }
 
   postpayment_method(a:any){
-    return this.http.post('https://api.kincamp.com//payment_method/',a);
+    return this.http.post(' https://api-dev.kincamp.com/payment_method/',a);
   }
   upddatepayment_method(a:any,id){
-    return this.http.patch('https://api.kincamp.com//payment_method/'+id,a);
+    return this.http.patch(' https://api-dev.kincamp.com/payment_method/'+id,a);
   }
 
   deletpayment_method(id){
     console.log(id);
-    return this.http.delete('https://api.kincamp.com//delete/payment_method/'+id);
+    return this.http.delete(' https://api-dev.kincamp.com/delete/payment_method/'+id);
   }
   //Preguntas extras
 
   getcamp_extra_question(){
-    return this.http.get('https://api.kincamp.com//camp_extra_question/');
+    return this.http.get(' https://api-dev.kincamp.com/camp_extra_question/');
   }
 
   postcamp_extra_question(a:any){
-    return this.http.post('https://api.kincamp.com//camp_extra_question/',a);
+    return this.http.post(' https://api-dev.kincamp.com/camp_extra_question/',a);
   }
   upddatcamp_extra_question(a:any,id){
-    return this.http.patch('https://api.kincamp.com//camp_extra_question/'+id,a);
+    return this.http.patch(' https://api-dev.kincamp.com/camp_extra_question/'+id,a);
   }
 
   deletcamp_extra_question(id){
     console.log(id);
-    return this.http.delete('https://api.kincamp.com//delete/camp_extra_question/'+id);
+    return this.http.delete(' https://api-dev.kincamp.com/delete/camp_extra_question/'+id);
   }
     //Cargos extras
 
     getcamp_extra_charge(){
-      return this.http.get('https://api.kincamp.com//camp_extra_charge/');
+      return this.http.get(' https://api-dev.kincamp.com/camp_extra_charge/');
     }
   
     postcamp_extra_charge(a:any){
-      return this.http.post('https://api.kincamp.com//camp_extra_charge/',a);
+      return this.http.post(' https://api-dev.kincamp.com/camp_extra_charge/',a);
     }
     upddatcamp_extra_charge(a:any,id){
-      return this.http.patch('https://api.kincamp.com//camp_extra_charge/'+id,a);
+      return this.http.patch(' https://api-dev.kincamp.com/camp_extra_charge/'+id,a);
     }
   
     deletcamp_extra_charge(id){
       console.log(id);
-      return this.http.delete('https://api.kincamp.com//delete/camp_extra_charge/'+id);
+      return this.http.delete(' https://api-dev.kincamp.com/delete/camp_extra_charge/'+id);
     }
     ///
      getSchool(){
-      return this.http.get('https://api.kincamp.com//school/');
+      return this.http.get(' https://api-dev.kincamp.com/school/');
 
      }
      postSchool(info){
-      return this.http.post('https://api.kincamp.com//school/',info);
+      return this.http.post(' https://api-dev.kincamp.com/school/',info);
      }
      updateSchool(a:any,id){
-      return this.http.patch('https://api.kincamp.com//school/'+id,a);
+      return this.http.patch(' https://api-dev.kincamp.com/school/'+id,a);
     }
     deleteSchool(id){
-      return this.http.delete('https://api.kincamp.com//delete_school/'+id);
+      return this.http.delete(' https://api-dev.kincamp.com/delete_school/'+id);
     }
 
     searchPerent(id){
-      return this.http.get('https://api.kincamp.com//search/parent/'+id);
+      return this.http.get(' https://api-dev.kincamp.com/search/parent/'+id);
 
     }
     searchCamper(id){
-      return this.http.get('https://api.kincamp.com//search/camper/'+id);
+      return this.http.get(' https://api-dev.kincamp.com/search/camper/'+id);
 
     }
     searchUser(id){
-      return this.http.get('https://api.kincamp.com//search/user/'+id);
+      return this.http.get(' https://api-dev.kincamp.com/search/user/'+id);
 
     }
 
     getcampers(){
-      return this.http.get('https://api.kincamp.com//camper/');
+      return this.http.get(' https://api-dev.kincamp.com/camper/');
 
     }
     getCamperAdmi(page=1,per_page=10){
-      return this.http.get('https://api.kincamp.com//admin/camper/?page='+page+'&per_page='+per_page+'&order=desc');
+      return this.http.get(' https://api-dev.kincamp.com/admin/camper/?page='+page+'&per_page='+per_page+'&order=desc');
     }
 
     searchCampers(filters: any, page: number = 1, perPage: number = 10) {
@@ -272,26 +272,26 @@ export class CatalogosService {
         .set('per_page', perPage.toString())
         .set('order', 'desc');
   
-      return this.http.get<any>('https://api.kincamp.com//admin/search_camper/', { params });
+      return this.http.get<any>(' https://api-dev.kincamp.com/admin/search_camper/', { params });
     }
     getCamper(){
-      return this.http.get('https://api.kincamp.com//camper/');
+      return this.http.get(' https://api-dev.kincamp.com/camper/');
     }
     serachCamper(id){
-      return this.http.get('https://api.kincamp.com//camper/'+id);
+      return this.http.get(' https://api-dev.kincamp.com/camper/'+id);
 
     }
     serachCamps(id){
-      return this.http.get('https://api.kincamp.com//camp/'+id);
+      return this.http.get(' https://api-dev.kincamp.com/camp/'+id);
 
     }
     // parent admi
 
     getParent(){
-      return this.http.get('https://api.kincamp.com//parent/');
+      return this.http.get(' https://api-dev.kincamp.com/parent/');
      }
      getStaff(page=1,per_page=10){
-      return this.http.get('https://api.kincamp.com//staff/?page='+page+'&per_page='+per_page+'&order=desc');
+      return this.http.get(' https://api-dev.kincamp.com/staff/?page='+page+'&per_page='+per_page+'&order=desc');
      }
      searchUusario(filters: any, page: number = 1, perPage: number = 10) {
       const params = new HttpParams()
@@ -301,7 +301,7 @@ export class CatalogosService {
         .set('per_page', perPage.toString())
         .set('order', 'desc');
   
-      return this.http.get<any>('https://api.kincamp.com//search_usuario', { params });
+      return this.http.get<any>(' https://api-dev.kincamp.com/search_usuario', { params });
     }
     searchStaff(filters: any, page: number = 1, perPage: number = 10) {
       const params = new HttpParams()
@@ -311,14 +311,14 @@ export class CatalogosService {
         .set('per_page', perPage.toString())
         .set('order', 'desc');
   
-      return this.http.get<any>('https://api.kincamp.com//search_staff/', { params });
+      return this.http.get<any>(' https://api-dev.kincamp.com/search_staff/', { params });
     }
      getProspectos(){
-      return this.http.get('https://api.kincamp.com//prospect/');
+      return this.http.get(' https://api-dev.kincamp.com/prospect/');
 
      }
      getParentAdmi(page=1,per_page=10){
-      return this.http.get('https://api.kincamp.com//admin/parent/?page='+page+'&per_page='+per_page+'&order=desc');
+      return this.http.get(' https://api-dev.kincamp.com/admin/parent/?page='+page+'&per_page='+per_page+'&order=desc');
      }
 
      getParentAdmiSearcg(filters: any, page: number = 1, per_page: number = 10){
@@ -335,20 +335,20 @@ export class CatalogosService {
       });
   
       // Realizamos la solicitud GET con los filtros y parámetros como query string
-      return this.http.get<any>(`https://api.kincamp.com//search_admin_parent/`, { params });
+      return this.http.get<any>(` https://api-dev.kincamp.com/search_admin_parent/`, { params });
     }
      getParentU(id){
-      return this.http.get('https://api.kincamp.com//parent/'+id);
+      return this.http.get(' https://api-dev.kincamp.com/parent/'+id);
 
      }
      postParent(info){
-      return this.http.post('https://api.kincamp.com//parent/',info);
+      return this.http.post(' https://api-dev.kincamp.com/parent/',info);
      }
      patchParent(id,a:any){
-      return this.http.patch('https://api.kincamp.com//parent/'+id,a);
+      return this.http.patch(' https://api-dev.kincamp.com/parent/'+id,a);
     }
     deletParent(id){
-      return this.http.delete('https://api.kincamp.com//delete_parent/'+id);
+      return this.http.delete(' https://api-dev.kincamp.com/delete_parent/'+id);
     }
      // user admi
 
@@ -364,49 +364,49 @@ export class CatalogosService {
         .set('per_page', String(perPage))
         .set('order', order);
   
-      return this.http.get<any>('https://api.kincamp.com//usuario', { params });
+      return this.http.get<any>(' https://api-dev.kincamp.com/usuario', { params });
     }
      getUserF(){
-      return this.http.get('https://api.kincamp.com//usuario?is_active=false');
+      return this.http.get(' https://api-dev.kincamp.com/usuario?is_active=false');
 
      }
     
      postUser(info){
-      return this.http.post('https://api.kincamp.com//usuario/',info);
+      return this.http.post(' https://api-dev.kincamp.com/usuario/',info);
      }
      patchUser(a:any,id){
-      return this.http.patch('https://api.kincamp.com//usuario/'+id,a);
+      return this.http.patch(' https://api-dev.kincamp.com/usuario/'+id,a);
     }
     deletUser(id){
-      return this.http.delete('https://api.kincamp.com//delete_usuario/'+id);
+      return this.http.delete(' https://api-dev.kincamp.com/delete_usuario/'+id);
     }
 
     getRol(){
-      return this.http.get('https://api.kincamp.com//rol?is_active=true');
+      return this.http.get(' https://api-dev.kincamp.com/rol?is_active=true');
     }
 
     getinfodelet(id){
-      return this.http.get('https://api.kincamp.com//user_delete_info?user_id='+id);
+      return this.http.get(' https://api-dev.kincamp.com/user_delete_info?user_id='+id);
 
 
     }
 
     getinID(id){
-      return this.http.get('https://api.kincamp.com//usuario/'+id);
+      return this.http.get(' https://api-dev.kincamp.com/usuario/'+id);
 
 
     }
   
     // admi camper
     getCamps( ){
-      return this.http.get('https://api.kincamp.com//camp/');
+      return this.http.get(' https://api-dev.kincamp.com/camp/');
 
      }
      patchCamps(a:any,id){
-      return this.http.patch('https://api.kincamp.com//camp/'+id,a);
+      return this.http.patch(' https://api-dev.kincamp.com/camp/'+id,a);
     }
     deletCamps(id){
-      return this.http.delete('https://api.kincamp.com//delete_camp/'+id);
+      return this.http.delete(' https://api-dev.kincamp.com/delete_camp/'+id);
     }
   
 }

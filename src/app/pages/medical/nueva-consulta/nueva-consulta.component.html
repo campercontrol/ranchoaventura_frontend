@@ -156,7 +156,7 @@
                           <div class="row mb-3">
                             <label for="inputPassword3" class="col-sm-12 col-form-label">Comentario de la consulta</label>
                             <div class="col-sm-12">
-                                <textarea class="form-control" placeholder="" id="" style="height: 100px" formControlName="medical_comment" [ngClass]="{'is-invalid': formConsult.get('medical_comment').invalid && formConsult.get('medical_comment').touched}"></textarea>
+                                <textarea class="form-control" placeholder="" id="" style="height: 100px" formControlName="comment" [ngClass]="{'is-invalid': formConsult.get('medical_comment').invalid && formConsult.get('medical_comment').touched}"></textarea>
                             </div>
                           </div>
                           <br>
@@ -165,7 +165,7 @@
                           <div class="row mb-3">
                             <label for="inputPassword3" class="col-sm-12 col-form-label">Comentario solo para medicos y staff</label>
                             <div class="col-sm-12">
-                                <textarea class="form-control" placeholder="" id="" style="height: 100px" formControlName="comment" [ngClass]="{'is-invalid': formConsult.get('comment').invalid && formConsult.get('comment').touched}"></textarea>
+                                <textarea class="form-control" placeholder="" id="" style="height: 100px" formControlName="medical_comment" [ngClass]="{'is-invalid': formConsult.get('comment').invalid && formConsult.get('comment').touched}"></textarea>
                             </div>
                           </div>
 

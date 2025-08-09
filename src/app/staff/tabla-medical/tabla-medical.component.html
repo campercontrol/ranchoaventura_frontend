@@ -311,7 +311,7 @@
     
                         </div>
                         <div class="col-6 fs-6">
-                            <p>{{getAuthorizationName(infoDataCamp.medication_authorization)}}</p>
+                            <p>{{ infoDataCamp.medication_authorization}}</p>
                                             </div>
     
                         <hr>
@@ -355,7 +355,7 @@
     
                         </div>
                         <div class="col-6 fs-6">
-                            <p>{{infoDataCamp.medical_comment}}</p>
+                            <p>{{infoDataCamp.comment}}</p>
                         </div>
     
                         <hr>
@@ -367,7 +367,7 @@
     
                         </div>
                         <div class="col-6 fs-6">
-                            <p>{{ stripComment(infoDataCamp.comment) }}</p>
+                            <p>{{ stripComment(infoDataCamp.medical_comment) }}</p>
 
                             
                         </div>
@@ -437,7 +437,7 @@
     
                         </div>
                         <div class="col-6 fs-6">
-                            <p>{{getAuthorizationName(seguimiento.medication_authorization)}}</p>
+                            <p>{{ seguimiento.medication_authorization}}</p>
                                             </div>
     
                         <hr>
@@ -481,7 +481,7 @@
     
                         </div>
                         <div class="col-6 fs-6">
-                            <p>{{seguimiento.medical_comment}}</p>
+                            <p>{{seguimiento.comment}}</p>
                         </div>
     
                         <hr>
@@ -493,7 +493,7 @@
     
                         </div>
                         <div class="col-6 fs-6">
-                            <p>{{ stripComment(seguimiento.comment) }}</p>
+                            <p>{{ stripComment(seguimiento.medical_comment) }}</p>
 
                             
                         </div>

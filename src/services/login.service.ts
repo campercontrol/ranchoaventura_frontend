@@ -12,7 +12,7 @@ export class LoginService {
   constructor(private http: HttpClient,private router:Router) { }
   resetContrasena(a){
     return new Promise((resolve,reject)=>{
-        this.http.post('https://api.kincamp.com//user/send_mail_password_reset',a).subscribe((res:any)=>{
+        this.http.post(' https://api-dev.kincamp.com/user/send_mail_password_reset',a).subscribe((res:any)=>{
           resolve = res;
         },error=>{
           reject = error;

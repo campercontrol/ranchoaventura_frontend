@@ -222,7 +222,7 @@ export class ListaProspectosComponent implements OnInit {
   deleteProspect(id: number) {
     console.log(id);
     
-    const url = `https://api.kincamp.com//delete_prospect/${id}`;
+    const url = ` https://api-dev.kincamp.com/delete_prospect/${id}`;
     this.http.delete(url).subscribe({
       next: (res) => {
         console.log('Prospecto eliminado:', res);

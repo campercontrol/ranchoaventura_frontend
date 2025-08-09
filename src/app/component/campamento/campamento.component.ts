@@ -168,6 +168,7 @@ export class CampamentoComponent implements OnInit {
   respuestPregunta:any="";
   cargosExtra:false;
   inscripcion = true;
+  infoPagos:any;
   loadingMercadoPago = false;
   
 
@@ -218,7 +219,7 @@ export class CampamentoComponent implements OnInit {
         this.dataPagos = res.payments;
         console.log(this.dataCamp,'aa');
         this.cargando= true;
-        this.fechadePagos = this.arrayToJsonString(this.dataCamp.recommended_payment_dates)
+       // this.fechadePagos = this.arrayToJsonString(this.dataCamp.recommended_payment_dates)
         if(this.dataCamp.show_mercadopago_button == true){this.linkMercadoPago()}
         console.log(this.fechadePagos,'informacion');
         
@@ -241,6 +242,8 @@ export class CampamentoComponent implements OnInit {
       console.log(this.idoma);
       
     })
+
+ 
 
 
   }

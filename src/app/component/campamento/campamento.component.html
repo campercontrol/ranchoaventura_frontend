@@ -13,7 +13,7 @@
             <h1 style="color:white;">{{textos[idoma]["texto11"]}}</h1>
           </div>
           <div class="mt-5px container-pagos p-2" *ngIf="pagos">
-            <h1>{{textos[idoma]["texto12"]}} ${{balance}} MXN</h1>
+            <h1>{{textos[idoma]["texto12"]}} {{balance}} </h1>
           </div>
           <div class="col-lg-12">
             <div class="card p-2">
@@ -42,22 +42,16 @@
                           <td>{{item.payment_date.substring(0,10)}}</td>
                           <td>{{item.txn_number}}</td>
                           <td>
-                            <div *ngIf="item.payment_amount>=0">
-                              ${{item.payment_amount}}MXN
-                            </div>
-                            <div *ngIf="item.payment_amount<0">
-    
-                            </div>
+                        
+                              {{item.charge}} 
+                           
+                           
                           </td>
                           <td>
-                            <div *ngIf="item.payment_amount<0">
-                              ${{item.payment_amount*-1}}MXN
-                            </div>
-                            <div *ngIf="item.payment_amount>=0">
-    
-                            </div>
+                             {{item.pay}} 
+                            
                           </td>
-                          <td>${{item.saldo}}MXN</td>
+                          <td>{{item.balance}} </td>
                         </tr>
                       </tbody>
                     </table>
@@ -81,27 +75,23 @@
                           </thead>
                           <tbody>
                             <tr *ngFor="let item of dataPagos">
-                              <td>{{item.id}}</td>
-                              <td>{{item.payment_date.substring(0,10)}}</td>
-                              <td>{{item.txn_number}}</td>
-                              <td>
-                                <div *ngIf="item.payment_amount>=0">
-                                  ${{item.payment_amount}}MXN
-                                </div>
-                                <div *ngIf="item.payment_amount<0">
-              
-                                </div>
-                              </td>
-                              <td>
-                                <div *ngIf="item.payment_amount<0">
-                                  ${{item.payment_amount*-1}}MXN
-                                </div>
-                                <div *ngIf="item.payment_amount>=0">
-              
-                                </div>
-                              </td>
-                              <td>${{item.saldo}}MXN</td>
-                            </tr>
+                              <tr *ngFor="let item of dataPagos">
+                                <td>{{item.id}}</td>
+                                <td>{{item.payment_date.substring(0,10)}}</td>
+                                <td>{{item.txn_number}}</td>
+                                <td>
+                              
+                                    {{item.charge}} 
+                                 
+                                 
+                                </td>
+                                <td>
+                                   {{item.pay}} 
+                                  
+                                </td>
+                                <td>{{item.balance}} </td>
+                              </tr>
+                            
                           </tbody>
                         </table>
                       </div>

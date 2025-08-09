@@ -165,20 +165,14 @@
                                 </td>
                                
                                 <td>
-                                    <div *ngIf="tabla.payment_amount>0">
-                                        ${{tabla.payment_amount}}MXN
-                                      </div>
-                                      <div *ngIf="tabla.payment_amount<0">
-                                        
-                                      </div>
+                                  
+                                    {{tabla.charge}} 
+                                      
                                 </td>
                                 <td>
-                                    <div *ngIf="tabla.payment_amount<0">
-                                        ${{tabla.payment_amount*-1}}MXN
-                                      </div>
-                                      <div *ngIf="tabla.payment_amount>=0">
-                                        
-                                      </div>
+                                    
+                                        {{tabla.pay}} 
+                                    
                                 </td>
                                 <td>
                                     {{tabla.balance}}

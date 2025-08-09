@@ -144,7 +144,7 @@ export class UpdateStaffComponent implements OnInit {
         this.food_restrictions = res.food_restrictions;
         this.blood_types = res.blood_types;
         let staff = res.staff
-          this.photoSelect = 'https://api.kincamp.com//'+staff.photo;
+          this.photoSelect = ' https://api-dev.kincamp.com/'+staff.photo;
           console.log(this.photoSelect);
           
           this.formUser.patchValue({
@@ -189,7 +189,7 @@ export class UpdateStaffComponent implements OnInit {
         this.food_restrictions = res.food_restrictions;
         this.blood_types = res.blood_types;
         let staff = res.staff
-          this.photoSelect = 'https://api.kincamp.com//'+staff.photo;
+          this.photoSelect = ' https://api-dev.kincamp.com/'+staff.photo;
           console.log(this.photoSelect);
           
           this.formUser.patchValue({
