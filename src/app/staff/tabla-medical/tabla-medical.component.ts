@@ -15,7 +15,7 @@ export class TablaMedicalComponent implements OnInit {
     representatives: any[];
     @ViewChild("op") overlayPanel: any; 
 
-  url=" https://api-dev.kincamp.com/"
+  url="https://api-dev.kincamp.com/"
     statuses: any[];
 
     loading: boolean = false;
@@ -124,7 +124,7 @@ export class TablaMedicalComponent implements OnInit {
   
   getImageUrl(comment: string = ''): string | null {
     const m = comment.match(/\$\{\{\s*(.*?)\s*\}\}/);
-       return ` https://api-dev.kincamp.com/${comment}`;
+       return `https://api-dev.kincamp.com/${comment}`;
      
   }  
  

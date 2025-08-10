@@ -11,29 +11,29 @@ export class PaymentsService {
    }
 
    getpage(idCamp,idCamper,id=0){
-    return this.http.get(' https://api-dev.kincamp.com/payment/page/camper/'+idCamp+'/'+idCamper+'/'+id)
+    return this.http.get('https://api-dev.kincamp.com/payment/page/camper/'+idCamp+'/'+idCamper+'/'+id)
    }
    // crear pago
    setpage(info){
-    return this.http.post(' https://api-dev.kincamp.com/payment/',info)
+    return this.http.post('https://api-dev.kincamp.com/payment/',info)
    }
    updatepage(id,info){
-    return this.http.patch(' https://api-dev.kincamp.com/payment/'+id,info)
+    return this.http.patch('https://api-dev.kincamp.com/payment/'+id,info)
    }
    getPageIndi(id){
-    return this.http.get(' https://api-dev.kincamp.com/payment/'+id,)
+    return this.http.get('https://api-dev.kincamp.com/payment/'+id,)
    }
    deletPage(id){
-    return this.http.delete(' https://api-dev.kincamp.com/payment_method/'+id,{})
+    return this.http.delete('https://api-dev.kincamp.com/payment_method/'+id,{})
    }
    // admi pagos catalogos
    getPagos(){
 
-    return this.http.get(' https://api-dev.kincamp.com/payment/')
+    return this.http.get('https://api-dev.kincamp.com/payment/')
   }
   gettransaction_type(){
 
-    return this.http.get(' https://api-dev.kincamp.com/payment_transaction_type/')
+    return this.http.get('https://api-dev.kincamp.com/payment_transaction_type/')
   }
 
 
@@ -41,12 +41,12 @@ export class PaymentsService {
 
   getDatosPagosMasivo(id){
 
-    return this.http.get(' https://api-dev.kincamp.com/camp/'+id+'/incomes')
+    return this.http.get('https://api-dev.kincamp.com/camp/'+id+'/incomes')
   }
 
   setDatosPagosMasivo(id,data){
 
-    return this.http.post(' https://api-dev.kincamp.com/camps/'+id+'/campers/0/massive_payment',data)
+    return this.http.post('https://api-dev.kincamp.com/camps/'+id+'/campers/0/massive_payment',data)
   }
 
 
