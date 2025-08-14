@@ -126,11 +126,7 @@ stripComment(text: string = ''): string {
 }
 
 
-getImageUrl(comment: string = ''): string | null {
-  const m = comment.match(/\$\{\{\s*(.*?)\s*\}\}/);
-     return `https://api-dev.kincamp.com/${comment}`;
-   
-}  
+ 
 
 openEditModal(item: any) {
   this.selectedConsultId = item.id;               // ← Usa el ID de la consulta

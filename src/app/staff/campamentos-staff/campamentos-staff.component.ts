@@ -159,6 +159,8 @@ export class CampamentosStaffComponent implements OnInit {
       this.user_coordinator= info.infToken.user_coordinator ;
       this.createCamp.getSede().subscribe((res:any)=>{
         this.location = res.data;
+        this.location.sort((a, b) => b.name.localeCompare(a.name));
+
         //console.log(this.location);
   
        });
