@@ -87,7 +87,7 @@ export class NuevoCampamentoComponent implements OnInit,AfterViewInit {
        
     this.createCamp.getSede().subscribe((res:any)=>{
       this.location = res.data;
-      this.location.sort((a, b) => b.name.localeCompare(a.name));
+      this.location.sort((a, b) => a.name.localeCompare(b.name));
 
 
      });

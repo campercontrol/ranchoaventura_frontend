@@ -9,14 +9,16 @@ import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import jwt_decode from "jwt-decode";
-registerLocaleData(localeEs, 'es');
+import localeEsMX from '@angular/common/locales/es-MX';
+
+registerLocaleData(localeEsMX, 'es-MX');
 
 
 @Component({
   selector: 'app-campamento',
   templateUrl: './campamento.component.html',
   styleUrls: ['./campamento.component.scss'],
-  providers: [{ provide: LOCALE_ID, useValue: 'es' }],
+  providers: [{ provide: LOCALE_ID, useValue: 'es' }, { provide: LOCALE_ID, useValue: 'es-MX' }],
 
 })
 export class CampamentoComponent implements OnInit {

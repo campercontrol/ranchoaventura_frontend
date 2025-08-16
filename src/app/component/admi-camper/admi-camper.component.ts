@@ -112,7 +112,7 @@ export class AdmiCamperComponent implements OnInit {
   constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private catalogos:CatalogosService,) {  
     this.createCamp.getSede().subscribe((res:any)=>{
       this.location = res.data;
-      this.location.sort((a, b) => b.name.localeCompare(a.name));
+       this.location.sort((a, b) => a.name.localeCompare(b.name));
 
       //console.log(this.location);
 
