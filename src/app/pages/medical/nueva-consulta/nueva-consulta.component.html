@@ -200,7 +200,10 @@
 
     <!-- Previsualización -->
     <div class="preview mt-3" *ngIf="photoSelect">
-      <img [src]="photoSelect" alt="Previsualización" height="300px" />
+      <div style="width: 90%;">
+        <img [src]="photoSelect" alt="Previsualización" style="width: 90%;"  />
+
+      </div>
     </div>
 
     <!-- Spinner durante la carga -->
@@ -239,27 +242,64 @@
   aria-modal="true"
   role="dialog"
 >
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-dialog modal-dialog-centered modal-xl modal-custom">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Tomar foto</h5>
         <button type="button" class="btn-close" aria-label="Close" (click)="closeCamera()"></button>
       </div>
       <div class="modal-body text-center">
-        <video #video autoplay playsinline class="video-frame"></video>
-        <canvas #canvas class="d-none"></canvas>
-
+        <div class="video-container">
+          <!-- Cámara en vivo -->
+          <video
+            #video
+            *ngIf="!snapshotReady"
+            autoplay
+            playsinline
+            class="video-frame">
+          </video>
+        
+          <!-- Previsualización de la foto capturada -->
+          <img
+            *ngIf="snapshotReady"
+            [src]="photoSelect"
+            alt="Previsualización"
+            class="video-frame" />
+          
+          <canvas #canvas class="d-none"></canvas>
+        </div>
+        
+        <!-- Botones -->
         <div class="mt-3 d-flex justify-content-center gap-2 flex-wrap">
-          <button type="button" class="btn btn-secondary" (click)="takeSnapshot()">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            *ngIf="!snapshotReady"
+            (click)="takeSnapshot()">
             Capturar
           </button>
-          <button type="button" class="btn btn-primary" [disabled]="!snapshotReady" (click)="useSnapshot()">
+        
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            *ngIf="snapshotReady"
+            (click)="retakeSnapshot()">
+            Repetir
+          </button>
+        
+          <button
+            type="button"
+            class="btn btn-primary"
+            [disabled]="!snapshotReady || isImageUploading"
+            (click)="useSnapshot()">
             Usar foto
           </button>
+        
           <button type="button" class="btn btn-outline-danger" (click)="closeCamera()">
             Cancelar
           </button>
         </div>
+        
 
         <div *ngIf="cameraError" class="alert alert-danger mt-3 mb-0">
           {{ cameraError }}
@@ -268,4 +308,5 @@
     </div>
   </div>
 </div>
+
  

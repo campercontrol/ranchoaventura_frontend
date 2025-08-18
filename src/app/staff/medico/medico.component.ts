@@ -129,7 +129,19 @@ stripComment(text: string = ''): string {
  
 
 openEditModal(item: any) {
-  this.selectedConsultId = item.id;               // ← Usa el ID de la consulta
+  this.selectedConsultId = item.id;   
+  let consulta = [  { id:90, label:'No urgencia' },
+    { id:91, label:'Urgencia menor' },
+    { id:92, label:'Urgencia' },
+    { id:93, label:'Emergencia' },
+    { id:94, label:'Reanimación' }]  
+    let nombreBuscado = 'Urgencia menor'; // el label que quieras encontrar
+let resultado = consulta.find(data => data.label === item.triage);
+
+let idEncontrado  = resultado ? resultado.id : null;
+item.triage = idEncontrado; // Asigna el ID encontrado al campo triage
+    
+    // ← Usa el ID de la consulta
   this.editForm.patchValue(item);                 // ← Rellena el formulario
   this.displayEditModal = true;
 }

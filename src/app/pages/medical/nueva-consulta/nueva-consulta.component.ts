@@ -160,20 +160,16 @@ export class NuevaConsultaComponent implements OnInit {
 
   // ==========================
   // Cámara (getUserMedia)
-  // ==========================
+ 
   async openCamera() {
     this.cameraError = '';
     this.snapshotReady = false;
+    this.photoSelect = null;
     this.showCamera = true;
     this.cdr.detectChanges();
-
     try {
       this.mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          facingMode: { ideal: 'environment' },
-          width: { ideal: 1920 },
-          height: { ideal: 1080 },
-        },
+        video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } },
         audio: false,
       });
       const video = this.videoRef?.nativeElement;
@@ -183,10 +179,46 @@ export class NuevaConsultaComponent implements OnInit {
       }
     } catch (e: any) {
       console.error(e);
-      this.cameraError =
-        'No fue posible acceder a la cámara. Revisa permisos del navegador.';
+      this.cameraError = 'No fue posible acceder a la cámara. Revisa permisos del navegador.';
     }
   }
+  
+   
+  // Volver a cámara (descartar previa)
+  async retakeSnapshot() {
+    this.snapshotReady = false;
+    this.photoSelect = null;
+    const video = this.videoRef?.nativeElement;
+    if (video && this.mediaStream) {
+      video.srcObject = this.mediaStream;
+      try { await video.play(); } catch {}
+    }
+    this.cdr.detectChanges();
+  }
+  
+  // Usar foto -> comprimir, subir y cerrar
+  async useSnapshot() {
+    const canvas = this.canvasRef?.nativeElement;
+    if (!canvas) return;
+    this.isImageUploading = true;
+    this.cdr.detectChanges();
+  
+    try {
+      const blob = await this.compressToLimit(canvas, 'image/jpeg', this.MAX_BYTES);
+      const file = new File([blob], `cam_${Date.now()}.jpg`, { type: 'image/jpeg' });
+      await this.uploadFile(file);
+      this.statusImageFals = true;
+      this.closeCamera(); // cierra modal y limpia estado
+    } catch (e) {
+      console.error(e);
+      this.statusImageFals = false;
+      alert('No se pudo procesar/subir la foto.');
+    } finally {
+      this.isImageUploading = false;
+      this.cdr.detectChanges();
+    }
+  }
+
 
   closeCamera() {
     this.stopStream();
@@ -224,27 +256,7 @@ export class NuevaConsultaComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  async useSnapshot() {
-    const canvas = this.canvasRef?.nativeElement;
-    if (!canvas) return;
-    this.isImageUploading = true;
-    this.cdr.detectChanges();
-
-    try {
-      const blob = await this.compressToLimit(canvas, 'image/jpeg', this.MAX_BYTES);
-      const file = new File([blob], `cam_${Date.now()}.jpg`, { type: 'image/jpeg' });
-      await this.uploadFile(file);
-      this.statusImageFals = true;
-      this.closeCamera();
-    } catch (e) {
-      console.error(e);
-      this.statusImageFals = false;
-      alert('No se pudo procesar/subir la foto.');
-    } finally {
-      this.isImageUploading = false;
-      this.cdr.detectChanges();
-    }
-  }
+ 
 
   // ==========================
   // Utilidades
