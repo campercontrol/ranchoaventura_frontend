@@ -69,8 +69,10 @@ export class CampamentosStaffComponent implements OnInit {
   displayMaximizable2:boolean=false;
   modalConfir:boolean= false;
   selectRol:number=0;
-  infoCamp:campss={
+  
+  infoCamp:any={
     id: 0,
+    location: '',
     special_message: '',
     reminder_camp_days: 0,
     active: false,
@@ -348,6 +350,7 @@ private getFileNameFromHeader(contentDisposition: string | null): string | null 
     this.capms.getInfoCamp(this.idCamp).subscribe((res:any)=>{
       console.log(res);
       this.infoCamp = res.camp
+      this.infoCamp.location= res.location;
       this.listCampers = res.campers;
       this.listStaffConfirm = res.staff_confirmed;
       this.staffApuntado = res.staff_volunteer;
