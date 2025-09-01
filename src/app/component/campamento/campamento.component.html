@@ -244,7 +244,7 @@
           </div>
         </div>
         <hr>
-        <div class="conatiner-info-camp">
+        <div class="conatiner-info-camp" *ngIf="dataCamp.show_payment_parent">
           <p class="fw-bold"><i class="far fa-money-bill-alt"></i>{{textos[idoma]['texto9']}}</p>
           <p>${{dataCamp.public_price}} MXN.</p>
         </div>
