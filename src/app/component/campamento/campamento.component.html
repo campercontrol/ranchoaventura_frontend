@@ -199,13 +199,15 @@
             <p>{{dataCamp.start | date:'yyyy-MM-dd'}} - {{dataCamp.end | date:'yyyy-MM-dd'}}</p>
           </div>
           <div class="conatiner-info-camp">
-            <p class="fw-bold"><i class="bx bxs-time"></i> {{textos[idoma]['texto2']}}</p>
-            <p>{{dataCamp.start | date:'HH:mm'}}</p>
+            <p class="fw-bold"><i class="bx bxs-time"></i> {{ textos[idoma]['texto2'] }}</p>
+            <p>{{ dataCamp.start | date:'HH:mm':'UTC' }}</p>
           </div>
+          
           <div class="conatiner-info-camp">
-            <p class="fw-bold"><i class="bx bxs-time"></i> {{textos[idoma]['texto3']}}</p>
-            <p>{{dataCamp.end | date:'HH:mm'}}</p>
+            <p class="fw-bold"><i class="bx bxs-time"></i> {{ textos[idoma]['texto3'] }}</p>
+            <p>{{ dataCamp.end   | date:'HH:mm':'UTC' }}</p>
           </div>
+          
           <div class="conatiner-info-camp">
             <p class="fw-bold"><i class="fas fa-map-marked-alt"></i> {{textos[idoma]['texto4']}}</p>
             <p>{{dataCamp.venue}}</p>
@@ -232,7 +234,7 @@
           </div>
           <div class="conatiner-info-camp">
             <p class="fw-bold"><i class="bx bx-key"></i> {{textos[idoma]['texto42']}}</p>
-            <p>{{removeHtmlTags(dataCamp.special_message)}}</p>
+            <p [innerHTML]="dataCamp.special_message"></p>
           </div>
           <div class="conatiner-info-camp" *ngIf="dataCamp.show_paypal_button">
             <p class="fw-bold"><i class="bxl-paypal"></i> Paypal</p>
@@ -246,7 +248,7 @@
         <hr>
         <div class="conatiner-info-camp" *ngIf="dataCamp.show_payment_parent">
           <p class="fw-bold"><i class="far fa-money-bill-alt"></i>{{textos[idoma]['texto9']}}</p>
-          <p>${{dataCamp.public_price}} MXN.</p>
+          <p>{{this.dataCamp.currency.symbol}}{{dataCamp.public_price}} {{this.dataCamp.currency.acronyms}}</p>
         </div>
         <div class="container-btn">
           <button class="btn btn-info p-2" style="height:60px;" (click)="incio()">{{textos[idoma]['texto32']}}</button>
@@ -291,7 +293,7 @@
     <div class="mb-3" *ngFor="let item of cargosExtras; let index = index;">
       <label for="dateOfBirth">{{item.extra_charge_name}}</label>
       <input class="form-check-input" type="checkbox" [(ngModel)]="cargosExtras[index].extra_selected" />
-      <label class="form-check-label">${{item.extra_charge_price}}</label>
+      <label class="form-check-label"> {{this.dataCamp.currency.symbol}} {{item.extra_charge_price}} {{this.dataCamp.currency.acronyms}}</label>
     </div>
   </div>
   <div class="modal-footer">
@@ -307,7 +309,7 @@
         <h1 class="card-title text-white">{{textos[idoma]['textoMercadoTitulo']}}</h1>
       </div>
       <div class="alert alert-warning col-12" role="alert">
-        {{textos[idoma]['texto38']}} {{balance | currency}}. {{textos[idoma]['texto39']}}
+        {{textos[idoma]['texto38']}} {{  this.dataCamp.currency.symbol + balance +   this.dataCamp.currency.acronyms}}. {{textos[idoma]['texto39']}}
       </div>
       <div class="text-center mb-3">
         <input type="number" class="form-control w-50 mx-auto" [(ngModel)]="pagoMercado" />
@@ -315,7 +317,7 @@
       <div class="table-responsive mb-3">
         <table class="table table-bordered table-striped mb-0">
           <thead><tr><th>{{textos[idoma]['th']}}</th><th>{{textos[idoma]['textoCantidadPagar']}}</th></tr></thead>
-          <tbody><tr *ngFor="let item of fechadePagos"><td>{{item.name | date:'dd MMMM yyyy'}}</td><td>{{item.price | currency:'USD':'':'1.2-2'}}</td></tr></tbody>
+          <tbody><tr *ngFor="let item of fechadePagos"><td>{{item.name | date:'dd MMMM yyyy'}}</td><td> {{ this.dataCamp.currency.symbol}} {{item.price | number:'1.0-0' }} {{this.dataCamp.currency.acronyms}}</td></tr></tbody>
         </table>
       </div>
       <button class="btn btn-warning w-50 mx-auto" (click)="linkMp()">{{textos[idoma]['texto40']}}</button>

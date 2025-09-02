@@ -1,6 +1,6 @@
 {
   "/media": {
-    "target": " https://api.kincamp.com/",
+    "target": "https://api.kincamp.com/",
     "secure": false,
     "changeOrigin": true
   }

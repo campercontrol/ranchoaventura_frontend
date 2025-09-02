@@ -9,20 +9,24 @@ export class PaymentsService {
   constructor(private http : HttpClient) {
 
    }
-
+   // crear pago
    getpage(idCamp,idCamper,id=0){
     return this.http.get('https://api.kincamp.com/payment/page/camper/'+idCamp+'/'+idCamper+'/'+id)
-   }
+   } 
+
    // crear pago
    setpage(info){
     return this.http.post('https://api.kincamp.com/payment/',info)
    }
+     // crear pago
    updatepage(id,info){
     return this.http.patch('https://api.kincamp.com/payment/'+id,info)
    }
+     // crear pago
    getPageIndi(id){
     return this.http.get('https://api.kincamp.com/payment/'+id,)
    }
+     // crear pago
    deletPage(id){
     return this.http.delete('https://api.kincamp.com/payment_method/'+id,{})
    }
@@ -31,6 +35,7 @@ export class PaymentsService {
 
     return this.http.get('https://api.kincamp.com/payment/')
   }
+    // crear pago
   gettransaction_type(){
 
     return this.http.get('https://api.kincamp.com/payment_transaction_type/')

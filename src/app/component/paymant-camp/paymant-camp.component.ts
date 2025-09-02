@@ -35,11 +35,10 @@ export class PaymantCampComponent {
       this.camp = params['camp'];
      
   
-        console.log('si entro');
+        console.log('si entro ,informacion del camps');
         
         this.pages.getpage(43942,21078).subscribe((res)=>{
-          console.log(res,'informacion');
-          
+  
           this.info = res;
           this.tiposPago = this.info.payment_methods;
           this.tiposMovimiento = this.info.transaction_type;
@@ -62,9 +61,7 @@ export class PaymantCampComponent {
             this.loading = false;
             console.log(this.pagostipo,'tipos de pagos');
             console.log(this.camper,'tipos de pagos');
-
-            
-           
+ 
    
         }) 
 

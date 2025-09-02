@@ -52,25 +52,39 @@ export class AuthenticationService {
     );
   }
     
-    login2(email: string, password: string) {
-      return new Promise((resolve,reject)=>{
-        this.http.post("https://api.kincamp.com/token",{username :email, password:password})
-          .subscribe((user:any) => {
-              console.log(user);
-              this.loggedIn = true;
-              localStorage.setItem('currentUser', JSON.stringify(user));
-              this.infToken = jwt_decode(user.access_token);
-              this.router.navigate(['/dashboard/parents/new-camper']);
-           
-                console.log(this.infToken);
-                
-              resolve(user);
-          }),error =>{
-              reject(error);
-          };
-      })
-    }
-
+  login2(email: string, password: string) {
+    return new Promise((resolve, reject) => {
+      const body = new HttpParams()
+        .set('username', email)
+        .set('password', password);
+  
+      this.http.post(
+        "https://api.kincamp.com/token",
+        body.toString(),
+        {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'accept': 'application/json'
+          })
+        }
+      ).subscribe(
+        (user: any) => {
+          console.log(user);
+          this.loggedIn = true;
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.infToken = jwt_decode(user.access_token);
+          this.router.navigate(['/dashboard/parents/new-camper']);
+          console.log(this.infToken);
+  
+          resolve(user);
+        },
+        (error) => {
+          console.error(error);
+          reject(error);
+        }
+      );
+    });
+  }
     logaot(){
      let a =JSON.parse(localStorage.getItem('currentUser'));
      if(a){

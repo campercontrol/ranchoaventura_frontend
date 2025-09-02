@@ -83,9 +83,10 @@ export class NewParentComponent implements OnInit {
       texto5: "Confirmar contraseña*",
       texto6: "Este será el nombre de usuario para tu cuenta.",
       texto7: "Introduce la contraseña",
-      texto8: "Esta será utilizada para ingresar a Kin Camp. Mínimo 6 caracteres, incluyendo una mayúscula, una minúscula y un carácter especial.",
+      texto8: "La contraseña será utilizada para acceder a Kin Camp. Debe tener mínimo 6 caracteres, con al menos una letra mayúscula, una letra minúscula y un número.",
       texto9: "Introduce la contraseña",
       texto10: "Nombre(s)*",
+      texto29: "Email",
       texto11: "Apellido paterno*",
       texto12: "Apellido materno",
       texto13: "Teléfono primario (1er medio de contacto)*",
@@ -134,7 +135,9 @@ export class NewParentComponent implements OnInit {
       texto25: "Passwords do not match.",
       texto26: "Emails do not match.",
       texto27: "Make sure it is a valid email address, as we will send you messages related to the camps your children will attend.",
-      texto28: "At the end of the registration, a confirmation message will be sent to this email. Please check your spam folder to ensure you received it. If you do not receive it, please contact us."
+      texto28: "At the end of the registration, a confirmation message will be sent to this email. Please check your spam folder to ensure you received it. If you do not receive it, please contact us.",
+      texto29: "Email",
+
     }
   }
 

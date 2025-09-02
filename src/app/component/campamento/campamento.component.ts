@@ -10,6 +10,7 @@ import localeEs from '@angular/common/locales/es';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import jwt_decode from "jwt-decode";
 import localeEsMX from '@angular/common/locales/es-MX';
+import { CurrencyService } from './currency.service';
 
 registerLocaleData(localeEsMX, 'es-MX');
 
@@ -193,7 +194,8 @@ export class CampamentoComponent implements OnInit {
   spinner = false;
   showCancelDialog= false;
 
-  constructor(private mercadoPagoService: MercadoPagoService,private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router,private render:Renderer2,private lang:LangService,private routerNav:Router,private info : AuthenticationService) { 
+  constructor(private mercadoPagoService: MercadoPagoService,private hijos:CamperService,private camps:CampsService,private routesA:ActivatedRoute,private modalService: NgbModal, private router:Router,private render:Renderer2,private lang:LangService,private routerNav:Router,private info : AuthenticationService,  private currencyService: CurrencyService
+  ) { 
 
     this.rol=this.info.infToken.role_id
     
@@ -221,7 +223,13 @@ export class CampamentoComponent implements OnInit {
         this.dataPagos = res.payments;
         console.log(this.dataCamp,'aa');
         this.cargando= true;
-       // this.fechadePagos = this.arrayToJsonString(this.dataCamp.recommended_payment_dates)
+        this.currencyService.getCurrencyById(this.dataCamp.currency_id).subscribe(currency => {
+          if (currency) {
+            console.log('Moneda encontrada:', currency);
+            this.dataCamp.currency = currency; // la guardamos dentro del camp
+          }
+        });
+       this.fechadePagos = this.arrayToJsonString(this.dataCamp.recommended_payment_dates)
         if(this.dataCamp.show_mercadopago_button == true){this.linkMercadoPago()}
         console.log(this.fechadePagos,'informacion');
         
@@ -249,7 +257,11 @@ export class CampamentoComponent implements OnInit {
 
 
   }
- 
+  toLocal(dateString: string): Date | null {
+    if (!dateString) return null;
+    return new Date(dateString);
+  }
+  
   removeHtmlTags(inputString: string): string {
     if (!inputString) {
       return ''; // Devuelve una cadena vacía si el string es null o undefined
