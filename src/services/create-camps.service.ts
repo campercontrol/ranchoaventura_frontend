@@ -26,7 +26,7 @@ export class CreateCampsService {
   patchCamp(id,a:any){
     return this.http.patch('https://api.kincamp.com/camp/'+id,a);
   }
-  getCamp( page=1,per_page=10){
+  getCamp( page=1,per_page=50){
     return this.http.get('https://api.kincamp.com/active_camp/'+'?page='+page+'&per_page='+per_page+'&order=desc');
   }
   getCampId( id:any){

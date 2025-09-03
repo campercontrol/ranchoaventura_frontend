@@ -59,9 +59,9 @@
                                 placeholder="Global Search" />
                         </div>
 
-                        <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
-                            [value]="customer" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
-                            [loading]="loading" [paginator]="true"
+                        <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"  
+                            [value]="customer" [showCurrentPageReport]="true" 
+                            [loading]="loading"  
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                             [filterDelay]="0"
                             [globalFilterFields]="['camper.id','camper.camper_name','representative.name','status']">

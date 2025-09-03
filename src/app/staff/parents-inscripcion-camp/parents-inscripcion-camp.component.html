@@ -99,7 +99,7 @@
                  
                 </div>
       
-                <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="5" [value]="customer" 
+                <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"  [rows]="50" [value]="customer" 
                   [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
                   [globalFilterFields]="['name','location_id','start','end','public_price']"
@@ -208,7 +208,7 @@
       
               </div>
               <br>
-              <p-table #dt [value]="subscribe_camps" [rows]="5" 
+              <p-table #dt [value]="subscribe_camps"  [rows]="50" 
                   [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
                   [(selection)]="selectedProducts" [rowHover]="true" dataKey="camp_id"
                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -296,7 +296,7 @@
                
                
               </div>
-              <p-table #dt [value]="available_school_camps" [rows]="5" 
+              <p-table #dt [value]="available_school_camps"  [rows]="50" 
                   [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
                   [(selection)]="campsSchool" [rowHover]="true" dataKey="camp_id"
                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -384,7 +384,7 @@
               </div>
             
             <br>
-            <p-table #dt [value]="summer_school_camps" [rows]="5"  [(selection)]="campsSummer" 
+            <p-table #dt [value]="summer_school_camps"  [rows]="50"  [(selection)]="campsSummer" 
                 [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
                 dataKey="camp_id"
                 responsiveLayout="scroll"
@@ -459,7 +459,7 @@
   
           </div>
           <br>
-          <p-table #dt [value]="passed_camps" [rows]="5" 
+          <p-table #dt [value]="passed_camps"  [rows]="50" 
               [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
               [(selection)]="selectedProducts" [rowHover]="true" dataKey="camp_id"
               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -524,7 +524,7 @@
           </div>
           <br>
 
-          <p-table #dt [value]="cancelled_camps" [rows]="5" 
+          <p-table #dt [value]="cancelled_camps"  [rows]="50" 
               [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
               [(selection)]="selectedProducts" [rowHover]="true" dataKey="camp_id"
               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

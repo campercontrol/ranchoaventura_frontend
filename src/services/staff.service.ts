@@ -73,7 +73,7 @@ export class StaffService {
   
       return this.http.get(`https://api.kincamp.com/search/active_camp/?${params.toString()}`);
     }
-    getCamp( page=1,per_page=10){
+    getCamp( page=1,per_page=50){
       return this.http.get('https://api.kincamp.com/active_camp/'+'?page='+page+'&per_page='+per_page+'&order=desc');
     }
 }

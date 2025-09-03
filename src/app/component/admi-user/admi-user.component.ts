@@ -166,7 +166,7 @@ export class AdmiUserComponent implements OnInit {
   
   loadUsuarios(event: any) {
     const page = (event.first! / event.rows!) + 1;
-    const perPage = event.rows || 5;
+    const perPage = event.rows || 50;
 
  
     this.catalogos.getUsuarios(this.filters.is_active, page, perPage, 'desc').subscribe({

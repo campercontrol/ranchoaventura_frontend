@@ -207,7 +207,7 @@ export class AdmiParentComponent implements OnInit {
 
   }
 
-  getCatalogos(page: number = 1, per_page: number = 5) {
+  getCatalogos(page: number = 1, per_page: number = 50) {
     this.spiner = true;
     if (this.id === undefined) {
 

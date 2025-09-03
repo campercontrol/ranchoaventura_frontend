@@ -251,7 +251,7 @@ export class CatalogosService {
       return this.http.get('https://api.kincamp.com/camper/');
 
     }
-    getCamperAdmi(page=1,per_page=10){
+    getCamperAdmi(page=1,per_page=50){
       return this.http.get('https://api.kincamp.com/admin/camper/?page='+page+'&per_page='+per_page+'&order=desc');
     }
 
@@ -290,7 +290,7 @@ export class CatalogosService {
     getParent(){
       return this.http.get('https://api.kincamp.com/parent/');
      }
-     getStaff(page=1,per_page=10){
+     getStaff(page=1,per_page=50){
       return this.http.get('https://api.kincamp.com/staff/?page='+page+'&per_page='+per_page+'&order=desc');
      }
      searchUusario(filters: any, page: number = 1, perPage: number = 10) {
@@ -317,7 +317,7 @@ export class CatalogosService {
       return this.http.get('https://api.kincamp.com/prospect/');
 
      }
-     getParentAdmi(page=1,per_page=10){
+     getParentAdmi(page=1,per_page=50){
       return this.http.get('https://api.kincamp.com/admin/parent/?page='+page+'&per_page='+per_page+'&order=desc');
      }
 

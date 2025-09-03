@@ -16,8 +16,8 @@
         </div>
 
         <div class="scroll-y">
-            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10" [value]="campers"
-                [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
+            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"   [value]="campers"
+                [showCurrentPageReport]="true"  [loading]="loading" [paginator]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
                 [globalFilterFields]="['camper_name',
                 'tutor_fullname',
@@ -148,7 +148,7 @@
 
         <div >
             <div class="scroll-y">
-                <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="10"
+                <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="50"
                     [value]="staffs" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
                     [loading]="loading" [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"

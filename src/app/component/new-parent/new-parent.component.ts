@@ -83,7 +83,7 @@ export class NewParentComponent implements OnInit {
       texto5: "Confirmar contraseña*",
       texto6: "Este será el nombre de usuario para tu cuenta.",
       texto7: "Introduce la contraseña",
-      texto8: "La contraseña será utilizada para acceder a Kin Camp. Debe tener mínimo 6 caracteres, con al menos una letra mayúscula, una letra minúscula y un número.",
+      texto8: "La contraseña será utilizada para acceder a Kin Camp. Debe tener Mínimo de 6 caracteres, 1 letra mayúscula, 1 letra minúscula, un número y un caracter especial",
       texto9: "Introduce la contraseña",
       texto10: "Nombre(s)*",
       texto29: "Email",

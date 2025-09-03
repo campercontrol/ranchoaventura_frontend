@@ -54,7 +54,7 @@ export class AuthGuard implements CanActivate {
 
                 break;
             case 3:
-                if (state.url.includes('/camp') || state.url.includes('/medical') || state.url.includes('/staff')|| state.url.includes('/school')) {
+                if (state.url.includes('/camp') || state.url.includes('/medical') || state.url.includes('/staff')|| state.url.includes('/school') || state.url.includes('/grouping')) {
                     return true;
                 }
                 return false;

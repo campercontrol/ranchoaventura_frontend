@@ -40,10 +40,10 @@
                             </div>
                         </div>
                         <div style="overflow: auto;">
-                            <p-table #dt [value]="listcatalogos" [rows]="5" [rowsPerPageOptions]="[5, 25, 50]"
+                            <p-table #dt [value]="listcatalogos"  [rows]="50" [rowsPerPageOptions]="[5, 25, 50]"
                             dataKey="id"
                             [rowHover]="true"
-                            [rows]="10"
+                            [rows]="50"
                             [paginator]="true"
                             [lazy]="true"
                             (onLazyLoad)="loadCampsLazy($event)"
