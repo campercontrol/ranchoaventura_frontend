@@ -316,7 +316,7 @@
       </div>
       <div class="table-responsive mb-3">
         <table class="table table-bordered table-striped mb-0">
-          <thead><tr><th>{{textos[idoma]['th']}}</th><th>{{textos[idoma]['textoCantidadPagar']}}</th></tr></thead>
+          <thead><tr><th>{{textos[idoma]['th']}}</th><th>Monto</th></tr></thead>
           <tbody><tr *ngFor="let item of fechadePagos"><td>{{item.name | date:'dd MMMM yyyy'}}</td><td> {{ this.dataCamp.currency.symbol}} {{item.price | number:'1.0-0' }} {{this.dataCamp.currency.acronyms}}</td></tr></tbody>
         </table>
       </div>

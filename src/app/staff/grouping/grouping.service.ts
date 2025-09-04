@@ -11,7 +11,7 @@ export class GroupingService {
     return this.http.get('https://api.kincamp.com/camps/'+id+'/groupings/campers')
   }
   createGroup(data){
-    return this.http.post('https://api.kincamp.com/grouping_camps',data)
+    return this.http.post('https://api.kincamp.com/grouping_camps/',data)
   }
   editraCapcidadMaxima(id,data){
     return this.http.put('https://api.kincamp.com/grouping_camps/'+id,data)
@@ -26,7 +26,7 @@ export class GroupingService {
 
   }
   campersInscritos(data){
-    return this.http.post('https://api.kincamp.com/grouping_campers',data)
+    return this.http.post('https://api.kincamp.com/grouping_campers/',data)
 
   }
 

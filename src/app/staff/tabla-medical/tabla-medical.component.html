@@ -17,8 +17,8 @@
 
         <div class="scroll-y">
             <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"   [value]="campers"
-                [showCurrentPageReport]="true"  [loading]="loading" [paginator]="true"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                [showCurrentPageReport]="true"  [loading]="loading"  
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"  
                 [globalFilterFields]="['camper_name',
                 'tutor_fullname',
                 'tutor_email',
@@ -199,7 +199,7 @@
                         <tr class="p-selectable-row">
 
                             <td>
-                                <p-avatar image="../../../assets/images/users/avatar-2.jpg" shape="circle"
+                                <p-avatar   [image]=" url+customer.staff_photo" shape="circle"
                                     size="large"></p-avatar>
                             </td>
                             <td>
