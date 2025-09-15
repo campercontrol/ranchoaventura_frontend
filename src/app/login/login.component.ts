@@ -244,6 +244,8 @@ buttonSend: any = false;
         
       },error=>{
         this.spinner = true;
+        this.errologin=true;
+
         console.log(error);
         
       })

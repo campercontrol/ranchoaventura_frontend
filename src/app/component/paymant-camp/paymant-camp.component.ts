@@ -37,7 +37,7 @@ export class PaymantCampComponent {
   
         console.log('si entro ,informacion del camps');
         
-        this.pages.getpage(43942,21078).subscribe((res)=>{
+        this.pages.getpage(0,0).subscribe((res)=>{
   
           this.info = res;
           this.tiposPago = this.info.payment_methods;
