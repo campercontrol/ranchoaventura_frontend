@@ -255,7 +255,7 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
     this.getCatalogos(page, rows);
   }
 
-  getCatalogos(page: number = 1, per_page: number = 5) {
+  getCatalogos(page: number = 1, per_page: number = 50) {
     if(this.id == undefined){
 
       this.catalogos.getCamperAdmi(page,per_page).subscribe((res: any) => {

@@ -152,7 +152,7 @@ export class NewParentComponent implements OnInit {
       texto5: "Confirma contraseña* ",
       texto6: "Será el usuario de acceso a la cuenta.",
       texto7: "El correo no coincide",
-      texto8: "Se usará para ingresar a Kin Camp Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra minuscula y un caracter especial ",
+      texto8: " Se usará para ingresar a Kin Camp Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra minuscula , 1 un numero y un caracter especial ",
 
 
     },
@@ -223,7 +223,7 @@ export class NewParentComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(6),
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/),
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/)
         ],
       ],
 
