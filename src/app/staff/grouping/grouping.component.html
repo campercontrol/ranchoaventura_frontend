@@ -48,9 +48,12 @@
                 <th pSortableColumn="grade">
                   Grade <p-sortIcon field="grade"></p-sortIcon>
                 </th>
-                <!-- Columnas dinámicas de agrupaciones con ordenación -->
-                <th *ngFor="let grouping of tipoAgrupaciosn; let i = index" [pSortableColumn]="'grouping' + i">
-                  {{ grouping.name }} <p-sortIcon [field]="'grouping' + i"></p-sortIcon>
+          
+                <!-- 🔹 Solo cabeceras de agrupaciones en uso -->
+                <th *ngFor="let grouping of getVisibleGroupings(); let i = index"
+                    [pSortableColumn]="'grouping' + i">
+                  {{ grouping.name }}
+                  <p-sortIcon [field]="'grouping' + i"></p-sortIcon>
                 </th>
               </tr>
             </ng-template>
@@ -61,17 +64,20 @@
                 <td>{{ item.birthday | date: 'MM/dd/yyyy' }}</td>
                 <td>{{ item.gender }}</td>
                 <td>{{ item.grade }}</td>
-                <!-- Mostrar el nombre del grouping si coincide el grouping_type_id -->
-                <td *ngFor="let grouping of tipoAgrupaciosn; let i = index">
+          
+                <!-- 🔹 Solo columnas de agrupaciones en uso -->
+                <td *ngFor="let grouping of getVisibleGroupings(); let i = index">
                   {{ getGroupingName(item, grouping.id) }}
-                  <button pButton type="button" icon="pi pi-trash" class="p-button-danger small-circular-btn"
-                          *ngIf="getGroupingName(item, grouping.id) !== '-'"  
+                  <button pButton type="button" icon="pi pi-trash"
+                          class="p-button-danger small-circular-btn"
+                          *ngIf="getGroupingName(item, grouping.id) !== '-'"
                           (click)="deletGrping(item, grouping.id)">
                   </button>
                 </td>
               </tr>
             </ng-template>
           </p-table>
+          
           
           
           
@@ -149,51 +155,36 @@
       <p-table #dt [value]="listcatalogos"[globalFilterFields]="['name']" [rows]="100"
       dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
       [showCurrentPageReport]="true"  [(selection)]="selectCatalogos"  [rowsPerPageOptions]="[10,25,100]" [paginator]="true" >
-
       <ng-template pTemplate="header">
         <tr>
-          <th>
-            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-           </th>
-          <th pSortableColumn="name">Acampador<p-sortIcon field="name" style="font-size: 10px;"></p-sortIcon></th>
-          
-          <th pSortableColumn="birthday">Fecha de Nacimiento<p-sortIcon field="birthday"
-            style="font-size: 10px;"></p-sortIcon></th>
-        <th pSortableColumn="gender">Sexo<p-sortIcon field="gender"
-            style="font-size: 10px;"></p-sortIcon></th>
-        <th pSortableColumn="grade">Grado escolar<p-sortIcon field="grade"
-            style="font-size: 10px;"></p-sortIcon></th>
-       
-
+          <th><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+          <th>Acampador</th>
+          <th>Fecha de Nacimiento</th>
+          <th>Sexo</th>
+          <th>Grado escolar</th>
+      
+          <!-- 🔹 Cabeceras dinámicas -->
+          <th *ngFor="let grouping of getVisibleGroupings()">
+            {{ grouping.name }}
+          </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-customer>
+      
+      <ng-template pTemplate="body" let-camper>
         <tr>
-          <td>
-            <p-tableCheckbox [value]="customer"></p-tableCheckbox>
-
-           </td>
-          <td>
-            {{customer.name}}
+          <td><p-tableCheckbox [value]="camper"></p-tableCheckbox></td>
+          <td>{{ camper.name }}</td>
+          <td>{{ camper.birthday | date:'dd/MM/yyyy' }}</td>
+          <td>{{ camper.gender }}</td>
+          <td>{{ camper.grade }}</td>
+      
+          <!-- 🔹 Mostrar agrupaciones ya asignadas -->
+          <td *ngFor="let grouping of getVisibleGroupings()">
+            {{ getGroupingName(camper, grouping.id) }}
           </td>
-          
-          <td>
-            {{customer.birthday}}
-          </td>
-        
-
-
-          <td>
-            {{customer.gender}}
-
-          </td>
-          <td>
-            {{customer.grade}}
-
-          </td>
-
         </tr>
       </ng-template>
+      
 
     </p-table>
 

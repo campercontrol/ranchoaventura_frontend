@@ -424,6 +424,21 @@ customSort(event: any): void {
     return order * result;
   });
 }
+getUsedGroupingTypes(): number[] {
+  const usedTypes = new Set<number>();
+
+  this.listCampers.forEach(camper => {
+    camper.groupings.forEach((g: any) => {
+      usedTypes.add(g.grouping_type_id);
+    });
+  });
+
+  return Array.from(usedTypes);
+}
+getVisibleGroupings() {
+  const usedTypes = this.getUsedGroupingTypes();
+  return this.tipoAgrupaciosn.filter((g: any) => usedTypes.includes(g.id));
+}
 
 getSortingValue(item: any, field: string): any {
   // Verifica si el campo es un campo dinámico (ej. "grouping0", "grouping1")
