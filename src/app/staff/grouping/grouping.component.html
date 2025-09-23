@@ -33,7 +33,7 @@
           
           </div>
  
-          <p-table [value]="listCampers" [customSort]="true" (sortFunction)="customSort($event)">
+          <p-table [value]="listCampers" [customSort]="true" (sortFunction)="customSort($event, 'campers')">
             <ng-template pTemplate="header">
               <tr>
                 <th pSortableColumn="name">
@@ -152,41 +152,68 @@
      
       </form>
 
-      <p-table #dt [value]="listcatalogos"[globalFilterFields]="['name']" [rows]="100"
-      dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-      [showCurrentPageReport]="true"  [(selection)]="selectCatalogos"  [rowsPerPageOptions]="[10,25,100]" [paginator]="true" >
-      <ng-template pTemplate="header">
-        <tr>
-          <th><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
-          <th>Acampador</th>
-          <th>Fecha de Nacimiento</th>
-          <th>Sexo</th>
-          <th>Grado escolar</th>
-      
-          <!-- 🔹 Cabeceras dinámicas -->
-          <th *ngFor="let grouping of getVisibleGroupings()">
-            {{ grouping.name }}
-          </th>
-        </tr>
-      </ng-template>
-      
-      <ng-template pTemplate="body" let-camper>
-        <tr>
-          <td><p-tableCheckbox [value]="camper"></p-tableCheckbox></td>
-          <td>{{ camper.name }}</td>
-          <td>{{ camper.birthday | date:'dd/MM/yyyy' }}</td>
-          <td>{{ camper.gender }}</td>
-          <td>{{ camper.grade }}</td>
-      
-          <!-- 🔹 Mostrar agrupaciones ya asignadas -->
-          <td *ngFor="let grouping of getVisibleGroupings()">
-            {{ getGroupingName(camper, grouping.id) }}
-          </td>
-        </tr>
-      </ng-template>
-      
+      <p-table #dt 
+      [value]="listcatalogos"
+      [customSort]="true" 
+      (sortFunction)="customSort($event, 'catalogos')"
+            [globalFilterFields]="['name']"
+      [rows]="100"
+      dataKey="id"
+      currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+      [showCurrentPageReport]="true"
+      [(selection)]="selectCatalogos"
+      [rowsPerPageOptions]="[10,25,100]"
+      [paginator]="true"
+       >
 
-    </p-table>
+<!-- Header -->
+<ng-template pTemplate="header">
+ <tr>
+   <th><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+
+   <th pSortableColumn="name">
+     Acampador <p-sortIcon field="name"></p-sortIcon>
+   </th>
+
+   <th pSortableColumn="birthday">
+     Fecha de Nacimiento <p-sortIcon field="birthday"></p-sortIcon>
+   </th>
+
+   <th pSortableColumn="gender">
+     Sexo <p-sortIcon field="gender"></p-sortIcon>
+   </th>
+
+   <th pSortableColumn="grade">
+     Grado escolar <p-sortIcon field="grade"></p-sortIcon>
+   </th>
+
+   <!-- 🔹 Cabeceras dinámicas con orden -->
+   <th *ngFor="let grouping of getVisibleGroupings(); let i = index" 
+       [pSortableColumn]="'grouping' + i">
+     {{ grouping.name }}
+     <p-sortIcon [field]="'grouping' + i"></p-sortIcon>
+   </th>
+ </tr>
+</ng-template>
+
+<!-- Body -->
+<ng-template pTemplate="body" let-camper>
+ <tr>
+   <td><p-tableCheckbox [value]="camper"></p-tableCheckbox></td>
+
+   <td>{{ camper.name }}</td>
+   <td>{{ camper.birthday | date:'dd/MM/yyyy' }}</td>
+   <td>{{ camper.gender }}</td>
+   <td>{{ camper.grade }}</td>
+
+   <!-- 🔹 Mostrar agrupaciones ya asignadas -->
+   <td *ngFor="let grouping of getVisibleGroupings(); let i = index">
+     {{ getGroupingName(camper, grouping.id) }}
+   </td>
+ </tr>
+</ng-template>
+
+</p-table>
 
     </div>
    

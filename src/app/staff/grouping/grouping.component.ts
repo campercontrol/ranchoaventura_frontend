@@ -406,24 +406,45 @@ confirmDelet(){
 
 
 
-customSort(event: any): void {
+customSort(event: any, target: 'campers' | 'catalogos'): void {
   const field = event.field;
   const order = event.order;
-  console.log(event, 'el evento');
-  
-  this.listCampers.sort((a, b) => {
+
+  const list = target === 'campers' ? this.listCampers : this.listcatalogos;
+
+  list.sort((a, b) => {
     let value1 = this.getSortingValue(a, field);
     let value2 = this.getSortingValue(b, field);
+
+    // Si es fecha
+    if (field === 'birthday') {
+      value1 = new Date(value1).getTime();
+      value2 = new Date(value2).getTime();
+    }
 
     let result = 0;
     if (value1 == null && value2 != null) result = -1;
     else if (value1 != null && value2 == null) result = 1;
     else if (value1 == null && value2 == null) result = 0;
-    else result = (value1 < value2) ? -1 : (value1 > value2) ? 1 : 0;
+    else result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
 
     return order * result;
   });
 }
+
+getSortingValue(item: any, field: string): any {
+  if (field.startsWith('grouping')) {
+    const index = parseInt(field.replace('grouping', ''), 10);
+    const visibleGroupings = this.getVisibleGroupings();
+    const grouping = visibleGroupings[index]; // 👈 alineado con las columnas que se pintan
+    return this.getGroupingName(item, grouping.id);
+  }
+  return item[field];
+}
+
+
+
+
 getUsedGroupingTypes(): number[] {
   const usedTypes = new Set<number>();
 
@@ -440,16 +461,10 @@ getVisibleGroupings() {
   return this.tipoAgrupaciosn.filter((g: any) => usedTypes.includes(g.id));
 }
 
-getSortingValue(item: any, field: string): any {
-  // Verifica si el campo es un campo dinámico (ej. "grouping0", "grouping1")
-  if (field.startsWith('grouping')) {
-    const index = parseInt(field.replace('grouping', ''), 10);
-    const grouping = this.tipoAgrupaciosn[index];
-    return this.getGroupingName(item, grouping.id);
-  }
-  // Para otros campos estáticos (name, birthday, etc.)
-  return item[field];
-}
+ 
+
+
+
   
 
 }
