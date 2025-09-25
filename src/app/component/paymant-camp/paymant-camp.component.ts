@@ -51,7 +51,13 @@ export class PaymantCampComponent {
             })
               this.cards.forEach((element:any) => {
                if(element.payment_method != 'Descuentos'){
-                this.contatorTotal= this.contatorTotal + element.total_amount;
+                this.contatorTotal+= parseFloat(
+                  element.total_amount
+                    .replace('$', '')    // quita el símbolo $
+                    .replace('MXN', '')  // quita el texto MXN
+                    .replace(',', '')    // quita separadores de miles
+                    .trim()
+                ) || 0;
                 this.transaciones= this.transaciones + element.transactions;
 
 

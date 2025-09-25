@@ -9,7 +9,7 @@
 
         <div class="card-item green-background">
             <div class="card-content">
-                <h2 class="card-amount">{{ contatorTotal | number:'1.1-1' }}</h2>
+                <h2 class="card-amount">{{ contatorTotal }}</h2>
                 <p class="card-title">Pagos recibidos</p>
                 <p class="card-transactions">
                   {{ transaciones }} Transacciones
@@ -23,7 +23,7 @@
 
         <div class="card-item orange-background">
           <div class="card-content">
-              <h2 class="card-amount">{{ camper.length | number:'1.1-1' }}</h2>
+              <h2 class="card-amount">{{ camper.length  }}</h2>
               <p class="card-title">Registros activos </p>
               <p class="card-transactions">
             
@@ -37,7 +37,7 @@
       <div *ngFor="let card of cards" class="card-item" 
            [ngClass]="{'blue-background': card.payment_method !== 'Descuentos', 'orange-background': card.payment_method === 'Descuentos'}">
         <div class="card-content">
-          <h2 class="card-amount">{{ card.total_amount | number:'1.1-1' }}</h2>
+          <h2 class="card-amount">{{ card.total_amount   }}</h2>
           <p class="card-title">{{ card.payment_method }}</p>
           <p class="card-transactions">
             {{ card.transactions }} Transacciones
@@ -122,19 +122,19 @@
 
       </td>
       <td *ngFor="let key of getObjectKeys(rowData.payments_info.payments_by_payment_method)">
-        {{ rowData.payments_info?.payments_by_payment_method[key]?.total_amount || 0 | number:'1.0-0' }}
+        {{ rowData.payments_info?.payments_by_payment_method[key]?.total_amount || 0   }}
       </td>
       <td>
-        {{ rowData.payments_info.total_payments.amount || 0 | number:'1.0-0' }}
+        {{ rowData.payments_info.total_payments.amount || 0  }}
         <p-tag [value]="rowData.payments_info.total_payments.number_of_payments" severity="success" *ngIf="rowData.payments_info.total_payments.number_of_payments > 0"></p-tag>
       </td>
       <td>
-        {{ rowData.payments_info.discounts.amount || 0 | number:'1.0-0' }}
+        {{ rowData.payments_info.discounts.amount || 0  }}
         <p-tag [value]="rowData.payments_info.discounts.number_of_discounts" severity="success" *ngIf="rowData.payments_info.discounts.number_of_discounts > 0"></p-tag>
       </td>
-      <td>{{ rowData.payments_info.refunds.refunds || 0 | number:'1.0-0' }}</td>
+      <td>{{ rowData.payments_info.refunds.refunds || 0   }}</td>
       <td class="text-center">
-        {{ rowData.payments_info.camp_status.balance || 0 | number:'1.0-0' }}
+        {{ rowData.payments_info.camp_status.balance || 0  }}
         <br>
         <p-tag value="Pagado" severity="success" *ngIf="rowData.payments_info.camp_status.balance == 0"></p-tag>
         <p-tag value="Saldo pendiente" severity="warning" *ngIf="rowData.payments_info.camp_status.balance > 0"></p-tag>
