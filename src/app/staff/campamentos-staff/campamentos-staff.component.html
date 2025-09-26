@@ -235,6 +235,12 @@
                     </div>
                   </th>
   
+                  <th pSortableColumn="camper_total_balance" style=" min-width: 100px;" *ngIf="(rol ==2 && (user_admin==true || user_coordinator==true))|| rol==3">
+                    <div>
+                      Saldo
+                      <p-sortIcon field="camper_total_balance"></p-sortIcon>
+                    </div>
+                  </th>
                   <th pSortableColumn="tutor_full_name" style=" min-width: 100%;">
                     <div>
                       Tutor 1
@@ -290,6 +296,13 @@
                     <p-tag value="Pendiente" severity="warning"  [rounded]="true" *ngIf=" customer.camper_total_balance!=0"></p-tag>
 
                   </td>
+                  <td   *ngIf="(rol ==2 && (user_admin==true || user_coordinator==true))|| rol == 3">
+                    {{ customer.camper_total_balance | currency}}
+                     <br>
+                     <p-tag value="Pagado" severity="success"  [rounded]="true" *ngIf=" customer.camper_total_balance==0"></p-tag>
+                     <p-tag value="Pendiente" severity="warning"  [rounded]="true" *ngIf=" customer.camper_total_balance!=0"></p-tag>
+ 
+                   </td>
                   <td>
                   <a href=""  routerLink="/dashboard/admi/parent/{{customer.parent_id}}" > {{customer.tutor_full_name}}  </a>   <br>
                     {{customer.tutor_email}}

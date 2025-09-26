@@ -129,7 +129,7 @@
         <p-tag [value]="rowData.payments_info.total_payments.number_of_payments" severity="success" *ngIf="rowData.payments_info.total_payments.number_of_payments > 0"></p-tag>
       </td>
       <td>
-        {{ rowData.payments_info.discounts.amount || 0  }}
+        {{ rowData.payments_info.discounts.number_of_refunds   }}
         <p-tag [value]="rowData.payments_info.discounts.number_of_discounts" severity="success" *ngIf="rowData.payments_info.discounts.number_of_discounts > 0"></p-tag>
       </td>
       <td>{{ rowData.payments_info.refunds.refunds || 0   }}</td>
