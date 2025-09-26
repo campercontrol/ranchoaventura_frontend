@@ -863,7 +863,6 @@ reporteGeneral() {
     next: (response: any) => {
       const data = response.data;
 
-      // Mapeo de claves del JSON a cabeceras en español solo para los atributos especificados
       const headersMap: any = {
         'id':'ID',
         'name': 'Nombre',
@@ -916,7 +915,6 @@ reporteGeneral() {
         "enrollment": "Estatus",
       };
 
-      // Convertir los valores booleanos a "Sí" o "No" y concatenar comentarios
       const modifiedData = data.map((row: any) => {
         const newRow: any = {};
 
@@ -927,38 +925,50 @@ reporteGeneral() {
           }
         }
 
-        // Incluir cualquier clave no mapeada (sin traducción)
+        // Incluir claves no mapeadas
         for (const key in row) {
           if (!headersMap.hasOwnProperty(key)) {
             newRow[key] = row[key];
           }
         }
 
-        // Convertir valores booleanos a "Sí" o "No"
+        // Convertir booleanos y 0/1 a Sí/No
         for (const key in newRow) {
           if (typeof newRow[key] === 'boolean') {
               newRow[key] = newRow[key] ? 'Sí' : 'No';
           } else if (typeof newRow[key] === 'number' && (newRow[key] === 0 || newRow[key] === 1)) {
               newRow[key] = newRow[key] === 1 ? 'Sí' : 'No';
           }
-      }
+        }
 
         // Concatenar comentarios
-        newRow['Comentarios de Padres'] = row['Comments (Parent)'] ? row['Comments (Parent)'].map((comment: any) => comment.comment).join(', ') : '';
-        newRow['Comentarios del Personal'] = row['Comments (Staff)'] ? row['Comments (Staff)'].map((comment: any) => comment.comment).join(', ') : '';
-        newRow['Comentarios de la Escuela'] = row['Comments (School)'] ? row['Comments (School)'].map((comment: any) => comment.comment).join(', ') : '';
+        newRow['Comentarios de Padres'] = row['Comments (Parent)'] ? row['Comments (Parent)'].map((c: any) => c.comment).join(', ') : '';
+        newRow['Comentarios del Personal'] = row['Comments (Staff)'] ? row['Comments (Staff)'].map((c: any) => c.comment).join(', ') : '';
+        newRow['Comentarios de la Escuela'] = row['Comments (School)'] ? row['Comments (School)'].map((c: any) => c.comment).join(', ') : '';
+
+        // Columna Agrupaciones (aunque venga vacía)
+        newRow['Agrupaciones'] = row.Groupings && Array.isArray(row.Groupings)
+          ? row.Groupings.map((g: any) =>
+              `${g.name} (ID: ${g.id}, Tipo: ${g.grouping_type_id}, Activo: ${g.is_active ? 'Sí' : 'No'})`
+            ).join('; ')
+          : '';
 
         return newRow;
       });
 
-      // Obtener las cabeceras en el formato correcto
+      // Cabeceras
       const headers = [...new Set([...Object.keys(headersMap), ...data.flatMap(Object.keys)])];
       const translatedHeaders = headers.map(header => headersMap[header] || header);
 
-      // Convertir los datos a una hoja de Excel
+      // Forzar que siempre esté la columna "Agrupaciones"
+      if (!translatedHeaders.includes("Agrupaciones")) {
+        translatedHeaders.push("Agrupaciones");
+      }
+
+      // Generar hoja Excel
       const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(modifiedData, { header: translatedHeaders });
 
-      // Modificar las cabeceras de la hoja de Excel
+      // Reemplazar cabeceras por traducidas
       const range = XLSX.utils.decode_range(worksheet['!ref']!);
       for (let i = range.s.c; i <= range.e.c; i++) {
         const cell_address = XLSX.utils.encode_cell({ r: 0, c: i });
@@ -967,24 +977,20 @@ reporteGeneral() {
         }
       }
 
-      // Ajustar el ancho de las columnas
+      // Ajustar columnas
       const columnWidths = translatedHeaders.map((header, index) => {
         const maxWidth = Math.max(...modifiedData.map((row: any) => (row[translatedHeaders[index]] || '').toString().length));
-        return Math.max(header.length, maxWidth) + 2; // Agregar un margen extra
+        return Math.max(header.length, maxWidth) + 2;
       });
+      worksheet['!cols'] = columnWidths.map(width => ({ wpx: width * 10 }));
 
-      worksheet['!cols'] = columnWidths.map(width => ({ wpx: width * 10 })); // Ajustar el ancho de las columnas (multiplicador por 10 es opcional)
+      // Altura filas
+      worksheet['!rows'] = modifiedData.map(() => ({ hpx: 20 }));
 
-      // Ajustar el alto de las filas (opcional)
-      worksheet['!rows'] = modifiedData.map(() => ({ hpx: 20 })); // Ajustar alto a 20px (ajusta según sea necesario)
-
-      // Crear un nuevo libro de trabajo
+      // Crear libro y exportar
       const workbook: XLSX.WorkBook = { Sheets: { 'Datos': worksheet }, SheetNames: ['Datos'] };
-
-      // Generar el archivo Excel
       const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
 
-      // Guardar el archivo
       this.saveAsExcelFile(excelBuffer, 'Reporte General ' + this.infoCamp.name);
     },
     error: (error) => {
@@ -992,6 +998,8 @@ reporteGeneral() {
     }
   });
 }
+
+
 
 reporteGeneralStaff() {
   this.capms.getReportesGeneralesStaff(this.idCamp).subscribe({

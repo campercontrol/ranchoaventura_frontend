@@ -235,7 +235,7 @@
                     </div>
                   </th>
   
-                  <th pSortableColumn="camper_total_balance" style=" min-width: 100px;" *ngIf="(rol ==2 && (user_admin==true || user_coordinator==true))|| rol==3">
+                  <th pSortableColumn="camper_total_balance" style=" min-width: 100px;" *ngIf="  rol==3">
                     <div>
                       Saldo
                       <p-sortIcon field="camper_total_balance"></p-sortIcon>
@@ -296,7 +296,7 @@
                     <p-tag value="Pendiente" severity="warning"  [rounded]="true" *ngIf=" customer.camper_total_balance!=0"></p-tag>
 
                   </td>
-                  <td   *ngIf="(rol ==2 && (user_admin==true || user_coordinator==true))|| rol == 3">
+                  <td   *ngIf=" rol == 3">
                     {{ customer.camper_total_balance | currency}}
                      <br>
                      <p-tag value="Pagado" severity="success"  [rounded]="true" *ngIf=" customer.camper_total_balance==0"></p-tag>
