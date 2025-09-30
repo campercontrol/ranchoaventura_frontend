@@ -355,7 +355,7 @@ private getFileNameFromHeader(contentDisposition: string | null): string | null 
       this.listStaffConfirm = res.staff_confirmed;
       this.staffApuntado = res.staff_volunteer;
 
-      this.infoCamp.special_message=this.parseHTMLContent(this.infoCamp.special_message);
+      this.infoCamp.special_message= this.infoCamp.special_message;
       this.infoCamp.special_message_admin=this.parseHTMLContent(this.infoCamp.special_message_admin);
 
       this.cargando= true;

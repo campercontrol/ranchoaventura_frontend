@@ -111,14 +111,13 @@
                     <p>
                       <span class="fw-bold">{{ textos['hermanosLabel'] }}</span>
                  
-                         <a
-                        *ngFor="let item of infoCamper.siblings || []"
-                        routerLink="/dashboard/parents/camper/{{ item.id }}"
-                      >
-                        {{ item.name }}
-                        {{ item.lastname_father }}
-                        {{ item.lastname_mother + '  ' }}
-                      </a>
+                      <a
+                      *ngFor="let item of infoCamper.siblings || []"
+                      [routerLink]="['/dashboard/parents/camper', item.id]"
+                      (click)="openCamper(item.id)"
+                    >
+                      {{ item.name }} {{ item.lastname_father }} {{ item.lastname_mother }}
+                    </a>
                   
                      
                    

@@ -59,61 +59,109 @@
                                 placeholder="Global Search" />
                         </div>
 
-                        <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"  
-                            [value]="customer" [showCurrentPageReport]="true" 
-                            [loading]="loading"  
-                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                            [filterDelay]="0"
-                            [globalFilterFields]="['camper.id','camper.camper_name','representative.name','status']">
-
-                            <ng-template pTemplate="header">
-                                <tr >
-
-                                    <th style="width: 20px;">
-                                        #
-                                    </th>
-                                    <th style="min-width: 240px; width: 240px;">
-                                        Nombre
-                                    </th>
-                                    <th  *ngFor="let item of columnas">
-                                        <div  style="min-width: 70px; width: 240px; white-space: pre-line;" class="conatiner-th">
-                                           <div> {{item.name}}  </div>
-                                         <div>{{item.chekpoint_date_esp}} <i class="bx bx-highlight" style="margin-left: 5px;"(click)="showDialog(item)"></i> </div> 
-                                     <div>  <span><i class="bx bxs-barcode p-1 bg-primary" style="color: white; font-size: 15px; margin-right: 4px;margin-top: 2px; border-radius: 2px;" (click)="showDialog2(item)"></i> <i class="bx bx-x p-1 bg-primary" style="color: white; font-size: 15px; margin-right: 4px;margin-top: 2px; border-radius: 2px;" (click)="delet(item)"></i>1 de 5 </span>   </div>  
-                                        </div>
-                                      
-
-                                    </th>
-
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-customer>
-                                <tr class="p-selectable-row">
-                                    <td (click)="hypervinculo(customer.camper.camper_id)">
-                                       {{customer.camper.camper_id}}
-                                    </td>
-
-                                    <td style="text-align: left; font-size: 10px;">
-                                        {{customer.camper.camper_name}}  {{customer.camper.camper_lastname_father}} {{customer.camper.camper_lastname_mother}}
-                                    </td>
-                                    <td style="text-align: left; font-size: 10px;" *ngFor="let b  of customer.checkpoints" [ngClass]="{'acierto':b.checkpoint_check,'error':!b.checkpoint_check}">
-                                        <div *ngIf="b.checkpoint_date"  style="">
-                                            {{b.checkpoint_date}}
-                                        </div>
-                                        <div *ngIf="!b.checkpoint_check" style="">
-
-                                        </div>
-                                       
-                                        
-                                    </td>
-                                 
-                                  
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="emptymessage">
-
-                            </ng-template>
-                        </p-table>
+                        <p-table
+                        #dt
+                        [(selection)]="selectedCustomers"
+                        dataKey="id"
+                        [rowHover]="true"
+                        [value]="customer"
+                        [showCurrentPageReport]="true"
+                        [loading]="loading"
+                        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                        [filterDelay]="0"
+                        scrollable="true"
+                        scrollDirection="horizontal"
+                        [globalFilterFields]="['camper.id','camper.camper_name','representative.name','status']"
+                        [paginator]="true"
+                        [rows]="50"
+                      >
+                        <!-- 🔹 Cabecera -->
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <!-- Columna ID -->
+                            <th style="width: 70px;" pSortableColumn="camper.camper_id">
+                              #
+                              <p-sortIcon field="camper.camper_id"></p-sortIcon>
+                            </th>
+                      
+                            <!-- Columna Nombre -->
+                            <th style="min-width: 240px;" pSortableColumn="camper.camper_name">
+                              Nombre
+                              <p-sortIcon field="camper.camper_name"></p-sortIcon>
+                            </th>
+                      
+                            <!-- Columnas dinámicas por checkpoint -->
+                            <th *ngFor="let item of columnas">
+                              <div style="min-width: 200px; white-space: pre-line;" class="conatiner-th">
+                                <!-- Nombre del checkpoint -->
+                                <div>{{ item.name }}</div>
+                      
+                                <!-- Fecha -->
+                                <div>
+                                  {{ item.chekpoint_date_esp }}
+                                  <i
+                                    class="bx bx-highlight"
+                                    style="margin-left: 5px; cursor: pointer;"
+                                    (click)="showDialog(item)"
+                                  ></i>
+                                </div>
+                      
+                                <!-- Botones + Contador dinámico -->
+                                <div>
+                                  <span>
+                                    <i
+                                      class="bx bxs-barcode p-1 bg-primary"
+                                      style="color: white; font-size: 15px; margin-right: 4px; margin-top: 2px; border-radius: 2px; cursor: pointer;"
+                                      (click)="showDialog2(item)"
+                                    ></i>
+                                    <i
+                                      class="bx bx-x p-1 bg-primary"
+                                      style="color: white; font-size: 15px; margin-right: 4px; margin-top: 2px; border-radius: 2px; cursor: pointer;"
+                                      (click)="delet(item)"
+                                    ></i>
+                                    <!-- 🔹 Contador dinámico -->
+                                    {{ contarCheckins(item.id) }} de {{ customer.length }}
+                                  </span>
+                                </div>
+                              </div>
+                            </th>
+                          </tr>
+                        </ng-template>
+                      
+                        <!-- 🔹 Cuerpo -->
+                        <ng-template pTemplate="body" let-customer>
+                          <tr class="p-selectable-row">
+                            <!-- ID con hipervínculo -->
+                            <td (click)="hypervinculo(customer.camper.camper_id)" style="cursor: pointer;">
+                              {{ customer.camper.camper_id }}
+                            </td>
+                      
+                            <!-- Nombre -->
+                            <td style="text-align: left; font-size: 12px;">
+                              {{ customer.camper.camper_name }}
+                              {{ customer.camper.camper_lastname_father }}
+                              {{ customer.camper.camper_lastname_mother }}
+                            </td>
+                      
+                            <!-- Checkpoints -->
+                            <td
+                              *ngFor="let b of customer.checkpoints"
+                              style="text-align: left; font-size: 12px;"
+                              [ngClass]="{ 'acierto': b.checkpoint_check, 'error': !b.checkpoint_check }"
+                            >
+                              <div *ngIf="b.checkpoint_date">{{ b.checkpoint_date }}</div>
+                            </td>
+                          </tr>
+                        </ng-template>
+                      
+                        <!-- 🔹 Mensaje vacío -->
+                        <ng-template pTemplate="emptymessage">
+                          <tr>
+                            <td colspan="20">No hay registros disponibles</td>
+                          </tr>
+                        </ng-template>
+                      </p-table>
+                      
 
                     </div>
                     <div class="spinner-border text-primary p-2" role="status" *ngIf="delteStatus" style="margin: auto ;">

@@ -86,8 +86,8 @@
           <div>
             <p class="fw-bold">Mensaje especial <i class="bx bxs-message-alt"></i> : </p>
           </div>
-          <div>
-            <p> {{infoCamp.special_message}}</p>
+          <div [innerHTML]="this.infoCamp.special_message">
+             
           </div>
         </div>
         <div class="conatiner-info-camp "  *ngIf=" rol ==2 && (user_admin==true || user_coordinator==true)">
@@ -289,13 +289,28 @@
                    
   
                   </td>
-                  <td (click)="linkPagos(customer.camper_id)" *ngIf="rol ==2 && (user_admin==true || user_coordinator==true)">
-                   {{ customer.camper_total_balance | currency}}
-                    <br>
-                    <p-tag value="Pagado" severity="success"  [rounded]="true" *ngIf=" customer.camper_total_balance==0"></p-tag>
-                    <p-tag value="Pendiente" severity="warning"  [rounded]="true" *ngIf=" customer.camper_total_balance!=0"></p-tag>
-
+                  <td *ngIf="rol == 2 && (user_admin || user_coordinator)">
+                    <a
+                      [routerLink]="['/dashboard/payments', customer.camper_id, idCamp]"
+                      class="text-decoration-none d-block"
+                    >
+                      {{ customer.camper_total_balance | currency }}
+                      <br />
+                      <p-tag
+                        value="Pagado"
+                        severity="success"
+                        [rounded]="true"
+                        *ngIf="customer.camper_total_balance == 0"
+                      ></p-tag>
+                      <p-tag
+                        value="Pendiente"
+                        severity="warning"
+                        [rounded]="true"
+                        *ngIf="customer.camper_total_balance != 0"
+                      ></p-tag>
+                    </a>
                   </td>
+                  
                   <td   *ngIf=" rol == 3">
                     {{ customer.camper_total_balance | currency}}
                      <br>

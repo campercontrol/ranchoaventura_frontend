@@ -292,4 +292,26 @@ export class PuntoControlComponent implements OnInit {
   hypervinculo(id:any){
       this.router.navigate(['dashboard/parents/camper/'+id])
   }
+  contarCheckins(columnaId: number): number {
+    if (!this.customer) return 0;
+  
+    let count = 0;
+  
+    this.customer.forEach((c: any) => {
+      if (c.checkpoints && c.checkpoints.length) {
+        const registro = c.checkpoints.find((p: any) =>
+          p.checkpoint_id === columnaId || p.id === columnaId
+        );
+  
+        if (registro?.checkin) {
+          count++;
+        }
+      }
+    });
+  
+    return count;
+  }
+  
+
+  
 }

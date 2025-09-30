@@ -353,7 +353,7 @@ export class PerfilCamperComponent implements OnInit {
 
 
 
-  constructor(private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private hijos: CamperService,private parents : ParentService, private rou:Router,public info: AuthenticationService,private staff: StaffService,private lang:LangService) {
+  constructor(private router: Router,private primengConfig: PrimeNGConfig, private routesA: ActivatedRoute, private hijos: CamperService,private parents : ParentService, private rou:Router,public info: AuthenticationService,private staff: StaffService,private lang:LangService) {
     this.routesA.params.subscribe((params) => {
       this.id = params['id'];
     })
@@ -475,7 +475,16 @@ export class PerfilCamperComponent implements OnInit {
   }
   
   
-  
+  getCamperUrl(id: any) {
+    return this.router.serializeUrl(
+      this.router.createUrlTree(['/dashboard/parents/camper', id])
+    );
+  }
+  openCamper(id: any) {
+    const url = this.getCamperUrl(id);
+    window.location.href = url; 
+  }
+
   
   // doctor_precall varibles
   getInfo(){
