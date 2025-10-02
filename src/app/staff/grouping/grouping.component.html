@@ -1,3 +1,8 @@
+
+<div style="width: 300px;" class="mt-2 mb-2">
+  <a class="btn btn-primary" style="width: 100%;" class="btn btn-primary" [href]="'dashboard/camp/'+idCamp" >Volver</a>
+
+</div>
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
@@ -33,7 +38,9 @@
           
           </div>
  
-          <p-table [value]="listCampers" [customSort]="true" (sortFunction)="customSort($event, 'campers')">
+          <p-table [value]="listCampers"
+           [customSort]="true" 
+           (sortFunction)="customSort($event, 'campers')">
             <ng-template pTemplate="header">
               <tr>
                 <th pSortableColumn="name">
@@ -157,13 +164,13 @@
       [customSort]="true" 
       (sortFunction)="customSort($event, 'catalogos')"
             [globalFilterFields]="['name']"
-      [rows]="100"
+      
       dataKey="id"
       currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
       [showCurrentPageReport]="true"
       [(selection)]="selectCatalogos"
-      [rowsPerPageOptions]="[10,25,100]"
-      [paginator]="true"
+      
+  
        >
 
 <!-- Header -->
