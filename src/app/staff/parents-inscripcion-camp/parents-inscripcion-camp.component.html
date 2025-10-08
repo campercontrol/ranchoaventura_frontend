@@ -233,7 +233,10 @@
                   </ng-template>
                   <ng-template pTemplate="body" let-customer>
                       <tr>
-                          <td (click)="routerCamps(customer.camp_id)" style="cursor: pointer;">
+                          <td *ngIf="!multipleInscr" (click)="routerCamps(customer.camp_id)" style="cursor: pointer;">
+                              {{customer.camp_name}}
+                            </td>
+                            <td (click)="filterCampsScholl()" *ngIf="multipleInscr">
                               {{customer.camp_name}}
                             </td>
                             <td> 
