@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div style="overflow: auto;">
-                            <p-table #dt [value]="listcatalogos"  [rows]="50" [rowsPerPageOptions]="[5, 25, 50]"
+                              <p-table   #dt scrollable="true" [value]="listcatalogos"  [rows]="50" [rowsPerPageOptions]="[5, 25, 50]"
                             dataKey="id"
                             [rowHover]="true"
                             [rows]="50"

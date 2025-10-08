@@ -20,7 +20,7 @@
                 placeholder="Global Search" />
         </div>
 <div style="overflow: auto;">
-    <p-table #dt [value]="listaTrofeos"  [rows]="50"
+      <p-table   #dt scrollable="true" [value]="listaTrofeos"  [rows]="50"
     [rowsPerPageOptions]="[5, 25, 50]"
     [globalFilterFields]="['name','description','tutor_lastname_mother','tutor_cellphone','contact_email','contact_name']"
     [rowHover]="true" dataKey="id"
@@ -271,7 +271,7 @@
                 <button class="btn btn-primary" class="btn btn-primary" style="width: 100px;">Buscar</button>
             </div>
            
-            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="50"
+              <p-table   #dt scrollable="true" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="50"
                     [value]="listaTrofeos" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
                     [loading]="loading" [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"

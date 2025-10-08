@@ -196,7 +196,7 @@
              
             </div>
             <div class=" scroll-y">
-            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"  [value]="listCampers" 
+              <p-table   #dt scrollable="true" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"  [value]="listCampers" 
               [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" 
               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
               [globalFilterFields]="['camper_full_name','camper_birthday','tutor_full_name','second_tutor_full_name']">
@@ -375,7 +375,7 @@
           </div>
 
           <div class="scroll-y">
-            <p-table #dt [(selection)]="selectedCustomers" dataKey="staff_id"  [rowHover]="true" [rows]="50" [value]="listStaffConfirm"
+              <p-table   #dt scrollable="true" [(selection)]="selectedCustomers" dataKey="staff_id"  [rowHover]="true" [rows]="50" [value]="listStaffConfirm"
             [showCurrentPageReport]="true"  [loading]="loading"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0" dataKey="staff_id"
             [globalFilterFields]="['name','country.name','representative.name','status']">
@@ -528,7 +528,7 @@
           </div>
 
           <div class="scroll-y">
-            <p-table #dt [(selection)]="staffSelecionado" dataKey="staff_id"  [rowHover]="true" [rows]="50" [value]="staffApuntado"
+              <p-table   #dt scrollable="true" [(selection)]="staffSelecionado" dataKey="staff_id"  [rowHover]="true" [rows]="50" [value]="staffApuntado"
             [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
             [globalFilterFields]="['name','country.name','representative.name','status']">
@@ -1190,7 +1190,7 @@
           placeholder="Global Search" />
         </div>
         <div class=" scroll-y">
-        <p-table #dt [(selection)]="staffNoselecionado" dataKey="Staff.id"  [rowHover]="true" [rows]="50" [value]="listaStaff"
+          <p-table   #dt scrollable="true" [(selection)]="staffNoselecionado" dataKey="Staff.id"  [rowHover]="true" [rows]="50" [value]="listaStaff"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
         [globalFilterFields]="['Staff.name','Staff.lastname_father','Staff.lastname_mother','status']">
@@ -1250,7 +1250,7 @@
           placeholder="Global Search" />
         </div>
         <div class=" scroll-y">
-        <p-table #dt [(selection)]="staffSelecionado" dataKey="Staff.id"  [rowHover]="true" [rows]="50" [value]="staffSelecionado"
+          <p-table   #dt scrollable="true" [(selection)]="staffSelecionado" dataKey="Staff.id"  [rowHover]="true" [rows]="50" [value]="staffSelecionado"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
         [globalFilterFields]="['staff_full_name']">
@@ -1305,7 +1305,7 @@
         </select>
      
         <div class=" scroll-y">
-        <p-table #dt [(selection)]="staffSelecionado" dataKey="Staff.id"  [rowHover]="true" [rows]="50" [value]="selectedCustomers"
+          <p-table   #dt scrollable="true" [(selection)]="staffSelecionado" dataKey="Staff.id"  [rowHover]="true" [rows]="50" [value]="selectedCustomers"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
         [globalFilterFields]="['staff_full_name']">
