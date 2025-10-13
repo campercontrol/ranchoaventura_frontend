@@ -19,7 +19,7 @@
                                 placeholder="Global Search" />
                         </div>
                         <div style="overflow: auto;">
-                              <p-table   #dt scrollable="true" [value]="listcatalogos"  [rows]="50" [rowsPerPageOptions]="[5, 25, 50]"
+                              <p-table   #dt [value]="listcatalogos"  [rows]="50" [rowsPerPageOptions]="[5, 25, 50]"
                                 [globalFilterFields]="['Padres','nombreCamper','payment_date','payment_amount','tipoMovimiento','metodosPago']"
                                 [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
                                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

@@ -38,6 +38,8 @@ export class GroupingComponent  {
   userForm: FormGroup;
   submitted = false;
   items: FormArray;
+  selectedGroup: any = null;
+
   idCamp =0;
   tipoAgrupacion:any =[]
   grupos:any =[];
@@ -226,7 +228,7 @@ export class GroupingComponent  {
       const tipo = id.type;
       console.log(this.listCampers, id);
       this.selecType = id.id
-console.log(this.listCampers);
+        console.log(this.listCampers);
 
       this.listcatalogos = this.listCampers.filter(item => {
         // Filtra solo los elementos donde ninguno de los `grouping_type_name` es igual a `tipo`
@@ -283,7 +285,7 @@ console.log(this.listCampers);
       camper_id: element.id,
       grouping_camp_id: this.selecType,
     }));
-
+  
     this.spinner = true;
     this.grouping.campersInscritos(campersToAdd).subscribe(
       (res: any) => {
@@ -291,39 +293,49 @@ console.log(this.listCampers);
         this.updateGroupings();
       },
       () => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Ocurrió un error, los campers no se añadieron correctamente.' });
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Ocurrió un error, los campers no se añadieron correctamente.',
+        });
         this.spinner = false;
       }
     );
   }
-
+  
   private handleResponseStatus(res: any) {
     let severityType = 'info';
-
     switch (res.status) {
       case 1:
-        severityType = 'success';  // Éxito
-        this.listcatalogos = [];
-
+        severityType = 'success'; // Éxito
         break;
       case 2:
-        severityType = 'warn';    // Advertencia para capacidad excedida
-        this.listcatalogos = [];
-
+        severityType = 'warn'; // Advertencia capacidad
         break;
       case 3:
       case 4:
-        severityType = 'error';   // Errores para duplicidad en agrupación y agrupación de mismo tipo
-        this.listcatalogos = [];
-
+        severityType = 'error'; // Duplicados o conflictos
         break;
       default:
-        severityType = 'error';   // Cualquier otro error no manejado
+        severityType = 'error';
     }
+  
+    // Mostrar mensaje
+    this.messageService.add({
+      severity: severityType,
+      summary: 'Resultado',
+      detail: res.detail,
+    });
+  
+    // 🔹 Limpieza general después de asignar
+    this.selectCatalogos = [];
+    this.listcatalogos = [];
+    this.selecType = 0; // o null si prefieres
+    this.spinner = false;
+    this.selectedGroup = "";
 
-    // Mostrar el mensaje directamente desde `detail` proporcionado por el backend
-    this.messageService.add({ severity: severityType, summary: 'Resultado', detail: res.detail });
   }
+  
 
   private updateGroupings() {
     this.listTypeAgrup.getAgrupaciones()

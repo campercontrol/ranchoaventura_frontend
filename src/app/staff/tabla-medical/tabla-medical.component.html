@@ -21,7 +21,7 @@
         </div>
 
         <div class="scroll-y">
-              <p-table   #dt scrollable="true" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"   [value]="campers"
+              <p-table   #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"   [value]="campers"
                 [showCurrentPageReport]="true"  [loading]="loading"  
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"  
                 [globalFilterFields]="['camper_name',
@@ -153,7 +153,7 @@
 
         <div >
             <div class="scroll-y">
-                  <p-table   #dt scrollable="true" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="50"
+                  <p-table   #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="50"
                     [value]="staffs" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
                     [loading]="loading" [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"

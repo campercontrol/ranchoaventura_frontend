@@ -18,7 +18,7 @@
             <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
                 placeholder="Global Search" />
         </div>
-          <p-table   #dt scrollable="true" [value]="listcatalogos" [rows]="50"
+          <p-table   #dt [value]="listcatalogos" [rows]="50"
             [globalFilterFields]="['name']"
             [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

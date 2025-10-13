@@ -42,13 +42,14 @@
                
               </div>
     
-                <p-table   #dt scrollable="true" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="25" [value]="aCamp" 
+                <p-table   [scrollable]="true"
+                
+                [responsive]="false"  #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="25" [value]="aCamp"  
               [globalFilterFields]="['camp_name','location_name','public_price','camp_start','camp_end','lastname_mother']"
 
                 [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,25,50]" [loading]="loading" [paginator]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-                responsiveLayout="scroll"
-                scrollHeight="flex"
+                [responsive]="false"
                 >
                 <ng-template pTemplate="header">
                   <tr>
@@ -198,7 +199,7 @@
                
               </div>
     
-                <p-table   #dt scrollable="true" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="25" [value]="pCamp" 
+                <p-table   #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="25" [value]="pCamp" 
               [globalFilterFields]="['camp_name','location_name','public_price','camp_start','camp_end','lastname_mother']"
 
                 [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,25,50]" [loading]="loading" [paginator]="true"
@@ -339,7 +340,7 @@
                
               </div>
     
-                <p-table   #dt scrollable="true" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="25" [value]="ICamp" 
+                <p-table   #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="25" [value]="ICamp" 
               [globalFilterFields]="['camp_name','location_name','public_price','camp_start','camp_end','lastname_mother']"
                 [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">

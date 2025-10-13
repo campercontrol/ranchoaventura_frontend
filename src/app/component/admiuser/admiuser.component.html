@@ -1583,7 +1583,7 @@
                     </div>
             
                     <div style="overflow: auto;">
-                          <p-table   #dt scrollable="true" [value]="listcatalogos" [rows]="50"
+                          <p-table   #dt [value]="listcatalogos" [rows]="50"
                             [rowsPerPageOptions]="[5, 25, 50]"
                             [globalFilterFields]="['camper_name', 'camper_lastname_father', 'camper_lastname_mother', 'school', 'tutor_fullname', 'tutor_email', 'camper_id', 'namecomplet']"
                             [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
@@ -1658,7 +1658,7 @@
                   <button class="btn btn-primary" type="button" id="button-addon2" (click)="searchUser()">Buscar</button>
                 </div>
               </div>
-              <p-table   #dt scrollable="true" [value]="listBuscador"  [rows]="50"
+              <p-table   #dt [value]="listBuscador"  [rows]="50"
             [rowsPerPageOptions]="[5, 25, 50]"
             [globalFilterFields]="['camper_name','camper_lastname_mother','camper_lastname_father']"
             [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"

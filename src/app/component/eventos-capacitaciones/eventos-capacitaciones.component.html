@@ -17,7 +17,7 @@
                     placeholder="Global Search" />
             </div>
 
-              <p-table   #dt scrollable="true" [value]="eventos" [rows]="50"
+              <p-table   #dt [value]="eventos" [rows]="50"
                 [globalFilterFields]="['name','description','camp_start','camp_end','public_price']"
                 [(selection)]="selectCapcitacion" [rowHover]="true" dataKey="id"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

@@ -18,7 +18,7 @@
                     </div>
                   </div>
         <div style="overflow: auto;">
-              <p-table   #dt scrollable="true" [value]="listcatalogos"  [rows]="50"
+              <p-table   #dt [value]="listcatalogos"  [rows]="50"
             [rowsPerPageOptions]="[5, 25, 50]"
             [globalFilterFields]="['tutor_name','tutor_lastname_father','tutor_lastname_mother','tutor_cellphone','contact_email','contact_name']"
              [rowHover]="true" dataKey="id"

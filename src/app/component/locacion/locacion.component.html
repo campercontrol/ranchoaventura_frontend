@@ -168,7 +168,7 @@
                         placeholder="Global Search" />
                 </div>
         <div style="overflow: auto;">
-              <p-table   #dt scrollable="true" [value]="listcatalogos" [rows]="50"
+              <p-table   #dt [value]="listcatalogos" [rows]="50"
             [globalFilterFields]="['name','address','email','phone','contact','url']"
             [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

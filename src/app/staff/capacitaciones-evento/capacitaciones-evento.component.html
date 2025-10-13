@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="scroll-y">
-                          <p-table   #dt scrollable="true" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="50"
+                          <p-table   #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="50"
                             [value]="customer" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
                             [loading]="loading" [paginator]="true"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -173,7 +173,7 @@
                     </div>
 
                     <div class="scroll-y">
-                          <p-table   #dt scrollable="true" [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="50"
+                          <p-table   #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [rows]="50"
                             [value]="customer" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
                             [loading]="loading" [paginator]="true"
                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

@@ -150,6 +150,9 @@
               <ng-select   [items]="listGruposImscritos"
               bindLabel="nameCample" 
               bindValue="id"
+              [(ngModel)]="selectedGroup"
+              [ngModelOptions]="{standalone: true}"  
+
               (change)="changeGrups($event)" >
                  
               </ng-select>
@@ -159,9 +162,10 @@
      
       </form>
 
-        <p-table   #dt scrollable="true" 
+        <p-table   #dt 
       [value]="listcatalogos"
       [customSort]="true" 
+      
       (sortFunction)="customSort($event, 'catalogos')"
             [globalFilterFields]="['name']"
       

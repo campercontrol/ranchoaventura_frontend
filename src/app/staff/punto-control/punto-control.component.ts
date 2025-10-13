@@ -217,7 +217,64 @@ export class PuntoControlComponent implements OnInit {
    
     
   
-
+     customSort(event: any) {
+      const field = event.field;
+      const order = event.order;
+    
+      // 🔹 Si es una columna de checkpoint
+      if (field && field.startsWith('checkpoint_')) {
+        const checkpointId = Number(field.replace('checkpoint_', ''));
+    
+        this.customer = [...this.customer].sort((a: any, b: any) => {
+          const aReg = a.checkpoints?.find(
+            (p: any) => p.checkpoint_id === checkpointId || p.id === checkpointId
+          );
+          const bReg = b.checkpoints?.find(
+            (p: any) => p.checkpoint_id === checkpointId || p.id === checkpointId
+          );
+    
+          const aVal = aReg?.checkin ? 1 : 0;
+          const bVal = bReg?.checkin ? 1 : 0;
+    
+          // Orden ascendente o descendente según clic
+          return (aVal - bVal) * order;
+        });
+      } else {
+        // 🔹 Ordenamiento normal (nombre, id, etc.)
+        this.customer = [...this.customer].sort((a: any, b: any) => {
+          const v1 = this.resolveFieldData(a, field);
+          const v2 = this.resolveFieldData(b, field);
+    
+          let result = 0;
+          if (v1 == null && v2 != null) result = -1;
+          else if (v1 != null && v2 == null) result = 1;
+          else if (v1 == null && v2 == null) result = 0;
+          else if (typeof v1 === 'string' && typeof v2 === 'string')
+            result = v1.localeCompare(v2);
+          else result = v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+    
+          return order * result;
+        });
+      }
+    }
+    
+    resolveFieldData(data: any, field: string): any {
+      if (!data || !field) return null;
+      if (!field.includes('.')) return data[field];
+    
+      const fields = field.split('.');
+      let value = data;
+      for (const f of fields) {
+        if (value == null) return null;
+        value = value[f];
+      }
+      return value;
+    }
+    
+    
+    // Utilidad para leer campos anidados tipo 'camper.camper_name'
+    
+    
 
 
   delet(item: any) {
@@ -293,24 +350,32 @@ export class PuntoControlComponent implements OnInit {
       this.router.navigate(['dashboard/parents/camper/'+id])
   }
   contarCheckins(columnaId: number): number {
-    if (!this.customer) return 0;
+    if (!this.customer?.length) return 0;
   
     let count = 0;
   
-    this.customer.forEach((c: any) => {
-      if (c.checkpoints && c.checkpoints.length) {
-        const registro = c.checkpoints.find((p: any) =>
-          p.checkpoint_id === columnaId || p.id === columnaId
-        );
+    for (const c of this.customer) {
+      const registro = c.checkpoints?.find(
+        (p: any) =>
+          p.checkpoint_id === columnaId ||
+          p.id === columnaId ||
+          p.check_id === columnaId
+      );
   
-        if (registro?.checkin) {
-          count++;
-        }
+      // Contar si está marcado como "pasó"
+      if (
+        registro &&
+        (registro.checkin === true ||
+          registro.checkpoint_check === true ||
+          registro.status === 'checked')
+      ) {
+        count++;
       }
-    });
+    }
   
     return count;
   }
+  
   
 
   

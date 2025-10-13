@@ -69,12 +69,14 @@
                         [(selection)]="selectedCustomers"
                         dataKey="id"
                         [rowHover]="true"
+                        [customSort]="true"
+                        (sortFunction)="customSort($event)"
                         [value]="customer"
                         [showCurrentPageReport]="true"
                         [loading]="loading"
                         currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
                         [filterDelay]="0"
-                        scrollable="true"
+                       
                         scrollDirection="horizontal"
                         [globalFilterFields]="['camper.id','camper.camper_name','representative.name','status']"
                         [paginator]="true"
@@ -96,22 +98,13 @@
                             </th>
                       
                             <!-- Columnas dinámicas por checkpoint -->
-                            <th *ngFor="let item of columnas">
+                            <th *ngFor="let item of columnas" pSortableColumn="checkpoint_{{ item.id }}">
                               <div style="min-width: 200px; white-space: pre-line;" class="conatiner-th">
-                                <!-- Nombre del checkpoint -->
                                 <div>{{ item.name }}</div>
-                      
-                                <!-- Fecha -->
                                 <div>
                                   {{ item.chekpoint_date_esp }}
-                                  <i
-                                    class="bx bx-highlight"
-                                    style="margin-left: 5px; cursor: pointer;"
-                                    (click)="showDialog(item)"
-                                  ></i>
+                                  <i class="bx bx-highlight" style="margin-left: 5px; cursor: pointer;" (click)="showDialog(item)"></i>
                                 </div>
-                      
-                                <!-- Botones + Contador dinámico -->
                                 <div>
                                   <span>
                                     <i
@@ -124,12 +117,14 @@
                                       style="color: white; font-size: 15px; margin-right: 4px; margin-top: 2px; border-radius: 2px; cursor: pointer;"
                                       (click)="delet(item)"
                                     ></i>
-                                    <!-- 🔹 Contador dinámico -->
+                                    <!-- Contador dinámico corregido -->
                                     {{ contarCheckins(item.id) }} de {{ customer.length }}
+                                    <p-sortIcon field="checkpoint_{{ item.id }}"></p-sortIcon>
                                   </span>
                                 </div>
                               </div>
                             </th>
+                            
                           </tr>
                         </ng-template>
                       
