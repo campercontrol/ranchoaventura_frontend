@@ -144,7 +144,7 @@
                     <p class="mb-0">{{textos[idoma]['texto22']}}</p>
                   </div>
                   <a class="mercado-pago-btn" (click)="showMercadopago=!showMercadopago">
-                    <img src="../../../assets/images/mercado.jpg" height="25px">  Pagar ahora
+                    <img src="../../../assets/images/mercado.jpg" width="55px">  Pagar ahora
 
                   </a>
                 </div>
@@ -242,9 +242,8 @@
             <p><a href="{{dataCamp.paypal_button}}">Paypal</a></p>
           </div>
           <div class="conatiner-info-camp" *ngIf="dataCamp.show_mercadopago_button">
-            <p class="fw-bold"><i><img src="../../../assets/images/mercado.jpg" height="25px"/></i> Mercado Pago</p>
-            <p><a (click)="showMercadopago=!showMercadopago">{{textos[idoma]['texto20']}}</a></p>
-          </div>
+            <p class="fw-bold"><i><img src="../../../assets/images/mercado.jpg" width="100px"/></i> Mercado Pago</p>
+           </div>
         </div>
         <hr>
         <div class="conatiner-info-camp" *ngIf="dataCamp.show_payment_parent">

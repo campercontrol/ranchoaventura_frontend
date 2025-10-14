@@ -88,8 +88,9 @@ td{
     margin-top: 20px;
 }
 .mercado-pago-btn {
-    background-color: #ffffff; /* Color característico de Mercado Pago */
-    color:black;
+  background-color: #00999a;
+  /* Color característico de Mercado Pago */
+    color:white;
     font-size: 16px;
     padding: 10px 10px;
     border: none;
@@ -103,18 +104,11 @@ td{
     letter-spacing: 1px;
   }
   
-  .mercado-pago-btn:hover {
-    background-color: #00999a;
-  }
+   
   
-  .mercado-pago-btn:active {
-    background-color: #007c7d;
-  }
+   
   
-  .mercado-pago-btn:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
+  
   
 .bodyCamper1{
     background-color: #f1b44c;
