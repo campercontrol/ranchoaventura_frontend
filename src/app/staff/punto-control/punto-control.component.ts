@@ -218,29 +218,36 @@ export class PuntoControlComponent implements OnInit {
     
   
      customSort(event: any) {
-      const field = event.field;
-      const order = event.order;
+      const { field, order } = event;
     
-      // 🔹 Si es una columna de checkpoint
+      // 🔹 Caso 1: ordenar columnas de checkpoint
       if (field && field.startsWith('checkpoint_')) {
         const checkpointId = Number(field.replace('checkpoint_', ''));
     
         this.customer = [...this.customer].sort((a: any, b: any) => {
           const aReg = a.checkpoints?.find(
-            (p: any) => p.checkpoint_id === checkpointId || p.id === checkpointId
+            (p: any) =>
+              p.checkpoint_id === checkpointId ||
+              p.id === checkpointId ||
+              p.check_id === checkpointId
           );
           const bReg = b.checkpoints?.find(
-            (p: any) => p.checkpoint_id === checkpointId || p.id === checkpointId
+            (p: any) =>
+              p.checkpoint_id === checkpointId ||
+              p.id === checkpointId ||
+              p.check_id === checkpointId
           );
     
-          const aVal = aReg?.checkin ? 1 : 0;
-          const bVal = bReg?.checkin ? 1 : 0;
+          // 🔹 Convertimos a 1 si está inscrito, 0 si no
+          const aVal = aReg?.checkin === true || aReg?.checkpoint_check === true ? 1 : 0;
+          const bVal = bReg?.checkin === true || bReg?.checkpoint_check === true ? 1 : 0;
     
-          // Orden ascendente o descendente según clic
-          return (aVal - bVal) * order;
+          // 🔹 Orden: primero los que están inscritos (1 antes que 0)
+          return (bVal - aVal) * order;
         });
-      } else {
-        // 🔹 Ordenamiento normal (nombre, id, etc.)
+      } 
+      // 🔹 Caso 2: ordenar campos normales (nombre, id, etc.)
+      else {
         this.customer = [...this.customer].sort((a: any, b: any) => {
           const v1 = this.resolveFieldData(a, field);
           const v2 = this.resolveFieldData(b, field);
@@ -257,6 +264,7 @@ export class PuntoControlComponent implements OnInit {
         });
       }
     }
+    
     
     resolveFieldData(data: any, field: string): any {
       if (!data || !field) return null;

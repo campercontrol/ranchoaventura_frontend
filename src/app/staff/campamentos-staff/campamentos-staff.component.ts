@@ -107,6 +107,10 @@ export class CampamentosStaffComponent implements OnInit {
   };
   cargando= false;
   
+totalRecordsStaff = 0;
+loadingStaff = false;
+currentPage = 1;
+totalPages = 0;
 
   idCamp = 0;
   activityValues: number[] = [0, 100];
@@ -143,8 +147,10 @@ export class CampamentosStaffComponent implements OnInit {
   alercharges= false;
   public Editor = ClassicEditor;
   alertPago =false
+  totalRecords: any;
 
-
+   
+  
 
   
 
@@ -362,10 +368,49 @@ private getFileNameFromHeader(contentDisposition: string | null): string | null 
 
       
     })
+
+    this.catalogos.getStaff(1, 30).subscribe((staffResponse: any) => {
+      let staffData = staffResponse.data.items;
+      this.listaStaff = staffData;
+      // Asigna el total de registros para que se muestre la paginación
+      console.log(this.listaStaff,'estafff no selecionado');
+      
+      this.totalRecords = staffResponse.data.total;
+      this.cargando = false;
+    }, (error: any) => {
+      console.error('Error fetching staff:', error);
+      this.cargando = false;
+    });
    
 
   }
-
+  getStaffData(page: number = 1, per_page: number = 25) {
+    this.loadingStaff = true;
+  
+    this.catalogos.getStaff(page, per_page).subscribe(
+      (res: any) => {
+        const staffData = res.data.items || [];
+        this.listaStaff = staffData;
+        this.totalRecordsStaff = res.data.total; // ← este es el total real de 1245
+        this.totalPages = res.data.pages;        // ← total de páginas (42)
+        this.currentPage = page;
+        this.loadingStaff = false;
+  
+        console.log(`Página ${page} de ${this.totalPages}, total: ${this.totalRecordsStaff}`);
+      },
+      (error) => {
+        console.error('Error al cargar staff:', error);
+        this.loadingStaff = false;
+      }
+    );
+  }
+  
+  loadStaffLazy(event: any) {
+    const page = Math.floor(event.first / event.rows) + 1;
+    const rows = event.rows;
+    this.getStaffData(page, rows);
+  }
+  
   parseHTMLContent(html: any): string {
     const regex = /<[^>]*>/g;
     return html.replace(regex, '');

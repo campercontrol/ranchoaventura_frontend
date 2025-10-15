@@ -199,7 +199,8 @@
               <p-table    #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true"  [value]="listCampers" 
               [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" 
               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-              [globalFilterFields]="['camper_full_name','camper_birthday','tutor_full_name','second_tutor_full_name']">
+              [globalFilterFields]="['staff_full_name','staff_birthday','staff_cellphone','staff_email']"
+               >
   
               <ng-template pTemplate="header">
                 <tr>
@@ -378,7 +379,7 @@
               <p-table   #dt [(selection)]="selectedCustomers" dataKey="staff_id"  [rowHover]="true" [rows]="50" [value]="listStaffConfirm"
             [showCurrentPageReport]="true"  [loading]="loading"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0" dataKey="staff_id"
-            [globalFilterFields]="['name','country.name','representative.name','status']">
+            [globalFilterFields]="['staff_full_name','staff_birthday','staff_cellphone','staff_email']">
 
             <ng-template pTemplate="header">
               <tr>
@@ -531,7 +532,7 @@
               <p-table   #dt [(selection)]="staffSelecionado" dataKey="staff_id"  [rowHover]="true" [rows]="50" [value]="staffApuntado"
             [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-            [globalFilterFields]="['name','country.name','representative.name','status']">
+            [globalFilterFields]="['staff_full_name','staff_birthday','staff_cellphone','staff_email']" >
 
             <ng-template pTemplate="header">
               <tr>
@@ -544,28 +545,28 @@
                     Foto
                   </div>
                 </th>
-                <th pSortableColumn="name" class="camp">
+                <th pSortableColumn="staff_full_name" class="camp">
                   <div class="flex justify-content-between align-items-center" style="max-width: 200px; width: 200px;">
                     Nombre
-                    <p-sortIcon field="name"></p-sortIcon>
+                    <p-sortIcon field="staff_full_name"></p-sortIcon>
                   </div>
                 </th>
-                <th pSortableColumn="precio">
+                <th pSortableColumn="staff_birthday">
                   <div class="flex justify-content-between align-items-center" style="width: 100px;">
                     Fecha de nacimiento
-                    <p-sortIcon field="precio"></p-sortIcon>
+                    <p-sortIcon field="staff_birthday"></p-sortIcon>
                   </div>
                 </th>
-                <th pSortableColumn="precio">
+                <th pSortableColumn="staff_cellphone">
                   <div class="flex justify-content-between align-items-center" style="width: 100px;">
                     Telefono celulares
-                    <p-sortIcon field="precio"></p-sortIcon>
+                    <p-sortIcon field="staff_cellphone"></p-sortIcon>
                   </div>
                 </th>
-                <th pSortableColumn="precio">
+                <th pSortableColumn="staff_email">
                   <div class="flex justify-content-between align-items-center" style="width: 100px;">
                     Correos
-                    <p-sortIcon field="precio"></p-sortIcon>
+                    <p-sortIcon field="staff_email"></p-sortIcon>
                   </div>
                 </th>
                
@@ -1190,10 +1191,19 @@
           placeholder="Global Search" />
         </div>
         <div class=" scroll-y">
-          <p-table   #dt [(selection)]="staffNoselecionado" dataKey="Staff.id"  [rowHover]="true" [rows]="50" [value]="listaStaff"
-        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" [paginator]="true"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
-        [globalFilterFields]="['Staff.name','Staff.lastname_father','Staff.lastname_mother','status']">
+          <p-table   #dt [(selection)]="staffNoselecionado"
+          dataKey="Staff.id"
+          [value]="listaStaff"
+          [lazy]="true"
+          (onLazyLoad)="loadStaffLazy($event)"
+          [totalRecords]="totalRecordsStaff"
+          [rows]="25"
+          [rowsPerPageOptions]="[10, 25, 50]"
+          [paginator]="true"
+          [rowHover]="true"
+          [loading]="loadingStaff"
+          currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+          [globalFilterFields]="['Staff.name','Staff.lastname_father','Staff.lastname_mother','status']">
     
         <ng-template pTemplate="header">
           <tr>
