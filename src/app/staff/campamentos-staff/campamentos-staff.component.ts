@@ -34,6 +34,7 @@ export class CampamentosStaffComponent implements OnInit {
 
   
   selectedCustomers: any[];
+  filters: { name: string; email: string } = { name: '', email: '' };
 
   representatives: any[];
   url = 'https://api-dev.kincamp.com/';
@@ -376,10 +377,10 @@ private getFileNameFromHeader(contentDisposition: string | null): string | null 
       console.log(this.listaStaff,'estafff no selecionado');
       
       this.totalRecords = staffResponse.data.total;
-      this.cargando = false;
+ 
     }, (error: any) => {
       console.error('Error fetching staff:', error);
-      this.cargando = false;
+  
     });
    
 
@@ -404,6 +405,26 @@ private getFileNameFromHeader(contentDisposition: string | null): string | null 
       }
     );
   }
+
+  buscarStaff(page: number = 1) {
+    this.catalogos.searchStaff(this.filters, page).subscribe(res => {
+      this.listaStaff = res.data.items;
+ 
+     
+      
+      this.totalRecords = res.data.total;
+    }, error => {
+      console.error('Error al buscar staff:', error);
+    });
+  }
+
+  resetFilters() {
+    this.filters = {
+      name: '',
+      email: ''
+    };
+    this.getStaffData();
+   }
   
   loadStaffLazy(event: any) {
     const page = Math.floor(event.first / event.rows) + 1;
