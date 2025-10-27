@@ -35,14 +35,15 @@ export class AuthenticationService {
      }
     
    
-  login(email: string, password: string) {
-    const body = new HttpParams()
-      .set('username', email)
-      .set('password', password);
+   // 🔹 Versión Observable
+   login(email: string, password: string) {
+    console.log(password, 'data');
+
+    const body = `username=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
 
     return this.http.post(
       'https://api-dev.kincamp.com/token',
-      body.toString(),
+      body,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -51,20 +52,20 @@ export class AuthenticationService {
       }
     );
   }
-    
+
+  // 🔹 Versión Promise (para usar con async/await)
   login2(email: string, password: string) {
-    console.log(password,'data');
-    
+    console.log(password, 'data');
+
+    const body = `username=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
+
     return new Promise((resolve, reject) => {
-      const body = new HttpParams()
-        .set('username', email)
-        .set('password', password);
-  
-      this.http.post(
-        "https://api-dev.kincamp.com/token",
-        body.toString(),
-        
-      ).subscribe(
+      this.http.post('https://api-dev.kincamp.com/token', body, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'accept': 'application/json'
+        })
+      }).subscribe(
         (user: any) => {
           console.log(user);
           this.loggedIn = true;
@@ -72,7 +73,6 @@ export class AuthenticationService {
           this.infToken = jwt_decode(user.access_token);
           this.router.navigate(['/dashboard/parents/new-camper']);
           console.log(this.infToken);
-  
           resolve(user);
         },
         (error) => {
