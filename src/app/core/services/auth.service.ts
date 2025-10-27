@@ -53,6 +53,8 @@ export class AuthenticationService {
   }
     
   login2(email: string, password: string) {
+    console.log(password,'data');
+    
     return new Promise((resolve, reject) => {
       const body = new HttpParams()
         .set('username', email)
@@ -61,12 +63,7 @@ export class AuthenticationService {
       this.http.post(
         "https://api-dev.kincamp.com/token",
         body.toString(),
-        {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'accept': 'application/json'
-          })
-        }
+        
       ).subscribe(
         (user: any) => {
           console.log(user);
