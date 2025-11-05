@@ -40,6 +40,8 @@
                 
                     <p-table
                     #dt
+                    [responsiveLayout]="false"
+                    [responsive]="false"
                     [(selection)]="selectedCustomers"
                     [value]="customer"
                     dataKey="id"
@@ -49,7 +51,7 @@
                     [lazy]="true"
                     (onLazyLoad)="loadCampsLazy($event)"
                     [totalRecords]="totalRecords"
-                    [responsive]="true"
+                  
                     [showCurrentPageReport]="true"
                     [rowsPerPageOptions]="[10,25,50]"
                     [loading]="loading"

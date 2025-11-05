@@ -332,7 +332,8 @@
                         placeholder="Global Search" />
                 </div>
         <div style="overflow: auto;">
-              <p-table   #dt [value]="listcatalogos" [rows]="50"
+              <p-table     [responsiveLayout]="false"
+                    [responsive]="false"  #dt [value]="listcatalogos" [rows]="50"
             [globalFilterFields]="['name','name','email','contact_second_email','contact_third_name','acronyms']"
             [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

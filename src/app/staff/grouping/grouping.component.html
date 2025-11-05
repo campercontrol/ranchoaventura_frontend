@@ -11,7 +11,7 @@
           <h4 class="card-title text-white">Acampadores</h4>
 
         </div>
-        <div class="p-3">
+        <div class="p-3" style="overflow: scroll;">
 
 
 
@@ -38,8 +38,11 @@
           
           </div>
  
-          <p-table [value]="listCampers"
+          <p-table     [responsiveLayout]="false"
+                    [responsive]="false"[value]="listCampers"
            [customSort]="true" 
+           [responsiveLayout]="false"
+              [responsive]="false"
            (sortFunction)="customSort($event, 'campers')">
             <ng-template pTemplate="header">
               <tr>
@@ -162,9 +165,12 @@
      
       </form>
 
-        <p-table   #dt 
+        <p-table     [responsiveLayout]="false"
+                    [responsive]="false"  #dt 
       [value]="listcatalogos"
       [customSort]="true" 
+      [responsiveLayout]="false"
+              [responsive]="false"
       
       (sortFunction)="customSort($event, 'catalogos')"
             [globalFilterFields]="['name']"

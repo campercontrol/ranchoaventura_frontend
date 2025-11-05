@@ -15,7 +15,8 @@
                         placeholder="Global Search" />
                 </div>
         <div style="overflow: auto;">
-              <p-table   #dt [value]="listcatalogos" [rows]="20"
+              <p-table     [responsiveLayout]="false"
+                    [responsive]="false"  #dt [value]="listcatalogos" [rows]="20"
             [rowsPerPageOptions]="[5, 25, 50]"
             [globalFilterFields]="['name','lastname_mother','lastname_father','school','tutor_fullname','tutor_email','camper_id']"
            [rowHover]="true" dataKey="id"

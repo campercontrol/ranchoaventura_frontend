@@ -47,7 +47,8 @@
                                                         <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
                                                             placeholder="Global Search" />
                                                     </div>
-                                                          <p-table   #dt1 [value]="listaTemplates" [rows]="50"
+                                                          <p-table     [responsiveLayout]="false"
+                    [responsive]="false"  #dt1 [value]="listaTemplates" [rows]="50"
                                                             [globalFilterFields]="['title','name']"
                                                             [(selection)]="selectCatalogos" [rowHover]="true"
                                                             dataKey="id"
@@ -398,7 +399,8 @@
           placeholder="Global Search" />
         </div>
         <div class=" scroll-y">
-          <p-table   #dt [(selection)]="selectdestinatariosCampers"   [rowHover]="true" [rows]="50" [value]="destinatariosCampers"
+          <p-table     [responsiveLayout]="false"
+                    [responsive]="false"  #dt [(selection)]="selectdestinatariosCampers"   [rowHover]="true" [rows]="50" [value]="destinatariosCampers"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
         [globalFilterFields]="['tutor_full_name','tutor_email','camper_full_name']"  responsiveLayout="scroll"
@@ -458,7 +460,8 @@
           placeholder="Global Search" />
         </div>
         <div class=" scroll-y">
-          <p-table   #dt [(selection)]="selectdestinatariosStaff"   [rowHover]="true" [rows]="50" [value]="destinatariosStaff"
+          <p-table     [responsiveLayout]="false"
+                    [responsive]="false"  #dt [(selection)]="selectdestinatariosStaff"   [rowHover]="true" [rows]="50" [value]="destinatariosStaff"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
         [globalFilterFields]="['staff_full_name','staff_email']"  responsiveLayout="scroll"
@@ -518,7 +521,8 @@
           placeholder="Global Search" />
         </div>
         <div class=" scroll-y">
-          <p-table   #dt [(selection)]="selectdestinatariosEscuela" dataKey="school_id"  [rowHover]="true" [rows]="50" [value]="destinatariosEscuela"
+          <p-table     [responsiveLayout]="false"
+                    [responsive]="false"  #dt [(selection)]="selectdestinatariosEscuela" dataKey="school_id"  [rowHover]="true" [rows]="50" [value]="destinatariosEscuela"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
         [globalFilterFields]="['school_email','school','name','email','contact_second_email','contact_third_email']"
@@ -609,7 +613,8 @@
                       placeholder="Global Search" />
                     </div>
                     <div class=" scroll-y">
-                      <p-table   #dt [(selection)]="item.camp.camperSelect"   [rowHover]="true" [rows]="50" [value]="item.camp.campers"
+                      <p-table     [responsiveLayout]="false"
+                    [responsive]="false"  #dt [(selection)]="item.camp.camperSelect"   [rowHover]="true" [rows]="50" [value]="item.camp.campers"
                     [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
                     [globalFilterFields]="['tutor_full_name','tutor_email','camper_full_name','tutor_email']"
@@ -670,7 +675,8 @@
                       placeholder="Global Search" />
                     </div>
                     <div class=" scroll-y">
-                      <p-table   #dt [(selection)]="item.camp.staffSelect"   [rowHover]="true" [rows]="50" [value]="item.camp.staff"
+                      <p-table     [responsiveLayout]="false"
+                    [responsive]="false"  #dt [(selection)]="item.camp.staffSelect"   [rowHover]="true" [rows]="50" [value]="item.camp.staff"
                     [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
                     [globalFilterFields]="['staff_full_name','staff_email']"  responsiveLayout="scroll"
@@ -730,7 +736,8 @@
                       placeholder="Global Search" />
                     </div>
                     <div class=" scroll-y">
-                      <p-table   #dt [(selection)]="item.camp.schollSelect" dataKey="school_id"  [rowHover]="true" [rows]="50" [value]="item.camp.schollList"
+                      <p-table     [responsiveLayout]="false"
+                    [responsive]="false"  #dt [(selection)]="item.camp.schollSelect" dataKey="school_id"  [rowHover]="true" [rows]="50" [value]="item.camp.schollList"
                     [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
                     [globalFilterFields]="['school_email','school','name']"  responsiveLayout="scroll"

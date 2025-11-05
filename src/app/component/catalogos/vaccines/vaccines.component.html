@@ -139,7 +139,8 @@
                         placeholder="Global Search" />
                 </div>
         
-                  <p-table   #dt [value]="listcatalogos" [rows]="50"
+                  <p-table     [responsiveLayout]="false"
+                    [responsive]="false"  #dt [value]="listcatalogos" [rows]="50"
                     [globalFilterFields]="['name','assigned_id','acronyms']"
                     [(selection)]="selectCatalogos" [rowHover]="true" dataKey="id"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

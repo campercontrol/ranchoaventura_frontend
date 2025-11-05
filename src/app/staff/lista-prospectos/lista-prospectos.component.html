@@ -65,7 +65,8 @@
             </div>
       
             
-               <p-table  #dt 
+               <p-table     [responsiveLayout]="false"
+                    [responsive]="false" #dt 
                [(selection)]="selectedCustomers" 
                dataKey="id" 
                [rowHover]="true" 
