@@ -73,10 +73,11 @@
             <!-- Icono grande como marca de agua 
   
 --> 
-<p-table [value]="camper" [paginator]="true" [rows]="50" [globalFilterFields]="['name']" [(selection)]="selectedCampers" *ngIf="!loading">
+<p-table [value]="camper"    [responsiveLayout]="false"
+[responsive]="false" [paginator]="true" [rows]="50" [globalFilterFields]="['name']" [(selection)]="selectedCampers" *ngIf="!loading">
   <ng-template pTemplate="header">
     <tr>
-      <th>
+      <th >
         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
       </th>
       <th pSortableColumn="payments_info.camper_fullname">Camper

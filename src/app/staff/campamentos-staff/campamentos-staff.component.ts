@@ -601,14 +601,29 @@ private getFileNameFromHeader(contentDisposition: string | null): string | null 
     })
 }
 
-  cumpleanosEnRango( cumpleanos: any): boolean {
-    let fechaInicio =  new Date(this.infoCamp.start);
-    let fechaFin =  new Date(this.infoCamp.end);
-    cumpleanos = new Date(cumpleanos);
+cumpleanosEnRango(cumpleanos: string | Date): boolean {
+  if (!this.infoCamp?.start || !this.infoCamp?.end || !cumpleanos) return false;
 
-    // Verificar si el cumpleaños del asistente está dentro del rango del evento
-    return cumpleanos >= fechaInicio && cumpleanos <= fechaFin;
+  const fechaInicio = new Date(this.infoCamp.start);
+  const fechaFin = new Date(this.infoCamp.end);
+  const cumple = new Date(cumpleanos);
+
+  // Convertir todo al año del campamento
+  const cumpleEsteAnio = new Date(
+    fechaInicio.getFullYear(),
+    cumple.getMonth(),
+    cumple.getDate()
+  );
+
+  // Si el rango cruza de año (ej. diciembre-enero), ajustar
+  let fin = new Date(fechaFin);
+  if (fechaFin < fechaInicio) {
+    fin.setFullYear(fechaInicio.getFullYear() + 1);
   }
+
+  return cumpleEsteAnio >= fechaInicio && cumpleEsteAnio <= fin;
+}
+
   linkPagos(idCamp){
     if(this.user_admin==true || this.user_coordinator==true){
         this.routerN.navigate(['dashboard/payments/'+idCamp +'/'+this.idCamp])
@@ -927,10 +942,10 @@ deletExtracharges(i){
 reporteGeneral() {
   this.capms.getReportesGenerales(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response.data;
+      const data = response.data || [];
 
       const headersMap: any = {
-        'id':'ID',
+        'id': 'ID',
         'name': 'Nombre',
         'lastname_father': 'Apellido Paterno',
         'lastname_mother': 'Apellido Materno',
@@ -970,100 +985,122 @@ reporteGeneral() {
         'second_tutor_work_phone': 'Teléfono del Trabajo del Segundo Tutor',
         'second_tutor_email': 'Email del Segundo Tutor',
         'emergency contact': 'Contacto de Emergencia',
-        'contact_kinship': 'Parentesco del Contacto de Emergencia',
+        'contact kinship': 'Parentesco del Contacto de Emergencia',
         'contact_cellphone': 'Celular del Contacto de Emergencia',
         'contact_homephone': 'Teléfono de Casa del Contacto de Emergencia',
         'payment_balance': 'Saldo de Pago',
-        'registration_date': 'Fecha de Registro',
+        'registration date': 'Fecha de Registro',
+        'created_at': 'Fecha de Registro',
         'Comments (Parent)': 'Comentarios de Padres',
         'Comments (Staff)': 'Comentarios del Personal',
         'Comments (School)': 'Comentarios de la Escuela',
-        "enrollment": "Estatus",
+        'enrollment': 'Estatus'
       };
 
+      const extraQuestionsSet = new Set<string>();
+      const extraChargesSet = new Set<string>();
+      const groupingTypesSet = new Set<string>();
+
+      // 🔹 Detectar preguntas, cargos y tipos de agrupación
+      data.forEach((row: any) => {
+        if (Array.isArray(row.ExtraQuestions)) {
+          row.ExtraQuestions.forEach((q: any) => q.question && extraQuestionsSet.add(q.question.trim()));
+        }
+
+        if (Array.isArray(row.ExtraCharges)) {
+          row.ExtraCharges.forEach((c: any) => c.name && extraChargesSet.add(c.name.trim()));
+        }
+
+        const groupings = row.Groupings || row.groupings || row.CamperGroupings || [];
+        if (Array.isArray(groupings)) {
+          groupings.forEach((g: any) => {
+            if (g.is_active) {
+              const typeName =
+                g.grouping_type_name ||
+                g.grouping_type?.name ||
+                (g.grouping_type_id ? `Agrupación tipo ${g.grouping_type_id}` : 'Agrupación');
+              groupingTypesSet.add(typeName.trim());
+            }
+          });
+        }
+      });
+
+      const extraQuestions = [...extraQuestionsSet];
+      const extraCharges = [...extraChargesSet];
+      const groupingTypes = [...groupingTypesSet];
+
+      // 🔹 Construir los datos
       const modifiedData = data.map((row: any) => {
         const newRow: any = {};
 
-        // Mapear claves conocidas
+        // Campos fijos traducidos
         for (const key in headersMap) {
-          if (headersMap.hasOwnProperty(key)) {
-            newRow[headersMap[key]] = row.hasOwnProperty(key) ? row[key] : '';
-          }
+          const translated = headersMap[key];
+          newRow[translated] = row.hasOwnProperty(key) ? row[key] : '';
         }
 
-        // Incluir claves no mapeadas
-        for (const key in row) {
-          if (!headersMap.hasOwnProperty(key)) {
-            newRow[key] = row[key];
-          }
-        }
-
-        // Convertir booleanos y 0/1 a Sí/No
+        // Convertir booleanos a Sí/No
         for (const key in newRow) {
-          if (typeof newRow[key] === 'boolean') {
-              newRow[key] = newRow[key] ? 'Sí' : 'No';
-          } else if (typeof newRow[key] === 'number' && (newRow[key] === 0 || newRow[key] === 1)) {
-              newRow[key] = newRow[key] === 1 ? 'Sí' : 'No';
-          }
+          if (typeof newRow[key] === 'boolean') newRow[key] = newRow[key] ? 'Sí' : 'No';
+          else if (typeof newRow[key] === 'number' && (newRow[key] === 0 || newRow[key] === 1))
+            newRow[key] = newRow[key] === 1 ? 'Sí' : 'No';
         }
 
-        // Concatenar comentarios
-        newRow['Comentarios de Padres'] = row['Comments (Parent)'] ? row['Comments (Parent)'].map((c: any) => c.comment).join(', ') : '';
-        newRow['Comentarios del Personal'] = row['Comments (Staff)'] ? row['Comments (Staff)'].map((c: any) => c.comment).join(', ') : '';
-        newRow['Comentarios de la Escuela'] = row['Comments (School)'] ? row['Comments (School)'].map((c: any) => c.comment).join(', ') : '';
+        // Comentarios
+        newRow['Comentarios de Padres'] = row['Comments (Parent)']?.map((c: any) => c.comment).join(', ') || '';
+        newRow['Comentarios del Personal'] = row['Comments (Staff)']?.map((c: any) => c.comment).join(', ') || '';
+        newRow['Comentarios de la Escuela'] = row['Comments (School)']?.map((c: any) => c.comment).join(', ') || '';
 
-        // Columna Agrupaciones (aunque venga vacía)
-        newRow['Agrupaciones'] = row.Groupings && Array.isArray(row.Groupings)
-          ? row.Groupings.map((g: any) =>
-              `${g.name} (ID: ${g.id}, Tipo: ${g.grouping_type_id}, Activo: ${g.is_active ? 'Sí' : 'No'})`
-            ).join('; ')
-          : '';
+        // Preguntas Extras
+        extraQuestions.forEach(q => {
+          const match = row.ExtraQuestions?.find((i: any) => i.question?.trim() === q);
+          newRow[q] = match?.answer || '';
+        });
+
+        // Cargos Extras
+        extraCharges.forEach(c => {
+          const match = row.ExtraCharges?.find((i: any) => i.name?.trim() === c);
+          newRow[c] = match ? (match.amount ?? '') : '';
+        });
+
+        // Agrupaciones (por tipo o id)
+        const groupings = row.Groupings || row.groupings || row.CamperGroupings || [];
+        groupingTypes.forEach(type => {
+          const match = groupings.find((g: any) => {
+            const currentType =
+              g.grouping_type_name ||
+              g.grouping_type?.name ||
+              (g.grouping_type_id ? `Agrupación tipo ${g.grouping_type_id}` : 'Agrupación');
+            return currentType.trim() === type && g.is_active;
+          });
+          newRow[type] = match ? match.name : '';
+        });
 
         return newRow;
       });
 
-      // Cabeceras
-      const headers = [...new Set([...Object.keys(headersMap), ...data.flatMap(Object.keys)])];
-      const translatedHeaders = headers.map(header => headersMap[header] || header);
+      // 🔹 Encabezados
+      const headers = [...Object.values(headersMap), ...extraQuestions, ...extraCharges, ...groupingTypes];
 
-      // Forzar que siempre esté la columna "Agrupaciones"
-      if (!translatedHeaders.includes("Agrupaciones")) {
-        translatedHeaders.push("Agrupaciones");
-      }
+      // 🔹 Crear hoja Excel
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet<any>(modifiedData, { header: headers as any[] });
 
-      // Generar hoja Excel
-      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(modifiedData, { header: translatedHeaders });
-
-      // Reemplazar cabeceras por traducidas
-      const range = XLSX.utils.decode_range(worksheet['!ref']!);
-      for (let i = range.s.c; i <= range.e.c; i++) {
-        const cell_address = XLSX.utils.encode_cell({ r: 0, c: i });
-        if (worksheet[cell_address]) {
-          worksheet[cell_address].v = translatedHeaders[i];
-        }
-      }
-
-      // Ajustar columnas
-      const columnWidths = translatedHeaders.map((header, index) => {
-        const maxWidth = Math.max(...modifiedData.map((row: any) => (row[translatedHeaders[index]] || '').toString().length));
-        return Math.max(header.length, maxWidth) + 2;
+      // 🔹 Ajuste de columnas
+      worksheet['!cols'] = headers.map((header:any) => {
+        const maxWidth = Math.max(header.length, ...modifiedData.map(r => (r[header]?.toString().length || 0)));
+        return { wpx: Math.min(maxWidth * 10, 300) };
       });
-      worksheet['!cols'] = columnWidths.map(width => ({ wpx: width * 10 }));
 
-      // Altura filas
-      worksheet['!rows'] = modifiedData.map(() => ({ hpx: 20 }));
-
-      // Crear libro y exportar
-      const workbook: XLSX.WorkBook = { Sheets: { 'Datos': worksheet }, SheetNames: ['Datos'] };
-      const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-
+      const workbook: XLSX.WorkBook = { Sheets: { Datos: worksheet }, SheetNames: ['Datos'] };
+      const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
       this.saveAsExcelFile(excelBuffer, 'Reporte General ' + this.infoCamp.name);
     },
-    error: (error) => {
-      console.error('Error al obtener los datos del reporte general', error);
-    }
+    error: err => console.error('Error al obtener los datos del reporte general', err),
   });
 }
+
+
+
 
 
 

@@ -561,6 +561,12 @@
                     <p-sortIcon field="staff_birthday"></p-sortIcon>
                   </div>
                 </th>
+                <th pSortableColumn="staff_birthday">
+                  <div class="flex justify-content-between align-items-center" style="width: 100px;">
+                    Fecha en que se apunta
+                    <p-sortIcon field="staff_birthday"></p-sortIcon>
+                  </div>
+                </th>
                 <th pSortableColumn="staff_cellphone">
                   <div class="flex justify-content-between align-items-center" style="width: 100px;">
                     Telefono celulares
@@ -607,6 +613,9 @@
                   {{customer.staff_birthday}}
                   <br>
 
+                </td>
+                <td>
+                  {{customer.staff_volunteer_date}}
                 </td>
                 <td>
                  {{customer.staff_cellphone}}
