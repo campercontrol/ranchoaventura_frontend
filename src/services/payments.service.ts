@@ -14,6 +14,11 @@ export class PaymentsService {
     return this.http.get('https://api-dev.kincamp.com/payment/page/camper/'+idCamp+'/'+idCamper+'/'+id)
    } 
 
+   getReporte(id){
+    return this.http.get('https://api-dev.kincamp.com/camps/'+id+'/payments_report')
+
+   }
+
    // crear pago
    setpage(info){
     return this.http.post('https://api-dev.kincamp.com/payment/',info)

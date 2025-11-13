@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentsService } from 'src/services/payments.service';
-
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-paymant-camp',
   templateUrl: `./paymant-camp.component.html`,
@@ -209,7 +210,31 @@ export class PaymantCampComponent {
     // Usa el valor procesado en la cadena de retorno
     return `payments_info.payments_by_payment_method.${paymentMethodKey}.total_amount`;
   }
+  getReporte(){
+    this.pages.getReporte(this.camp).subscribe({
+      next:(res)=>{
+        this.exportToExcel(res, 'Reporte_Pagos');
+
+      }
+    })
+  }
+  exportToExcel(data: any, fileName: string) {
+    // 1. Convertimos JSON → Hoja
+    const worksheet = XLSX.utils.json_to_sheet(data);
   
+    // 2. Creamos el libro
+    const workbook = {
+      Sheets: { 'Reporte': worksheet },
+      SheetNames: ['Reporte']
+    };
+  
+    // 3. Escribimos el archivo
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  
+    // 4. Guardamos en el navegador
+    const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+    saveAs(blob, `${fileName}.xlsx`);
+  }
   
   
 }
