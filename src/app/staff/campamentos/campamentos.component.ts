@@ -77,11 +77,36 @@ cars=[{Nombre:"Campamento con agrupaciones",grado:"prueba2",inicio:"2020-11-10 "
 
   loadCampsLazy(event: any) {
     this.loading = true;
+  
     const page = Math.floor(event.first / event.rows) + 1;
     const perPage = event.rows;
-
+  
+    const sortField = event.sortField;
+    const sortOrder = event.sortOrder; // 1 asc, -1 desc
+  
+    const aplicarOrdenFront = (items: any[]) => {
+      if (!sortField) return items; // si no están usando las flechas, no ordenar
+  
+      return items.sort((a: any, b: any) => {
+        // soporte para campos anidados "record.n"
+        const valA = sortField.includes('.')
+          ? sortField.split('.').reduce((o, k) => o?.[k], a)
+          : a[sortField];
+  
+        const valB = sortField.includes('.')
+          ? sortField.split('.').reduce((o, k) => o?.[k], b)
+          : b[sortField];
+  
+        if (valA == null) return 1 * sortOrder;
+        if (valB == null) return -1 * sortOrder;
+  
+        if (valA < valB) return -1 * sortOrder;
+        if (valA > valB) return 1 * sortOrder;
+        return 0;
+      });
+    };
+  
     if (this.filtrosActivos) {
-      // Si hay filtros activos, buscar con filtros
       this.camps.searchCamps(
         this.searchName,
         this.searchLocation,
@@ -89,20 +114,30 @@ cars=[{Nombre:"Campamento con agrupaciones",grado:"prueba2",inicio:"2020-11-10 "
         page,
         perPage
       ).subscribe((res: any) => {
-        this.customer = res.data.items;
+        let items = res.data.items;
+  
+        // ORDENAMIENTO EN FRONT
+        this.customer = aplicarOrdenFront(items);
+  
         this.totalRecords = res.data.total;
         this.loading = false;
       });
+  
     } else {
-      // Sin filtros: carga normal
+  
       this.camps.getCamp(page, perPage).subscribe((res: any) => {
-        this.customer = res.data.items;
+        let items = res.data.items;
+  
+        // ORDENAMIENTO EN FRONT
+        this.customer = aplicarOrdenFront(items);
+  
         this.totalRecords = res.data.total;
         this.loading = false;
       });
+  
     }
   }
-
+  
   buscarCampamentos() {
     this.filtrosActivos = true;
     this.loadCampsLazy({ first: 0, rows: 10 });

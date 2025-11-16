@@ -25,6 +25,9 @@ export class ListadoStaffComponent implements OnInit {
   selectHijos:any = [];
   resSearch:boolean = false; 
   spinner:boolean= false;
+  sortField: string | null = null;
+sortOrder: number | null = null;
+
   photoSelect : string | ArrayBuffer;
   photoSatus = false;
   spinerPhot= true;
@@ -101,22 +104,51 @@ export class ListadoStaffComponent implements OnInit {
   }
  
   info(page: number = 0, rows: number = 10) {
-   
+
     this.catalogos.getStaff(page + 1, rows).subscribe(
       (staffResponse: any) => {
-        console.log(staffResponse.data, 'respuesta staff');
-        this.listcatalogos = staffResponse.data.items;
   
-        this.listcatalogos.forEach(element => {
+        let items = staffResponse.data.items;
+  
+        // Procesar tus campos como ya lo hacías
+        items.forEach(element => {
           element.tipo = "Staff";
           element.combined = `${element.Staff.name} ${element.Staff.lastname_father} ${element.Staff.lastname_mother}`.toLowerCase();
         });
   
-        this.totalRecords = staffResponse.data.total; // Guarda el total de registros
+        // ---------------------------
+        // ORDENAMIENTO SOLO EN FRONT
+        // ---------------------------
+        if (this.sortField) {
+  
+          items.sort((a: any, b: any) => {
+  
+            // resolver campo normal o anidado
+            const getValue = (obj: any, field: string) => {
+              if (field.includes('.')) {
+                return field.split('.').reduce((o, k) => o?.[k], obj);
+              }
+              return obj[field];
+            };
+  
+            const valA = getValue(a, this.sortField!);
+            const valB = getValue(b, this.sortField!);
+  
+            if (valA == null) return 1 * this.sortOrder!;
+            if (valB == null) return -1 * this.sortOrder!;
+  
+            if (valA < valB) return -1 * this.sortOrder!;
+            if (valA > valB) return 1 * this.sortOrder!;
+            return 0;
+          });
+        }
+  
+        // asignamos ya ordenado
+        this.listcatalogos = items;
+        this.totalRecords = staffResponse.data.total;
   
         this.cargando = false;
         this.cdr.detectChanges();
-
       },
       (error: any) => {
         console.error('Error fetching staff:', error);
@@ -124,11 +156,19 @@ export class ListadoStaffComponent implements OnInit {
       }
     );
   }
+  
   loadStaffLazy(event: any) {
     const page = event.first / event.rows;
     const rows = event.rows;
+  
+    // capturamos los datos de ordenamiento
+    this.sortField = event.sortField;
+    this.sortOrder = event.sortOrder;
+  
     this.info(page, rows);
   }
+  
+  
   
 hypervinculo(id:any){
   this.routerAc.navigate(['dashboard/staff/perfil/'+id])

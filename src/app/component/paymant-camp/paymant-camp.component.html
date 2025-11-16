@@ -76,7 +76,11 @@
             <!-- Icono grande como marca de agua 
   
 --> 
-<p-table [value]="camper"    [responsiveLayout]="false"
+<p-table [value]="camper"    [responsiveLayout]="false"  [value]="camper"
+[paginator]="true"
+ 
+[customSort]="true"
+(sortFunction)="sortNested($event)"
 [responsive]="false" [paginator]="true" [rows]="50" [globalFilterFields]="['name']" [(selection)]="selectedCampers" *ngIf="!loading">
   <ng-template pTemplate="header">
     <tr>

@@ -349,6 +349,8 @@ export class CampamentoComponent implements OnInit {
       this.getQuestion()
       this.modalService.dismissAll()
       this.spinner = false;
+      window.location.reload();
+
       
     })
    
@@ -376,6 +378,8 @@ export class CampamentoComponent implements OnInit {
       this.getQuestion()
       this.modalService.dismissAll()
       this.spinner= false
+      window.location.reload();
+
     })
     
    

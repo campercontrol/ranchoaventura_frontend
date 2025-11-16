@@ -235,6 +235,26 @@ export class PaymantCampComponent {
     const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
     saveAs(blob, `${fileName}.xlsx`);
   }
+  sortNested(event: any) {
+    const field = event.field;
+    const order = event.order;
+  
+    const resolve = (obj: any, path: string) =>
+      path.split('.').reduce((acc, key) => acc?.[key], obj);
+  
+    event.data.sort((a: any, b: any) => {
+      const valA = resolve(a, field);
+      const valB = resolve(b, field);
+  
+      if (valA == null) return 1 * order;
+      if (valB == null) return -1 * order;
+  
+      if (valA < valB) return -1 * order;
+      if (valA > valB) return 1 * order;
+      return 0;
+    });
+  }
+  
   
   
 }
