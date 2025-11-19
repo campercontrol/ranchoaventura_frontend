@@ -103,7 +103,7 @@ export class AdminStaffComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   selectedCities: string[] = [];
   totalRecords: any;
-  filters: { name: string; email: string } = { name: '', email: '' };
+  filters: { name: string; email: string ,lastname_father:string,lastname_mother:string} = { name: '', email: '',lastname_father:'',lastname_mother:'' };
   
   constructor(private createCamp: CreateCampsService, private formGrup: FormBuilder, private render :Renderer2,private catalogos:CatalogosService,private paymants:PaymentsService,private router:Router) {  
   }
@@ -437,7 +437,10 @@ export class AdminStaffComponent implements OnInit {
   resetFilters() {
     this.filters = {
       name: '',
-      email: ''
+      email: '',
+      lastname_father:'',
+      lastname_mother:''
+
     };
     this.info(); // Buscar sin filtros
   }

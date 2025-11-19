@@ -273,7 +273,7 @@
                     
                   </td>
                   <td (click)="vercamper(customer.camper_id)">
-                   <a routerLink="/dashboard/parents/camper/{{customer.camper_id}}">{{customer.camper_full_name}} </a>  <i class="bx bx-conversation" style="color: rgb(147, 147, 224);" *ngIf="customer.camper_comments>0" pTooltip="{{customer.camper_commentss}}"></i> <i class="bx bx-plus-medical"  style="color: rgb(228, 32, 26);"  pTooltip="Solicita llamada" *ngIf="customer.camper_doctor_precall== true"></i>
+                   <a routerLink="/dashboard/parents/camper/{{customer.camper_id}}">{{customer.camper_full_name}} </a>  <i class="bx bx-conversation"     style="font-size: 18px; color: #FF7A00; margin-left: 6px;"  *ngIf="customer.camper_comments>0" pTooltip="{{customer.camper_commentss}}"></i> <i class="bx bx-plus-medical"  style="color: rgb(228, 32, 26);"  pTooltip="Solicita llamada" *ngIf="customer.camper_doctor_precall== true"></i>
                   </td>
                   <td>
   
@@ -286,8 +286,13 @@
   
                   </td>
                   <td>
-  
-                    {{customer.camper_birthday}}<i class="bx bx-cake" *ngIf="cumpleanosEnRango(customer.camper_birthday)"></i>
+                    {{ customer.camper_birthday }}
+                    <i 
+                      class="bx bx-cake"
+                      *ngIf="cumpleanosEnRango(customer.camper_birthday)"
+                      style="font-size: 18px; color: #FF7A00; margin-left: 6px;"
+                    ></i>
+                    
                     <br>
                    
   
@@ -1203,9 +1208,13 @@
           <div class="mb-3 mt-3">
             <label for="name">Nombre</label>
             <input type="text" pInputText [(ngModel)]="filters.name" class="form-control" placeholder="Nombre del staff" />
-        
+            <label for="name">Apellido paterno</label>
+            <input type="text" pInputText [(ngModel)]="filters.lastname_father" class="form-control" placeholder="Nombre del staff" />
+            <label for="name">Apellido materno</label>
+            <input type="text" pInputText [(ngModel)]="filters.lastname_mother" class="form-control" placeholder="Nombre del staff" />
             <label for="email">Correo</label>
             <input type="text" pInputText [(ngModel)]="filters.email" class="form-control" placeholder="Correo del staff" />
+            
         <div class="d-flex justify-content-center mt-3">
            
             <button   type="button" label="" class="btn btn-secondary ms-3" (click)="resetFilters()"> Limpiar</button>

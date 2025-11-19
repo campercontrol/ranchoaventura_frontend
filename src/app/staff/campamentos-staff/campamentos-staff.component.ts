@@ -34,8 +34,7 @@ export class CampamentosStaffComponent implements OnInit {
 
   
   selectedCustomers: any[];
-  filters: { name: string; email: string } = { name: '', email: '' };
-
+ 
   representatives: any[];
   url = 'https://api-dev.kincamp.com/';
 
@@ -152,6 +151,7 @@ totalPages = 0;
 
    
   
+  filters: { name: string; email: string ,lastname_father:string,lastname_mother:string} = { name: '', email: '',lastname_father:'',lastname_mother:'' };
 
   
 
@@ -418,13 +418,17 @@ private getFileNameFromHeader(contentDisposition: string | null): string | null 
     });
   }
 
-  resetFilters() {
+  
+   resetFilters() {
     this.filters = {
       name: '',
-      email: ''
+      email: '',
+      lastname_father:'',
+      lastname_mother:''
+
     };
     this.getStaffData();
-   }
+  }
   
   loadStaffLazy(event: any) {
     const page = Math.floor(event.first / event.rows) + 1;

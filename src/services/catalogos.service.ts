@@ -299,6 +299,8 @@ export class CatalogosService {
         .set('email', filters.email || '')
         .set('page', page.toString())
         .set('per_page', perPage.toString())
+        .set('lastname_mother', perPage.toString())
+        .set('lastname_father', perPage.toString())
         .set('order', 'desc');
   
       return this.http.get<any>('https://api-dev.kincamp.com/search_usuario', { params });
