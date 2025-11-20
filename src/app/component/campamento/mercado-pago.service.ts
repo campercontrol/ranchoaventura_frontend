@@ -17,4 +17,7 @@ export class MercadoPagoService {
   createPreference(camp_id,camper_id,pago): Observable<any> {
     return this.http.get(`${this.baseUrl}mercado_pago/create_payment_link/${camp_id}/${camper_id}/${pago}`);
   }
+  paypal(camp_id,camper_id): Observable<any> {
+    return this.http.post(`${this.baseUrl}camps/${camp_id}/campers/${camper_id}/paypal_link`,{});
+  }
 }

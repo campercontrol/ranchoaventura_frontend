@@ -493,6 +493,25 @@ export class CampamentoComponent implements OnInit {
 
   }
   
+  linkPaypal(){
+    this.loadingMercadoPago = true;
+    this.mercadoPagoService.paypal(this.idCamp,this.idCamper).subscribe({
+      next:(response)=>{
+
+        let link = response.data;
+        if (!link.startsWith('http')) {
+          link = 'https://' + link;
+        }
+      
+        window.open(link, '_blank');
+      
+
+
+      }
+
+    })
+
+  }
 
   linkMercadoPago(){
     this.loadingMercadoPago = true;

@@ -237,9 +237,9 @@
             <p class="fw-bold"><i class="bx bx-key"></i> {{textos[idoma]['texto42']}}</p>
             <p [innerHTML]="dataCamp.special_message"></p>
           </div>
-          <div class="conatiner-info-camp" *ngIf="dataCamp.show_paypal_button">
-            <p class="fw-bold"><i class="bxl-paypal"></i> Paypal</p>
-            <p><a href="{{dataCamp.paypal_button}}">Paypal</a></p>
+          <div class="conatiner-info-camp" *ngIf="dataCamp.show_paypal_button" (click)="linkPaypal()" style="cursor: pointer;">
+            <p class="fw-bold"><i class="bxl-paypal" (click)="linkPaypal()" ></i> Paypal</p>
+            <p><a >Paypal</a></p>
           </div>
           <div class="conatiner-info-camp" *ngIf="dataCamp.show_mercadopago_button">
             <p class="fw-bold"><i><img src="../../../assets/images/mercado.jpg" width="100px"/></i> Mercado Pago</p>
