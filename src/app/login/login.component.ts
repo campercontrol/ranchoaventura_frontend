@@ -82,31 +82,31 @@ export class LoginComponent implements OnInit {
     },
     createAccountModal: {
       esp: {
-        body1: `Si en años anteriores ya has enviado a un hijo o hija a Kin Camp, no debes crear una cuenta nueva, pues ya tenemos todos tus datos. Da click en Recupera tu contraseña para poder activar de nuevo tu cuenta o bien ponte en contacto con nosotros para poder ayudarte a acceder a tu cuenta registrada.`,
+        body1: `Si en años anteriores ya has enviado a un hijo o hija a RANCHO AVENTURA, no debes crear una cuenta nueva, pues ya tenemos todos tus datos. Da click en Recupera tu contraseña para poder activar de nuevo tu cuenta o bien ponte en contacto con nosotros para poder ayudarte a acceder a tu cuenta registrada.`,
         contact: `Comunícate con nosotros al (55) 5257.4937 o al (55) 1793.7555 y con mucho gusto te ayudaremos.`,
         body2: `Si eres completamente nuevo, ¡Gracias por la confianza!`,
-        newButton: `Soy nuevo en Kin Camp y quiero crear una nueva cuenta`,
+        newButton: `Soy nuevo en RANCHO AVENTURA y quiero crear una nueva cuenta`,
         cancelButton: `Cancelar`
       },
       eng: {
-        body1: `If you have already sent a camper to Kin Camp in previous years, you do not need to create a new account, as we already have all your information. Click on "Recover your password" to reactivate your account or contact us for assistance in accessing your registered account.`,
+        body1: `If you have already sent a camper to RANCHO AVENTURA in previous years, you do not need to create a new account, as we already have all your information. Click on "Recover your password" to reactivate your account or contact us for assistance in accessing your registered account.`,
         contact: `Reach out to us at (55) 5257.4937 or (55) 1793.7555, and we will gladly help you.`,
         body2: `If you are completely new, thank you for your trust!`,
-        newButton: `I'm new to Kin Camp and want to create a new account`,
+        newButton: `I'm new to RANCHO AVENTURA and want to create a new account`,
         cancelButton: `Cancel`
       }
     },
     noticeDialog: {
       esp: {
         attention: `¡Atención!`,
-        line1: `A partir del 01 de Julio de 2025 en Kin Camp estamos estrenando nueva versión del sistema de inscripción.`,
+        line1: `A partir del 01 de Julio de 2025 en RANCHO AVENTURA estamos estrenando nueva versión del sistema de inscripción.`,
         line2: `Por tu seguridad, todas las contraseñas fueron borradas en la migración de la base de datos, por lo que antes de ingresar a tu cuenta deberás recuperar tu contraseña dando click en “Recuperar Contraseña”.`,
         line3: `Te enviaremos un correo con una liga para que la asignes de nuevo. NO OLVIDES REVISAR tu bandeja de SPAM.`,
         line4: `Este proceso solo debe realizarse una vez. Si ya lo hiciste, no es necesario repetirlo.`
       },
       eng: {
         attention: `Attention!`,
-        line1: `As of July 1, 2025 at Kin Camp we are launching a new version of the registration system.`,
+        line1: `As of July 1, 2025 at RANCHO AVENTURA we are launching a new version of the registration system.`,
         line2: `For your security, all passwords were deleted during the database migration, so before logging in you will need to reset your password by clicking “Recover Password.”`,
         line3: `We will send you an email with a link to set it again. PLEASE REMEMBER TO CHECK your SPAM folder.`,
         line4: `This process only needs to be done once. If you have already done it, you do not need to repeat it.`

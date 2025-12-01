@@ -83,7 +83,7 @@ export class NewParentComponent implements OnInit {
       texto5: "Confirmar contraseña*",
       texto6: "Este será el nombre de usuario para tu cuenta.",
       texto7: "Introduce la contraseña",
-      texto8: "La contraseña será utilizada para acceder a Kin Camp. Debe tener Mínimo de 6 caracteres, 1 letra mayúscula, 1 letra minúscula, un número y un caracter especial",
+      texto8: "La contraseña será utilizada para acceder a RANCHO AVENTURA. Debe tener Mínimo de 6 caracteres, 1 letra mayúscula, 1 letra minúscula, un número y un caracter especial",
       texto9: "Introduce la contraseña",
       texto10: "Nombre(s)*",
       texto29: "Email",
@@ -115,7 +115,7 @@ export class NewParentComponent implements OnInit {
       texto5: "Confirm password*",
       texto6: "This will be the username for your account.",
       texto7: "Enter password",
-      texto8: "This will be used to log into Kin Camp. Minimum of 6 characters, including 1 uppercase letter, 1 lowercase letter, and 1 special character.",
+      texto8: "This will be used to log into RANCHO AVENTURA. Minimum of 6 characters, including 1 uppercase letter, 1 lowercase letter, and 1 special character.",
       texto9: "Enter password",
       texto10: "First Name(s)*",
       texto11: "Paternal Last Name*",
@@ -145,27 +145,27 @@ export class NewParentComponent implements OnInit {
   cabezeras = {
     "esp": {
       titulo: "Datos de acceso del Padre, Madre o Tutor titular de la cuenta",
-      texto1: "Información de acceso con la cual entrarás a Kin Camp",
+      texto1: "Información de acceso con la cual entrarás a RANCHO AVENTURA",
       texto2: "Correo electrónico*",
       texto3: "Confirma correo electrónico*",
       texto4: "Contraseña*",
       texto5: "Confirma contraseña* ",
       texto6: "Será el usuario de acceso a la cuenta.",
       texto7: "El correo no coincide",
-      texto8: " Se usará para ingresar a Kin Camp Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra minuscula , 1 un numero y un caracter especial ",
+      texto8: " Se usará para ingresar a RANCHO AVENTURA Mínimo de 6 caracteres , 1 letra mayuscula, 1 letra minuscula , 1 un numero y un caracter especial ",
 
 
     },
     "eng": {
       titulo: " Access data of the Father, mother or guardian",
-      texto1: "Access information with which you access the Kin Camp Make sure it is a valid email address, as we will send you referrals from the camps your child will attend.",
+      texto1: "Access information with which you access the RANCHO AVENTURA Make sure it is a valid email address, as we will send you referrals from the camps your child will attend.",
       texto2: "Email*",
       texto3: "Reenter email*",
       texto4: "Password*",
       texto5: "Confirm password* ",
       texto6: "This will be the access user to the account.",
       texto7: "The email does not match",
-      texto8: "It will be used to enter Kin Camp Minimum of 6 characters, 1 uppercase letter, 1 lowercase letter and a special character ",
+      texto8: "It will be used to enter RANCHO AVENTURA Minimum of 6 characters, 1 uppercase letter, 1 lowercase letter and a special character ",
     }
 
   }

@@ -13,7 +13,7 @@ import { saveAs } from 'file-saver';
 export class PaymantCampComponent {
   cards = [
     { amount: 189800.0, title: 'Pagos recibidos', transactions: 98, bgClass: 'green-background', iconClass: 'pi pi-money-bill' },
-    { amount: 6500.0, title: 'Depósito Bbva Kin Camp', transactions: 3, bgClass: 'blue-background', iconClass: 'pi pi-building' },
+    { amount: 6500.0, title: 'Depósito Bbva RANCHO AVENTURA', transactions: 3, bgClass: 'blue-background', iconClass: 'pi pi-building' },
     { amount: 176800.0, title: 'Depósito Bbva Patricia', transactions: 93, bgClass: 'blue-background', iconClass: 'pi pi-building' },
     { amount: 6500.0, title: 'Paypal Patricia', transactions: 2, bgClass: 'blue-background', iconClass: 'pi pi-paypal' },
     { amount: 29, title: 'Registros activos', transactions: '', bgClass: 'orange-background', iconClass: 'pi pi-users' }
