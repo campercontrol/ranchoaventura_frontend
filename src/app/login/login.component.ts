@@ -83,14 +83,14 @@ export class LoginComponent implements OnInit {
     createAccountModal: {
       esp: {
         body1: `Si en años anteriores ya has enviado a un hijo o hija a RANCHO AVENTURA, no debes crear una cuenta nueva, pues ya tenemos todos tus datos. Da click en Recupera tu contraseña para poder activar de nuevo tu cuenta o bien ponte en contacto con nosotros para poder ayudarte a acceder a tu cuenta registrada.`,
-        contact: `Comunícate con nosotros al (55) 5257.4937 o al (55) 1793.7555 y con mucho gusto te ayudaremos.`,
+        contact: `Comunícate con nosotros al (55) 1741.4673 o al (55) 1741.4673  y con mucho gusto te ayudaremos.`,
         body2: `Si eres completamente nuevo, ¡Gracias por la confianza!`,
         newButton: `Soy nuevo en RANCHO AVENTURA y quiero crear una nueva cuenta`,
         cancelButton: `Cancelar`
       },
       eng: {
         body1: `If you have already sent a camper to RANCHO AVENTURA in previous years, you do not need to create a new account, as we already have all your information. Click on "Recover your password" to reactivate your account or contact us for assistance in accessing your registered account.`,
-        contact: `Reach out to us at (55) 5257.4937 or (55) 1793.7555, and we will gladly help you.`,
+        contact: `Reach out to us at (55) 1741.4673  or (55) 1741.4673 , and we will gladly help you.`,
         body2: `If you are completely new, thank you for your trust!`,
         newButton: `I'm new to RANCHO AVENTURA and want to create a new account`,
         cancelButton: `Cancel`
