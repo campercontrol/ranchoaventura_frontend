@@ -7,7 +7,7 @@ import { Observable,  } from 'rxjs';
   providedIn: 'root'
 })
 export class CurrencyService {
-  private apiUrl = 'https://api-dev.kincamp.com/currency/';
+  private apiUrl = 'https://api.kincamp.com/currency/';
 
   constructor(private http: HttpClient) {}
 
