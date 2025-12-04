@@ -218,7 +218,7 @@ total: number = 0;
   checkImagesOrientation() {
     this.hijosRes.camperList.forEach(camper => {
       const img = new Image();
-      img.src = 'https://api.kincamp.com/' + camper.photo;
+      img.src = 'https://api.ranchoaventuramexico.com/' + camper.photo;
 
       img.onload = () => {
         // Detectar si la imagen es horizontal (ancho > alto)

@@ -15,7 +15,7 @@ export class TablaMedicalComponent implements OnInit {
     representatives: any[];
     @ViewChild("op") overlayPanel: any; 
 
-  url="https://api.kincamp.com/"
+  url="https://api.ranchoaventuramexico.com/"
     statuses: any[];
 
     loading: boolean = false;

@@ -9,18 +9,18 @@ export class MedicalService {
   constructor(private http:HttpClient)  { }
 
   getMedicalCamps(id:any){
-    return this.http.get('https://api.kincamp.com/medical/camp/'+ id);
+    return this.http.get('https://api.ranchoaventuramexico.com/medical/camp/'+ id);
     
   }
   getMedicalCampCamper(campId,camperId){
-    return this.http.get('https://api.kincamp.com/medical/camp/'+campId+'/camper/'+camperId);
+    return this.http.get('https://api.ranchoaventuramexico.com/medical/camp/'+campId+'/camper/'+camperId);
     
   }
   nuevaConsulta(data){
-    return this.http.post("https://api.kincamp.com/medical/camper/visit/",data);
+    return this.http.post("https://api.ranchoaventuramexico.com/medical/camper/visit/",data);
 
   }
   editConsulta(id,data){
-    return this.http.patch("https://api.kincamp.com/medical/camper/visit/"+id,data);
+    return this.http.patch("https://api.ranchoaventuramexico.com/medical/camper/visit/"+id,data);
   }
 }

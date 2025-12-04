@@ -11,39 +11,39 @@ export class PaymentsService {
    }
    // crear pago
    getpage(idCamp,idCamper,id=0){
-    return this.http.get('https://api.kincamp.com/payment/page/camper/'+idCamp+'/'+idCamper+'/'+id)
+    return this.http.get('https://api.ranchoaventuramexico.com/payment/page/camper/'+idCamp+'/'+idCamper+'/'+id)
    } 
 
    getReporte(id){
-    return this.http.get('https://api.kincamp.com/camps/'+id+'/payments_report')
+    return this.http.get('https://api.ranchoaventuramexico.com/camps/'+id+'/payments_report')
 
    }
 
    // crear pago
    setpage(info){
-    return this.http.post('https://api.kincamp.com/payment/',info)
+    return this.http.post('https://api.ranchoaventuramexico.com/payment/',info)
    }
      // crear pago
    updatepage(id,info){
-    return this.http.patch('https://api.kincamp.com/payment/'+id,info)
+    return this.http.patch('https://api.ranchoaventuramexico.com/payment/'+id,info)
    }
      // crear pago
    getPageIndi(id){
-    return this.http.get('https://api.kincamp.com/payment/'+id,)
+    return this.http.get('https://api.ranchoaventuramexico.com/payment/'+id,)
    }
      // crear pago
    deletPage(id){
-    return this.http.delete('https://api.kincamp.com/payment_method/'+id,{})
+    return this.http.delete('https://api.ranchoaventuramexico.com/payment_method/'+id,{})
    }
    // admi pagos catalogos
    getPagos(){
 
-    return this.http.get('https://api.kincamp.com/payment/')
+    return this.http.get('https://api.ranchoaventuramexico.com/payment/')
   }
     // crear pago
   gettransaction_type(){
 
-    return this.http.get('https://api.kincamp.com/payment_transaction_type/')
+    return this.http.get('https://api.ranchoaventuramexico.com/payment_transaction_type/')
   }
 
 
@@ -51,12 +51,12 @@ export class PaymentsService {
 
   getDatosPagosMasivo(id){
 
-    return this.http.get('https://api.kincamp.com/camp/'+id+'/incomes')
+    return this.http.get('https://api.ranchoaventuramexico.com/camp/'+id+'/incomes')
   }
 
   setDatosPagosMasivo(id,data){
 
-    return this.http.post('https://api.kincamp.com/camps/'+id+'/campers/0/massive_payment',data)
+    return this.http.post('https://api.ranchoaventuramexico.com/camps/'+id+'/campers/0/massive_payment',data)
   }
 
 

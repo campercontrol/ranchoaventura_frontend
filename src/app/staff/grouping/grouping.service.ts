@@ -8,31 +8,31 @@ export class GroupingService {
 
   constructor(private http:HttpClient)  { }
   getCamper(id){
-    return this.http.get('https://api.kincamp.com/camps/'+id+'/groupings/campers')
+    return this.http.get('https://api.ranchoaventuramexico.com/camps/'+id+'/groupings/campers')
   }
   createGroup(data){
-    return this.http.post('https://api.kincamp.com/grouping_camps/',data)
+    return this.http.post('https://api.ranchoaventuramexico.com/grouping_camps/',data)
   }
   editraCapcidadMaxima(id,data){
-    return this.http.put('https://api.kincamp.com/grouping_camps/'+id,data)
+    return this.http.put('https://api.ranchoaventuramexico.com/grouping_camps/'+id,data)
   }
 
   getGruposInscritos(id){
-    return this.http.get('https://api.kincamp.com/camps/'+id+'/groupings')
+    return this.http.get('https://api.ranchoaventuramexico.com/camps/'+id+'/groupings')
 
   }
   getCampersInscritos(id){
-    return this.http.get('https://api.kincamp.com/groupings/' + id +'/available_campers')
+    return this.http.get('https://api.ranchoaventuramexico.com/groupings/' + id +'/available_campers')
 
   }
   campersInscritos(data){
-    return this.http.post('https://api.kincamp.com/grouping_campers/',data)
+    return this.http.post('https://api.ranchoaventuramexico.com/grouping_campers/',data)
 
   }
 
   deletGruping(id){
 
-    return this.http.delete('https://api.kincamp.com/grouping_camper/'+id)
+    return this.http.delete('https://api.ranchoaventuramexico.com/grouping_camper/'+id)
 
   }
 }
