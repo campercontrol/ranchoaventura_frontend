@@ -18,7 +18,7 @@ export class GroupingService {
   }
 
   getGruposInscritos(id){
-    return this.http.get('https://api-dev.kincamp.com/camps/'+id+'/groupings')
+    return this.http.get('https://api-dev.kincamp.com/camps/'+id+'/groupings/')
 
   }
   getCampersInscritos(id){
