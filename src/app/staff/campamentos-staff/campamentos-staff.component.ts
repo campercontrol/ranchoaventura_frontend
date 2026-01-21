@@ -946,7 +946,12 @@ deletExtracharges(i){
 reporteGeneral() {
   this.capms.getReportesGenerales(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response.data || [];
+      const data = (response.data ).sort((a, b) => {
+        const apA = (a?.lastname_father ?? '').toString().trim().toLowerCase();
+        const apB = (b?.lastname_father ?? '').toString().trim().toLowerCase();
+
+        return apA.localeCompare(apB, 'es', { sensitivity: 'base' });
+      });
 
       const headersMap: any = {
         'id': 'ID',
@@ -1111,8 +1116,12 @@ reporteGeneral() {
 reporteGeneralStaff() {
   this.capms.getReportesGeneralesStaff(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response.data;
+      const data = (response || []).sort((a, b) => {
+        const apA = (a?.lastname_father ?? '').toString().trim().toLowerCase();
+        const apB = (b?.lastname_father ?? '').toString().trim().toLowerCase();
 
+        return apA.localeCompare(apB, 'es', { sensitivity: 'base' });
+      });
       // Filtrar los datos que coincidan con listStaffConfirm
       const filteredData = data.filter((row: any) =>
         this.listStaffConfirm.some((staff: any) => staff.staff_id === row.id)
@@ -1210,7 +1219,12 @@ reporteGeneralStaff() {
 reporteDatosGenerales() {
   this.capms.getReportesSeguros(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response;
+      const data = (response || []).sort((a, b) => {
+        const apA = (a?.lastname_father ?? '').toString().trim().toLowerCase();
+        const apB = (b?.lastname_father ?? '').toString().trim().toLowerCase();
+
+        return apA.localeCompare(apB, 'es', { sensitivity: 'base' });
+      });
 
       // Mapeo de claves del JSON a cabeceras en español
       const headersMap: any = {
@@ -1280,7 +1294,12 @@ reporteDatosGenerales() {
 reporteDatosContactos() {
   this.capms.getReporteSocialExtras(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response;
+      const data = (response || []).sort((a, b) => {
+        const apA = (a?.lastname_father ?? '').toString().trim().toLowerCase();
+        const apB = (b?.lastname_father ?? '').toString().trim().toLowerCase();
+
+        return apA.localeCompare(apB, 'es', { sensitivity: 'base' });
+      });
 
       // Mapeo de claves del JSON a cabeceras en español
       const headersMap: any = {
@@ -1367,7 +1386,12 @@ reporteDatosContactos() {
 reporteMedical() {
   this.capms.getReportesContactossMedical(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response;
+      const data = (response || []).sort((a, b) => {
+        const apA = (a?.lastname_father ?? '').toString().trim().toLowerCase();
+        const apB = (b?.lastname_father ?? '').toString().trim().toLowerCase();
+
+        return apA.localeCompare(apB, 'es', { sensitivity: 'base' });
+      });
 
       const headersMap: any = {
         'name': 'Nombre',
@@ -1465,7 +1489,12 @@ reporteMedical() {
 reporteComida() {
   this.capms.getReporteComidaRestringida(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response;
+      const data = (response || []).sort((a, b) => {
+        const apA = (a?.lastname_father ?? '').toString().trim().toLowerCase();
+        const apB = (b?.lastname_father ?? '').toString().trim().toLowerCase();
+
+        return apA.localeCompare(apB, 'es', { sensitivity: 'base' });
+      });
 
       const headersMap: any = {
         'name': 'Nombre',
@@ -1535,7 +1564,12 @@ reporteComida() {
 ReporteExtras() {
   this.capms.getReporteExtras(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response;
+      const data = (response || []).sort((a, b) => {
+        const apA = (a?.lastname_father ?? '').toString().trim().toLowerCase();
+        const apB = (b?.lastname_father ?? '').toString().trim().toLowerCase();
+
+        return apA.localeCompare(apB, 'es', { sensitivity: 'base' });
+      });
 
       const headersMap: any = {
         'name': 'Nombre',
