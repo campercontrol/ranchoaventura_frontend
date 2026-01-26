@@ -608,25 +608,41 @@ private getFileNameFromHeader(contentDisposition: string | null): string | null 
 cumpleanosEnRango(cumpleanos: string | Date): boolean {
   if (!this.infoCamp?.start || !this.infoCamp?.end || !cumpleanos) return false;
 
-  const fechaInicio = new Date(this.infoCamp.start);
-  const fechaFin = new Date(this.infoCamp.end);
+  const inicio = new Date(this.infoCamp.start);
+  const fin = new Date(this.infoCamp.end);
   const cumple = new Date(cumpleanos);
 
-  // Convertir todo al año del campamento
-  const cumpleEsteAnio = new Date(
-    fechaInicio.getFullYear(),
-    cumple.getMonth(),
-    cumple.getDate()
-  );
+  // Ignorar horas
+  inicio.setHours(0, 0, 0, 0);
+  fin.setHours(23, 59, 59, 999);
 
-  // Si el rango cruza de año (ej. diciembre-enero), ajustar
-  let fin = new Date(fechaFin);
-  if (fechaFin < fechaInicio) {
-    fin.setFullYear(fechaInicio.getFullYear() + 1);
+  // Si el rango es >= 1 año, casi siempre es true
+  // (salvo Feb 29)
+  const msUnAnio = 365 * 24 * 60 * 60 * 1000;
+  const duraAlMenosUnAnio = (fin.getTime() - inicio.getTime()) >= msUnAnio;
+
+  // Caso especial: Feb 29
+  const esFeb29 = (cumple.getMonth() === 1 && cumple.getDate() === 29);
+
+  if (duraAlMenosUnAnio && !esFeb29) return true;
+
+  // Caso normal: buscar el próximo cumpleaños que ocurra >= inicio
+  let proxCumple = new Date(inicio.getFullYear(), cumple.getMonth(), cumple.getDate());
+
+  // Si el cumple no existe (Feb 29 en año no bisiesto), JS lo "mueve" a marzo.
+  // Lo detectamos y lo descartamos.
+  if (esFeb29 && proxCumple.getMonth() !== 1) {
+    // probar el siguiente año (por si el siguiente sí es bisiesto)
+    proxCumple = new Date(inicio.getFullYear() + 1, 1, 29);
   }
 
-  return cumpleEsteAnio >= fechaInicio && cumpleEsteAnio <= fin;
+  if (proxCumple < inicio) proxCumple.setFullYear(proxCumple.getFullYear() + 1);
+
+  return proxCumple <= fin;
 }
+
+
+
 
   linkPagos(idCamp){
     if(this.user_admin==true || this.user_coordinator==true){
