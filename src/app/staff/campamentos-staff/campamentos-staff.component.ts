@@ -605,34 +605,42 @@ private getFileNameFromHeader(contentDisposition: string | null): string | null 
     })
 }
 
+private parseDateSmart(value: string | Date): Date {
+  if (value instanceof Date) return new Date(value);
+
+  // Si viene como YYYY-MM-DD, trátalo como fecha local (sin UTC)
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (m) {
+    const y = Number(m[1]);
+    const mo = Number(m[2]) - 1;
+    const d = Number(m[3]);
+    return new Date(y, mo, d);
+  }
+
+  // Si viene con hora / timezone, deja que Date lo interprete
+  return new Date(value);
+}
+
 cumpleanosEnRango(cumpleanos: string | Date): boolean {
   if (!this.infoCamp?.start || !this.infoCamp?.end || !cumpleanos) return false;
 
-  const inicio = new Date(this.infoCamp.start);
-  const fin = new Date(this.infoCamp.end);
-  const cumple = new Date(cumpleanos);
+  const inicio = this.parseDateSmart(this.infoCamp.start);
+  const fin = this.parseDateSmart(this.infoCamp.end);
+  const cumple = this.parseDateSmart(cumpleanos);
 
   // Ignorar horas
   inicio.setHours(0, 0, 0, 0);
   fin.setHours(23, 59, 59, 999);
 
-  // Si el rango es >= 1 año, casi siempre es true
-  // (salvo Feb 29)
   const msUnAnio = 365 * 24 * 60 * 60 * 1000;
   const duraAlMenosUnAnio = (fin.getTime() - inicio.getTime()) >= msUnAnio;
 
-  // Caso especial: Feb 29
   const esFeb29 = (cumple.getMonth() === 1 && cumple.getDate() === 29);
-
   if (duraAlMenosUnAnio && !esFeb29) return true;
 
-  // Caso normal: buscar el próximo cumpleaños que ocurra >= inicio
   let proxCumple = new Date(inicio.getFullYear(), cumple.getMonth(), cumple.getDate());
 
-  // Si el cumple no existe (Feb 29 en año no bisiesto), JS lo "mueve" a marzo.
-  // Lo detectamos y lo descartamos.
   if (esFeb29 && proxCumple.getMonth() !== 1) {
-    // probar el siguiente año (por si el siguiente sí es bisiesto)
     proxCumple = new Date(inicio.getFullYear() + 1, 1, 29);
   }
 
@@ -640,7 +648,6 @@ cumpleanosEnRango(cumpleanos: string | Date): boolean {
 
   return proxCumple <= fin;
 }
-
 
 
 
