@@ -66,10 +66,10 @@
             </div>
 
             <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [customSort]="true"
-              [responsiveLayout]="'scroll'" [scrollable]="true" scrollDirection="both" scrollHeight="auto"
+              [responsiveLayout]="'scroll'" 
               (sortFunction)="customSort($event)" [value]="customer" [showCurrentPageReport]="true" [loading]="loading"
               currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros" [filterDelay]="0"
-              scrollDirection="horizontal"
+              
               [globalFilterFields]="['camper.id','camper.camper_name','representative.name','status']"
               [paginator]="true" [rows]="50">
               <!-- 🔹 Cabecera -->
@@ -97,31 +97,35 @@
                           (click)="showDialog(item)"></i>
                       </div>
                       <div>
-                        
-                        <div
+                        <div class="contenedor-botones">
+                          <div (click)="showDialog2(item)"
                           style="width: 100px; border-radius:10px ; height: 30px; color: white; background-color: rgb(112, 121, 243); font-size: 20px; display: flex; align-items: center;">
-                          <i class="bx bxs-barcode p-1  " (click)="showDialog2(item)">
+                          <i class="bx bxs-barcode p-1  " >
                             
                           </i>
-                          <span style="font-size: 15px;">
+                          <span style="font-size: 10px;">
                             Escanear
                           </span>
                         </div>
-                        <div
+                        <div>
+
+                      
+                          <!-- Contador dinámico corregido -->
+                          {{ contarCheckins(item.id) }} de {{ customer.length }}
+                          <p-sortIcon field="checkpoint_{{ item.id }}"></p-sortIcon>
+                        </div>
+                        <div (click)="delet(item)"
                           style="width: 100px; border-radius:10px ; height: 30px; color: white; background-color: rgb(222, 43, 15); font-size: 20px; margin-top: 10px;display: flex;align-items: center;">
-                          <i class="bx bx-x p-1  " (click)="delet(item)"></i>
-                          <span style="font-size: 15px;">
+                          <i class="bx bx-x p-1  " ></i>
+                          <span style="font-size: 10px;">
                             Eliminar
                           </span>
                         </div>
                       
-                        <span>
-
-                          <br>
-                          <!-- Contador dinámico corregido -->
-                          {{ contarCheckins(item.id) }} de {{ customer.length }}
-                          <p-sortIcon field="checkpoint_{{ item.id }}"></p-sortIcon>
-                        </span>
+                       
+                        </div>
+                        
+                      
                       </div>
                     </div>
                   </th>
