@@ -1023,7 +1023,6 @@ reporteGeneral() {
         'contact_homephone': 'Teléfono de Casa del Contacto de Emergencia',
         'payment_balance': 'Saldo de Pago',
         'registration_date': 'Fecha de Registro',
-        'created_at': 'Fecha de Registro',
         'Comments (Parent)': 'Comentarios de Padres',
         'Comments (Staff)': 'Comentarios del Personal',
         'Comments (School)': 'Comentarios de la Escuela',
