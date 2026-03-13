@@ -1,248 +1,249 @@
-
 <div style="width: 300px;" class="mt-2 mb-2">
-  <a class="btn btn-primary" style="width: 100%;" class="btn btn-primary" [href]="'dashboard/camp/'+id" >Volver</a>
+  <a class="btn btn-primary" style="width: 100%;" class="btn btn-primary" [href]="'dashboard/camp/'+id">Volver</a>
 
 </div>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-           
+  <div class="row">
+    <div class="col-12">
 
-            <form [formGroup]="chekpoint">
-            <div class="card border border-success border-1">
-                <div class="bg-success p-2">
-                    <h1 class="card-title text-white">Agregar un punto de control</h1>
-                </div>
-                <div class="container-fluid col-10 mt-4 mb-2">
-                    <div class="mb-3 row">
-                        <label for="inputPassword" class="col-sm-5 d-flex justify-content-end col-form-label"> Nombre
-                            del punto de control:</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control d-flex justify-content-start" id="inputPassword" formControlName="name">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="inputPassword" class="col-sm-5 d-flex justify-content-end col-form-label"> Fecha de
-                            aplicacion: </label>
-                        <div class="col-sm-4">
-                            <input type="date" class="form-control d-flex justify-content-start" formControlName="chekpoint_date">
-                        </div>
-                    </div>
-                    <div class="alert alert-primary" role="alert" *ngIf="letrero">
-                         Se agrego correctamente 
-                      </div>
 
-                </div>
-
-                <hr class="mb-4">
-                <div class="display-flex p-2">
-
-                    <button class="btn btn-secondary" [routerLink]="['/dashboard/camp', id]"  >ver camp</button>
-                    <button class="btn btn-primary" type="submit" (click)="crearCheck()" [disabled]="chekpoint.invalid">Agregar punto de Control</button>
-                </div>
-
+      <form [formGroup]="chekpoint">
+        <div class="card border border-success border-1">
+          <div class="bg-success p-2">
+            <h1 class="card-title text-white">Agregar un punto de control</h1>
+          </div>
+          <div class="container-fluid col-10 mt-4 mb-2">
+            <div class="mb-3 row">
+              <label for="inputPassword" class="col-sm-5 d-flex justify-content-end col-form-label"> Nombre
+                del punto de control:</label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control d-flex justify-content-start" id="inputPassword"
+                  formControlName="name">
+              </div>
             </div>
-        </form>
-
-
-            <div class="card border border-primary border-1">
-                <div class="bg-primary p-2">
-                    <h1 class="card-title text-white">Acampadores</h1>
-                </div>
-                <hr>
-                <div class=" scroll-y" style="margin:0 auto  ;width: 100%;" >
-                  
-                    <div class="card-body" *ngIf="!delteStatus">
-                        <div>
-                            <div class="col text-end">
-
-                            </div>
-                        </div>
-                        <div class="container-btn">
-
-                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                                placeholder="Global Search" />
-                        </div>
-
-                        <p-table
-                        #dt
-                        [(selection)]="selectedCustomers"
-                        dataKey="id"
-                        [rowHover]="true"
-                        [customSort]="true"
-                        [responsiveLayout]="'scroll'"
-                        [scrollable]="true"
-                        scrollDirection="both"
-                        scrollHeight="auto"
-                        (sortFunction)="customSort($event)"
-                        [value]="customer"
-                        [showCurrentPageReport]="true"
-                        [loading]="loading"
-                        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
-                        [filterDelay]="0"
-                       
-                        scrollDirection="horizontal"
-                        [globalFilterFields]="['camper.id','camper.camper_name','representative.name','status']"
-                        [paginator]="true"
-                        [rows]="50"
-                      >
-                        <!-- 🔹 Cabecera -->
-                        <ng-template pTemplate="header">
-                          <tr>
-                            <!-- Columna ID -->
-                            <th style="width: 70px;" pSortableColumn="camper.camper_id">
-                              #
-                              <p-sortIcon field="camper.camper_id"></p-sortIcon>
-                            </th>
-                      
-                            <!-- Columna Nombre -->
-                            <th style="min-width: 240px;" pSortableColumn="camper.camper_name">
-                              Nombre
-                              <p-sortIcon field="camper.camper_name"></p-sortIcon>
-                            </th>
-                      
-                            <!-- Columnas dinámicas por checkpoint -->
-                            <th *ngFor="let item of columnas" pSortableColumn="checkpoint_{{ item.id }}">
-                              <div style="min-width: 200px; white-space: pre-line;" class="conatiner-th">
-                                <div>{{ item.name }}</div>
-                                <div>
-                                  {{ item.chekpoint_date_esp }}
-                                  <i class="bx bx-highlight" style="margin-left: 5px; cursor: pointer;" (click)="showDialog(item)"></i>
-                                </div>
-                                <div>
-                                  <span>
-                                    <i
-                                      class="bx bxs-barcode p-1 bg-primary"
-                                      style="color: white; font-size: 15px; margin-right: 4px; margin-top: 2px; border-radius: 2px; cursor: pointer;"
-                                      (click)="showDialog2(item)"
-                                    ></i>
-                                    <i
-                                      class="bx bx-x p-1 bg-primary"
-                                      style="color: white; font-size: 15px; margin-right: 4px; margin-top: 2px; border-radius: 2px; cursor: pointer;"
-                                      (click)="delet(item)"
-                                    ></i>
-                                    <!-- Contador dinámico corregido -->
-                                    {{ contarCheckins(item.id) }} de {{ customer.length }}
-                                    <p-sortIcon field="checkpoint_{{ item.id }}"></p-sortIcon>
-                                  </span>
-                                </div>
-                              </div>
-                            </th>
-                            
-                          </tr>
-                        </ng-template>
-                      
-                        <!-- 🔹 Cuerpo -->
-                        <ng-template pTemplate="body" let-customer>
-                          <tr class="p-selectable-row">
-                            <!-- ID con hipervínculo -->
-                            <td (click)="hypervinculo(customer.camper.camper_id)" style="cursor: pointer;">
-                              {{ customer.camper.camper_id }}
-                            </td>
-                      
-                            <!-- Nombre -->
-                            <td style="text-align: left; font-size: 12px;">
-                              {{ customer.camper.camper_name }}
-                              {{ customer.camper.camper_lastname_father }}
-                              {{ customer.camper.camper_lastname_mother }}
-                            </td>
-                      
-                            <!-- Checkpoints -->
-                            <td
-                              *ngFor="let b of customer.checkpoints"
-                              style="text-align: left; font-size: 12px;"
-                              [ngClass]="{ 'acierto': b.checkpoint_check, 'error': !b.checkpoint_check }"
-                            >
-                              <div *ngIf="b.checkpoint_date">{{ b.checkpoint_date }}</div>
-                            </td>
-                          </tr>
-                        </ng-template>
-                      
-                        <!-- 🔹 Mensaje vacío -->
-                        <ng-template pTemplate="emptymessage">
-                          <tr>
-                            <td colspan="20">No hay registros disponibles</td>
-                          </tr>
-                        </ng-template>
-                      </p-table>
-                      
-
-                    </div>
-                    <div class="spinner-border text-primary p-2" role="status" *ngIf="delteStatus" style="margin: auto ;">
-                        <span  style="margin: auto ;"class="sr-only">Loading...</span>
-                      </div>
-                </div>
-
+            <div class="mb-3 row">
+              <label for="inputPassword" class="col-sm-5 d-flex justify-content-end col-form-label"> Fecha de
+                aplicacion: </label>
+              <div class="col-sm-4">
+                <input type="date" class="form-control d-flex justify-content-start" formControlName="chekpoint_date">
+              </div>
             </div>
+            <div class="alert alert-primary" role="alert" *ngIf="letrero">
+              Se agrego correctamente
+            </div>
+
+          </div>
+
+          <hr class="mb-4">
+          <div class="display-flex p-2">
+
+            <button class="btn btn-secondary" [routerLink]="['/dashboard/camp', id]">ver camp</button>
+            <button class="btn btn-primary" type="submit" (click)="crearCheck()" [disabled]="chekpoint.invalid">Agregar
+              punto de Control</button>
+          </div>
+
         </div>
+      </form>
+
+
+      <div class="card border border-primary border-1">
+        <div class="bg-primary p-2">
+          <h1 class="card-title text-white">Acampadores</h1>
+        </div>
+        <hr>
+        <div class=" scroll-y" style="margin:0 auto  ;width: 100%;">
+
+          <div class="card-body" *ngIf="!delteStatus">
+            <div>
+              <div class="col text-end">
+
+              </div>
+            </div>
+            <div class="container-btn">
+
+              <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                placeholder="Global Search" />
+            </div>
+
+            <p-table #dt [(selection)]="selectedCustomers" dataKey="id" [rowHover]="true" [customSort]="true"
+              [responsiveLayout]="'scroll'" 
+              (sortFunction)="customSort($event)" [value]="customer" [showCurrentPageReport]="true" [loading]="loading"
+              currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros" [filterDelay]="0"
+              
+              [globalFilterFields]="['camper.id','camper.camper_name','representative.name','status']"
+              [paginator]="true" [rows]="50">
+              <!-- 🔹 Cabecera -->
+              <ng-template pTemplate="header">
+                <tr>
+                  <!-- Columna ID -->
+                  <th style="width: 70px;" pSortableColumn="camper.camper_id">
+                    #
+                    <p-sortIcon field="camper.camper_id"></p-sortIcon>
+                  </th>
+
+                  <!-- Columna Nombre -->
+                  <th style="min-width: 240px;" pSortableColumn="camper.camper_name">
+                    Nombre
+                    <p-sortIcon field="camper.camper_name"></p-sortIcon>
+                  </th>
+
+                  <!-- Columnas dinámicas por checkpoint -->
+                  <th *ngFor="let item of columnas" pSortableColumn="checkpoint_{{ item.id }}">
+                    <div style="min-width: 200px; white-space: pre-line;" class="conatiner-th">
+                      <div>{{ item.name }}</div>
+                      <div>
+                        {{ item.chekpoint_date_esp }}
+                        <i class="bx bx-highlight" style="margin-left: 5px; cursor: pointer;"
+                          (click)="showDialog(item)"></i>
+                      </div>
+                      <div>
+                        <div class="contenedor-botones">
+                          <div (click)="showDialog2(item)"
+                          style="width: 100px; border-radius:10px ; height: 30px; color: white; background-color: rgb(112, 121, 243); font-size: 20px; display: flex; align-items: center;">
+                          <i class="bx bxs-barcode p-1  " >
+                            
+                          </i>
+                          <span style="font-size: 10px;">
+                            Escanear
+                          </span>
+                        </div>
+                        <div>
+
+                      
+                          <!-- Contador dinámico corregido -->
+                          {{ contarCheckins(item.id) }} de {{ customer.length }}
+                          <p-sortIcon field="checkpoint_{{ item.id }}"></p-sortIcon>
+                        </div>
+                        <div (click)="delet(item)"
+                          style="width: 100px; border-radius:10px ; height: 30px; color: white; background-color: rgb(222, 43, 15); font-size: 20px; margin-top: 10px;display: flex;align-items: center;">
+                          <i class="bx bx-x p-1  " ></i>
+                          <span style="font-size: 10px;">
+                            Eliminar
+                          </span>
+                        </div>
+                      
+                       
+                        </div>
+                        
+                      
+                      </div>
+                    </div>
+                  </th>
+
+                </tr>
+              </ng-template>
+
+              <!-- 🔹 Cuerpo -->
+              <ng-template pTemplate="body" let-customer>
+                <tr class="p-selectable-row">
+                  <!-- ID con hipervínculo -->
+                  <td (click)="hypervinculo(customer.camper.camper_id)" style="cursor: pointer;">
+                    {{ customer.camper.camper_id }}
+                  </td>
+
+                  <!-- Nombre -->
+                  <td style="text-align: left; font-size: 12px;">
+                    {{ customer.camper.camper_name }}
+                    {{ customer.camper.camper_lastname_father }}
+                    {{ customer.camper.camper_lastname_mother }}
+                  </td>
+
+                  <!-- Checkpoints -->
+                  <td *ngFor="let b of customer.checkpoints" style="text-align: left; font-size: 12px;"
+                    [ngClass]="{ 'acierto': b.checkpoint_check, 'error': !b.checkpoint_check }">
+                    <div *ngIf="b.checkpoint_date">{{ b.checkpoint_date }}</div>
+                  </td>
+                </tr>
+              </ng-template>
+
+              <!-- 🔹 Mensaje vacío -->
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="20">No hay registros disponibles</td>
+                </tr>
+              </ng-template>
+            </p-table>
+
+
+          </div>
+          <div class="spinner-border text-primary p-2" role="status" *ngIf="delteStatus" style="margin: auto ;">
+            <span style="margin: auto ;" class="sr-only">Loading...</span>
+          </div>
+        </div>
+
+      </div>
     </div>
+  </div>
 </div>
 
 <p-dialog header="Editar" [(visible)]="visible" [style]="{width: '50vw'}">
-    <div class="container-fluid col-10 mt-4 mb-2">
-        <div class="mb-3 row">
-            <label for="inputPassword" class="col-sm-5 d-flex justify-content-end col-form-label"> Nombre
-                del punto de control:</label>
-            <div class="col-sm-7">
-                <input type="text" class="form-control d-flex justify-content-start" id="inputPassword" [(ngModel)]="updateName">
-            </div>
-        </div>
-        <div class="mb-3 row">
-            <label for="inputPassword" class="col-sm-5 d-flex justify-content-end col-form-label"> Fecha de
-                aplicacion: </label>
-            <div class="col-sm-4">
-                <input type="date" class="form-control d-flex justify-content-start" [(ngModel)]="updateDate">
-            </div>
-        </div>
-        
-
+  <div class="container-fluid col-10 mt-4 mb-2">
+    <div class="mb-3 row">
+      <label for="inputPassword" class="col-sm-5 d-flex justify-content-end col-form-label"> Nombre
+        del punto de control:</label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control d-flex justify-content-start" id="inputPassword"
+          [(ngModel)]="updateName">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="inputPassword" class="col-sm-5 d-flex justify-content-end col-form-label"> Fecha de
+        aplicacion: </label>
+      <div class="col-sm-4">
+        <input type="date" class="form-control d-flex justify-content-start" [(ngModel)]="updateDate">
+      </div>
     </div>
 
-    <hr class="mb-4">
-    <div class="display-flex p-2">
-        <button class="btn btn-secondary" type="submit" (click)="cerrarModal()">Cancelar</button>
-        <button class="btn btn-primary" type="submit" (click)="updadte()" *ngIf="!estatusUpdate">Actualizar </button >
-        <div class="spinner-border text-primary" role="status" *ngIf="estatusUpdate">
-            <span class="visually-hidden">Loading...</span>
-          </div>
+
+  </div>
+
+  <hr class="mb-4">
+  <div class="display-flex p-2">
+    <button class="btn btn-secondary" type="submit" (click)="cerrarModal()">Cancelar</button>
+    <button class="btn btn-primary" type="submit" (click)="updadte()" *ngIf="!estatusUpdate">Actualizar </button>
+    <div class="spinner-border text-primary" role="status" *ngIf="estatusUpdate">
+      <span class="visually-hidden">Loading...</span>
     </div>
+  </div>
 </p-dialog>
 
 
 <p-dialog [header]="namePunto" [(visible)]="visibleCreate" [style]="{width: '50vw'}">
-    <div class="container-fluid col-10 mt-4 mb-2">
-        <div class="mb-3 row">
-            <div class="col-sm-9">      
-                <div>
-                    <label for="inputPassword" >Inscribir a punto de control:</label>
+  <div class="container-fluid col-10 mt-4 mb-2">
+    <div class="mb-3 row">
+      <div class="col-sm-9">
+        <div>
+          <label for="inputPassword">Inscribir a punto de control:</label>
 
-               
-                    <input type="number" #miInput  class="form-control" id="inputPassword" [(ngModel)]="inscribirPunto"  (keyup.enter)="Inscribe()">
 
-                </div>
-            </div>
-            <div class="col-3 " style="margin-top: 30px;">
-                <form (submit)="Inscribe()">
-                    <button type="submit" class="btn btn-primary m" style="width: 90%;">Agregar</button>
-                  </form>            </div>
-        </div>
-
-        <div *ngIf="cuadroMensaje">
-            <div class="alert alert-primary" role="alert" *ngIf="mensajeActivo">
-                Se agrego correctamente  {{this.nameCamper}}
-              </div>
-
-              <div class="alert alert-danger" role="alert" *ngIf="mensajeerror">
-                No se pudo agregar(id no se encuentra inscrito)
-              </div>
+          <input type="number" #miInput class="form-control" id="inputPassword" [(ngModel)]="inscribirPunto"
+            (keyup.enter)="Inscribe()">
 
         </div>
+      </div>
+      <div class="col-3 " style="margin-top: 30px;">
+        <form (submit)="Inscribe()">
+          <button type="submit" class="btn btn-primary m" style="width: 90%;">Agregar</button>
+        </form>
+      </div>
     </div>
 
-    <hr class="mb-4">
-    <div class="display-flex p-2">
-        <div class="spinner-border text-primary" role="status" *ngIf="estatusUpdate">
-            <span class="visually-hidden">Loading...</span>
-          </div>
+    <div *ngIf="cuadroMensaje">
+      <div class="alert alert-primary" role="alert" *ngIf="mensajeActivo">
+        Se agrego correctamente {{this.nameCamper}}
+      </div>
+
+      <div class="alert alert-danger" role="alert" *ngIf="mensajeerror">
+        No se pudo agregar(id no se encuentra inscrito)
+      </div>
+
     </div>
+  </div>
+
+  <hr class="mb-4">
+  <div class="display-flex p-2">
+    <div class="spinner-border text-primary" role="status" *ngIf="estatusUpdate">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
 </p-dialog>

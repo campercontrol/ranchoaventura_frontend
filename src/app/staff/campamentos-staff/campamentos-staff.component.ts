@@ -605,28 +605,51 @@ private getFileNameFromHeader(contentDisposition: string | null): string | null 
     })
 }
 
+private parseDateSmart(value: string | Date): Date {
+  if (value instanceof Date) return new Date(value);
+
+  // Si viene como YYYY-MM-DD, trátalo como fecha local (sin UTC)
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (m) {
+    const y = Number(m[1]);
+    const mo = Number(m[2]) - 1;
+    const d = Number(m[3]);
+    return new Date(y, mo, d);
+  }
+
+  // Si viene con hora / timezone, deja que Date lo interprete
+  return new Date(value);
+}
+
 cumpleanosEnRango(cumpleanos: string | Date): boolean {
   if (!this.infoCamp?.start || !this.infoCamp?.end || !cumpleanos) return false;
 
-  const fechaInicio = new Date(this.infoCamp.start);
-  const fechaFin = new Date(this.infoCamp.end);
-  const cumple = new Date(cumpleanos);
+  const inicio = this.parseDateSmart(this.infoCamp.start);
+  const fin = this.parseDateSmart(this.infoCamp.end);
+  const cumple = this.parseDateSmart(cumpleanos);
 
-  // Convertir todo al año del campamento
-  const cumpleEsteAnio = new Date(
-    fechaInicio.getFullYear(),
-    cumple.getMonth(),
-    cumple.getDate()
-  );
+  // Ignorar horas
+  inicio.setHours(0, 0, 0, 0);
+  fin.setHours(23, 59, 59, 999);
 
-  // Si el rango cruza de año (ej. diciembre-enero), ajustar
-  let fin = new Date(fechaFin);
-  if (fechaFin < fechaInicio) {
-    fin.setFullYear(fechaInicio.getFullYear() + 1);
+  const msUnAnio = 365 * 24 * 60 * 60 * 1000;
+  const duraAlMenosUnAnio = (fin.getTime() - inicio.getTime()) >= msUnAnio;
+
+  const esFeb29 = (cumple.getMonth() === 1 && cumple.getDate() === 29);
+  if (duraAlMenosUnAnio && !esFeb29) return true;
+
+  let proxCumple = new Date(inicio.getFullYear(), cumple.getMonth(), cumple.getDate());
+
+  if (esFeb29 && proxCumple.getMonth() !== 1) {
+    proxCumple = new Date(inicio.getFullYear() + 1, 1, 29);
   }
 
-  return cumpleEsteAnio >= fechaInicio && cumpleEsteAnio <= fin;
+  if (proxCumple < inicio) proxCumple.setFullYear(proxCumple.getFullYear() + 1);
+
+  return proxCumple <= fin;
 }
+
+
 
   linkPagos(idCamp){
     if(this.user_admin==true || this.user_coordinator==true){
@@ -946,7 +969,12 @@ deletExtracharges(i){
 reporteGeneral() {
   this.capms.getReportesGenerales(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response.data || [];
+      const data = (response.data ).sort((a, b) => {
+        const apA = (a?.lastname_father ?? '').toString().trim().toLowerCase();
+        const apB = (b?.lastname_father ?? '').toString().trim().toLowerCase();
+
+        return apA.localeCompare(apB, 'es', { sensitivity: 'base' });
+      });
 
       const headersMap: any = {
         'id': 'ID',
@@ -983,18 +1011,18 @@ reporteGeneral() {
         'tutor_work_phone': 'Teléfono del Trabajo del Tutor',
         'tutor_email': 'Email del Tutor',
         'second_tutor_name': 'Nombre del Segundo Tutor',
-        'second_tutor_mothers_lastname': 'Apellido Materno del Segundo Tutor',
-        'second_tutor_fathers_lastname': 'Apellido Paterno del Segundo Tutor',
+        'second_tutor_mother_lastname': 'Apellido Materno del Segundo Tutor',
+        'second_tutor_father_lastname': 'Apellido Paterno del Segundo Tutor',
         'second_tutor_cellphone': 'Celular del Segundo Tutor',
         'second_tutor_work_phone': 'Teléfono del Trabajo del Segundo Tutor',
+        'second_tutor_home_phone': 'Teléfono de Casa del Segundo Tutor',
         'second_tutor_email': 'Email del Segundo Tutor',
-        'emergency contact': 'Contacto de Emergencia',
-        'contact kinship': 'Parentesco del Contacto de Emergencia',
+        'emergency_contact': 'Contacto de Emergencia',
+        'contact_kinship': 'Parentesco del Contacto de Emergencia',
         'contact_cellphone': 'Celular del Contacto de Emergencia',
         'contact_homephone': 'Teléfono de Casa del Contacto de Emergencia',
         'payment_balance': 'Saldo de Pago',
-        'registration date': 'Fecha de Registro',
-        'created_at': 'Fecha de Registro',
+        'registration_date': 'Fecha de Registro',
         'Comments (Parent)': 'Comentarios de Padres',
         'Comments (Staff)': 'Comentarios del Personal',
         'Comments (School)': 'Comentarios de la Escuela',
@@ -1111,8 +1139,12 @@ reporteGeneral() {
 reporteGeneralStaff() {
   this.capms.getReportesGeneralesStaff(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response.data;
+      const data = (response || []).sort((a, b) => {
+        const apA = (a?.lastname_father ?? '').toString().trim().toLowerCase();
+        const apB = (b?.lastname_father ?? '').toString().trim().toLowerCase();
 
+        return apA.localeCompare(apB, 'es', { sensitivity: 'base' });
+      });
       // Filtrar los datos que coincidan con listStaffConfirm
       const filteredData = data.filter((row: any) =>
         this.listStaffConfirm.some((staff: any) => staff.staff_id === row.id)
@@ -1210,7 +1242,12 @@ reporteGeneralStaff() {
 reporteDatosGenerales() {
   this.capms.getReportesSeguros(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response;
+      const data = (response || []).sort((a, b) => {
+        const apA = (a?.lastname_father ?? '').toString().trim().toLowerCase();
+        const apB = (b?.lastname_father ?? '').toString().trim().toLowerCase();
+
+        return apA.localeCompare(apB, 'es', { sensitivity: 'base' });
+      });
 
       // Mapeo de claves del JSON a cabeceras en español
       const headersMap: any = {
@@ -1280,7 +1317,12 @@ reporteDatosGenerales() {
 reporteDatosContactos() {
   this.capms.getReporteSocialExtras(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response;
+      const data = (response || []).sort((a, b) => {
+        const apA = (a?.lastname_father ?? '').toString().trim().toLowerCase();
+        const apB = (b?.lastname_father ?? '').toString().trim().toLowerCase();
+
+        return apA.localeCompare(apB, 'es', { sensitivity: 'base' });
+      });
 
       // Mapeo de claves del JSON a cabeceras en español
       const headersMap: any = {
@@ -1296,9 +1338,10 @@ reporteDatosContactos() {
         'tutor_work_phone': 'Teléfono del Trabajo del Tutor',
         'tutor_email': 'Email del Tutor',
         'second_tutor_name': 'Nombre del Segundo Tutor',
-        'second_tutor_mothers_lastname': 'Apellido Materno del Segundo Tutor',
-        'second_tutor_fathers_lastname': 'Apellido Paterno del Segundo Tutor',
+        'second_tutor_mother_lastname': 'Apellido Materno del Segundo Tutor',
+        'second_tutor_father_lastname': 'Apellido Paterno del Segundo Tutor',
         'second_tutor_cellphone': 'Celular del Segundo Tutor',
+        'second_tutor_home_phone': 'Teléfono de Casa del Segundo Tutor',
         'second_tutor_work_phone': 'Teléfono del Trabajo del Segundo Tutor',
         'second_tutor_email': 'Email del Segundo Tutor',
         'emergency_contact': 'Contacto de Emergencia',
@@ -1367,7 +1410,12 @@ reporteDatosContactos() {
 reporteMedical() {
   this.capms.getReportesContactossMedical(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response;
+      const data = (response || []).sort((a, b) => {
+        const apA = (a?.lastname_father ?? '').toString().trim().toLowerCase();
+        const apB = (b?.lastname_father ?? '').toString().trim().toLowerCase();
+
+        return apA.localeCompare(apB, 'es', { sensitivity: 'base' });
+      });
 
       const headersMap: any = {
         'name': 'Nombre',
@@ -1400,9 +1448,10 @@ reporteMedical() {
         'tutor_work_phone': 'Teléfono del Trabajo del Tutor',
         'tutor_email': 'Email del Tutor',
         'second_tutor_name': 'Nombre del Segundo Tutor',
-        'second_tutor_mothers_lastname': 'Apellido Materno del Segundo Tutor',
-        'second_tutor_fathers_lastname': 'Apellido Paterno del Segundo Tutor',
+        'second_tutor_mother_lastname': 'Apellido Materno del Segundo Tutor',
+        'second_tutor_father_lastname': 'Apellido Paterno del Segundo Tutor',
         'second_tutor_cellphone': 'Celular del Segundo Tutor',
+        'second_tutor_home_phone': 'Teléfono de Casa del Segundo Tutor',
         'second_tutor_work_phone': 'Teléfono del Trabajo del Segundo Tutor',
         'second_tutor_email': 'Email del Segundo Tutor',
         'emergency_contact': 'Contacto de Emergencia',
@@ -1465,7 +1514,12 @@ reporteMedical() {
 reporteComida() {
   this.capms.getReporteComidaRestringida(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response;
+      const data = (response || []).sort((a, b) => {
+        const apA = (a?.lastname_father ?? '').toString().trim().toLowerCase();
+        const apB = (b?.lastname_father ?? '').toString().trim().toLowerCase();
+
+        return apA.localeCompare(apB, 'es', { sensitivity: 'base' });
+      });
 
       const headersMap: any = {
         'name': 'Nombre',
@@ -1535,7 +1589,12 @@ reporteComida() {
 ReporteExtras() {
   this.capms.getReporteExtras(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response;
+      const data = (response || []).sort((a, b) => {
+        const apA = (a?.lastname_father ?? '').toString().trim().toLowerCase();
+        const apB = (b?.lastname_father ?? '').toString().trim().toLowerCase();
+
+        return apA.localeCompare(apB, 'es', { sensitivity: 'base' });
+      });
 
       const headersMap: any = {
         'name': 'Nombre',

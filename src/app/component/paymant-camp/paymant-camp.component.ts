@@ -212,29 +212,64 @@ export class PaymantCampComponent {
   }
   getReporte(){
     this.pages.getReporte(this.camp).subscribe({
-      next:(res)=>{
+      next:(res:any)=>{
         this.exportToExcel(res, 'Reporte_Pagos');
 
       }
     })
   }
-  exportToExcel(data: any, fileName: string) {
-    // 1. Convertimos JSON → Hoja
-    const worksheet = XLSX.utils.json_to_sheet(data);
+  exportToExcel(data: any[], fileName: string) {
+
+    const parsedData = data.map(row => {
+      const newRow: any = {};
   
-    // 2. Creamos el libro
+      Object.keys(row).forEach(key => {
+        let value = row[key];
+  
+        if (value !== null && value !== '') {
+  
+          // Si es string, limpiamos $, MXN, comas y espacios
+          if (typeof value === 'string') {
+            const cleaned = value
+              .replace(/\$/g, '')
+              .replace(/MXN/gi, '')
+              .replace(/,/g, '')
+              .trim();
+  
+            // Si después de limpiar es número → convertir
+            if (!isNaN(Number(cleaned))) {
+              newRow[key] = Number(cleaned);
+              return;
+            }
+          }
+  
+          // Si ya es número
+          if (typeof value === 'number') {
+            newRow[key] = value;
+            return;
+          }
+        }
+  
+        newRow[key] = value;
+      });
+  
+      return newRow;
+    });
+  
+    const worksheet = XLSX.utils.json_to_sheet(parsedData);
+  
     const workbook = {
       Sheets: { 'Reporte': worksheet },
       SheetNames: ['Reporte']
     };
   
-    // 3. Escribimos el archivo
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
   
-    // 4. Guardamos en el navegador
     const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
     saveAs(blob, `${fileName}.xlsx`);
   }
+  
+  
   sortNested(event: any) {
     const field = event.field;
     const order = event.order;
