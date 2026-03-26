@@ -1111,8 +1111,12 @@ reporteGeneral() {
 reporteGeneralStaff() {
   this.capms.getReportesGeneralesStaff(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = response.data;
+      const data = (response.data || []).sort((a, b) => {
+        const apA = (a?.lastname_father ?? '').toString().trim().toLowerCase();
+        const apB = (b?.lastname_father ?? '').toString().trim().toLowerCase();
 
+        return apA.localeCompare(apB, 'es', { sensitivity: 'base' });
+      });
       // Filtrar los datos que coincidan con listStaffConfirm
       const filteredData = data.filter((row: any) =>
         this.listStaffConfirm.some((staff: any) => staff.staff_id === row.id)
