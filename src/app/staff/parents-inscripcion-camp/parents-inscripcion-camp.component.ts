@@ -33,7 +33,8 @@ export class ParentsInscripcionCampComponent implements OnInit {
         "titulo12":"Saldo",
         "titulo13":"Camps a los que asisti",
         "titulo14":"Campamentos Cancelados ",
-        "titulo15":"ver perfil "
+        "titulo15":"ver perfil ",
+        "titulo16":"Registro Cerrado",
 
 
 
@@ -53,7 +54,9 @@ export class ParentsInscripcionCampComponent implements OnInit {
         "titulo12":"Balance",
         "titulo13":"Camps I attended",
         "titulo14":"Canceled Camps",
-        "titulo15":"view profile "
+        "titulo15":"view profile ",
+        "titulo16":"Closed Registry",
+
 
       }
     }
@@ -85,6 +88,7 @@ export class ParentsInscripcionCampComponent implements OnInit {
    
   }
     @ViewChild('centerDataModal') content:ElementRef;
+  campsWithoutRegistration: any[];
 
     
 
@@ -205,6 +209,14 @@ getCampsDIs(){
       fechaI = fechaI.split("T");
       item.camp_start = fechaI[0];          
      });
+     this.campsWithoutRegistration = [
+      ...this.customer,
+      ...this.summer_school_camps,
+      ...this.subscribe_camps,
+    
+      ...this.available_school_camps,
+     
+    ].filter(camp => camp.registration === false);
     
   })
 }

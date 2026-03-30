@@ -202,7 +202,7 @@
 
 
 
-        <div class="card border border-success border-1" *ngIf="subscribe_camps.length>0">
+        <div class="card border border-success border-1" *ngIf="subscribe_camps?.length>0">
             
             <div class="bg-success p-2">
                 <h1 class="card-title text-white">{{textos[idoma]["titulo11"]}}  </h1>
@@ -275,7 +275,7 @@
               </p-table>
         </div>
 
-        <div class="card border border-secondary border-1"  *ngIf="available_school_camps.length>0">
+        <div class="card border border-secondary border-1"  *ngIf="available_school_camps?.length>0">
             
             <div class="bg-secondary p-2">
                 <h1 class="card-title text-white">{{textos[idoma]["titulo9"]}}  </h1>
@@ -368,7 +368,7 @@
               </p-table>
             </div>
         </div>
-        <div class="card border border-info border-1" *ngIf="summer_school_camps.length>0">
+        <div class="card border border-info border-1" *ngIf="summer_school_camps?.length>0">
             
           <div class="bg-info p-2">
               <h1 class="card-title text-white">{{textos[idoma]["titulo10"]}}  </h1>
@@ -463,7 +463,7 @@
             </p-table>
             </div>
       </div>
-      <div class="card border border-secondary border-1"  *ngIf="passed_camps.length>0">
+      <div class="card border border-secondary border-1"  *ngIf="passed_camps?.length>0">
             
         <div class="bg-secondary p-2">
             <h1 class="card-title text-white">{{textos[idoma]["titulo13"]}} </h1>
@@ -528,6 +528,72 @@
               
           </p-table>
     </div>
+
+    <div class="card border border-secondary border-1"  *ngIf="campsWithoutRegistration?.length>0">
+            
+      <div class="bg-secondary p-2">
+          <h1 class="card-title text-white">{{textos[idoma]["titulo16"]}} </h1>
+
+        </div>
+        <br>
+          <p-table     [responsiveLayout]="false"
+                  [responsive]="false"  #dt [value]="campsWithoutRegistration"  [rows]="50" 
+            [globalFilterFields]="['camp_name','location_name','camp_start','camp_end','public_price']"
+            [(selection)]="selectedProducts" [rowHover]="true" dataKey="camp_id"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true"
+            responsiveLayout="scroll"
+              scrollHeight="flex"
+              [paginator]="true">
+          
+            <ng-template pTemplate="header">
+                <tr>
+                    
+                    <th pSortableColumn="camp_name">Camp <p-sortIcon field="camp" style="font-size: 10px;"></p-sortIcon></th>
+                    <th pSortableColumn="location_name">{{textos[idoma]["titulo4"]}}  <p-sortIcon field="sede"></p-sortIcon></th>
+                    <th pSortableColumn=" camp_end">{{textos[idoma]["titulo5"]}}  <p-sortIcon field="inicio"></p-sortIcon></th>
+                    <th pSortableColumn="camp_start">{{textos[idoma]["titulo6"]}}  <p-sortIcon field="termino"></p-sortIcon></th>
+                    <th pSortableColumn="public_price">{{textos[idoma]["titulo7"]}}  <p-sortIcon field="precio"></p-sortIcon></th>
+
+                    <th></th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-customer>
+                <tr>
+                    <td  (click)="routerCamps(customer.camp_id)" style="cursor: pointer;">
+                        {{customer.camp_name}}
+                      </td>
+                      <td> 
+                        {{customer.location_name}}
+                      </td>
+                      <td>
+      
+                       {{customer.camp_end}}
+      
+      
+                      </td>
+                      <td>
+      
+                       
+                       {{customer.camp_start}}
+      
+                      </td>
+                      <td>
+                       {{customer.public_price}}
+      
+                      </td>
+                   
+      
+                      <td>
+                        <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../camp-info/'+id+'/'+customer.camp_id]">{{textos[idoma]["titulo8"]}} </button>
+                      </td>
+
+                </tr>
+            </ng-template>
+            
+        </p-table>
+  </div>
     <div class="card border border-danger border-1" *ngIf="cancelled_camps.length>0">
         
         <div class="bg-danger p-2">
