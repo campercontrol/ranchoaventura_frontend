@@ -9,13 +9,13 @@ export class AdminService {
 
 
   getAgrupaciones(){
-    return this.http.get('https://api.kincamp.com/groupings')
+    return this.http.get('https://api.kincamp.com/groupings/')
   }
   postAgrupaciones(data:any){
-    return this.http.post('https://api.kincamp.com/groupings',data)
+    return this.http.post('https://api.kincamp.com/groupings/',data)
   }
   typgetAgrupaciones(){
-    return this.http.get('https://api.kincamp.com/grouping_types')
+    return this.http.get('https://api.kincamp.com/grouping_types/')
   }
 
   updateAgrupaciones(info:any,id){
@@ -28,6 +28,6 @@ export class AdminService {
   }
 
   getAgrupacionesType(){
-    return this.http.get('https://api.kincamp.com/grouping_types')
+    return this.http.get('https://api.kincamp.com/grouping_types/')
   }
 }
