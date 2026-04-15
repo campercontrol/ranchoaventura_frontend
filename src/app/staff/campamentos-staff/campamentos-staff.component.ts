@@ -36,7 +36,7 @@ export class CampamentosStaffComponent implements OnInit {
   selectedCustomers: any[];
  
   representatives: any[];
-  url = 'https://api-dev.kincamp.com/';
+  url = 'https://api.kincamp.com/';
 
   statuses: any[];
 
@@ -313,7 +313,7 @@ async downloadImages(listCampers = this.listCampers) {
   const zip = new JSZip();
 
   const imagePromises = listCampers.map(async (customer, index) => {
-    const imageUrl = `https://api-dev.kincamp.com/${customer.camper_photo}/`;
+    const imageUrl = `https://api.kincamp.com/${customer.camper_photo}/`;
 
     try {
       const response = await fetch(imageUrl);
@@ -969,7 +969,7 @@ deletExtracharges(i){
 reporteGeneral() {
   this.capms.getReportesGenerales(this.idCamp).subscribe({
     next: (response: any) => {
-      const data = (response.data ).sort((a, b) => {
+      const data = (response.data || []).sort((a: any, b: any) => {
         const apA = (a?.lastname_father ?? '').toString().trim().toLowerCase();
         const apB = (b?.lastname_father ?? '').toString().trim().toLowerCase();
 
@@ -1029,18 +1029,29 @@ reporteGeneral() {
         'enrollment': 'Estatus'
       };
 
-      const extraQuestionsSet = new Set<string>();
+      const camperExtraQuestionsSet = new Set<string>();
       const extraChargesSet = new Set<string>();
       const groupingTypesSet = new Set<string>();
 
-      // 🔹 Detectar preguntas, cargos y tipos de agrupación
       data.forEach((row: any) => {
-        if (Array.isArray(row.ExtraQuestions)) {
-          row.ExtraQuestions.forEach((q: any) => q.question && extraQuestionsSet.add(q.question.trim()));
+        // Aquí tomamos la propiedad real que viene en tu JSON
+        const camperQuestions = row['Camper extra questions'] || [];
+
+        if (Array.isArray(camperQuestions)) {
+          camperQuestions.forEach((q: any) => {
+            if (q.question) {
+              const cleanQuestion = this.stripHtml(q.question).trim();
+              camperExtraQuestionsSet.add(cleanQuestion);
+            }
+          });
         }
 
         if (Array.isArray(row.ExtraCharges)) {
-          row.ExtraCharges.forEach((c: any) => c.name && extraChargesSet.add(c.name.trim()));
+          row.ExtraCharges.forEach((c: any) => {
+            if (c.name) {
+              extraChargesSet.add(c.name.trim());
+            }
+          });
         }
 
         const groupings = row.Groupings || row.groupings || row.CamperGroupings || [];
@@ -1051,84 +1062,118 @@ reporteGeneral() {
                 g.grouping_type_name ||
                 g.grouping_type?.name ||
                 (g.grouping_type_id ? `Agrupación tipo ${g.grouping_type_id}` : 'Agrupación');
+
               groupingTypesSet.add(typeName.trim());
             }
           });
         }
       });
 
-      const extraQuestions = [...extraQuestionsSet];
+      const camperExtraQuestions = [...camperExtraQuestionsSet];
       const extraCharges = [...extraChargesSet];
       const groupingTypes = [...groupingTypesSet];
 
-      // 🔹 Construir los datos
       const modifiedData = data.map((row: any) => {
         const newRow: any = {};
 
-        // Campos fijos traducidos
+        // Campos fijos
         for (const key in headersMap) {
           const translated = headersMap[key];
-          newRow[translated] = row.hasOwnProperty(key) ? row[key] : '';
+          newRow[translated] = Object.prototype.hasOwnProperty.call(row, key) ? row[key] : '';
         }
 
-        // Convertir booleanos a Sí/No
+        // Booleanos
         for (const key in newRow) {
-          if (typeof newRow[key] === 'boolean') newRow[key] = newRow[key] ? 'Sí' : 'No';
-          else if (typeof newRow[key] === 'number' && (newRow[key] === 0 || newRow[key] === 1))
+          if (typeof newRow[key] === 'boolean') {
+            newRow[key] = newRow[key] ? 'Sí' : 'No';
+          } else if (
+            typeof newRow[key] === 'number' &&
+            (newRow[key] === 0 || newRow[key] === 1)
+          ) {
             newRow[key] = newRow[key] === 1 ? 'Sí' : 'No';
+          }
         }
 
         // Comentarios
-        newRow['Comentarios de Padres'] = row['Comments (Parent)']?.map((c: any) => c.comment).join(', ') || '';
-        newRow['Comentarios del Personal'] = row['Comments (Staff)']?.map((c: any) => c.comment).join(', ') || '';
-        newRow['Comentarios de la Escuela'] = row['Comments (School)']?.map((c: any) => c.comment).join(', ') || '';
+        newRow['Comentarios de Padres'] =
+          row['Comments (Parent)']?.map((c: any) => c.comment).join(', ') || '';
+        newRow['Comentarios del Personal'] =
+          row['Comments (Staff)']?.map((c: any) => c.comment).join(', ') || '';
+        newRow['Comentarios de la Escuela'] =
+          row['Comments (School)']?.map((c: any) => c.comment).join(', ') || '';
 
-        // Preguntas Extras
-        extraQuestions.forEach(q => {
-          const match = row.ExtraQuestions?.find((i: any) => i.question?.trim() === q);
-          newRow[q] = match?.answer || '';
+        // Preguntas extra del camper
+        const camperQuestions = row['Camper extra questions'] || [];
+
+        camperExtraQuestions.forEach((questionText) => {
+          const match = camperQuestions.find(
+            (q: any) => this.stripHtml(q.question || '').trim() === questionText
+          );
+
+          newRow[questionText] = match?.answer || '';
         });
 
-        // Cargos Extras
-        extraCharges.forEach(c => {
+        // Cargos extras
+        extraCharges.forEach((c) => {
           const match = row.ExtraCharges?.find((i: any) => i.name?.trim() === c);
           newRow[c] = match ? (match.amount ?? '') : '';
         });
 
-        // Agrupaciones (por tipo o id)
+        // Agrupaciones
         const groupings = row.Groupings || row.groupings || row.CamperGroupings || [];
-        groupingTypes.forEach(type => {
+        groupingTypes.forEach((type) => {
           const match = groupings.find((g: any) => {
             const currentType =
               g.grouping_type_name ||
               g.grouping_type?.name ||
               (g.grouping_type_id ? `Agrupación tipo ${g.grouping_type_id}` : 'Agrupación');
+
             return currentType.trim() === type && g.is_active;
           });
+
           newRow[type] = match ? match.name : '';
         });
 
         return newRow;
       });
 
-      // 🔹 Encabezados
-      const headers = [...Object.values(headersMap), ...extraQuestions, ...extraCharges, ...groupingTypes];
+      const headers = [
+        ...Object.values(headersMap),
+        ...camperExtraQuestions,
+        ...extraCharges,
+        ...groupingTypes
+      ];
 
-      // 🔹 Crear hoja Excel
-      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet<any>(modifiedData, { header: headers as any[] });
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(modifiedData, {
+        header: headers as any[]
+      });
 
-      // 🔹 Ajuste de columnas
-      worksheet['!cols'] = headers.map((header:any) => {
-        const maxWidth = Math.max(header.length, ...modifiedData.map(r => (r[header]?.toString().length || 0)));
+      worksheet['!cols'] = headers.map((header: any) => {
+        const maxWidth = Math.max(
+          header.length,
+          ...modifiedData.map((r: any) => (r[header]?.toString().length || 0))
+        );
         return { wpx: Math.min(maxWidth * 10, 300) };
       });
 
-      const workbook: XLSX.WorkBook = { Sheets: { Datos: worksheet }, SheetNames: ['Datos'] };
-      const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+      const workbook: XLSX.WorkBook = {
+        Sheets: { Datos: worksheet },
+        SheetNames: ['Datos']
+      };
+
+      const excelBuffer = XLSX.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array'
+      });
+
       this.saveAsExcelFile(excelBuffer, 'Reporte General ' + this.infoCamp.name);
     },
-    error: err => console.error('Error al obtener los datos del reporte general', err),
+    error: (err) => console.error('Error al obtener los datos del reporte general', err),
   });
+}
+
+private stripHtml(text: string): string {
+  return text.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim();
 }
 
 
