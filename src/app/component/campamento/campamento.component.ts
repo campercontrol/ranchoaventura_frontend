@@ -223,6 +223,7 @@ export class CampamentoComponent implements OnInit {
         this.dataPagos = res.payments;
         console.log(this.dataCamp,'aa');
         this.cargando= true;
+        console.log(this.dataCamp.currency_id,'id moneda');
         this.currencyService.getCurrencyById(this.dataCamp.currency_id).subscribe(currency => {
           if (currency) {
             console.log('Moneda encontrada:', currency);
