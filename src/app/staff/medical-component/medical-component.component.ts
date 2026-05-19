@@ -75,7 +75,7 @@ export class MedicalComponentComponent implements OnInit {
     const today = new Date(); // Fecha actual
   
     // Filtrar los datos cuya fecha `camp_end` aún no ha pasado
-    this.aCamp = res.data.filter((camp: any) => new Date(camp.camp_end) >= today);
+    this.aCamp = res.data.items.filter((camp: any) => new Date(camp.camp_end) >= today);
   
     console.log(this.aCamp); // Mostrar los datos filtrados
     this.spiner=!this.spiner;
@@ -84,44 +84,79 @@ export class MedicalComponentComponent implements OnInit {
  }
 
  loadCampsLazy(event: any) {
+  this.loading = true;
+
   const page = Math.floor(event.first / event.rows) + 1;
- const perPage = event.rows;
+  const perPage = event.rows;
 
- if (this.filtrosActivos) {
-   // Si hay filtros activos, buscar con filtros
-   this.staff.searchCamps(
-     this.searchName,
-     this.searchLocation,
-     this.searchSchool,
-     page,
-     perPage
-   ).subscribe((res: any) => {
-     this.listcatalogos = res.data.items;
-     this.totalRecords = res.data.total;
-     this.cargando = false;
-   });
- } else {
-   // Sin filtros: carga normal
-   this.staff.getCamp(page, perPage).subscribe((res: any) => {
-     this.listcatalogos = res.data.items;
-     this.totalRecords = res.data.total;
-     this.cargando = false;
+  const sortField = event.sortField;
+  const sortOrder = event.sortOrder; // 1 asc, -1 desc
 
-   });
- }
+  const aplicarOrdenFront = (items: any[]) => {
+    if (!sortField) return items; // si no están usando las flechas, no ordenar
+
+    return items.sort((a: any, b: any) => {
+      // soporte para campos anidados "record.n"
+      const valA = sortField.includes('.')
+        ? sortField.split('.').reduce((o, k) => o?.[k], a)
+        : a[sortField];
+
+      const valB = sortField.includes('.')
+        ? sortField.split('.').reduce((o, k) => o?.[k], b)
+        : b[sortField];
+
+      if (valA == null) return 1 * sortOrder;
+      if (valB == null) return -1 * sortOrder;
+
+      if (valA < valB) return -1 * sortOrder;
+      if (valA > valB) return 1 * sortOrder;
+      return 0;
+    });
+  };
+
+  if (this.filtrosActivos) {
+    this.camps.searchCamps(
+      this.searchName,
+      this.searchLocation,
+      this.searchSchool,
+      page,
+      perPage
+    ).subscribe((res: any) => {
+      let items = res.data.items;
+
+      // ORDENAMIENTO EN FRONT
+      this.listcatalogos = aplicarOrdenFront(items);
+
+      this.totalRecords = res.data.total;
+      this.loading = false;
+    });
+
+  } else {
+
+    this.camps.getCamp(page, perPage).subscribe((res: any) => {
+      let items = res.data.items;
+
+      // ORDENAMIENTO EN FRONT
+      this.listcatalogos = aplicarOrdenFront(items);
+
+      this.totalRecords = res.data.total;
+      this.loading = false;
+    });
+
+  }
 }
+
 buscarCampamentos() {
   this.filtrosActivos = true;
   this.loadCampsLazy({ first: 0, rows: 10 });
 }
 
 resetFiltros() {
- this.searchName = '';
- this.searchLocation = null;
- this.searchSchool = null;
- this.filtrosActivos = false;
- 
- this.loadCampsLazy({ first: 0, rows: 10 });
-} 
+  this.searchName = '';
+  this.searchLocation = null;
+  this.searchSchool = null;
+  this.filtrosActivos = false;
+  this.loadCampsLazy({ first: 0, rows: 10 });
+}
  
   }

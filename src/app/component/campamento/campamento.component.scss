@@ -104,7 +104,58 @@ td{
     letter-spacing: 1px;
   }
   
-   
+  .paypal-container {
+    background: #ffc439;
+    border-radius: 18px;
+    padding: 14px 18px;
+    width: 360px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    border: 2px solid transparent;
+    margin-left: 30px;
+  }
+  
+  .paypal-container:hover {
+    transform: translateY(-2px);
+    background: #ffb800;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+    border-color: #00308720;
+  }
+  
+  .paypal-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  
+  .paypal-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+  }
+  
+  .paypal-text {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .paypal-title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: #111;
+  }
+  
+  .paypal-title span {
+    color: #003087;
+  }
+  
+  .paypal-subtitle {
+    margin: 0;
+    font-size: 13px;
+    color: #444;
+  }
   
    
   

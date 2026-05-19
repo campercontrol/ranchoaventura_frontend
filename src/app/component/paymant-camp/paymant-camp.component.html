@@ -23,7 +23,7 @@
 
         <div class="card-item orange-background">
           <div class="card-content">
-              <h2 class="card-amount">{{ camper.length  }}</h2>
+              <h2 class="card-amount">{{ getinscritos(camper ) }}</h2>
               <p class="card-title">Registros activos </p>
               <p class="card-transactions">
             
@@ -76,94 +76,163 @@
             <!-- Icono grande como marca de agua 
   
 --> 
-<p-table [value]="camper"    [responsiveLayout]="false"  [value]="camper"
-[paginator]="true"
+<div class="table-toolbar">
+  <div class="table-toolbar-left">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Buscar por camper"
+      [(ngModel)]="searchCamper"
+      (input)="applyFiltersAndOrder()"
+    />
+  </div>
+
+   
+</div>
+
+<div class="top-scrollbar" #topScroll>
+  <div #topScrollInner></div>
+</div>
+
+<div class="table-scroll-container" #tableScroll>
+  <p-table
+    [value]="camper"
+    [responsiveLayout]="false"
+    [customSort]="true"
+    (sortFunction)="sortNested($event)"
+    [responsive]="false"
+    [paginator]="false"
+    [globalFilterFields]="['camper_fullname']"
+    [(selection)]="selectedCampers"
+    *ngIf="!loading"
+    styleClass="campers-table"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+
+        <th pSortableColumn="camper_fullname">
+          Camper
+          <p-sortIcon field="camper_fullname"></p-sortIcon>
+        </th>
+
+        <th pSortableColumn="payments_info.camp_status.enrolment_status">
+          Status
+          <p-sortIcon field="payments_info.camp_status.enrolment_status"></p-sortIcon>
+        </th>
+
+        <th
+          *ngFor="let key of getObjectKeys(tiposPago)"
+          [pSortableColumn]="getPaymentMethodField(key, tiposPago)"
+        >
+          {{ tiposPago[key].name }}
+          <p-sortIcon [field]="getPaymentMethodField(key, tiposPago)"></p-sortIcon>
+        </th>
+
+        <th pSortableColumn="payments_info.total_payments.amount">
+          Total de pagos
+          <p-sortIcon field="payments_info.total_payments.amount"></p-sortIcon>
+        </th>
+
+        <th pSortableColumn="payments_info.discounts.amount">
+          Descuentos
+          <p-sortIcon field="payments_info.discounts.amount"></p-sortIcon>
+        </th>
+
+        <th pSortableColumn="payments_info.refunds.amount">
+          Rembolso
+          <p-sortIcon field="payments_info.refunds.amount"></p-sortIcon>
+        </th>
+
+        <th pSortableColumn="payments_info.camp_status.balance">
+          Saldo
+          <p-sortIcon field="payments_info.camp_status.balance"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+        </td>
+
+        <td>
+          <a [routerLink]="['/dashboard/payments', rowData.camper_id, camp]">
+            {{ rowData.camper_fullname }}
+          </a>
+
+          <i
+            *ngIf="rowData?.payments_info?.camp_status?.enrolment_status != 'Inscrito'"
+            class="pi pi-times-circle ms-2"
+            style="color: red"
+          ></i>
+
+          <i
+            *ngIf="rowData.number_of_comments > 0"
+            class="fas fa-sticky-note"
+            style="color: rgb(192, 192, 187);"
+          ></i>
+        </td>
+
+        <td>
+          {{ rowData?.payments_info?.camp_status?.enrolment_status }}
+        </td>
+
+        <td *ngFor="let key of getObjectKeys(rowData?.payments_info?.payments_by_payment_method || {})">
+          {{ rowData?.payments_info?.payments_by_payment_method?.[key]?.total_amount || 0 }}
+        </td>
+
+        <td>
+          {{ rowData?.payments_info?.total_payments?.amount || 0 }}
+          <p-tag
+            [value]="rowData?.payments_info?.total_payments?.number_of_payments"
+            severity="success"
+            *ngIf="rowData?.payments_info?.total_payments?.number_of_payments > 0"
+          ></p-tag>
+        </td>
+
+        <td>
+          {{ rowData?.payments_info?.discounts?.amount || 0 }}
+          <p-tag
+            [value]="rowData?.payments_info?.discounts?.number_of_discounts"
+            severity="success"
+            *ngIf="rowData?.payments_info?.discounts?.number_of_discounts > 0"
+          ></p-tag>
+        </td>
+
+        <td>
+          {{ rowData?.payments_info?.refunds?.amount || 0 }}
+          <p-tag
+            [value]="rowData?.payments_info?.refunds?.number_of_refunds"
+            severity="warning"
+            *ngIf="rowData?.payments_info?.refunds?.number_of_refunds > 0"
+          ></p-tag>
+        </td>
+
+        <td class="text-center">
+          {{ rowData?.payments_info?.camp_status?.balance || 0 }}
+          <br />
+          <p-tag
+            value="Pagado"
+            severity="success"
+            *ngIf="rowData?.payments_info?.camp_status?.balance == 0"
+          ></p-tag>
+
+          <p-tag
+            value="Saldo pendiente"
+            severity="warning"
+            *ngIf="rowData?.payments_info?.camp_status?.balance > 0"
+          ></p-tag>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
  
-[customSort]="true"
-(sortFunction)="sortNested($event)"
-[responsive]="false" [paginator]="true" [rows]="50" [globalFilterFields]="['name']" [(selection)]="selectedCampers" *ngIf="!loading">
-  <ng-template pTemplate="header">
-    <tr>
-      <th >
-        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-      </th>
-      <th pSortableColumn="payments_info.camper_fullname">Camper
-        <p-sortIcon field="payments_info.camper_fullname"></p-sortIcon>
-      </th>
-
-      <th pSortableColumn="payments_info.camp_statusenrolment_status">Status
-        <p-sortIcon field="payments_info.camp_statusenrolment_status"></p-sortIcon>
-      </th>
-      <th *ngFor="let key of getObjectKeys(tiposPago)" [pSortableColumn]="getPaymentMethodField(key,tiposPago)">
-        {{ tiposPago[key].name }}
-        <p-sortIcon [field]="getPaymentMethodField(key,tiposPago)"></p-sortIcon>
-      </th>
-      
-      <th pSortableColumn="payments_info.total_payments.amount">Total de pagos
-        <p-sortIcon field="payments_info.total_payments.amount"></p-sortIcon>
-      </th>
-      <th pSortableColumn="payments_info.discounts.amount">Descuentos
-        <p-sortIcon field="payments_info.discounts.amount"></p-sortIcon>
-      </th>
-      <th pSortableColumn="payments_info.refunds.refunds">Rembolso
-        <p-sortIcon field="payments_info.refunds.refunds"></p-sortIcon>
-      </th>
-      <th pSortableColumn="payments_info.camp_status.balance">Saldo
-        <p-sortIcon field="payments_info.camp_status.balance"></p-sortIcon>
-      </th>
-    </tr>
-  </ng-template>
-  
-  <ng-template pTemplate="body" let-rowData>
-    <tr>
-      <td>
-        <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
-      </td>
-      <td>
-        <a [routerLink]="['/dashboard/payments', rowData.camper_id, camp]">{{ rowData.camper_fullname }}</a>
-        <i *ngIf="rowData.payments_info.camp_statusenrolment_status == 'Inscrito'" class="pi pi-times-circle ms-2" style="color:red"></i>
-        <i *ngIf="rowData.number_of_comments > 0" class="fas fa-sticky-note" style="color: rgb(192, 192, 187);"></i>
-      </td>
-
-      <td>
-        {{ rowData.payments_info.camp_status.enrolment_status }}
-
-      </td>
-      <td *ngFor="let key of getObjectKeys(rowData.payments_info.payments_by_payment_method)">
-        {{ rowData.payments_info?.payments_by_payment_method[key]?.total_amount || 0   }}
-      </td>
-      <td>
-        {{ rowData.payments_info.total_payments.amount || 0  }}
-        <p-tag [value]="rowData.payments_info.total_payments.number_of_payments" severity="success" *ngIf="rowData.payments_info.total_payments.number_of_payments > 0"></p-tag>
-      </td>
-      <td>
-        {{ rowData.payments_info.discounts.amount || 0 }}
-        <p-tag 
-          [value]="rowData.payments_info.discounts.number_of_discounts" 
-          severity="success"
-          *ngIf="rowData.payments_info.discounts.number_of_discounts > 0">
-        </p-tag>
-      </td>
-      
-      <td>
-        {{ rowData.payments_info.refunds.amount || 0 }}
-        <p-tag 
-          [value]="rowData.payments_info.refunds.number_of_refunds" 
-          severity="warning"
-          *ngIf="rowData.payments_info.refunds.number_of_refunds > 0">
-        </p-tag>
-      </td>
-      
-      <td class="text-center">
-        {{ rowData.payments_info.camp_status.balance || 0  }}
-        <br>
-        <p-tag value="Pagado" severity="success" *ngIf="rowData.payments_info.camp_status.balance == 0"></p-tag>
-        <p-tag value="Saldo pendiente" severity="warning" *ngIf="rowData.payments_info.camp_status.balance > 0"></p-tag>
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
-
   <div class="spinner-border mx-auto" role="status" *ngIf="loading">
 
   </div>

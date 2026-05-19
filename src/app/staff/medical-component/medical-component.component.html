@@ -4,35 +4,36 @@
 
     </div>
    
-    
-    <div style="overflow: auto;" class="mt-4 p-3">
-      <div style="width: 100%; margin-bottom: 20px;  padding: 20px; display: none;">
-        <div class="row mb-2">
-          <div class="col-md-4">
-            <input pInputText type="text" [(ngModel)]="searchName" placeholder="Nombre del campamento" class="form-control" />
-          </div>
-          <div class="col-md-4">
-            <input pInputText type="text" [(ngModel)]="searchLocation" placeholder="Sede (location)" class="form-control" />
-          </div>
-          <div class="col-md-4">
-            <input pInputText type="text" [(ngModel)]="searchSchool" placeholder=" Escuela (school)" class="form-control" />
-          </div>
+    <div   style="width: 100%; margin-bottom: 20px; background-color: rgb(203, 201, 201); padding: 20px;" >
+      <div class="row mb-2">
+        <div class="col-md-4">
+          <input pInputText type="text" [(ngModel)]="searchName" placeholder="Nombre del campamento" class="form-control" />
         </div>
-        <div class="row mb-3">
-          <div class="col-md-12 text-end">
-            <button class="btn btn-success" (click)="buscarCampamentos()">Buscar</button>
-          
+        <div class="col-md-4">
+          <input pInputText type="text" [(ngModel)]="searchLocation" placeholder="Sede (location)" class="form-control" />
+        </div>
+        <div class="col-md-4">
+          <input pInputText type="text" [(ngModel)]="searchSchool" placeholder=" Escuela (school)" class="form-control" />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-12 text-end">
+          <button class="btn btn-success" (click)="buscarCampamentos()">Buscar</button>
+         
 
-            <button class="btn btn-secondary ms-2" (click)="resetFiltros()">Limpiar</button>
-              
-          </div>
+          <button class="btn btn-secondary ms-2" (click)="resetFiltros()">Limpiar</button>
+            
         </div>
-    </div>
+      </div>
+  </div>
+    <div style="overflow: auto;" class="mt-4 p-3">
+   
         <p-table     [responsiveLayout]="false"
                     [responsive]="false"  #dt [value]="listcatalogos"  [rows]="50" [rowsPerPageOptions]="[5, 25, 50]"
       dataKey="id"
       [rowHover]="true"
       [rows]="50"
+      [loading]="spiner"
       [paginator]="true"
       [lazy]="true"
       (onLazyLoad)="loadCampsLazy($event)"

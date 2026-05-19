@@ -10,6 +10,47 @@ label{
     width: 100%;
     justify-content:space-around;
 }
+.paypal-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  
+    background: #ffc439;
+    color: #111;
+    border: none;
+    border-radius: 999px;
+  
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+  
+    cursor: pointer;
+    transition: all 0.25s ease;
+  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .paypal-btn:hover {
+    transform: translateY(-2px);
+    background: #ffb800;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  }
+  
+  .paypal-btn:active {
+    transform: scale(0.98);
+  }
+  
+  .paypal-logo {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+  }
+  
+  .paypal-btn strong {
+    color: #003087;
+    letter-spacing: 0.5px;
+  }
 
 .container-info{
     display: flex;

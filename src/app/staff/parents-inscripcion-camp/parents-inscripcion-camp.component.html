@@ -202,7 +202,7 @@
 
 
 
-        <div class="card border border-success border-1" *ngIf="subscribe_camps.length>0">
+        <div class="card border border-success border-1" *ngIf="subscribe_camps?.length>0">
             
             <div class="bg-success p-2">
                 <h1 class="card-title text-white">{{textos[idoma]["titulo11"]}}  </h1>
@@ -275,7 +275,7 @@
               </p-table>
         </div>
 
-        <div class="card border border-secondary border-1"  *ngIf="available_school_camps.length>0">
+        <div class="card border border-secondary border-1"  *ngIf="available_school_camps?.length>0">
             
             <div class="bg-secondary p-2">
                 <h1 class="card-title text-white">{{textos[idoma]["titulo9"]}}  </h1>
@@ -368,7 +368,7 @@
               </p-table>
             </div>
         </div>
-        <div class="card border border-info border-1" *ngIf="summer_school_camps.length>0">
+        <div class="card border border-info border-1" *ngIf="summer_school_camps?.length>0">
             
           <div class="bg-info p-2">
               <h1 class="card-title text-white">{{textos[idoma]["titulo10"]}}  </h1>
@@ -419,8 +419,8 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-customer>
                     <tr>
-                      <td *ngIf="multipleInscr">
-                        <p-tableCheckbox [value]="customer"></p-tableCheckbox>
+                      <td *ngIf="multipleInscr ">
+                        <p-tableCheckbox [value]="customer" *ngIf=" customer.registration"></p-tableCheckbox>
                       </td>
                       <td *ngIf="multipleInscr" (click)="routerCamps(customer.camp_id)" style="cursor: pointer;">
                         {{customer.camp_name}} 
@@ -449,9 +449,16 @@
                           </td>
 
                             <td>
-                              <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../camp-info/'+id+'/'+customer.camp_id]" *ngIf="multipleInscr">ver campamento</button>
-                              <button class="btn btn-primary" class="btn btn-success" (click)="inscribirCampsUnico(customer.camp_id)" *ngIf="!multipleInscr">Inscribir a camp</button>
+                              <div *ngIf="customer.registration">
+                                <button class="btn btn-primary" class="btn btn-primary" [routerLink]="['../camp-info/'+id+'/'+customer.camp_id]" *ngIf="multipleInscr">ver campamento</button>
+                                <button class="btn btn-primary" class="btn btn-success" (click)="inscribirCampsUnico(customer.camp_id)" *ngIf="!multipleInscr">Inscribir a camp</button>
+  
+                              </div>
+                              <div  *ngIf="!customer.registration">
+                                <button class="btn btn-danger"  >Registro Cerrado</button>
 
+                              </div>
+                            
                             </td>
                          
                        
@@ -463,7 +470,7 @@
             </p-table>
             </div>
       </div>
-      <div class="card border border-secondary border-1"  *ngIf="passed_camps.length>0">
+      <div class="card border border-secondary border-1"  *ngIf="passed_camps?.length>0">
             
         <div class="bg-secondary p-2">
             <h1 class="card-title text-white">{{textos[idoma]["titulo13"]}} </h1>
@@ -528,6 +535,8 @@
               
           </p-table>
     </div>
+
+    
     <div class="card border border-danger border-1" *ngIf="cancelled_camps.length>0">
         
         <div class="bg-danger p-2">

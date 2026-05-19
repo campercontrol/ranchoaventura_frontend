@@ -31,6 +31,17 @@ export class PaymantCampComponent {
   contatorTotal=0;
   transaciones=0;
   pagostipo:any
+   @ViewChild('topScroll') topScroll!: ElementRef;
+  @ViewChild('tableScroll') tableScroll!: ElementRef;
+  @ViewChild('topScrollInner') topScrollInner!: ElementRef;
+
+  
+  selectedCampers: any[] = [];
+
+  // NUEVO
+  searchCamper: string = '';
+  statusOrder: string = ''; // '', 'inscrito', 'cancelado'
+  camperOriginal: any;
   constructor(private routesA:ActivatedRoute,private pages: PaymentsService, private formBuild:FormBuilder,private modalService: NgbModal,config: NgbModalConfig, private render:Renderer2 ) {
     this.routesA.params.subscribe((params) => {
       this.camp = params['camp'];
@@ -50,6 +61,7 @@ export class PaymantCampComponent {
             this.camper.forEach((item:any)=>{ 
               item.payments_info.payments_by_payment_method= this.transformPayments(item.payments_info.payments_by_payment_method);
             })
+            this.camperOriginal  = this.camper
               this.cards.forEach((element:any) => {
                if(element.payment_method != 'Descuentos'){
                 this.contatorTotal+= parseFloat(
@@ -78,8 +90,86 @@ export class PaymantCampComponent {
       
   
    }
-  selectedCampers: any[] = [];
+   ngAfterViewInit(): void {
+    setTimeout(() => this.syncTopScrollbar(), 200);
+  }
+
+  syncTopScrollbar(): void {
+    if (!this.topScroll || !this.tableScroll || !this.topScrollInner) return;
+
+    const tableWrapper = this.tableScroll.nativeElement;
+    const topWrapper = this.topScroll.nativeElement;
+    const topInner = this.topScrollInner.nativeElement;
+
+    topInner.style.width = tableWrapper.scrollWidth + 'px';
+
+    topWrapper.onscroll = () => {
+      tableWrapper.scrollLeft = topWrapper.scrollLeft;
+    };
+
+    tableWrapper.onscroll = () => {
+      topWrapper.scrollLeft = tableWrapper.scrollLeft;
+    };
+  }
+
+  normalizeStatus(status: string): string {
+    return (status || '')
+      .toString()
+      .trim()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+  }
+
+  getActiveRecordsCount(): number {
+    return this.camper.filter((item: any) => {
+      const status = this.normalizeStatus(item?.payments_info?.camp_status?.enrolment_status);
+      return status === 'inscrito';
+    }).length;
+  }
+
+  applyFiltersAndOrder(): void {
+    
+    let data = [...this.camperOriginal];
+
+    // filtro por nombre camper
+    if (this.searchCamper?.trim()) {
+      const term = this.searchCamper.trim().toLowerCase();
+      data = data.filter((item: any) =>
+        (item?.camper_fullname || '').toLowerCase().includes(term)
+      );
+    }else if(this.searchCamper?.trim().length==0){
+      this.camper = [...this.camperOriginal];
+    }
+
+    // orden por status
+    if (this.statusOrder === 'inscrito') {
+      data.sort((a: any, b: any) => {
+        const statusA = this.normalizeStatus(a?.payments_info?.camp_status?.enrolment_status);
+        const statusB = this.normalizeStatus(b?.payments_info?.camp_status?.enrolment_status);
+
+        if (statusA === 'Inscrito' && statusB !== 'Inscrito') return -1;
+        if (statusA !== 'Inscrito' && statusB === 'Inscrito') return 1;
+        return (a?.camper_fullname || '').localeCompare(b?.camper_fullname || '');
+      });
+    }
+
+    if (this.statusOrder === 'cancelado') {
+      data.sort((a: any, b: any) => {
+        const statusA = this.normalizeStatus(a?.payments_info?.camp_status?.enrolment_status);
+        const statusB = this.normalizeStatus(b?.payments_info?.camp_status?.enrolment_status);
+
+        if (statusA === 'Cancelado' && statusB !== 'Cancelado') return -1;
+        if (statusA !== 'Cancelado' && statusB === 'Cancelado') return 1;
+        return (a?.camper_fullname || '').localeCompare(b?.camper_fullname || '');
+      });
+    }
+
   
+    this.camper = data;
+
+    setTimeout(() => this.syncTopScrollbar(), 100);
+  }  
 
   onHeaderCheckboxToggle(event: any) {
       this.selectedCampers = event.value; // Actualiza la selección
@@ -98,6 +188,13 @@ export class PaymantCampComponent {
   getObjectKeysField(obj: any) {
     console.log();
     
+  }
+  getinscritos(data:any){
+    const info = data.filter((camper: any) => 
+      camper?.payments_info?.camp_status.enrolment_status === "Inscrito"
+    );
+    
+    return info.length;
   }
   toggleView() {
     this.showAll = !this.showAll;
