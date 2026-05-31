@@ -136,6 +136,7 @@ export class AdminEditStaffComponent implements OnInit {
       this.vaccines = res.vaccines;
       this.food_restrictions = res.food_restrictions;
       this.blood_types = res.blood_types;
+      this.genders = res.genders
       let staff = res.staff
         this.photoSelect = 'https://api-dev.kincamp.com/'+staff.photo;
         console.log(this.photoSelect);
@@ -242,7 +243,7 @@ export class AdminEditStaffComponent implements OnInit {
       
     }
     if(this.formUser.valid){
-      this.staff.editStaff(a,this.info.infToken.profile_id).subscribe((res:any)=>{
+      this.staff.editStaff(a,this.updateId).subscribe((res:any)=>{
         this.spinner = false;
         console.log(res);
         this.eventoAlPadre.emit(1);

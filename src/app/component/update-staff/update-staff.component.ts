@@ -120,13 +120,13 @@ export class UpdateStaffComponent implements OnInit {
       birthday: ["",[Validators.required]], //fecha de nacimiento
       curp: ["",[Validators.required]],
       bio: ["", [Validators.required]], // biografia
-      facebook: [""],
+      facebook: [" "],
       home_phone: ["", [Validators.required,Validators.pattern("^[0-9]*$"), Validators.minLength(8)]],
       cellphone: ["", [Validators.required, Validators.pattern("^[0-9]*$"),Validators.minLength(8)]],
       cv: [""],
       gender_id:[0],
       employee:[true],
-
+ 
       
      
       terms: ["", [Validators.required, Validators.requiredTrue]],
@@ -143,6 +143,8 @@ export class UpdateStaffComponent implements OnInit {
         this.vaccines = res.vaccines;
         this.food_restrictions = res.food_restrictions;
         this.blood_types = res.blood_types;
+        this.genders = res.genders
+
         let staff = res.staff
           this.photoSelect = 'https://api-dev.kincamp.com/'+staff.photo;
           console.log(this.photoSelect);
@@ -154,7 +156,7 @@ export class UpdateStaffComponent implements OnInit {
        
             phobias:staff.phobias,
             drugs:staff.drugs,
-         
+            facebook:'',
             affliction:staff.affliction,
             prohibited_foods:staff.prohibited_foods,
             staff_contact_name: staff.staff_contact_name,
@@ -171,8 +173,7 @@ export class UpdateStaffComponent implements OnInit {
             birthday: staff.birthday,//fecha de nacimiento
             curp:staff.curp,
             bio: staff.bio,// biografia
-            facebook: staff.facebook,
-            home_phone:staff.home_phone,
+             home_phone:staff.home_phone,
             cellphone:staff.cellphone,
             cv:staff.cv,
             gender_id:staff.gender_id,
@@ -188,6 +189,8 @@ export class UpdateStaffComponent implements OnInit {
         this.vaccines = res.vaccines;
         this.food_restrictions = res.food_restrictions;
         this.blood_types = res.blood_types;
+        this.genders = res.genders
+
         let staff = res.staff
           this.photoSelect = 'https://api-dev.kincamp.com/'+staff.photo;
           console.log(this.photoSelect);
@@ -216,7 +219,7 @@ export class UpdateStaffComponent implements OnInit {
             birthday: staff.birthday,//fecha de nacimiento
             curp:staff.curp,
             bio: staff.bio,// biografia
-            facebook: staff.facebook,
+            facebook: '',
             home_phone:staff.home_phone,
             cellphone:staff.cellphone,
             cv:staff.cv,

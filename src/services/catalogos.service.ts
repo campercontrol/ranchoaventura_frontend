@@ -309,6 +309,8 @@ export class CatalogosService {
       const params = new HttpParams()
         .set('name', filters.name || '')
         .set('email', filters.email || '')
+        .set('lastname_father', filters.lastname_father || '')
+        .set('lastname_mother', filters.lastname_mother || '')
         .set('page', page.toString())
         .set('per_page', perPage.toString())
         .set('order', 'desc');
