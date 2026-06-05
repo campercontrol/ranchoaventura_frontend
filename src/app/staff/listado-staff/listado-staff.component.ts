@@ -163,7 +163,7 @@ sortOrder: number | null = null;
     this.sortField = event.sortField;
     this.sortOrder = event.sortOrder;
   
-    this.info(page, rows);
+    this.buscarStaff(page);
   }
   
   
@@ -175,7 +175,41 @@ buscarStaff(page: number = 1) {
   this.catalogos.searchStaff(this.filters, page).subscribe(res => {
     this.listcatalogos = res.data.items;
     console.log(this.listcatalogos);
+    
+    let items = res.data.items;
+  
+    // Procesar tus campos como ya lo hacías
+    items.forEach(element => {
+      element.tipo = "Staff";
+      element.combined = `${element.Staff.name} ${element.Staff.lastname_father} ${element.Staff.lastname_mother}`.toLowerCase();
+    });
 
+    // ---------------------------
+    // ORDENAMIENTO SOLO EN FRONT
+    // ---------------------------
+    if (this.sortField) {
+
+      items.sort((a: any, b: any) => {
+
+        // resolver campo normal o anidado
+        const getValue = (obj: any, field: string) => {
+          if (field.includes('.')) {
+            return field.split('.').reduce((o, k) => o?.[k], obj);
+          }
+          return obj[field];
+        };
+
+        const valA = getValue(a, this.sortField!);
+        const valB = getValue(b, this.sortField!);
+
+        if (valA == null) return 1 * this.sortOrder!;
+        if (valB == null) return -1 * this.sortOrder!;
+
+        if (valA < valB) return -1 * this.sortOrder!;
+        if (valA > valB) return 1 * this.sortOrder!;
+        return 0;
+      });
+    }
     this.listcatalogos.map((pago:any) => {
       pago.metodosPago = this.tipoSearch(pago.payment_method_id);
       pago.nombreCamper = this.nombreCmper(pago.camper_id);

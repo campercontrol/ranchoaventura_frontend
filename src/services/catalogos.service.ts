@@ -291,6 +291,7 @@ export class CatalogosService {
       return this.http.get('https://api-dev.kincamp.com/parent/');
      }
      getStaff(page=1,per_page=50){
+      
       return this.http.get('https://api-dev.kincamp.com/staff/?page='+page+'&per_page='+per_page+'&order=desc');
      }
      searchUusario(filters: any, page: number = 1, perPage: number = 10) {
