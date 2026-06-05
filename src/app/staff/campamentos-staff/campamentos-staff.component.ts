@@ -433,7 +433,7 @@ private getFileNameFromHeader(contentDisposition: string | null): string | null 
   loadStaffLazy(event: any) {
     const page = Math.floor(event.first / event.rows) + 1;
     const rows = event.rows;
-    this.buscarStaff(page);
+    this.getStaffData(page,rows);
   }
   
   parseHTMLContent(html: any): string {

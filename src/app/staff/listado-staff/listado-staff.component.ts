@@ -163,7 +163,7 @@ sortOrder: number | null = null;
     this.sortField = event.sortField;
     this.sortOrder = event.sortOrder;
   
-    this.buscarStaff(page);
+    this.info(page,rows);
   }
   
   
