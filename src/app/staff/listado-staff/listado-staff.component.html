@@ -38,8 +38,9 @@
                           (onLazyLoad)="loadStaffLazy($event)"
                           [paginator]="true"
                            [rows]="50"
+                           [loading]="cargando" 
                           [totalRecords]="totalRecords"
-                          [loading]="cargando"
+                          
                           [rowsPerPageOptions]="[5, 25, 50]"
                           [globalFilterFields]="['combined','Staff.lastname_father','Staff.lastname_mother','Staff.facebook','email','Staff.bio','Staff.cellphone','Staff.home_phone']"
                           dataKey="id"

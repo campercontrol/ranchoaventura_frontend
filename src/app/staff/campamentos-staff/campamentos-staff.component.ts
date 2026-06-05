@@ -433,7 +433,7 @@ private getFileNameFromHeader(contentDisposition: string | null): string | null 
   loadStaffLazy(event: any) {
     const page = Math.floor(event.first / event.rows) + 1;
     const rows = event.rows;
-    this.getStaffData(page, rows);
+    this.buscarStaff(page);
   }
   
   parseHTMLContent(html: any): string {
@@ -1061,7 +1061,7 @@ reporteGeneral() {
               const typeName =
                 g.grouping_type_name ||
                 g.grouping_type?.name ||
-                (g.grouping_type_id ? `Agrupación tipo ${g.grouping_type_id}` : 'Agrupación');
+                (g.grouping_type_id ? `Agrupación tipo ${g.name}` : 'Agrupación');
 
               groupingTypesSet.add(typeName.trim());
             }
