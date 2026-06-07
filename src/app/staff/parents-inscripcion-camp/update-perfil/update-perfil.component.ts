@@ -7,6 +7,7 @@ import { CamperService } from 'src/services/camper.service';
 import traducciones  from 'src/assets/json/lengua.json';
 import { LangService } from 'src/services/lang.service';
 
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-update-perfil',
@@ -20,6 +21,8 @@ export class UpdatePerfilComponent implements OnInit {
     ceil: 180,
     showSelectionBar: true
   };
+  private apiUrl = environment.apiUrl;
+
   visibleSelection=0;
   @Output() inscribirCamps  = new EventEmitter();
   blood_types:any = [];
@@ -582,7 +585,7 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
     this.catalogos.getCamper(this.id).subscribe(
       (res:any)=>{
         console.log('respuestas',res);
-         this.photoSelect = 'https://api-dev.kincamp.com/'+res['camper'].photo,
+         this.photoSelect = this.apiUrl+'/'+res['camper'].photo,
 
           this.formUser.patchValue({
            

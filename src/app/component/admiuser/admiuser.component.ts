@@ -6,6 +6,7 @@ import { CamperService } from 'src/services/camper.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { NgSelectComponent } from '@ng-select/ng-select';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -104,6 +105,8 @@ export class AdmiuserComponent implements OnInit {
   photoSelectUp : string | ArrayBuffer;
   displayEditUpd:boolean = false;
   idioma = 'esp';
+    private apiUrl = environment.apiUrl;
+  
   @ViewChild('dt') dt: Table;
 
   id:any;
@@ -519,7 +522,7 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
     
     this.school = res.school[0];
     this.vaccines = res.vaccines; 
-    this.photoSelectUp = 'https://api-dev.kincamp.com/'+res['camper'].photo;
+    this.photoSelectUp = this.apiUrl+'/'+res['camper'].photo;
    
     
     this.formFood.patchValue({
@@ -605,7 +608,7 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
     this.pathological_background_fm = res.pathological_background_fm;
     this.school = res.school[0];
     this.vaccines = res.vaccines; 
-    this.photoSelectUp = 'https://api-dev.kincamp.com/'+res['camper'].photo;
+    this.photoSelectUp = this.apiUrl+'/'+res['camper'].photo;
    
 
     this.formFood.patchValue({

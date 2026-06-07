@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { CamperService } from 'src/services/camper.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-list-events',
@@ -11,6 +12,7 @@ export class ListEventsComponent implements OnInit {
   temporada=[];
   eventos=[];
   capacitaciones=[];
+  public apiUrl = environment.apiUrl;
 
   constructor(private fb: FormBuilder, private catalogos: CamperService) { 
     this.getTrainig()

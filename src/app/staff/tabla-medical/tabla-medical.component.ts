@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { MedicalService } from 'src/services/medical.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-tabla-medical',
@@ -15,7 +16,7 @@ export class TablaMedicalComponent implements OnInit {
     representatives: any[];
     @ViewChild("op") overlayPanel: any; 
 
-  url="https://api-dev.kincamp.com/"
+  url=environment.apiUrl+"/"
     statuses: any[];
 
     loading: boolean = false;

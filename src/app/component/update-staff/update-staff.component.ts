@@ -5,6 +5,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CamperService } from 'src/services/camper.service';
 import { StaffService } from 'src/services/staff.service';
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-update-staff',
   templateUrl: './update-staff.component.html',
@@ -16,7 +18,9 @@ export class UpdateStaffComponent implements OnInit {
   blood_types: any = [];
   food_restrictions: any = [];
   genders: any = [];
-  grades: any = [];
+  grades: any = [];  
+  private apiUrl = environment.apiUrl;
+
   licensed_medicines: any = [];
   pathological_background: any = [];
   @ViewChild('centerDataModal') content:ElementRef;
@@ -146,7 +150,7 @@ export class UpdateStaffComponent implements OnInit {
         this.genders = res.genders
 
         let staff = res.staff
-          this.photoSelect = 'https://api-dev.kincamp.com/'+staff.photo;
+          this.photoSelect = this.apiUrl+'/'+staff.photo;
           console.log(this.photoSelect);
           
           this.formUser.patchValue({
@@ -192,7 +196,7 @@ export class UpdateStaffComponent implements OnInit {
         this.genders = res.genders
 
         let staff = res.staff
-          this.photoSelect = 'https://api-dev.kincamp.com/'+staff.photo;
+          this.photoSelect = this.apiUrl+'/'+staff.photo;
           console.log(this.photoSelect);
           
           this.formUser.patchValue({

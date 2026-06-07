@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from 'src/environments/environment';
 
 
 import { AdvancedService } from './advanced.service';
@@ -31,12 +32,13 @@ import { Observable } from 'rxjs';
 
 })
 export class CampamentosStaffComponent implements OnInit {
+  private apiUrl = environment.apiUrl;
 
   
   selectedCustomers: any[];
  
   representatives: any[];
-  url = 'https://api-dev.kincamp.com/';
+  url =  environment.apiUrl+'/';
 
   statuses: any[];
 
@@ -313,7 +315,7 @@ async downloadImages(listCampers = this.listCampers) {
   const zip = new JSZip();
 
   const imagePromises = listCampers.map(async (customer, index) => {
-    const imageUrl = `https://api-dev.kincamp.com/${customer.camper_photo}/`;
+    const imageUrl = this.apiUrl+`/${customer.camper_photo}/`;
 
     try {
       const response = await fetch(imageUrl);

@@ -19,7 +19,8 @@
                         </div>
                     </div>
                     <div class="foto-perfil">
-                        <img src="https://api-dev.kincamp.com/{{infoCamp.photo}}" class="avatar-lg rounded-circle" alt="">
+                        <img   [src]="apiUrl + '/' + infoCamp.photo"
+                        class="avatar-lg rounded-circle" alt="">
                       
                     </div>
 

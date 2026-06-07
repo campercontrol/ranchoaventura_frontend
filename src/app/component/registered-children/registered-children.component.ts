@@ -11,6 +11,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import traducciones  from 'src/assets/json/lengua.json';
 import { LangService } from 'src/services/lang.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -24,6 +25,9 @@ export class RegisteredChildrenComponent implements OnInit {
   modalVista :boolean= true;
   userGridData:any=[];
   selected;
+  
+  public apiUrl = environment.apiUrl;
+
   userForm: FormGroup;
   submitted = false;
   hijosRes:any=[];
@@ -218,7 +222,7 @@ total: number = 0;
   checkImagesOrientation() {
     this.hijosRes.camperList.forEach(camper => {
       const img = new Image();
-      img.src = 'https://api-dev.kincamp.com/' + camper.photo;
+      img.src = this.apiUrl+'/' + camper.photo;
 
       img.onload = () => {
         // Detectar si la imagen es horizontal (ancho > alto)

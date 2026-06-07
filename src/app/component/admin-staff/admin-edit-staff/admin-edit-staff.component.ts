@@ -5,6 +5,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CamperService } from 'src/services/camper.service';
 import { StaffService } from 'src/services/staff.service';
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-admin-edit-staff',
   templateUrl: './admin-edit-staff.component.html',
@@ -17,6 +19,8 @@ export class AdminEditStaffComponent implements OnInit {
   genders: any = [];
   grades: any = [];
   licensed_medicines: any = [];
+  private apiUrl = environment.apiUrl;
+
   pathological_background: any = [];
   @ViewChild('centerDataModal') content:ElementRef;
   pathological_background_fm: any = [];
@@ -138,7 +142,7 @@ export class AdminEditStaffComponent implements OnInit {
       this.blood_types = res.blood_types;
       this.genders = res.genders
       let staff = res.staff
-        this.photoSelect = 'https://api-dev.kincamp.com/'+staff.photo;
+        this.photoSelect = this.apiUrl+'/'+staff.photo;
         console.log(this.photoSelect);
         
         this.formUser.patchValue({

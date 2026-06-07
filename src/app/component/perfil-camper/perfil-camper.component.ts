@@ -8,6 +8,7 @@ import { ParentService } from 'src/services/parent.service';
 import { differenceInCalendarMonths, format } from 'date-fns';
 import { StaffService } from 'src/services/staff.service';
 import { LangService } from 'src/services/lang.service';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -49,6 +50,8 @@ export class PerfilCamperComponent implements OnInit {
   userPermis:any;
   infoCamper:Welcome;
   tipoUser:any;
+  public apiUrl = environment.apiUrl;
+
   translations = 
     {
       "eng": {

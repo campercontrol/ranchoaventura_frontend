@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -7,35 +8,36 @@ import { Injectable } from '@angular/core';
 export class CreateCampsService {
 
   constructor(private http:HttpClient) { }
+  private apiUrl = environment.apiUrl;
 
   getSede(){
-    return this.http.get('https://api-dev.kincamp.com/location/');
+    return this.http.get(this.apiUrl+'/location/');
   }
   getTemporada(){
-    return this.http.get('https://api-dev.kincamp.com/season/');
+    return this.http.get(this.apiUrl+'/season/');
   }
   gerSchool(){
-    return this.http.get('https://api-dev.kincamp.com/school/');
+    return this.http.get(this.apiUrl+'/school/');
   }
   getcurrency(){
-    return this.http.get('https://api-dev.kincamp.com/currency/');
+    return this.http.get(this.apiUrl+'/currency/');
   }
   postCamp(a:any){
-    return this.http.post('https://api-dev.kincamp.com/camp/',a);
+    return this.http.post(this.apiUrl+'/camp/',a);
   }
   patchCamp(id,a:any){
-    return this.http.patch('https://api-dev.kincamp.com/camp/'+id,a);
+    return this.http.patch(this.apiUrl+'/camp/'+id,a);
   }
   getCamp( page=1,per_page=50){
-    return this.http.get('https://api-dev.kincamp.com/active_camp/'+'?page='+page+'&per_page='+per_page+'&order=desc');
+    return this.http.get(this.apiUrl+'/active_camp/'+'?page='+page+'&per_page='+per_page+'&order=desc');
   }
   getCampId( id:any){
-    return this.http.get('https://api-dev.kincamp.com/camp/'+id);
+    return this.http.get(this.apiUrl+'/camp/'+id);
   }
 
 
   get_temporada(){
-    return this.http.get('https://api-dev.kincamp.com/season/');
+    return this.http.get(this.apiUrl+'/season/');
   }
   searchCamps(name: string, location: any, school: any, page: number = 1, perPage: number = 10) {
     const params = new URLSearchParams();
@@ -46,6 +48,6 @@ export class CreateCampsService {
     params.append('per_page', perPage.toString());
     params.append('order', 'desc');
 
-    return this.http.get(`https://api-dev.kincamp.com/search/active_camp/?${params.toString()}`);
+    return this.http.get(this.apiUrl+`/search/active_camp/?${params.toString()}`);
   }
 }
