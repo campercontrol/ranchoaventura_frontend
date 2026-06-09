@@ -18,7 +18,10 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "rxjs", "core-js", "chart.js", "chartist"
+              "rxjs",
+              "core-js",
+              "chart.js",
+              "chartist"
             ],
             "outputPath": "dist/skote",
             "index": "src/index.html",
@@ -37,7 +40,6 @@
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/bootstrap4-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css"
-              
             ],
             "scripts": [],
             "vendorChunk": true,
@@ -74,6 +76,33 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.prod.ts",
+                  "with": "src/environments/environment.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "30mb",
+                  "maximumError": "60mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
             }
           }
         },
@@ -86,6 +115,9 @@
           "configurations": {
             "production": {
               "browserTarget": "skote:build:production"
+            },
+            "development": {
+              "browserTarget": "skote:build:development"
             }
           }
         },

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,  
-  apiUrl: 'https://api-dev.kincamp.com',
+  apiUrl: 'https://api.kincamp.com',
 
   defaultauth: 'fackbackend',
   firebaseConfig: {
