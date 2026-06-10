@@ -68,6 +68,7 @@ export class ProspectoComponent implements OnInit {
   @ViewChild("emailConfir") emailConfir: ElementRef;
   @ViewChild("confirmPassword") confirmPassword: ElementRef;
   @ViewChild("facebook") facebook: ElementRef;
+  @ViewChild("gender_id") gender_id: ElementRef;
   filetemp:any ={};
   cvSatus= false;
 
@@ -75,7 +76,12 @@ export class ProspectoComponent implements OnInit {
 
 
 
-  constructor(private catalogos: CamperService, private formGrup: FormBuilder, private router: Router,private staff: StaffService,private modalService: NgbModal,private render :Renderer2,private auth:AuthenticationService) { }
+  constructor(private catalogos: CamperService, private formGrup: FormBuilder, private router: Router,private staff: StaffService,private modalService: NgbModal,private render :Renderer2,private auth:AuthenticationService) { 
+    this.catalogos.getCatalogos().subscribe((res:any)=>{
+      this.genders = res.genders
+
+    })
+  }
 
   ngOnInit(): void {
     this.formUser = this.formGrup.group({
@@ -94,9 +100,8 @@ export class ProspectoComponent implements OnInit {
       home_phone: ["", [Validators.required,Validators.pattern("^[0-9]*$"), Validators.minLength(8)]],
       cellphone: ["", [Validators.required, Validators.pattern("^[0-9]*$"),Validators.minLength(8)]],
       cv: [""],
-      gender_id:[4],
       season_id:[0],
-
+      gender_id:[4, [Validators.required]],
       login_id:[0],
       coordinator:[false],
       terms: ["", [Validators.required, Validators.requiredTrue]],
@@ -245,6 +250,7 @@ export class ProspectoComponent implements OnInit {
       this.getpassword();
       this.getconfirmEmail();
       this.getemail();
+      this.getgender_id();
 
     }
     
@@ -439,6 +445,19 @@ export class ProspectoComponent implements OnInit {
       }
     );
   }
-  
+  getgender_id() {
+    if( this.formUser.get('gender_id').valid){
+      console.log( this.formUser.get('gender_id').valid);
+      
+      this.render.removeClass(this.gender_id.nativeElement,"is-invalid");
+      this.render.addClass(this.gender_id.nativeElement,"is-valid");
+   }else{
+    this.render.removeClass(this.gender_id.nativeElement,"is-valid");
+    this.render.addClass(this.gender_id.nativeElement,"is-invalid");
+    this.gender_id.nativeElement.focus()
+
+   }
+  }
+
 
 }

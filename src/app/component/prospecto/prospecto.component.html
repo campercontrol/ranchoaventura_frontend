@@ -156,11 +156,15 @@
 
                                             </div>
                                         </div>
+                                        <div class="row mb-4">
+                                            <label for="" class="col-sm-3 col-form-label">Género*</label>
 
-
-
-
-
+                                            <div class="col-sm-9">
+                                                <select bindLabel="value" bindValue="id" formControlName="gender_id"  style="width: 100%;" (change)="getgender_id()"  class=" form-control" #gender_id>
+                                                    <option *ngFor="let item of genders" [value]="item.id" > {{item.value}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="foto mt-4">
                                             <div class="container-footer-parents">
                                                 <img [src]="photoSelect || 'assets/images/camp/perfil-camper.png'"
