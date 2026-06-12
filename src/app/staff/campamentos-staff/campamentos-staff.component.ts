@@ -546,14 +546,18 @@ private getFileNameFromHeader(contentDisposition: string | null): string | null 
   }
 
   pulserac11(){
+    let infocamp:any = {}
+    this.capms.getInfoCamp(this.idCamp).subscribe((res:any)=>{
+      infocamp = res.camp
+    })
+
     this.capms.pulseras1x11(this.idCamp).subscribe((res:any)=>{
-      console.log(res);
       const dataBinary = [];
       dataBinary.push(res);
       const filePath =  window.URL.createObjectURL(new Blob(dataBinary,{type: 'application/pdf'}));
       const link = document.createElement('a');
       link.href =filePath;
-      link.setAttribute('download','pulseras 1x11');
+      link.setAttribute('download','pulseras 1x11 ' + infocamp.name);
       document.body.appendChild(link);
       link.click();
  
