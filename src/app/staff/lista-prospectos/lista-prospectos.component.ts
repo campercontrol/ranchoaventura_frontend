@@ -7,6 +7,7 @@ import { saveAs } from 'file-saver';
 import { data } from 'jquery';
  import * as JSZip from 'jszip';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-lista-prospectos',
@@ -15,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ListaProspectosComponent implements OnInit {
   selectedProducts: any[];
+  private apiUrl = environment.apiUrl;
 
   product: any;
     spinner = false; 
@@ -222,7 +224,7 @@ export class ListaProspectosComponent implements OnInit {
   deleteProspect(id: number) {
     console.log(id);
     
-    const url = `https://api.ranchoaventuramexico.com/delete_prospect/${id}`;
+    const url = this.apiUrl+`/delete_prospect/${id}`;
     this.http.delete(url).subscribe({
       next: (res) => {
         console.log('Prospecto eliminado:', res);

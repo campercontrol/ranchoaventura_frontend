@@ -6,6 +6,8 @@ import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CamperService } from 'src/services/camper.service';
 import traducciones  from 'src/assets/json/lengua.json';
 import { LangService } from 'src/services/lang.service';
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-update-perfil',
   templateUrl: './update-perfil.component.html',
@@ -19,6 +21,8 @@ export class UpdatePerfilComponent implements OnInit {
     showSelectionBar: true
   };
   visibleSelection=0;
+  private apiUrl = environment.apiUrl;
+
   @Output() inscribirCamps  = new EventEmitter();
   blood_types:any = [];
   food_restrictions:any = [];
@@ -580,7 +584,7 @@ this.pathological_background_fm.sort((a, b) => a.name.localeCompare(b.name));
     this.catalogos.getCamper(this.id).subscribe(
       (res:any)=>{
         console.log('respuestas',res);
-         this.photoSelect = 'https://api.ranchoaventuramexico.com/'+res['camper'].photo,
+         this.photoSelect = this.apiUrl+'/'+res['camper'].photo,
 
           this.formUser.patchValue({
            

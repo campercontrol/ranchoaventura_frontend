@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class MercadoPagoService {
+  private apiUrl = environment.apiUrl;
 
-  private baseUrl = 'https://api.ranchoaventuramexico.com/';  // Cambia esto por la URL de tu backend
+  private baseUrl = environment.apiUrl+'/';  // Cambia esto por la URL de tu backend
 
   constructor(private http: HttpClient) {}
 

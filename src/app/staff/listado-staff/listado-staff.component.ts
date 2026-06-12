@@ -31,10 +31,8 @@ sortOrder: number | null = null;
   photoSelect : string | ArrayBuffer;
   photoSatus = false;
   spinerPhot= true;
-   filters = {
-    name: '',
-    email: ''
-  };
+  filters: { name: string; email: string ,lastname_father:string,lastname_mother:string} = { name: '', email: '',lastname_father:'',lastname_mother:'' };
+
   table:boolean=true;
 
   location:any = [];
@@ -165,7 +163,7 @@ sortOrder: number | null = null;
     this.sortField = event.sortField;
     this.sortOrder = event.sortOrder;
   
-    this.info(page, rows);
+    this.info(page,rows);
   }
   
   
@@ -174,31 +172,119 @@ hypervinculo(id:any){
   this.routerAc.navigate(['dashboard/staff/perfil/'+id])
 }
 buscarStaff(page: number = 1) {
-  this.catalogos.searchStaff(this.filters, page).subscribe(
-    (staffResponse: any) => {
-      console.log(staffResponse.data, 'respuesta staff');
-      this.listcatalogos = staffResponse.data.items;
+  this.catalogos.searchStaff(this.filters, page).subscribe(res => {
+    this.listcatalogos = res.data.items;
+    console.log(this.listcatalogos);
+    
+    let items = res.data.items;
+  
+    // Procesar tus campos como ya lo hacías
+    items.forEach(element => {
+      element.tipo = "Staff";
+      element.combined = `${element.Staff.name} ${element.Staff.lastname_father} ${element.Staff.lastname_mother}`.toLowerCase();
+    });
 
-      this.listcatalogos.forEach(element => {
-        element.tipo = "Staff";
-        element.combined = `${element.Staff.name} ${element.Staff.lastname_father} ${element.Staff.lastname_mother}`.toLowerCase();
+    // ---------------------------
+    // ORDENAMIENTO SOLO EN FRONT
+    // ---------------------------
+    if (this.sortField) {
+
+      items.sort((a: any, b: any) => {
+
+        // resolver campo normal o anidado
+        const getValue = (obj: any, field: string) => {
+          if (field.includes('.')) {
+            return field.split('.').reduce((o, k) => o?.[k], obj);
+          }
+          return obj[field];
+        };
+
+        const valA = getValue(a, this.sortField!);
+        const valB = getValue(b, this.sortField!);
+
+        if (valA == null) return 1 * this.sortOrder!;
+        if (valB == null) return -1 * this.sortOrder!;
+
+        if (valA < valB) return -1 * this.sortOrder!;
+        if (valA > valB) return 1 * this.sortOrder!;
+        return 0;
       });
-
-      this.totalRecords = staffResponse.data.total; // Guarda el total de registros
-
-      this.cargando = false;
-      this.cdr.detectChanges();
+    }
+    this.listcatalogos.map((pago:any) => {
+      pago.metodosPago = this.tipoSearch(pago.payment_method_id);
+      pago.nombreCamper = this.nombreCmper(pago.camper_id);
+      pago.tipoMovimiento = this.searchTicpo(pago.txn_type_id);
+ 
+     });
+    this.cargando = false;
+    
+    this.totalRecords = res.data.total;
   }, error => {
     console.error('Error al buscar staff:', error);
   });
 }
+searchTicpo(id){
+  let a= this.tipoTransacion.filter((camps)=>{
+    return   camps.id ==  id;
+  })
+  console.log(a);
+  
+  return a[0].name
+  }
+nombreCmper(id){
+  console.log(id,'id camper');
+  
+  console.log(this.campersd,'camperssss');
+  
+  let a :any;
+   this.campersd.forEach((camps:any) => {
+   if(camps.id == id){
+    a = camps
+    console.log(a,'si se encontro');
+    
+   }
+  });
 
+ console.log(a);
+
+  if (a) {
+    return a.name;
+  } else {
+    // Aquí puedes manejar el caso en el que no se encuentra ningún elemento con el id especificado.
+    // Puedes devolver un valor predeterminado o lanzar una excepción, según lo que sea adecuado en tu caso.
+    return "No se encontró ningún elemento con el ID especificado";
+  }
+  }
+tipoSearch(id) {
+  //console.log(this.metodosPagos);
+
+  let a = this.metodosPagos.filter((camps) => {
+    console.log(camps);
+    return camps.id == id;
+  });
+
+//  console.log(a);
+
+  if (a.length > 0) {
+    return a[0].name;
+  } else {
+    // Aquí puedes manejar el caso en el que no se encuentra ningún elemento con el id especificado.
+    // Puedes devolver un valor predeterminado o lanzar una excepción, según lo que sea adecuado en tu caso.
+    return "No se encontró ningún elemento con el ID especificado";
+  }
+}
+
+  
 resetFilters() {
   this.filters = {
     name: '',
-    email: ''
+    email: '',
+    lastname_father:'',
+    lastname_mother:''
+
   };
   this.info(); // Buscar sin filtros
 }
+
 
 }

@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from 'src/environments/environment';
 
 
 import { AdvancedService } from './advanced.service';
@@ -31,12 +32,13 @@ import { Observable } from 'rxjs';
 
 })
 export class CampamentosStaffComponent implements OnInit {
+  private apiUrl = environment.apiUrl;
 
   
   selectedCustomers: any[];
  
   representatives: any[];
-  url = 'https://api.ranchoaventuramexico.com/';
+  url =  environment.apiUrl+'/';
 
   statuses: any[];
 
@@ -313,7 +315,7 @@ async downloadImages(listCampers = this.listCampers) {
   const zip = new JSZip();
 
   const imagePromises = listCampers.map(async (customer, index) => {
-    const imageUrl = `https://api.ranchoaventuramexico.com/${customer.camper_photo}/`;
+    const imageUrl = this.apiUrl+`/${customer.camper_photo}/`;
 
     try {
       const response = await fetch(imageUrl);
@@ -433,7 +435,7 @@ private getFileNameFromHeader(contentDisposition: string | null): string | null 
   loadStaffLazy(event: any) {
     const page = Math.floor(event.first / event.rows) + 1;
     const rows = event.rows;
-    this.getStaffData(page, rows);
+    this.getStaffData(page,rows);
   }
   
   parseHTMLContent(html: any): string {
@@ -544,14 +546,18 @@ private getFileNameFromHeader(contentDisposition: string | null): string | null 
   }
 
   pulserac11(){
+    let infocamp:any = {}
+    this.capms.getInfoCamp(this.idCamp).subscribe((res:any)=>{
+      infocamp = res.camp
+    })
+
     this.capms.pulseras1x11(this.idCamp).subscribe((res:any)=>{
-      console.log(res);
       const dataBinary = [];
       dataBinary.push(res);
       const filePath =  window.URL.createObjectURL(new Blob(dataBinary,{type: 'application/pdf'}));
       const link = document.createElement('a');
       link.href =filePath;
-      link.setAttribute('download','pulseras 1x11');
+      link.setAttribute('download','pulseras 1x11 ' + infocamp.name);
       document.body.appendChild(link);
       link.click();
  
@@ -1061,7 +1067,7 @@ reporteGeneral() {
               const typeName =
                 g.grouping_type_name ||
                 g.grouping_type?.name ||
-                (g.grouping_type_id ? `Agrupación tipo ${g.grouping_type_id}` : 'Agrupación');
+                (g.grouping_type_id ? `Agrupación tipo ${g.name}` : 'Agrupación');
 
               groupingTypesSet.add(typeName.trim());
             }

@@ -1,10 +1,12 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StaffService {
+  private apiUrl = environment.apiUrl;
 
   constructor(private http:HttpClient) { 
       
@@ -12,7 +14,7 @@ export class StaffService {
   prospectos(prospecto:any){
     console.log(prospecto);
     
-    return this.http.post('https://api.ranchoaventuramexico.com/prospect/',prospecto)
+    return this.http.post(this.apiUrl+'/prospect/',prospecto)
   }
   getProspectosSearch(filters: any) {
     let params = new HttpParams();
@@ -22,44 +24,44 @@ export class StaffService {
       }
     });
   
-    return this.http.get<any>('https://api.ranchoaventuramexico.com/search_prospect/', { params });
+    return this.http.get<any>(this.apiUrl+'/search_prospect/', { params });
   }
   
   editStaff(a,id){
-    return this.http.patch('https://api.ranchoaventuramexico.com/staff/complete/'+id,a)
+    return this.http.patch(this.apiUrl+'/staff/complete/'+id,a)
   }
   infoPerfil(id,idioma = 'es'){
-    return this.http.get('https://api.ranchoaventuramexico.com/staff/complete/'+id+'/'+idioma)
+    return this.http.get(this.apiUrl+'/staff/complete/'+id+'/'+idioma)
   }
 
   getPerfilStaff(id,idioma = 'es'){
-    return this.http.get('https://api.ranchoaventuramexico.com/staff/profile/'+id+'/'+idioma)
+    return this.http.get(this.apiUrl+'/staff/profile/'+id+'/'+idioma)
   }
 
   getProspectos(page=1,per_page =10){
-    return this.http.get('https://api.ranchoaventuramexico.com/prospect/?page='+page+'&per_page='+per_page+'&order=desc')
+    return this.http.get(this.apiUrl+'/prospect/?page='+page+'&per_page='+per_page+'&order=desc')
 
   }
   aceptarProspectos(id){
-    return this.http.patch('https://api.ranchoaventuramexico.com/accept_prospect/'+id,{})
+    return this.http.patch(this.apiUrl+'/accept_prospect/'+id,{})
 
   }
   cancelarParticipacio(id){
-    return this.http.delete('https://api.ranchoaventuramexico.com/staff_unsubscribe/'+id)
+    return this.http.delete(this.apiUrl+'/staff_unsubscribe/'+id)
 
   }
 
   getPerfil(id ){
-    return this.http.get('https://api.ranchoaventuramexico.com/staff/'+id)
+    return this.http.get(this.apiUrl+'/staff/'+id)
   }
   
 
   reportProspecto( ){
-    return this.http.post('https://api.ranchoaventuramexico.com/prospects/report/general',{})
+    return this.http.post(this.apiUrl+'/prospects/report/general',{})
   }
   
   createComment(info){
-    return this.http.post('https://api.ranchoaventuramexico.com/staff_comment/',info)
+    return this.http.post(this.apiUrl+'/staff_comment/',info)
   }
  
     searchCamps(name: string, location: any, school: any, page: number = 1, perPage: number = 10) {
@@ -71,9 +73,9 @@ export class StaffService {
       params.append('per_page', perPage.toString());
       params.append('order', 'desc');
   
-      return this.http.get(`https://api.ranchoaventuramexico.com/search/active_camp/?${params.toString()}`);
+      return this.http.get(this.apiUrl+`/search/active_camp/?${params.toString()}`);
     }
     getCamp( page=1,per_page=50){
-      return this.http.get('https://api.ranchoaventuramexico.com/active_camp/'+'?page='+page+'&per_page='+per_page+'&order=desc');
+      return this.http.get(this.apiUrl+'/active_camp/'+'?page='+page+'&per_page='+per_page+'&order=desc');
     }
 }

@@ -19,7 +19,8 @@
                         </div>
                     </div>
                     <div class="foto-perfil">
-                        <img src="https://api.ranchoaventuramexico.com/{{infoCamp.photo}}" class="avatar-lg rounded-circle" alt="">
+                        <img   [src]="apiUrl + '/' + infoCamp.photo"
+                        class="avatar-lg rounded-circle" alt="">
                       
                     </div>
 
@@ -77,6 +78,10 @@
                                 <p> <span class="fw-bold">Edad: </span> {{infoCamp.birthdayA}}</p>
                                 <p> <span class="fw-bold">RFC:</span> {{infoCamp.rfc}}</p>
                                 <p> <span class="fw-bold">CURP: </span> {{infoCamp.curp}}</p>
+                                <p> <span class="fw-bold">Género: </span> {{infoCamp.gender}}</p>
+                                <p> <span class="fw-bold">Temporada: </span> {{infoCamp.season}}</p>
+                                
+                                
                              <!-- <p> <span class="fw-bold"> Correo: </span>{{infoCamp.email}} // faltante del back</p>
  -->   
                             </div>

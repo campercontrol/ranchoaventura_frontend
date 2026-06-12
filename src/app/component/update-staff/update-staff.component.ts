@@ -5,6 +5,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { CamperService } from 'src/services/camper.service';
 import { StaffService } from 'src/services/staff.service';
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-update-staff',
   templateUrl: './update-staff.component.html',
@@ -16,7 +18,9 @@ export class UpdateStaffComponent implements OnInit {
   blood_types: any = [];
   food_restrictions: any = [];
   genders: any = [];
-  grades: any = [];
+  grades: any = [];  
+  private apiUrl = environment.apiUrl;
+
   licensed_medicines: any = [];
   pathological_background: any = [];
   @ViewChild('centerDataModal') content:ElementRef;
@@ -120,13 +124,13 @@ export class UpdateStaffComponent implements OnInit {
       birthday: ["",[Validators.required]], //fecha de nacimiento
       curp: ["",[Validators.required]],
       bio: ["", [Validators.required]], // biografia
-      facebook: [""],
+      facebook: [" "],
       home_phone: ["", [Validators.required,Validators.pattern("^[0-9]*$"), Validators.minLength(8)]],
       cellphone: ["", [Validators.required, Validators.pattern("^[0-9]*$"),Validators.minLength(8)]],
       cv: [""],
       gender_id:[0],
       employee:[true],
-
+ 
       
      
       terms: ["", [Validators.required, Validators.requiredTrue]],
@@ -143,8 +147,10 @@ export class UpdateStaffComponent implements OnInit {
         this.vaccines = res.vaccines;
         this.food_restrictions = res.food_restrictions;
         this.blood_types = res.blood_types;
+        this.genders = res.genders
+
         let staff = res.staff
-          this.photoSelect = 'https://api.ranchoaventuramexico.com/'+staff.photo;
+          this.photoSelect = this.apiUrl+'/'+staff.photo;
           console.log(this.photoSelect);
           
           this.formUser.patchValue({
@@ -154,7 +160,7 @@ export class UpdateStaffComponent implements OnInit {
        
             phobias:staff.phobias,
             drugs:staff.drugs,
-         
+            facebook:'',
             affliction:staff.affliction,
             prohibited_foods:staff.prohibited_foods,
             staff_contact_name: staff.staff_contact_name,
@@ -171,8 +177,7 @@ export class UpdateStaffComponent implements OnInit {
             birthday: staff.birthday,//fecha de nacimiento
             curp:staff.curp,
             bio: staff.bio,// biografia
-            facebook: staff.facebook,
-            home_phone:staff.home_phone,
+             home_phone:staff.home_phone,
             cellphone:staff.cellphone,
             cv:staff.cv,
             gender_id:staff.gender_id,
@@ -188,8 +193,10 @@ export class UpdateStaffComponent implements OnInit {
         this.vaccines = res.vaccines;
         this.food_restrictions = res.food_restrictions;
         this.blood_types = res.blood_types;
+        this.genders = res.genders
+
         let staff = res.staff
-          this.photoSelect = 'https://api.ranchoaventuramexico.com/'+staff.photo;
+          this.photoSelect = this.apiUrl+'/'+staff.photo;
           console.log(this.photoSelect);
           
           this.formUser.patchValue({
@@ -216,7 +223,7 @@ export class UpdateStaffComponent implements OnInit {
             birthday: staff.birthday,//fecha de nacimiento
             curp:staff.curp,
             bio: staff.bio,// biografia
-            facebook: staff.facebook,
+            facebook: '',
             home_phone:staff.home_phone,
             cellphone:staff.cellphone,
             cv:staff.cv,

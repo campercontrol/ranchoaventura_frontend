@@ -9,20 +9,17 @@
                   </div>
                   <div class="card-body">
                     
-                    <div class="mb-3 mt-3 row">
-                      <div class="col-6">
-                        <label for="name">Nombre</label>
-                        <input type="text" pInputText [(ngModel)]="filters.name" class="form-control" placeholder="Nombre del staff" />
-                    
-                      </div>
-                      <div class="col-6">
-
-                        <label for="email">Correo</label>
-                        <input type="text" pInputText [(ngModel)]="filters.email" class="form-control" placeholder="Correo del staff" />
-                      </div>
-                     
+                    <div class="mb-3 mt-3">
+                      <label for="name">Nombre</label>
+                      <input type="text" pInputText [(ngModel)]="filters.name" class="form-control" placeholder="Nombre del staff" />
+                      <label for="name">Apellido paterno</label>
+                      <input type="text" pInputText [(ngModel)]="filters.lastname_father" class="form-control" placeholder="Nombre del staff" />
+                      <label for="name">Apellido materno</label>
+                      <input type="text" pInputText [(ngModel)]="filters.lastname_mother" class="form-control" placeholder="Nombre del staff" />
+                      <label for="email">Correo</label>
+                      <input type="text" pInputText [(ngModel)]="filters.email" class="form-control" placeholder="Correo del staff" />
                   <div class="d-flex justify-content-center mt-3">
-                       
+                     
                       <button   type="button" label="" class="btn btn-secondary ms-3" (click)="resetFilters()"> Limpiar</button>
                       <button   type="button" label="" class="btn btn-primary ms-3" (click)="buscarStaff()"> Buscar</button>
 
@@ -41,8 +38,9 @@
                           (onLazyLoad)="loadStaffLazy($event)"
                           [paginator]="true"
                            [rows]="50"
+                           [loading]="cargando" 
                           [totalRecords]="totalRecords"
-                          [loading]="cargando"
+                          
                           [rowsPerPageOptions]="[5, 25, 50]"
                           [globalFilterFields]="['combined','Staff.lastname_father','Staff.lastname_mother','Staff.facebook','email','Staff.bio','Staff.cellphone','Staff.home_phone']"
                           dataKey="id"

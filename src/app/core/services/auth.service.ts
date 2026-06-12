@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { preventDefault } from '@fullcalendar/core';
 import { Router } from '@angular/router';
 import jwt_decode from "jwt-decode";
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
@@ -15,6 +16,7 @@ export class AuthenticationService {
 
     loggedIn:boolean = false;
     infToken!:any;
+    private apiUrl = environment.apiUrl;
 
     constructor(private http: HttpClient,private router:Router ) {
     }
@@ -25,7 +27,7 @@ export class AuthenticationService {
    
     resetContrasena(a){
         return new Promise((resolve,reject)=>{
-            this.http.post('https://api.ranchoaventuramexico.com/user/send_mail_password_reset',a).subscribe((res:any)=>{
+            this.http.post(this.apiUrl+'/user/send_mail_password_reset',a).subscribe((res:any)=>{
               resolve = res;
             },error=>{
               reject = error;
@@ -42,7 +44,7 @@ export class AuthenticationService {
     const body = `username=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
 
     return this.http.post(
-      'https://api.ranchoaventuramexico.com/token',
+      this.apiUrl+'/token',
       body,
       {
         headers: new HttpHeaders({
@@ -60,7 +62,7 @@ export class AuthenticationService {
     const body = `username=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
 
     return new Promise((resolve, reject) => {
-      this.http.post('https://api.ranchoaventuramexico.com/token', body, {
+      this.http.post(this.apiUrl+'/token', body, {
         headers: new HttpHeaders({
           'Content-Type': 'application/x-www-form-urlencoded',
           'accept': 'application/json'
@@ -92,26 +94,26 @@ export class AuthenticationService {
     }
 
     recuperarContra(a){
-     return  this.http.post("https://api.ranchoaventuramexico.com/user/send_mail_password_reset",a)
+     return  this.http.post(this.apiUrl+"/user/send_mail_password_reset",a)
 
     }
 
     cambiarContrasena(email,a){
-      return  this.http.post("https://api.ranchoaventuramexico.com/usuario/change_password/"+email,a)
+      return  this.http.post(this.apiUrl+"/usuario/change_password/"+email,a)
  
      }
      restPassword(token,a){
-      return  this.http.post("https://api.ranchoaventuramexico.com/user/reset_password?t="+token,a)
+      return  this.http.post(this.apiUrl+"/user/reset_password?t="+token,a)
  
      }
 
      validarCuenta(token){
-      return  this.http.post("https://api.ranchoaventuramexico.com/user/verify/?t="+token,"")
+      return  this.http.post(this.apiUrl+"/user/verify/?t="+token,"")
  
      }
      
      cambiarEmail(email,a){
-      return  this.http.post("https://api.ranchoaventuramexico.com/usuario/change_email/"+email,a)
+      return  this.http.post(this.apiUrl+"/usuario/change_email/"+email,a)
  
      }
    

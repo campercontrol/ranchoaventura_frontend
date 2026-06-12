@@ -1,17 +1,19 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CatalogosService {
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { 
 
   }
 
   order(id,info){
-    return this.http.post('https://api.ranchoaventuramexico.com/update/order/catalogs?catalog_type='+id,info);
+    return this.http.post(this.apiUrl+'/update/order/catalogs?catalog_type='+id,info);
 
   }
 
@@ -26,233 +28,233 @@ export class CatalogosService {
       }
     });
 
-    return this.http.get<any>('https://api.ranchoaventuramexico.com/search_admin_parent/', { params });
+    return this.http.get<any>(this.apiUrl+'/search_admin_parent/', { params });
   }
 
 
   getAlimentos(){
-    return this.http.get('https://api.ranchoaventuramexico.com/food_restriction/');
+    return this.http.get(this.apiUrl+'/food_restriction/');
   }
 
   postAlimentos(a:any){
-    return this.http.post('https://api.ranchoaventuramexico.com/food_restriction/',a);
+    return this.http.post(this.apiUrl+'/food_restriction/',a);
   }
   updateAlimentos(a:any,id){
-    return this.http.post('https://api.ranchoaventuramexico.com/food_restriction/'+id,a);
+    return this.http.post(this.apiUrl+'/food_restriction/'+id,a);
   }
   delerAlimentos(id){
     console.log(id);
-    return this.http.delete('https://api.ranchoaventuramexico.com/delete_food_restriction/'+id);
+    return this.http.delete(this.apiUrl+'/delete_food_restriction/'+id);
   }
 
   getGener(id = 'es'){
     console.log(id);
-    return this.http.delete('https://api.ranchoaventuramexico.com/get_all_gender/'+id);
+    return this.http.delete(this.apiUrl+'/get_all_gender/'+id);
   }
 
 
   getcurrency(){
-    return this.http.get('https://api.ranchoaventuramexico.com/currency/');
+    return this.http.get(this.apiUrl+'/currency/');
   }
 
   postcurrency(a:any){
-    return this.http.post('https://api.ranchoaventuramexico.com/currency/',a);
+    return this.http.post(this.apiUrl+'/currency/',a);
   }
   updatcurrency(a:any,id){
-    return this.http.patch('https://api.ranchoaventuramexico.com/currency/'+id,a);
+    return this.http.patch(this.apiUrl+'/currency/'+id,a);
   }
   delecurrency(id){
     console.log(id);
-    return this.http.delete('https://api.ranchoaventuramexico.com/delete_currency/'+id);
+    return this.http.delete(this.apiUrl+'/delete_currency/'+id);
   }
 
 
 
 
   getPathological_background(){
-    return this.http.get('https://api.ranchoaventuramexico.com/pathological_background/');
+    return this.http.get(this.apiUrl+'/pathological_background/');
   }
 
   posPathological_background(a:any){
-    return this.http.post('https://api.ranchoaventuramexico.com/pathological_background/',a);
+    return this.http.post(this.apiUrl+'/pathological_background/',a);
   }
   updatPathological_background(a:any,id){
-    return this.http.post('https://api.ranchoaventuramexico.com/pathological_background/'+id,a);
+    return this.http.post(this.apiUrl+'/pathological_background/'+id,a);
   }
   delePathological_background(id){
     console.log(id);
-    return this.http.delete('https://api.ranchoaventuramexico.com/delete_pathological_back/'+id);
+    return this.http.delete(this.apiUrl+'/delete_pathological_back/'+id);
   }
 
 
 
   getPathological_backgroundFamily(){
-    return this.http.get('https://api.ranchoaventuramexico.com/pathological_background_family/');
+    return this.http.get(this.apiUrl+'/pathological_background_family/');
   }
 
   posPathological_backgroundFamily(a:any){
-    return this.http.post('https://api.ranchoaventuramexico.com/pathological_background_family/',a);
+    return this.http.post(this.apiUrl+'/pathological_background_family/',a);
   }
   updatPathological_backgroundFamily(a:any,id){
-    return this.http.post('https://api.ranchoaventuramexico.com/pathological_background_family/'+id,a);
+    return this.http.post(this.apiUrl+'/pathological_background_family/'+id,a);
   }
   delePathological_backgroundFamily(id){
     console.log(id);
     
-    return this.http.delete('https://api.ranchoaventuramexico.com/delete_pathological_back_fm/'+id);
+    return this.http.delete(this.apiUrl+'/delete_pathological_back_fm/'+id);
   }
 
 
 
   getpaymentaccounts(){
-    return this.http.get('https://api.ranchoaventuramexico.com/payment_account/');
+    return this.http.get(this.apiUrl+'/payment_account/');
   }
 
   postpaymentaccounts(a:any){
-    return this.http.post('https://api.ranchoaventuramexico.com/payment_account/',a);
+    return this.http.post(this.apiUrl+'/payment_account/',a);
   }
   updatpaymentaccounts(a:any,id){
-    return this.http.post('https://api.ranchoaventuramexico.com/payment_account/'+id,a);
+    return this.http.post(this.apiUrl+'/payment_account/'+id,a);
   }
   delepaymentaccounts(id){
     console.log(id);
-    return this.http.delete('https://api.ranchoaventuramexico.com/delete_payment_account/'+id);
+    return this.http.delete(this.apiUrl+'/delete_payment_account/'+id);
   }
 
 
 
   getlicensed_medicine(){
-    return this.http.get('https://api.ranchoaventuramexico.com/licensed_medicine/');
+    return this.http.get(this.apiUrl+'/licensed_medicine/');
   }
 
   postlicensed_medicine(a:any){
-    return this.http.post('https://api.ranchoaventuramexico.com/licensed_medicine/',a);
+    return this.http.post(this.apiUrl+'/licensed_medicine/',a);
   }
   updatlicensed_medicine(a:any,id){
-    return this.http.post('https://api.ranchoaventuramexico.com/licensed_medicine/'+id,a);
+    return this.http.post(this.apiUrl+'/licensed_medicine/'+id,a);
   }
   delelicensed_medicine(id){
     console.log(id);
-    return this.http.delete('https://api.ranchoaventuramexico.com/delete_licensed_medicine/'+id);
+    return this.http.delete(this.apiUrl+'/delete_licensed_medicine/'+id);
   }
 
 
   getVaccine(){
-    return this.http.get('https://api.ranchoaventuramexico.com/vaccine/');
+    return this.http.get(this.apiUrl+'/vaccine/');
   }
 
   postVaccine(a:any){
-    return this.http.post('https://api.ranchoaventuramexico.com/vaccine/',a);
+    return this.http.post(this.apiUrl+'/vaccine/',a);
   }
   updatVaccine(a:any,id){
-    return this.http.patch('https://api.ranchoaventuramexico.com/vaccine/'+id,a);
+    return this.http.patch(this.apiUrl+'/vaccine/'+id,a);
   }
 
   deleVaccine(id){
     console.log(id);
-    return this.http.delete('https://api.ranchoaventuramexico.com/delete_vaccine/'+id);
+    return this.http.delete(this.apiUrl+'/delete_vaccine/'+id);
   }
 
 
   getStaffroles(){
-    return this.http.get('https://api.ranchoaventuramexico.com/staff_role/');
+    return this.http.get(this.apiUrl+'/staff_role/');
   }
 
   postStaffroles(a:any){
-    return this.http.post('https://api.ranchoaventuramexico.com/staff_role/',a);
+    return this.http.post(this.apiUrl+'/staff_role/',a);
   }
   updatStaffroles(a:any,id){
-    return this.http.post('https://api.ranchoaventuramexico.com/staff_role/'+id,a);
+    return this.http.post(this.apiUrl+'/staff_role/'+id,a);
   }
 
   deleStaffroles(id){
     console.log(id);
-    return this.http.delete('https://api.ranchoaventuramexico.com/delete_staff_role/'+id);
+    return this.http.delete(this.apiUrl+'/delete_staff_role/'+id);
   }
   //metodos de pago
   getpayment_method(){
-    return this.http.get('https://api.ranchoaventuramexico.com/payment_method/');
+    return this.http.get(this.apiUrl+'/payment_method/');
   }
 
   postpayment_method(a:any){
-    return this.http.post('https://api.ranchoaventuramexico.com/payment_method/',a);
+    return this.http.post(this.apiUrl+'/payment_method/',a);
   }
   upddatepayment_method(a:any,id){
-    return this.http.patch('https://api.ranchoaventuramexico.com/payment_method/'+id,a);
+    return this.http.patch(this.apiUrl+'/payment_method/'+id,a);
   }
 
   deletpayment_method(id){
     console.log(id);
-    return this.http.delete('https://api.ranchoaventuramexico.com/delete/payment_method/'+id);
+    return this.http.delete(this.apiUrl+'/delete/payment_method/'+id);
   }
   //Preguntas extras
 
   getcamp_extra_question(){
-    return this.http.get('https://api.ranchoaventuramexico.com/camp_extra_question/');
+    return this.http.get(this.apiUrl+'/camp_extra_question/');
   }
 
   postcamp_extra_question(a:any){
-    return this.http.post('https://api.ranchoaventuramexico.com/camp_extra_question/',a);
+    return this.http.post(this.apiUrl+'/camp_extra_question/',a);
   }
   upddatcamp_extra_question(a:any,id){
-    return this.http.patch('https://api.ranchoaventuramexico.com/camp_extra_question/'+id,a);
+    return this.http.patch(this.apiUrl+'/camp_extra_question/'+id,a);
   }
 
   deletcamp_extra_question(id){
     console.log(id);
-    return this.http.delete('https://api.ranchoaventuramexico.com/delete/camp_extra_question/'+id);
+    return this.http.delete(this.apiUrl+'/delete/camp_extra_question/'+id);
   }
     //Cargos extras
 
     getcamp_extra_charge(){
-      return this.http.get('https://api.ranchoaventuramexico.com/camp_extra_charge/');
+      return this.http.get(this.apiUrl+'/camp_extra_charge/');
     }
   
     postcamp_extra_charge(a:any){
-      return this.http.post('https://api.ranchoaventuramexico.com/camp_extra_charge/',a);
+      return this.http.post(this.apiUrl+'/camp_extra_charge/',a);
     }
     upddatcamp_extra_charge(a:any,id){
-      return this.http.patch('https://api.ranchoaventuramexico.com/camp_extra_charge/'+id,a);
+      return this.http.patch(this.apiUrl+'/camp_extra_charge/'+id,a);
     }
   
     deletcamp_extra_charge(id){
       console.log(id);
-      return this.http.delete('https://api.ranchoaventuramexico.com/delete/camp_extra_charge/'+id);
+      return this.http.delete(this.apiUrl+'/delete/camp_extra_charge/'+id);
     }
     ///
      getSchool(){
-      return this.http.get('https://api.ranchoaventuramexico.com/school/');
+      return this.http.get(this.apiUrl+'/school/');
 
      }
      postSchool(info){
-      return this.http.post('https://api.ranchoaventuramexico.com/school/',info);
+      return this.http.post(this.apiUrl+'/school/',info);
      }
      updateSchool(a:any,id){
-      return this.http.patch('https://api.ranchoaventuramexico.com/school/'+id,a);
+      return this.http.patch(this.apiUrl+'/school/'+id,a);
     }
     deleteSchool(id){
-      return this.http.delete('https://api.ranchoaventuramexico.com/delete_school/'+id);
+      return this.http.delete(this.apiUrl+'/delete_school/'+id);
     }
 
     searchPerent(id){
-      return this.http.get('https://api.ranchoaventuramexico.com/search/parent/'+id);
+      return this.http.get(this.apiUrl+'/search/parent/'+id);
 
     }
     searchCamper(id){
-      return this.http.get('https://api.ranchoaventuramexico.com/search/camper/'+id);
+      return this.http.get(this.apiUrl+'/search/camper/'+id);
 
     }
     searchUser(id){
-      return this.http.get('https://api.ranchoaventuramexico.com/search/user/'+id);
+      return this.http.get(this.apiUrl+'/search/user/'+id);
 
     }
 
     getcampers(){
-      return this.http.get('https://api.ranchoaventuramexico.com/camper/');
+      return this.http.get(this.apiUrl+'/camper/');
 
     }
     getCamperAdmi(page=1,per_page=50){
-      return this.http.get('https://api.ranchoaventuramexico.com/admin/camper/?page='+page+'&per_page='+per_page+'&order=desc');
+      return this.http.get(this.apiUrl+'/admin/camper/?page='+page+'&per_page='+per_page+'&order=desc');
     }
 
     searchCampers(filters: any, page: number = 1, perPage: number = 10) {
@@ -272,26 +274,27 @@ export class CatalogosService {
         .set('per_page', perPage.toString())
         .set('order', 'desc');
   
-      return this.http.get<any>('https://api.ranchoaventuramexico.com/admin/search_camper/', { params });
+      return this.http.get<any>(this.apiUrl+'/admin/search_camper/', { params });
     }
     getCamper(){
-      return this.http.get('https://api.ranchoaventuramexico.com/camper/');
+      return this.http.get(this.apiUrl+'/camper/');
     }
     serachCamper(id){
-      return this.http.get('https://api.ranchoaventuramexico.com/camper/'+id);
+      return this.http.get(this.apiUrl+'/camper/'+id);
 
     }
     serachCamps(id){
-      return this.http.get('https://api.ranchoaventuramexico.com/camp/'+id);
+      return this.http.get(this.apiUrl+'/camp/'+id);
 
     }
     // parent admi
 
     getParent(){
-      return this.http.get('https://api.ranchoaventuramexico.com/parent/');
+      return this.http.get(this.apiUrl+'/parent/');
      }
      getStaff(page=1,per_page=50){
-      return this.http.get('https://api.ranchoaventuramexico.com/staff/?page='+page+'&per_page='+per_page+'&order=desc');
+      
+      return this.http.get(this.apiUrl+'/staff/?page='+page+'&per_page='+per_page+'&order=desc');
      }
      searchUusario(filters: any, page: number = 1, perPage: number = 10) {
       const params = new HttpParams()
@@ -303,24 +306,26 @@ export class CatalogosService {
         .set('lastname_father', perPage.toString())
         .set('order', 'desc');
   
-      return this.http.get<any>('https://api.ranchoaventuramexico.com/search_usuario', { params });
+      return this.http.get<any>(this.apiUrl+'/search_usuario', { params });
     }
     searchStaff(filters: any, page: number = 1, perPage: number = 10) {
       const params = new HttpParams()
         .set('name', filters.name || '')
         .set('email', filters.email || '')
+        .set('lastname_father', filters.lastname_father || '')
+        .set('lastname_mother', filters.lastname_mother || '')
         .set('page', page.toString())
         .set('per_page', perPage.toString())
         .set('order', 'desc');
   
-      return this.http.get<any>('https://api.ranchoaventuramexico.com/search_staff/', { params });
+      return this.http.get<any>(this.apiUrl+'/search_staff/', { params });
     }
      getProspectos(){
-      return this.http.get('https://api.ranchoaventuramexico.com/prospect/');
+      return this.http.get(this.apiUrl+'/prospect/');
 
      }
      getParentAdmi(page=1,per_page=50){
-      return this.http.get('https://api.ranchoaventuramexico.com/admin/parent/?page='+page+'&per_page='+per_page+'&order=desc');
+      return this.http.get(this.apiUrl+'/admin/parent/?page='+page+'&per_page='+per_page+'&order=desc');
      }
 
      getParentAdmiSearcg(filters: any, page: number = 1, per_page: number = 10){
@@ -337,20 +342,20 @@ export class CatalogosService {
       });
   
       // Realizamos la solicitud GET con los filtros y parámetros como query string
-      return this.http.get<any>(`https://api.ranchoaventuramexico.com/search_admin_parent/`, { params });
+      return this.http.get<any>(this.apiUrl+`/search_admin_parent/`, { params });
     }
      getParentU(id){
-      return this.http.get('https://api.ranchoaventuramexico.com/parent/'+id);
+      return this.http.get(this.apiUrl+'/parent/'+id);
 
      }
      postParent(info){
-      return this.http.post('https://api.ranchoaventuramexico.com/parent/',info);
+      return this.http.post(this.apiUrl+'/parent/',info);
      }
      patchParent(id,a:any){
-      return this.http.patch('https://api.ranchoaventuramexico.com/parent/'+id,a);
+      return this.http.patch(this.apiUrl+'/parent/'+id,a);
     }
     deletParent(id){
-      return this.http.delete('https://api.ranchoaventuramexico.com/delete_parent/'+id);
+      return this.http.delete(this.apiUrl+'/delete_parent/'+id);
     }
      // user admi
 
@@ -366,49 +371,49 @@ export class CatalogosService {
         .set('per_page', String(perPage))
         .set('order', order);
   
-      return this.http.get<any>('https://api.ranchoaventuramexico.com/usuario', { params });
+      return this.http.get<any>(this.apiUrl+'/usuario', { params });
     }
      getUserF(){
-      return this.http.get('https://api.ranchoaventuramexico.com/usuario?is_active=false');
+      return this.http.get(this.apiUrl+'/usuario?is_active=false');
 
      }
     
      postUser(info){
-      return this.http.post('https://api.ranchoaventuramexico.com/usuario/',info);
+      return this.http.post(this.apiUrl+'/usuario/',info);
      }
      patchUser(a:any,id){
-      return this.http.patch('https://api.ranchoaventuramexico.com/usuario/'+id,a);
+      return this.http.patch(this.apiUrl+'/usuario/'+id,a);
     }
     deletUser(id){
-      return this.http.delete('https://api.ranchoaventuramexico.com/delete_usuario/'+id);
+      return this.http.delete(this.apiUrl+'/delete_usuario/'+id);
     }
 
     getRol(){
-      return this.http.get('https://api.ranchoaventuramexico.com/rol?is_active=true');
+      return this.http.get(this.apiUrl+'/rol?is_active=true');
     }
 
     getinfodelet(id){
-      return this.http.get('https://api.ranchoaventuramexico.com/user_delete_info?user_id='+id);
+      return this.http.get(this.apiUrl+'/user_delete_info?user_id='+id);
 
 
     }
 
     getinID(id){
-      return this.http.get('https://api.ranchoaventuramexico.com/usuario/'+id);
+      return this.http.get(this.apiUrl+'/usuario/'+id);
 
 
     }
   
     // admi camper
     getCamps( ){
-      return this.http.get('https://api.ranchoaventuramexico.com/camp/');
+      return this.http.get(this.apiUrl+'/camp/');
 
      }
      patchCamps(a:any,id){
-      return this.http.patch('https://api.ranchoaventuramexico.com/camp/'+id,a);
+      return this.http.patch(this.apiUrl+'/camp/'+id,a);
     }
     deletCamps(id){
-      return this.http.delete('https://api.ranchoaventuramexico.com/delete_camp/'+id);
+      return this.http.delete(this.apiUrl+'/delete_camp/'+id);
     }
   
 }

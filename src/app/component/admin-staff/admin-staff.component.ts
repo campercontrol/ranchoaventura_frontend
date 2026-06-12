@@ -403,6 +403,9 @@ export class AdminStaffComponent implements OnInit {
      this.updateId = item["Staff"].id;
     this.display2= true;
     this.table= false;
+    console.log(item);
+    console.log(this.updateId);
+    
    
    
 

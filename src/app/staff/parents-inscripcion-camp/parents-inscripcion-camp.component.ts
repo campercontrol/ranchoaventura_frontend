@@ -5,6 +5,7 @@ import { CamperService } from 'src/services/camper.service';
 import { CampsService } from 'src/services/camps.service';
 import { LangService } from 'src/services/lang.service';
 import { differenceInCalendarMonths, format } from 'date-fns';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -60,6 +61,8 @@ export class ParentsInscripcionCampComponent implements OnInit {
 
       }
     }
+    public apiUrl = environment.apiUrl;
+
     multipleInscr=false;
     idoma = "esp";
     selectedProducts: any[];

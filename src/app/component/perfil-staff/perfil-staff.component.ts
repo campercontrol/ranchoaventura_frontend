@@ -8,6 +8,7 @@ import { ParentService } from 'src/services/parent.service';
 import { StaffService } from 'src/services/staff.service';
 import { differenceInCalendarMonths, format } from 'date-fns';
 
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-perfil-staff',
@@ -22,6 +23,8 @@ export class PerfilStaffComponent implements OnInit {
   providers: [];
   isCollapsed = true;
   id = 0;
+  public apiUrl = environment.apiUrl;
+
   typecoment:number = 1
   infoCamp: any = {};
   catalogoEsculea: any;
