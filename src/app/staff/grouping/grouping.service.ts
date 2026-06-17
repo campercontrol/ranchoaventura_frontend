@@ -20,7 +20,7 @@ export class GroupingService {
   }
 
   getGruposInscritos(id){
-    return this.http.get(this.apiUrl+'/camps/'+id+'/groupings/')
+    return this.http.get(this.apiUrl+'/camps/'+id+'/groupings')
 
   }
   getCampersInscritos(id){
